@@ -1,0 +1,10 @@
+<project>
+    <meta title="ZIde" package="cc.zygame.zide" version="1.0.0" company="Company Name" />
+    <app main="UIStart" path="Export" file="ZIde-UI" />
+    <haxelib name="zygameui" />
+    <haxelib name="feathersui"/>
+    <source path="Source" />
+    <source path="../CommonSource"/>
+    <window height="0" width="0"/>
+    <haxedef name="disable_res"/>
+</project>

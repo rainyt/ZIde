@@ -1,0 +1,100 @@
+import UIStart;
+import zygame.core.Start;
+import js.html.DivElement;
+import js.Browser;
+import js.html.CanvasElement;
+import openfl.display.DOMElement;
+import openfl.geom.Rectangle;
+import openfl.events.Event;
+import openfl.display.Stage;
+import openfl.display.Bitmap;
+import openfl.display.BitmapData;
+import feathers.controls.LayoutGroup;
+
+/**
+ * WEBGL渲染舞台，用于渲染UI组件功能
+ */
+class StageCavans extends LayoutGroup {
+	public static var current:StageCavans;
+
+	var element:CanvasElement;
+
+	private var cacheX:Float = 0;
+	private var cacheY:Float = 0;
+
+	public function new() {
+		super();
+		current = this;
+		this.width = 480;
+		this.height = 800;
+		element = cast Browser.document.createCanvasElement();
+		untyped window.canvas = element;
+		element.id = "uicanvas";
+		element.style.transform = "translateZ(0px)";
+		var dom:DOMElement = new DOMElement(element);
+		this.addChild(dom);
+		dom.width = this.width;
+		dom.height = this.height;
+		dom.x = this.x;
+		dom.y = this.y;
+	}
+
+	public function getStart():UIStart {
+		return cast untyped window.uiStart;
+	}
+
+	public var inited = false;
+
+	override function initialize() {
+		super.initialize();
+		stage.addEventListener(Event.ENTER_FRAME, function(e) {
+			if (this.x != this.cacheX || this.y != this.cacheY) {
+				this.cacheX = this.x;
+				this.cacheY = this.y;
+				onWindowResize();
+			}
+			if (!inited && untyped window.onLimeEnbed != null) {
+				inited = true;
+				untyped window.onLimeEnbed();
+				this.onWindowResize();
+			}
+		});
+	}
+
+	override function set_width(value:Float):Float {
+		super.set_width(value);
+		return value;
+	}
+
+	override function set_height(value:Float):Float {
+		super.set_height(value);
+		return value;
+	}
+
+	public function onWindowResize():Void {
+		if(getStart() == null)
+			return;
+		var stage:Stage = untyped window.uiContext;
+		element.height = Std.int(height);
+		element.width = Std.int(width);
+		element.style.width = Std.int(this.width) + "px";
+		element.style.height = Std.int(this.height) + "px";
+		element.style.left = this.x + this.parent.x + "px";
+		element.style.top = this.y + this.parent.y + "px";
+		if (App.currentProject == null) {
+			getStart().HDHeight = Std.int(this.height);
+			getStart().HDWidth = Std.int(this.width);
+		} else {
+			getStart().HDHeight = App.currentProject.HDHeight == 0 ? Std.int(this.height) : App.currentProject.HDHeight;
+			getStart().HDWidth = App.currentProject.HDWidth == 0 ? Std.int(this.width) : App.currentProject.HDWidth;
+		}
+		if (stage != null) {
+			stage.window.resize(Std.int(this.width), Std.int(this.height));
+			@:privateAccess stage.__resize();
+			getStart().onStageSizeChange();
+			trace("window.uiContext.resize()", Std.int(this.width), Std.int(this.height), getStart().HDWidth, getStart().HDHeight);
+		} else {
+			trace("window.uiContext is null");
+		}
+	}
+}

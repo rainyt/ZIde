@@ -1,0 +1,6 @@
+-main Main
+-lib openfl
+-lib lime
+-neko ../Assets/atlas/tools.n
+--remap flash:openfl
+-D lime

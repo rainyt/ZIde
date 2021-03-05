@@ -1,0 +1,3 @@
+-lib hxnodejs
+-main Tools
+-js ../bin/tools/createAtlas.js
