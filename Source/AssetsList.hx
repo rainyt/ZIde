@@ -28,18 +28,19 @@ class AssetsList extends LayoutGroup {
 		this.addChild(list);
 		list.itemToText = (data) -> data.name;
 		list.layoutData = AnchorLayoutData.fill();
+		cast(list.layoutData, AnchorLayoutData).bottom = 20;
 		Utils.listener.addEventListener("assetsProess", function(e) {
 			list.dataProvider = new ArrayCollection(App.currentProject.builderFiles);
 		});
-        list.doubleClickEnabled = true;
+		list.doubleClickEnabled = true;
 		list.addEventListener(Event.CHANGE, function(e) {
-			if(list.selectedItem == null)
+			if (list.selectedItem == null)
 				return;
 			trace("显示文件：" + list.selectedItem.path);
 			App.currentEditPath = list.selectedItem.path;
 			var xmlData = File.getContent(list.selectedItem.path);
 			Editor.current.setEditorData(xmlData);
-            StageCavans.current.getStart().openFile(xmlData, App.currentProject);
+			StageCavans.current.getStart().openFile(xmlData, App.currentProject);
 		});
 	}
 }

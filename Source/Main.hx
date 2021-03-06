@@ -51,7 +51,10 @@ class Main extends Application {
 		this.addChild(head);
 		var assets = new AssetsList();
 		this.addChild(assets);
+		var bottom = new BottomHead();
+		this.addChild(bottom);
+		bottom.layoutData = new AnchorLayoutData(null,0,0,50);
 
-		stageLayoutGroup.layoutData = new AnchorLayoutData(36, 0, 0, 50 + assets.width);
+		stageLayoutGroup.layoutData = new AnchorLayoutData(36, 0, 20, 50 + assets.width);
 	}
 }

@@ -24,12 +24,6 @@ class Head extends LayoutGroup {
 		label.textFormat = new TextFormat(Utils.fontName, 12, 0x959595);
 		this.layoutData = new AnchorLayoutData(0, 0, null, 50);
 
-		var version = new Label();
-		this.addChild(version);
-		version.text = ZMacroUtils.buildDateTime();
-		version.textFormat = new TextFormat(Utils.fontName, 12, 0x656565);
-		version.layoutData = AnchorLayoutData.middleRight(0, 10);
-
 		Utils.listener.addEventListener("openProject", function(e:ZEvent):Void {
 			if (e.data == null)
 				return;
