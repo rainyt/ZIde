@@ -1,14 +1,10 @@
+import sys.FileSystem;
 import UIStart;
-import zygame.core.Start;
-import js.html.DivElement;
 import js.Browser;
 import js.html.CanvasElement;
 import openfl.display.DOMElement;
-import openfl.geom.Rectangle;
 import openfl.events.Event;
 import openfl.display.Stage;
-import openfl.display.Bitmap;
-import openfl.display.BitmapData;
 import feathers.controls.LayoutGroup;
 
 /**
@@ -21,6 +17,10 @@ class StageCavans extends LayoutGroup {
 
 	private var cacheX:Float = 0;
 	private var cacheY:Float = 0;
+
+	public var assetsSize:Int = 0;
+
+	public var assetsList:Array<Dynamic>;
 
 	public function new() {
 		super();
@@ -57,8 +57,20 @@ class StageCavans extends LayoutGroup {
 				inited = true;
 				untyped window.onLimeEnbed();
 				this.onWindowResize();
+				// 注册资源文件变更事件
+				getStart().onFileChanged = onFileChanged;
 			}
 		});
+	}
+
+	private function onFileChanged(list:Array<Dynamic>):Void {
+		assetsSize = 0;
+		assetsList = list;
+		for (index => value in list) {
+			var size = FileSystem.stat(value.file).size;
+			value.size = size;
+			assetsSize += size;
+		}
 	}
 
 	override function set_width(value:Float):Float {

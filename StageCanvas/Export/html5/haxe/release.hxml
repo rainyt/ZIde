@@ -28,6 +28,7 @@
 -cp /Users/grtf/haxelib/zygameui
 -cp Source
 -cp ../CommonSource
+-D gl_stats
 -D tools=7.7.6
 -D lime-canvas
 -D howlerjs

@@ -1,3 +1,4 @@
+import zygame.utils.Lib;
 import js.Browser;
 import openfl.events.MouseEvent;
 import zygame.display.batch.ImageBatchs;
@@ -15,13 +16,17 @@ class UIStart extends Start {
 
 	private var _build:Builder;
 
+	public var filesConfig:Array<Dynamic> = [];
+
+	public dynamic function onFileChanged(files:Array<Dynamic>):Void {}
+
 	public function new() {
-		super(1080, 600, false);
+		super(1080, 600, true);
 		untyped window.uiContext = this.stage;
 		untyped window.uiStart = this;
 		this.stage.color = 0x373737;
 		ZBuilder.bindAssets(_assets);
-		Browser.window.addEventListener("click", function(e){
+		Browser.window.addEventListener("click", function(e) {
 			stage.dispatchEvent(new MouseEvent(MouseEvent.MOUSE_UP));
 		});
 	}
@@ -88,6 +93,7 @@ class UIStart extends Start {
 			}
 		}
 		if (isload) {
+			filesConfig = [];
 			_assets.unloadAll();
 			for (file in needAssets) {
 				var png:String = this._project.pngFiles.get(file);
@@ -97,31 +103,52 @@ class UIStart extends Start {
 				if (png != null && afile != null) {
 					// Spine格式
 					trace("载入Spine", png, afile);
+					filesConfig.push({
+						file: png
+					});
+					filesConfig.push({
+						file: afile
+					});
 					_assets.loadSpineTextAlats([png], afile);
 				} else if (png != null && xfile != null) {
 					// 图集格式
 					trace("载入图集", png, xfile);
+					filesConfig.push({
+						file: png
+					});
+					filesConfig.push({
+						file: xfile
+					});
 					_assets.loadTextures(png, xfile);
 				} else if (png != null) {
 					// 单图格式
 					trace("载入单图", png);
+					filesConfig.push({
+						file: png
+					});
 					_assets.loadFile(png);
 				}
 				if (jfile != null) {
 					// JSON格式
 					trace("载入JSON", jfile);
+					filesConfig.push({
+						file: jfile
+					});
 					_assets.loadFile(jfile);
 				}
 			}
 			_assets.start(function(f) {
 				if (f == 1) {
 					cb(true);
+					onFileChanged(filesConfig);
 				}
 			}, function(data) {
 				cb(false);
+				onFileChanged(filesConfig);
 			});
 		} else {
 			cb(true);
+			onFileChanged(filesConfig);
 		}
 	}
 
