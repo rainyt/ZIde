@@ -117,6 +117,7 @@ class AutoExportSlice9 {
 			endleft--;
 			var newLeft = array[endleft];
 			if (currentLeft != newLeft) {
+				endleft += 2;
 				break;
 			}
 		}
@@ -124,6 +125,7 @@ class AutoExportSlice9 {
 			endright++;
 			var newRight = array[endright];
 			if (currentRight != newRight) {
+				endright -= 2;
 				break;
 			}
 		}

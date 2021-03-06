@@ -10,6 +10,9 @@ import feathers.skins.RectangleSkin;
 import feathers.layout.AnchorLayoutData;
 import feathers.controls.LayoutGroup;
 
+/**
+ * 左侧菜单栏
+ */
 class Menu extends LayoutGroup {
 	public function new() {
 		super();

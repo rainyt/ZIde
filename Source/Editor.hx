@@ -1,7 +1,5 @@
 import feathers.layout.HorizontalLayoutData;
-import feathers.layout.VerticalLayoutData;
 import feathers.skins.RectangleSkin;
-import feathers.layout.AnchorLayoutData;
 import openfl.display.DOMElement;
 import js.Browser;
 import js.html.IFrameElement;

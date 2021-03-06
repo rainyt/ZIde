@@ -12,6 +12,9 @@ import feathers.layout.AnchorLayoutData;
 import feathers.skins.RectangleSkin;
 import feathers.controls.LayoutGroup;
 
+/**
+ * 资源列表管理器，会自动筛选出可用的XML文件列表
+ */
 class AssetsList extends LayoutGroup {
 	public function new() {
 		super();

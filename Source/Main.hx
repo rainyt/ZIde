@@ -4,16 +4,9 @@ import feathers.layout.HorizontalLayout;
 import zygame.components.ZBuilder;
 import feathers.layout.AnchorLayoutData;
 import feathers.controls.LayoutGroup;
-import openfl.Lib;
-import js.html.ScriptElement;
-import js.Browser;
 import feathers.layout.AnchorLayout;
-import feathers.graphics.FillStyle;
 import feathers.skins.RectangleSkin;
 import feathers.controls.Application;
-import openfl.display.Bitmap;
-import openfl.display.BitmapData;
-import js.html.CanvasElement;
 
 /**
  * ZIde主框架，实现界面逻辑

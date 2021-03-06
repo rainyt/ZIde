@@ -1,9 +1,5 @@
 import data.ZProjectData;
-import js.Browser;
 import zygame.events.ZEvent;
-import openfl.display.Stage;
-import feathers.events.TriggerEvent;
-import feathers.controls.Button;
 import feathers.text.TextFormat;
 import feathers.layout.AnchorLayoutData;
 import feathers.controls.Label;
@@ -11,6 +7,9 @@ import feathers.layout.AnchorLayout;
 import feathers.skins.RectangleSkin;
 import feathers.controls.LayoutGroup;
 
+/**
+ * 头部信息栏
+ */
 class Head extends LayoutGroup {
 	public function new() {
 		super();
@@ -25,7 +24,7 @@ class Head extends LayoutGroup {
 		this.layoutData = new AnchorLayoutData(0, 0, null, 50);
 
 		Utils.listener.addEventListener("openProject", function(e:ZEvent):Void {
-			if(e.data == null)
+			if (e.data == null)
 				return;
 			label.text = e.data.path;
 			App.currentProject = new ZProjectData(e.data.path);
