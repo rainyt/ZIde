@@ -25,8 +25,8 @@ class StageCavans extends LayoutGroup {
 	public function new() {
 		super();
 		current = this;
-		this.width = 480;
-		this.height = 800;
+		this.width = 480 * 0.7;
+		this.height = 800 * 0.7;
 		element = cast Browser.document.createCanvasElement();
 		untyped window.canvas = element;
 		element.id = "uicanvas";
@@ -72,8 +72,15 @@ class StageCavans extends LayoutGroup {
 	}
 
 	public function onWindowResize():Void {
-		if(getStart() == null)
+		if (getStart() == null)
 			return;
+		if (App.currentProject == null || !App.currentProject.isLandsapce()) {
+			this.width = 480 * 0.7;
+			this.height = 800 * 0.7;
+		} else {
+			this.height = 480 * 0.6;
+			this.width = 800 * 0.6;
+		}
 		var stage:Stage = untyped window.uiContext;
 		element.height = Std.int(height);
 		element.width = Std.int(width);

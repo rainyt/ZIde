@@ -48,7 +48,6 @@ class AssetsListItem extends ItemRenderer {
 	public function new() {
 		super();
 		this.backgroundSkin = new RectangleSkin(SolidColor(0x2a2a2a));
-		this.backgroundSkin.width = 200;
 		this.textFormat = new TextFormat(Utils.fontName, 12, 0xcccccc);
 		this.setSkinForState(ToggleButtonState.UP(true), new RectangleSkin(SolidColor(0x373737)));
 		this.setSkinForState(ToggleButtonState.DOWN(true), new RectangleSkin(SolidColor(0x474747)));

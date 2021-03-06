@@ -44,11 +44,19 @@ class ZProjectData {
 	 * 分辨率宽度
 	 */
 	public var HDWidth:Int = 0;
-	
+
 	/**
 	 * 分辨率高度
 	 */
 	public var HDHeight:Int = 0;
+
+	/**
+	 * 是否横屏
+	 * @return Bool
+	 */
+	public function isLandsapce():Bool {
+		return HDWidth > HDHeight;
+	}
 
 	public function new(path:String, xml:Xml = null) {
 		#if electron
