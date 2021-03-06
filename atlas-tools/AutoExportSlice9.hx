@@ -8,124 +8,150 @@ import openfl.display.BitmapData;
  */
 class AutoExportSlice9 {
 	public static function createSlice9(bitmap:BitmapData):Slice9 {
-		trace("扫描九宫格");
-		var lastXLen:String = null;
-		var isStartX:Bool = false;
-		var isEndX:Bool = false;
-		var startX:Int = 0;
-		var endX:Int = 0;
-
-		var lastYLen:String = null;
-		var isStartY:Bool = false;
-		var isEndY:Bool = false;
-		var startY:Int = 0;
-		var endY:Int = 0;
-
-		// 新版算法
-        var twoWidth:Int = Std.int(bitmap.width / 2);
-        var ix:Int = 0;
-        lastXLen = Base64.encode(bitmap.getPixels(new Rectangle(twoWidth, 0, 1, bitmap.height)));
-		while (ix < twoWidth) {
-            ix ++;
-            var curXLenA = Base64.encode(bitmap.getPixels(new Rectangle(twoWidth - ix,0,1,bitmap.height)));
-            var curXLenB = Base64.encode(bitmap.getPixels(new Rectangle(twoWidth + ix,0,1,bitmap.height)));
-			if (!isStartX && curXLenA != lastXLen) {
-                isStartX = true;
-                startX = twoWidth - ix - 1;
-            }
-            if (!isEndX && curXLenB != lastXLen) {
-                isEndX = true;
-                endX = twoWidth + ix + 1;
-            }
+		// 数组算法
+		var xArray:Array<String> = [];
+		var yArray:Array<String> = [];
+		for (i in 0...bitmap.width) {
+			xArray.push(Base64.encode(bitmap.getPixels(new Rectangle(i, 0, 1, bitmap.height))));
 		}
-        var twoHeight:Int = Std.int(bitmap.height / 2);
-        lastYLen = Base64.encode(bitmap.getPixels(new Rectangle(0,twoHeight,bitmap.width,1)));
-        var iy:Int = 0;
-		while (iy < twoHeight) {
-            iy ++;
-            var curXLenA = Base64.encode(bitmap.getPixels(new Rectangle(0,twoHeight - iy,bitmap.width,1)));
-            var curXLenB = Base64.encode(bitmap.getPixels(new Rectangle(0,twoHeight + iy,bitmap.width,1)));
-			if (!isStartY && curXLenA != lastYLen) {
-                isStartY = true;
-                startY = twoHeight - iy - 1;
-            }
-            if (!isEndY && curXLenB != lastYLen) {
-                isEndY = true;
-                endY = twoHeight + iy + 1;
-            }
+		for (i in 0...bitmap.height) {
+			yArray.push(Base64.encode(bitmap.getPixels(new Rectangle(0, i, bitmap.width, 1))));
 		}
-
-		// 旧版算法
-
-		// for(ix in 0...bitmap.width){
-		//     if(lastXLen == null){
-		//         lastXLen = Base64.encode(bitmap.getPixels(new Rectangle(ix,0,1,bitmap.height)));
-		//         continue;
-		//     }
-		//     var curXLen = Base64.encode(bitmap.getPixels(new Rectangle(ix,0,1,bitmap.height)));
-		//     if(curXLen == lastXLen){
-		//         if(isStartX){
-		//             //相等，记录第一个点
-		//             startX = ix - 1;
-		//             isStartX = false;
-		//         }
-		//     }
-		//     else if(!isStartX){
-		//         //不再相等，计算最后一个点
-		//         endX = ix - 1;
-		//         break;
-		//     }
-		//     lastXLen = curXLen;
-		// }
-
-		// for(iy in 0...bitmap.height){
-		//     if(lastYLen == null){
-		//         lastYLen = Base64.encode(bitmap.getPixels(new Rectangle(0,iy,bitmap.width,1)));
-		//         continue;
-		//     }
-		//     var curYLen = Base64.encode(bitmap.getPixels(new Rectangle(0,iy,bitmap.width,1)));
-		//     if(curYLen == lastYLen){
-		//         if(isStartY){
-		//             //相等，记录第一个点
-		//             startY = iy - 1;
-		//             isStartY = false;
-		//         }
-		//     }
-		//     else if(!isStartY){
-		//         //不再相等，计算最后一个点
-		//         endY = iy - 1;
-		//         break;
-		//     }
-		//     lastYLen = curYLen;
-		// }
-
-		if (startX == 0 && endX == 0 && startY == 0 && endY == 0) {
-			var newBitmapData:BitmapData = new BitmapData(4, 4, true, 0x0);
-			newBitmapData.draw(bitmap, null, null, new Rectangle(0, 0, 4, 4));
-			return new Slice9(newBitmapData, "1 1 1 1");
-		}
-		trace("x结果：", startX, endX, startY, endY);
-		var css = [startY, bitmap.width - endX, bitmap.height - endY, startX].join(" ");
-		trace("生成CSS：", css);
-		// 创建出新的位图
-		var newBitmapData:BitmapData = new BitmapData(bitmap.width - (endX - startX) + 4, bitmap.height - (endY - startY) + 4, true, 0x0);
-		// var newBitmapData:BitmapData = new BitmapData(bitmap.width,bitmap.height,true,0x0);
-		// 左上
+		var xdata = proessArray(xArray);
+		var ydata = proessArray(yArray);
+		trace(xdata, ydata);
+		var newBitmapData:BitmapData = new BitmapData(xdata.len, ydata.len, true, 0x0);
+		// var newBitmapData:BitmapData = new BitmapData(bitmap.width, bitmap.height, false, 0xff0000);
 		var mx:Matrix = new Matrix();
-		newBitmapData.draw(bitmap, mx, null, null, new Rectangle(0, 0, startX, startY));
+		// 左上
+		newBitmapData.draw(bitmap, mx, null, null, new Rectangle(0, 0, xdata.left1, ydata.left1));
 		// 左下
 		mx.tx = 0;
-		mx.ty = -endY + startY + 4;
-		newBitmapData.draw(bitmap, mx, null, null, new Rectangle(0, startY, startX + 4, bitmap.height - endY + 4));
+		mx.ty = -(yArray.length - ydata.len);
+		trace("左下", mx.tx, mx.ty);
+		newBitmapData.draw(bitmap, mx, null, null, new Rectangle(0, ydata.len - ydata.rightlen, xdata.left1, ydata.rightlen));
 		// 右上
-		mx.tx = -endX + startX + 4;
+		mx.tx = -(xArray.length - xdata.len);
 		mx.ty = 0;
-		newBitmapData.draw(bitmap, mx, null, null, new Rectangle(startX, 0, bitmap.width - endX + 4, startY));
+		trace("右上", mx.tx, mx.ty);
+		newBitmapData.draw(bitmap, mx, null, null, new Rectangle(xdata.len - xdata.rightlen, 0, xdata.rightlen, ydata.left1));
 		// 右下
-		mx.tx = -endX + startX + 4;
-		mx.ty = -endY + startY + 4;
-		newBitmapData.draw(bitmap, mx, null, null, new Rectangle(startX, startY, bitmap.width - endX + 4, bitmap.height - endY + 4));
+		mx.tx = -(xArray.length - xdata.len);
+		mx.ty = -(yArray.length - ydata.len);
+		newBitmapData.draw(bitmap, mx, null, null, new Rectangle(xdata.len - xdata.rightlen, ydata.len - ydata.rightlen, xdata.rightlen, ydata.rightlen));
+		// 补充缺失块
+		if (!xdata.t) {
+			trace("Y轴丢失");
+			// 上中
+			mx.tx = -(xArray.length - xdata.len) - 1;
+			mx.ty = 0;
+			newBitmapData.draw(bitmap, mx, null, null, new Rectangle(xdata.len - xdata.rightlen - 1, 0, 1, ydata.left1));
+			// 下中
+			mx.tx = -(xArray.length - xdata.len) - 1;
+			mx.ty = -(yArray.length - ydata.len);
+			newBitmapData.draw(bitmap, mx, null, null, new Rectangle(xdata.len - xdata.rightlen - 1, ydata.len - ydata.rightlen, 1, ydata.rightlen));
+		}
+
+		if (!ydata.t) {
+			trace("X轴丢失");
+			// 左中
+			mx.tx = 0;
+			mx.ty = -(yArray.length - ydata.len) - 1;
+			newBitmapData.draw(bitmap, mx, null, null, new Rectangle(0, ydata.len - ydata.rightlen - 1, xdata.left1, 1));
+			// 右中
+			mx.tx = -(xArray.length - xdata.len);
+			mx.ty = -(yArray.length - ydata.len) - 1;
+			newBitmapData.draw(bitmap, mx, null, null, new Rectangle(xdata.len - xdata.rightlen, ydata.len - ydata.rightlen - 1, xdata.rightlen, 1));
+		}
+
+		if (!ydata.t && !xdata.t) {
+			// 都缺失的情况下，需要补充中心点
+			// 中心
+			mx.tx = -(xArray.length - xdata.len) - 1;
+			mx.ty = -(yArray.length - ydata.len) - 1;
+			newBitmapData.draw(bitmap, mx, null, null, new Rectangle(xdata.len - xdata.rightlen - 1, ydata.len - ydata.rightlen - 1, 1, 1));
+		}
+		// top right bottom left
+		var css = [ydata.left1 + 1, xdata.rightlen + 1, ydata.rightlen + 1, xdata.left1 + 1].join(" ");
 		return new Slice9(newBitmapData, css);
+	}
+
+	/**
+	 * 解析数组
+	 * @param array 
+	 * @return Dynamic
+	 */
+	public static function proessArray(array:Array<String>):{
+		left1:Int,
+		left2:Int,
+		right1:Int,
+		right2:Int,
+		len:Int, // 长度
+		rightlen:Int, // 右侧保留的长度
+		t:Bool // 是否为偶数
+	} {
+		var left = 0;
+		var right = array.length;
+		var endleft = 0;
+		var endright = 0;
+		var len = 0;
+		trace("数组长度", array.length);
+		if (array.length % 2 == 0) {
+			// 偶数，则直接一半计算
+			trace("偶数算法");
+			left = Std.int(array.length / 2);
+			right = left + 1;
+		} else {
+			// 奇数，则偏移一位计算
+			trace("奇数算法");
+			left = Std.int((array.length - 1) / 2);
+			right = Std.int((array.length + 1) / 2) + 1;
+			len++;
+		}
+		trace("开始计算：", left, right);
+		endleft = left;
+		endright = right;
+		var currentLeft = array[endleft];
+		var currentRight = array[endright];
+		while (endleft > 0) {
+			endleft--;
+			var newLeft = array[endleft];
+			if (currentLeft != newLeft) {
+				break;
+			}
+		}
+		while (endright < array.length) {
+			endright++;
+			var newRight = array[endright];
+			if (currentRight != newRight) {
+				break;
+			}
+		}
+		// len += 2;
+		len += endleft;
+		len += (array.length - endright);
+		trace("计算结果：["
+			+ endleft
+			+ ","
+			+ left
+			+ "] ["
+			+ right
+			+ ","
+			+ endright
+			+ "] len="
+			+ len
+			+ " rightlen="
+			+ (array.length - endright));
+		// 开始减值计算
+		return {
+			rightlen: array.length - endright,
+			t: array.length % 2 == 0,
+			len: len,
+			left1: endleft,
+			left2: left,
+			right1: right,
+			right2: endright
+		};
 	}
 }
 

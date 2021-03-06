@@ -25,6 +25,8 @@ class Head extends LayoutGroup {
 		this.layoutData = new AnchorLayoutData(0, 0, null, 50);
 
 		Utils.listener.addEventListener("openProject", function(e:ZEvent):Void {
+			if(e.data == null)
+				return;
 			label.text = e.data.path;
 			App.currentProject = new ZProjectData(e.data.path);
 			Utils.listener.dispatchEvent(new ZEvent("assetsProess"));

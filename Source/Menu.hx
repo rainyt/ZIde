@@ -1,3 +1,4 @@
+import electron.renderer.Remote;
 import haxe.Exception;
 import zygame.events.ZEvent;
 import sys.io.File;
@@ -12,6 +13,7 @@ import feathers.controls.LayoutGroup;
 class Menu extends LayoutGroup {
 	public function new() {
 		super();
+
 		this.width = 50;
 		this.layoutData = new AnchorLayoutData(0, null, 0);
 		this.backgroundSkin = new RectangleSkin(SolidColor(0x333333));
@@ -62,6 +64,20 @@ class Menu extends LayoutGroup {
 		Utils.click(exportPsd, function() {
 			Main.current.addChild(new tools.psd.PSDView());
 		});
+
+		var debug = new MenuButton();
+		debug.text = "调试";
+		this.addChild(debug);
+		Utils.click(debug, function() {
+			Remote.getCurrentWebContents().openDevTools();
+		});
+
+		// var update = new MenuButton();
+		// update.text = "更新";
+		// this.addChild(update);
+		// Utils.click(update, function() {
+		// 	Remote.getCurrentWebContents().reload();
+		// });
 	}
 }
 
@@ -71,7 +87,7 @@ class MenuButton extends Button {
 		this.width = 50;
 		this.height = 50;
 		this.backgroundSkin = new RectangleSkin(SolidColor(0x444444));
-		this.textFormat = new TextFormat(null, 12, 0x858585);
+		this.textFormat = new TextFormat(Utils.fontName, 12, 0x858585);
 		this.setTextFormatForState(ButtonState.HOVER, new TextFormat(Utils.fontName, 12, 0xffffff));
 		this.setSkinForState(ButtonState.HOVER, new RectangleSkin(SolidColor(0x666666)));
 	}

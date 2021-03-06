@@ -1,6 +1,7 @@
 -main Main
 -lib openfl
 -lib lime
--neko ../Assets/atlas/tools.n
+# -neko ../Assets/atlas/tools.n
+-neko ../Export/electron/bin/atlas/tools.n
 --remap flash:openfl
 -D lime

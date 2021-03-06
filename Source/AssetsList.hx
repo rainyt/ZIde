@@ -30,6 +30,8 @@ class AssetsList extends LayoutGroup {
 		});
         list.doubleClickEnabled = true;
 		list.addEventListener(Event.CHANGE, function(e) {
+			if(list.selectedItem == null)
+				return;
 			trace("显示文件：" + list.selectedItem.path);
 			App.currentEditPath = list.selectedItem.path;
 			var xmlData = File.getContent(list.selectedItem.path);

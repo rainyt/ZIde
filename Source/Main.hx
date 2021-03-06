@@ -19,11 +19,17 @@ import js.html.CanvasElement;
  * ZIde主框架，实现界面逻辑
  */
 class Main extends Application {
-
 	public static var current:Main;
 
 	public function new() {
 		super();
+
+		js.Syntax.code("// 此处修复命令行索引
+		const fixPath = require('fix-path');
+		console.log(process.env.PATH);
+		//=> '/usr/bin'
+		fixPath();
+		console.log(process.env.PATH);");
 
 		current = this;
 

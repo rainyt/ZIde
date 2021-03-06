@@ -19,5 +19,7 @@
     <!-- <perbuild command="cd StageCavans && lime build html5" /> -->
     <postbuild command="electron ./Export/electron/bin/ElectronSetup.js" if="electron" />
     <template path="html5/index.html" rename="index.html" />
+    <!-- <template path="html5/package.json" rename="package.json" /> -->
+    <template path="./template" />
     <haxedef name="disable_res" />
 </project>
