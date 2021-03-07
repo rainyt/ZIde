@@ -21,7 +21,7 @@ class UIStart extends Start {
 	public dynamic function onFileChanged(files:Array<Dynamic>):Void {}
 
 	public function new() {
-		super(1080, 600, true);
+		super(1080, 600, false);
 		untyped window.uiContext = this.stage;
 		untyped window.uiStart = this;
 		this.stage.color = 0x373737;
