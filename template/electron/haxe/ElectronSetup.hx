@@ -72,9 +72,8 @@ class ElectronSetup
 				});
 
 				ElectronSetup.window.loadURL('file://' + js.Node.__dirname + '/index.html');
-				// #if (debug && !suppress_devtools)
-				// ElectronSetup.window.webContents.openDevTools();
-				// #end
+				var core = untyped require("./electron-core.js");
+				core.MainCore.window = ElectronSetup.window;
 			});
 		}
 	}

@@ -9,6 +9,7 @@
     <source path="./StageCanvas/Source" />
     <window height="0" width="0" />
     <define name="dom" />
+    <assets path="./ElectronSource/electron-core.js" rename="electron-core.js" embed="false" />
     <assets path="Assets/icons" rename="icons" />
     <assets path="Assets/md" rename="md" embed="false" />
     <assets path="Assets/china" rename="china" embed="false" />

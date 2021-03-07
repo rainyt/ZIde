@@ -14,9 +14,12 @@ import feathers.controls.LayoutGroup;
  * 左侧菜单栏
  */
 class Menu extends LayoutGroup {
+
+	public static var current:Menu;
+
 	public function new() {
 		super();
-
+		current = this;
 		this.width = 50;
 		this.layoutData = new AnchorLayoutData(0, null, 0);
 		this.backgroundSkin = new RectangleSkin(SolidColor(0x333333));
@@ -35,31 +38,12 @@ class Menu extends LayoutGroup {
 		var build = new MenuButton();
 		build.text = "编译";
 		this.addChild(build);
-		Utils.click(build, function() {
-			// 编译界面
-			try {
-				var data = Editor.current.getEditorData();
-				Xml.parse(data);
-				StageCavans.current.getStart().openFile(data, App.currentProject);
-			} catch (e:Exception) {
-				Alert.show("错误", "编译错误：" + e.message);
-			}
-		});
+		Utils.click(build, onBuild);
 
 		var save = new MenuButton();
 		save.text = "保存";
 		this.addChild(save);
-		Utils.click(save, function() {
-			// 编译界面
-			try {
-				var data = Editor.current.getEditorData();
-				Xml.parse(data);
-				File.saveContent(App.currentEditPath, data);
-				Alert.show("提示", "保存成功");
-			} catch (e:Exception) {
-				Alert.show("错误", "保存错误：" + e.message);
-			}
-		});
+		Utils.click(save, onSave);
 
 		var exportPsd = new MenuButton();
 		exportPsd.text = "PSD";
@@ -81,6 +65,29 @@ class Menu extends LayoutGroup {
 		// Utils.click(update, function() {
 		// 	Remote.getCurrentWebContents().reload();
 		// });
+	}
+
+	public function onBuild():Void {
+		// 编译界面
+		try {
+			var data = Editor.current.getEditorData();
+			Xml.parse(data);
+			StageCavans.current.getStart().openFile(data, App.currentProject);
+		} catch (e:Exception) {
+			Alert.show("错误", "编译错误：" + e.message);
+		}
+	}
+
+	public function onSave():Void {
+		// 编译界面
+		try {
+			var data = Editor.current.getEditorData();
+			Xml.parse(data);
+			File.saveContent(App.currentEditPath, data);
+			Alert.show("提示", "保存成功");
+		} catch (e:Exception) {
+			Alert.show("错误", "保存错误：" + e.message);
+		}
 	}
 }
 

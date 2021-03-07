@@ -1,3 +1,4 @@
+import electron.renderer.IpcRenderer;
 import feathers.layout.VerticalAlign;
 import feathers.layout.HorizontalAlign;
 import feathers.layout.HorizontalLayout;
@@ -23,6 +24,14 @@ class Main extends Application {
 		//=> '/usr/bin'
 		fixPath();
 		console.log(process.env.PATH);");
+
+		IpcRenderer.on("save", function(){
+			Menu.current.onSave();
+		});
+
+		IpcRenderer.on("build", function(){
+			Menu.current.onBuild();
+		});
 
 		current = this;
 
@@ -53,7 +62,7 @@ class Main extends Application {
 		this.addChild(assets);
 		var bottom = new BottomHead();
 		this.addChild(bottom);
-		bottom.layoutData = new AnchorLayoutData(null,0,0,50);
+		bottom.layoutData = new AnchorLayoutData(null, 0, 0, 50);
 
 		stageLayoutGroup.layoutData = new AnchorLayoutData(36, 0, 20, 50 + assets.width);
 	}
