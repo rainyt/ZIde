@@ -1,3 +1,5 @@
+import electron.renderer.Remote;
+import tools.update.UpdateCore;
 import electron.renderer.IpcRenderer;
 import feathers.layout.VerticalAlign;
 import feathers.layout.HorizontalAlign;
@@ -18,6 +20,8 @@ class Main extends Application {
 	public function new() {
 		super();
 
+		App.init();
+
 		js.Syntax.code("// 此处修复命令行索引
 		const fixPath = require('fix-path');
 		console.log(process.env.PATH);
@@ -25,12 +29,26 @@ class Main extends Application {
 		fixPath();
 		console.log(process.env.PATH);");
 
-		IpcRenderer.on("save", function(){
+		IpcRenderer.on("save", function() {
 			Menu.current.onSave();
 		});
 
-		IpcRenderer.on("build", function(){
+		IpcRenderer.on("build", function() {
 			Menu.current.onBuild();
+		});
+
+		IpcRenderer.on("update", function() {
+			// 更新
+			new UpdateCore(function(code) {
+				if (code == 0) {
+					Alert.showSelect("提示", "已更新成功，是否马上重启？", function(data) {
+						if (data == "确定") {
+							Remote.getCurrentWebContents().reload();
+						}
+					});
+				} else
+					Alert.show("错误", "更新错误（" + code + "）");
+			});
 		});
 
 		current = this;

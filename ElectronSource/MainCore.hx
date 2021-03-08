@@ -13,8 +13,16 @@ class MainCore {
 				label: "Application",
 				submenu: [
 					{
+						label: "检查更新",
+						accelerator: "Command+U",
+						click: function() {
+							untyped window.send("update");
+						}
+					},
+					{
 						label: "关闭",
-						accelerator: "Command+Q"
+						accelerator: "Command+Q",
+						click: null
 					}
 				]
 			},
@@ -22,9 +30,9 @@ class MainCore {
 				label: "编辑",
 				submenu: [
 					{
-						label: "拷贝",
-						accelerator: "CmdOrCtrl+C",
-						selector: "copy:",
+						label: "拷贝全部",
+						accelerator: "CmdOrCtrl+A",
+						selector: "selectAll:",
 						click: null
 					},
 					{

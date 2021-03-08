@@ -3,7 +3,9 @@
 var MainCore = $hx_exports["MainCore"] = function() { };
 MainCore.main = function() {
 	console.log("MainCore.hx:10:","ElectronCore初始化");
-	var template = [{ label : "Application", submenu : [{ label : "关闭", accelerator : "Command+Q"}]},{ label : "编辑", submenu : [{ label : "拷贝", accelerator : "CmdOrCtrl+C", selector : "copy:", click : null},{ label : "粘贴", accelerator : "CmdOrCtrl+V", selector : "paste:", click : null},{ label : "剪切", accelerator : "CmdOrCtrl+X", selector : "cut:", click : null},{ label : "保存", accelerator : "CmdOrCtrl+S", selector : null, click : function() {
+	var template = [{ label : "Application", submenu : [{ label : "检查更新", accelerator : "Command+U", click : function() {
+		MainCore.window.send("update");
+	}},{ label : "关闭", accelerator : "Command+Q", click : null}]},{ label : "编辑", submenu : [{ label : "拷贝全部", accelerator : "CmdOrCtrl+A", selector : "selectAll:", click : null},{ label : "粘贴", accelerator : "CmdOrCtrl+V", selector : "paste:", click : null},{ label : "剪切", accelerator : "CmdOrCtrl+X", selector : "cut:", click : null},{ label : "保存", accelerator : "CmdOrCtrl+S", selector : null, click : function() {
 		return MainCore.window.send("save");
 	}}]},{ label : "构造", submenu : [{ label : "编译", accelerator : "CmdOrCtrl+B", selector : null, click : function() {
 		return MainCore.window.send("build");

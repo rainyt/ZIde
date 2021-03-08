@@ -12,11 +12,12 @@ class FilterText extends LayoutGroup {
 
 	public var text:String;
 
+	public var input = new TextInput();
+
 	public function new() {
 		super();
 		this.height = 32;
 		this.layout = new AnchorLayout();
-		var input = new TextInput();
 		var clear = new Button();
 		clear.visible = false;
 		this.addChild(input);
@@ -45,6 +46,7 @@ class FilterText extends LayoutGroup {
 	}
 
 	public function bindData(data:Array<Dynamic>):Void {
+		this.input.text = "";
 		_data = data;
 	}
 
