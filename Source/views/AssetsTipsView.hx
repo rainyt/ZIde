@@ -10,12 +10,13 @@ class AssetsTipsView extends TitleView {
 		this.setTitle("资源列表");
 		var list = new ListView();
 		this.getGroup().addChild(list);
-		list.width = 400;
-		list.height = 600;
+		list.width = 650;
+		list.height = 500;
 		list.dataProvider = new ArrayCollection(data);
 		list.itemToText = function(data:Dynamic) {
 			var file:String = data.file;
-			return file.substr(file.lastIndexOf("/") + 1) + " 文件大小：" + Utils.getSize(data.size);
+			file = StringTools.replace(file, App.currentProject.rootPath + "/", "");
+			return file + " 文件大小：" + Utils.getSize(data.size);
 		};
 	}
 }
