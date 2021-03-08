@@ -1,3 +1,4 @@
+import electron.main.App;
 import electron.main.BrowserWindow;
 import electron.main.MenuItem;
 import electron.main.Menu;
@@ -15,6 +16,7 @@ class MainCore {
 					{
 						label: "检查更新",
 						accelerator: "Command+U",
+						selector: null,
 						click: function() {
 							untyped window.send("update");
 						}
@@ -22,7 +24,10 @@ class MainCore {
 					{
 						label: "关闭",
 						accelerator: "Command+Q",
-						click: null
+						selector: "quit:",
+						click: function() {
+							App.quit();
+						}
 					}
 				]
 			},
