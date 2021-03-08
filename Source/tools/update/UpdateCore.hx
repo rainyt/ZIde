@@ -1,5 +1,6 @@
 package tools.update;
 
+import zygame.macro.ZMacroUtils;
 import js.node.ChildProcess;
 import sys.io.File;
 import haxe.Http;
@@ -15,7 +16,7 @@ class UpdateCore {
 	 * @param cb 返回状态栏（0）更新完毕；（400）更新失败；（-1）更新错误
 	 */
 	public function new(cb:Int->Void) {
-		var http = new Http(updateUrl);
+		var http = new Http(updateUrl + "?" + ZMacroUtils.buildDateTime() + Math.random());
 		http.onStatus = function(data:Int) {
 			if (data != 200) {
 				cb(-1);
