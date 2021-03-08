@@ -894,7 +894,7 @@ ApplicationMain.main = function() {
 ApplicationMain.create = function(config) {
 	var app = new openfl_display_Application();
 	ManifestResources.init(config);
-	app.meta.h["build"] = "12";
+	app.meta.h["build"] = "15";
 	app.meta.h["company"] = "Company Name";
 	app.meta.h["file"] = "ZIde-UI";
 	app.meta.h["name"] = "ZIde";
@@ -5387,8 +5387,8 @@ UIStart.prototype = $extend(zygame_core_Start.prototype,{
 				isload = true;
 			}
 		}
+		this.filesConfig = [];
 		if(isload) {
-			this.filesConfig = [];
 			this._assets.unloadAll();
 			var _g = 0;
 			while(_g < needAssets.length) {
@@ -5463,7 +5463,21 @@ UIStart.prototype = $extend(zygame_core_Start.prototype,{
 					var datas = src.split(":");
 					path = datas[0];
 					if(array.indexOf(datas[1]) == -1) {
-						array.push(datas[1]);
+						var tmp;
+						if(item1.nodeType != Xml.Element) {
+							throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
+						}
+						if(item1.nodeName != "BImage") {
+							if(item1.nodeType != Xml.Element) {
+								throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
+							}
+							tmp = item1.nodeName != "ZImage";
+						} else {
+							tmp = false;
+						}
+						if(tmp) {
+							array.push(datas[1]);
+						}
 					}
 				} else {
 					path = src;
@@ -117157,7 +117171,6 @@ zygame_utils_load_TextureAtlas.prototype = $extend(zygame_utils_load_Atlas.proto
 		try {
 			xmls = xml.firstElement().elements();
 		} catch( _g ) {
-			haxe_NativeStackTrace.lastError = _g;
 			return null;
 		}
 		var rect = new openfl_geom_Rectangle();
@@ -118403,7 +118416,6 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 							spine_support_utils_ObjectMap.put(skin.attachments,key,attachment);
 						}
 					} catch( _g2 ) {
-						haxe_NativeStackTrace.lastError = _g2;
 						var ex = haxe_Exception.caught(_g2).unwrap();
 						throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Error reading attachment: " + entry.get_name() + ", skin: " + Std.string(skin),ex));
 					}
@@ -119115,7 +119127,6 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 				}
 				skeletonData.animations.push(new spine_Animation(name,timelines,duration));
 			} catch( _g2 ) {
-				haxe_NativeStackTrace.lastError = _g2;
 				var ex = haxe_Exception.caught(_g2).unwrap();
 				throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Error reading animation: " + animationMap.get_name(),ex));
 			}
@@ -119413,7 +119424,6 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 							spine_support_utils_ObjectMap.put(skin.attachments,key,attachment);
 						}
 					} catch( _g2 ) {
-						haxe_NativeStackTrace.lastError = _g2;
 						var ex = haxe_Exception.caught(_g2).unwrap();
 						throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Error reading attachment: " + entry.get_name() + ", skin: " + Std.string(skin),ex));
 					}
@@ -120125,7 +120135,6 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 				}
 				skeletonData.animations.push(new spine_Animation(name,timelines,duration));
 			} catch( _g2 ) {
-				haxe_NativeStackTrace.lastError = _g2;
 				var ex = haxe_Exception.caught(_g2).unwrap();
 				throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Error reading animation: " + animationMap.get_name(),ex));
 			}

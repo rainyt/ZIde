@@ -92,8 +92,8 @@ class UIStart extends Start {
 				isload = true;
 			}
 		}
+		filesConfig = [];
 		if (isload) {
-			filesConfig = [];
 			_assets.unloadAll();
 			for (file in needAssets) {
 				var png:String = this._project.pngFiles.get(file);
@@ -184,7 +184,9 @@ class UIStart extends Start {
 					path = datas[0];
 					// 可能是JSON格式
 					if (array.indexOf(datas[1]) == -1) {
-						array.push(datas[1]);
+						// 排除BImage和ZImage，这两个是使用图集，没有JSON可能性
+						if(item.nodeName != "BImage" && item.nodeName != "ZImage")
+							array.push(datas[1]);
 					}
 				} else {
 					// 图集、或者整张图片
