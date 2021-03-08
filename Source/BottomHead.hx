@@ -1,3 +1,5 @@
+import views.AssetsTipsView;
+import feathers.controls.ButtonState;
 import openfl.events.Event;
 import zygame.macro.ZMacroUtils;
 
@@ -14,10 +16,27 @@ class BottomHead extends LayoutGroup {
 
 		this.layout = new AnchorLayout();
 
-		this.addChild(tips);
+		var leftLayout = new LayoutGroup();
+		this.addChild(leftLayout);
+		leftLayout.layout = new HorizontalLayout();
+		cast(leftLayout.layout, HorizontalLayout).verticalAlign = VerticalAlign.MIDDLE;
+		cast(leftLayout.layout, HorizontalLayout).horizontalAlign = HorizontalAlign.LEFT;
+
+		leftLayout.addChild(tips);
 		tips.textFormat = new TextFormat(Utils.fontName, 12, 0xffffff);
-		tips.layoutData = AnchorLayoutData.middleLeft(0, 10);
+		leftLayout.layoutData = AnchorLayoutData.middleLeft(0, 10);
 		tips.text = "绘制次数:0 | 文件大小:0Kb";
+
+		var asslist = new Button();
+		leftLayout.addChild(asslist);
+		asslist.text = "[文件详情]";
+		asslist.backgroundSkin = null;
+		asslist.setTextFormatForState(ButtonState.UP, new TextFormat(Utils.fontName, 12, 0xffffff));
+		asslist.setTextFormatForState(ButtonState.HOVER, new TextFormat(Utils.fontName, 12, 0xcccccc));
+		asslist.setTextFormatForState(ButtonState.DOWN, new TextFormat(Utils.fontName, 12, 0xaaaaaa));
+		Utils.click(asslist, function() {
+			Main.current.addChild(new AssetsTipsView(StageCavans.current.assetsList));
+		});
 
 		var version = new Label();
 		this.addChild(version);
@@ -38,16 +57,8 @@ class BottomHead extends LayoutGroup {
 	 * @param config 
 	 */
 	public function updateConfig(config:{drawcall:Int, filesize:Int}):Void {
-		tips.text = "绘制次数:" + config.drawcall + " | 文件大小:" + getSize(config.filesize);
+		tips.text = "绘制次数:" + config.drawcall + " | 文件大小:" + Utils.getSize(config.filesize);
 	}
 
-	private function getSize(size:Int):String {
-		if (size < 1024)
-			return size + "k";
-		if (size < 1024 * 1024)
-			return Std.int(size / 1024 * 100) / 100 + "kb";
-		if (size < 1024 * 1024 * 1024)
-			return Std.int(size / 1024 / 1024 * 100) / 100 + "mb";
-		return "0k";
-	}
+	
 }

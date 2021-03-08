@@ -77,4 +77,15 @@ class Utils {
 	public static function itemToText(data:Dynamic):String {
 		return data.text;
 	}
+
+
+	public static function getSize(size:Int):String {
+		if (size < 1024)
+			return size + "k";
+		if (size < 1024 * 1024)
+			return Std.int(size / 1024 * 100) / 100 + "kb";
+		if (size < 1024 * 1024 * 1024)
+			return Std.int(size / 1024 / 1024 * 100) / 100 + "mb";
+		return "0k";
+	}
 }
