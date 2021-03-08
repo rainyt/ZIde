@@ -1,3 +1,4 @@
+import base.FilterText;
 import openfl.Lib;
 import sys.io.File;
 import openfl.events.Event;
@@ -23,14 +24,22 @@ class AssetsList extends LayoutGroup {
 		this.backgroundSkin = new RectangleSkin(SolidColor(0x252525));
 		this.layoutData = new AnchorLayoutData(36, null, 0, 50);
 		this.layout = new AnchorLayout();
+
+		// 筛选功能
+		var f = new FilterText();
+		this.addChild(f);
+		f.layoutData = new AnchorLayoutData(0, 0, null, 0);
+
 		var list = new ListView();
 		list.backgroundSkin = null;
 		list.itemRendererRecycler = DisplayObjectRecycler.withClass(AssetsListItem);
 		this.addChild(list);
 		list.itemToText = (data) -> data.name;
 		list.layoutData = AnchorLayoutData.fill();
+		cast(list.layoutData, AnchorLayoutData).top = 32;
 		cast(list.layoutData, AnchorLayoutData).bottom = 20;
 		Utils.listener.addEventListener("assetsProess", function(e) {
+			f.bindData(App.currentProject.builderFiles);
 			list.dataProvider = new ArrayCollection(App.currentProject.builderFiles);
 		});
 		list.doubleClickEnabled = true;
@@ -43,6 +52,15 @@ class AssetsList extends LayoutGroup {
 			Editor.current.setEditorData(xmlData);
 			StageCavans.current.getStart().openFile(xmlData, App.currentProject);
 		});
+
+		f.onFilter = function(data) {
+			if (data.path.toLowerCase().indexOf(f.text.toLowerCase()) == -1)
+				return false;
+			return true;
+		}
+		f.onFiltered = function(data) {
+			list.dataProvider = new ArrayCollection(data);
+		}
 	}
 }
 
