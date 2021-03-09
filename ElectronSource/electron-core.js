@@ -15,6 +15,8 @@ MainCore.main = function() {
 		return MainCore.window.send("build");
 	}}]},{ label : "工具", submenu : [{ label : "格式化", accelerator : "Shift+Opt+F", selector : null, click : function() {
 		return MainCore.window.send("formatxml");
+	}},{ label : "联想提示", accelerator : "CmdOrCtrl+D", selector : null, click : function() {
+		return MainCore.window.send("codetips");
 	}}]}];
 	electron_main_Menu.setApplicationMenu(electron_main_Menu.buildFromTemplate(template));
 };

@@ -29,7 +29,7 @@ class Main extends Application {
 		fixPath();
 		console.log(process.env.PATH);");
 
-		IpcRenderer.on("formatxml", function(){
+		IpcRenderer.on("formatxml", function() {
 			Editor.current.formatXml();
 		});
 
@@ -39,6 +39,10 @@ class Main extends Application {
 
 		IpcRenderer.on("build", function() {
 			Menu.current.onBuild();
+		});
+
+		IpcRenderer.on("codetips", function() {
+			trace("联想提示");
 		});
 
 		IpcRenderer.on("update", function() {

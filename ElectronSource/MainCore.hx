@@ -99,6 +99,14 @@ class MainCore {
 						click: () -> {
 							untyped window.send("formatxml");
 						}
+					},
+					{
+						label: "联想提示",
+						accelerator: "CmdOrCtrl+D",
+						selector: null,
+						click: () -> {
+							untyped window.send("codetips");
+						}
 					}
 				]
 			}

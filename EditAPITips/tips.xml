@@ -54,8 +54,8 @@
         <src tips="设置图集" />
     </BButton>
     <BBox class="Base" tips="批渲染布局"></BBox>
-    <VBBox class="Base" tips="批渲染布局V"></VBBox>
-    <HBBox class="Base" tips="批渲染布局H"></HBBox>
+    <VBox class="Base" tips="批渲染布局V"></VBox>
+    <HBox class="Base" tips="批渲染布局H"></HBox>
     <BImage class="Base" tips="批渲染图片"></BImage>
     <BScale9Image class="Base" tips="批渲染图片（九宫格）"></BScale9Image>
     <BLabel class="Base" tips="批渲染文本">
