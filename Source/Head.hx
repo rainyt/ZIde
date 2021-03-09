@@ -31,6 +31,7 @@ class Head extends LayoutGroup {
 			App.currentProject = new ZProjectData(e.data.path);
 			Utils.listener.dispatchEvent(new ZEvent("assetsProess"));
 			StageCavans.current.onWindowResize();
+			Editor.current.bindZProjectData(App.currentProject);
 		});
 	}
 }

@@ -71,4 +71,7 @@
     <tween parent="ZTween" class="add" tips="过渡动画">
         <from tips="初始值" />
     </tween>
+    <ZHaxe tips="HScript">
+        <id tips="调用名"/>
+    </ZHaxe>
 </tips>

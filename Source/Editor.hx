@@ -1,3 +1,4 @@
+import data.ZProjectData;
 import feathers.layout.HorizontalLayoutData;
 import feathers.skins.RectangleSkin;
 import openfl.display.DOMElement;
@@ -49,6 +50,14 @@ class Editor extends LayoutGroup {
 
 	public function getEditorData():String {
 		return untyped iframe.contentWindow.getCodeValue();
+	}
+
+	/**
+	 * 绑定ZProjectData
+	 * @param zproject 
+	 */
+	public function bindZProjectData(zproject:ZProjectData):Void{
+		untyped iframe.contentWindow.registerZProjectData(zproject);
 	}
 
 	override function initialize() {

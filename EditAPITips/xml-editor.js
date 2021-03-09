@@ -41,6 +41,13 @@ HxOverrides.now = function() {
 Math.__name__ = "Math";
 var Reflect = function() { };
 Reflect.__name__ = "Reflect";
+Reflect.field = function(o,field) {
+	try {
+		return o[field];
+	} catch( _g ) {
+		return null;
+	}
+};
 Reflect.fields = function(o) {
 	var a = [];
 	if(o != null) {
@@ -173,11 +180,12 @@ Suggestions.create = function(label,insertText,detail,className,filterText) {
 	return { label : label, insertText : insertText, detail : detail, filterText : filterText, kind : monaco.languages.CompletionItemKind[className], insertTextRules : monaco.languages.CompletionItemInsertTextRule.KeepWhitespace};
 };
 var TipsPool = function() {
+	this.childrenMaps = new haxe_ds_StringMap();
 	this.xmlItemMaps = new haxe_ds_StringMap();
 	this.attartMaps = new haxe_ds_StringMap();
 	this.classesend = [];
 	this.classes = [];
-	var xml = Xml.parse("<tips>\n    <Base igone=\"true\">\n        <id tips=\"设置ID标示\" />\n        <width tips=\"宽度\" />\n        <height tips=\"高度\" />\n        <scaleX tips=\"ScaleX缩放\" />\n        <scaleY tips=\"ScaleY缩放\" />\n        <alpha tips=\"透明度\" />\n        <x tips=\"X轴坐标\" />\n        <y tips=\"Y轴坐标\" />\n        <visible tips=\"可见\" />\n        <left tips=\"左对齐\" />\n        <right tips=\"右对齐\" />\n        <top tips=\"顶部对齐\" />\n        <bottom tips=\"底部对齐\" />\n        <centerX tips=\"横向对齐\" />\n        <centerY tips=\"垂直对齐\" />\n    </Base>\n    <BaseBox class=\"Base\" igone=\"true\">\n        <gap tips=\"间隔\" />\n    </BaseBox>\n    <ZImage class=\"Base\" tips=\"图像对象\">\n        <src tips=\"设置图像，支持网络地址、图集地址\" />\n    </ZImage>\n    <ZBox class=\"Base\" tips=\"基本容器\"></ZBox>\n    <ZVBox class=\"BaseBox\" tips=\"基本容器(竖向)\"></ZVBox>\n    <ZHBox class=\"BaseBox\" tips=\"基本容器(横向)\"></ZHBox>\n    <ZQuad class=\"Base\" tips=\"色块\">\n        <color tips=\"颜色\" />\n    </ZQuad>\n    <ZLabel class=\"Base\" tips=\"文本\">\n        <text tips=\"文本\" />\n        <color tips=\"文本颜色\" />\n        <size tips=\"文本大小\" />\n    </ZLabel>\n    <ZInputLabel class=\"ZLabel\" tips=\"输入文本框\"></ZInputLabel>\n    <ZTween tips=\"动画\"></ZTween>\n    <ZSpine class=\"Base\" tips=\"Spine动画\"></ZSpine>\n    <ZScroll class=\"Base\" tips=\"Scroll窗口\"></ZScroll>\n    <ZList class=\"Base\" tips=\"数据列表窗口\"></ZList>\n    <ZButton class=\"Base\" tips=\"按钮\">\n        <src tips=\"设置图像\" />\n    </ZButton>\n    <ZBitmapLabel class=\"ZLabel\" tips=\"位图文本\">\n        <src tips=\"设置图集或者Fnt\" />\n    </ZBitmapLabel>\n    <ImageBatchs class=\"Base\" tips=\"批渲染对象（无触摸）\">\n        <src tips=\"设置图集\" />\n    </ImageBatchs>\n    <TouchDisplayObjectContainer class=\"ImageBatchs\" tips=\"批渲染对象（含触摸）\"></TouchDisplayObjectContainer>\n    <BButton class=\"Base\" tips=\"批渲染按钮\">\n        <src tips=\"设置图集\" />\n    </BButton>\n    <BBox class=\"Base\" tips=\"批渲染布局\"></BBox>\n    <VBBox class=\"Base\" tips=\"批渲染布局V\"></VBBox>\n    <HBBox class=\"Base\" tips=\"批渲染布局H\"></HBBox>\n    <BImage class=\"Base\" tips=\"批渲染图片\"></BImage>\n    <BScale9Image class=\"Base\" tips=\"批渲染图片（九宫格）\"></BScale9Image>\n    <BLabel class=\"Base\" tips=\"批渲染文本\">\n        <src tips=\"设置图集或者Fnt\" />\n    </BLabel>\n    <add parent=\"ZTween\" tips=\"递增动画\">\n        <bind tips=\"绑定ID值\"/>\n        <key tips=\"修改的属性\"/>\n        <start tips=\"开始帧\"/>\n        <end tips=\"结束帧\"/>\n        <to tips=\"修改值\"/>\n    </add>\n    <tween parent=\"ZTween\" class=\"add\" tips=\"过渡动画\">\n        <from tips=\"初始值\"/>\n    </tween>\n</tips>");
+	var xml = Xml.parse("<tips>\n    <Base igone=\"true\">\n        <id tips=\"设置ID标示\" />\n        <width tips=\"宽度\" />\n        <height tips=\"高度\" />\n        <scaleX tips=\"ScaleX缩放\" />\n        <scaleY tips=\"ScaleY缩放\" />\n        <alpha tips=\"透明度\" />\n        <x tips=\"X轴坐标\" />\n        <y tips=\"Y轴坐标\" />\n        <visible tips=\"可见\" />\n        <left tips=\"左对齐\" />\n        <right tips=\"右对齐\" />\n        <top tips=\"顶部对齐\" />\n        <bottom tips=\"底部对齐\" />\n        <centerX tips=\"横向对齐\" />\n        <centerY tips=\"垂直对齐\" />\n    </Base>\n    <BaseBox class=\"Base\" igone=\"true\">\n        <gap tips=\"间隔\" />\n    </BaseBox>\n    <ZImage class=\"Base\" tips=\"图像对象\">\n        <src tips=\"设置图像，支持网络地址、图集地址\" />\n    </ZImage>\n    <ZBox class=\"Base\" tips=\"基本容器\"></ZBox>\n    <ZVBox class=\"BaseBox\" tips=\"基本容器(竖向)\"></ZVBox>\n    <ZHBox class=\"BaseBox\" tips=\"基本容器(横向)\"></ZHBox>\n    <ZQuad class=\"Base\" tips=\"色块\">\n        <color tips=\"颜色\" />\n    </ZQuad>\n    <ZLabel class=\"Base\" tips=\"文本\">\n        <text tips=\"文本\" />\n        <color tips=\"文本颜色\" />\n        <size tips=\"文本大小\" />\n    </ZLabel>\n    <ZInputLabel class=\"ZLabel\" tips=\"输入文本框\"></ZInputLabel>\n    <ZTween tips=\"动画\">\n        <auto tips=\"自动播放(Bool)\" />\n    </ZTween>\n    <ZSpine class=\"Base\" tips=\"Spine动画\"></ZSpine>\n    <ZScroll class=\"Base\" tips=\"Scroll窗口\"></ZScroll>\n    <ZList class=\"Base\" tips=\"数据列表窗口\"></ZList>\n    <ZButton class=\"Base\" tips=\"按钮\">\n        <src tips=\"设置图像\" />\n    </ZButton>\n    <ZBitmapLabel class=\"ZLabel\" tips=\"位图文本\">\n        <src tips=\"设置图集或者Fnt\" />\n    </ZBitmapLabel>\n    <ImageBatchs class=\"Base\" tips=\"批渲染对象（无触摸）\">\n        <src tips=\"设置图集\" />\n    </ImageBatchs>\n    <TouchDisplayObjectContainer class=\"ImageBatchs\" tips=\"批渲染对象（含触摸）\"></TouchDisplayObjectContainer>\n    <BButton class=\"Base\" tips=\"批渲染按钮\">\n        <src tips=\"设置图集\" />\n    </BButton>\n    <BBox class=\"Base\" tips=\"批渲染布局\"></BBox>\n    <VBBox class=\"Base\" tips=\"批渲染布局V\"></VBBox>\n    <HBBox class=\"Base\" tips=\"批渲染布局H\"></HBBox>\n    <BImage class=\"Base\" tips=\"批渲染图片\"></BImage>\n    <BScale9Image class=\"Base\" tips=\"批渲染图片（九宫格）\"></BScale9Image>\n    <BLabel class=\"Base\" tips=\"批渲染文本\">\n        <src tips=\"设置图集或者Fnt\" />\n    </BLabel>\n    <add parent=\"ZTween\" tips=\"递增动画\">\n        <bind tips=\"绑定ID值\" />\n        <key tips=\"修改的属性\" />\n        <start tips=\"开始帧\" />\n        <end tips=\"结束帧\" />\n        <to tips=\"修改值\" />\n    </add>\n    <tween parent=\"ZTween\" class=\"add\" tips=\"过渡动画\">\n        <from tips=\"初始值\" />\n    </tween>\n    <ZHaxe tips=\"HScript\">\n        <id tips=\"调用名\"/>\n    </ZHaxe>\n</tips>");
 	var item = xml.firstElement().elements();
 	while(item.hasNext()) {
 		var item1 = item.next();
@@ -185,57 +193,72 @@ var TipsPool = function() {
 		if(item1.nodeType != Xml.Element) {
 			throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
 		}
-		tmp("API:",{ fileName : "TipsPool.hx", lineNumber : 24, className : "TipsPool", methodName : "new", customParams : [item1.nodeName]});
+		tmp("API:",{ fileName : "TipsPool.hx", lineNumber : 34, className : "TipsPool", methodName : "new", customParams : [item1.nodeName]});
 		if(!item1.exists("igone")) {
-			var tmp1 = this.classes;
-			if(item1.nodeType != Xml.Element) {
-				throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
+			if(item1.exists("parent")) {
+				var p = item1.get("parent");
+				if(!Object.prototype.hasOwnProperty.call(this.childrenMaps.h,p)) {
+					this.childrenMaps.h[p] = [];
+				}
+				var tmp1 = this.childrenMaps.h[p];
+				if(item1.nodeType != Xml.Element) {
+					throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
+				}
+				if(item1.nodeType != Xml.Element) {
+					throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
+				}
+				tmp1.push(Suggestions.create(item1.nodeName,item1.nodeName,item1.get("tips")));
+			} else {
+				var tmp3 = this.classes;
+				if(item1.nodeType != Xml.Element) {
+					throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
+				}
+				if(item1.nodeType != Xml.Element) {
+					throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
+				}
+				tmp3.push(Suggestions.create(item1.nodeName,item1.nodeName,item1.get("tips")));
+				var tmp5 = this.classesend;
+				if(item1.nodeType != Xml.Element) {
+					throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
+				}
+				if(item1.nodeType != Xml.Element) {
+					throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
+				}
+				tmp5.push(Suggestions.create(item1.nodeName,item1.nodeName,item1.get("tips")));
 			}
-			if(item1.nodeType != Xml.Element) {
-				throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
-			}
-			tmp1.push(Suggestions.create(item1.nodeName,item1.nodeName,item1.get("tips")));
-			var tmp3 = this.classesend;
-			if(item1.nodeType != Xml.Element) {
-				throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
-			}
-			if(item1.nodeType != Xml.Element) {
-				throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
-			}
-			tmp3.push(Suggestions.create(item1.nodeName,item1.nodeName,item1.get("tips")));
 		}
 		var this1 = this.attartMaps;
 		if(item1.nodeType != Xml.Element) {
 			throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
 		}
 		if(Object.prototype.hasOwnProperty.call(this1.h,item1.nodeName) == false) {
-			var this2 = this.attartMaps;
+			var this11 = this.attartMaps;
 			if(item1.nodeType != Xml.Element) {
 				throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
 			}
-			this2.h[item1.nodeName] = [];
+			this11.h[item1.nodeName] = [];
 		}
 		var attritem = item1.elements();
 		while(attritem.hasNext()) {
 			var attritem1 = attritem.next();
-			var this3 = this.attartMaps;
+			var this12 = this.attartMaps;
 			if(item1.nodeType != Xml.Element) {
 				throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
 			}
-			var tmp5 = this3.h[item1.nodeName];
+			var tmp7 = this12.h[item1.nodeName];
 			if(attritem1.nodeType != Xml.Element) {
 				throw haxe_Exception.thrown("Bad node type, expected Element but found " + (attritem1.nodeType == null ? "null" : XmlType.toString(attritem1.nodeType)));
 			}
 			if(attritem1.nodeType != Xml.Element) {
 				throw haxe_Exception.thrown("Bad node type, expected Element but found " + (attritem1.nodeType == null ? "null" : XmlType.toString(attritem1.nodeType)));
 			}
-			tmp5.push(Suggestions.create(attritem1.nodeName,attritem1.nodeName,attritem1.get("tips")));
+			tmp7.push(Suggestions.create(attritem1.nodeName,attritem1.nodeName,attritem1.get("tips")));
 		}
-		var this4 = this.xmlItemMaps;
+		var this13 = this.xmlItemMaps;
 		if(item1.nodeType != Xml.Element) {
 			throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
 		}
-		this4.h[item1.nodeName] = item1;
+		this13.h[item1.nodeName] = item1;
 	}
 	var item = xml.firstElement().elements();
 	while(item.hasNext()) {
@@ -245,15 +268,28 @@ var TipsPool = function() {
 			this.extendsClass(item1,c);
 		}
 	}
+	haxe_Log.trace(this.childrenMaps == null ? "null" : haxe_ds_StringMap.stringify(this.childrenMaps.h),{ fileName : "TipsPool.hx", lineNumber : 63, className : "TipsPool", methodName : "new"});
 };
 TipsPool.__name__ = "TipsPool";
 TipsPool.prototype = {
-	extendsClass: function(item,c) {
+	getCacheFileMaps: function() {
+		var array = [];
+		var _g = haxe_ds_StringMap.kvIterator(TipsPool.cacheData.pngFiles.h);
+		while(_g.hasNext()) {
+			var _g1 = _g.next();
+			var key = _g1.key;
+			var value = _g1.value;
+			var fileName = zygame_utils_StringUtils.getName(value);
+			array.push(Suggestions.create(fileName,fileName,value));
+		}
+		return array;
+	}
+	,extendsClass: function(item,c) {
 		var tmp = haxe_Log.trace;
 		if(item.nodeType != Xml.Element) {
 			throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item.nodeType == null ? "null" : XmlType.toString(item.nodeType)));
 		}
-		tmp("继承",{ fileName : "TipsPool.hx", lineNumber : 56, className : "TipsPool", methodName : "extendsClass", customParams : [item.nodeName,c]});
+		tmp("继承",{ fileName : "TipsPool.hx", lineNumber : 81, className : "TipsPool", methodName : "extendsClass", customParams : [item.nodeName,c]});
 		var array = this.attartMaps.h[c];
 		var _g_current = 0;
 		var _g_array = array;
@@ -262,7 +298,7 @@ TipsPool.prototype = {
 			var _g1_key = _g_current++;
 			var index = _g1_key;
 			var value = _g1_value;
-			haxe_Log.trace("push",{ fileName : "TipsPool.hx", lineNumber : 59, className : "TipsPool", methodName : "extendsClass", customParams : [value.label]});
+			haxe_Log.trace("push",{ fileName : "TipsPool.hx", lineNumber : 84, className : "TipsPool", methodName : "extendsClass", customParams : [value.label]});
 			var this1 = this.attartMaps;
 			if(item.nodeType != Xml.Element) {
 				throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item.nodeType == null ? "null" : XmlType.toString(item.nodeType)));
@@ -438,23 +474,26 @@ XmlEditor.__name__ = "XmlEditor";
 XmlEditor.main = function() {
 };
 var XmlEditorContent = $hx_exports["XmlEditorContent"] = function() {
-	this.triggerCharacters = ["<"," ","/"];
+	this.triggerCharacters = ["<"," ","/","\""];
 	this.tipsPool = new TipsPool();
 };
 XmlEditorContent.__name__ = "XmlEditorContent";
+XmlEditorContent.registerZProjectData = function(cachedata) {
+	haxe_Log.trace("更新项目缓存",{ fileName : "XmlEditor.hx", lineNumber : 12, className : "XmlEditorContent", methodName : "registerZProjectData"});
+	TipsPool.cacheData = cachedata;
+};
 XmlEditorContent.prototype = {
 	provideCompletionItems: function(model,position,context,token) {
-		haxe_Log.trace(context,{ fileName : "XmlEditor.hx", lineNumber : 26, className : "XmlEditorContent", methodName : "provideCompletionItems", customParams : [token]});
 		var line = position.lineNumber;
 		var column = position.column;
-		haxe_Log.trace(Reflect.fields(position),{ fileName : "XmlEditor.hx", lineNumber : 29, className : "XmlEditorContent", methodName : "provideCompletionItems"});
+		haxe_Log.trace(Reflect.fields(position),{ fileName : "XmlEditor.hx", lineNumber : 35, className : "XmlEditorContent", methodName : "provideCompletionItems"});
 		var content = model.getLineContent(line);
 		var sym = content[column - 2];
 		var leftInput = HxOverrides.substr(content,0,column - 1);
 		if(leftInput.indexOf(" ") != -1) {
 			leftInput = HxOverrides.substr(leftInput,leftInput.lastIndexOf(" ") + 1,null);
 		}
-		haxe_Log.trace("position:",{ fileName : "XmlEditor.hx", lineNumber : 37, className : "XmlEditorContent", methodName : "provideCompletionItems", customParams : [position,content,sym,"leftInput=",leftInput]});
+		haxe_Log.trace("position:",{ fileName : "XmlEditor.hx", lineNumber : 43, className : "XmlEditorContent", methodName : "provideCompletionItems", customParams : [position,content,sym,"leftInput=",leftInput]});
 		if(leftInput.indexOf("</") == 0) {
 			return this.returnSuggestions(this.filterSuggestions(position,sym,content,this.tipsPool.classesend.slice()));
 		} else if(leftInput.indexOf("<") == 0) {
@@ -463,10 +502,27 @@ XmlEditorContent.prototype = {
 			var classFount = HxOverrides.substr(content,content.lastIndexOf("<"),null);
 			classFount = HxOverrides.substr(classFount,1,classFount.indexOf(" ") - 1);
 			if(Object.prototype.hasOwnProperty.call(this.tipsPool.attartMaps.h,classFount)) {
-				return this.returnSuggestions(this.filterSuggestions(position,sym,content,this.tipsPool.attartMaps.h[classFount],"=\"\""));
+				return this.returnSuggestions(this.filterSuggestions(position,sym,content,this.tipsPool.attartMaps.h[classFount],"="));
 			}
+		} else if(sym == "\"") {
+			return this.returnSuggestions(this.filterSuggestions(position,sym,content,this.tipsPool.getCacheFileMaps()));
 		}
 		return { };
+	}
+	,getLastClassName: function(model,line) {
+		var _g = 0;
+		var _g1 = line;
+		while(_g < _g1) {
+			var i = _g++;
+			var index = line - i;
+			var content = model.getLineContent(index);
+			if(content.indexOf("<") != -1) {
+				var c = HxOverrides.substr(content,content.indexOf("<") + 1,null);
+				c = HxOverrides.substr(c,0,content.indexOf(" "));
+				return c;
+			}
+		}
+		return null;
 	}
 	,filterSuggestions: function(position,sym,content,array,endPushInsertText) {
 		if(endPushInsertText == null) {
@@ -482,13 +538,30 @@ XmlEditorContent.prototype = {
 			var value = _g1_value;
 			newarray.push(Suggestions.create(value.label,Std.string(value.insertText) + endPushInsertText,value.detail,value.className,HxOverrides.substr(content,0,content.lastIndexOf(sym) + 1) + Std.string(value.insertText)));
 		}
-		haxe_Log.trace("提示：",{ fileName : "XmlEditor.hx", lineNumber : 60, className : "XmlEditorContent", methodName : "filterSuggestions", customParams : [newarray]});
+		haxe_Log.trace("提示：",{ fileName : "XmlEditor.hx", lineNumber : 87, className : "XmlEditorContent", methodName : "filterSuggestions", customParams : [newarray]});
 		return newarray;
 	}
 	,returnSuggestions: function(array) {
 		return { suggestions : array};
 	}
 	,__class__: XmlEditorContent
+};
+var data_ZProjectData = function(path,xml) {
+	this.HDHeight = 0;
+	this.HDWidth = 0;
+	this.atlasFiles = new haxe_ds_StringMap();
+	this.jsonFiles = new haxe_ds_StringMap();
+	this.xmlFiles = new haxe_ds_StringMap();
+	this.pngFiles = new haxe_ds_StringMap();
+	this.builderFiles = [];
+	this.rootPath = "";
+};
+data_ZProjectData.__name__ = "data.ZProjectData";
+data_ZProjectData.prototype = {
+	isLandsapce: function() {
+		return this.HDWidth > this.HDHeight;
+	}
+	,__class__: data_ZProjectData
 };
 var haxe_Exception = function(message,previous,native) {
 	Error.call(this,message);
@@ -548,6 +621,96 @@ haxe_ValueException.__super__ = haxe_Exception;
 haxe_ValueException.prototype = $extend(haxe_Exception.prototype,{
 	__class__: haxe_ValueException
 });
+var haxe_ds_List = function() {
+	this.length = 0;
+};
+haxe_ds_List.__name__ = "haxe.ds.List";
+haxe_ds_List.prototype = {
+	add: function(item) {
+		var x = new haxe_ds__$List_ListNode(item,null);
+		if(this.h == null) {
+			this.h = x;
+		} else {
+			this.q.next = x;
+		}
+		this.q = x;
+		this.length++;
+	}
+	,pop: function() {
+		if(this.h == null) {
+			return null;
+		}
+		var x = this.h.item;
+		this.h = this.h.next;
+		if(this.h == null) {
+			this.q = null;
+		}
+		this.length--;
+		return x;
+	}
+	,clear: function() {
+		this.h = null;
+		this.q = null;
+		this.length = 0;
+	}
+	,remove: function(v) {
+		var prev = null;
+		var l = this.h;
+		while(l != null) {
+			if(l.item == v) {
+				if(prev == null) {
+					this.h = l.next;
+				} else {
+					prev.next = l.next;
+				}
+				if(this.q == l) {
+					this.q = prev;
+				}
+				this.length--;
+				return true;
+			}
+			prev = l;
+			l = l.next;
+		}
+		return false;
+	}
+	,__class__: haxe_ds_List
+};
+var haxe_ds__$List_ListNode = function(item,next) {
+	this.item = item;
+	this.next = next;
+};
+haxe_ds__$List_ListNode.__name__ = "haxe.ds._List.ListNode";
+haxe_ds__$List_ListNode.prototype = {
+	__class__: haxe_ds__$List_ListNode
+};
+var haxe_ds_ObjectMap = function() {
+	this.h = { __keys__ : { }};
+};
+haxe_ds_ObjectMap.__name__ = "haxe.ds.ObjectMap";
+haxe_ds_ObjectMap.prototype = {
+	set: function(key,value) {
+		var id = key.__id__;
+		if(id == null) {
+			id = (key.__id__ = $global.$haxeUID++);
+		}
+		this.h[id] = value;
+		this.h.__keys__[id] = key;
+	}
+	,exists: function(key) {
+		return this.h.__keys__[key.__id__] != null;
+	}
+	,remove: function(key) {
+		var id = key.__id__;
+		if(this.h.__keys__[id] == null) {
+			return false;
+		}
+		delete(this.h[id]);
+		delete(this.h.__keys__[id]);
+		return true;
+	}
+	,__class__: haxe_ds_ObjectMap
+};
 var haxe_ds_StringMap = function() {
 	this.h = Object.create(null);
 };
@@ -563,8 +726,43 @@ haxe_ds_StringMap.keysIterator = function(h) {
 		return keys[idx - 1];
 	}};
 };
+haxe_ds_StringMap.kvIterator = function(h) {
+	var keys = Object.keys(h);
+	var len = keys.length;
+	var idx = 0;
+	return { hasNext : function() {
+		return idx < len;
+	}, next : function() {
+		idx += 1;
+		var k = keys[idx - 1];
+		return { key : k, value : h[k]};
+	}};
+};
+haxe_ds_StringMap.stringify = function(h) {
+	var s = "{";
+	var first = true;
+	for (var key in h) {
+		if (first) first = false; else s += ',';
+		s += key + ' => ' + Std.string(h[key]);
+	}
+	return s + "}";
+};
 haxe_ds_StringMap.prototype = {
-	__class__: haxe_ds_StringMap
+	exists: function(key) {
+		return Object.prototype.hasOwnProperty.call(this.h,key);
+	}
+	,set: function(key,value) {
+		this.h[key] = value;
+	}
+	,remove: function(key) {
+		if(Object.prototype.hasOwnProperty.call(this.h,key)) {
+			delete(this.h[key]);
+			return true;
+		} else {
+			return false;
+		}
+	}
+	,__class__: haxe_ds_StringMap
 };
 var haxe_iterators_ArrayIterator = function(array) {
 	this.current = 0;
@@ -1229,6 +1427,318 @@ js_node_url_URLSearchParamsEntry.get_name = function(this1) {
 js_node_url_URLSearchParamsEntry.get_value = function(this1) {
 	return this1[1];
 };
+var openfl__$internal_utils_ObjectPool = function(create,clean,size) {
+	this.__pool = new haxe_ds_ObjectMap();
+	this.activeObjects = 0;
+	this.inactiveObjects = 0;
+	this.__inactiveObject0 = null;
+	this.__inactiveObject1 = null;
+	this.__inactiveObjectList = new haxe_ds_List();
+	if(create != null) {
+		this.create = create;
+	}
+	if(clean != null) {
+		this.clean = clean;
+	}
+	if(size != null) {
+		this.set_size(size);
+	}
+};
+openfl__$internal_utils_ObjectPool.__name__ = "openfl._internal.utils.ObjectPool";
+openfl__$internal_utils_ObjectPool.prototype = {
+	add: function(object) {
+		if(!this.__pool.exists(object)) {
+			this.__pool.set(object,false);
+			this.clean(object);
+			if(this.__inactiveObject0 == null) {
+				this.__inactiveObject0 = object;
+			} else if(this.__inactiveObject1 == null) {
+				this.__inactiveObject1 = object;
+			} else {
+				this.__inactiveObjectList.add(object);
+			}
+			this.inactiveObjects++;
+		}
+	}
+	,clean: function(object) {
+	}
+	,clear: function() {
+		this.__pool = new haxe_ds_ObjectMap();
+		this.activeObjects = 0;
+		this.inactiveObjects = 0;
+		this.__inactiveObject0 = null;
+		this.__inactiveObject1 = null;
+		this.__inactiveObjectList.clear();
+	}
+	,create: function() {
+		return null;
+	}
+	,get: function() {
+		var object = null;
+		if(this.inactiveObjects > 0) {
+			var object1 = null;
+			if(this.__inactiveObject0 != null) {
+				object1 = this.__inactiveObject0;
+				this.__inactiveObject0 = null;
+			} else if(this.__inactiveObject1 != null) {
+				object1 = this.__inactiveObject1;
+				this.__inactiveObject1 = null;
+			} else {
+				object1 = this.__inactiveObjectList.pop();
+				if(this.__inactiveObjectList.length > 0) {
+					this.__inactiveObject0 = this.__inactiveObjectList.pop();
+				}
+				if(this.__inactiveObjectList.length > 0) {
+					this.__inactiveObject1 = this.__inactiveObjectList.pop();
+				}
+			}
+			this.inactiveObjects--;
+			this.activeObjects++;
+			object = object1;
+		} else if(this.__size == null || this.activeObjects < this.__size) {
+			object = this.create();
+			if(object != null) {
+				this.__pool.set(object,true);
+				this.activeObjects++;
+			}
+		}
+		return object;
+	}
+	,release: function(object) {
+		this.activeObjects--;
+		if(this.__size == null || this.activeObjects + this.inactiveObjects < this.__size) {
+			this.clean(object);
+			if(this.__inactiveObject0 == null) {
+				this.__inactiveObject0 = object;
+			} else if(this.__inactiveObject1 == null) {
+				this.__inactiveObject1 = object;
+			} else {
+				this.__inactiveObjectList.add(object);
+			}
+			this.inactiveObjects++;
+		} else {
+			this.__pool.remove(object);
+		}
+	}
+	,remove: function(object) {
+		if(this.__pool.exists(object)) {
+			this.__pool.remove(object);
+			if(this.__inactiveObject0 == object) {
+				this.__inactiveObject0 = null;
+				this.inactiveObjects--;
+			} else if(this.__inactiveObject1 == object) {
+				this.__inactiveObject1 = null;
+				this.inactiveObjects--;
+			} else if(this.__inactiveObjectList.remove(object)) {
+				this.inactiveObjects--;
+			} else {
+				this.activeObjects--;
+			}
+		}
+	}
+	,__addInactive: function(object) {
+		if(this.__inactiveObject0 == null) {
+			this.__inactiveObject0 = object;
+		} else if(this.__inactiveObject1 == null) {
+			this.__inactiveObject1 = object;
+		} else {
+			this.__inactiveObjectList.add(object);
+		}
+		this.inactiveObjects++;
+	}
+	,__getInactive: function() {
+		var object = null;
+		if(this.__inactiveObject0 != null) {
+			object = this.__inactiveObject0;
+			this.__inactiveObject0 = null;
+		} else if(this.__inactiveObject1 != null) {
+			object = this.__inactiveObject1;
+			this.__inactiveObject1 = null;
+		} else {
+			object = this.__inactiveObjectList.pop();
+			if(this.__inactiveObjectList.length > 0) {
+				this.__inactiveObject0 = this.__inactiveObjectList.pop();
+			}
+			if(this.__inactiveObjectList.length > 0) {
+				this.__inactiveObject1 = this.__inactiveObjectList.pop();
+			}
+		}
+		this.inactiveObjects--;
+		this.activeObjects++;
+		return object;
+	}
+	,__removeInactive: function(count) {
+		if(count <= 0 || this.inactiveObjects == 0) {
+			return;
+		}
+		if(this.__inactiveObject0 != null) {
+			this.__pool.remove(this.__inactiveObject0);
+			this.__inactiveObject0 = null;
+			this.inactiveObjects--;
+			--count;
+		}
+		if(count == 0 || this.inactiveObjects == 0) {
+			return;
+		}
+		if(this.__inactiveObject1 != null) {
+			this.__pool.remove(this.__inactiveObject1);
+			this.__inactiveObject1 = null;
+			this.inactiveObjects--;
+			--count;
+		}
+		if(count == 0 || this.inactiveObjects == 0) {
+			return;
+		}
+		var _g_head = this.__inactiveObjectList.h;
+		while(_g_head != null) {
+			var val = _g_head.item;
+			_g_head = _g_head.next;
+			var object = val;
+			this.__pool.remove(object);
+			this.__inactiveObjectList.remove(object);
+			this.inactiveObjects--;
+			--count;
+			if(count == 0 || this.inactiveObjects == 0) {
+				return;
+			}
+		}
+	}
+	,get_size: function() {
+		return this.__size;
+	}
+	,set_size: function(value) {
+		if(value == null) {
+			this.__size = null;
+		} else {
+			var current = this.inactiveObjects + this.activeObjects;
+			this.__size = value;
+			if(current > value) {
+				this.__removeInactive(current - value);
+			} else if(value > current) {
+				var object;
+				var _g = 0;
+				var _g1 = value - current;
+				while(_g < _g1) {
+					var i = _g++;
+					object = this.create();
+					if(object != null) {
+						this.__pool.set(object,false);
+						this.__inactiveObjectList.add(object);
+						this.inactiveObjects++;
+					} else {
+						break;
+					}
+				}
+			}
+		}
+		return value;
+	}
+	,__class__: openfl__$internal_utils_ObjectPool
+};
+var openfl_events_Event = function(type,bubbles,cancelable) {
+	if(cancelable == null) {
+		cancelable = false;
+	}
+	if(bubbles == null) {
+		bubbles = false;
+	}
+	this.type = type;
+	this.bubbles = bubbles;
+	this.cancelable = cancelable;
+	this.eventPhase = 2;
+};
+openfl_events_Event.__name__ = "openfl.events.Event";
+openfl_events_Event.prototype = {
+	clone: function() {
+		var event = new openfl_events_Event(this.type,this.bubbles,this.cancelable);
+		event.eventPhase = this.eventPhase;
+		event.target = this.target;
+		event.currentTarget = this.currentTarget;
+		return event;
+	}
+	,formatToString: function(className,p1,p2,p3,p4,p5) {
+		var parameters = [];
+		if(p1 != null) {
+			parameters.push(p1);
+		}
+		if(p2 != null) {
+			parameters.push(p2);
+		}
+		if(p3 != null) {
+			parameters.push(p3);
+		}
+		if(p4 != null) {
+			parameters.push(p4);
+		}
+		if(p5 != null) {
+			parameters.push(p5);
+		}
+		return $bind(this,this.__formatToString).apply(this,[className,parameters]);
+	}
+	,isDefaultPrevented: function() {
+		return this.__preventDefault;
+	}
+	,preventDefault: function() {
+		if(this.cancelable) {
+			this.__preventDefault = true;
+		}
+	}
+	,stopImmediatePropagation: function() {
+		this.__isCanceled = true;
+		this.__isCanceledNow = true;
+	}
+	,stopPropagation: function() {
+		this.__isCanceled = true;
+	}
+	,toString: function() {
+		return this.__formatToString("Event",["type","bubbles","cancelable"]);
+	}
+	,__formatToString: function(className,parameters) {
+		var output = "[" + className;
+		var arg = null;
+		var _g = 0;
+		while(_g < parameters.length) {
+			var param = parameters[_g];
+			++_g;
+			arg = Reflect.field(this,param);
+			if(typeof(arg) == "string") {
+				output += " " + param + "=\"" + Std.string(arg) + "\"";
+			} else {
+				output += " " + param + "=" + Std.string(arg);
+			}
+		}
+		output += "]";
+		return output;
+	}
+	,__init: function() {
+		this.target = null;
+		this.currentTarget = null;
+		this.bubbles = false;
+		this.cancelable = false;
+		this.eventPhase = 2;
+		this.__isCanceled = false;
+		this.__isCanceledNow = false;
+		this.__preventDefault = false;
+	}
+	,__class__: openfl_events_Event
+};
+var openfl_events_EventType = {};
+openfl_events_EventType.equals = function(a,b) {
+	return a == b;
+};
+openfl_events_EventType.notEquals = function(a,b) {
+	return a != b;
+};
+var zygame_events_ZEvent = function(type,data) {
+	this.data = null;
+	openfl_events_Event.call(this,type,true,false);
+	this.data = data;
+};
+zygame_events_ZEvent.__name__ = "zygame.events.ZEvent";
+zygame_events_ZEvent.__super__ = openfl_events_Event;
+zygame_events_ZEvent.prototype = $extend(openfl_events_Event.prototype,{
+	__class__: zygame_events_ZEvent
+});
 var zygame_macro_ZMacroUtils = function() { };
 zygame_macro_ZMacroUtils.__name__ = "zygame.macro.ZMacroUtils";
 var zygame_utils_StringUtils = function() { };
@@ -1257,6 +1767,9 @@ zygame_utils_StringUtils.getName = function(source) {
 	}
 	return data;
 };
+var $_;
+function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $global.$haxeUID++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = m.bind(o); o.hx__closures__[m.__id__] = f; } return f; }
+$global.$haxeUID |= 0;
 if(typeof(performance) != "undefined" ? typeof(performance.now) == "function" : false) {
 	HxOverrides.now = performance.now.bind(performance);
 }
@@ -1264,6 +1777,7 @@ if( String.fromCodePoint == null ) String.fromCodePoint = function(c) { return c
 String.prototype.__class__ = String;
 String.__name__ = "String";
 Array.__name__ = "Array";
+haxe_ds_ObjectMap.count = 0;
 js_Boot.__toStr = ({ }).toString;
 Xml.Element = 0;
 Xml.PCData = 1;
@@ -1283,5 +1797,47 @@ haxe_xml_Parser.escapes = (function($this) {
 	$r = h;
 	return $r;
 }(this));
+openfl__$internal_utils_ObjectPool.__meta__ = { obj : { SuppressWarnings : ["checkstyle:FieldDocComment"]}};
+openfl_events_Event.ACTIVATE = "activate";
+openfl_events_Event.ADDED = "added";
+openfl_events_Event.ADDED_TO_STAGE = "addedToStage";
+openfl_events_Event.CANCEL = "cancel";
+openfl_events_Event.CHANGE = "change";
+openfl_events_Event.CLEAR = "clear";
+openfl_events_Event.CLOSE = "close";
+openfl_events_Event.COMPLETE = "complete";
+openfl_events_Event.CONNECT = "connect";
+openfl_events_Event.CONTEXT3D_CREATE = "context3DCreate";
+openfl_events_Event.COPY = "copy";
+openfl_events_Event.CUT = "cut";
+openfl_events_Event.DEACTIVATE = "deactivate";
+openfl_events_Event.ENTER_FRAME = "enterFrame";
+openfl_events_Event.EXIT_FRAME = "exitFrame";
+openfl_events_Event.FRAME_CONSTRUCTED = "frameConstructed";
+openfl_events_Event.FRAME_LABEL = "frameLabel";
+openfl_events_Event.FULLSCREEN = "fullScreen";
+openfl_events_Event.ID3 = "id3";
+openfl_events_Event.INIT = "init";
+openfl_events_Event.MOUSE_LEAVE = "mouseLeave";
+openfl_events_Event.OPEN = "open";
+openfl_events_Event.PASTE = "paste";
+openfl_events_Event.REMOVED = "removed";
+openfl_events_Event.REMOVED_FROM_STAGE = "removedFromStage";
+openfl_events_Event.RENDER = "render";
+openfl_events_Event.RESIZE = "resize";
+openfl_events_Event.SCROLL = "scroll";
+openfl_events_Event.SELECT = "select";
+openfl_events_Event.SELECT_ALL = "selectAll";
+openfl_events_Event.SOUND_COMPLETE = "soundComplete";
+openfl_events_Event.TAB_CHILDREN_CHANGE = "tabChildrenChange";
+openfl_events_Event.TAB_ENABLED_CHANGE = "tabEnabledChange";
+openfl_events_Event.TAB_INDEX_CHANGE = "tabIndexChange";
+openfl_events_Event.TEXTURE_READY = "textureReady";
+openfl_events_Event.UNLOAD = "unload";
+openfl_events_Event.__pool = new openfl__$internal_utils_ObjectPool(function() {
+	return new openfl_events_Event(null);
+},function(event) {
+	event.__init();
+});
 XmlEditor.main();
 })(typeof exports != "undefined" ? exports : typeof window != "undefined" ? window : typeof self != "undefined" ? self : this, typeof window != "undefined" ? window : typeof global != "undefined" ? global : typeof self != "undefined" ? self : this);

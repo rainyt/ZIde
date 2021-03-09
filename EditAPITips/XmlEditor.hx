@@ -4,17 +4,24 @@ class XmlEditor {
 
 @:expose
 class XmlEditorContent {
+	/**
+	 * 注册ZProjectData，用于提示时便于查找资源
+	 * @param data 
+	 */
+	public static function registerZProjectData(cachedata:data.ZProjectData):Void {
+		trace("更新项目缓存");
+		TipsPool.cacheData = cachedata;
+	}
+
+	/**
+	 * 提示缓存库
+	 */
 	public var tipsPool = new TipsPool();
 
 	/**
 	 * 初始化提示缓存
 	 */
-	public function new():Void {
-		// var keys = "qwertyuioplkjhgfdsazxbnmQWERTYUIOPLKJHGFDSAZXCVBNM".split("");
-		// for (k in keys) {
-		// 	triggerCharacters.push(k);
-		// }
-	}
+	public function new():Void {}
 
 	/**
 	 * 智能提示逻辑
@@ -23,7 +30,6 @@ class XmlEditorContent {
 	 * @return Dynamic
 	 */
 	public function provideCompletionItems(model:Dynamic, position:Dynamic, context:Dynamic, token:Dynamic):Dynamic {
-		trace(context, token);
 		var line:Int = position.lineNumber;
 		var column = position.column;
 		trace(Reflect.fields(position));
@@ -46,9 +52,30 @@ class XmlEditorContent {
 			var classFount = content.substr(content.lastIndexOf("<"));
 			classFount = classFount.substr(1, classFount.indexOf(" ") - 1);
 			if (tipsPool.attartMaps.exists(classFount))
-				return returnSuggestions(filterSuggestions(position, sym, content, tipsPool.attartMaps.get(classFount), "=\"\""));
+				return returnSuggestions(filterSuggestions(position, sym, content, tipsPool.attartMaps.get(classFount), "="));
+		} else if (sym == "\"") {
+			// 分号处理，需要筛选出资源选项
+			return returnSuggestions(filterSuggestions(position, sym, content, tipsPool.getCacheFileMaps()));
 		}
 		return {};
+	}
+
+	/**
+	 * 获取上父节点标签类
+	 * @param model 
+	 * @return String
+	 */
+	public function getLastClassName(model:Dynamic, line:Int):String {
+		for (i in 0...line) {
+			var index = line - i;
+			var content:String = model.getLineContent(index);
+			if (content.indexOf("<") != -1) {
+				var c = content.substr(content.indexOf("<") + 1);
+				c = c.substr(0, content.indexOf(" "));
+				return c;
+			}
+		}
+		return null;
 	}
 
 	public function filterSuggestions(position:Dynamic, sym:String, content:String, array:Array<Dynamic>, endPushInsertText = ""):Array<Dynamic> {
@@ -67,5 +94,5 @@ class XmlEditorContent {
 		};
 	}
 
-	public var triggerCharacters:Array<String> = ["<", " ", "/"];
+	public var triggerCharacters:Array<String> = ["<", " ", "/", "\""];
 }

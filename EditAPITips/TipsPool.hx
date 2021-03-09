@@ -1,6 +1,13 @@
+import zygame.utils.StringUtils;
+import data.ZProjectData;
 import zygame.macro.ZMacroUtils;
 
 class TipsPool {
+	/**
+	 * 项目缓存
+	 */
+	public static var cacheData:ZProjectData;
+
 	/**
 	 * <开头 所有类型返回
 	 */
@@ -18,13 +25,23 @@ class TipsPool {
 
 	public var xmlItemMaps:Map<String, Xml> = [];
 
+	public var childrenMaps:Map<String, Array<Dynamic>> = [];
+
 	public function new() {
 		var xml = Xml.parse(ZMacroUtils.readFileContent("tips.xml"));
 		for (item in xml.firstElement().elements()) {
 			trace("API:", item.nodeName);
 			if (!item.exists("igone")) {
-				classes.push(Suggestions.create(item.nodeName, item.nodeName, item.get("tips")));
-				classesend.push(Suggestions.create(item.nodeName, item.nodeName, item.get("tips")));
+				if (item.exists("parent")) {
+					var p = item.get("parent");
+					if (!childrenMaps.exists(p)) {
+						childrenMaps.set(p, []);
+					}
+					childrenMaps.get(p).push(Suggestions.create(item.nodeName, item.nodeName, item.get("tips")));
+				} else {
+					classes.push(Suggestions.create(item.nodeName, item.nodeName, item.get("tips")));
+					classesend.push(Suggestions.create(item.nodeName, item.nodeName, item.get("tips")));
+				}
 			}
 			if (attartMaps.exists(item.nodeName) == false) {
 				attartMaps.set(item.nodeName, []);
@@ -42,9 +59,20 @@ class TipsPool {
 				extendsClass(item, c);
 			}
 		}
+		trace(childrenMaps);
+	}
 
-		// trace("classes=", classes);
-		// trace("attartMaps=", attartMaps);
+	/**
+	 * 获取缓存联想
+	 * @return Array<Dynamic>
+	 */
+	public function getCacheFileMaps():Array<Dynamic> {
+		var array = [];
+		for (key => value in cacheData.pngFiles) {
+			var fileName = StringUtils.getName(value);
+			array.push(Suggestions.create(fileName, fileName, value));
+		}
+		return array;
 	}
 
 	/**
@@ -56,7 +84,7 @@ class TipsPool {
 		trace("继承", item.nodeName, c);
 		var array = attartMaps.get(c);
 		for (index => value in array) {
-            trace("push",value.label);
+			trace("push", value.label);
 			attartMaps.get(item.nodeName).push(value);
 		}
 	}
