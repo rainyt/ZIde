@@ -1,0 +1,35 @@
+<tips>
+    <Base igone="true">
+        <width tips="宽度" />
+        <height tips="高度" />
+        <scaleX tips="ScaleX缩放" />
+        <scaleY tips="ScaleY缩放" />
+        <alpha tips="透明度" />
+        <x tips="X轴坐标"/>
+        <y tips="Y轴坐标"/>
+        <visible tips="可见"/>
+        <left tips="左对齐"/>
+        <right tips="右对齐"/>
+        <top tips="顶部对齐"/>
+        <bottom tips="底部对齐"/>
+        <centerX tips="横向对齐"/>
+        <centerY tips="垂直对齐"/>
+    </Base>
+    <BaseBox class="Base" igone="true">
+        <gap tips="间隔"/>
+    </BaseBox>
+    <ZImage class="Base" tips="图像对象">
+        <src tips="设置图像，支持网络地址、图集地址" />
+    </ZImage>
+    <ZBox class="Base" tips="基本容器"></ZBox>
+    <ZVBox class="BaseBox" tips="基本容器(竖向)"></ZVBox>
+    <ZHBox class="BaseBox" tips="基本容器(横向)"></ZHBox>
+    <ZQuad class="Base" tips="色块">
+        <color tips="颜色"/>
+    </ZQuad>
+    <ZLabel class="Base" tips="文本">
+        <text tips="文本"/>
+        <color tips="文本颜色"/>
+        <size tips="文本大小"/>
+    </ZLabel>
+</tips>

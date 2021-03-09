@@ -34,6 +34,15 @@ class Editor extends LayoutGroup {
 		this.visible = true;
 	}
 
+	/**
+	 * 格式化XML
+	 */
+	public function formatXml():Void {
+		var f = zygame.utils.XMLUtils.fromat(getEditorData());
+		trace("格式化后：",f);
+		setEditorData(f);
+	}
+
 	public function setEditorData(content:String):Void {
 		untyped iframe.contentWindow.setCodeValue(content);
 	}

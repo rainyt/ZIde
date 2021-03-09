@@ -22,9 +22,17 @@ class MainCore {
 						}
 					},
 					{
+						label: "重启",
+						accelerator: "Command+R",
+						selector: null,
+						click: function() {
+							window.reload();
+						}
+					},
+					{
 						label: "关闭",
 						accelerator: "Command+Q",
-						selector: "quit:",
+						selector: null,
 						click: function() {
 							App.quit();
 						}
@@ -38,6 +46,12 @@ class MainCore {
 						label: "拷贝全部",
 						accelerator: "CmdOrCtrl+A",
 						selector: "selectAll:",
+						click: null
+					},
+					{
+						label: "复制",
+						accelerator: "CmdOrCtrl+C",
+						selector: "copy:",
 						click: null
 					},
 					{
@@ -71,6 +85,19 @@ class MainCore {
 						selector: null,
 						click: () -> {
 							untyped window.send("build");
+						}
+					}
+				]
+			},
+			{
+				label: "工具",
+				submenu: [
+					{
+						label: "格式化",
+						accelerator: "Shift+Opt+F",
+						selector: null,
+						click: () -> {
+							untyped window.send("formatxml");
 						}
 					}
 				]

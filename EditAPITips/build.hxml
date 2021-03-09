@@ -1,0 +1,7 @@
+-main XmlEditor
+-lib hxnodejs
+--library zygameui
+-js ./xml-editor.js
+--cmd cp -rp ./xml-editor.js ../Assets/md/xml-editor.js
+--cmd cp -rp ./xml-editor.js ../Export/electron/bin/dist/ZIde-darwin-x64/ZIde.app/Contents/Resources/app/md/xml-editor.js
+--cmd cp -rp ./xml-editor.js ../Export/electron/bin/md/xml-editor.js

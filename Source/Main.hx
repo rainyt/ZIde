@@ -29,6 +29,10 @@ class Main extends Application {
 		fixPath();
 		console.log(process.env.PATH);");
 
+		IpcRenderer.on("formatxml", function(){
+			Editor.current.formatXml();
+		});
+
 		IpcRenderer.on("save", function() {
 			Menu.current.onSave();
 		});
