@@ -67,10 +67,14 @@ class TipsPool {
 	 * @return Array<Dynamic>
 	 */
 	public function getCacheFileMaps():Array<Dynamic> {
+		// if (cacheData == null)
+		// 	return [];
 		var array = [];
 		for (key => value in cacheData.pngFiles) {
 			var fileName = StringUtils.getName(value);
-			array.push(Suggestions.create(fileName, fileName, value));
+			if (fileName.indexOf(".") == 0)
+				continue;
+			array.push(Suggestions.create(fileName, fileName, StringTools.replace(value, cacheData.rootPath, ""), "Property", null));
 		}
 		return array;
 	}
@@ -81,10 +85,8 @@ class TipsPool {
 	 * @param c 
 	 */
 	public function extendsClass(item:Xml, c:String) {
-		trace("继承", item.nodeName, c);
 		var array = attartMaps.get(c);
 		for (index => value in array) {
-			trace("push", value.label);
 			attartMaps.get(item.nodeName).push(value);
 		}
 	}

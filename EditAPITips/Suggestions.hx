@@ -9,7 +9,7 @@ class Suggestions {
 	 * @param detail 提示
 	 * @param className Function
 	 */
-	public static function create(label:String, insertText:String, detail:String, className:String = "Property",filterText:String = null):Dynamic {
+	public static function create(label:String, insertText:String, detail:String, className:String = "Property", filterText:String = null):Dynamic {
 		return {
 			label: label,
 			insertText: insertText,

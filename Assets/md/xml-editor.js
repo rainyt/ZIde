@@ -171,6 +171,9 @@ StringTools.rtrim = function(s) {
 StringTools.trim = function(s) {
 	return StringTools.ltrim(StringTools.rtrim(s));
 };
+StringTools.replace = function(s,sub,by) {
+	return s.split(sub).join(by);
+};
 var Suggestions = function() { };
 Suggestions.__name__ = "Suggestions";
 Suggestions.create = function(label,insertText,detail,className,filterText) {
@@ -280,16 +283,14 @@ TipsPool.prototype = {
 			var key = _g1.key;
 			var value = _g1.value;
 			var fileName = zygame_utils_StringUtils.getName(value);
-			array.push(Suggestions.create(fileName,fileName,value));
+			if(fileName.indexOf(".") == 0) {
+				continue;
+			}
+			array.push(Suggestions.create(fileName,fileName,StringTools.replace(value,TipsPool.cacheData.rootPath,""),"Property",null));
 		}
 		return array;
 	}
 	,extendsClass: function(item,c) {
-		var tmp = haxe_Log.trace;
-		if(item.nodeType != Xml.Element) {
-			throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item.nodeType == null ? "null" : XmlType.toString(item.nodeType)));
-		}
-		tmp("继承",{ fileName : "TipsPool.hx", lineNumber : 84, className : "TipsPool", methodName : "extendsClass", customParams : [item.nodeName,c]});
 		var array = this.attartMaps.h[c];
 		var _g_current = 0;
 		var _g_array = array;
@@ -298,7 +299,6 @@ TipsPool.prototype = {
 			var _g1_key = _g_current++;
 			var index = _g1_key;
 			var value = _g1_value;
-			haxe_Log.trace("push",{ fileName : "TipsPool.hx", lineNumber : 87, className : "TipsPool", methodName : "extendsClass", customParams : [value.label]});
 			var this1 = this.attartMaps;
 			if(item.nodeType != Xml.Element) {
 				throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item.nodeType == null ? "null" : XmlType.toString(item.nodeType)));
@@ -504,7 +504,7 @@ XmlEditorContent.prototype = {
 			if(Object.prototype.hasOwnProperty.call(this.tipsPool.attartMaps.h,classFount)) {
 				return this.returnSuggestions(this.filterSuggestions(position,sym,content,this.tipsPool.attartMaps.h[classFount],"="));
 			}
-		} else if(sym == "\"") {
+		} else if(sym == "\"" && leftInput == "src=\"") {
 			return this.returnSuggestions(this.filterSuggestions(position,sym,content,this.tipsPool.getCacheFileMaps()));
 		}
 		return { };

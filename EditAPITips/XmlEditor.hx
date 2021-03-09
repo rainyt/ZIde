@@ -53,7 +53,7 @@ class XmlEditorContent {
 			classFount = classFount.substr(1, classFount.indexOf(" ") - 1);
 			if (tipsPool.attartMaps.exists(classFount))
 				return returnSuggestions(filterSuggestions(position, sym, content, tipsPool.attartMaps.get(classFount), "="));
-		} else if (sym == "\"") {
+		} else if (sym == "\"" && leftInput == "src=\"") {
 			// 分号处理，需要筛选出资源选项
 			return returnSuggestions(filterSuggestions(position, sym, content, tipsPool.getCacheFileMaps()));
 		}
