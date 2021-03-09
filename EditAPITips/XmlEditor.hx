@@ -12,7 +12,7 @@ class XmlEditorContent {
 	public function new():Void {
 		// var keys = "qwertyuioplkjhgfdsazxbnmQWERTYUIOPLKJHGFDSAZXCVBNM".split("");
 		// for (k in keys) {
-		// triggerCharacters.push(k);
+		// 	triggerCharacters.push(k);
 		// }
 	}
 

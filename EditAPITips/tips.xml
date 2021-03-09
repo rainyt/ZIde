@@ -1,22 +1,23 @@
 <tips>
     <Base igone="true">
+        <id tips="设置ID标示" />
         <width tips="宽度" />
         <height tips="高度" />
         <scaleX tips="ScaleX缩放" />
         <scaleY tips="ScaleY缩放" />
         <alpha tips="透明度" />
-        <x tips="X轴坐标"/>
-        <y tips="Y轴坐标"/>
-        <visible tips="可见"/>
-        <left tips="左对齐"/>
-        <right tips="右对齐"/>
-        <top tips="顶部对齐"/>
-        <bottom tips="底部对齐"/>
-        <centerX tips="横向对齐"/>
-        <centerY tips="垂直对齐"/>
+        <x tips="X轴坐标" />
+        <y tips="Y轴坐标" />
+        <visible tips="可见" />
+        <left tips="左对齐" />
+        <right tips="右对齐" />
+        <top tips="顶部对齐" />
+        <bottom tips="底部对齐" />
+        <centerX tips="横向对齐" />
+        <centerY tips="垂直对齐" />
     </Base>
     <BaseBox class="Base" igone="true">
-        <gap tips="间隔"/>
+        <gap tips="间隔" />
     </BaseBox>
     <ZImage class="Base" tips="图像对象">
         <src tips="设置图像，支持网络地址、图集地址" />
@@ -25,11 +26,49 @@
     <ZVBox class="BaseBox" tips="基本容器(竖向)"></ZVBox>
     <ZHBox class="BaseBox" tips="基本容器(横向)"></ZHBox>
     <ZQuad class="Base" tips="色块">
-        <color tips="颜色"/>
+        <color tips="颜色" />
     </ZQuad>
     <ZLabel class="Base" tips="文本">
-        <text tips="文本"/>
-        <color tips="文本颜色"/>
-        <size tips="文本大小"/>
+        <text tips="文本" />
+        <color tips="文本颜色" />
+        <size tips="文本大小" />
     </ZLabel>
+    <ZInputLabel class="ZLabel" tips="输入文本框"></ZInputLabel>
+    <ZTween tips="动画">
+        <auto tips="自动播放(Bool)" />
+    </ZTween>
+    <ZSpine class="Base" tips="Spine动画"></ZSpine>
+    <ZScroll class="Base" tips="Scroll窗口"></ZScroll>
+    <ZList class="Base" tips="数据列表窗口"></ZList>
+    <ZButton class="Base" tips="按钮">
+        <src tips="设置图像" />
+    </ZButton>
+    <ZBitmapLabel class="ZLabel" tips="位图文本">
+        <src tips="设置图集或者Fnt" />
+    </ZBitmapLabel>
+    <ImageBatchs class="Base" tips="批渲染对象（无触摸）">
+        <src tips="设置图集" />
+    </ImageBatchs>
+    <TouchDisplayObjectContainer class="ImageBatchs" tips="批渲染对象（含触摸）"></TouchDisplayObjectContainer>
+    <BButton class="Base" tips="批渲染按钮">
+        <src tips="设置图集" />
+    </BButton>
+    <BBox class="Base" tips="批渲染布局"></BBox>
+    <VBBox class="Base" tips="批渲染布局V"></VBBox>
+    <HBBox class="Base" tips="批渲染布局H"></HBBox>
+    <BImage class="Base" tips="批渲染图片"></BImage>
+    <BScale9Image class="Base" tips="批渲染图片（九宫格）"></BScale9Image>
+    <BLabel class="Base" tips="批渲染文本">
+        <src tips="设置图集或者Fnt" />
+    </BLabel>
+    <add parent="ZTween" tips="递增动画">
+        <bind tips="绑定ID值" />
+        <key tips="修改的属性" />
+        <start tips="开始帧" />
+        <end tips="结束帧" />
+        <to tips="修改值" />
+    </add>
+    <tween parent="ZTween" class="add" tips="过渡动画">
+        <from tips="初始值" />
+    </tween>
 </tips>

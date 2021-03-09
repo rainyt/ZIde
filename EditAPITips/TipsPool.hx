@@ -43,8 +43,8 @@ class TipsPool {
 			}
 		}
 
-		trace("classes=", classes);
-		trace("attartMaps=", attartMaps);
+		// trace("classes=", classes);
+		// trace("attartMaps=", attartMaps);
 	}
 
 	/**
@@ -53,13 +53,11 @@ class TipsPool {
 	 * @param c 
 	 */
 	public function extendsClass(item:Xml, c:String) {
+		trace("继承", item.nodeName, c);
 		var array = attartMaps.get(c);
 		for (index => value in array) {
+            trace("push",value.label);
 			attartMaps.get(item.nodeName).push(value);
-		}
-		var ec = xmlItemMaps.get(c);
-		if (ec.exists("class")) {
-			extendsClass(item, ec.get("class"));
 		}
 	}
 }
