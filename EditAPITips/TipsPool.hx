@@ -63,6 +63,25 @@ class TipsPool {
 	}
 
 	/**
+	 * 根据Xml联想
+	 * @param xmlid 
+	 * @return Array<Dynamic>
+	 */
+	public function getCacheFileMapsByXml(xmlid:String):Array<Dynamic> {
+		if (cacheData.xmlFiles.exists(xmlid)) {
+			trace("xmlid=" + xmlid);
+			var path = cacheData.xmlFiles.get(xmlid);
+			var xml = Xml.parse(cacheData.xmlDatas.get(path));
+			var array = [];
+			for (item in xml.firstElement().elements()) {
+				array.push(Suggestions.create(item.get("name"), item.get("name"), "图集名"));
+			}
+			return array;
+		}
+		return [];
+	}
+
+	/**
 	 * 获取缓存联想
 	 * @return Array<Dynamic>
 	 */

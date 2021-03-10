@@ -41,6 +41,11 @@ class ZProjectData {
 	public var atlasFiles:Map<String, String> = [];
 
 	/**
+	 * XML数据缓存
+	 */
+	public var xmlDatas:Map<String, String> = [];
+
+	/**
 	 * 分辨率宽度
 	 */
 	public var HDWidth:Int = 0;
@@ -114,6 +119,7 @@ class ZProjectData {
 					} else {
 						// 普通XML文件
 						xmlFiles.set(StringUtils.getName(path), path);
+						xmlDatas.set(path, File.getContent(path));
 					}
 				case "png":
 					// 图片文件缓存

@@ -59,12 +59,6 @@ class Menu extends LayoutGroup {
 			Remote.getCurrentWebContents().openDevTools();
 		});
 
-		// var update = new MenuButton();
-		// update.text = "更新";
-		// this.addChild(update);
-		// Utils.click(update, function() {
-		// 	Remote.getCurrentWebContents().reload();
-		// });
 	}
 
 	public function onBuild():Void {

@@ -56,7 +56,9 @@
     <BBox class="Base" tips="批渲染布局"></BBox>
     <VBox class="Base" tips="批渲染布局V"></VBox>
     <HBox class="Base" tips="批渲染布局H"></HBox>
-    <BImage class="Base" tips="批渲染图片"></BImage>
+    <BImage class="Base" tips="批渲染图片">
+        <src tips="设置图集" />
+    </BImage>
     <BScale9Image class="Base" tips="批渲染图片（九宫格）"></BScale9Image>
     <BLabel class="Base" tips="批渲染文本">
         <src tips="设置图集或者Fnt" />

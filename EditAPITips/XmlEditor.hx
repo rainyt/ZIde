@@ -54,8 +54,13 @@ class XmlEditorContent {
 			if (tipsPool.attartMaps.exists(classFount))
 				return returnSuggestions(filterSuggestions(position, sym, content, tipsPool.attartMaps.get(classFount), "="));
 		} else if (sym == "\"" && leftInput == "src=\"") {
-			// 分号处理，需要筛选出资源选项
+			// src参数 需要筛选出资源选项
 			return returnSuggestions(filterSuggestions(position, sym, content, tipsPool.getCacheFileMaps()));
+		} else if (sym == ":" && leftInput.indexOf("src=\"") != -1) {
+			// src参数 精灵图的子内容
+			var xmlid = leftInput.substr(leftInput.indexOf("\"") + 1);
+			xmlid = xmlid.substr(0,xmlid.indexOf(":"));
+			return returnSuggestions(filterSuggestions(position, sym, content, tipsPool.getCacheFileMapsByXml(xmlid)));
 		}
 		return {};
 	}
@@ -94,5 +99,5 @@ class XmlEditorContent {
 		};
 	}
 
-	public var triggerCharacters:Array<String> = ["<", " ", "/", "\""];
+	public var triggerCharacters:Array<String> = ["<", " ", "/", "\"", ":"];
 }

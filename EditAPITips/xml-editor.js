@@ -188,7 +188,7 @@ var TipsPool = function() {
 	this.attartMaps = new haxe_ds_StringMap();
 	this.classesend = [];
 	this.classes = [];
-	var xml = Xml.parse("<tips>\n    <Base igone=\"true\">\n        <id tips=\"设置ID标示\" />\n        <width tips=\"宽度\" />\n        <height tips=\"高度\" />\n        <scaleX tips=\"ScaleX缩放\" />\n        <scaleY tips=\"ScaleY缩放\" />\n        <alpha tips=\"透明度\" />\n        <x tips=\"X轴坐标\" />\n        <y tips=\"Y轴坐标\" />\n        <visible tips=\"可见\" />\n        <left tips=\"左对齐\" />\n        <right tips=\"右对齐\" />\n        <top tips=\"顶部对齐\" />\n        <bottom tips=\"底部对齐\" />\n        <centerX tips=\"横向对齐\" />\n        <centerY tips=\"垂直对齐\" />\n    </Base>\n    <BaseBox class=\"Base\" igone=\"true\">\n        <gap tips=\"间隔\" />\n    </BaseBox>\n    <ZImage class=\"Base\" tips=\"图像对象\">\n        <src tips=\"设置图像，支持网络地址、图集地址\" />\n    </ZImage>\n    <ZBox class=\"Base\" tips=\"基本容器\"></ZBox>\n    <ZVBox class=\"BaseBox\" tips=\"基本容器(竖向)\"></ZVBox>\n    <ZHBox class=\"BaseBox\" tips=\"基本容器(横向)\"></ZHBox>\n    <ZQuad class=\"Base\" tips=\"色块\">\n        <color tips=\"颜色\" />\n    </ZQuad>\n    <ZLabel class=\"Base\" tips=\"文本\">\n        <text tips=\"文本\" />\n        <color tips=\"文本颜色\" />\n        <size tips=\"文本大小\" />\n    </ZLabel>\n    <ZInputLabel class=\"ZLabel\" tips=\"输入文本框\"></ZInputLabel>\n    <ZTween tips=\"动画\">\n        <auto tips=\"自动播放(Bool)\" />\n    </ZTween>\n    <ZSpine class=\"Base\" tips=\"Spine动画\"></ZSpine>\n    <ZScroll class=\"Base\" tips=\"Scroll窗口\"></ZScroll>\n    <ZList class=\"Base\" tips=\"数据列表窗口\"></ZList>\n    <ZButton class=\"Base\" tips=\"按钮\">\n        <src tips=\"设置图像\" />\n    </ZButton>\n    <ZBitmapLabel class=\"ZLabel\" tips=\"位图文本\">\n        <src tips=\"设置图集或者Fnt\" />\n    </ZBitmapLabel>\n    <ImageBatchs class=\"Base\" tips=\"批渲染对象（无触摸）\">\n        <src tips=\"设置图集\" />\n    </ImageBatchs>\n    <TouchDisplayObjectContainer class=\"ImageBatchs\" tips=\"批渲染对象（含触摸）\"></TouchDisplayObjectContainer>\n    <BButton class=\"Base\" tips=\"批渲染按钮\">\n        <src tips=\"设置图集\" />\n    </BButton>\n    <BBox class=\"Base\" tips=\"批渲染布局\"></BBox>\n    <VBox class=\"Base\" tips=\"批渲染布局V\"></VBox>\n    <HBox class=\"Base\" tips=\"批渲染布局H\"></HBox>\n    <BImage class=\"Base\" tips=\"批渲染图片\"></BImage>\n    <BScale9Image class=\"Base\" tips=\"批渲染图片（九宫格）\"></BScale9Image>\n    <BLabel class=\"Base\" tips=\"批渲染文本\">\n        <src tips=\"设置图集或者Fnt\" />\n    </BLabel>\n    <add parent=\"ZTween\" tips=\"递增动画\">\n        <bind tips=\"绑定ID值\" />\n        <key tips=\"修改的属性\" />\n        <start tips=\"开始帧\" />\n        <end tips=\"结束帧\" />\n        <to tips=\"修改值\" />\n    </add>\n    <tween parent=\"ZTween\" class=\"add\" tips=\"过渡动画\">\n        <from tips=\"初始值\" />\n    </tween>\n    <ZHaxe tips=\"HScript\">\n        <id tips=\"调用名\"/>\n    </ZHaxe>\n</tips>");
+	var xml = Xml.parse("<tips>\n    <Base igone=\"true\">\n        <id tips=\"设置ID标示\" />\n        <width tips=\"宽度\" />\n        <height tips=\"高度\" />\n        <scaleX tips=\"ScaleX缩放\" />\n        <scaleY tips=\"ScaleY缩放\" />\n        <alpha tips=\"透明度\" />\n        <x tips=\"X轴坐标\" />\n        <y tips=\"Y轴坐标\" />\n        <visible tips=\"可见\" />\n        <left tips=\"左对齐\" />\n        <right tips=\"右对齐\" />\n        <top tips=\"顶部对齐\" />\n        <bottom tips=\"底部对齐\" />\n        <centerX tips=\"横向对齐\" />\n        <centerY tips=\"垂直对齐\" />\n    </Base>\n    <BaseBox class=\"Base\" igone=\"true\">\n        <gap tips=\"间隔\" />\n    </BaseBox>\n    <ZImage class=\"Base\" tips=\"图像对象\">\n        <src tips=\"设置图像，支持网络地址、图集地址\" />\n    </ZImage>\n    <ZBox class=\"Base\" tips=\"基本容器\"></ZBox>\n    <ZVBox class=\"BaseBox\" tips=\"基本容器(竖向)\"></ZVBox>\n    <ZHBox class=\"BaseBox\" tips=\"基本容器(横向)\"></ZHBox>\n    <ZQuad class=\"Base\" tips=\"色块\">\n        <color tips=\"颜色\" />\n    </ZQuad>\n    <ZLabel class=\"Base\" tips=\"文本\">\n        <text tips=\"文本\" />\n        <color tips=\"文本颜色\" />\n        <size tips=\"文本大小\" />\n    </ZLabel>\n    <ZInputLabel class=\"ZLabel\" tips=\"输入文本框\"></ZInputLabel>\n    <ZTween tips=\"动画\">\n        <auto tips=\"自动播放(Bool)\" />\n    </ZTween>\n    <ZSpine class=\"Base\" tips=\"Spine动画\"></ZSpine>\n    <ZScroll class=\"Base\" tips=\"Scroll窗口\"></ZScroll>\n    <ZList class=\"Base\" tips=\"数据列表窗口\"></ZList>\n    <ZButton class=\"Base\" tips=\"按钮\">\n        <src tips=\"设置图像\" />\n    </ZButton>\n    <ZBitmapLabel class=\"ZLabel\" tips=\"位图文本\">\n        <src tips=\"设置图集或者Fnt\" />\n    </ZBitmapLabel>\n    <ImageBatchs class=\"Base\" tips=\"批渲染对象（无触摸）\">\n        <src tips=\"设置图集\" />\n    </ImageBatchs>\n    <TouchDisplayObjectContainer class=\"ImageBatchs\" tips=\"批渲染对象（含触摸）\"></TouchDisplayObjectContainer>\n    <BButton class=\"Base\" tips=\"批渲染按钮\">\n        <src tips=\"设置图集\" />\n    </BButton>\n    <BBox class=\"Base\" tips=\"批渲染布局\"></BBox>\n    <VBox class=\"Base\" tips=\"批渲染布局V\"></VBox>\n    <HBox class=\"Base\" tips=\"批渲染布局H\"></HBox>\n    <BImage class=\"Base\" tips=\"批渲染图片\">\n        <src tips=\"设置图集\" />\n    </BImage>\n    <BScale9Image class=\"Base\" tips=\"批渲染图片（九宫格）\"></BScale9Image>\n    <BLabel class=\"Base\" tips=\"批渲染文本\">\n        <src tips=\"设置图集或者Fnt\" />\n    </BLabel>\n    <add parent=\"ZTween\" tips=\"递增动画\">\n        <bind tips=\"绑定ID值\" />\n        <key tips=\"修改的属性\" />\n        <start tips=\"开始帧\" />\n        <end tips=\"结束帧\" />\n        <to tips=\"修改值\" />\n    </add>\n    <tween parent=\"ZTween\" class=\"add\" tips=\"过渡动画\">\n        <from tips=\"初始值\" />\n    </tween>\n    <ZHaxe tips=\"HScript\">\n        <id tips=\"调用名\"/>\n    </ZHaxe>\n</tips>");
 	var item = xml.firstElement().elements();
 	while(item.hasNext()) {
 		var item1 = item.next();
@@ -275,7 +275,22 @@ var TipsPool = function() {
 };
 TipsPool.__name__ = "TipsPool";
 TipsPool.prototype = {
-	getCacheFileMaps: function() {
+	getCacheFileMapsByXml: function(xmlid) {
+		if(Object.prototype.hasOwnProperty.call(TipsPool.cacheData.xmlFiles.h,xmlid)) {
+			haxe_Log.trace("xmlid=" + xmlid,{ fileName : "TipsPool.hx", lineNumber : 72, className : "TipsPool", methodName : "getCacheFileMapsByXml"});
+			var path = TipsPool.cacheData.xmlFiles.h[xmlid];
+			var xml = Xml.parse(TipsPool.cacheData.xmlDatas.h[path]);
+			var array = [];
+			var item = xml.firstElement().elements();
+			while(item.hasNext()) {
+				var item1 = item.next();
+				array.push(Suggestions.create(item1.get("name"),item1.get("name"),"图集名"));
+			}
+			return array;
+		}
+		return [];
+	}
+	,getCacheFileMaps: function() {
 		var array = [];
 		var _g = haxe_ds_StringMap.kvIterator(TipsPool.cacheData.pngFiles.h);
 		while(_g.hasNext()) {
@@ -474,7 +489,7 @@ XmlEditor.__name__ = "XmlEditor";
 XmlEditor.main = function() {
 };
 var XmlEditorContent = $hx_exports["XmlEditorContent"] = function() {
-	this.triggerCharacters = ["<"," ","/","\""];
+	this.triggerCharacters = ["<"," ","/","\"",":"];
 	this.tipsPool = new TipsPool();
 };
 XmlEditorContent.__name__ = "XmlEditorContent";
@@ -506,6 +521,10 @@ XmlEditorContent.prototype = {
 			}
 		} else if(sym == "\"" && leftInput == "src=\"") {
 			return this.returnSuggestions(this.filterSuggestions(position,sym,content,this.tipsPool.getCacheFileMaps()));
+		} else if(sym == ":" && leftInput.indexOf("src=\"") != -1) {
+			var xmlid = HxOverrides.substr(leftInput,leftInput.indexOf("\"") + 1,null);
+			xmlid = HxOverrides.substr(xmlid,0,xmlid.indexOf(":"));
+			return this.returnSuggestions(this.filterSuggestions(position,sym,content,this.tipsPool.getCacheFileMapsByXml(xmlid)));
 		}
 		return { };
 	}
@@ -538,7 +557,7 @@ XmlEditorContent.prototype = {
 			var value = _g1_value;
 			newarray.push(Suggestions.create(value.label,Std.string(value.insertText) + endPushInsertText,value.detail,value.className,HxOverrides.substr(content,0,content.lastIndexOf(sym) + 1) + Std.string(value.insertText)));
 		}
-		haxe_Log.trace("提示：",{ fileName : "XmlEditor.hx", lineNumber : 87, className : "XmlEditorContent", methodName : "filterSuggestions", customParams : [newarray]});
+		haxe_Log.trace("提示：",{ fileName : "XmlEditor.hx", lineNumber : 92, className : "XmlEditorContent", methodName : "filterSuggestions", customParams : [newarray]});
 		return newarray;
 	}
 	,returnSuggestions: function(array) {
@@ -549,6 +568,7 @@ XmlEditorContent.prototype = {
 var data_ZProjectData = function(path,xml) {
 	this.HDHeight = 0;
 	this.HDWidth = 0;
+	this.xmlDatas = new haxe_ds_StringMap();
 	this.atlasFiles = new haxe_ds_StringMap();
 	this.jsonFiles = new haxe_ds_StringMap();
 	this.xmlFiles = new haxe_ds_StringMap();
