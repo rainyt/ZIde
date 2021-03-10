@@ -1,3 +1,5 @@
+import electron.main.Dialog;
+import electron.main.IpcMain;
 import electron.main.App;
 import electron.main.BrowserWindow;
 import electron.main.MenuItem;
@@ -112,5 +114,14 @@ class MainCore {
 			}
 		];
 		Menu.setApplicationMenu(Menu.buildFromTemplate(template));
+
+		IpcMain.on("saveFile", function(event) {
+			Dialog.showSaveDialog(window, {
+				title: "储存文件"
+			}).then(function(promise) {
+				if (untyped !promise.canceled)
+					untyped window.send("selectFile", promise.filePath);
+			});
+		});
 	}
 }

@@ -45,6 +45,11 @@ class Main extends Application {
 			trace("联想提示");
 		});
 
+		IpcRenderer.on("selectFile", function(event,args){
+			trace("选择文件夹：" + args);
+			@:privateAccess Utils._openFileSaveCB(args);
+		});
+
 		IpcRenderer.on("update", function() {
 			// 更新
 			new UpdateCore(function(code) {

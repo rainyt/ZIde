@@ -1,3 +1,4 @@
+import electron.renderer.IpcRenderer;
 import electron.remote.Dialog;
 import electron.renderer.Remote;
 import zygame.components.ZBuilder;
@@ -60,6 +61,13 @@ class Utils {
 		input.click();
 	}
 
+	private static var _openFileSaveCB:String->Void;
+
+	public static function openFileSave(cb:String->Void):Void {
+		_openFileSaveCB = cb;
+		IpcRenderer.send("saveFile");
+	}
+
 	/**
 	 * 判断是否为ZBuilderXml目录
 	 * @param path 
@@ -77,7 +85,6 @@ class Utils {
 	public static function itemToText(data:Dynamic):String {
 		return data.text;
 	}
-
 
 	public static function getSize(size:Int):String {
 		if (size < 1024)

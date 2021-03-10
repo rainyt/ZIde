@@ -1,3 +1,4 @@
+import electron.renderer.IpcRenderer;
 import electron.renderer.Remote;
 import haxe.Exception;
 import zygame.events.ZEvent;
@@ -14,7 +15,6 @@ import feathers.controls.LayoutGroup;
  * 左侧菜单栏
  */
 class Menu extends LayoutGroup {
-
 	public static var current:Menu;
 
 	public function new() {
@@ -58,7 +58,6 @@ class Menu extends LayoutGroup {
 		Utils.click(debug, function() {
 			Remote.getCurrentWebContents().openDevTools();
 		});
-
 	}
 
 	public function onBuild():Void {
@@ -77,8 +76,24 @@ class Menu extends LayoutGroup {
 		try {
 			var data = Editor.current.getEditorData();
 			Xml.parse(data);
-			File.saveContent(App.currentEditPath, data);
-			Alert.show("提示", "保存成功");
+			if (App.currentEditPath == null) {
+				// 保存新文件
+				Utils.openFileSave(function(path) {
+					App.currentEditPath = path;
+					File.saveContent(App.currentEditPath, data);
+					// 将文件追加到zproject中
+					if (App.currentProject != null) {
+						App.currentProject.builderFiles.push({
+							name: path.substr(path.lastIndexOf("/") + 1),
+							path: path
+						});
+					}
+					Alert.show("提示", "保存成功");
+				});
+			} else {
+				File.saveContent(App.currentEditPath, data);
+				Alert.show("提示", "保存成功");
+			}
 		} catch (e:Exception) {
 			Alert.show("错误", "保存错误：" + e.message);
 		}

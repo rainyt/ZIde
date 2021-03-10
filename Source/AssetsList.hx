@@ -1,3 +1,5 @@
+import electron.renderer.IpcRenderer;
+import base.BaseButton;
 import base.FilterText;
 import openfl.Lib;
 import sys.io.File;
@@ -28,7 +30,16 @@ class AssetsList extends LayoutGroup {
 		// 筛选功能
 		var f = new FilterText();
 		this.addChild(f);
-		f.layoutData = new AnchorLayoutData(0, 0, null, 0);
+		f.layoutData = new AnchorLayoutData(0, 32, null, 0);
+
+		var add = new BaseButton();
+		this.addChild(add);
+		add.text = "+";
+		add.layoutData = new AnchorLayoutData(3, 0, null, null);
+		Utils.click(add, function() {
+			App.currentEditPath = null;
+			Editor.current.setEditorData("");
+		});
 
 		var list = new ListView();
 		list.backgroundSkin = null;

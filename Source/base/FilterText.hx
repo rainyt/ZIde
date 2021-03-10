@@ -31,7 +31,7 @@ class FilterText extends LayoutGroup {
 		});
 		clear.width = 26;
 		clear.height = 26;
-		clear.text = "x";
+		clear.text = "X";
 		clear.backgroundSkin = null;
 		clear.textFormat = new TextFormat(Utils.fontName, 9, 0xa6a6a6);
 		clear.setSkinForState(ButtonState.UP, new RectangleSkin(SolidColor(0x252525)));

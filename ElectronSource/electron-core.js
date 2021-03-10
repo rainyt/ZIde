@@ -2,7 +2,7 @@
 (function ($hx_exports, $global) { "use strict";
 var MainCore = $hx_exports["MainCore"] = function() { };
 MainCore.main = function() {
-	console.log("MainCore.hx:11:","ElectronCore初始化");
+	console.log("MainCore.hx:13:","ElectronCore初始化");
 	var template = [{ label : "Application", submenu : [{ label : "检查更新", accelerator : "Command+U", selector : null, click : function() {
 		MainCore.window.send("update");
 	}},{ label : "重启", accelerator : "Command+R", selector : null, click : function() {
@@ -19,8 +19,17 @@ MainCore.main = function() {
 		return MainCore.window.send("codetips");
 	}}]}];
 	electron_main_Menu.setApplicationMenu(electron_main_Menu.buildFromTemplate(template));
+	electron_main_IpcMain.on("saveFile",function(event) {
+		electron_main_Dialog.showSaveDialog(MainCore.window,{ title : "储存文件"}).then(function(promise) {
+			if(!promise.canceled) {
+				MainCore.window.send("selectFile",promise.filePath);
+			}
+		});
+	});
 };
 var electron_main_App = require("electron").app;
+var electron_main_Dialog = require("electron").dialog;
+var electron_main_IpcMain = require("electron").ipcMain;
 var electron_main_Menu = require("electron").Menu;
 var haxe_iterators_ArrayIterator = function(array) {
 	this.current = 0;
