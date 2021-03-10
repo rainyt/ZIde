@@ -32,7 +32,8 @@ class TipsPool {
 		for (item in xml.firstElement().elements()) {
 			trace("API:", item.nodeName);
 			if (!item.exists("igone")) {
-				if (item.exists("parent")) {
+				// 暂禁用
+				if (false && item.exists("parent")) {
 					var p = item.get("parent");
 					if (!childrenMaps.exists(p)) {
 						childrenMaps.set(p, []);

@@ -198,70 +198,55 @@ var TipsPool = function() {
 		}
 		tmp("API:",{ fileName : "TipsPool.hx", lineNumber : 33, className : "TipsPool", methodName : "new", customParams : [item1.nodeName]});
 		if(!item1.exists("igone")) {
-			if(item1.exists("parent")) {
-				var p = item1.get("parent");
-				if(!Object.prototype.hasOwnProperty.call(this.childrenMaps.h,p)) {
-					this.childrenMaps.h[p] = [];
-				}
-				var tmp1 = this.childrenMaps.h[p];
-				if(item1.nodeType != Xml.Element) {
-					throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
-				}
-				if(item1.nodeType != Xml.Element) {
-					throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
-				}
-				tmp1.push(Suggestions.create(item1.nodeName,item1.nodeName,item1.get("tips")));
-			} else {
-				var tmp3 = this.classes;
-				if(item1.nodeType != Xml.Element) {
-					throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
-				}
-				if(item1.nodeType != Xml.Element) {
-					throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
-				}
-				tmp3.push(Suggestions.create(item1.nodeName,item1.nodeName,item1.get("tips")));
-				var tmp5 = this.classesend;
-				if(item1.nodeType != Xml.Element) {
-					throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
-				}
-				if(item1.nodeType != Xml.Element) {
-					throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
-				}
-				tmp5.push(Suggestions.create(item1.nodeName,item1.nodeName,item1.get("tips")));
+			var tmp1 = this.classes;
+			if(item1.nodeType != Xml.Element) {
+				throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
 			}
+			if(item1.nodeType != Xml.Element) {
+				throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
+			}
+			tmp1.push(Suggestions.create(item1.nodeName,item1.nodeName,item1.get("tips")));
+			var tmp3 = this.classesend;
+			if(item1.nodeType != Xml.Element) {
+				throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
+			}
+			if(item1.nodeType != Xml.Element) {
+				throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
+			}
+			tmp3.push(Suggestions.create(item1.nodeName,item1.nodeName,item1.get("tips")));
 		}
 		var this1 = this.attartMaps;
 		if(item1.nodeType != Xml.Element) {
 			throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
 		}
 		if(Object.prototype.hasOwnProperty.call(this1.h,item1.nodeName) == false) {
-			var this2 = this.attartMaps;
+			var this11 = this.attartMaps;
 			if(item1.nodeType != Xml.Element) {
 				throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
 			}
-			this2.h[item1.nodeName] = [];
+			this11.h[item1.nodeName] = [];
 		}
 		var attritem = item1.elements();
 		while(attritem.hasNext()) {
 			var attritem1 = attritem.next();
-			var this3 = this.attartMaps;
+			var this12 = this.attartMaps;
 			if(item1.nodeType != Xml.Element) {
 				throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
 			}
-			var tmp7 = this3.h[item1.nodeName];
+			var tmp5 = this12.h[item1.nodeName];
 			if(attritem1.nodeType != Xml.Element) {
 				throw haxe_Exception.thrown("Bad node type, expected Element but found " + (attritem1.nodeType == null ? "null" : XmlType.toString(attritem1.nodeType)));
 			}
 			if(attritem1.nodeType != Xml.Element) {
 				throw haxe_Exception.thrown("Bad node type, expected Element but found " + (attritem1.nodeType == null ? "null" : XmlType.toString(attritem1.nodeType)));
 			}
-			tmp7.push(Suggestions.create(attritem1.nodeName,attritem1.nodeName,attritem1.get("tips")));
+			tmp5.push(Suggestions.create(attritem1.nodeName,attritem1.nodeName,attritem1.get("tips")));
 		}
-		var this4 = this.xmlItemMaps;
+		var this13 = this.xmlItemMaps;
 		if(item1.nodeType != Xml.Element) {
 			throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
 		}
-		this4.h[item1.nodeName] = item1;
+		this13.h[item1.nodeName] = item1;
 	}
 	var item = xml.firstElement().elements();
 	while(item.hasNext()) {
@@ -271,13 +256,13 @@ var TipsPool = function() {
 			this.extendsClass(item1,c);
 		}
 	}
-	haxe_Log.trace(this.childrenMaps == null ? "null" : haxe_ds_StringMap.stringify(this.childrenMaps.h),{ fileName : "TipsPool.hx", lineNumber : 62, className : "TipsPool", methodName : "new"});
+	haxe_Log.trace(this.childrenMaps == null ? "null" : haxe_ds_StringMap.stringify(this.childrenMaps.h),{ fileName : "TipsPool.hx", lineNumber : 63, className : "TipsPool", methodName : "new"});
 };
 TipsPool.__name__ = "TipsPool";
 TipsPool.prototype = {
 	getCacheFileMapsByXml: function(xmlid) {
 		if(Object.prototype.hasOwnProperty.call(TipsPool.cacheData.xmlFiles.h,xmlid)) {
-			haxe_Log.trace("xmlid=" + xmlid,{ fileName : "TipsPool.hx", lineNumber : 72, className : "TipsPool", methodName : "getCacheFileMapsByXml"});
+			haxe_Log.trace("xmlid=" + xmlid,{ fileName : "TipsPool.hx", lineNumber : 73, className : "TipsPool", methodName : "getCacheFileMapsByXml"});
 			var path = TipsPool.cacheData.xmlFiles.h[xmlid];
 			var xml = Xml.parse(TipsPool.cacheData.xmlDatas.h[path]);
 			var array = [];
@@ -508,7 +493,6 @@ XmlEditorContent.prototype = {
 		if(leftInput.indexOf(" ") != -1) {
 			leftInput = HxOverrides.substr(leftInput,leftInput.lastIndexOf(" ") + 1,null);
 		}
-		haxe_Log.trace("position:",{ fileName : "XmlEditor.hx", lineNumber : 43, className : "XmlEditorContent", methodName : "provideCompletionItems", customParams : [position,content,sym,"leftInput=",leftInput]});
 		if(leftInput.indexOf("</") == 0) {
 			return this.returnSuggestions(this.filterSuggestions(position,sym,content,this.tipsPool.classesend.slice()));
 		} else if(leftInput.indexOf("<") == 0) {
@@ -535,10 +519,14 @@ XmlEditorContent.prototype = {
 			var i = _g++;
 			var index = line - i;
 			var content = model.getLineContent(index);
+			haxe_Log.trace("检查：",{ fileName : "XmlEditor.hx", lineNumber : 78, className : "XmlEditorContent", methodName : "getLastClassName", customParams : [content]});
 			if(content.indexOf("<") != -1) {
 				var c = HxOverrides.substr(content,content.indexOf("<") + 1,null);
 				c = HxOverrides.substr(c,0,content.indexOf(" "));
-				return c;
+				haxe_Log.trace("类型判断",{ fileName : "XmlEditor.hx", lineNumber : 82, className : "XmlEditorContent", methodName : "getLastClassName", customParams : [c]});
+				if(Object.prototype.hasOwnProperty.call(this.tipsPool.xmlItemMaps.h,c)) {
+					return c;
+				}
 			}
 		}
 		return null;
@@ -557,7 +545,6 @@ XmlEditorContent.prototype = {
 			var value = _g1_value;
 			newarray.push(Suggestions.create(value.label,Std.string(value.insertText) + endPushInsertText,value.detail,value.className,HxOverrides.substr(content,0,content.lastIndexOf(sym) + 1) + Std.string(value.insertText)));
 		}
-		haxe_Log.trace("提示：",{ fileName : "XmlEditor.hx", lineNumber : 92, className : "XmlEditorContent", methodName : "filterSuggestions", customParams : [newarray]});
 		return newarray;
 	}
 	,returnSuggestions: function(array) {

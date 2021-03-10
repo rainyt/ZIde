@@ -40,7 +40,8 @@ class XmlEditorContent {
 		if (leftInput.indexOf(" ") != -1) {
 			leftInput = leftInput.substr(leftInput.lastIndexOf(" ") + 1);
 		}
-		trace("position:", position, content, sym, "leftInput=", leftInput);
+		// var parentClass = getLastClassName(model, line);
+		// trace("position:", position, content, sym, "leftInput=" + leftInput, "parentClass=" + parentClass);
 		if (leftInput.indexOf("</") == 0) {
 			// </开头时，应输入类型
 			return returnSuggestions(filterSuggestions(position, sym, content, tipsPool.classesend.copy()));
@@ -59,7 +60,7 @@ class XmlEditorContent {
 		} else if (sym == ":" && leftInput.indexOf("src=\"") != -1) {
 			// src参数 精灵图的子内容
 			var xmlid = leftInput.substr(leftInput.indexOf("\"") + 1);
-			xmlid = xmlid.substr(0,xmlid.indexOf(":"));
+			xmlid = xmlid.substr(0, xmlid.indexOf(":"));
 			return returnSuggestions(filterSuggestions(position, sym, content, tipsPool.getCacheFileMapsByXml(xmlid)));
 		}
 		return {};
@@ -74,10 +75,14 @@ class XmlEditorContent {
 		for (i in 0...line) {
 			var index = line - i;
 			var content:String = model.getLineContent(index);
+			trace("检查：", content);
 			if (content.indexOf("<") != -1) {
 				var c = content.substr(content.indexOf("<") + 1);
 				c = c.substr(0, content.indexOf(" "));
-				return c;
+				trace("类型判断", c);
+				if (tipsPool.xmlItemMaps.exists(c)) {
+					return c;
+				}
 			}
 		}
 		return null;
@@ -89,7 +94,7 @@ class XmlEditorContent {
 			newarray.push(Suggestions.create(value.label, value.insertText + endPushInsertText, value.detail, value.className,
 				content.substr(0, content.lastIndexOf(sym) + 1) + value.insertText));
 		}
-		trace("提示：", newarray);
+		// trace("提示：", newarray);
 		return newarray;
 	}
 
