@@ -94,14 +94,14 @@ class MainCore {
 			{
 				label: "工具",
 				submenu: [
-					{
-						label: "格式化",
-						accelerator: "Shift+Opt+F",
-						selector: null,
-						click: () -> {
-							untyped window.send("formatxml");
-						}
-					},
+					// {
+					// 	label: "格式化",
+					// 	accelerator: "Shift+Opt+F",
+					// 	selector: null,
+					// 	click: () -> {
+					// 		untyped window.send("formatxml");
+					// 	}
+					// },
 					{
 						label: "联想提示",
 						accelerator: "CmdOrCtrl+D",
