@@ -116,11 +116,10 @@ class ZProjectData {
 							name: path.substr(path.lastIndexOf("/") + 1),
 							path: path
 						});
-					} else {
-						// 普通XML文件
-						xmlFiles.set(StringUtils.getName(path), path);
-						xmlDatas.set(path, File.getContent(path));
 					}
+					// 普通XML文件
+					xmlFiles.set(StringUtils.getName(path), path);
+					xmlDatas.set(path, File.getContent(path));
 				case "png":
 					// 图片文件缓存
 					pngFiles.set(StringUtils.getName(path), path);

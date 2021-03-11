@@ -127,6 +127,13 @@ class UIStart extends Start {
 						file: png
 					});
 					_assets.loadFile(png);
+				} else if (xfile != null) {
+					// 单XML格式
+					trace("载入单XML", xfile);
+					filesConfig.push({
+						file: xfile
+					});
+					_assets.loadFile(xfile);
 				}
 				if (jfile != null) {
 					// JSON格式
@@ -185,7 +192,7 @@ class UIStart extends Start {
 					// 可能是JSON格式
 					if (array.indexOf(datas[1]) == -1) {
 						// 排除BImage和ZImage，这两个是使用图集，没有JSON可能性
-						if(item.nodeName != "BImage" && item.nodeName != "ZImage")
+						if (item.nodeName != "BImage" && item.nodeName != "ZImage")
 							array.push(datas[1]);
 					}
 				} else {
@@ -194,6 +201,17 @@ class UIStart extends Start {
 				}
 				if (array.indexOf(path) == -1) {
 					array.push(path);
+				}
+			}
+			if (! @:privateAccess ZBuilder.classMaps.exists(item.nodeName) && array.indexOf(item.nodeName) == -1) {
+				if (_project.xmlFiles.exists(item.nodeName)) {
+					// 深度查询
+					var childXmlContent = _project.xmlDatas.get(_project.xmlFiles.get(item.nodeName));
+					trace("子集查询：" + item.nodeName,childXmlContent);
+					var childXml = Xml.parse(childXmlContent);
+					trace("深度查询：", childXml.toString());
+					findXmlAssets(childXml.firstElement(), array);
+					array.push(item.nodeName);
 				}
 			}
 			findXmlAssets(item, array);
