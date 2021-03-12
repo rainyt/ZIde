@@ -188,7 +188,7 @@ var TipsPool = function() {
 	this.attartMaps = new haxe_ds_StringMap();
 	this.classesend = [];
 	this.classes = [];
-	var xml = Xml.parse("<tips>\n    <Base igone=\"true\">\n        <id tips=\"设置ID标示\" />\n        <width tips=\"宽度\" />\n        <height tips=\"高度\" />\n        <scaleX tips=\"ScaleX缩放\" />\n        <scaleY tips=\"ScaleY缩放\" />\n        <alpha tips=\"透明度\" />\n        <x tips=\"X轴坐标\" />\n        <y tips=\"Y轴坐标\" />\n        <visible tips=\"可见\" />\n        <left tips=\"左对齐\" />\n        <right tips=\"右对齐\" />\n        <top tips=\"顶部对齐\" />\n        <bottom tips=\"底部对齐\" />\n        <centerX tips=\"横向对齐\" />\n        <centerY tips=\"垂直对齐\" />\n    </Base>\n    <BaseBox class=\"Base\" igone=\"true\">\n        <gap tips=\"间隔\" />\n    </BaseBox>\n    <ZImage class=\"Base\" tips=\"图像对象\">\n        <src tips=\"设置图像，支持网络地址、图集地址\" />\n    </ZImage>\n    <ZBox class=\"Base\" tips=\"基本容器\"></ZBox>\n    <ZVBox class=\"BaseBox\" tips=\"基本容器(竖向)\"></ZVBox>\n    <ZHBox class=\"BaseBox\" tips=\"基本容器(横向)\"></ZHBox>\n    <ZQuad class=\"Base\" tips=\"色块\">\n        <color tips=\"颜色\" />\n    </ZQuad>\n    <ZLabel class=\"Base\" tips=\"文本\">\n        <text tips=\"文本\" />\n        <color tips=\"文本颜色\" />\n        <size tips=\"文本大小\" />\n    </ZLabel>\n    <ZInputLabel class=\"ZLabel\" tips=\"输入文本框\"></ZInputLabel>\n    <ZTween tips=\"动画\">\n        <auto tips=\"自动播放(Bool)\" />\n    </ZTween>\n    <ZSpine class=\"Base\" tips=\"Spine动画\"></ZSpine>\n    <ZScroll class=\"Base\" tips=\"Scroll窗口\"></ZScroll>\n    <ZList class=\"Base\" tips=\"数据列表窗口\"></ZList>\n    <ZButton class=\"Base\" tips=\"按钮\">\n        <src tips=\"设置图像\" />\n    </ZButton>\n    <ZBitmapLabel class=\"ZLabel\" tips=\"位图文本\">\n        <src tips=\"设置图集或者Fnt\" />\n    </ZBitmapLabel>\n    <ImageBatchs class=\"Base\" tips=\"批渲染对象（无触摸）\">\n        <src tips=\"设置图集\" />\n    </ImageBatchs>\n    <TouchDisplayObjectContainer class=\"ImageBatchs\" tips=\"批渲染对象（含触摸）\"></TouchDisplayObjectContainer>\n    <BButton class=\"Base\" tips=\"批渲染按钮\">\n        <src tips=\"设置图集\" />\n    </BButton>\n    <BBox class=\"Base\" tips=\"批渲染布局\"></BBox>\n    <VBox class=\"Base\" tips=\"批渲染布局V\"></VBox>\n    <HBox class=\"Base\" tips=\"批渲染布局H\"></HBox>\n    <BImage class=\"Base\" tips=\"批渲染图片\">\n        <src tips=\"设置图集\" />\n    </BImage>\n    <BScale9Image class=\"Base\" tips=\"批渲染图片（九宫格）\"></BScale9Image>\n    <BLabel class=\"Base\" tips=\"批渲染文本\">\n        <src tips=\"设置图集或者Fnt\" />\n    </BLabel>\n    <add parent=\"ZTween\" tips=\"递增动画\">\n        <bind tips=\"绑定ID值\" />\n        <key tips=\"修改的属性\" />\n        <start tips=\"开始帧\" />\n        <end tips=\"结束帧\" />\n        <to tips=\"修改值\" />\n    </add>\n    <tween parent=\"ZTween\" class=\"add\" tips=\"过渡动画\">\n        <from tips=\"初始值\" />\n    </tween>\n    <ZHaxe tips=\"HScript\">\n        <id tips=\"调用名\"/>\n    </ZHaxe>\n</tips>");
+	var xml = Xml.parse("<tips>\n    <Base igone=\"true\">\n        <id tips=\"设置ID标示\" />\n        <width tips=\"宽度\" />\n        <height tips=\"高度\" />\n        <scaleX tips=\"ScaleX缩放\" />\n        <scaleY tips=\"ScaleY缩放\" />\n        <alpha tips=\"透明度\" />\n        <x tips=\"X轴坐标\" />\n        <y tips=\"Y轴坐标\" />\n        <visible tips=\"可见\" />\n        <left tips=\"左对齐\" />\n        <right tips=\"右对齐\" />\n        <top tips=\"顶部对齐\" />\n        <bottom tips=\"底部对齐\" />\n        <centerX tips=\"横向对齐\" />\n        <centerY tips=\"垂直对齐\" />\n    </Base>\n    <BaseBox class=\"Base\" igone=\"true\">\n        <gap tips=\"间隔\" />\n    </BaseBox>\n    <ZImage class=\"Base\" tips=\"图像对象\">\n        <src tips=\"设置图像，支持网络地址、图集地址\" />\n    </ZImage>\n    <ZBox class=\"Base\" tips=\"基本容器\"></ZBox>\n    <VBox class=\"BaseBox\" tips=\"基本容器(竖向)\"></VBox>\n    <HBox class=\"BaseBox\" tips=\"基本容器(横向)\"></HBox>\n    <ZQuad class=\"Base\" tips=\"色块\">\n        <color tips=\"颜色\" />\n    </ZQuad>\n    <ZLabel class=\"Base\" tips=\"文本\">\n        <text tips=\"文本\" />\n        <color tips=\"文本颜色\" />\n        <size tips=\"文本大小\" />\n    </ZLabel>\n    <ZInputLabel class=\"ZLabel\" tips=\"输入文本框\"></ZInputLabel>\n    <ZTween tips=\"动画\">\n        <auto tips=\"自动播放(Bool)\" />\n    </ZTween>\n    <ZSpine class=\"Base\" tips=\"Spine动画\"></ZSpine>\n    <ZScroll class=\"Base\" tips=\"Scroll窗口\"></ZScroll>\n    <ZList class=\"Base\" tips=\"数据列表窗口\"></ZList>\n    <ZButton class=\"Base\" tips=\"按钮\">\n        <src tips=\"设置图像\" />\n    </ZButton>\n    <ZBitmapLabel class=\"ZLabel\" tips=\"位图文本\">\n        <src tips=\"设置图集或者Fnt\" />\n    </ZBitmapLabel>\n    <ImageBatchs class=\"Base\" tips=\"批渲染对象（无触摸）\">\n        <src tips=\"设置图集\" />\n    </ImageBatchs>\n    <TouchDisplayObjectContainer class=\"ImageBatchs\" tips=\"批渲染对象（含触摸）\"></TouchDisplayObjectContainer>\n    <BButton class=\"Base\" tips=\"批渲染按钮\">\n        <src tips=\"设置图集\" />\n    </BButton>\n    <BBox class=\"Base\" tips=\"批渲染布局\"></BBox>\n    <VBBox class=\"Base\" tips=\"批渲染布局V\"></VBBox>\n    <HBBox class=\"Base\" tips=\"批渲染布局H\"></HBBox>\n    <BImage class=\"Base\" tips=\"批渲染图片\">\n        <src tips=\"设置图集\" />\n    </BImage>\n    <BScale9Image class=\"Base\" tips=\"批渲染图片（九宫格）\"></BScale9Image>\n    <BLabel class=\"Base\" tips=\"批渲染文本\">\n        <src tips=\"设置图集或者Fnt\" />\n    </BLabel>\n    <add parent=\"ZTween\" tips=\"递增动画\">\n        <bind tips=\"绑定ID值\" />\n        <key tips=\"修改的属性\" />\n        <start tips=\"开始帧\" />\n        <end tips=\"结束帧\" />\n        <to tips=\"修改值\" />\n    </add>\n    <tween parent=\"ZTween\" class=\"add\" tips=\"过渡动画\">\n        <from tips=\"初始值\" />\n    </tween>\n    <ZHaxe tips=\"HScript\">\n        <id tips=\"调用名\"/>\n    </ZHaxe>\n</tips>");
 	var item = xml.firstElement().elements();
 	while(item.hasNext()) {
 		var item1 = item.next();
@@ -220,20 +220,20 @@ var TipsPool = function() {
 			throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
 		}
 		if(Object.prototype.hasOwnProperty.call(this1.h,item1.nodeName) == false) {
-			var this11 = this.attartMaps;
+			var this2 = this.attartMaps;
 			if(item1.nodeType != Xml.Element) {
 				throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
 			}
-			this11.h[item1.nodeName] = [];
+			this2.h[item1.nodeName] = [];
 		}
 		var attritem = item1.elements();
 		while(attritem.hasNext()) {
 			var attritem1 = attritem.next();
-			var this12 = this.attartMaps;
+			var this3 = this.attartMaps;
 			if(item1.nodeType != Xml.Element) {
 				throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
 			}
-			var tmp5 = this12.h[item1.nodeName];
+			var tmp5 = this3.h[item1.nodeName];
 			if(attritem1.nodeType != Xml.Element) {
 				throw haxe_Exception.thrown("Bad node type, expected Element but found " + (attritem1.nodeType == null ? "null" : XmlType.toString(attritem1.nodeType)));
 			}
@@ -242,11 +242,11 @@ var TipsPool = function() {
 			}
 			tmp5.push(Suggestions.create(attritem1.nodeName,attritem1.nodeName,attritem1.get("tips")));
 		}
-		var this13 = this.xmlItemMaps;
+		var this4 = this.xmlItemMaps;
 		if(item1.nodeType != Xml.Element) {
 			throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
 		}
-		this13.h[item1.nodeName] = item1;
+		this4.h[item1.nodeName] = item1;
 	}
 	var item = xml.firstElement().elements();
 	while(item.hasNext()) {

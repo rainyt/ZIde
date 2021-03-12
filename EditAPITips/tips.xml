@@ -23,8 +23,8 @@
         <src tips="设置图像，支持网络地址、图集地址" />
     </ZImage>
     <ZBox class="Base" tips="基本容器"></ZBox>
-    <ZVBox class="BaseBox" tips="基本容器(竖向)"></ZVBox>
-    <ZHBox class="BaseBox" tips="基本容器(横向)"></ZHBox>
+    <VBox class="BaseBox" tips="基本容器(竖向)"></VBox>
+    <HBox class="BaseBox" tips="基本容器(横向)"></HBox>
     <ZQuad class="Base" tips="色块">
         <color tips="颜色" />
     </ZQuad>
@@ -32,6 +32,7 @@
         <text tips="文本" />
         <color tips="文本颜色" />
         <size tips="文本大小" />
+        <fontName tips="文本字体"/>
     </ZLabel>
     <ZInputLabel class="ZLabel" tips="输入文本框"></ZInputLabel>
     <ZTween tips="动画">
@@ -54,14 +55,16 @@
         <src tips="设置图集" />
     </BButton>
     <BBox class="Base" tips="批渲染布局"></BBox>
-    <VBox class="Base" tips="批渲染布局V"></VBox>
-    <HBox class="Base" tips="批渲染布局H"></HBox>
+    <VBBox class="Base" tips="批渲染布局V"></VBBox>
+    <HBBox class="Base" tips="批渲染布局H"></HBBox>
     <BImage class="Base" tips="批渲染图片">
         <src tips="设置图集" />
     </BImage>
     <BScale9Image class="Base" tips="批渲染图片（九宫格）"></BScale9Image>
     <BLabel class="Base" tips="批渲染文本">
         <src tips="设置图集或者Fnt" />
+        <fontName tips="文本字体"/>
+        <size tips="文本大小"/>
     </BLabel>
     <add parent="ZTween" tips="递增动画">
         <bind tips="绑定ID值" />
