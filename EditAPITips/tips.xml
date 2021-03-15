@@ -43,6 +43,8 @@
     <ZList class="Base" tips="数据列表窗口"></ZList>
     <ZButton class="Base" tips="按钮">
         <src tips="设置图像" />
+        <text tips="设置按钮文案" />
+        <size tips="设置文案大小" />
     </ZButton>
     <ZBitmapLabel class="ZLabel" tips="位图文本">
         <src tips="设置图集或者Fnt" />
@@ -50,7 +52,7 @@
     <ImageBatchs class="Base" tips="批渲染对象（无触摸）">
         <src tips="设置图集" />
     </ImageBatchs>
-    <TouchDisplayObjectContainer class="ImageBatchs" tips="批渲染对象（含触摸）"></TouchDisplayObjectContainer>
+    <TouchImageBatchsContainer class="ImageBatchs" tips="批渲染对象（含触摸）"></TouchImageBatchsContainer>
     <BButton class="Base" tips="批渲染按钮">
         <src tips="设置图集" />
     </BButton>

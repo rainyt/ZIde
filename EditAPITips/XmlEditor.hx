@@ -47,7 +47,14 @@ class XmlEditorContent {
 			return returnSuggestions(filterSuggestions(position, sym, content, tipsPool.classesend.copy()));
 		} else if (leftInput.indexOf("<") == 0) {
 			// <开头时，应输入类型
-			return returnSuggestions(filterSuggestions(position, sym, content, tipsPool.classes.copy()));
+			var copy = tipsPool.classes.copy();
+			if(TipsPool.cacheData != null){
+				for (index => value in TipsPool.cacheData.builderFiles) {
+					var cName = StringTools.replace(value.name,".xml","");
+					copy.push(Suggestions.create(cName,cName,value.path));
+				}
+			}
+			return returnSuggestions(filterSuggestions(position, sym, content, copy));
 		} else if (sym == " ") {
 			// 可能是访问属性
 			var classFount = content.substr(content.lastIndexOf("<"));
