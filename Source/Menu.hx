@@ -88,11 +88,9 @@ class Menu extends LayoutGroup {
 							path: path
 						});
 					}
-					Alert.show("提示", "保存成功");
 				});
 			} else {
 				File.saveContent(App.currentEditPath, data);
-				Alert.show("提示", "保存成功");
 			}
 		} catch (e:Exception) {
 			Alert.show("错误", "保存错误：" + e.message);

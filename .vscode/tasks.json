@@ -542,7 +542,7 @@
             }
         },{
             "label": "上传新版本到热更服务器",
-            "command": "cd Export/electron/bin && zip -o update.zip md/editor.html md/xml-editor.js atlas china game icons lib manifest photoshop electron-core.js ElectronSetup.js index.html ZIde.js && haxelib run aliyun-oss-upload /Users/grtf/Documents/GitHub/ZIde/Export/electron/bin/update.zip kengsdk_tools_res:1002",
+            "command": "cd Export/electron/bin && zip -o update.zip md/editor.html md/xml-editor.js atlas china game/* icons lib manifest photoshop electron-core.js ElectronSetup.js index.html ZIde.js && haxelib run aliyun-oss-upload /Users/grtf/Documents/GitHub/ZIde/Export/electron/bin/update.zip kengsdk_tools_res:1002",
             "type": "shell",
             "problemMatcher": [],
             "group": {
