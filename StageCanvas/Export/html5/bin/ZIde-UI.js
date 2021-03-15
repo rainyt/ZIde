@@ -894,7 +894,7 @@ ApplicationMain.main = function() {
 ApplicationMain.create = function(config) {
 	var app = new openfl_display_Application();
 	ManifestResources.init(config);
-	app.meta.h["build"] = "30";
+	app.meta.h["build"] = "34";
 	app.meta.h["company"] = "Company Name";
 	app.meta.h["file"] = "ZIde-UI";
 	app.meta.h["name"] = "ZIde";
@@ -1192,99 +1192,6 @@ openfl_display_IBitmapDrawable.prototype = {
 	,__scrollRect: null
 	,__class__: openfl_display_IBitmapDrawable
 };
-var haxe_IMap = function() { };
-$hxClasses["haxe.IMap"] = haxe_IMap;
-haxe_IMap.__name__ = "haxe.IMap";
-haxe_IMap.__isInterface__ = true;
-haxe_IMap.prototype = {
-	get: null
-	,set: null
-	,exists: null
-	,remove: null
-	,keys: null
-	,iterator: null
-	,keyValueIterator: null
-	,__class__: haxe_IMap
-};
-var haxe_ds_StringMap = function() {
-	this.h = Object.create(null);
-};
-$hxClasses["haxe.ds.StringMap"] = haxe_ds_StringMap;
-haxe_ds_StringMap.__name__ = "haxe.ds.StringMap";
-haxe_ds_StringMap.__interfaces__ = [haxe_IMap];
-haxe_ds_StringMap.keysIterator = function(h) {
-	var keys = Object.keys(h);
-	var len = keys.length;
-	var idx = 0;
-	return { hasNext : function() {
-		return idx < len;
-	}, next : function() {
-		idx += 1;
-		return keys[idx - 1];
-	}};
-};
-haxe_ds_StringMap.valueIterator = function(h) {
-	var keys = Object.keys(h);
-	var len = keys.length;
-	var idx = 0;
-	return { hasNext : function() {
-		return idx < len;
-	}, next : function() {
-		idx += 1;
-		return h[keys[idx - 1]];
-	}};
-};
-haxe_ds_StringMap.kvIterator = function(h) {
-	var keys = Object.keys(h);
-	var len = keys.length;
-	var idx = 0;
-	return { hasNext : function() {
-		return idx < len;
-	}, next : function() {
-		idx += 1;
-		var k = keys[idx - 1];
-		return { key : k, value : h[k]};
-	}};
-};
-haxe_ds_StringMap.stringify = function(h) {
-	var s = "{";
-	var first = true;
-	for (var key in h) {
-		if (first) first = false; else s += ',';
-		s += key + ' => ' + Std.string(h[key]);
-	}
-	return s + "}";
-};
-haxe_ds_StringMap.prototype = {
-	h: null
-	,exists: function(key) {
-		return Object.prototype.hasOwnProperty.call(this.h,key);
-	}
-	,get: function(key) {
-		return this.h[key];
-	}
-	,set: function(key,value) {
-		this.h[key] = value;
-	}
-	,remove: function(key) {
-		if(Object.prototype.hasOwnProperty.call(this.h,key)) {
-			delete(this.h[key]);
-			return true;
-		} else {
-			return false;
-		}
-	}
-	,keys: function() {
-		return haxe_ds_StringMap.keysIterator(this.h);
-	}
-	,iterator: function() {
-		return haxe_ds_StringMap.valueIterator(this.h);
-	}
-	,keyValueIterator: function() {
-		return haxe_ds_StringMap.kvIterator(this.h);
-	}
-	,__class__: haxe_ds_StringMap
-};
 var openfl_Vector = {};
 openfl_Vector.__properties__ = {set_length:"set_length",get_length:"get_length",set_fixed:"set_fixed",get_fixed:"get_fixed"};
 openfl_Vector.concat = function(this1,vec) {
@@ -1407,237 +1314,6 @@ openfl_Vector.get_length = function(this1) {
 };
 openfl_Vector.set_length = function(this1,value) {
 	return this1.set_length(value);
-};
-var openfl__$Vector_IVector = function() { };
-$hxClasses["openfl._Vector.IVector"] = openfl__$Vector_IVector;
-openfl__$Vector_IVector.__name__ = "openfl._Vector.IVector";
-openfl__$Vector_IVector.__isInterface__ = true;
-openfl__$Vector_IVector.prototype = {
-	get_length: null
-	,set_length: null
-	,fixed: null
-	,concat: null
-	,copy: null
-	,filter: null
-	,get: null
-	,indexOf: null
-	,insertAt: null
-	,iterator: null
-	,join: null
-	,lastIndexOf: null
-	,pop: null
-	,push: null
-	,removeAt: null
-	,reverse: null
-	,set: null
-	,shift: null
-	,slice: null
-	,sort: null
-	,splice: null
-	,toString: null
-	,unshift: null
-	,__class__: openfl__$Vector_IVector
-	,__properties__: {set_length:"set_length",get_length:"get_length"}
-};
-var openfl__$Vector_ObjectVector = function(length,fixed,array,forceCopy) {
-	if(forceCopy == null) {
-		forceCopy = false;
-	}
-	if(fixed == null) {
-		fixed = false;
-	}
-	if(length == null) {
-		length = 0;
-	}
-	if(forceCopy) {
-		this.__array = [];
-		if(array != null) {
-			var _g = 0;
-			var _g1 = array.length;
-			while(_g < _g1) {
-				var i = _g++;
-				this.__array[i] = array[i];
-			}
-		}
-	} else {
-		if(array == null) {
-			array = [];
-		}
-		this.__array = array;
-	}
-	if(length > 0) {
-		this.set_length(length);
-	}
-	this.fixed = fixed;
-};
-$hxClasses["openfl._Vector.ObjectVector"] = openfl__$Vector_ObjectVector;
-openfl__$Vector_ObjectVector.__name__ = "openfl._Vector.ObjectVector";
-openfl__$Vector_ObjectVector.__interfaces__ = [openfl__$Vector_IVector];
-openfl__$Vector_ObjectVector.prototype = {
-	fixed: null
-	,__array: null
-	,concat: function(a) {
-		if(a == null) {
-			return new openfl__$Vector_ObjectVector(0,false,this.__array.slice());
-		} else {
-			var other = a;
-			if(other.__array.length > 0) {
-				return new openfl__$Vector_ObjectVector(0,false,this.__array.concat(other.__array));
-			} else {
-				return new openfl__$Vector_ObjectVector(0,false,this.__array.slice());
-			}
-		}
-	}
-	,copy: function() {
-		return new openfl__$Vector_ObjectVector(0,this.fixed,this.__array.slice());
-	}
-	,filter: function(callback) {
-		var tmp = this.fixed;
-		var _g = [];
-		var _g1 = 0;
-		var _g2 = this.__array;
-		while(_g1 < _g2.length) {
-			var v = _g2[_g1];
-			++_g1;
-			if(callback(v)) {
-				_g.push(v);
-			}
-		}
-		return new openfl__$Vector_ObjectVector(0,tmp,_g);
-	}
-	,get: function(index) {
-		return this.__array[index];
-	}
-	,indexOf: function(x,from) {
-		if(from == null) {
-			from = 0;
-		}
-		var _g = from;
-		var _g1 = this.__array.length;
-		while(_g < _g1) {
-			var i = _g++;
-			if(this.__array[i] == x) {
-				return i;
-			}
-		}
-		return -1;
-	}
-	,insertAt: function(index,element) {
-		if(!this.fixed || index < this.__array.length) {
-			this.__array.splice(index,0,element);
-		}
-	}
-	,iterator: function() {
-		return new haxe_iterators_ArrayIterator(this.__array);
-	}
-	,join: function(sep) {
-		if(sep == null) {
-			sep = ",";
-		}
-		return this.__array.join(sep);
-	}
-	,lastIndexOf: function(x,from) {
-		var i = from == null || from >= this.__array.length ? this.__array.length - 1 : from;
-		while(i >= 0) {
-			if(this.__array[i] == x) {
-				return i;
-			}
-			--i;
-		}
-		return -1;
-	}
-	,pop: function() {
-		if(!this.fixed) {
-			return this.__array.pop();
-		} else {
-			return null;
-		}
-	}
-	,push: function(x) {
-		if(!this.fixed) {
-			return this.__array.push(x);
-		} else {
-			return this.__array.length;
-		}
-	}
-	,removeAt: function(index) {
-		if(!this.fixed || index < this.__array.length) {
-			return this.__array.splice(index,1)[0];
-		}
-		return null;
-	}
-	,reverse: function() {
-		this.__array.reverse();
-		return this;
-	}
-	,set: function(index,value) {
-		if(!this.fixed || index < this.__array.length) {
-			return this.__array[index] = value;
-		} else {
-			return value;
-		}
-	}
-	,shift: function() {
-		if(!this.fixed) {
-			return this.__array.shift();
-		} else {
-			return null;
-		}
-	}
-	,slice: function(startIndex,endIndex) {
-		if(startIndex == null) {
-			startIndex = 0;
-		}
-		if(endIndex == null) {
-			endIndex = 16777215;
-		}
-		return new openfl__$Vector_ObjectVector(0,false,this.__array.slice(startIndex,endIndex));
-	}
-	,sort: function(f) {
-		this.__array.sort(f);
-	}
-	,splice: function(pos,len) {
-		return new openfl__$Vector_ObjectVector(0,false,this.__array.splice(pos,len));
-	}
-	,toJSON: function() {
-		return this.__array;
-	}
-	,toString: function() {
-		if(this.__array != null) {
-			return this.__array.toString();
-		} else {
-			return null;
-		}
-	}
-	,unshift: function(x) {
-		if(!this.fixed) {
-			this.__array.unshift(x);
-		}
-	}
-	,get_length: function() {
-		return this.__array.length;
-	}
-	,set_length: function(value) {
-		if(!this.fixed) {
-			var currentLength = this.__array.length;
-			if(value < 0) {
-				value = 0;
-			}
-			if(value > currentLength) {
-				var _g = currentLength;
-				var _g1 = value;
-				while(_g < _g1) {
-					var i = _g++;
-					this.__array.push(null);
-				}
-			} else {
-				while(this.__array.length > value) this.__array.pop();
-			}
-		}
-		return this.__array.length;
-	}
-	,__class__: openfl__$Vector_ObjectVector
-	,__properties__: {set_length:"set_length",get_length:"get_length"}
 };
 var lime_utils_ObjectPool = function(create,clean,size) {
 	this.__pool = new haxe_ds_ObjectMap();
@@ -1855,6 +1531,20 @@ lime_utils_ObjectPool.prototype = {
 	}
 	,__class__: lime_utils_ObjectPool
 	,__properties__: {set_size:"set_size",get_size:"get_size"}
+};
+var haxe_IMap = function() { };
+$hxClasses["haxe.IMap"] = haxe_IMap;
+haxe_IMap.__name__ = "haxe.IMap";
+haxe_IMap.__isInterface__ = true;
+haxe_IMap.prototype = {
+	get: null
+	,set: null
+	,exists: null
+	,remove: null
+	,keys: null
+	,iterator: null
+	,keyValueIterator: null
+	,__class__: haxe_IMap
 };
 var haxe_ds_ObjectMap = function() {
 	this.h = { __keys__ : { }};
@@ -5048,9 +4738,9 @@ var zygame_core_Start = function(HDWidth,HDHeight,isDebug) {
 	this.isDebug = isDebug;
 	this.updates = openfl_Vector.toObjectVector(null);
 	zygame_core_Start.current = this;
-	this.log("[zygameui] build time:","2021-03-11 15:50:35");
+	this.log("[zygameui] build time:","2021-03-15 19:15:07");
 	this.log("[zygameui] channel=" + zygame_utils_Lib.getChannel() + " render=" + zygame_utils_Lib.getRenderMode());
-	var defines = JSON.parse("{\"js\":\"1\",\"utf16\":\"1\",\"no-compilation\":\"1\",\"hscript\":\"2.4.0\",\"lime_html5\":\"1\",\"hxargs\":\"3.0.2\",\"source-header\":\"Generated by Haxe 4.1.5\",\"haxe4\":\"1\",\"haxe_ver\":\"4.105\",\"lime_webgl\":\"1\",\"true\":\"1\",\"lime-webgl\":\"1\",\"js_es\":\"5\",\"haxe\":\"4.1.5\",\"openfl_disable_graphics_upscaling\":\"1\",\"target.name\":\"js\",\"lime-canvas\":\"1\",\"castle\":\"1.6.1\",\"openfl-disable-graphics-upscaling\":\"1\",\"lime-dom\":\"1\",\"disable_res\":\"1\",\"lime_canvas\":\"1\",\"js_es5\":\"1\",\"lime_dom\":\"1\",\"openfl-html5\":\"1\",\"no_compilation\":\"1\",\"lime\":\"7.7.6\",\"feathersui\":\"1.0.0-beta.2\",\"dce\":\"std\",\"haxe3\":\"1\",\"target.utf16\":\"true\",\"spine_hx\":\"3.6.0\",\"lime-html5\":\"1\",\"js-es5\":\"1\",\"spine-hx\":\"3.6.0\",\"tweenxcore\":\"1.0.4\",\"lime_howlerjs\":\"1\",\"differ\":\"1.3.0\",\"gl_stats\":\"1\",\"openfl_html5\":\"1\",\"openfl\":\"8.9.8\",\"web\":\"1\",\"html5\":\"1\",\"howlerjs\":\"1\",\"actuate\":\"1.8.9\",\"zygameui\":\"10.0.8\",\"tools\":\"7.7.6\",\"lime-howlerjs\":\"1\",\"target.unicode\":\"true\",\"zygame\":\"1\"}");
+	var defines = JSON.parse("{\"js\":\"1\",\"utf16\":\"1\",\"no-compilation\":\"1\",\"hscript\":\"2.4.0\",\"lime_html5\":\"1\",\"hxargs\":\"3.0.2\",\"source-header\":\"Generated by Haxe 4.1.5\",\"haxe4\":\"1\",\"haxe_ver\":\"4.105\",\"lime_webgl\":\"1\",\"true\":\"1\",\"lime-webgl\":\"1\",\"js_es\":\"5\",\"haxe\":\"4.1.5\",\"openfl_disable_graphics_upscaling\":\"1\",\"target.name\":\"js\",\"lime-canvas\":\"1\",\"castle\":\"1.6.1\",\"openfl-disable-graphics-upscaling\":\"1\",\"lime-dom\":\"1\",\"disable_res\":\"1\",\"lime_canvas\":\"1\",\"js_es5\":\"1\",\"lime_dom\":\"1\",\"openfl-html5\":\"1\",\"no_compilation\":\"1\",\"lime\":\"7.7.6\",\"feathersui\":\"1.0.0-beta.2\",\"dce\":\"std\",\"haxe3\":\"1\",\"target.utf16\":\"true\",\"spine_hx\":\"3.8.1\",\"lime-html5\":\"1\",\"js-es5\":\"1\",\"spine-hx\":\"3.8.1\",\"tweenxcore\":\"1.0.4\",\"spine38\":\"1\",\"lime_howlerjs\":\"1\",\"differ\":\"1.3.0\",\"spine3.8\":\"1\",\"gl_stats\":\"1\",\"openfl_html5\":\"1\",\"openfl\":\"8.9.8\",\"web\":\"1\",\"html5\":\"1\",\"howlerjs\":\"1\",\"actuate\":\"1.8.9\",\"zygameui\":\"10.1.0\",\"tools\":\"7.7.6\",\"lime-howlerjs\":\"1\",\"target.unicode\":\"true\",\"zygame\":\"1\"}");
 	this.log(defines);
 	var keys = Reflect.fields(defines);
 	var _g = 0;
@@ -5504,17 +5194,17 @@ UIStart.prototype = $extend(zygame_core_Start.prototype,{
 				tmp1 = false;
 			}
 			if(tmp1) {
-				var this11 = this._project.xmlFiles;
+				var this2 = this._project.xmlFiles;
 				if(item1.nodeType != Xml.Element) {
 					throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
 				}
-				if(Object.prototype.hasOwnProperty.call(this11.h,item1.nodeName)) {
-					var this12 = this._project.xmlDatas;
-					var this13 = this._project.xmlFiles;
+				if(Object.prototype.hasOwnProperty.call(this2.h,item1.nodeName)) {
+					var this3 = this._project.xmlDatas;
+					var this4 = this._project.xmlFiles;
 					if(item1.nodeType != Xml.Element) {
 						throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
 					}
-					var childXmlContent = this12.h[this13.h[item1.nodeName]];
+					var childXmlContent = this3.h[this4.h[item1.nodeName]];
 					var tmp2 = haxe_Log.trace;
 					if(item1.nodeType != Xml.Element) {
 						throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
@@ -5752,6 +5442,7 @@ Reflect.field = function(o,field) {
 	try {
 		return o[field];
 	} catch( _g ) {
+		haxe_NativeStackTrace.lastError = _g;
 		return null;
 	}
 };
@@ -6132,6 +5823,7 @@ Type.enumEq = function(a,b) {
 			}
 		}
 	} catch( _g ) {
+		haxe_NativeStackTrace.lastError = _g;
 		return false;
 	}
 	return true;
@@ -8541,6 +8233,7 @@ haxe_ds_BalancedTree.prototype = {
 			this.root = this.removeLoop(key,this.root);
 			return true;
 		} catch( _g ) {
+			haxe_NativeStackTrace.lastError = _g;
 			if(typeof(haxe_Exception.caught(_g).unwrap()) == "string") {
 				return false;
 			} else {
@@ -8834,6 +8527,85 @@ haxe_ds__$List_ListIterator.prototype = {
 	}
 	,__class__: haxe_ds__$List_ListIterator
 };
+var haxe_ds_StringMap = function() {
+	this.h = Object.create(null);
+};
+$hxClasses["haxe.ds.StringMap"] = haxe_ds_StringMap;
+haxe_ds_StringMap.__name__ = "haxe.ds.StringMap";
+haxe_ds_StringMap.__interfaces__ = [haxe_IMap];
+haxe_ds_StringMap.keysIterator = function(h) {
+	var keys = Object.keys(h);
+	var len = keys.length;
+	var idx = 0;
+	return { hasNext : function() {
+		return idx < len;
+	}, next : function() {
+		idx += 1;
+		return keys[idx - 1];
+	}};
+};
+haxe_ds_StringMap.valueIterator = function(h) {
+	var keys = Object.keys(h);
+	var len = keys.length;
+	var idx = 0;
+	return { hasNext : function() {
+		return idx < len;
+	}, next : function() {
+		idx += 1;
+		return h[keys[idx - 1]];
+	}};
+};
+haxe_ds_StringMap.kvIterator = function(h) {
+	var keys = Object.keys(h);
+	var len = keys.length;
+	var idx = 0;
+	return { hasNext : function() {
+		return idx < len;
+	}, next : function() {
+		idx += 1;
+		var k = keys[idx - 1];
+		return { key : k, value : h[k]};
+	}};
+};
+haxe_ds_StringMap.stringify = function(h) {
+	var s = "{";
+	var first = true;
+	for (var key in h) {
+		if (first) first = false; else s += ',';
+		s += key + ' => ' + Std.string(h[key]);
+	}
+	return s + "}";
+};
+haxe_ds_StringMap.prototype = {
+	h: null
+	,exists: function(key) {
+		return Object.prototype.hasOwnProperty.call(this.h,key);
+	}
+	,get: function(key) {
+		return this.h[key];
+	}
+	,set: function(key,value) {
+		this.h[key] = value;
+	}
+	,remove: function(key) {
+		if(Object.prototype.hasOwnProperty.call(this.h,key)) {
+			delete(this.h[key]);
+			return true;
+		} else {
+			return false;
+		}
+	}
+	,keys: function() {
+		return haxe_ds_StringMap.keysIterator(this.h);
+	}
+	,iterator: function() {
+		return haxe_ds_StringMap.valueIterator(this.h);
+	}
+	,keyValueIterator: function() {
+		return haxe_ds_StringMap.kvIterator(this.h);
+	}
+	,__class__: haxe_ds_StringMap
+};
 var haxe_io_BytesBuffer = function() {
 	this.pos = 0;
 	this.size = 0;
@@ -8922,6 +8694,7 @@ haxe_io_Input.prototype = {
 				--k;
 			}
 		} catch( _g ) {
+			haxe_NativeStackTrace.lastError = _g;
 			if(!((haxe_Exception.caught(_g).unwrap()) instanceof haxe_io_Eof)) {
 				throw _g;
 			}
@@ -10747,6 +10520,7 @@ hscript_Interp.prototype = {
 		try {
 			return this.expr(e);
 		} catch( _g ) {
+			haxe_NativeStackTrace.lastError = _g;
 			var _g1 = haxe_Exception.caught(_g).unwrap();
 			if(js_Boot.__instanceof(_g1,hscript__$Interp_Stop)) {
 				var e = _g1;
@@ -10997,6 +10771,7 @@ hscript_Interp.prototype = {
 					try {
 						r = me.exprReturn(fexpr);
 					} catch( _g ) {
+						haxe_NativeStackTrace.lastError = _g;
 						var e = haxe_Exception.caught(_g).unwrap();
 						me.locals = old;
 						me.depth = depth;
@@ -11139,6 +10914,7 @@ hscript_Interp.prototype = {
 				this.inTry = oldTry;
 				return v;
 			} catch( _g ) {
+				haxe_NativeStackTrace.lastError = _g;
 				var _g1 = haxe_Exception.caught(_g).unwrap();
 				if(js_Boot.__instanceof(_g1,hscript__$Interp_Stop)) {
 					var err = _g1;
@@ -11227,6 +11003,7 @@ hscript_Interp.prototype = {
 			try {
 				this.expr(e);
 			} catch( _g ) {
+				haxe_NativeStackTrace.lastError = _g;
 				var _g1 = haxe_Exception.caught(_g).unwrap();
 				if(js_Boot.__instanceof(_g1,hscript__$Interp_Stop)) {
 					var err = _g1;
@@ -11253,6 +11030,7 @@ hscript_Interp.prototype = {
 		_hx_loop1: while(this.expr(econd) == true) try {
 			this.expr(e);
 		} catch( _g ) {
+			haxe_NativeStackTrace.lastError = _g;
 			var _g1 = haxe_Exception.caught(_g).unwrap();
 			if(js_Boot.__instanceof(_g1,hscript__$Interp_Stop)) {
 				var err = _g1;
@@ -11274,6 +11052,7 @@ hscript_Interp.prototype = {
 		try {
 			v = $getIterator(v);
 		} catch( _g ) {
+			haxe_NativeStackTrace.lastError = _g;
 		}
 		if(v.hasNext == null || v.next == null) {
 			var e = hscript_Error.EInvalidIterator(v);
@@ -11292,6 +11071,7 @@ hscript_Interp.prototype = {
 			try {
 				this.expr(e);
 			} catch( _g ) {
+				haxe_NativeStackTrace.lastError = _g;
 				var _g1 = haxe_Exception.caught(_g).unwrap();
 				if(js_Boot.__instanceof(_g1,hscript__$Interp_Stop)) {
 					var err = _g1;
@@ -14245,6 +14025,7 @@ js_Boot.__string_rec = function(o,s) {
 		try {
 			tostr = o.toString;
 		} catch( _g ) {
+			haxe_NativeStackTrace.lastError = _g;
 			return "???";
 		}
 		if(tostr != null && tostr != Object.toString && typeof(tostr) == "function") {
@@ -14392,6 +14173,7 @@ js_Browser.getLocalStorage = function() {
 		}
 		return s;
 	} catch( _g ) {
+		haxe_NativeStackTrace.lastError = _g;
 		return null;
 	}
 };
@@ -20030,6 +19812,7 @@ var lime_app_Future = function(work,async) {
 				this.value = work();
 				this.isComplete = true;
 			} catch( _g ) {
+				haxe_NativeStackTrace.lastError = _g;
 				var e = haxe_Exception.caught(_g).unwrap();
 				this.error = e;
 				this.isError = true;
@@ -20172,6 +19955,7 @@ lime_app__$Future_FutureWork.threadPool_doWork = function(state) {
 		var result = state.work();
 		lime_app__$Future_FutureWork.threadPool.sendComplete({ promise : state.promise, result : result});
 	} catch( _g ) {
+		haxe_NativeStackTrace.lastError = _g;
 		var e = haxe_Exception.caught(_g).unwrap();
 		lime_app__$Future_FutureWork.threadPool.sendError({ promise : state.promise, error : e});
 	}
@@ -27151,6 +26935,7 @@ var lime_media_AudioContext = function(type) {
 				this.web = new window.AudioContext ();
 				this.type = "web";
 			} catch( _g ) {
+				haxe_NativeStackTrace.lastError = _g;
 			}
 		}
 		if(this.web == null && type != "web") {
@@ -30473,7 +30258,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 683784;
+	this.version = 299043;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = "lime.utils.AssetCache";
@@ -32868,6 +32653,37 @@ openfl_Lib.get_current = function() {
 	}
 	return openfl__$internal_Lib.current;
 };
+var openfl__$Vector_IVector = function() { };
+$hxClasses["openfl._Vector.IVector"] = openfl__$Vector_IVector;
+openfl__$Vector_IVector.__name__ = "openfl._Vector.IVector";
+openfl__$Vector_IVector.__isInterface__ = true;
+openfl__$Vector_IVector.prototype = {
+	get_length: null
+	,set_length: null
+	,fixed: null
+	,concat: null
+	,copy: null
+	,filter: null
+	,get: null
+	,indexOf: null
+	,insertAt: null
+	,iterator: null
+	,join: null
+	,lastIndexOf: null
+	,pop: null
+	,push: null
+	,removeAt: null
+	,reverse: null
+	,set: null
+	,shift: null
+	,slice: null
+	,sort: null
+	,splice: null
+	,toString: null
+	,unshift: null
+	,__class__: openfl__$Vector_IVector
+	,__properties__: {set_length:"set_length",get_length:"get_length"}
+};
 var openfl__$Vector_BoolVector = function(length,fixed,array) {
 	if(fixed == null) {
 		fixed = false;
@@ -33629,6 +33445,206 @@ openfl__$Vector_IntVector.prototype = {
 		return this.__array.length;
 	}
 	,__class__: openfl__$Vector_IntVector
+	,__properties__: {set_length:"set_length",get_length:"get_length"}
+};
+var openfl__$Vector_ObjectVector = function(length,fixed,array,forceCopy) {
+	if(forceCopy == null) {
+		forceCopy = false;
+	}
+	if(fixed == null) {
+		fixed = false;
+	}
+	if(length == null) {
+		length = 0;
+	}
+	if(forceCopy) {
+		this.__array = [];
+		if(array != null) {
+			var _g = 0;
+			var _g1 = array.length;
+			while(_g < _g1) {
+				var i = _g++;
+				this.__array[i] = array[i];
+			}
+		}
+	} else {
+		if(array == null) {
+			array = [];
+		}
+		this.__array = array;
+	}
+	if(length > 0) {
+		this.set_length(length);
+	}
+	this.fixed = fixed;
+};
+$hxClasses["openfl._Vector.ObjectVector"] = openfl__$Vector_ObjectVector;
+openfl__$Vector_ObjectVector.__name__ = "openfl._Vector.ObjectVector";
+openfl__$Vector_ObjectVector.__interfaces__ = [openfl__$Vector_IVector];
+openfl__$Vector_ObjectVector.prototype = {
+	fixed: null
+	,__array: null
+	,concat: function(a) {
+		if(a == null) {
+			return new openfl__$Vector_ObjectVector(0,false,this.__array.slice());
+		} else {
+			var other = a;
+			if(other.__array.length > 0) {
+				return new openfl__$Vector_ObjectVector(0,false,this.__array.concat(other.__array));
+			} else {
+				return new openfl__$Vector_ObjectVector(0,false,this.__array.slice());
+			}
+		}
+	}
+	,copy: function() {
+		return new openfl__$Vector_ObjectVector(0,this.fixed,this.__array.slice());
+	}
+	,filter: function(callback) {
+		var tmp = this.fixed;
+		var _g = [];
+		var _g1 = 0;
+		var _g2 = this.__array;
+		while(_g1 < _g2.length) {
+			var v = _g2[_g1];
+			++_g1;
+			if(callback(v)) {
+				_g.push(v);
+			}
+		}
+		return new openfl__$Vector_ObjectVector(0,tmp,_g);
+	}
+	,get: function(index) {
+		return this.__array[index];
+	}
+	,indexOf: function(x,from) {
+		if(from == null) {
+			from = 0;
+		}
+		var _g = from;
+		var _g1 = this.__array.length;
+		while(_g < _g1) {
+			var i = _g++;
+			if(this.__array[i] == x) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	,insertAt: function(index,element) {
+		if(!this.fixed || index < this.__array.length) {
+			this.__array.splice(index,0,element);
+		}
+	}
+	,iterator: function() {
+		return new haxe_iterators_ArrayIterator(this.__array);
+	}
+	,join: function(sep) {
+		if(sep == null) {
+			sep = ",";
+		}
+		return this.__array.join(sep);
+	}
+	,lastIndexOf: function(x,from) {
+		var i = from == null || from >= this.__array.length ? this.__array.length - 1 : from;
+		while(i >= 0) {
+			if(this.__array[i] == x) {
+				return i;
+			}
+			--i;
+		}
+		return -1;
+	}
+	,pop: function() {
+		if(!this.fixed) {
+			return this.__array.pop();
+		} else {
+			return null;
+		}
+	}
+	,push: function(x) {
+		if(!this.fixed) {
+			return this.__array.push(x);
+		} else {
+			return this.__array.length;
+		}
+	}
+	,removeAt: function(index) {
+		if(!this.fixed || index < this.__array.length) {
+			return this.__array.splice(index,1)[0];
+		}
+		return null;
+	}
+	,reverse: function() {
+		this.__array.reverse();
+		return this;
+	}
+	,set: function(index,value) {
+		if(!this.fixed || index < this.__array.length) {
+			return this.__array[index] = value;
+		} else {
+			return value;
+		}
+	}
+	,shift: function() {
+		if(!this.fixed) {
+			return this.__array.shift();
+		} else {
+			return null;
+		}
+	}
+	,slice: function(startIndex,endIndex) {
+		if(startIndex == null) {
+			startIndex = 0;
+		}
+		if(endIndex == null) {
+			endIndex = 16777215;
+		}
+		return new openfl__$Vector_ObjectVector(0,false,this.__array.slice(startIndex,endIndex));
+	}
+	,sort: function(f) {
+		this.__array.sort(f);
+	}
+	,splice: function(pos,len) {
+		return new openfl__$Vector_ObjectVector(0,false,this.__array.splice(pos,len));
+	}
+	,toJSON: function() {
+		return this.__array;
+	}
+	,toString: function() {
+		if(this.__array != null) {
+			return this.__array.toString();
+		} else {
+			return null;
+		}
+	}
+	,unshift: function(x) {
+		if(!this.fixed) {
+			this.__array.unshift(x);
+		}
+	}
+	,get_length: function() {
+		return this.__array.length;
+	}
+	,set_length: function(value) {
+		if(!this.fixed) {
+			var currentLength = this.__array.length;
+			if(value < 0) {
+				value = 0;
+			}
+			if(value > currentLength) {
+				var _g = currentLength;
+				var _g1 = value;
+				while(_g < _g1) {
+					var i = _g++;
+					this.__array.push(null);
+				}
+			} else {
+				while(this.__array.length > value) this.__array.pop();
+			}
+		}
+		return this.__array.length;
+	}
+	,__class__: openfl__$Vector_ObjectVector
 	,__properties__: {set_length:"set_length",get_length:"get_length"}
 };
 var openfl__$internal_Lib = function() { };
@@ -61334,6 +61350,7 @@ openfl_display_MovieClip.prototype = $extend(openfl_display_Sprite.prototype,{
 					})(interp,program);
 					this.__frameScripts.h[frame] = script;
 				} catch( _g2 ) {
+					haxe_NativeStackTrace.lastError = _g2;
 					if(this.__symbol.className != null) {
 						lime_utils_Log.warn("Unable to evaluate frame script source for symbol \"" + this.__symbol.className + "\" frame " + frame + "\n" + frameData.scriptSource,{ fileName : "openfl/display/MovieClip.hx", lineNumber : 675, className : "openfl.display.MovieClip", methodName : "__fromSymbol"});
 					} else {
@@ -63742,6 +63759,7 @@ openfl_display_Stage.prototype = $extend(openfl_display_DisplayObjectContainer.p
 					try {
 						dispatcher.__dispatch(event);
 					} catch( _g1 ) {
+						haxe_NativeStackTrace.lastError = _g1;
 						var e = haxe_Exception.caught(_g1).unwrap();
 						this.__handleError(e);
 					}
@@ -63787,6 +63805,7 @@ openfl_display_Stage.prototype = $extend(openfl_display_DisplayObjectContainer.p
 		try {
 			return openfl_display_DisplayObjectContainer.prototype.__dispatchEvent.call(this,event);
 		} catch( _g ) {
+			haxe_NativeStackTrace.lastError = _g;
 			var e = haxe_Exception.caught(_g).unwrap();
 			this.__handleError(e);
 			return false;
@@ -63837,6 +63856,7 @@ openfl_display_Stage.prototype = $extend(openfl_display_DisplayObjectContainer.p
 				}
 			}
 		} catch( _g ) {
+			haxe_NativeStackTrace.lastError = _g;
 			var e = haxe_Exception.caught(_g).unwrap();
 			this.__handleError(e);
 		}
@@ -63845,6 +63865,7 @@ openfl_display_Stage.prototype = $extend(openfl_display_DisplayObjectContainer.p
 		try {
 			return target.__dispatchEvent(event);
 		} catch( _g ) {
+			haxe_NativeStackTrace.lastError = _g;
 			var e = haxe_Exception.caught(_g).unwrap();
 			this.__handleError(e);
 			return false;
@@ -63898,6 +63919,7 @@ openfl_display_Stage.prototype = $extend(openfl_display_DisplayObjectContainer.p
 		try {
 			openfl_Lib.get_current().__loaderInfo.uncaughtErrorEvents.dispatchEvent(event);
 		} catch( _g ) {
+			haxe_NativeStackTrace.lastError = _g;
 		}
 		if(!event.__preventDefault) {
 			try {
@@ -63907,6 +63929,7 @@ openfl_display_Stage.prototype = $extend(openfl_display_DisplayObjectContainer.p
 					e.stack = exc.stack;
 				}
 			} catch( _g ) {
+				haxe_NativeStackTrace.lastError = _g;
 			}
 			throw e;
 		}
@@ -64557,6 +64580,7 @@ openfl_display_Stage.prototype = $extend(openfl_display_DisplayObjectContainer.p
 		try {
 			openfl_ui_GameInput.__onGamepadAxisMove(gamepad,axis,value);
 		} catch( _g ) {
+			haxe_NativeStackTrace.lastError = _g;
 			var e = haxe_Exception.caught(_g).unwrap();
 			this.__handleError(e);
 		}
@@ -64565,6 +64589,7 @@ openfl_display_Stage.prototype = $extend(openfl_display_DisplayObjectContainer.p
 		try {
 			openfl_ui_GameInput.__onGamepadButtonDown(gamepad,button);
 		} catch( _g ) {
+			haxe_NativeStackTrace.lastError = _g;
 			var e = haxe_Exception.caught(_g).unwrap();
 			this.__handleError(e);
 		}
@@ -64573,6 +64598,7 @@ openfl_display_Stage.prototype = $extend(openfl_display_DisplayObjectContainer.p
 		try {
 			openfl_ui_GameInput.__onGamepadButtonUp(gamepad,button);
 		} catch( _g ) {
+			haxe_NativeStackTrace.lastError = _g;
 			var e = haxe_Exception.caught(_g).unwrap();
 			this.__handleError(e);
 		}
@@ -64581,6 +64607,7 @@ openfl_display_Stage.prototype = $extend(openfl_display_DisplayObjectContainer.p
 		try {
 			openfl_ui_GameInput.__onGamepadConnect(gamepad);
 		} catch( _g ) {
+			haxe_NativeStackTrace.lastError = _g;
 			var e = haxe_Exception.caught(_g).unwrap();
 			this.__handleError(e);
 		}
@@ -64613,6 +64640,7 @@ openfl_display_Stage.prototype = $extend(openfl_display_DisplayObjectContainer.p
 		try {
 			openfl_ui_GameInput.__onGamepadDisconnect(gamepad);
 		} catch( _g ) {
+			haxe_NativeStackTrace.lastError = _g;
 			var e = haxe_Exception.caught(_g).unwrap();
 			this.__handleError(e);
 		}
@@ -67161,6 +67189,7 @@ var openfl_display_Window = function(application,attributes) {
 		try {
 			this.stage.get_loaderInfo().parameters = attributes.parameters;
 		} catch( _g ) {
+			haxe_NativeStackTrace.lastError = _g;
 		}
 	}
 	if(Object.prototype.hasOwnProperty.call(attributes,"resizable") && !attributes.resizable) {
@@ -74640,6 +74669,7 @@ openfl_net_NetStream.prototype = $extend(openfl_events_EventDispatcher.prototype
 				var handler = this.client.onPlayStatus;
 				handler({ code : code, duration : this.__video.duration, position : this.__video.currentTime, speed : this.__video.playbackRate, start : this.__video.startTime});
 			} catch( _g ) {
+				haxe_NativeStackTrace.lastError = _g;
 			}
 		}
 	}
@@ -74670,6 +74700,7 @@ openfl_net_NetStream.prototype = $extend(openfl_events_EventDispatcher.prototype
 				var handler = this.client.onMetaData;
 				handler({ width : this.__video.videoWidth, height : this.__video.videoHeight, duration : this.__video.duration});
 			} catch( _g ) {
+				haxe_NativeStackTrace.lastError = _g;
 			}
 		}
 	}
@@ -74791,6 +74822,7 @@ openfl_net_SharedObject.getLocal = function(name,localPath,secure) {
 				encodedData = storage.getItem(localPath + ":" + name);
 			}
 		} catch( _g ) {
+			haxe_NativeStackTrace.lastError = _g;
 		}
 		var sharedObject = new openfl_net_SharedObject();
 		sharedObject.data = { };
@@ -74802,6 +74834,7 @@ openfl_net_SharedObject.getLocal = function(name,localPath,secure) {
 				unserializer.setResolver({ resolveEnum : Type.resolveEnum, resolveClass : openfl_net_SharedObject.__resolveClass});
 				sharedObject.data = unserializer.unserialize();
 			} catch( _g ) {
+				haxe_NativeStackTrace.lastError = _g;
 			}
 		}
 		openfl_net_SharedObject.__sharedObjects.h[id] = sharedObject;
@@ -74887,6 +74920,7 @@ openfl_net_SharedObject.prototype = $extend(openfl_events_EventDispatcher.protot
 				storage.removeItem(this.__localPath + ":" + this.__name);
 			}
 		} catch( _g ) {
+			haxe_NativeStackTrace.lastError = _g;
 		}
 	}
 	,close: function() {
@@ -74909,6 +74943,7 @@ openfl_net_SharedObject.prototype = $extend(openfl_events_EventDispatcher.protot
 				storage.setItem(this.__localPath + ":" + this.__name,encodedData);
 			}
 		} catch( _g ) {
+			haxe_NativeStackTrace.lastError = _g;
 			return 1;
 		}
 		return 0;
@@ -74928,6 +74963,7 @@ openfl_net_SharedObject.prototype = $extend(openfl_events_EventDispatcher.protot
 			var d = haxe_Serializer.run(this.data);
 			return haxe_io_Bytes.ofString(d).length;
 		} catch( _g ) {
+			haxe_NativeStackTrace.lastError = _g;
 			return 0;
 		}
 	}
@@ -76066,6 +76102,7 @@ openfl_text_TextField.prototype = $extend(openfl_display_InteractiveObject.proto
 					rect.setTo(x,group1.offsetY,lastPosition,group1.ascent + group1.descent);
 					return true;
 				} catch( _g2 ) {
+					haxe_NativeStackTrace.lastError = _g2;
 				}
 			}
 		}
@@ -81198,16 +81235,14 @@ haxe_lang_Iterable.prototype = {
 };
 var spine_Animation = function(name,timelines,duration) {
 	this.duration = 0;
+	this.timelineIDs = new haxe_ds_IntMap();
 	this.hashCode = Math.random() * 99999999 | 0;
 	if(name == null) {
 		throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("name cannot be null."));
 	}
-	if(timelines == null) {
-		throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("timelines cannot be null."));
-	}
 	this.name = name;
-	this.timelines = timelines;
 	this.duration = duration;
+	this.setTimelines(timelines);
 };
 $hxClasses["spine.Animation"] = spine_Animation;
 spine_Animation.__name__ = "spine.Animation";
@@ -81264,9 +81299,43 @@ spine_Animation.prototype = {
 	hashCode: null
 	,name: null
 	,timelines: null
+	,timelineIDs: null
 	,duration: null
 	,getTimelines: function() {
 		return this.timelines;
+	}
+	,setTimelines: function(timelines) {
+		if(timelines == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("timelines cannot be null."));
+		}
+		this.timelines = timelines;
+		var this1 = this.timelineIDs;
+		var keys = [];
+		var key = this1.keys();
+		while(key.hasNext()) {
+			var key1 = key.next();
+			keys.push(key1);
+		}
+		var _g = 0;
+		while(_g < keys.length) {
+			var key = keys[_g];
+			++_g;
+			this1.remove(key);
+		}
+		var _g = 0;
+		var _g1 = timelines;
+		while(_g < _g1.length) {
+			var timeline = _g1[_g];
+			++_g;
+			var this1 = this.timelineIDs;
+			var val = timeline.getPropertyId();
+			if(!this1.h.hasOwnProperty(val)) {
+				this1.h[val] = true;
+			}
+		}
+	}
+	,hasTimeline: function(id) {
+		return this.timelineIDs.h.hasOwnProperty(id);
 	}
 	,getDuration: function() {
 		return this.duration;
@@ -81274,7 +81343,7 @@ spine_Animation.prototype = {
 	,setDuration: function(duration) {
 		this.duration = duration;
 	}
-	,apply: function(skeleton,lastTime,time,loop,events,alpha,pose,direction) {
+	,apply: function(skeleton,lastTime,time,loop,events,alpha,blend,direction) {
 		if(skeleton == null) {
 			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("skeleton cannot be null."));
 		}
@@ -81288,7 +81357,7 @@ spine_Animation.prototype = {
 		var i = 0;
 		var n = timelines.length;
 		while(i < n) {
-			timelines[i].apply(skeleton,lastTime,time,events,alpha,pose,direction);
+			timelines[i].apply(skeleton,lastTime,time,events,alpha,blend,direction);
 			++i;
 		}
 	}
@@ -81308,6 +81377,26 @@ spine_Timeline.prototype = {
 	apply: null
 	,getPropertyId: null
 	,__class__: spine_Timeline
+};
+var spine_BoneTimeline = function() { };
+$hxClasses["spine.BoneTimeline"] = spine_BoneTimeline;
+spine_BoneTimeline.__name__ = "spine.BoneTimeline";
+spine_BoneTimeline.__isInterface__ = true;
+spine_BoneTimeline.__interfaces__ = [spine_Timeline];
+spine_BoneTimeline.prototype = {
+	setBoneIndex: null
+	,getBoneIndex: null
+	,__class__: spine_BoneTimeline
+};
+var spine_SlotTimeline = function() { };
+$hxClasses["spine.SlotTimeline"] = spine_SlotTimeline;
+spine_SlotTimeline.__name__ = "spine.SlotTimeline";
+spine_SlotTimeline.__isInterface__ = true;
+spine_SlotTimeline.__interfaces__ = [spine_Timeline];
+spine_SlotTimeline.prototype = {
+	setSlotIndex: null
+	,getSlotIndex: null
+	,__class__: spine_SlotTimeline
 };
 var spine_CurveTimeline = function(frameCount) {
 	if(frameCount <= 0) {
@@ -81341,7 +81430,7 @@ spine_CurveTimeline.prototype = {
 	getPropertyId: function() {
 		return 0;
 	}
-	,apply: function(skeleton,lastTime,time,events,alpha,pose,direction) {
+	,apply: function(skeleton,lastTime,time,events,alpha,blend,direction) {
 	}
 	,curves: null
 	,getFrameCount: function() {
@@ -81456,6 +81545,7 @@ var spine_RotateTimeline = function(frameCount) {
 };
 $hxClasses["spine.RotateTimeline"] = spine_RotateTimeline;
 spine_RotateTimeline.__name__ = "spine.RotateTimeline";
+spine_RotateTimeline.__interfaces__ = [spine_BoneTimeline];
 spine_RotateTimeline.__super__ = spine_CurveTimeline;
 spine_RotateTimeline.prototype = $extend(spine_CurveTimeline.prototype,{
 	boneIndex: null
@@ -81480,32 +81570,47 @@ spine_RotateTimeline.prototype = $extend(spine_CurveTimeline.prototype,{
 		this.frames[frameIndex] = time;
 		this.frames[frameIndex + 1] = degrees;
 	}
-	,apply: function(skeleton,lastTime,time,events,alpha,pose,direction) {
+	,apply: function(skeleton,lastTime,time,events,alpha,blend,direction) {
 		var bone = skeleton.bones[this.boneIndex];
+		if(!bone.active) {
+			return;
+		}
 		var frames = this.frames;
 		if(time < frames[0]) {
 			var _continueAfterSwitch0 = false;
 			while(true) {
-				var _switchCond0 = pose;
+				var _switchCond0 = blend;
 				if(_switchCond0 == 0) {
 					bone.rotation = bone.data.rotation;
 					return;
 				} else if(_switchCond0 == 1) {
 					var r = bone.data.rotation - bone.rotation;
-					r -= (16384 - (16384.499999999996 - r / 360 | 0)) * 360;
-					bone.rotation += r * alpha;
+					bone.rotation += (r - (16384 - (16384.499999999996 - r / 360 | 0)) * 360) * alpha;
 				}
 				break;
 			}
 			return;
 		}
 		if(time >= frames[frames.length - 2]) {
-			if(pose == 0) {
-				bone.rotation = bone.data.rotation + frames[frames.length + (-1)] * alpha;
-			} else {
-				var r = bone.data.rotation + frames[frames.length + (-1)] - bone.rotation;
-				r -= (16384 - (16384.499999999996 - r / 360 | 0)) * 360;
-				bone.rotation += r * alpha;
+			var r = frames[frames.length + (-1)];
+			var _continueAfterSwitch1 = false;
+			while(true) {
+				var _switchCond1 = blend;
+				if(_switchCond1 == 0) {
+					bone.rotation = bone.data.rotation + r * alpha;
+					break;
+				} else if(_switchCond1 == 1) {
+					r += bone.data.rotation - bone.rotation;
+					r -= (16384 - (16384.499999999996 - r / 360 | 0)) * 360;
+					bone.rotation += r * alpha;
+				} else if(_switchCond1 == 2) {
+					r += bone.data.rotation - bone.rotation;
+					r -= (16384 - (16384.499999999996 - r / 360 | 0)) * 360;
+					bone.rotation += r * alpha;
+				} else if(_switchCond1 == 3) {
+					bone.rotation += r * alpha;
+				}
+				break;
 			}
 			return;
 		}
@@ -81514,15 +81619,23 @@ spine_RotateTimeline.prototype = $extend(spine_CurveTimeline.prototype,{
 		var frameTime = frames[frame];
 		var percent = this.getCurvePercent((frame >> 1) - 1,1 - (time - frameTime) / (frames[frame + (-2)] - frameTime));
 		var r = frames[frame + 1] - prevRotation;
-		r -= (16384 - (16384.499999999996 - r / 360 | 0)) * 360;
-		r = prevRotation + r * percent;
-		if(pose == 0) {
-			r -= (16384 - (16384.499999999996 - r / 360 | 0)) * 360;
-			bone.rotation = bone.data.rotation + r * alpha;
-		} else {
-			r = bone.data.rotation + r - bone.rotation;
-			r -= (16384 - (16384.499999999996 - r / 360 | 0)) * 360;
-			bone.rotation += r * alpha;
+		r = prevRotation + (r - (16384 - (16384.499999999996 - r / 360 | 0)) * 360) * percent;
+		var _continueAfterSwitch2 = false;
+		while(true) {
+			var _switchCond2 = blend;
+			if(_switchCond2 == 0) {
+				bone.rotation = bone.data.rotation + (r - (16384 - (16384.499999999996 - r / 360 | 0)) * 360) * alpha;
+				break;
+			} else if(_switchCond2 == 1) {
+				r += bone.data.rotation - bone.rotation;
+				bone.rotation += (r - (16384 - (16384.499999999996 - r / 360 | 0)) * 360) * alpha;
+			} else if(_switchCond2 == 2) {
+				r += bone.data.rotation - bone.rotation;
+				bone.rotation += (r - (16384 - (16384.499999999996 - r / 360 | 0)) * 360) * alpha;
+			} else if(_switchCond2 == 3) {
+				bone.rotation += (r - (16384 - (16384.499999999996 - r / 360 | 0)) * 360) * alpha;
+			}
+			break;
 		}
 	}
 	,__class__: spine_RotateTimeline
@@ -81553,6 +81666,7 @@ var spine_TranslateTimeline = function(frameCount) {
 };
 $hxClasses["spine.TranslateTimeline"] = spine_TranslateTimeline;
 spine_TranslateTimeline.__name__ = "spine.TranslateTimeline";
+spine_TranslateTimeline.__interfaces__ = [spine_BoneTimeline];
 spine_TranslateTimeline.__super__ = spine_CurveTimeline;
 spine_TranslateTimeline.prototype = $extend(spine_CurveTimeline.prototype,{
 	boneIndex: null
@@ -81578,18 +81692,21 @@ spine_TranslateTimeline.prototype = $extend(spine_CurveTimeline.prototype,{
 		this.frames[frameIndex + 1] = x;
 		this.frames[frameIndex + 2] = y;
 	}
-	,apply: function(skeleton,lastTime,time,events,alpha,pose,direction) {
+	,apply: function(skeleton,lastTime,time,events,alpha,blend,direction) {
 		var bone = skeleton.bones[this.boneIndex];
+		if(!bone.active) {
+			return;
+		}
 		var frames = this.frames;
 		if(time < frames[0]) {
-			var _continueAfterSwitch1 = false;
+			var _continueAfterSwitch3 = false;
 			while(true) {
-				var _switchCond1 = pose;
-				if(_switchCond1 == 0) {
+				var _switchCond3 = blend;
+				if(_switchCond3 == 0) {
 					bone.x = bone.data.x;
 					bone.y = bone.data.y;
 					return;
-				} else if(_switchCond1 == 1) {
+				} else if(_switchCond3 == 1) {
 					bone.x += (bone.data.x - bone.x) * alpha;
 					bone.y += (bone.data.y - bone.y) * alpha;
 				}
@@ -81611,12 +81728,26 @@ spine_TranslateTimeline.prototype = $extend(spine_CurveTimeline.prototype,{
 			x += (frames[frame + 1] - x) * percent;
 			y += (frames[frame + 2] - y) * percent;
 		}
-		if(pose == 0) {
-			bone.x = bone.data.x + x * alpha;
-			bone.y = bone.data.y + y * alpha;
-		} else {
-			bone.x += (bone.data.x + x - bone.x) * alpha;
-			bone.y += (bone.data.y + y - bone.y) * alpha;
+		var _continueAfterSwitch4 = false;
+		while(true) {
+			var _switchCond4 = blend;
+			if(_switchCond4 == 0) {
+				bone.x = bone.data.x + x * alpha;
+				bone.y = bone.data.y + y * alpha;
+				break;
+			} else if(_switchCond4 == 1) {
+				bone.x += (bone.data.x + x - bone.x) * alpha;
+				bone.y += (bone.data.y + y - bone.y) * alpha;
+				break;
+			} else if(_switchCond4 == 2) {
+				bone.x += (bone.data.x + x - bone.x) * alpha;
+				bone.y += (bone.data.y + y - bone.y) * alpha;
+				break;
+			} else if(_switchCond4 == 3) {
+				bone.x += x * alpha;
+				bone.y += y * alpha;
+			}
+			break;
 		}
 	}
 	,__class__: spine_TranslateTimeline
@@ -81631,18 +81762,21 @@ spine_ScaleTimeline.prototype = $extend(spine_TranslateTimeline.prototype,{
 	getPropertyId: function() {
 		return (2 << 24) + this.boneIndex;
 	}
-	,apply: function(skeleton,lastTime,time,events,alpha,pose,direction) {
+	,apply: function(skeleton,lastTime,time,events,alpha,blend,direction) {
 		var bone = skeleton.bones[this.boneIndex];
+		if(!bone.active) {
+			return;
+		}
 		var frames = this.frames;
 		if(time < frames[0]) {
-			var _continueAfterSwitch2 = false;
+			var _continueAfterSwitch5 = false;
 			while(true) {
-				var _switchCond2 = pose;
-				if(_switchCond2 == 0) {
+				var _switchCond5 = blend;
+				if(_switchCond5 == 0) {
 					bone.scaleX = bone.data.scaleX;
 					bone.scaleY = bone.data.scaleY;
 					return;
-				} else if(_switchCond2 == 1) {
+				} else if(_switchCond5 == 1) {
 					bone.scaleX += (bone.data.scaleX - bone.scaleX) * alpha;
 					bone.scaleY += (bone.data.scaleY - bone.scaleY) * alpha;
 				}
@@ -81665,27 +81799,77 @@ spine_ScaleTimeline.prototype = $extend(spine_TranslateTimeline.prototype,{
 			y = (y + (frames[frame + 2] - y) * percent) * bone.data.scaleY;
 		}
 		if(alpha == 1) {
-			bone.scaleX = x;
-			bone.scaleY = y;
+			if(blend == 3) {
+				bone.scaleX += x - bone.data.scaleX;
+				bone.scaleY += y - bone.data.scaleY;
+			} else {
+				bone.scaleX = x;
+				bone.scaleY = y;
+			}
 		} else {
 			var bx = 0;
 			var by = 0;
-			if(pose == 0) {
-				bx = bone.data.scaleX;
-				by = bone.data.scaleY;
-			} else {
-				bx = bone.scaleX;
-				by = bone.scaleY;
-			}
 			if(direction == 1) {
-				x = Math.abs(x) * (bx > 0 ? 1 : bx < 0 ? -1 : 0);
-				y = Math.abs(y) * (by > 0 ? 1 : by < 0 ? -1 : 0);
+				var _continueAfterSwitch6 = false;
+				while(true) {
+					var _switchCond6 = blend;
+					if(_switchCond6 == 0) {
+						bx = bone.data.scaleX;
+						by = bone.data.scaleY;
+						bone.scaleX = bx + (Math.abs(x) * (bx > 0 ? 1 : bx < 0 ? -1 : 0) - bx) * alpha;
+						bone.scaleY = by + (Math.abs(y) * (by > 0 ? 1 : by < 0 ? -1 : 0) - by) * alpha;
+						break;
+					} else if(_switchCond6 == 1) {
+						bx = bone.scaleX;
+						by = bone.scaleY;
+						bone.scaleX = bx + (Math.abs(x) * (bx > 0 ? 1 : bx < 0 ? -1 : 0) - bx) * alpha;
+						bone.scaleY = by + (Math.abs(y) * (by > 0 ? 1 : by < 0 ? -1 : 0) - by) * alpha;
+						break;
+					} else if(_switchCond6 == 2) {
+						bx = bone.scaleX;
+						by = bone.scaleY;
+						bone.scaleX = bx + (Math.abs(x) * (bx > 0 ? 1 : bx < 0 ? -1 : 0) - bx) * alpha;
+						bone.scaleY = by + (Math.abs(y) * (by > 0 ? 1 : by < 0 ? -1 : 0) - by) * alpha;
+						break;
+					} else if(_switchCond6 == 3) {
+						bx = bone.scaleX;
+						by = bone.scaleY;
+						bone.scaleX = bx + (Math.abs(x) * (bx > 0 ? 1 : bx < 0 ? -1 : 0) - bone.data.scaleX) * alpha;
+						bone.scaleY = by + (Math.abs(y) * (by > 0 ? 1 : by < 0 ? -1 : 0) - bone.data.scaleY) * alpha;
+					}
+					break;
+				}
 			} else {
-				bx = Math.abs(bx) * (x > 0 ? 1 : x < 0 ? -1 : 0);
-				by = Math.abs(by) * (y > 0 ? 1 : y < 0 ? -1 : 0);
+				var _continueAfterSwitch7 = false;
+				while(true) {
+					var _switchCond7 = blend;
+					if(_switchCond7 == 0) {
+						bx = Math.abs(bone.data.scaleX) * (x > 0 ? 1 : x < 0 ? -1 : 0);
+						by = Math.abs(bone.data.scaleY) * (y > 0 ? 1 : y < 0 ? -1 : 0);
+						bone.scaleX = bx + (x - bx) * alpha;
+						bone.scaleY = by + (y - by) * alpha;
+						break;
+					} else if(_switchCond7 == 1) {
+						bx = Math.abs(bone.scaleX) * (x > 0 ? 1 : x < 0 ? -1 : 0);
+						by = Math.abs(bone.scaleY) * (y > 0 ? 1 : y < 0 ? -1 : 0);
+						bone.scaleX = bx + (x - bx) * alpha;
+						bone.scaleY = by + (y - by) * alpha;
+						break;
+					} else if(_switchCond7 == 2) {
+						bx = Math.abs(bone.scaleX) * (x > 0 ? 1 : x < 0 ? -1 : 0);
+						by = Math.abs(bone.scaleY) * (y > 0 ? 1 : y < 0 ? -1 : 0);
+						bone.scaleX = bx + (x - bx) * alpha;
+						bone.scaleY = by + (y - by) * alpha;
+						break;
+					} else if(_switchCond7 == 3) {
+						bx = x > 0 ? 1 : x < 0 ? -1 : 0;
+						by = y > 0 ? 1 : y < 0 ? -1 : 0;
+						bone.scaleX = Math.abs(bone.scaleX) * bx + (x - Math.abs(bone.data.scaleX) * bx) * alpha;
+						bone.scaleY = Math.abs(bone.scaleY) * by + (y - Math.abs(bone.data.scaleY) * by) * alpha;
+					}
+					break;
+				}
 			}
-			bone.scaleX = bx + (x - bx) * alpha;
-			bone.scaleY = by + (y - by) * alpha;
 		}
 	}
 	,__class__: spine_ScaleTimeline
@@ -81700,18 +81884,21 @@ spine_ShearTimeline.prototype = $extend(spine_TranslateTimeline.prototype,{
 	getPropertyId: function() {
 		return (3 << 24) + this.boneIndex;
 	}
-	,apply: function(skeleton,lastTime,time,events,alpha,pose,direction) {
+	,apply: function(skeleton,lastTime,time,events,alpha,blend,direction) {
 		var bone = skeleton.bones[this.boneIndex];
+		if(!bone.active) {
+			return;
+		}
 		var frames = this.frames;
 		if(time < frames[0]) {
-			var _continueAfterSwitch3 = false;
+			var _continueAfterSwitch8 = false;
 			while(true) {
-				var _switchCond3 = pose;
-				if(_switchCond3 == 0) {
+				var _switchCond8 = blend;
+				if(_switchCond8 == 0) {
 					bone.shearX = bone.data.shearX;
 					bone.shearY = bone.data.shearY;
 					return;
-				} else if(_switchCond3 == 1) {
+				} else if(_switchCond8 == 1) {
 					bone.shearX += (bone.data.shearX - bone.shearX) * alpha;
 					bone.shearY += (bone.data.shearY - bone.shearY) * alpha;
 				}
@@ -81733,12 +81920,26 @@ spine_ShearTimeline.prototype = $extend(spine_TranslateTimeline.prototype,{
 			x += (frames[frame + 1] - x) * percent;
 			y += (frames[frame + 2] - y) * percent;
 		}
-		if(pose == 0) {
-			bone.shearX = bone.data.shearX + x * alpha;
-			bone.shearY = bone.data.shearY + y * alpha;
-		} else {
-			bone.shearX += (bone.data.shearX + x - bone.shearX) * alpha;
-			bone.shearY += (bone.data.shearY + y - bone.shearY) * alpha;
+		var _continueAfterSwitch9 = false;
+		while(true) {
+			var _switchCond9 = blend;
+			if(_switchCond9 == 0) {
+				bone.shearX = bone.data.shearX + x * alpha;
+				bone.shearY = bone.data.shearY + y * alpha;
+				break;
+			} else if(_switchCond9 == 1) {
+				bone.shearX += (bone.data.shearX + x - bone.shearX) * alpha;
+				bone.shearY += (bone.data.shearY + y - bone.shearY) * alpha;
+				break;
+			} else if(_switchCond9 == 2) {
+				bone.shearX += (bone.data.shearX + x - bone.shearX) * alpha;
+				bone.shearY += (bone.data.shearY + y - bone.shearY) * alpha;
+				break;
+			} else if(_switchCond9 == 3) {
+				bone.shearX += x * alpha;
+				bone.shearY += y * alpha;
+			}
+			break;
 		}
 	}
 	,__class__: spine_ShearTimeline
@@ -81769,6 +81970,7 @@ var spine_ColorTimeline = function(frameCount) {
 };
 $hxClasses["spine.ColorTimeline"] = spine_ColorTimeline;
 spine_ColorTimeline.__name__ = "spine.ColorTimeline";
+spine_ColorTimeline.__interfaces__ = [spine_SlotTimeline];
 spine_ColorTimeline.__super__ = spine_CurveTimeline;
 spine_ColorTimeline.prototype = $extend(spine_CurveTimeline.prototype,{
 	slotIndex: null
@@ -81796,23 +81998,31 @@ spine_ColorTimeline.prototype = $extend(spine_CurveTimeline.prototype,{
 		this.frames[frameIndex + 3] = b;
 		this.frames[frameIndex + 4] = a;
 	}
-	,apply: function(skeleton,lastTime,time,events,alpha,pose,direction) {
+	,apply: function(skeleton,lastTime,time,events,alpha,blend,direction) {
 		var slot = skeleton.slots[this.slotIndex];
+		if(!slot.bone.active) {
+			return;
+		}
 		var frames = this.frames;
 		if(time < frames[0]) {
-			var _continueAfterSwitch4 = false;
+			var _continueAfterSwitch10 = false;
 			while(true) {
-				var _switchCond4 = pose;
-				if(_switchCond4 == 0) {
-					slot.color.set(slot.data.color);
+				var _switchCond10 = blend;
+				if(_switchCond10 == 0) {
+					var _this = slot.color;
+					var color = slot.data.color;
+					_this.r = color.r;
+					_this.g = color.g;
+					_this.b = color.b;
+					_this.a = color.a;
 					return;
-				} else if(_switchCond4 == 1) {
-					var color = slot.color;
+				} else if(_switchCond10 == 1) {
+					var color1 = slot.color;
 					var setup = slot.data.color;
-					color.r += (setup.r - color.r) * alpha;
-					color.g += (setup.g - color.g) * alpha;
-					color.b += (setup.b - color.b) * alpha;
-					color.a += (setup.a - color.a) * alpha;
+					color1.r += (setup.r - color1.r) * alpha;
+					color1.g += (setup.g - color1.g) * alpha;
+					color1.b += (setup.b - color1.b) * alpha;
+					color1.a += (setup.a - color1.a) * alpha;
 				}
 				break;
 			}
@@ -81842,11 +82052,25 @@ spine_ColorTimeline.prototype = $extend(spine_CurveTimeline.prototype,{
 			a += (frames[frame + 4] - a) * percent;
 		}
 		if(alpha == 1) {
-			slot.color.set(r,g,b,a);
+			var _this = slot.color;
+			var a1 = a;
+			if(a1 == null) {
+				a1 = -1;
+			}
+			_this.r = r;
+			_this.g = g;
+			_this.b = b;
+			if(a1 != -1) {
+				_this.a = a1;
+			}
 		} else {
 			var color = slot.color;
-			if(pose == 0) {
-				color.set(slot.data.color);
+			if(blend == 0) {
+				var color1 = slot.data.color;
+				color.r = color1.r;
+				color.g = color1.g;
+				color.b = color1.b;
+				color.a = color1.a;
 			}
 			color.r += (r - color.r) * alpha;
 			color.g += (g - color.g) * alpha;
@@ -81882,6 +82106,7 @@ var spine_TwoColorTimeline = function(frameCount) {
 };
 $hxClasses["spine.TwoColorTimeline"] = spine_TwoColorTimeline;
 spine_TwoColorTimeline.__name__ = "spine.TwoColorTimeline";
+spine_TwoColorTimeline.__interfaces__ = [spine_SlotTimeline];
 spine_TwoColorTimeline.__super__ = spine_CurveTimeline;
 spine_TwoColorTimeline.prototype = $extend(spine_CurveTimeline.prototype,{
 	slotIndex: null
@@ -81912,18 +82137,31 @@ spine_TwoColorTimeline.prototype = $extend(spine_CurveTimeline.prototype,{
 		this.frames[frameIndex + 6] = g2;
 		this.frames[frameIndex + 7] = b2;
 	}
-	,apply: function(skeleton,lastTime,time,events,alpha,pose,direction) {
+	,apply: function(skeleton,lastTime,time,events,alpha,blend,direction) {
 		var slot = skeleton.slots[this.slotIndex];
+		if(!slot.bone.active) {
+			return;
+		}
 		var frames = this.frames;
 		if(time < frames[0]) {
-			var _continueAfterSwitch5 = false;
+			var _continueAfterSwitch11 = false;
 			while(true) {
-				var _switchCond5 = pose;
-				if(_switchCond5 == 0) {
-					slot.color.set(slot.data.color);
-					slot.darkColor.set(slot.data.darkColor);
+				var _switchCond11 = blend;
+				if(_switchCond11 == 0) {
+					var _this = slot.color;
+					var color = slot.data.color;
+					_this.r = color.r;
+					_this.g = color.g;
+					_this.b = color.b;
+					_this.a = color.a;
+					var _this1 = slot.darkColor;
+					var color1 = slot.data.darkColor;
+					_this1.r = color1.r;
+					_this1.g = color1.g;
+					_this1.b = color1.b;
+					_this1.a = color1.a;
 					return;
-				} else if(_switchCond5 == 1) {
+				} else if(_switchCond11 == 1) {
 					var light = slot.color;
 					var dark = slot.darkColor;
 					var setupLight = slot.data.color;
@@ -81977,14 +82215,42 @@ spine_TwoColorTimeline.prototype = $extend(spine_CurveTimeline.prototype,{
 			b2 += (frames[frame + 7] - b2) * percent;
 		}
 		if(alpha == 1) {
-			slot.color.set(r,g,b,a);
-			slot.darkColor.set(r2,g2,b2,1);
+			var _this = slot.color;
+			var a1 = a;
+			if(a1 == null) {
+				a1 = -1;
+			}
+			_this.r = r;
+			_this.g = g;
+			_this.b = b;
+			if(a1 != -1) {
+				_this.a = a1;
+			}
+			var _this = slot.darkColor;
+			var a1 = 1;
+			if(a1 == null) {
+				a1 = -1;
+			}
+			_this.r = r2;
+			_this.g = g2;
+			_this.b = b2;
+			if(a1 != -1) {
+				_this.a = a1;
+			}
 		} else {
 			var light = slot.color;
 			var dark = slot.darkColor;
-			if(pose == 0) {
-				light.set(slot.data.color);
-				dark.set(slot.data.darkColor);
+			if(blend == 0) {
+				var color = slot.data.color;
+				light.r = color.r;
+				light.g = color.g;
+				light.b = color.b;
+				light.a = color.a;
+				var color = slot.data.darkColor;
+				dark.r = color.r;
+				dark.g = color.g;
+				dark.b = color.b;
+				dark.a = color.a;
 			}
 			light.r += (r - light.r) * alpha;
 			light.g += (g - light.g) * alpha;
@@ -82000,6 +82266,9 @@ spine_TwoColorTimeline.prototype = $extend(spine_CurveTimeline.prototype,{
 });
 var spine_AttachmentTimeline = function(frameCount) {
 	this.slotIndex = 0;
+	if(frameCount <= 0) {
+		throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("frameCount must be > 0: " + frameCount));
+	}
 	var length = frameCount;
 	if(length == null) {
 		length = 0;
@@ -82040,7 +82309,7 @@ var spine_AttachmentTimeline = function(frameCount) {
 };
 $hxClasses["spine.AttachmentTimeline"] = spine_AttachmentTimeline;
 spine_AttachmentTimeline.__name__ = "spine.AttachmentTimeline";
-spine_AttachmentTimeline.__interfaces__ = [spine_Timeline];
+spine_AttachmentTimeline.__interfaces__ = [spine_SlotTimeline];
 spine_AttachmentTimeline.prototype = {
 	slotIndex: null
 	,frames: null
@@ -82070,28 +82339,31 @@ spine_AttachmentTimeline.prototype = {
 		this.frames[frameIndex] = time;
 		this.attachmentNames[frameIndex] = attachmentName;
 	}
-	,apply: function(skeleton,lastTime,time,events,alpha,pose,direction) {
+	,apply: function(skeleton,lastTime,time,events,alpha,blend,direction) {
 		var slot = skeleton.slots[this.slotIndex];
-		if(direction == 1 && pose == 0) {
+		if(!slot.bone.active) {
+			return;
+		}
+		if(direction == 1 && blend == 0) {
 			var attachmentName = slot.data.attachmentName;
 			var attachment = attachmentName == null ? null : skeleton.getAttachment(this.slotIndex,attachmentName);
 			if(slot.attachment != attachment) {
 				slot.attachment = attachment;
 				slot.attachmentTime = slot.bone.skeleton.time;
-				var this1 = slot.attachmentVertices;
+				var this1 = slot.deform;
 				this1.splice(0,this1.length);
 			}
 			return;
 		}
 		var frames = this.frames;
 		if(time < frames[0]) {
-			if(pose == 0) {
+			if(blend == 0 || blend == 1) {
 				var attachmentName = slot.data.attachmentName;
 				var attachment = attachmentName == null ? null : skeleton.getAttachment(this.slotIndex,attachmentName);
 				if(slot.attachment != attachment) {
 					slot.attachment = attachment;
 					slot.attachmentTime = slot.bone.skeleton.time;
-					var this1 = slot.attachmentVertices;
+					var this1 = slot.deform;
 					this1.splice(0,this1.length);
 				}
 			}
@@ -82108,7 +82380,7 @@ spine_AttachmentTimeline.prototype = {
 		if(slot.attachment != attachment) {
 			slot.attachment = attachment;
 			slot.attachmentTime = slot.bone.skeleton.time;
-			var this1 = slot.attachmentVertices;
+			var this1 = slot.deform;
 			this1.splice(0,this1.length);
 		}
 	}
@@ -82187,6 +82459,7 @@ var spine_DeformTimeline = function(frameCount) {
 };
 $hxClasses["spine.DeformTimeline"] = spine_DeformTimeline;
 spine_DeformTimeline.__name__ = "spine.DeformTimeline";
+spine_DeformTimeline.__interfaces__ = [spine_SlotTimeline];
 spine_DeformTimeline.__super__ = spine_CurveTimeline;
 spine_DeformTimeline.prototype = $extend(spine_CurveTimeline.prototype,{
 	slotIndex: null
@@ -82221,54 +82494,66 @@ spine_DeformTimeline.prototype = $extend(spine_CurveTimeline.prototype,{
 		this.frames[frameIndex] = time;
 		this.frameVertices[frameIndex] = vertices;
 	}
-	,apply: function(skeleton,lastTime,time,events,alpha,pose,direction) {
+	,apply: function(skeleton,lastTime,time,events,alpha,blend,direction) {
 		var slot = skeleton.slots[this.slotIndex];
-		var slotAttachment = slot.attachment;
-		if(!((slotAttachment) instanceof spine_attachments_VertexAttachment) || !(js_Boot.__cast(slotAttachment , spine_attachments_VertexAttachment)).applyDeform(this.attachment)) {
+		if(!slot.bone.active) {
 			return;
 		}
-		var verticesArray = slot.attachmentVertices;
-		if(verticesArray.length == 0) {
-			alpha = 1;
+		var slotAttachment = slot.attachment;
+		var tmp;
+		if(((slotAttachment) instanceof spine_attachments_VertexAttachment)) {
+			var result = slotAttachment;
+			var _this = result;
+			tmp = (_this.deformAttachment != null ? _this.deformAttachment : _this) != this.attachment;
+		} else {
+			tmp = true;
+		}
+		if(tmp) {
+			return;
+		}
+		var deformArray = slot.deform;
+		if(deformArray.length == 0) {
+			blend = 0;
 		}
 		var frameVertices = this.frameVertices;
 		var vertexCount = frameVertices[0].length;
 		var frames = this.frames;
 		if(time < frames[0]) {
-			var vertexAttachment = js_Boot.__cast(slotAttachment , spine_attachments_VertexAttachment);
-			var _continueAfterSwitch6 = false;
+			var result = slotAttachment;
+			var vertexAttachment = result;
+			var _continueAfterSwitch12 = false;
 			while(true) {
-				var _switchCond6 = pose;
-				if(_switchCond6 == 0) {
-					verticesArray.splice(0,verticesArray.length);
+				var _switchCond12 = blend;
+				if(_switchCond12 == 0) {
+					deformArray.splice(0,deformArray.length);
 					return;
-				} else if(_switchCond6 == 1) {
+				} else if(_switchCond12 == 1) {
 					if(alpha == 1) {
-						verticesArray.splice(0,verticesArray.length);
+						deformArray.splice(0,deformArray.length);
 						return;
 					}
-					var len = verticesArray.length;
+					var len = deformArray.length;
 					if(len > vertexCount) {
-						verticesArray.splice(vertexCount,vertexCount - len);
+						deformArray.splice(vertexCount,vertexCount - len);
 					} else if(len < vertexCount) {
 						while(len < vertexCount) {
-							verticesArray.push(0);
+							deformArray.push(0);
 							++len;
 						}
 					}
-					var vertices = verticesArray;
+					var deform = deformArray;
 					if(vertexAttachment.bones == null) {
 						var setupVertices = vertexAttachment.vertices;
 						var i = 0;
 						while(i < vertexCount) {
-							vertices[i] += (setupVertices[i] - vertices[i]) * alpha;
+							deform[i] += (setupVertices[i] - deform[i]) * alpha;
 							++i;
 						}
 					} else {
 						alpha = 1 - alpha;
 						var i1 = 0;
 						while(i1 < vertexCount) {
-							vertices[i1] *= alpha;
+							deform[i1] *= alpha;
 							++i1;
 						}
 					}
@@ -82277,42 +82562,108 @@ spine_DeformTimeline.prototype = $extend(spine_CurveTimeline.prototype,{
 			}
 			return;
 		}
-		var len = verticesArray.length;
+		var len = deformArray.length;
 		if(len > vertexCount) {
-			verticesArray.splice(vertexCount,vertexCount - len);
+			deformArray.splice(vertexCount,vertexCount - len);
 		} else if(len < vertexCount) {
 			while(len < vertexCount) {
-				verticesArray.push(0);
+				deformArray.push(0);
 				++len;
 			}
 		}
-		var vertices = verticesArray;
+		var deform = deformArray;
 		if(time >= frames[frames.length - 1]) {
 			var lastVertices = frameVertices[frames.length - 1];
 			if(alpha == 1) {
-				spine_support_utils_Array.copy(lastVertices,0,vertices,0,vertexCount);
-			} else if(pose == 0) {
-				var vertexAttachment = js_Boot.__cast(slotAttachment , spine_attachments_VertexAttachment);
-				if(vertexAttachment.bones == null) {
-					var setupVertices = vertexAttachment.vertices;
-					var i = 0;
-					while(i < vertexCount) {
-						var setup = setupVertices[i];
-						vertices[i] = setup + (lastVertices[i] - setup) * alpha;
-						++i;
+				if(blend == 3) {
+					var result = slotAttachment;
+					var vertexAttachment = result;
+					if(vertexAttachment.bones == null) {
+						var setupVertices = vertexAttachment.vertices;
+						var i = 0;
+						while(i < vertexCount) {
+							deform[i] += lastVertices[i] - setupVertices[i];
+							++i;
+						}
+					} else {
+						var i = 0;
+						while(i < vertexCount) {
+							deform[i] += lastVertices[i];
+							++i;
+						}
 					}
 				} else {
-					var i = 0;
-					while(i < vertexCount) {
-						vertices[i] = lastVertices[i] * alpha;
-						++i;
+					var src = lastVertices;
+					var dest = deform;
+					if(src == null) {
+						throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("src cannot be null."));
+					}
+					if(dest == null) {
+						throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("dest cannot be null."));
+					}
+					try {
+						spine_support_utils_Array.copy(src,0,dest,0,vertexCount);
+					} catch( _g ) {
+						haxe_NativeStackTrace.lastError = _g;
+						throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + vertexCount));
 					}
 				}
 			} else {
-				var i = 0;
-				while(i < vertexCount) {
-					vertices[i] += (lastVertices[i] - vertices[i]) * alpha;
-					++i;
+				var _continueAfterSwitch13 = false;
+				while(true) {
+					var _switchCond13 = blend;
+					if(_switchCond13 == 0) {
+						var result = slotAttachment;
+						var vertexAttachment = result;
+						if(vertexAttachment.bones == null) {
+							var setupVertices = vertexAttachment.vertices;
+							var i = 0;
+							while(i < vertexCount) {
+								var setup = setupVertices[i];
+								deform[i] = setup + (lastVertices[i] - setup) * alpha;
+								++i;
+							}
+						} else {
+							var i1 = 0;
+							while(i1 < vertexCount) {
+								deform[i1] = lastVertices[i1] * alpha;
+								++i1;
+							}
+						}
+						break;
+					} else if(_switchCond13 == 1) {
+						var i2 = 0;
+						while(i2 < vertexCount) {
+							deform[i2] += (lastVertices[i2] - deform[i2]) * alpha;
+							++i2;
+						}
+						break;
+					} else if(_switchCond13 == 2) {
+						var i3 = 0;
+						while(i3 < vertexCount) {
+							deform[i3] += (lastVertices[i3] - deform[i3]) * alpha;
+							++i3;
+						}
+						break;
+					} else if(_switchCond13 == 3) {
+						var result1 = slotAttachment;
+						var vertexAttachment1 = result1;
+						if(vertexAttachment1.bones == null) {
+							var setupVertices1 = vertexAttachment1.vertices;
+							var i4 = 0;
+							while(i4 < vertexCount) {
+								deform[i4] += (lastVertices[i4] - setupVertices1[i4]) * alpha;
+								++i4;
+							}
+						} else {
+							var i5 = 0;
+							while(i5 < vertexCount) {
+								deform[i5] += lastVertices[i5] * alpha;
+								++i5;
+							}
+						}
+					}
+					break;
 				}
 			}
 			return;
@@ -82323,43 +82674,104 @@ spine_DeformTimeline.prototype = $extend(spine_CurveTimeline.prototype,{
 		var frameTime = frames[frame];
 		var percent = this.getCurvePercent(frame - 1 | 0,1 - (time - frameTime) / (frames[frame - 1 | 0] - frameTime));
 		if(alpha == 1) {
-			var i = 0;
-			while(i < vertexCount) {
-				var prev = prevVertices[i];
-				vertices[i] = prev + (nextVertices[i] - prev) * percent;
-				++i;
-			}
-		} else if(pose == 0) {
-			var vertexAttachment = js_Boot.__cast(slotAttachment , spine_attachments_VertexAttachment);
-			if(vertexAttachment.bones == null) {
-				var setupVertices = vertexAttachment.vertices;
-				var i = 0;
-				while(i < vertexCount) {
-					var prev = prevVertices[i];
-					var setup = setupVertices[i];
-					vertices[i] = setup + (prev + (nextVertices[i] - prev) * percent - setup) * alpha;
-					++i;
+			if(blend == 3) {
+				var result = slotAttachment;
+				var vertexAttachment = result;
+				if(vertexAttachment.bones == null) {
+					var setupVertices = vertexAttachment.vertices;
+					var i = 0;
+					while(i < vertexCount) {
+						var prev = prevVertices[i];
+						deform[i] += prev + (nextVertices[i] - prev) * percent - setupVertices[i];
+						++i;
+					}
+				} else {
+					var i = 0;
+					while(i < vertexCount) {
+						var prev = prevVertices[i];
+						deform[i] += prev + (nextVertices[i] - prev) * percent;
+						++i;
+					}
 				}
 			} else {
 				var i = 0;
 				while(i < vertexCount) {
 					var prev = prevVertices[i];
-					vertices[i] = (prev + (nextVertices[i] - prev) * percent) * alpha;
+					deform[i] = prev + (nextVertices[i] - prev) * percent;
 					++i;
 				}
 			}
 		} else {
-			var i = 0;
-			while(i < vertexCount) {
-				var prev = prevVertices[i];
-				vertices[i] += (prev + (nextVertices[i] - prev) * percent - vertices[i]) * alpha;
-				++i;
+			var _continueAfterSwitch14 = false;
+			while(true) {
+				var _switchCond14 = blend;
+				if(_switchCond14 == 0) {
+					var result = slotAttachment;
+					var vertexAttachment = result;
+					if(vertexAttachment.bones == null) {
+						var setupVertices = vertexAttachment.vertices;
+						var i = 0;
+						while(i < vertexCount) {
+							var prev = prevVertices[i];
+							var setup = setupVertices[i];
+							deform[i] = setup + (prev + (nextVertices[i] - prev) * percent - setup) * alpha;
+							++i;
+						}
+					} else {
+						var i1 = 0;
+						while(i1 < vertexCount) {
+							var prev1 = prevVertices[i1];
+							deform[i1] = (prev1 + (nextVertices[i1] - prev1) * percent) * alpha;
+							++i1;
+						}
+					}
+					break;
+				} else if(_switchCond14 == 1) {
+					var i2 = 0;
+					while(i2 < vertexCount) {
+						var prev2 = prevVertices[i2];
+						deform[i2] += (prev2 + (nextVertices[i2] - prev2) * percent - deform[i2]) * alpha;
+						++i2;
+					}
+					break;
+				} else if(_switchCond14 == 2) {
+					var i3 = 0;
+					while(i3 < vertexCount) {
+						var prev3 = prevVertices[i3];
+						deform[i3] += (prev3 + (nextVertices[i3] - prev3) * percent - deform[i3]) * alpha;
+						++i3;
+					}
+					break;
+				} else if(_switchCond14 == 3) {
+					var result1 = slotAttachment;
+					var vertexAttachment1 = result1;
+					if(vertexAttachment1.bones == null) {
+						var setupVertices1 = vertexAttachment1.vertices;
+						var i4 = 0;
+						while(i4 < vertexCount) {
+							var prev4 = prevVertices[i4];
+							deform[i4] += (prev4 + (nextVertices[i4] - prev4) * percent - setupVertices1[i4]) * alpha;
+							++i4;
+						}
+					} else {
+						var i5 = 0;
+						while(i5 < vertexCount) {
+							var prev5 = prevVertices[i5];
+							deform[i5] += (prev5 + (nextVertices[i5] - prev5) * percent) * alpha;
+							++i5;
+						}
+					}
+				}
+				break;
 			}
 		}
 	}
 	,__class__: spine_DeformTimeline
 });
 var spine_EventTimeline = function(frameCount) {
+	if(frameCount <= 0) {
+		throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("frameCount must be > 0: " + frameCount));
+	}
 	var length = frameCount;
 	if(length == null) {
 		length = 0;
@@ -82420,14 +82832,14 @@ spine_EventTimeline.prototype = {
 		this.frames[frameIndex] = event.time;
 		this.events[frameIndex] = event;
 	}
-	,apply: function(skeleton,lastTime,time,firedEvents,alpha,pose,direction) {
+	,apply: function(skeleton,lastTime,time,firedEvents,alpha,blend,direction) {
 		if(firedEvents == null) {
 			return;
 		}
 		var frames = this.frames;
 		var frameCount = frames.length;
 		if(lastTime > time) {
-			this.apply(skeleton,lastTime,999999999,firedEvents,alpha,pose,direction);
+			this.apply(skeleton,lastTime,999999999,firedEvents,alpha,blend,direction);
 			lastTime = -1;
 		} else if(lastTime >= frames[frameCount - 1]) {
 			return;
@@ -82456,6 +82868,9 @@ spine_EventTimeline.prototype = {
 	,__class__: spine_EventTimeline
 };
 var spine_DrawOrderTimeline = function(frameCount) {
+	if(frameCount <= 0) {
+		throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("frameCount must be > 0: " + frameCount));
+	}
 	var length = frameCount;
 	if(length == null) {
 		length = 0;
@@ -82546,17 +82961,45 @@ spine_DrawOrderTimeline.prototype = {
 		this.frames[frameIndex] = time;
 		this.drawOrders[frameIndex] = drawOrder;
 	}
-	,apply: function(skeleton,lastTime,time,events,alpha,pose,direction) {
+	,apply: function(skeleton,lastTime,time,events,alpha,blend,direction) {
 		var drawOrder = skeleton.drawOrder;
 		var slots = skeleton.slots;
-		if(direction == 1 && pose == 0) {
-			spine_support_utils_Array.copy(slots,0,drawOrder,0,slots.length);
+		if(direction == 1 && blend == 0) {
+			var src = slots;
+			var dest = drawOrder;
+			var length = slots.length;
+			if(src == null) {
+				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("src cannot be null."));
+			}
+			if(dest == null) {
+				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("dest cannot be null."));
+			}
+			try {
+				spine_support_utils_Array.copy(src,0,dest,0,length);
+			} catch( _g ) {
+				haxe_NativeStackTrace.lastError = _g;
+				throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
+			}
 			return;
 		}
 		var frames = this.frames;
 		if(time < frames[0]) {
-			if(pose == 0) {
-				spine_support_utils_Array.copy(slots,0,drawOrder,0,slots.length);
+			if(blend == 0 || blend == 1) {
+				var src = slots;
+				var dest = drawOrder;
+				var length = slots.length;
+				if(src == null) {
+					throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("src cannot be null."));
+				}
+				if(dest == null) {
+					throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("dest cannot be null."));
+				}
+				try {
+					spine_support_utils_Array.copy(src,0,dest,0,length);
+				} catch( _g ) {
+					haxe_NativeStackTrace.lastError = _g;
+					throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
+				}
 			}
 			return;
 		}
@@ -82568,7 +83011,21 @@ spine_DrawOrderTimeline.prototype = {
 		}
 		var drawOrderToSetupIndex = this.drawOrders[frame];
 		if(drawOrderToSetupIndex == null) {
-			spine_support_utils_Array.copy(slots,0,drawOrder,0,slots.length);
+			var src = slots;
+			var dest = drawOrder;
+			var length = slots.length;
+			if(src == null) {
+				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("src cannot be null."));
+			}
+			if(dest == null) {
+				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("dest cannot be null."));
+			}
+			try {
+				spine_support_utils_Array.copy(src,0,dest,0,length);
+			} catch( _g ) {
+				haxe_NativeStackTrace.lastError = _g;
+				throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
+			}
 		} else {
 			var i = 0;
 			var n = drawOrderToSetupIndex.length;
@@ -82583,7 +83040,7 @@ spine_DrawOrderTimeline.prototype = {
 var spine_IkConstraintTimeline = function(frameCount) {
 	this.ikConstraintIndex = 0;
 	spine_CurveTimeline.call(this,frameCount);
-	var length = frameCount * 3;
+	var length = frameCount * 6;
 	if(length == null) {
 		length = 0;
 	}
@@ -82625,54 +83082,91 @@ spine_IkConstraintTimeline.prototype = $extend(spine_CurveTimeline.prototype,{
 	,getFrames: function() {
 		return this.frames;
 	}
-	,setFrame: function(frameIndex,time,mix,bendDirection) {
-		frameIndex *= 3;
+	,setFrame: function(frameIndex,time,mix,softness,bendDirection,compress,stretch) {
+		frameIndex *= 6;
 		this.frames[frameIndex] = time;
 		this.frames[frameIndex + 1] = mix;
-		this.frames[frameIndex + 2] = bendDirection;
+		this.frames[frameIndex + 2] = softness;
+		this.frames[frameIndex + 3] = bendDirection;
+		this.frames[frameIndex + 4] = compress ? 1 : 0;
+		this.frames[frameIndex + 5] = stretch ? 1 : 0;
 	}
-	,apply: function(skeleton,lastTime,time,events,alpha,pose,direction) {
+	,apply: function(skeleton,lastTime,time,events,alpha,blend,direction) {
 		var constraint = skeleton.ikConstraints[this.ikConstraintIndex];
+		if(!constraint.active) {
+			return;
+		}
 		var frames = this.frames;
 		if(time < frames[0]) {
-			var _continueAfterSwitch7 = false;
+			var _continueAfterSwitch15 = false;
 			while(true) {
-				var _switchCond7 = pose;
-				if(_switchCond7 == 0) {
+				var _switchCond15 = blend;
+				if(_switchCond15 == 0) {
 					constraint.mix = constraint.data.mix;
+					constraint.softness = constraint.data.softness;
 					constraint.bendDirection = constraint.data.bendDirection;
+					constraint.compress = constraint.data.compress;
+					constraint.stretch = constraint.data.stretch;
 					return;
-				} else if(_switchCond7 == 1) {
+				} else if(_switchCond15 == 1) {
 					constraint.mix += (constraint.data.mix - constraint.mix) * alpha;
+					constraint.softness += (constraint.data.softness - constraint.softness) * alpha;
 					constraint.bendDirection = constraint.data.bendDirection;
+					constraint.compress = constraint.data.compress;
+					constraint.stretch = constraint.data.stretch;
 				}
 				break;
 			}
 			return;
 		}
-		if(time >= frames[frames.length - 3]) {
-			if(pose == 0) {
-				constraint.mix = constraint.data.mix + (frames[frames.length + (-2)] - constraint.data.mix) * alpha;
-				constraint.bendDirection = direction == 1 ? constraint.data.bendDirection : frames[frames.length + (-1)] | 0;
+		if(time >= frames[frames.length - 6]) {
+			if(blend == 0) {
+				constraint.mix = constraint.data.mix + (frames[frames.length + (-5)] - constraint.data.mix) * alpha;
+				constraint.softness = constraint.data.softness + (frames[frames.length + (-4)] - constraint.data.softness) * alpha;
+				if(direction == 1) {
+					constraint.bendDirection = constraint.data.bendDirection;
+					constraint.compress = constraint.data.compress;
+					constraint.stretch = constraint.data.stretch;
+				} else {
+					constraint.bendDirection = frames[frames.length + (-3)] | 0;
+					constraint.compress = frames[frames.length + (-2)] != 0;
+					constraint.stretch = frames[frames.length + (-1)] != 0;
+				}
 			} else {
-				constraint.mix += (frames[frames.length + (-2)] - constraint.mix) * alpha;
+				constraint.mix += (frames[frames.length + (-5)] - constraint.mix) * alpha;
+				constraint.softness += (frames[frames.length + (-4)] - constraint.softness) * alpha;
 				if(direction == 0) {
-					constraint.bendDirection = frames[frames.length + (-1)] | 0;
+					constraint.bendDirection = frames[frames.length + (-3)] | 0;
+					constraint.compress = frames[frames.length + (-2)] != 0;
+					constraint.stretch = frames[frames.length + (-1)] != 0;
 				}
 			}
 			return;
 		}
-		var frame = spine_Animation.binarySearchWithStep(frames,time,3);
-		var mix = frames[frame + (-2)];
+		var frame = spine_Animation.binarySearchWithStep(frames,time,6);
+		var mix = frames[frame + (-5)];
+		var softness = frames[frame + (-4)];
 		var frameTime = frames[frame];
-		var percent = this.getCurvePercent(frame / 3 - 1 | 0,1 - (time - frameTime) / (frames[frame + (-3)] - frameTime));
-		if(pose == 0) {
+		var percent = this.getCurvePercent(frame / 6 - 1 | 0,1 - (time - frameTime) / (frames[frame + (-6)] - frameTime));
+		if(blend == 0) {
 			constraint.mix = constraint.data.mix + (mix + (frames[frame + 1] - mix) * percent - constraint.data.mix) * alpha;
-			constraint.bendDirection = direction == 1 ? constraint.data.bendDirection : frames[frame + (-1)] | 0;
+			constraint.softness = constraint.data.softness + (softness + (frames[frame + 2] - softness) * percent - constraint.data.softness) * alpha;
+			if(direction == 1) {
+				constraint.bendDirection = constraint.data.bendDirection;
+				constraint.compress = constraint.data.compress;
+				constraint.stretch = constraint.data.stretch;
+			} else {
+				constraint.bendDirection = frames[frame + (-3)] | 0;
+				constraint.compress = frames[frame + (-2)] != 0;
+				constraint.stretch = frames[frame + (-1)] != 0;
+			}
 		} else {
 			constraint.mix += (mix + (frames[frame + 1] - mix) * percent - constraint.mix) * alpha;
+			constraint.softness += (softness + (frames[frame + 2] - softness) * percent - constraint.softness) * alpha;
 			if(direction == 0) {
-				constraint.bendDirection = frames[frame + (-1)] | 0;
+				constraint.bendDirection = frames[frame + (-3)] | 0;
+				constraint.compress = frames[frame + (-2)] != 0;
+				constraint.stretch = frames[frame + (-1)] != 0;
 			}
 		}
 	}
@@ -82731,21 +83225,24 @@ spine_TransformConstraintTimeline.prototype = $extend(spine_CurveTimeline.protot
 		this.frames[frameIndex + 3] = scaleMix;
 		this.frames[frameIndex + 4] = shearMix;
 	}
-	,apply: function(skeleton,lastTime,time,events,alpha,pose,direction) {
+	,apply: function(skeleton,lastTime,time,events,alpha,blend,direction) {
 		var constraint = skeleton.transformConstraints[this.transformConstraintIndex];
+		if(!constraint.active) {
+			return;
+		}
 		var frames = this.frames;
 		if(time < frames[0]) {
 			var data = constraint.data;
-			var _continueAfterSwitch8 = false;
+			var _continueAfterSwitch16 = false;
 			while(true) {
-				var _switchCond8 = pose;
-				if(_switchCond8 == 0) {
+				var _switchCond16 = blend;
+				if(_switchCond16 == 0) {
 					constraint.rotateMix = data.rotateMix;
 					constraint.translateMix = data.translateMix;
 					constraint.scaleMix = data.scaleMix;
 					constraint.shearMix = data.shearMix;
 					return;
-				} else if(_switchCond8 == 1) {
+				} else if(_switchCond16 == 1) {
 					constraint.rotateMix += (data.rotateMix - constraint.rotateMix) * alpha;
 					constraint.translateMix += (data.translateMix - constraint.translateMix) * alpha;
 					constraint.scaleMix += (data.scaleMix - constraint.scaleMix) * alpha;
@@ -82778,7 +83275,7 @@ spine_TransformConstraintTimeline.prototype = $extend(spine_CurveTimeline.protot
 			scale += (frames[frame + 3] - scale) * percent;
 			shear += (frames[frame + 4] - shear) * percent;
 		}
-		if(pose == 0) {
+		if(blend == 0) {
 			var data = constraint.data;
 			constraint.rotateMix = data.rotateMix + (rotate - data.rotateMix) * alpha;
 			constraint.translateMix = data.translateMix + (translate - data.translateMix) * alpha;
@@ -82843,17 +83340,20 @@ spine_PathConstraintPositionTimeline.prototype = $extend(spine_CurveTimeline.pro
 		this.frames[frameIndex] = time;
 		this.frames[frameIndex + 1] = position;
 	}
-	,apply: function(skeleton,lastTime,time,events,alpha,pose,direction) {
+	,apply: function(skeleton,lastTime,time,events,alpha,blend,direction) {
 		var constraint = skeleton.pathConstraints[this.pathConstraintIndex];
+		if(!constraint.active) {
+			return;
+		}
 		var frames = this.frames;
 		if(time < frames[0]) {
-			var _continueAfterSwitch9 = false;
+			var _continueAfterSwitch17 = false;
 			while(true) {
-				var _switchCond9 = pose;
-				if(_switchCond9 == 0) {
+				var _switchCond17 = blend;
+				if(_switchCond17 == 0) {
 					constraint.position = constraint.data.position;
 					return;
-				} else if(_switchCond9 == 1) {
+				} else if(_switchCond17 == 1) {
 					constraint.position += (constraint.data.position - constraint.position) * alpha;
 				}
 				break;
@@ -82870,7 +83370,7 @@ spine_PathConstraintPositionTimeline.prototype = $extend(spine_CurveTimeline.pro
 			var percent = this.getCurvePercent(frame / 2 - 1 | 0,1 - (time - frameTime) / (frames[frame + (-2)] - frameTime));
 			position += (frames[frame + 1] - position) * percent;
 		}
-		if(pose == 0) {
+		if(blend == 0) {
 			constraint.position = constraint.data.position + (position - constraint.data.position) * alpha;
 		} else {
 			constraint.position += (position - constraint.position) * alpha;
@@ -82888,17 +83388,20 @@ spine_PathConstraintSpacingTimeline.prototype = $extend(spine_PathConstraintPosi
 	getPropertyId: function() {
 		return (12 << 24) + this.pathConstraintIndex;
 	}
-	,apply: function(skeleton,lastTime,time,events,alpha,pose,direction) {
+	,apply: function(skeleton,lastTime,time,events,alpha,blend,direction) {
 		var constraint = skeleton.pathConstraints[this.pathConstraintIndex];
+		if(!constraint.active) {
+			return;
+		}
 		var frames = this.frames;
 		if(time < frames[0]) {
-			var _continueAfterSwitch10 = false;
+			var _continueAfterSwitch18 = false;
 			while(true) {
-				var _switchCond10 = pose;
-				if(_switchCond10 == 0) {
+				var _switchCond18 = blend;
+				if(_switchCond18 == 0) {
 					constraint.spacing = constraint.data.spacing;
 					return;
-				} else if(_switchCond10 == 1) {
+				} else if(_switchCond18 == 1) {
 					constraint.spacing += (constraint.data.spacing - constraint.spacing) * alpha;
 				}
 				break;
@@ -82915,7 +83418,7 @@ spine_PathConstraintSpacingTimeline.prototype = $extend(spine_PathConstraintPosi
 			var percent = this.getCurvePercent(frame / 2 - 1 | 0,1 - (time - frameTime) / (frames[frame + (-2)] - frameTime));
 			spacing += (frames[frame + 1] - spacing) * percent;
 		}
-		if(pose == 0) {
+		if(blend == 0) {
 			constraint.spacing = constraint.data.spacing + (spacing - constraint.data.spacing) * alpha;
 		} else {
 			constraint.spacing += (spacing - constraint.spacing) * alpha;
@@ -82974,18 +83477,21 @@ spine_PathConstraintMixTimeline.prototype = $extend(spine_CurveTimeline.prototyp
 		this.frames[frameIndex + 1] = rotateMix;
 		this.frames[frameIndex + 2] = translateMix;
 	}
-	,apply: function(skeleton,lastTime,time,events,alpha,pose,direction) {
+	,apply: function(skeleton,lastTime,time,events,alpha,blend,direction) {
 		var constraint = skeleton.pathConstraints[this.pathConstraintIndex];
+		if(!constraint.active) {
+			return;
+		}
 		var frames = this.frames;
 		if(time < frames[0]) {
-			var _continueAfterSwitch11 = false;
+			var _continueAfterSwitch19 = false;
 			while(true) {
-				var _switchCond11 = pose;
-				if(_switchCond11 == 0) {
+				var _switchCond19 = blend;
+				if(_switchCond19 == 0) {
 					constraint.rotateMix = constraint.data.rotateMix;
 					constraint.translateMix = constraint.data.translateMix;
 					return;
-				} else if(_switchCond11 == 1) {
+				} else if(_switchCond19 == 1) {
 					constraint.rotateMix += (constraint.data.rotateMix - constraint.rotateMix) * alpha;
 					constraint.translateMix += (constraint.data.translateMix - constraint.translateMix) * alpha;
 				}
@@ -83007,7 +83513,7 @@ spine_PathConstraintMixTimeline.prototype = $extend(spine_CurveTimeline.prototyp
 			rotate += (frames[frame + 1] - rotate) * percent;
 			translate += (frames[frame + 2] - translate) * percent;
 		}
-		if(pose == 0) {
+		if(blend == 0) {
 			constraint.rotateMix = constraint.data.rotateMix + (rotate - constraint.data.rotateMix) * alpha;
 			constraint.translateMix = constraint.data.translateMix + (translate - constraint.data.translateMix) * alpha;
 		} else {
@@ -83017,14 +83523,16 @@ spine_PathConstraintMixTimeline.prototype = $extend(spine_CurveTimeline.prototyp
 	}
 	,__class__: spine_PathConstraintMixTimeline
 });
-var spine_MixPose_$enum = function() { };
-$hxClasses["spine.MixPose_enum"] = spine_MixPose_$enum;
-spine_MixPose_$enum.__name__ = "spine.MixPose_enum";
-spine_MixPose_$enum.valueOf = function(value) {
+var spine_MixBlend_$enum = function() { };
+$hxClasses["spine.MixBlend_enum"] = spine_MixBlend_$enum;
+spine_MixBlend_$enum.__name__ = "spine.MixBlend_enum";
+spine_MixBlend_$enum.valueOf = function(value) {
 	switch(value) {
-	case "current":
+	case "add":
+		return 3;
+	case "first":
 		return 1;
-	case "currentLayered":
+	case "replace":
 		return 2;
 	case "setup":
 		return 0;
@@ -83130,7 +83638,6 @@ var spine_AnimationState = function(data) {
 	this.trackEntryPool = new spine__$AnimationState_TrackEntryPool();
 	this.timeScale = 1;
 	this.animationsChanged = false;
-	this.mixingTo = [];
 	this.propertyIDs = new haxe_ds_IntMap();
 	this.queue = null;
 	this.listeners = [];
@@ -83152,7 +83659,6 @@ spine_AnimationState.prototype = {
 	,listeners: null
 	,queue: null
 	,propertyIDs: null
-	,mixingTo: null
 	,animationsChanged: null
 	,timeScale: null
 	,trackEntryPool: null
@@ -83183,7 +83689,7 @@ spine_AnimationState.prototype = {
 				var nextTime = current.trackLast - next.delay;
 				if(nextTime >= 0) {
 					next.delay = 0;
-					next.trackTime = nextTime + delta * next.timeScale;
+					next.trackTime += current.timeScale == 0 ? 0 : (nextTime / current.timeScale + delta) * next.timeScale;
 					current.trackTime += currentDelta;
 					var from;
 					if(i < this.tracks.length) {
@@ -83205,6 +83711,7 @@ spine_AnimationState.prototype = {
 						_this.objects.push(1);
 						_this.objects.push(from);
 						next.mixingFrom = from;
+						from.mixingTo = next;
 						next.mixTime = 0;
 						if(from.mixingFrom != null && from.mixDuration > 0) {
 							next.interruptAlpha *= Math.min(1,from.mixTime / from.mixDuration | 0);
@@ -83217,7 +83724,7 @@ spine_AnimationState.prototype = {
 					_this1.objects.push(next);
 					_this1.AnimationState_this.animationsChanged = true;
 					while(next.mixingFrom != null) {
-						next.mixTime += currentDelta;
+						next.mixTime += delta;
 						next = next.mixingFrom;
 					}
 					++i;
@@ -83254,9 +83761,12 @@ spine_AnimationState.prototype = {
 						var finished1 = this.updateMixingFrom(from2,delta);
 						from2.animationLast = from2.nextAnimationLast;
 						from2.trackLast = from2.nextTrackLast;
-						if(from1.mixTime > 0 && (from1.mixTime >= from1.mixDuration || from1.timeScale == 0)) {
+						if(from1.mixTime > 0 && from1.mixTime >= from1.mixDuration) {
 							if(from2.totalAlpha == 0 || from1.mixDuration == 0) {
 								from1.mixingFrom = from2.mixingFrom;
+								if(from2.mixingFrom != null) {
+									from2.mixingFrom.mixingTo = from1;
+								}
 								from1.interruptAlpha = from2.interruptAlpha;
 								var _this4 = this.queue;
 								_this4.objects.push(2);
@@ -83266,15 +83776,18 @@ spine_AnimationState.prototype = {
 							finished = finished1;
 						} else {
 							from2.trackTime += delta * from2.timeScale;
-							from1.mixTime += delta * from1.timeScale;
+							from1.mixTime += delta;
 							finished = false;
 						}
 					}
 					from1.animationLast = from1.nextAnimationLast;
 					from1.trackLast = from1.nextTrackLast;
-					if(current.mixTime > 0 && (current.mixTime >= current.mixDuration || current.timeScale == 0)) {
+					if(current.mixTime > 0 && current.mixTime >= current.mixDuration) {
 						if(from1.totalAlpha == 0 || current.mixDuration == 0) {
 							current.mixingFrom = from1.mixingFrom;
+							if(from1.mixingFrom != null) {
+								from1.mixingFrom.mixingTo = current;
+							}
 							current.interruptAlpha = from1.interruptAlpha;
 							var _this5 = this.queue;
 							_this5.objects.push(2);
@@ -83284,7 +83797,7 @@ spine_AnimationState.prototype = {
 						tmp = finished;
 					} else {
 						from1.trackTime += delta * from1.timeScale;
-						current.mixTime += delta * current.timeScale;
+						current.mixTime += delta;
 						tmp = false;
 					}
 				}
@@ -83294,6 +83807,9 @@ spine_AnimationState.prototype = {
 			if(tmp) {
 				var from3 = current.mixingFrom;
 				current.mixingFrom = null;
+				if(from3 != null) {
+					from3.mixingTo = null;
+				}
 				while(from3 != null) {
 					var _this6 = this.queue;
 					_this6.objects.push(2);
@@ -83312,11 +83828,12 @@ spine_AnimationState.prototype = {
 			var listeners = _this.AnimationState_this.listeners;
 			var i = 0;
 			while(i < objects.length) {
-				var type = js_Boot.__cast(objects[i] , Int);
-				var entry = js_Boot.__cast(objects[i + 1] , spine_TrackEntry);
+				var type = objects[i];
+				var result = objects[i + 1];
+				var entry = result;
 				while(true) {
-					var _switchCond1 = type;
-					if(_switchCond1 == 0) {
+					var _switchCond2 = type;
+					if(_switchCond2 == 0) {
 						if(entry.listener != null) {
 							entry.listener.start(entry);
 						}
@@ -83326,7 +83843,7 @@ spine_AnimationState.prototype = {
 							++ii;
 						}
 						break;
-					} else if(_switchCond1 == 1) {
+					} else if(_switchCond2 == 1) {
 						if(entry.listener != null) {
 							entry.listener.interrupt(entry);
 						}
@@ -83336,7 +83853,7 @@ spine_AnimationState.prototype = {
 							++ii1;
 						}
 						break;
-					} else if(_switchCond1 == 2) {
+					} else if(_switchCond2 == 2) {
 						if(entry.listener != null) {
 							entry.listener.end(entry);
 						}
@@ -83355,7 +83872,7 @@ spine_AnimationState.prototype = {
 						}
 						_this.AnimationState_this.trackEntryPool.free(entry);
 						break;
-					} else if(_switchCond1 == 3) {
+					} else if(_switchCond2 == 3) {
 						if(entry.listener != null) {
 							entry.listener.dispose(entry);
 						}
@@ -83366,7 +83883,7 @@ spine_AnimationState.prototype = {
 						}
 						_this.AnimationState_this.trackEntryPool.free(entry);
 						break;
-					} else if(_switchCond1 == 4) {
+					} else if(_switchCond2 == 4) {
 						if(entry.listener != null) {
 							entry.listener.complete(entry);
 						}
@@ -83376,8 +83893,9 @@ spine_AnimationState.prototype = {
 							++ii5;
 						}
 						break;
-					} else if(_switchCond1 == 5) {
-						var event = js_Boot.__cast(objects[i++ + 2] , spine_Event);
+					} else if(_switchCond2 == 5) {
+						var result1 = objects[i++ + 2];
+						var event = result1;
 						if(entry.listener != null) {
 							entry.listener.event(entry,event);
 						}
@@ -83405,9 +83923,12 @@ spine_AnimationState.prototype = {
 		var finished = this.updateMixingFrom(from,delta);
 		from.animationLast = from.nextAnimationLast;
 		from.trackLast = from.nextTrackLast;
-		if(to.mixTime > 0 && (to.mixTime >= to.mixDuration || to.timeScale == 0)) {
+		if(to.mixTime > 0 && to.mixTime >= to.mixDuration) {
 			if(from.totalAlpha == 0 || to.mixDuration == 0) {
 				to.mixingFrom = from.mixingFrom;
+				if(from.mixingFrom != null) {
+					from.mixingFrom.mixingTo = to;
+				}
 				to.interruptAlpha = from.interruptAlpha;
 				var _this = this.queue;
 				_this.objects.push(2);
@@ -83417,7 +83938,7 @@ spine_AnimationState.prototype = {
 			return finished;
 		}
 		from.trackTime += delta * from.timeScale;
-		to.mixTime += delta * to.timeScale;
+		to.mixTime += delta;
 		return false;
 	}
 	,apply: function(skeleton) {
@@ -83426,9 +83947,9 @@ spine_AnimationState.prototype = {
 		}
 		if(this.animationsChanged) {
 			this.animationsChanged = false;
-			var propertyIDs = this.propertyIDs;
+			var this1 = this.propertyIDs;
 			var keys = [];
-			var key = propertyIDs.keys();
+			var key = this1.keys();
 			while(key.hasNext()) {
 				var key1 = key.next();
 				keys.push(key1);
@@ -83437,33 +83958,23 @@ spine_AnimationState.prototype = {
 			while(_g < keys.length) {
 				var key = keys[_g];
 				++_g;
-				propertyIDs.remove(key);
+				this1.remove(key);
 			}
-			var mixingTo = this.mixingTo;
 			var i = 0;
 			var n = this.tracks.length;
 			while(i < n) {
 				var entry = this.tracks[i];
-				if(entry != null) {
-					var to = null;
-					if(to != null) {
-						mixingTo.push(to);
-					}
-					var lastEntry;
-					if(entry.mixingFrom != null) {
-						var _this = entry.mixingFrom;
-						if(entry != null) {
-							mixingTo.push(entry);
-						}
-						var lastEntry1 = _this.mixingFrom != null ? _this.mixingFrom.setTimelineData(_this,mixingTo,propertyIDs) : _this;
-						if(entry != null) {
-							mixingTo.pop();
-						}
-						var mixingTo1 = mixingTo;
-						var mixingToLast = mixingTo.length - 1;
-						var timelines = _this.animation.timelines;
-						var timelinesCount = _this.animation.timelines.length;
-						var this1 = _this.timelineData;
+				if(entry == null) {
+					++i;
+					continue;
+				}
+				while(entry.mixingFrom != null) entry = entry.mixingFrom;
+				while(true) {
+					if(entry.mixingTo == null || entry.mixBlend != 3) {
+						var to = entry.mixingTo;
+						var timelines = entry.animation.timelines;
+						var timelinesCount = entry.animation.timelines.length;
+						var this1 = entry.timelineMode;
 						var len = this1.length;
 						if(len > timelinesCount) {
 							this1.splice(timelinesCount,timelinesCount - len);
@@ -83473,149 +83984,133 @@ spine_AnimationState.prototype = {
 								++len;
 							}
 						}
-						var timelineData = this1;
-						var this2 = _this.timelineDipMix;
+						var timelineMode = this1;
+						var this2 = entry.timelineHoldMix;
 						this2.splice(0,this2.length);
-						var this3 = _this.timelineDipMix;
+						var this3 = entry.timelineHoldMix;
 						var len1 = this3.length;
 						if(len1 > timelinesCount) {
 							this3.splice(timelinesCount,timelinesCount - len1);
 						} else if(len1 < timelinesCount) {
 							this3[timelinesCount - 1] = null;
 						}
-						var timelineDipMix = this3;
-						var _gotoLabel_outer;
-						while(true) {
-							_gotoLabel_outer = 0;
+						var timelineHoldMix = this3;
+						var propertyIDs = this.propertyIDs;
+						if(to != null && to.holdPrevious) {
 							var i1 = 0;
 							while(i1 < timelinesCount) {
-								var id = (js_Boot.__cast(timelines[i1] , spine_Timeline)).getPropertyId();
-								var lastEntry2;
-								if(propertyIDs.h.hasOwnProperty(id)) {
-									lastEntry2 = false;
-								} else {
-									propertyIDs.h[id] = true;
-									lastEntry2 = true;
+								var result = timelines[i1];
+								var val = result.getPropertyId();
+								if(!propertyIDs.h.hasOwnProperty(val)) {
+									propertyIDs.h[val] = true;
 								}
-								if(!lastEntry2) {
-									timelineData[i1] = 0;
-								} else if(entry == null || !entry.hasTimeline(id)) {
-									timelineData[i1] = 1;
-								} else {
-									var ii = mixingToLast;
-									while(ii >= 0) {
-										var entry1 = js_Boot.__cast(mixingTo1[ii] , spine_TrackEntry);
-										if(!entry1.hasTimeline(id)) {
-											if(entry1.mixDuration > 0) {
-												timelineData[i1] = 3;
-												timelineDipMix[i1] = entry1;
-												--ii;
+								timelineMode[i1] = 2;
+								++i1;
+							}
+						} else {
+							var _gotoLabel_outer;
+							while(true) {
+								_gotoLabel_outer = 0;
+								var i2 = 0;
+								while(i2 < timelinesCount) {
+									var result1 = timelines[i2];
+									var timeline = result1;
+									var id = timeline.getPropertyId();
+									var tmp;
+									if(propertyIDs.h.hasOwnProperty(id)) {
+										tmp = false;
+									} else {
+										propertyIDs.h[id] = true;
+										tmp = true;
+									}
+									if(!tmp) {
+										timelineMode[i2] = 0;
+									} else if(to == null || ((timeline) instanceof spine_AttachmentTimeline) || ((timeline) instanceof spine_DrawOrderTimeline) || ((timeline) instanceof spine_EventTimeline) || !to.animation.hasTimeline(id)) {
+										timelineMode[i2] = 1;
+									} else {
+										var next = to.mixingTo;
+										while(next != null) {
+											if(next.animation.hasTimeline(id)) {
+												next = next.mixingTo;
+												continue;
+											}
+											if(next.mixDuration > 0) {
+												timelineMode[i2] = 3;
+												timelineHoldMix[i2] = next;
+												next = next.mixingTo;
 												_gotoLabel_outer = 2;
 												break;
 											}
 											break;
 										}
-										--ii;
-									}
-									if(_gotoLabel_outer == 2) {
-										_gotoLabel_outer = 0;
-										++i1;
-										continue;
-									}
-									if(_gotoLabel_outer >= 1) {
-										break;
-									}
-									timelineData[i1] = 2;
-								}
-								++i1;
-							}
-							if(_gotoLabel_outer == 0) {
-								break;
-							}
-						}
-						lastEntry = lastEntry1;
-					} else {
-						lastEntry = entry;
-					}
-					if(to != null) {
-						mixingTo.pop();
-					}
-					var mixingTo2 = mixingTo;
-					var mixingToLast1 = mixingTo.length - 1;
-					var timelines1 = entry.animation.timelines;
-					var timelinesCount1 = entry.animation.timelines.length;
-					var this4 = entry.timelineData;
-					var len2 = this4.length;
-					if(len2 > timelinesCount1) {
-						this4.splice(timelinesCount1,timelinesCount1 - len2);
-					} else if(len2 < timelinesCount1) {
-						while(len2 < timelinesCount1) {
-							this4.push(0);
-							++len2;
-						}
-					}
-					var timelineData1 = this4;
-					var this5 = entry.timelineDipMix;
-					this5.splice(0,this5.length);
-					var this6 = entry.timelineDipMix;
-					var len3 = this6.length;
-					if(len3 > timelinesCount1) {
-						this6.splice(timelinesCount1,timelinesCount1 - len3);
-					} else if(len3 < timelinesCount1) {
-						this6[timelinesCount1 - 1] = null;
-					}
-					var timelineDipMix1 = this6;
-					var _gotoLabel_outer1;
-					while(true) {
-						_gotoLabel_outer1 = 0;
-						var i2 = 0;
-						while(i2 < timelinesCount1) {
-							var id1 = (js_Boot.__cast(timelines1[i2] , spine_Timeline)).getPropertyId();
-							var tmp;
-							if(propertyIDs.h.hasOwnProperty(id1)) {
-								tmp = false;
-							} else {
-								propertyIDs.h[id1] = true;
-								tmp = true;
-							}
-							if(!tmp) {
-								timelineData1[i2] = 0;
-							} else if(to == null || !to.hasTimeline(id1)) {
-								timelineData1[i2] = 1;
-							} else {
-								var ii1 = mixingToLast1;
-								while(ii1 >= 0) {
-									var entry2 = js_Boot.__cast(mixingTo2[ii1] , spine_TrackEntry);
-									if(!entry2.hasTimeline(id1)) {
-										if(entry2.mixDuration > 0) {
-											timelineData1[i2] = 3;
-											timelineDipMix1[i2] = entry2;
-											--ii1;
-											_gotoLabel_outer1 = 2;
+										if(_gotoLabel_outer == 2) {
+											_gotoLabel_outer = 0;
+											++i2;
+											continue;
+										}
+										if(_gotoLabel_outer >= 1) {
 											break;
 										}
-										break;
+										timelineMode[i2] = 2;
 									}
-									--ii1;
-								}
-								if(_gotoLabel_outer1 == 2) {
-									_gotoLabel_outer1 = 0;
 									++i2;
-									continue;
 								}
-								if(_gotoLabel_outer1 >= 1) {
+								if(_gotoLabel_outer == 0) {
 									break;
 								}
-								timelineData1[i2] = 2;
 							}
-							++i2;
 						}
-						if(_gotoLabel_outer1 == 0) {
-							break;
-						}
+					}
+					entry = entry.mixingTo;
+					if(!(entry != null)) {
+						break;
 					}
 				}
 				++i;
+			}
+			var this1 = this.propertyIDs;
+			var keys = [];
+			var key = this1.keys();
+			while(key.hasNext()) {
+				var key1 = key.next();
+				keys.push(key1);
+			}
+			var _g = 0;
+			while(_g < keys.length) {
+				var key = keys[_g];
+				++_g;
+				this1.remove(key);
+			}
+			var i = this.tracks.length - 1;
+			while(i >= 0) {
+				var entry = this.tracks[i];
+				while(entry != null) {
+					var timelines = entry.animation.timelines;
+					var timelinesCount = entry.animation.timelines.length;
+					var timelineMode = entry.timelineMode;
+					var propertyIDs = this.propertyIDs;
+					var i1 = 0;
+					while(i1 < timelinesCount) {
+						if(((timelines[i1]) instanceof spine_AttachmentTimeline)) {
+							var result = timelines[i1];
+							var timeline = result;
+							var val = timeline.slotIndex;
+							var tmp;
+							if(propertyIDs.h.hasOwnProperty(val)) {
+								tmp = false;
+							} else {
+								propertyIDs.h[val] = true;
+								tmp = true;
+							}
+							if(!tmp) {
+								timelineMode[i1] |= 4;
+							}
+						}
+						++i1;
+					}
+					entry = entry.mixingFrom;
+				}
+				--i;
 			}
 		}
 		var events = this.events;
@@ -83629,10 +84124,10 @@ spine_AnimationState.prototype = {
 				continue;
 			}
 			applied = true;
-			var currentPose = i == 0 ? 1 : 2;
+			var blend = i == 0 ? 1 : current.mixBlend;
 			var mix = current.alpha;
 			if(current.mixingFrom != null) {
-				mix *= this.applyMixingFrom(current,skeleton,currentPose);
+				mix *= this.applyMixingFrom(current,skeleton,blend);
 			} else if(current.trackTime >= current.trackEnd && current.next == null) {
 				mix = 0;
 			}
@@ -83646,15 +84141,16 @@ spine_AnimationState.prototype = {
 			}
 			var timelineCount = current.animation.timelines.length;
 			var timelines = current.animation.timelines;
-			if(mix == 1) {
+			if(i == 0 && mix == 1 || blend == 3) {
 				var ii = 0;
 				while(ii < timelineCount) {
-					(js_Boot.__cast(timelines[ii] , spine_Timeline)).apply(skeleton,animationLast,animationTime,events,1,0,0);
+					var result = timelines[ii];
+					result.apply(skeleton,animationLast,animationTime,events,mix,blend,0);
 					++ii;
 				}
 			} else {
-				var timelineData = current.timelineData;
-				var firstFrame = current.timelinesRotation.length == 0;
+				var timelineMode = current.timelineMode;
+				var firstFrame = current.timelinesRotation.length != timelineCount << 1;
 				if(firstFrame) {
 					var this1 = current.timelinesRotation;
 					var size = timelineCount << 1;
@@ -83671,74 +84167,14 @@ spine_AnimationState.prototype = {
 				var timelinesRotation = current.timelinesRotation;
 				var ii1 = 0;
 				while(ii1 < timelineCount) {
-					var timeline = js_Boot.__cast(timelines[ii1] , spine_Timeline);
-					var pose = timelineData[ii1] >= 1 ? 0 : currentPose;
+					var result1 = timelines[ii1];
+					var timeline = result1;
+					var timelineBlend = (timelineMode[ii1] & 3) == 0 ? blend : 0;
 					if(((timeline) instanceof spine_RotateTimeline)) {
-						var i1 = ii1 << 1;
-						if(firstFrame) {
-							timelinesRotation[i1] = 0;
-						}
-						if(mix == 1) {
-							timeline.apply(skeleton,0,animationTime,null,1,pose,0);
-						} else {
-							var rotateTimeline = js_Boot.__cast(timeline , spine_RotateTimeline);
-							var bone = skeleton.bones[rotateTimeline.boneIndex];
-							var frames = rotateTimeline.frames;
-							if(animationTime < frames[0]) {
-								if(pose == 0) {
-									bone.rotation = bone.data.rotation;
-								}
-							} else {
-								var r2 = 0;
-								if(animationTime >= frames[frames.length - 2]) {
-									r2 = bone.data.rotation + frames[frames.length + (-1)];
-								} else {
-									var frame = spine_Animation.binarySearchWithStep(frames,animationTime,2);
-									var prevRotation = frames[frame + (-1)];
-									var frameTime = frames[frame];
-									var percent = rotateTimeline.getCurvePercent((frame >> 1) - 1,1 - (animationTime - frameTime) / (frames[frame + (-2)] - frameTime));
-									r2 = frames[frame + 1] - prevRotation;
-									r2 -= (16384 - (16384.499999999996 - r2 / 360 | 0)) * 360;
-									r2 = prevRotation + r2 * percent + bone.data.rotation;
-									r2 -= (16384 - (16384.499999999996 - r2 / 360 | 0)) * 360;
-								}
-								var r1 = pose == 0 ? bone.data.rotation : bone.rotation;
-								var total = 0;
-								var diff = r2 - r1;
-								if(diff == 0) {
-									total = timelinesRotation[i1];
-								} else {
-									diff -= (16384 - (16384.499999999996 - diff / 360 | 0)) * 360;
-									var lastTotal = 0;
-									var lastDiff = 0;
-									if(firstFrame) {
-										lastTotal = 0;
-										lastDiff = diff;
-									} else {
-										lastTotal = timelinesRotation[i1];
-										lastDiff = timelinesRotation[i1 + 1];
-									}
-									var current1 = diff > 0;
-									var dir = lastTotal >= 0;
-									if((lastDiff > 0 ? 1 : lastDiff < 0 ? -1 : 0) != (diff > 0 ? 1 : diff < 0 ? -1 : 0) && Math.abs(lastDiff) <= 90) {
-										if(Math.abs(lastTotal) > 180) {
-											lastTotal += 360 * (lastTotal > 0 ? 1 : lastTotal < 0 ? -1 : 0);
-										}
-										dir = current1;
-									}
-									total = diff + lastTotal - lastTotal % 360;
-									if(dir != current1) {
-										total += 360 * (lastTotal > 0 ? 1 : lastTotal < 0 ? -1 : 0);
-									}
-									timelinesRotation[i1] = total;
-								}
-								timelinesRotation[i1 + 1] = diff;
-								r1 += total * mix;
-								bone.rotation = r1 - (16384 - (16384.499999999996 - r1 / 360 | 0)) * 360;
-							}
-						}
+						var result2 = timeline;
+						this.applyRotateTimeline(result2,skeleton,animationTime,mix,timelineBlend,timelinesRotation,ii1 << 1,firstFrame);
 					} else {
-						timeline.apply(skeleton,animationLast,animationTime,events,mix,pose,0);
+						timeline.apply(skeleton,animationLast,animationTime,events,mix,timelineBlend,0);
 					}
 					++ii1;
 				}
@@ -83748,22 +84184,22 @@ spine_AnimationState.prototype = {
 			var duration1 = animationEnd - animationStart;
 			var trackLastWrapped = current.trackLast % duration1;
 			var events1 = this.events;
-			var i2 = 0;
+			var i1 = 0;
 			var n1 = events1.length;
-			while(i2 < n1) {
-				var event = events1[i2];
+			while(i1 < n1) {
+				var event = events1[i1];
 				if(event.time < trackLastWrapped) {
 					break;
 				}
 				if(event.time > animationEnd) {
-					++i2;
+					++i1;
 					continue;
 				}
 				var _this = this.queue;
 				_this.objects.push(5);
 				_this.objects.push(current);
 				_this.objects.push(event);
-				++i2;
+				++i1;
 			}
 			var complete = false;
 			if(current.loop) {
@@ -83776,17 +84212,17 @@ spine_AnimationState.prototype = {
 				_this1.objects.push(4);
 				_this1.objects.push(current);
 			}
-			while(i2 < n1) {
-				var event1 = events1[i2];
+			while(i1 < n1) {
+				var event1 = events1[i1];
 				if(event1.time < animationStart) {
-					++i2;
+					++i1;
 					continue;
 				}
 				var _this2 = this.queue;
 				_this2.objects.push(5);
 				_this2.objects.push(current);
-				_this2.objects.push(events1[i2]);
-				++i2;
+				_this2.objects.push(events1[i1]);
+				++i1;
 			}
 			events.splice(0,events.length);
 			current.nextAnimationLast = animationTime;
@@ -83800,11 +84236,12 @@ spine_AnimationState.prototype = {
 			var listeners = _this.AnimationState_this.listeners;
 			var i = 0;
 			while(i < objects.length) {
-				var type = js_Boot.__cast(objects[i] , Int);
-				var entry = js_Boot.__cast(objects[i + 1] , spine_TrackEntry);
+				var type = objects[i];
+				var result = objects[i + 1];
+				var entry = result;
 				while(true) {
-					var _switchCond1 = type;
-					if(_switchCond1 == 0) {
+					var _switchCond2 = type;
+					if(_switchCond2 == 0) {
 						if(entry.listener != null) {
 							entry.listener.start(entry);
 						}
@@ -83814,7 +84251,7 @@ spine_AnimationState.prototype = {
 							++ii;
 						}
 						break;
-					} else if(_switchCond1 == 1) {
+					} else if(_switchCond2 == 1) {
 						if(entry.listener != null) {
 							entry.listener.interrupt(entry);
 						}
@@ -83824,7 +84261,7 @@ spine_AnimationState.prototype = {
 							++ii1;
 						}
 						break;
-					} else if(_switchCond1 == 2) {
+					} else if(_switchCond2 == 2) {
 						if(entry.listener != null) {
 							entry.listener.end(entry);
 						}
@@ -83843,7 +84280,7 @@ spine_AnimationState.prototype = {
 						}
 						_this.AnimationState_this.trackEntryPool.free(entry);
 						break;
-					} else if(_switchCond1 == 3) {
+					} else if(_switchCond2 == 3) {
 						if(entry.listener != null) {
 							entry.listener.dispose(entry);
 						}
@@ -83854,7 +84291,7 @@ spine_AnimationState.prototype = {
 						}
 						_this.AnimationState_this.trackEntryPool.free(entry);
 						break;
-					} else if(_switchCond1 == 4) {
+					} else if(_switchCond2 == 4) {
 						if(entry.listener != null) {
 							entry.listener.complete(entry);
 						}
@@ -83864,8 +84301,9 @@ spine_AnimationState.prototype = {
 							++ii5;
 						}
 						break;
-					} else if(_switchCond1 == 5) {
-						var event = js_Boot.__cast(objects[i++ + 2] , spine_Event);
+					} else if(_switchCond2 == 5) {
+						var result1 = objects[i++ + 2];
+						var event = result1;
 						if(entry.listener != null) {
 							entry.listener.event(entry,event);
 						}
@@ -83886,19 +84324,24 @@ spine_AnimationState.prototype = {
 		}
 		return applied;
 	}
-	,applyMixingFrom: function(to,skeleton,currentPose) {
+	,applyMixingFrom: function(to,skeleton,blend) {
 		var from = to.mixingFrom;
 		if(from.mixingFrom != null) {
-			this.applyMixingFrom(from,skeleton,currentPose);
+			this.applyMixingFrom(from,skeleton,blend);
 		}
 		var mix = 0;
 		if(to.mixDuration == 0) {
 			mix = 1;
-			currentPose = 0;
+			if(blend == 1) {
+				blend = 0;
+			}
 		} else {
 			mix = to.mixTime / to.mixDuration;
 			if(mix > 1) {
 				mix = 1;
+			}
+			if(blend != 1) {
+				blend = from.mixBlend;
 			}
 		}
 		var events = mix < from.eventThreshold ? this.events : null;
@@ -83914,134 +84357,99 @@ spine_AnimationState.prototype = {
 		}
 		var timelineCount = from.animation.timelines.length;
 		var timelines = from.animation.timelines;
-		var timelineData = from.timelineData;
-		var timelineDipMix = from.timelineDipMix;
-		var firstFrame = from.timelinesRotation.length == 0;
-		if(firstFrame) {
-			var this1 = from.timelinesRotation;
-			var size = timelineCount << 1;
-			var len = this1.length;
-			if(len > size) {
-				this1.splice(size,size - len);
-			} else if(len < size) {
-				while(len < size) {
-					this1.push(0);
-					++len;
-				}
-			}
-		}
-		var timelinesRotation = from.timelinesRotation;
-		var pose = 0;
-		var alphaDip = from.alpha * to.interruptAlpha;
-		var alphaMix = alphaDip * (1 - mix);
-		var alpha = 0;
-		from.totalAlpha = 0;
-		var i = 0;
-		while(i < timelineCount) {
-			var timeline = js_Boot.__cast(timelines[i] , spine_Timeline);
-			var _continueAfterSwitch0 = false;
-			while(true) {
-				var _switchCond0 = timelineData[i];
-				if(_switchCond0 == 0) {
-					if(!attachments && ((timeline) instanceof spine_AttachmentTimeline)) {
-						_continueAfterSwitch0 = true;
-						break;
-					}
-					if(!drawOrder && ((timeline) instanceof spine_DrawOrderTimeline)) {
-						_continueAfterSwitch0 = true;
-						break;
-					}
-					pose = currentPose;
-					alpha = alphaMix;
-					break;
-				} else if(_switchCond0 == 1) {
-					pose = 0;
-					alpha = alphaMix;
-					break;
-				} else if(_switchCond0 == 2) {
-					pose = 0;
-					alpha = alphaDip;
-					break;
-				} else {
-					pose = 0;
-					var dipMix = js_Boot.__cast(timelineDipMix[i] , spine_TrackEntry);
-					alpha = alphaDip * Math.max(0,1 - dipMix.mixTime / dipMix.mixDuration | 0);
-				}
-				break;
-			}
-			if(_continueAfterSwitch0) {
+		var alphaHold = from.alpha * to.interruptAlpha;
+		var alphaMix = alphaHold * (1 - mix);
+		if(blend == 3) {
+			var i = 0;
+			while(i < timelineCount) {
+				var result = timelines[i];
+				result.apply(skeleton,animationLast,animationTime,events,alphaMix,blend,1);
 				++i;
-				continue;
 			}
-			from.totalAlpha += alpha;
-			if(((timeline) instanceof spine_RotateTimeline)) {
-				var i1 = i << 1;
-				if(firstFrame) {
-					timelinesRotation[i1] = 0;
-				}
-				if(alpha == 1) {
-					timeline.apply(skeleton,0,animationTime,null,1,pose,0);
-				} else {
-					var rotateTimeline = js_Boot.__cast(timeline , spine_RotateTimeline);
-					var bone = skeleton.bones[rotateTimeline.boneIndex];
-					var frames = rotateTimeline.frames;
-					if(animationTime < frames[0]) {
-						if(pose == 0) {
-							bone.rotation = bone.data.rotation;
-						}
-					} else {
-						var r2 = 0;
-						if(animationTime >= frames[frames.length - 2]) {
-							r2 = bone.data.rotation + frames[frames.length + (-1)];
-						} else {
-							var frame = spine_Animation.binarySearchWithStep(frames,animationTime,2);
-							var prevRotation = frames[frame + (-1)];
-							var frameTime = frames[frame];
-							var percent = rotateTimeline.getCurvePercent((frame >> 1) - 1,1 - (animationTime - frameTime) / (frames[frame + (-2)] - frameTime));
-							r2 = frames[frame + 1] - prevRotation;
-							r2 -= (16384 - (16384.499999999996 - r2 / 360 | 0)) * 360;
-							r2 = prevRotation + r2 * percent + bone.data.rotation;
-							r2 -= (16384 - (16384.499999999996 - r2 / 360 | 0)) * 360;
-						}
-						var r1 = pose == 0 ? bone.data.rotation : bone.rotation;
-						var total = 0;
-						var diff = r2 - r1;
-						if(diff == 0) {
-							total = timelinesRotation[i1];
-						} else {
-							diff -= (16384 - (16384.499999999996 - diff / 360 | 0)) * 360;
-							var lastTotal = 0;
-							var lastDiff = 0;
-							if(firstFrame) {
-								lastTotal = 0;
-								lastDiff = diff;
-							} else {
-								lastTotal = timelinesRotation[i1];
-								lastDiff = timelinesRotation[i1 + 1];
-							}
-							var current = diff > 0;
-							var dir = lastTotal >= 0;
-							if((lastDiff > 0 ? 1 : lastDiff < 0 ? -1 : 0) != (diff > 0 ? 1 : diff < 0 ? -1 : 0) && Math.abs(lastDiff) <= 90) {
-								if(Math.abs(lastTotal) > 180) {
-									lastTotal += 360 * (lastTotal > 0 ? 1 : lastTotal < 0 ? -1 : 0);
-								}
-								dir = current;
-							}
-							total = diff + lastTotal - lastTotal % 360;
-							if(dir != current) {
-								total += 360 * (lastTotal > 0 ? 1 : lastTotal < 0 ? -1 : 0);
-							}
-							timelinesRotation[i1] = total;
-						}
-						timelinesRotation[i1 + 1] = diff;
-						r1 += total * alpha;
-						bone.rotation = r1 - (16384 - (16384.499999999996 - r1 / 360 | 0)) * 360;
+		} else {
+			var timelineMode = from.timelineMode;
+			var timelineHoldMix = from.timelineHoldMix;
+			var firstFrame = from.timelinesRotation.length != timelineCount << 1;
+			if(firstFrame) {
+				var this1 = from.timelinesRotation;
+				var size = timelineCount << 1;
+				var len = this1.length;
+				if(len > size) {
+					this1.splice(size,size - len);
+				} else if(len < size) {
+					while(len < size) {
+						this1.push(0);
+						++len;
 					}
 				}
-			} else {
-				timeline.apply(skeleton,animationLast,animationTime,events,alpha,pose,1);
 			}
-			++i;
+			var timelinesRotation = from.timelinesRotation;
+			from.totalAlpha = 0;
+			var i = 0;
+			while(i < timelineCount) {
+				var result = timelines[i];
+				var timeline = result;
+				var direction = 1;
+				var timelineBlend = 0;
+				var alpha = 0;
+				var _continueAfterSwitch0 = false;
+				while(true) {
+					var _switchCond0 = timelineMode[i] & 3;
+					if(_switchCond0 == 0) {
+						timelineBlend = blend;
+						if(!attachments && ((timeline) instanceof spine_AttachmentTimeline)) {
+							if((timelineMode[i] & 4) == 4) {
+								_continueAfterSwitch0 = true;
+								break;
+							}
+							timelineBlend = 0;
+						}
+						if(!drawOrder && ((timeline) instanceof spine_DrawOrderTimeline)) {
+							_continueAfterSwitch0 = true;
+							break;
+						}
+						alpha = alphaMix;
+						break;
+					} else if(_switchCond0 == 1) {
+						timelineBlend = 0;
+						alpha = alphaMix;
+						break;
+					} else if(_switchCond0 == 2) {
+						timelineBlend = 0;
+						alpha = alphaHold;
+						break;
+					} else {
+						timelineBlend = 0;
+						var result1 = timelineHoldMix[i];
+						var holdMix = result1;
+						alpha = alphaHold * Math.max(0,1 - holdMix.mixTime / holdMix.mixDuration | 0);
+						break;
+					}
+				}
+				if(_continueAfterSwitch0) {
+					++i;
+					continue;
+				}
+				from.totalAlpha += alpha;
+				if(((timeline) instanceof spine_RotateTimeline)) {
+					var result2 = timeline;
+					this.applyRotateTimeline(result2,skeleton,animationTime,alpha,timelineBlend,timelinesRotation,i << 1,firstFrame);
+				} else {
+					if(timelineBlend == 0) {
+						if(((timeline) instanceof spine_AttachmentTimeline)) {
+							if(attachments || (timelineMode[i] & 4) == 4) {
+								direction = 0;
+							}
+						} else if(((timeline) instanceof spine_DrawOrderTimeline)) {
+							if(drawOrder) {
+								direction = 0;
+							}
+						}
+					}
+					timeline.apply(skeleton,animationLast,animationTime,events,alpha,timelineBlend,direction);
+				}
+				++i;
+			}
 		}
 		if(to.mixDuration > 0) {
 			var animationStart = from.animationStart;
@@ -84096,43 +84504,57 @@ spine_AnimationState.prototype = {
 		from.nextTrackLast = from.trackTime;
 		return mix;
 	}
-	,applyRotateTimeline: function(timeline,skeleton,time,alpha,pose,timelinesRotation,i,firstFrame) {
+	,applyRotateTimeline: function(timeline,skeleton,time,alpha,blend,timelinesRotation,i,firstFrame) {
 		if(firstFrame) {
 			timelinesRotation[i] = 0;
 		}
 		if(alpha == 1) {
-			timeline.apply(skeleton,0,time,null,1,pose,0);
+			timeline.apply(skeleton,0,time,null,1,blend,0);
 			return;
 		}
-		var rotateTimeline = js_Boot.__cast(timeline , spine_RotateTimeline);
-		var bone = skeleton.bones[rotateTimeline.boneIndex];
-		var frames = rotateTimeline.frames;
-		if(time < frames[0]) {
-			if(pose == 0) {
-				bone.rotation = bone.data.rotation;
-			}
+		var bone = skeleton.bones[timeline.boneIndex];
+		if(!bone.active) {
 			return;
 		}
+		var frames = timeline.frames;
+		var r1 = 0;
 		var r2 = 0;
-		if(time >= frames[frames.length - 2]) {
-			r2 = bone.data.rotation + frames[frames.length + (-1)];
+		if(time < frames[0]) {
+			var _continueAfterSwitch1 = false;
+			while(true) {
+				var _switchCond1 = blend;
+				if(_switchCond1 == 0) {
+					bone.rotation = bone.data.rotation;
+					return;
+				} else if(_switchCond1 == 1) {
+					r1 = bone.rotation;
+					r2 = bone.data.rotation;
+				} else {
+					return;
+				}
+				break;
+			}
 		} else {
-			var frame = spine_Animation.binarySearchWithStep(frames,time,2);
-			var prevRotation = frames[frame + (-1)];
-			var frameTime = frames[frame];
-			var percent = rotateTimeline.getCurvePercent((frame >> 1) - 1,1 - (time - frameTime) / (frames[frame + (-2)] - frameTime));
-			r2 = frames[frame + 1] - prevRotation;
-			r2 -= (16384 - (16384.499999999996 - r2 / 360 | 0)) * 360;
-			r2 = prevRotation + r2 * percent + bone.data.rotation;
-			r2 -= (16384 - (16384.499999999996 - r2 / 360 | 0)) * 360;
+			r1 = blend == 0 ? bone.data.rotation : bone.rotation;
+			if(time >= frames[frames.length - 2]) {
+				r2 = bone.data.rotation + frames[frames.length + (-1)];
+			} else {
+				var frame = spine_Animation.binarySearchWithStep(frames,time,2);
+				var prevRotation = frames[frame + (-1)];
+				var frameTime = frames[frame];
+				var percent = timeline.getCurvePercent((frame >> 1) - 1,1 - (time - frameTime) / (frames[frame + (-2)] - frameTime));
+				r2 = frames[frame + 1] - prevRotation;
+				r2 -= (16384 - (16384.499999999996 - r2 / 360 | 0)) * 360;
+				r2 = prevRotation + r2 * percent + bone.data.rotation;
+				r2 -= (16384 - (16384.499999999996 - r2 / 360 | 0)) * 360;
+			}
 		}
-		var r1 = pose == 0 ? bone.data.rotation : bone.rotation;
 		var total = 0;
 		var diff = r2 - r1;
+		diff -= (16384 - (16384.499999999996 - diff / 360 | 0)) * 360;
 		if(diff == 0) {
 			total = timelinesRotation[i];
 		} else {
-			diff -= (16384 - (16384.499999999996 - diff / 360 | 0)) * 360;
 			var lastTotal = 0;
 			var lastDiff = 0;
 			if(firstFrame) {
@@ -84213,6 +84635,9 @@ spine_AnimationState.prototype = {
 		var i = 0;
 		var n = this.tracks.length;
 		while(i < n) {
+			if(i < 0) {
+				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("trackIndex must be >= 0."));
+			}
 			if(i < this.tracks.length) {
 				var current = this.tracks[i];
 				if(current != null) {
@@ -84239,6 +84664,7 @@ spine_AnimationState.prototype = {
 						_this2.objects.push(from);
 						_this2.AnimationState_this.animationsChanged = true;
 						entry.mixingFrom = null;
+						entry.mixingTo = null;
 						entry = from;
 					}
 					this.tracks[current.trackIndex] = null;
@@ -84249,11 +84675,12 @@ spine_AnimationState.prototype = {
 						var listeners = _this3.AnimationState_this.listeners;
 						var i1 = 0;
 						while(i1 < objects.length) {
-							var type = js_Boot.__cast(objects[i1] , Int);
-							var entry1 = js_Boot.__cast(objects[i1 + 1] , spine_TrackEntry);
+							var type = objects[i1];
+							var result = objects[i1 + 1];
+							var entry1 = result;
 							while(true) {
-								var _switchCond1 = type;
-								if(_switchCond1 == 0) {
+								var _switchCond2 = type;
+								if(_switchCond2 == 0) {
 									if(entry1.listener != null) {
 										entry1.listener.start(entry1);
 									}
@@ -84263,7 +84690,7 @@ spine_AnimationState.prototype = {
 										++ii;
 									}
 									break;
-								} else if(_switchCond1 == 1) {
+								} else if(_switchCond2 == 1) {
 									if(entry1.listener != null) {
 										entry1.listener.interrupt(entry1);
 									}
@@ -84273,7 +84700,7 @@ spine_AnimationState.prototype = {
 										++ii1;
 									}
 									break;
-								} else if(_switchCond1 == 2) {
+								} else if(_switchCond2 == 2) {
 									if(entry1.listener != null) {
 										entry1.listener.end(entry1);
 									}
@@ -84292,7 +84719,7 @@ spine_AnimationState.prototype = {
 									}
 									_this3.AnimationState_this.trackEntryPool.free(entry1);
 									break;
-								} else if(_switchCond1 == 3) {
+								} else if(_switchCond2 == 3) {
 									if(entry1.listener != null) {
 										entry1.listener.dispose(entry1);
 									}
@@ -84303,7 +84730,7 @@ spine_AnimationState.prototype = {
 									}
 									_this3.AnimationState_this.trackEntryPool.free(entry1);
 									break;
-								} else if(_switchCond1 == 4) {
+								} else if(_switchCond2 == 4) {
 									if(entry1.listener != null) {
 										entry1.listener.complete(entry1);
 									}
@@ -84313,8 +84740,9 @@ spine_AnimationState.prototype = {
 										++ii5;
 									}
 									break;
-								} else if(_switchCond1 == 5) {
-									var event = js_Boot.__cast(objects[i1++ + 2] , spine_Event);
+								} else if(_switchCond2 == 5) {
+									var result1 = objects[i1++ + 2];
+									var event = result1;
 									if(entry1.listener != null) {
 										entry1.listener.event(entry1,event);
 									}
@@ -84347,11 +84775,12 @@ spine_AnimationState.prototype = {
 			var listeners = _this.AnimationState_this.listeners;
 			var i = 0;
 			while(i < objects.length) {
-				var type = js_Boot.__cast(objects[i] , Int);
-				var entry = js_Boot.__cast(objects[i + 1] , spine_TrackEntry);
+				var type = objects[i];
+				var result = objects[i + 1];
+				var entry = result;
 				while(true) {
-					var _switchCond1 = type;
-					if(_switchCond1 == 0) {
+					var _switchCond2 = type;
+					if(_switchCond2 == 0) {
 						if(entry.listener != null) {
 							entry.listener.start(entry);
 						}
@@ -84361,7 +84790,7 @@ spine_AnimationState.prototype = {
 							++ii;
 						}
 						break;
-					} else if(_switchCond1 == 1) {
+					} else if(_switchCond2 == 1) {
 						if(entry.listener != null) {
 							entry.listener.interrupt(entry);
 						}
@@ -84371,7 +84800,7 @@ spine_AnimationState.prototype = {
 							++ii1;
 						}
 						break;
-					} else if(_switchCond1 == 2) {
+					} else if(_switchCond2 == 2) {
 						if(entry.listener != null) {
 							entry.listener.end(entry);
 						}
@@ -84390,7 +84819,7 @@ spine_AnimationState.prototype = {
 						}
 						_this.AnimationState_this.trackEntryPool.free(entry);
 						break;
-					} else if(_switchCond1 == 3) {
+					} else if(_switchCond2 == 3) {
 						if(entry.listener != null) {
 							entry.listener.dispose(entry);
 						}
@@ -84401,7 +84830,7 @@ spine_AnimationState.prototype = {
 						}
 						_this.AnimationState_this.trackEntryPool.free(entry);
 						break;
-					} else if(_switchCond1 == 4) {
+					} else if(_switchCond2 == 4) {
 						if(entry.listener != null) {
 							entry.listener.complete(entry);
 						}
@@ -84411,8 +84840,9 @@ spine_AnimationState.prototype = {
 							++ii5;
 						}
 						break;
-					} else if(_switchCond1 == 5) {
-						var event = js_Boot.__cast(objects[i++ + 2] , spine_Event);
+					} else if(_switchCond2 == 5) {
+						var result1 = objects[i++ + 2];
+						var event = result1;
 						if(entry.listener != null) {
 							entry.listener.event(entry,event);
 						}
@@ -84433,6 +84863,9 @@ spine_AnimationState.prototype = {
 		}
 	}
 	,clearTrack: function(trackIndex) {
+		if(trackIndex < 0) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("trackIndex must be >= 0."));
+		}
 		if(trackIndex >= this.tracks.length) {
 			return;
 		}
@@ -84463,6 +84896,7 @@ spine_AnimationState.prototype = {
 			_this.objects.push(from);
 			_this.AnimationState_this.animationsChanged = true;
 			entry.mixingFrom = null;
+			entry.mixingTo = null;
 			entry = from;
 		}
 		this.tracks[current.trackIndex] = null;
@@ -84473,11 +84907,12 @@ spine_AnimationState.prototype = {
 			var listeners = _this.AnimationState_this.listeners;
 			var i = 0;
 			while(i < objects.length) {
-				var type = js_Boot.__cast(objects[i] , Int);
-				var entry = js_Boot.__cast(objects[i + 1] , spine_TrackEntry);
+				var type = objects[i];
+				var result = objects[i + 1];
+				var entry = result;
 				while(true) {
-					var _switchCond1 = type;
-					if(_switchCond1 == 0) {
+					var _switchCond2 = type;
+					if(_switchCond2 == 0) {
 						if(entry.listener != null) {
 							entry.listener.start(entry);
 						}
@@ -84487,7 +84922,7 @@ spine_AnimationState.prototype = {
 							++ii;
 						}
 						break;
-					} else if(_switchCond1 == 1) {
+					} else if(_switchCond2 == 1) {
 						if(entry.listener != null) {
 							entry.listener.interrupt(entry);
 						}
@@ -84497,7 +84932,7 @@ spine_AnimationState.prototype = {
 							++ii1;
 						}
 						break;
-					} else if(_switchCond1 == 2) {
+					} else if(_switchCond2 == 2) {
 						if(entry.listener != null) {
 							entry.listener.end(entry);
 						}
@@ -84516,7 +84951,7 @@ spine_AnimationState.prototype = {
 						}
 						_this.AnimationState_this.trackEntryPool.free(entry);
 						break;
-					} else if(_switchCond1 == 3) {
+					} else if(_switchCond2 == 3) {
 						if(entry.listener != null) {
 							entry.listener.dispose(entry);
 						}
@@ -84527,7 +84962,7 @@ spine_AnimationState.prototype = {
 						}
 						_this.AnimationState_this.trackEntryPool.free(entry);
 						break;
-					} else if(_switchCond1 == 4) {
+					} else if(_switchCond2 == 4) {
 						if(entry.listener != null) {
 							entry.listener.complete(entry);
 						}
@@ -84537,8 +84972,9 @@ spine_AnimationState.prototype = {
 							++ii5;
 						}
 						break;
-					} else if(_switchCond1 == 5) {
-						var event = js_Boot.__cast(objects[i++ + 2] , spine_Event);
+					} else if(_switchCond2 == 5) {
+						var result1 = objects[i++ + 2];
+						var event = result1;
 						if(entry.listener != null) {
 							entry.listener.event(entry,event);
 						}
@@ -84581,6 +85017,7 @@ spine_AnimationState.prototype = {
 				_this.objects.push(from);
 			}
 			current.mixingFrom = from;
+			from.mixingTo = current;
 			current.mixTime = 0;
 			if(from.mixingFrom != null && from.mixDuration > 0) {
 				current.interruptAlpha *= Math.min(1,from.mixTime / from.mixDuration | 0);
@@ -84597,6 +85034,9 @@ spine_AnimationState.prototype = {
 		var animation = this.data.skeletonData.findAnimation(animationName);
 		if(animation == null) {
 			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("Animation not found: " + animationName));
+		}
+		if(trackIndex < 0) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("trackIndex must be >= 0."));
 		}
 		if(animation == null) {
 			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("animation cannot be null."));
@@ -84651,6 +85091,7 @@ spine_AnimationState.prototype = {
 		entry.trackIndex = trackIndex;
 		entry.animation = animation;
 		entry.loop = loop;
+		entry.holdPrevious = false;
 		entry.eventThreshold = 0;
 		entry.attachmentThreshold = 0;
 		entry.drawOrderThreshold = 0;
@@ -84679,9 +85120,30 @@ spine_AnimationState.prototype = {
 			if(animation == null) {
 				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("to cannot be null."));
 			}
-			_this.tempKey.a1 = from;
-			_this.tempKey.a2 = animation;
-			tmp = spine_support_utils_ObjectMap.get(_this.animationToMixTime,_this.tempKey,_this.defaultMix);
+			_this.tempAnimationStateDataKey.a1 = from;
+			_this.tempAnimationStateDataKey.a2 = animation;
+			var this1 = _this.animationToMixTime;
+			var key = _this.tempAnimationStateDataKey;
+			var defaultValue = _this.defaultMix;
+			if(defaultValue == null) {
+				defaultValue = 0.0;
+			}
+			var key1 = key.getHashCode();
+			var entries = this1.h[key1];
+			var result = defaultValue;
+			if(entries != null) {
+				var _g = 0;
+				var _g1 = entries.length;
+				while(_g < _g1) {
+					var i = _g++;
+					var entry1 = entries[i];
+					if(entry1.key.equals(key)) {
+						result = entry1.value;
+						break;
+					}
+				}
+			}
+			tmp = result;
 		}
 		entry.mixDuration = tmp;
 		var entry1 = entry;
@@ -84707,6 +85169,7 @@ spine_AnimationState.prototype = {
 				_this.objects.push(from);
 			}
 			entry1.mixingFrom = from;
+			from.mixingTo = entry1;
 			entry1.mixTime = 0;
 			if(from.mixingFrom != null && from.mixDuration > 0) {
 				entry1.interruptAlpha *= Math.min(1,from.mixTime / from.mixDuration | 0);
@@ -84725,11 +85188,12 @@ spine_AnimationState.prototype = {
 			var listeners = _this.AnimationState_this.listeners;
 			var i = 0;
 			while(i < objects.length) {
-				var type = js_Boot.__cast(objects[i] , Int);
-				var entry = js_Boot.__cast(objects[i + 1] , spine_TrackEntry);
+				var type = objects[i];
+				var result = objects[i + 1];
+				var entry = result;
 				while(true) {
-					var _switchCond1 = type;
-					if(_switchCond1 == 0) {
+					var _switchCond2 = type;
+					if(_switchCond2 == 0) {
 						if(entry.listener != null) {
 							entry.listener.start(entry);
 						}
@@ -84739,7 +85203,7 @@ spine_AnimationState.prototype = {
 							++ii;
 						}
 						break;
-					} else if(_switchCond1 == 1) {
+					} else if(_switchCond2 == 1) {
 						if(entry.listener != null) {
 							entry.listener.interrupt(entry);
 						}
@@ -84749,7 +85213,7 @@ spine_AnimationState.prototype = {
 							++ii1;
 						}
 						break;
-					} else if(_switchCond1 == 2) {
+					} else if(_switchCond2 == 2) {
 						if(entry.listener != null) {
 							entry.listener.end(entry);
 						}
@@ -84768,7 +85232,7 @@ spine_AnimationState.prototype = {
 						}
 						_this.AnimationState_this.trackEntryPool.free(entry);
 						break;
-					} else if(_switchCond1 == 3) {
+					} else if(_switchCond2 == 3) {
 						if(entry.listener != null) {
 							entry.listener.dispose(entry);
 						}
@@ -84779,7 +85243,7 @@ spine_AnimationState.prototype = {
 						}
 						_this.AnimationState_this.trackEntryPool.free(entry);
 						break;
-					} else if(_switchCond1 == 4) {
+					} else if(_switchCond2 == 4) {
 						if(entry.listener != null) {
 							entry.listener.complete(entry);
 						}
@@ -84789,8 +85253,9 @@ spine_AnimationState.prototype = {
 							++ii5;
 						}
 						break;
-					} else if(_switchCond1 == 5) {
-						var event = js_Boot.__cast(objects[i++ + 2] , spine_Event);
+					} else if(_switchCond2 == 5) {
+						var result1 = objects[i++ + 2];
+						var event = result1;
 						if(entry.listener != null) {
 							entry.listener.event(entry,event);
 						}
@@ -84812,6 +85277,9 @@ spine_AnimationState.prototype = {
 		return entry1;
 	}
 	,setAnimation: function(trackIndex,animation,loop) {
+		if(trackIndex < 0) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("trackIndex must be >= 0."));
+		}
 		if(animation == null) {
 			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("animation cannot be null."));
 		}
@@ -84865,6 +85333,7 @@ spine_AnimationState.prototype = {
 		entry.trackIndex = trackIndex;
 		entry.animation = animation;
 		entry.loop = loop;
+		entry.holdPrevious = false;
 		entry.eventThreshold = 0;
 		entry.attachmentThreshold = 0;
 		entry.drawOrderThreshold = 0;
@@ -84893,9 +85362,30 @@ spine_AnimationState.prototype = {
 			if(animation == null) {
 				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("to cannot be null."));
 			}
-			_this.tempKey.a1 = from;
-			_this.tempKey.a2 = animation;
-			tmp = spine_support_utils_ObjectMap.get(_this.animationToMixTime,_this.tempKey,_this.defaultMix);
+			_this.tempAnimationStateDataKey.a1 = from;
+			_this.tempAnimationStateDataKey.a2 = animation;
+			var this1 = _this.animationToMixTime;
+			var key = _this.tempAnimationStateDataKey;
+			var defaultValue = _this.defaultMix;
+			if(defaultValue == null) {
+				defaultValue = 0.0;
+			}
+			var key1 = key.getHashCode();
+			var entries = this1.h[key1];
+			var result = defaultValue;
+			if(entries != null) {
+				var _g = 0;
+				var _g1 = entries.length;
+				while(_g < _g1) {
+					var i = _g++;
+					var entry1 = entries[i];
+					if(entry1.key.equals(key)) {
+						result = entry1.value;
+						break;
+					}
+				}
+			}
+			tmp = result;
 		}
 		entry.mixDuration = tmp;
 		var entry1 = entry;
@@ -84921,6 +85411,7 @@ spine_AnimationState.prototype = {
 				_this.objects.push(from);
 			}
 			entry1.mixingFrom = from;
+			from.mixingTo = entry1;
 			entry1.mixTime = 0;
 			if(from.mixingFrom != null && from.mixDuration > 0) {
 				entry1.interruptAlpha *= Math.min(1,from.mixTime / from.mixDuration | 0);
@@ -84939,11 +85430,12 @@ spine_AnimationState.prototype = {
 			var listeners = _this.AnimationState_this.listeners;
 			var i = 0;
 			while(i < objects.length) {
-				var type = js_Boot.__cast(objects[i] , Int);
-				var entry = js_Boot.__cast(objects[i + 1] , spine_TrackEntry);
+				var type = objects[i];
+				var result = objects[i + 1];
+				var entry = result;
 				while(true) {
-					var _switchCond1 = type;
-					if(_switchCond1 == 0) {
+					var _switchCond2 = type;
+					if(_switchCond2 == 0) {
 						if(entry.listener != null) {
 							entry.listener.start(entry);
 						}
@@ -84953,7 +85445,7 @@ spine_AnimationState.prototype = {
 							++ii;
 						}
 						break;
-					} else if(_switchCond1 == 1) {
+					} else if(_switchCond2 == 1) {
 						if(entry.listener != null) {
 							entry.listener.interrupt(entry);
 						}
@@ -84963,7 +85455,7 @@ spine_AnimationState.prototype = {
 							++ii1;
 						}
 						break;
-					} else if(_switchCond1 == 2) {
+					} else if(_switchCond2 == 2) {
 						if(entry.listener != null) {
 							entry.listener.end(entry);
 						}
@@ -84982,7 +85474,7 @@ spine_AnimationState.prototype = {
 						}
 						_this.AnimationState_this.trackEntryPool.free(entry);
 						break;
-					} else if(_switchCond1 == 3) {
+					} else if(_switchCond2 == 3) {
 						if(entry.listener != null) {
 							entry.listener.dispose(entry);
 						}
@@ -84993,7 +85485,7 @@ spine_AnimationState.prototype = {
 						}
 						_this.AnimationState_this.trackEntryPool.free(entry);
 						break;
-					} else if(_switchCond1 == 4) {
+					} else if(_switchCond2 == 4) {
 						if(entry.listener != null) {
 							entry.listener.complete(entry);
 						}
@@ -85003,8 +85495,9 @@ spine_AnimationState.prototype = {
 							++ii5;
 						}
 						break;
-					} else if(_switchCond1 == 5) {
-						var event = js_Boot.__cast(objects[i++ + 2] , spine_Event);
+					} else if(_switchCond2 == 5) {
+						var result1 = objects[i++ + 2];
+						var event = result1;
 						if(entry.listener != null) {
 							entry.listener.event(entry,event);
 						}
@@ -85031,6 +85524,9 @@ spine_AnimationState.prototype = {
 			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("Animation not found: " + animationName));
 		}
 		var delay1 = delay;
+		if(trackIndex < 0) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("trackIndex must be >= 0."));
+		}
 		if(animation == null) {
 			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("animation cannot be null."));
 		}
@@ -85055,6 +85551,7 @@ spine_AnimationState.prototype = {
 		entry.trackIndex = trackIndex;
 		entry.animation = animation;
 		entry.loop = loop;
+		entry.holdPrevious = false;
 		entry.eventThreshold = 0;
 		entry.attachmentThreshold = 0;
 		entry.drawOrderThreshold = 0;
@@ -85083,9 +85580,30 @@ spine_AnimationState.prototype = {
 			if(animation == null) {
 				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("to cannot be null."));
 			}
-			_this.tempKey.a1 = from;
-			_this.tempKey.a2 = animation;
-			tmp = spine_support_utils_ObjectMap.get(_this.animationToMixTime,_this.tempKey,_this.defaultMix);
+			_this.tempAnimationStateDataKey.a1 = from;
+			_this.tempAnimationStateDataKey.a2 = animation;
+			var this1 = _this.animationToMixTime;
+			var key = _this.tempAnimationStateDataKey;
+			var defaultValue = _this.defaultMix;
+			if(defaultValue == null) {
+				defaultValue = 0.0;
+			}
+			var key1 = key.getHashCode();
+			var entries = this1.h[key1];
+			var result = defaultValue;
+			if(entries != null) {
+				var _g = 0;
+				var _g1 = entries.length;
+				while(_g < _g1) {
+					var i = _g++;
+					var entry1 = entries[i];
+					if(entry1.key.equals(key)) {
+						result = entry1.value;
+						break;
+					}
+				}
+			}
+			tmp = result;
 		}
 		entry.mixDuration = tmp;
 		var entry1 = entry;
@@ -85110,6 +85628,7 @@ spine_AnimationState.prototype = {
 				_this.objects.push(1);
 				_this.objects.push(from);
 				entry1.mixingFrom = from;
+				from.mixingTo = entry1;
 				entry1.mixTime = 0;
 				if(from.mixingFrom != null && from.mixDuration > 0) {
 					entry1.interruptAlpha *= Math.min(1,from.mixTime / from.mixDuration | 0);
@@ -85128,11 +85647,12 @@ spine_AnimationState.prototype = {
 				var listeners = _this.AnimationState_this.listeners;
 				var i = 0;
 				while(i < objects.length) {
-					var type = js_Boot.__cast(objects[i] , Int);
-					var entry = js_Boot.__cast(objects[i + 1] , spine_TrackEntry);
+					var type = objects[i];
+					var result = objects[i + 1];
+					var entry = result;
 					while(true) {
-						var _switchCond1 = type;
-						if(_switchCond1 == 0) {
+						var _switchCond2 = type;
+						if(_switchCond2 == 0) {
 							if(entry.listener != null) {
 								entry.listener.start(entry);
 							}
@@ -85142,7 +85662,7 @@ spine_AnimationState.prototype = {
 								++ii;
 							}
 							break;
-						} else if(_switchCond1 == 1) {
+						} else if(_switchCond2 == 1) {
 							if(entry.listener != null) {
 								entry.listener.interrupt(entry);
 							}
@@ -85152,7 +85672,7 @@ spine_AnimationState.prototype = {
 								++ii1;
 							}
 							break;
-						} else if(_switchCond1 == 2) {
+						} else if(_switchCond2 == 2) {
 							if(entry.listener != null) {
 								entry.listener.end(entry);
 							}
@@ -85171,7 +85691,7 @@ spine_AnimationState.prototype = {
 							}
 							_this.AnimationState_this.trackEntryPool.free(entry);
 							break;
-						} else if(_switchCond1 == 3) {
+						} else if(_switchCond2 == 3) {
 							if(entry.listener != null) {
 								entry.listener.dispose(entry);
 							}
@@ -85182,7 +85702,7 @@ spine_AnimationState.prototype = {
 							}
 							_this.AnimationState_this.trackEntryPool.free(entry);
 							break;
-						} else if(_switchCond1 == 4) {
+						} else if(_switchCond2 == 4) {
 							if(entry.listener != null) {
 								entry.listener.complete(entry);
 							}
@@ -85192,8 +85712,9 @@ spine_AnimationState.prototype = {
 								++ii5;
 							}
 							break;
-						} else if(_switchCond1 == 5) {
-							var event = js_Boot.__cast(objects[i++ + 2] , spine_Event);
+						} else if(_switchCond2 == 5) {
+							var result1 = objects[i++ + 2];
+							var event = result1;
 							if(entry.listener != null) {
 								entry.listener.event(entry,event);
 							}
@@ -85220,7 +85741,7 @@ spine_AnimationState.prototype = {
 					if(last.loop) {
 						delay1 += duration * (1 + (last.trackTime / duration | 0));
 					} else {
-						delay1 += duration;
+						delay1 += Math.max(duration,last.trackTime);
 					}
 					var _this = this.data;
 					var from = last.animation;
@@ -85230,11 +85751,32 @@ spine_AnimationState.prototype = {
 					if(animation == null) {
 						throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("to cannot be null."));
 					}
-					_this.tempKey.a1 = from;
-					_this.tempKey.a2 = animation;
-					delay1 -= spine_support_utils_ObjectMap.get(_this.animationToMixTime,_this.tempKey,_this.defaultMix);
+					_this.tempAnimationStateDataKey.a1 = from;
+					_this.tempAnimationStateDataKey.a2 = animation;
+					var this1 = _this.animationToMixTime;
+					var key = _this.tempAnimationStateDataKey;
+					var defaultValue = _this.defaultMix;
+					if(defaultValue == null) {
+						defaultValue = 0.0;
+					}
+					var key1 = key.getHashCode();
+					var entries = this1.h[key1];
+					var result = defaultValue;
+					if(entries != null) {
+						var _g = 0;
+						var _g1 = entries.length;
+						while(_g < _g1) {
+							var i = _g++;
+							var entry = entries[i];
+							if(entry.key.equals(key)) {
+								result = entry.value;
+								break;
+							}
+						}
+					}
+					delay1 -= result;
 				} else {
-					delay1 = 0;
+					delay1 = last.trackTime;
 				}
 			}
 		}
@@ -85242,6 +85784,9 @@ spine_AnimationState.prototype = {
 		return entry1;
 	}
 	,addAnimation: function(trackIndex,animation,loop,delay) {
+		if(trackIndex < 0) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("trackIndex must be >= 0."));
+		}
 		if(animation == null) {
 			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("animation cannot be null."));
 		}
@@ -85266,6 +85811,7 @@ spine_AnimationState.prototype = {
 		entry.trackIndex = trackIndex;
 		entry.animation = animation;
 		entry.loop = loop;
+		entry.holdPrevious = false;
 		entry.eventThreshold = 0;
 		entry.attachmentThreshold = 0;
 		entry.drawOrderThreshold = 0;
@@ -85294,9 +85840,30 @@ spine_AnimationState.prototype = {
 			if(animation == null) {
 				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("to cannot be null."));
 			}
-			_this.tempKey.a1 = from;
-			_this.tempKey.a2 = animation;
-			tmp = spine_support_utils_ObjectMap.get(_this.animationToMixTime,_this.tempKey,_this.defaultMix);
+			_this.tempAnimationStateDataKey.a1 = from;
+			_this.tempAnimationStateDataKey.a2 = animation;
+			var this1 = _this.animationToMixTime;
+			var key = _this.tempAnimationStateDataKey;
+			var defaultValue = _this.defaultMix;
+			if(defaultValue == null) {
+				defaultValue = 0.0;
+			}
+			var key1 = key.getHashCode();
+			var entries = this1.h[key1];
+			var result = defaultValue;
+			if(entries != null) {
+				var _g = 0;
+				var _g1 = entries.length;
+				while(_g < _g1) {
+					var i = _g++;
+					var entry1 = entries[i];
+					if(entry1.key.equals(key)) {
+						result = entry1.value;
+						break;
+					}
+				}
+			}
+			tmp = result;
 		}
 		entry.mixDuration = tmp;
 		var entry1 = entry;
@@ -85321,6 +85888,7 @@ spine_AnimationState.prototype = {
 				_this.objects.push(1);
 				_this.objects.push(from);
 				entry1.mixingFrom = from;
+				from.mixingTo = entry1;
 				entry1.mixTime = 0;
 				if(from.mixingFrom != null && from.mixDuration > 0) {
 					entry1.interruptAlpha *= Math.min(1,from.mixTime / from.mixDuration | 0);
@@ -85339,11 +85907,12 @@ spine_AnimationState.prototype = {
 				var listeners = _this.AnimationState_this.listeners;
 				var i = 0;
 				while(i < objects.length) {
-					var type = js_Boot.__cast(objects[i] , Int);
-					var entry = js_Boot.__cast(objects[i + 1] , spine_TrackEntry);
+					var type = objects[i];
+					var result = objects[i + 1];
+					var entry = result;
 					while(true) {
-						var _switchCond1 = type;
-						if(_switchCond1 == 0) {
+						var _switchCond2 = type;
+						if(_switchCond2 == 0) {
 							if(entry.listener != null) {
 								entry.listener.start(entry);
 							}
@@ -85353,7 +85922,7 @@ spine_AnimationState.prototype = {
 								++ii;
 							}
 							break;
-						} else if(_switchCond1 == 1) {
+						} else if(_switchCond2 == 1) {
 							if(entry.listener != null) {
 								entry.listener.interrupt(entry);
 							}
@@ -85363,7 +85932,7 @@ spine_AnimationState.prototype = {
 								++ii1;
 							}
 							break;
-						} else if(_switchCond1 == 2) {
+						} else if(_switchCond2 == 2) {
 							if(entry.listener != null) {
 								entry.listener.end(entry);
 							}
@@ -85382,7 +85951,7 @@ spine_AnimationState.prototype = {
 							}
 							_this.AnimationState_this.trackEntryPool.free(entry);
 							break;
-						} else if(_switchCond1 == 3) {
+						} else if(_switchCond2 == 3) {
 							if(entry.listener != null) {
 								entry.listener.dispose(entry);
 							}
@@ -85393,7 +85962,7 @@ spine_AnimationState.prototype = {
 							}
 							_this.AnimationState_this.trackEntryPool.free(entry);
 							break;
-						} else if(_switchCond1 == 4) {
+						} else if(_switchCond2 == 4) {
 							if(entry.listener != null) {
 								entry.listener.complete(entry);
 							}
@@ -85403,8 +85972,9 @@ spine_AnimationState.prototype = {
 								++ii5;
 							}
 							break;
-						} else if(_switchCond1 == 5) {
-							var event = js_Boot.__cast(objects[i++ + 2] , spine_Event);
+						} else if(_switchCond2 == 5) {
+							var result1 = objects[i++ + 2];
+							var event = result1;
 							if(entry.listener != null) {
 								entry.listener.event(entry,event);
 							}
@@ -85431,7 +86001,7 @@ spine_AnimationState.prototype = {
 					if(last.loop) {
 						delay += duration * (1 + (last.trackTime / duration | 0));
 					} else {
-						delay += duration;
+						delay += Math.max(duration,last.trackTime);
 					}
 					var _this = this.data;
 					var from = last.animation;
@@ -85441,11 +86011,32 @@ spine_AnimationState.prototype = {
 					if(animation == null) {
 						throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("to cannot be null."));
 					}
-					_this.tempKey.a1 = from;
-					_this.tempKey.a2 = animation;
-					delay -= spine_support_utils_ObjectMap.get(_this.animationToMixTime,_this.tempKey,_this.defaultMix);
+					_this.tempAnimationStateDataKey.a1 = from;
+					_this.tempAnimationStateDataKey.a2 = animation;
+					var this1 = _this.animationToMixTime;
+					var key = _this.tempAnimationStateDataKey;
+					var defaultValue = _this.defaultMix;
+					if(defaultValue == null) {
+						defaultValue = 0.0;
+					}
+					var key1 = key.getHashCode();
+					var entries = this1.h[key1];
+					var result = defaultValue;
+					if(entries != null) {
+						var _g = 0;
+						var _g1 = entries.length;
+						while(_g < _g1) {
+							var i = _g++;
+							var entry = entries[i];
+							if(entry.key.equals(key)) {
+								result = entry.value;
+								break;
+							}
+						}
+					}
+					delay -= result;
 				} else {
-					delay = 0;
+					delay = last.trackTime;
 				}
 			}
 		}
@@ -85454,6 +86045,9 @@ spine_AnimationState.prototype = {
 	}
 	,setEmptyAnimation: function(trackIndex,mixDuration) {
 		var animation = spine_AnimationState.emptyAnimation;
+		if(trackIndex < 0) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("trackIndex must be >= 0."));
+		}
 		if(animation == null) {
 			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("animation cannot be null."));
 		}
@@ -85507,6 +86101,7 @@ spine_AnimationState.prototype = {
 		entry.trackIndex = trackIndex;
 		entry.animation = animation;
 		entry.loop = false;
+		entry.holdPrevious = false;
 		entry.eventThreshold = 0;
 		entry.attachmentThreshold = 0;
 		entry.drawOrderThreshold = 0;
@@ -85535,9 +86130,30 @@ spine_AnimationState.prototype = {
 			if(animation == null) {
 				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("to cannot be null."));
 			}
-			_this.tempKey.a1 = from;
-			_this.tempKey.a2 = animation;
-			tmp = spine_support_utils_ObjectMap.get(_this.animationToMixTime,_this.tempKey,_this.defaultMix);
+			_this.tempAnimationStateDataKey.a1 = from;
+			_this.tempAnimationStateDataKey.a2 = animation;
+			var this1 = _this.animationToMixTime;
+			var key = _this.tempAnimationStateDataKey;
+			var defaultValue = _this.defaultMix;
+			if(defaultValue == null) {
+				defaultValue = 0.0;
+			}
+			var key1 = key.getHashCode();
+			var entries = this1.h[key1];
+			var result = defaultValue;
+			if(entries != null) {
+				var _g = 0;
+				var _g1 = entries.length;
+				while(_g < _g1) {
+					var i = _g++;
+					var entry1 = entries[i];
+					if(entry1.key.equals(key)) {
+						result = entry1.value;
+						break;
+					}
+				}
+			}
+			tmp = result;
 		}
 		entry.mixDuration = tmp;
 		var entry1 = entry;
@@ -85563,6 +86179,7 @@ spine_AnimationState.prototype = {
 				_this.objects.push(from);
 			}
 			entry1.mixingFrom = from;
+			from.mixingTo = entry1;
 			entry1.mixTime = 0;
 			if(from.mixingFrom != null && from.mixDuration > 0) {
 				entry1.interruptAlpha *= Math.min(1,from.mixTime / from.mixDuration | 0);
@@ -85581,11 +86198,12 @@ spine_AnimationState.prototype = {
 			var listeners = _this.AnimationState_this.listeners;
 			var i = 0;
 			while(i < objects.length) {
-				var type = js_Boot.__cast(objects[i] , Int);
-				var entry = js_Boot.__cast(objects[i + 1] , spine_TrackEntry);
+				var type = objects[i];
+				var result = objects[i + 1];
+				var entry = result;
 				while(true) {
-					var _switchCond1 = type;
-					if(_switchCond1 == 0) {
+					var _switchCond2 = type;
+					if(_switchCond2 == 0) {
 						if(entry.listener != null) {
 							entry.listener.start(entry);
 						}
@@ -85595,7 +86213,7 @@ spine_AnimationState.prototype = {
 							++ii;
 						}
 						break;
-					} else if(_switchCond1 == 1) {
+					} else if(_switchCond2 == 1) {
 						if(entry.listener != null) {
 							entry.listener.interrupt(entry);
 						}
@@ -85605,7 +86223,7 @@ spine_AnimationState.prototype = {
 							++ii1;
 						}
 						break;
-					} else if(_switchCond1 == 2) {
+					} else if(_switchCond2 == 2) {
 						if(entry.listener != null) {
 							entry.listener.end(entry);
 						}
@@ -85624,7 +86242,7 @@ spine_AnimationState.prototype = {
 						}
 						_this.AnimationState_this.trackEntryPool.free(entry);
 						break;
-					} else if(_switchCond1 == 3) {
+					} else if(_switchCond2 == 3) {
 						if(entry.listener != null) {
 							entry.listener.dispose(entry);
 						}
@@ -85635,7 +86253,7 @@ spine_AnimationState.prototype = {
 						}
 						_this.AnimationState_this.trackEntryPool.free(entry);
 						break;
-					} else if(_switchCond1 == 4) {
+					} else if(_switchCond2 == 4) {
 						if(entry.listener != null) {
 							entry.listener.complete(entry);
 						}
@@ -85645,8 +86263,9 @@ spine_AnimationState.prototype = {
 							++ii5;
 						}
 						break;
-					} else if(_switchCond1 == 5) {
-						var event = js_Boot.__cast(objects[i++ + 2] , spine_Event);
+					} else if(_switchCond2 == 5) {
+						var result1 = objects[i++ + 2];
+						var event = result1;
 						if(entry.listener != null) {
 							entry.listener.event(entry,event);
 						}
@@ -85676,6 +86295,9 @@ spine_AnimationState.prototype = {
 		}
 		var animation = spine_AnimationState.emptyAnimation;
 		var delay1 = delay;
+		if(trackIndex < 0) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("trackIndex must be >= 0."));
+		}
 		if(animation == null) {
 			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("animation cannot be null."));
 		}
@@ -85700,6 +86322,7 @@ spine_AnimationState.prototype = {
 		entry.trackIndex = trackIndex;
 		entry.animation = animation;
 		entry.loop = false;
+		entry.holdPrevious = false;
 		entry.eventThreshold = 0;
 		entry.attachmentThreshold = 0;
 		entry.drawOrderThreshold = 0;
@@ -85728,9 +86351,30 @@ spine_AnimationState.prototype = {
 			if(animation == null) {
 				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("to cannot be null."));
 			}
-			_this.tempKey.a1 = from;
-			_this.tempKey.a2 = animation;
-			tmp = spine_support_utils_ObjectMap.get(_this.animationToMixTime,_this.tempKey,_this.defaultMix);
+			_this.tempAnimationStateDataKey.a1 = from;
+			_this.tempAnimationStateDataKey.a2 = animation;
+			var this1 = _this.animationToMixTime;
+			var key = _this.tempAnimationStateDataKey;
+			var defaultValue = _this.defaultMix;
+			if(defaultValue == null) {
+				defaultValue = 0.0;
+			}
+			var key1 = key.getHashCode();
+			var entries = this1.h[key1];
+			var result = defaultValue;
+			if(entries != null) {
+				var _g = 0;
+				var _g1 = entries.length;
+				while(_g < _g1) {
+					var i = _g++;
+					var entry1 = entries[i];
+					if(entry1.key.equals(key)) {
+						result = entry1.value;
+						break;
+					}
+				}
+			}
+			tmp = result;
 		}
 		entry.mixDuration = tmp;
 		var entry1 = entry;
@@ -85755,6 +86399,7 @@ spine_AnimationState.prototype = {
 				_this.objects.push(1);
 				_this.objects.push(from);
 				entry1.mixingFrom = from;
+				from.mixingTo = entry1;
 				entry1.mixTime = 0;
 				if(from.mixingFrom != null && from.mixDuration > 0) {
 					entry1.interruptAlpha *= Math.min(1,from.mixTime / from.mixDuration | 0);
@@ -85773,11 +86418,12 @@ spine_AnimationState.prototype = {
 				var listeners = _this.AnimationState_this.listeners;
 				var i = 0;
 				while(i < objects.length) {
-					var type = js_Boot.__cast(objects[i] , Int);
-					var entry = js_Boot.__cast(objects[i + 1] , spine_TrackEntry);
+					var type = objects[i];
+					var result = objects[i + 1];
+					var entry = result;
 					while(true) {
-						var _switchCond1 = type;
-						if(_switchCond1 == 0) {
+						var _switchCond2 = type;
+						if(_switchCond2 == 0) {
 							if(entry.listener != null) {
 								entry.listener.start(entry);
 							}
@@ -85787,7 +86433,7 @@ spine_AnimationState.prototype = {
 								++ii;
 							}
 							break;
-						} else if(_switchCond1 == 1) {
+						} else if(_switchCond2 == 1) {
 							if(entry.listener != null) {
 								entry.listener.interrupt(entry);
 							}
@@ -85797,7 +86443,7 @@ spine_AnimationState.prototype = {
 								++ii1;
 							}
 							break;
-						} else if(_switchCond1 == 2) {
+						} else if(_switchCond2 == 2) {
 							if(entry.listener != null) {
 								entry.listener.end(entry);
 							}
@@ -85816,7 +86462,7 @@ spine_AnimationState.prototype = {
 							}
 							_this.AnimationState_this.trackEntryPool.free(entry);
 							break;
-						} else if(_switchCond1 == 3) {
+						} else if(_switchCond2 == 3) {
 							if(entry.listener != null) {
 								entry.listener.dispose(entry);
 							}
@@ -85827,7 +86473,7 @@ spine_AnimationState.prototype = {
 							}
 							_this.AnimationState_this.trackEntryPool.free(entry);
 							break;
-						} else if(_switchCond1 == 4) {
+						} else if(_switchCond2 == 4) {
 							if(entry.listener != null) {
 								entry.listener.complete(entry);
 							}
@@ -85837,8 +86483,9 @@ spine_AnimationState.prototype = {
 								++ii5;
 							}
 							break;
-						} else if(_switchCond1 == 5) {
-							var event = js_Boot.__cast(objects[i++ + 2] , spine_Event);
+						} else if(_switchCond2 == 5) {
+							var result1 = objects[i++ + 2];
+							var event = result1;
 							if(entry.listener != null) {
 								entry.listener.event(entry,event);
 							}
@@ -85865,7 +86512,7 @@ spine_AnimationState.prototype = {
 					if(last.loop) {
 						delay1 += duration * (1 + (last.trackTime / duration | 0));
 					} else {
-						delay1 += duration;
+						delay1 += Math.max(duration,last.trackTime);
 					}
 					var _this = this.data;
 					var from = last.animation;
@@ -85875,11 +86522,32 @@ spine_AnimationState.prototype = {
 					if(animation == null) {
 						throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("to cannot be null."));
 					}
-					_this.tempKey.a1 = from;
-					_this.tempKey.a2 = animation;
-					delay1 -= spine_support_utils_ObjectMap.get(_this.animationToMixTime,_this.tempKey,_this.defaultMix);
+					_this.tempAnimationStateDataKey.a1 = from;
+					_this.tempAnimationStateDataKey.a2 = animation;
+					var this1 = _this.animationToMixTime;
+					var key = _this.tempAnimationStateDataKey;
+					var defaultValue = _this.defaultMix;
+					if(defaultValue == null) {
+						defaultValue = 0.0;
+					}
+					var key1 = key.getHashCode();
+					var entries = this1.h[key1];
+					var result = defaultValue;
+					if(entries != null) {
+						var _g = 0;
+						var _g1 = entries.length;
+						while(_g < _g1) {
+							var i = _g++;
+							var entry = entries[i];
+							if(entry.key.equals(key)) {
+								result = entry.value;
+								break;
+							}
+						}
+					}
+					delay1 -= result;
 				} else {
-					delay1 = 0;
+					delay1 = last.trackTime;
 				}
 			}
 		}
@@ -85899,6 +86567,9 @@ spine_AnimationState.prototype = {
 			if(current != null) {
 				var trackIndex = current.trackIndex;
 				var animation = spine_AnimationState.emptyAnimation;
+				if(trackIndex < 0) {
+					throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("trackIndex must be >= 0."));
+				}
 				if(animation == null) {
 					throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("animation cannot be null."));
 				}
@@ -85952,6 +86623,7 @@ spine_AnimationState.prototype = {
 				entry.trackIndex = trackIndex;
 				entry.animation = animation;
 				entry.loop = false;
+				entry.holdPrevious = false;
 				entry.eventThreshold = 0;
 				entry.attachmentThreshold = 0;
 				entry.drawOrderThreshold = 0;
@@ -85980,139 +86652,163 @@ spine_AnimationState.prototype = {
 					if(animation == null) {
 						throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("to cannot be null."));
 					}
-					_this4.tempKey.a1 = from;
-					_this4.tempKey.a2 = animation;
-					tmp = spine_support_utils_ObjectMap.get(_this4.animationToMixTime,_this4.tempKey,_this4.defaultMix);
+					_this4.tempAnimationStateDataKey.a1 = from;
+					_this4.tempAnimationStateDataKey.a2 = animation;
+					var this2 = _this4.animationToMixTime;
+					var key = _this4.tempAnimationStateDataKey;
+					var defaultValue = _this4.defaultMix;
+					if(defaultValue == null) {
+						defaultValue = 0.0;
+					}
+					var key1 = key.getHashCode();
+					var entries = this2.h[key1];
+					var result = defaultValue;
+					if(entries != null) {
+						var _g = 0;
+						var _g1 = entries.length;
+						while(_g < _g1) {
+							var i1 = _g++;
+							var entry1 = entries[i1];
+							if(entry1.key.equals(key)) {
+								result = entry1.value;
+								break;
+							}
+						}
+					}
+					tmp = result;
 				}
 				entry.mixDuration = tmp;
-				var entry1 = entry;
+				var entry2 = entry;
 				var from1;
 				if(trackIndex < this.tracks.length) {
 					from1 = this.tracks[trackIndex];
 				} else {
-					var this2 = this.tracks;
+					var this3 = this.tracks;
 					var size1 = trackIndex + 1;
-					var len1 = this2.length;
+					var len1 = this3.length;
 					if(len1 > size1) {
-						this2.splice(size1,size1 - len1);
+						this3.splice(size1,size1 - len1);
 					} else if(len1 < size1) {
-						this2[size1 - 1] = null;
+						this3[size1 - 1] = null;
 					}
 					from1 = null;
 				}
-				this.tracks[trackIndex] = entry1;
+				this.tracks[trackIndex] = entry2;
 				if(from1 != null) {
 					if(interrupt) {
 						var _this5 = this.queue;
 						_this5.objects.push(1);
 						_this5.objects.push(from1);
 					}
-					entry1.mixingFrom = from1;
-					entry1.mixTime = 0;
+					entry2.mixingFrom = from1;
+					from1.mixingTo = entry2;
+					entry2.mixTime = 0;
 					if(from1.mixingFrom != null && from1.mixDuration > 0) {
-						entry1.interruptAlpha *= Math.min(1,from1.mixTime / from1.mixDuration | 0);
+						entry2.interruptAlpha *= Math.min(1,from1.mixTime / from1.mixDuration | 0);
 					}
-					var this3 = from1.timelinesRotation;
-					this3.splice(0,this3.length);
+					var this4 = from1.timelinesRotation;
+					this4.splice(0,this4.length);
 				}
 				var _this6 = this.queue;
 				_this6.objects.push(0);
-				_this6.objects.push(entry1);
+				_this6.objects.push(entry2);
 				_this6.AnimationState_this.animationsChanged = true;
 				var _this7 = this.queue;
 				if(!_this7.drainDisabled) {
 					_this7.drainDisabled = true;
 					var objects = _this7.objects;
 					var listeners = _this7.AnimationState_this.listeners;
-					var i1 = 0;
-					while(i1 < objects.length) {
-						var type = js_Boot.__cast(objects[i1] , Int);
-						var entry2 = js_Boot.__cast(objects[i1 + 1] , spine_TrackEntry);
+					var i2 = 0;
+					while(i2 < objects.length) {
+						var type = objects[i2];
+						var result1 = objects[i2 + 1];
+						var entry3 = result1;
 						while(true) {
-							var _switchCond1 = type;
-							if(_switchCond1 == 0) {
-								if(entry2.listener != null) {
-									entry2.listener.start(entry2);
+							var _switchCond2 = type;
+							if(_switchCond2 == 0) {
+								if(entry3.listener != null) {
+									entry3.listener.start(entry3);
 								}
 								var ii = 0;
 								while(ii < listeners.length) {
-									listeners[ii].start(entry2);
+									listeners[ii].start(entry3);
 									++ii;
 								}
 								break;
-							} else if(_switchCond1 == 1) {
-								if(entry2.listener != null) {
-									entry2.listener.interrupt(entry2);
+							} else if(_switchCond2 == 1) {
+								if(entry3.listener != null) {
+									entry3.listener.interrupt(entry3);
 								}
 								var ii1 = 0;
 								while(ii1 < listeners.length) {
-									listeners[ii1].interrupt(entry2);
+									listeners[ii1].interrupt(entry3);
 									++ii1;
 								}
 								break;
-							} else if(_switchCond1 == 2) {
-								if(entry2.listener != null) {
-									entry2.listener.end(entry2);
+							} else if(_switchCond2 == 2) {
+								if(entry3.listener != null) {
+									entry3.listener.end(entry3);
 								}
 								var ii2 = 0;
 								while(ii2 < listeners.length) {
-									listeners[ii2].end(entry2);
+									listeners[ii2].end(entry3);
 									++ii2;
 								}
-								if(entry2.listener != null) {
-									entry2.listener.dispose(entry2);
+								if(entry3.listener != null) {
+									entry3.listener.dispose(entry3);
 								}
 								var ii3 = 0;
 								while(ii3 < listeners.length) {
-									listeners[ii3].dispose(entry2);
+									listeners[ii3].dispose(entry3);
 									++ii3;
 								}
-								_this7.AnimationState_this.trackEntryPool.free(entry2);
+								_this7.AnimationState_this.trackEntryPool.free(entry3);
 								break;
-							} else if(_switchCond1 == 3) {
-								if(entry2.listener != null) {
-									entry2.listener.dispose(entry2);
+							} else if(_switchCond2 == 3) {
+								if(entry3.listener != null) {
+									entry3.listener.dispose(entry3);
 								}
 								var ii4 = 0;
 								while(ii4 < listeners.length) {
-									listeners[ii4].dispose(entry2);
+									listeners[ii4].dispose(entry3);
 									++ii4;
 								}
-								_this7.AnimationState_this.trackEntryPool.free(entry2);
+								_this7.AnimationState_this.trackEntryPool.free(entry3);
 								break;
-							} else if(_switchCond1 == 4) {
-								if(entry2.listener != null) {
-									entry2.listener.complete(entry2);
+							} else if(_switchCond2 == 4) {
+								if(entry3.listener != null) {
+									entry3.listener.complete(entry3);
 								}
 								var ii5 = 0;
 								while(ii5 < listeners.length) {
-									listeners[ii5].complete(entry2);
+									listeners[ii5].complete(entry3);
 									++ii5;
 								}
 								break;
-							} else if(_switchCond1 == 5) {
-								var event = js_Boot.__cast(objects[i1++ + 2] , spine_Event);
-								if(entry2.listener != null) {
-									entry2.listener.event(entry2,event);
+							} else if(_switchCond2 == 5) {
+								var result2 = objects[i2++ + 2];
+								var event = result2;
+								if(entry3.listener != null) {
+									entry3.listener.event(entry3,event);
 								}
 								var ii6 = 0;
 								while(ii6 < listeners.length) {
-									listeners[ii6].event(entry2,event);
+									listeners[ii6].event(entry3,event);
 									++ii6;
 								}
 								break;
 							}
 							break;
 						}
-						i1 += 2;
+						i2 += 2;
 					}
-					var this4 = _this7.objects;
-					this4.splice(0,this4.length);
+					var this5 = _this7.objects;
+					this5.splice(0,this5.length);
 					_this7.drainDisabled = false;
 				}
-				var entry3 = entry1;
-				entry3.mixDuration = mixDuration;
-				entry3.trackEnd = mixDuration;
+				var entry4 = entry2;
+				entry4.mixDuration = mixDuration;
+				entry4.trackEnd = mixDuration;
 			}
 			++i;
 		}
@@ -86124,11 +86820,12 @@ spine_AnimationState.prototype = {
 			var listeners = _this.AnimationState_this.listeners;
 			var i = 0;
 			while(i < objects.length) {
-				var type = js_Boot.__cast(objects[i] , Int);
-				var entry = js_Boot.__cast(objects[i + 1] , spine_TrackEntry);
+				var type = objects[i];
+				var result = objects[i + 1];
+				var entry = result;
 				while(true) {
-					var _switchCond1 = type;
-					if(_switchCond1 == 0) {
+					var _switchCond2 = type;
+					if(_switchCond2 == 0) {
 						if(entry.listener != null) {
 							entry.listener.start(entry);
 						}
@@ -86138,7 +86835,7 @@ spine_AnimationState.prototype = {
 							++ii;
 						}
 						break;
-					} else if(_switchCond1 == 1) {
+					} else if(_switchCond2 == 1) {
 						if(entry.listener != null) {
 							entry.listener.interrupt(entry);
 						}
@@ -86148,7 +86845,7 @@ spine_AnimationState.prototype = {
 							++ii1;
 						}
 						break;
-					} else if(_switchCond1 == 2) {
+					} else if(_switchCond2 == 2) {
 						if(entry.listener != null) {
 							entry.listener.end(entry);
 						}
@@ -86167,7 +86864,7 @@ spine_AnimationState.prototype = {
 						}
 						_this.AnimationState_this.trackEntryPool.free(entry);
 						break;
-					} else if(_switchCond1 == 3) {
+					} else if(_switchCond2 == 3) {
 						if(entry.listener != null) {
 							entry.listener.dispose(entry);
 						}
@@ -86178,7 +86875,7 @@ spine_AnimationState.prototype = {
 						}
 						_this.AnimationState_this.trackEntryPool.free(entry);
 						break;
-					} else if(_switchCond1 == 4) {
+					} else if(_switchCond2 == 4) {
 						if(entry.listener != null) {
 							entry.listener.complete(entry);
 						}
@@ -86188,8 +86885,9 @@ spine_AnimationState.prototype = {
 							++ii5;
 						}
 						break;
-					} else if(_switchCond1 == 5) {
-						var event = js_Boot.__cast(objects[i++ + 2] , spine_Event);
+					} else if(_switchCond2 == 5) {
+						var result1 = objects[i++ + 2];
+						var event = result1;
 						if(entry.listener != null) {
 							entry.listener.event(entry,event);
 						}
@@ -86228,6 +86926,7 @@ spine_AnimationState.prototype = {
 		entry.trackIndex = trackIndex;
 		entry.animation = animation;
 		entry.loop = loop;
+		entry.holdPrevious = false;
 		entry.eventThreshold = 0;
 		entry.attachmentThreshold = 0;
 		entry.drawOrderThreshold = 0;
@@ -86256,9 +86955,30 @@ spine_AnimationState.prototype = {
 			if(animation == null) {
 				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("to cannot be null."));
 			}
-			_this.tempKey.a1 = from;
-			_this.tempKey.a2 = animation;
-			tmp = spine_support_utils_ObjectMap.get(_this.animationToMixTime,_this.tempKey,_this.defaultMix);
+			_this.tempAnimationStateDataKey.a1 = from;
+			_this.tempAnimationStateDataKey.a2 = animation;
+			var this1 = _this.animationToMixTime;
+			var key = _this.tempAnimationStateDataKey;
+			var defaultValue = _this.defaultMix;
+			if(defaultValue == null) {
+				defaultValue = 0.0;
+			}
+			var key1 = key.getHashCode();
+			var entries = this1.h[key1];
+			var result = defaultValue;
+			if(entries != null) {
+				var _g = 0;
+				var _g1 = entries.length;
+				while(_g < _g1) {
+					var i = _g++;
+					var entry1 = entries[i];
+					if(entry1.key.equals(key)) {
+						result = entry1.value;
+						break;
+					}
+				}
+			}
+			tmp = result;
 		}
 		entry.mixDuration = tmp;
 		return entry;
@@ -86275,9 +86995,9 @@ spine_AnimationState.prototype = {
 	}
 	,handleAnimationsChanged: function() {
 		this.animationsChanged = false;
-		var propertyIDs = this.propertyIDs;
+		var this1 = this.propertyIDs;
 		var keys = [];
-		var key = propertyIDs.keys();
+		var key = this1.keys();
 		while(key.hasNext()) {
 			var key1 = key.next();
 			keys.push(key1);
@@ -86286,33 +87006,23 @@ spine_AnimationState.prototype = {
 		while(_g < keys.length) {
 			var key = keys[_g];
 			++_g;
-			propertyIDs.remove(key);
+			this1.remove(key);
 		}
-		var mixingTo = this.mixingTo;
 		var i = 0;
 		var n = this.tracks.length;
 		while(i < n) {
 			var entry = this.tracks[i];
-			if(entry != null) {
-				var to = null;
-				if(to != null) {
-					mixingTo.push(to);
-				}
-				var lastEntry;
-				if(entry.mixingFrom != null) {
-					var _this = entry.mixingFrom;
-					if(entry != null) {
-						mixingTo.push(entry);
-					}
-					var lastEntry1 = _this.mixingFrom != null ? _this.mixingFrom.setTimelineData(_this,mixingTo,propertyIDs) : _this;
-					if(entry != null) {
-						mixingTo.pop();
-					}
-					var mixingTo1 = mixingTo;
-					var mixingToLast = mixingTo.length - 1;
-					var timelines = _this.animation.timelines;
-					var timelinesCount = _this.animation.timelines.length;
-					var this1 = _this.timelineData;
+			if(entry == null) {
+				++i;
+				continue;
+			}
+			while(entry.mixingFrom != null) entry = entry.mixingFrom;
+			while(true) {
+				if(entry.mixingTo == null || entry.mixBlend != 3) {
+					var to = entry.mixingTo;
+					var timelines = entry.animation.timelines;
+					var timelinesCount = entry.animation.timelines.length;
+					var this1 = entry.timelineMode;
 					var len = this1.length;
 					if(len > timelinesCount) {
 						this1.splice(timelinesCount,timelinesCount - len);
@@ -86322,152 +87032,255 @@ spine_AnimationState.prototype = {
 							++len;
 						}
 					}
-					var timelineData = this1;
-					var this2 = _this.timelineDipMix;
+					var timelineMode = this1;
+					var this2 = entry.timelineHoldMix;
 					this2.splice(0,this2.length);
-					var this3 = _this.timelineDipMix;
+					var this3 = entry.timelineHoldMix;
 					var len1 = this3.length;
 					if(len1 > timelinesCount) {
 						this3.splice(timelinesCount,timelinesCount - len1);
 					} else if(len1 < timelinesCount) {
 						this3[timelinesCount - 1] = null;
 					}
-					var timelineDipMix = this3;
-					var _gotoLabel_outer;
-					while(true) {
-						_gotoLabel_outer = 0;
+					var timelineHoldMix = this3;
+					var propertyIDs = this.propertyIDs;
+					if(to != null && to.holdPrevious) {
 						var i1 = 0;
 						while(i1 < timelinesCount) {
-							var id = (js_Boot.__cast(timelines[i1] , spine_Timeline)).getPropertyId();
-							var lastEntry2;
-							if(propertyIDs.h.hasOwnProperty(id)) {
-								lastEntry2 = false;
-							} else {
-								propertyIDs.h[id] = true;
-								lastEntry2 = true;
+							var result = timelines[i1];
+							var val = result.getPropertyId();
+							if(!propertyIDs.h.hasOwnProperty(val)) {
+								propertyIDs.h[val] = true;
 							}
-							if(!lastEntry2) {
-								timelineData[i1] = 0;
-							} else if(entry == null || !entry.hasTimeline(id)) {
-								timelineData[i1] = 1;
-							} else {
-								var ii = mixingToLast;
-								while(ii >= 0) {
-									var entry1 = js_Boot.__cast(mixingTo1[ii] , spine_TrackEntry);
-									if(!entry1.hasTimeline(id)) {
-										if(entry1.mixDuration > 0) {
-											timelineData[i1] = 3;
-											timelineDipMix[i1] = entry1;
-											--ii;
+							timelineMode[i1] = 2;
+							++i1;
+						}
+					} else {
+						var _gotoLabel_outer;
+						while(true) {
+							_gotoLabel_outer = 0;
+							var i2 = 0;
+							while(i2 < timelinesCount) {
+								var result1 = timelines[i2];
+								var timeline = result1;
+								var id = timeline.getPropertyId();
+								var tmp;
+								if(propertyIDs.h.hasOwnProperty(id)) {
+									tmp = false;
+								} else {
+									propertyIDs.h[id] = true;
+									tmp = true;
+								}
+								if(!tmp) {
+									timelineMode[i2] = 0;
+								} else if(to == null || ((timeline) instanceof spine_AttachmentTimeline) || ((timeline) instanceof spine_DrawOrderTimeline) || ((timeline) instanceof spine_EventTimeline) || !to.animation.hasTimeline(id)) {
+									timelineMode[i2] = 1;
+								} else {
+									var next = to.mixingTo;
+									while(next != null) {
+										if(next.animation.hasTimeline(id)) {
+											next = next.mixingTo;
+											continue;
+										}
+										if(next.mixDuration > 0) {
+											timelineMode[i2] = 3;
+											timelineHoldMix[i2] = next;
+											next = next.mixingTo;
 											_gotoLabel_outer = 2;
 											break;
 										}
 										break;
 									}
-									--ii;
+									if(_gotoLabel_outer == 2) {
+										_gotoLabel_outer = 0;
+										++i2;
+										continue;
+									}
+									if(_gotoLabel_outer >= 1) {
+										break;
+									}
+									timelineMode[i2] = 2;
 								}
-								if(_gotoLabel_outer == 2) {
-									_gotoLabel_outer = 0;
-									++i1;
-									continue;
-								}
-								if(_gotoLabel_outer >= 1) {
-									break;
-								}
-								timelineData[i1] = 2;
+								++i2;
 							}
-							++i1;
-						}
-						if(_gotoLabel_outer == 0) {
-							break;
+							if(_gotoLabel_outer == 0) {
+								break;
+							}
 						}
 					}
-					lastEntry = lastEntry1;
-				} else {
-					lastEntry = entry;
 				}
-				if(to != null) {
-					mixingTo.pop();
+				entry = entry.mixingTo;
+				if(!(entry != null)) {
+					break;
 				}
-				var mixingTo2 = mixingTo;
-				var mixingToLast1 = mixingTo.length - 1;
-				var timelines1 = entry.animation.timelines;
-				var timelinesCount1 = entry.animation.timelines.length;
-				var this4 = entry.timelineData;
-				var len2 = this4.length;
-				if(len2 > timelinesCount1) {
-					this4.splice(timelinesCount1,timelinesCount1 - len2);
-				} else if(len2 < timelinesCount1) {
-					while(len2 < timelinesCount1) {
-						this4.push(0);
-						++len2;
-					}
-				}
-				var timelineData1 = this4;
-				var this5 = entry.timelineDipMix;
-				this5.splice(0,this5.length);
-				var this6 = entry.timelineDipMix;
-				var len3 = this6.length;
-				if(len3 > timelinesCount1) {
-					this6.splice(timelinesCount1,timelinesCount1 - len3);
-				} else if(len3 < timelinesCount1) {
-					this6[timelinesCount1 - 1] = null;
-				}
-				var timelineDipMix1 = this6;
-				var _gotoLabel_outer1;
-				while(true) {
-					_gotoLabel_outer1 = 0;
-					var i2 = 0;
-					while(i2 < timelinesCount1) {
-						var id1 = (js_Boot.__cast(timelines1[i2] , spine_Timeline)).getPropertyId();
+			}
+			++i;
+		}
+		var this1 = this.propertyIDs;
+		var keys = [];
+		var key = this1.keys();
+		while(key.hasNext()) {
+			var key1 = key.next();
+			keys.push(key1);
+		}
+		var _g = 0;
+		while(_g < keys.length) {
+			var key = keys[_g];
+			++_g;
+			this1.remove(key);
+		}
+		var i = this.tracks.length - 1;
+		while(i >= 0) {
+			var entry = this.tracks[i];
+			while(entry != null) {
+				var timelines = entry.animation.timelines;
+				var timelinesCount = entry.animation.timelines.length;
+				var timelineMode = entry.timelineMode;
+				var propertyIDs = this.propertyIDs;
+				var i1 = 0;
+				while(i1 < timelinesCount) {
+					if(((timelines[i1]) instanceof spine_AttachmentTimeline)) {
+						var result = timelines[i1];
+						var timeline = result;
+						var val = timeline.slotIndex;
 						var tmp;
-						if(propertyIDs.h.hasOwnProperty(id1)) {
+						if(propertyIDs.h.hasOwnProperty(val)) {
 							tmp = false;
 						} else {
-							propertyIDs.h[id1] = true;
+							propertyIDs.h[val] = true;
 							tmp = true;
 						}
 						if(!tmp) {
-							timelineData1[i2] = 0;
-						} else if(to == null || !to.hasTimeline(id1)) {
-							timelineData1[i2] = 1;
-						} else {
-							var ii1 = mixingToLast1;
-							while(ii1 >= 0) {
-								var entry2 = js_Boot.__cast(mixingTo2[ii1] , spine_TrackEntry);
-								if(!entry2.hasTimeline(id1)) {
-									if(entry2.mixDuration > 0) {
-										timelineData1[i2] = 3;
-										timelineDipMix1[i2] = entry2;
-										--ii1;
-										_gotoLabel_outer1 = 2;
-										break;
-									}
-									break;
-								}
-								--ii1;
-							}
-							if(_gotoLabel_outer1 == 2) {
-								_gotoLabel_outer1 = 0;
-								++i2;
-								continue;
-							}
-							if(_gotoLabel_outer1 >= 1) {
-								break;
-							}
-							timelineData1[i2] = 2;
+							timelineMode[i1] |= 4;
 						}
-						++i2;
 					}
-					if(_gotoLabel_outer1 == 0) {
+					++i1;
+				}
+				entry = entry.mixingFrom;
+			}
+			--i;
+		}
+	}
+	,computeHold: function(entry) {
+		var to = entry.mixingTo;
+		var timelines = entry.animation.timelines;
+		var timelinesCount = entry.animation.timelines.length;
+		var this1 = entry.timelineMode;
+		var len = this1.length;
+		if(len > timelinesCount) {
+			this1.splice(timelinesCount,timelinesCount - len);
+		} else if(len < timelinesCount) {
+			while(len < timelinesCount) {
+				this1.push(0);
+				++len;
+			}
+		}
+		var timelineMode = this1;
+		var this1 = entry.timelineHoldMix;
+		this1.splice(0,this1.length);
+		var this1 = entry.timelineHoldMix;
+		var len = this1.length;
+		if(len > timelinesCount) {
+			this1.splice(timelinesCount,timelinesCount - len);
+		} else if(len < timelinesCount) {
+			this1[timelinesCount - 1] = null;
+		}
+		var timelineHoldMix = this1;
+		var propertyIDs = this.propertyIDs;
+		if(to != null && to.holdPrevious) {
+			var i = 0;
+			while(i < timelinesCount) {
+				var result = timelines[i];
+				var val = result.getPropertyId();
+				if(!propertyIDs.h.hasOwnProperty(val)) {
+					propertyIDs.h[val] = true;
+				}
+				timelineMode[i] = 2;
+				++i;
+			}
+			return;
+		}
+		var _gotoLabel_outer;
+		while(true) {
+			_gotoLabel_outer = 0;
+			var i = 0;
+			while(i < timelinesCount) {
+				var result = timelines[i];
+				var timeline = result;
+				var id = timeline.getPropertyId();
+				var tmp;
+				if(propertyIDs.h.hasOwnProperty(id)) {
+					tmp = false;
+				} else {
+					propertyIDs.h[id] = true;
+					tmp = true;
+				}
+				if(!tmp) {
+					timelineMode[i] = 0;
+				} else if(to == null || ((timeline) instanceof spine_AttachmentTimeline) || ((timeline) instanceof spine_DrawOrderTimeline) || ((timeline) instanceof spine_EventTimeline) || !to.animation.hasTimeline(id)) {
+					timelineMode[i] = 1;
+				} else {
+					var next = to.mixingTo;
+					while(next != null) {
+						if(next.animation.hasTimeline(id)) {
+							next = next.mixingTo;
+							continue;
+						}
+						if(next.mixDuration > 0) {
+							timelineMode[i] = 3;
+							timelineHoldMix[i] = next;
+							next = next.mixingTo;
+							_gotoLabel_outer = 2;
+							break;
+						}
 						break;
 					}
+					if(_gotoLabel_outer == 2) {
+						_gotoLabel_outer = 0;
+						++i;
+						continue;
+					}
+					if(_gotoLabel_outer >= 1) {
+						break;
+					}
+					timelineMode[i] = 2;
+				}
+				++i;
+			}
+			if(_gotoLabel_outer == 0) {
+				break;
+			}
+		}
+	}
+	,computeNotLast: function(entry) {
+		var timelines = entry.animation.timelines;
+		var timelinesCount = entry.animation.timelines.length;
+		var timelineMode = entry.timelineMode;
+		var propertyIDs = this.propertyIDs;
+		var i = 0;
+		while(i < timelinesCount) {
+			if(((timelines[i]) instanceof spine_AttachmentTimeline)) {
+				var result = timelines[i];
+				var timeline = result;
+				var val = timeline.slotIndex;
+				var tmp;
+				if(propertyIDs.h.hasOwnProperty(val)) {
+					tmp = false;
+				} else {
+					propertyIDs.h[val] = true;
+					tmp = true;
+				}
+				if(!tmp) {
+					timelineMode[i] |= 4;
 				}
 			}
 			++i;
 		}
 	}
 	,getCurrent: function(trackIndex) {
+		if(trackIndex < 0) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("trackIndex must be >= 0."));
+		}
 		if(trackIndex >= this.tracks.length) {
 			return null;
 		}
@@ -86545,8 +87358,9 @@ spine_support_utils_Poolable.prototype = {
 };
 var spine_TrackEntry = function() {
 	this.timelinesRotation = [];
-	this.timelineDipMix = [];
-	this.timelineData = [];
+	this.timelineHoldMix = [];
+	this.timelineMode = [];
+	this.mixBlend = 2;
 	this.totalAlpha = 0;
 	this.interruptAlpha = 0;
 	this.mixDuration = 0;
@@ -86565,8 +87379,10 @@ var spine_TrackEntry = function() {
 	this.drawOrderThreshold = 0;
 	this.attachmentThreshold = 0;
 	this.eventThreshold = 0;
+	this.holdPrevious = false;
 	this.loop = false;
 	this.trackIndex = 0;
+	this.mixingTo = null;
 	this.mixingFrom = null;
 };
 $hxClasses["spine.TrackEntry"] = spine_TrackEntry;
@@ -86576,9 +87392,11 @@ spine_TrackEntry.prototype = {
 	animation: null
 	,next: null
 	,mixingFrom: null
+	,mixingTo: null
 	,listener: null
 	,trackIndex: null
 	,loop: null
+	,holdPrevious: null
 	,eventThreshold: null
 	,attachmentThreshold: null
 	,drawOrderThreshold: null
@@ -86597,116 +87415,22 @@ spine_TrackEntry.prototype = {
 	,mixDuration: null
 	,interruptAlpha: null
 	,totalAlpha: null
-	,timelineData: null
-	,timelineDipMix: null
+	,mixBlend: null
+	,timelineMode: null
+	,timelineHoldMix: null
 	,timelinesRotation: null
 	,reset: function() {
 		this.next = null;
 		this.mixingFrom = null;
+		this.mixingTo = null;
 		this.animation = null;
 		this.listener = null;
-		var this1 = this.timelineData;
+		var this1 = this.timelineMode;
 		this1.splice(0,this1.length);
-		var this1 = this.timelineDipMix;
+		var this1 = this.timelineHoldMix;
 		this1.splice(0,this1.length);
 		var this1 = this.timelinesRotation;
 		this1.splice(0,this1.length);
-	}
-	,setTimelineData: function(to,mixingToArray,propertyIDs) {
-		if(to != null) {
-			mixingToArray.push(to);
-		}
-		var lastEntry = this.mixingFrom != null ? this.mixingFrom.setTimelineData(this,mixingToArray,propertyIDs) : this;
-		if(to != null) {
-			mixingToArray.pop();
-		}
-		var mixingTo = mixingToArray;
-		var mixingToLast = mixingToArray.length - 1;
-		var timelines = this.animation.timelines;
-		var timelinesCount = this.animation.timelines.length;
-		var this1 = this.timelineData;
-		var len = this1.length;
-		if(len > timelinesCount) {
-			this1.splice(timelinesCount,timelinesCount - len);
-		} else if(len < timelinesCount) {
-			while(len < timelinesCount) {
-				this1.push(0);
-				++len;
-			}
-		}
-		var timelineData = this1;
-		var this1 = this.timelineDipMix;
-		this1.splice(0,this1.length);
-		var this1 = this.timelineDipMix;
-		var len = this1.length;
-		if(len > timelinesCount) {
-			this1.splice(timelinesCount,timelinesCount - len);
-		} else if(len < timelinesCount) {
-			this1[timelinesCount - 1] = null;
-		}
-		var timelineDipMix = this1;
-		var _gotoLabel_outer;
-		while(true) {
-			_gotoLabel_outer = 0;
-			var i = 0;
-			while(i < timelinesCount) {
-				var id = (js_Boot.__cast(timelines[i] , spine_Timeline)).getPropertyId();
-				var tmp;
-				if(propertyIDs.h.hasOwnProperty(id)) {
-					tmp = false;
-				} else {
-					propertyIDs.h[id] = true;
-					tmp = true;
-				}
-				if(!tmp) {
-					timelineData[i] = 0;
-				} else if(to == null || !to.hasTimeline(id)) {
-					timelineData[i] = 1;
-				} else {
-					var ii = mixingToLast;
-					while(ii >= 0) {
-						var entry = js_Boot.__cast(mixingTo[ii] , spine_TrackEntry);
-						if(!entry.hasTimeline(id)) {
-							if(entry.mixDuration > 0) {
-								timelineData[i] = 3;
-								timelineDipMix[i] = entry;
-								--ii;
-								_gotoLabel_outer = 2;
-								break;
-							}
-							break;
-						}
-						--ii;
-					}
-					if(_gotoLabel_outer == 2) {
-						_gotoLabel_outer = 0;
-						++i;
-						continue;
-					}
-					if(_gotoLabel_outer >= 1) {
-						break;
-					}
-					timelineData[i] = 2;
-				}
-				++i;
-			}
-			if(_gotoLabel_outer == 0) {
-				break;
-			}
-		}
-		return lastEntry;
-	}
-	,hasTimeline: function(id) {
-		var timelines = this.animation.timelines;
-		var i = 0;
-		var n = this.animation.timelines.length;
-		while(i < n) {
-			if((js_Boot.__cast(timelines[i] , spine_Timeline)).getPropertyId() == id) {
-				return true;
-			}
-			++i;
-		}
-		return false;
 	}
 	,getTrackIndex: function() {
 		return this.trackIndex;
@@ -86715,6 +87439,9 @@ spine_TrackEntry.prototype = {
 		return this.animation;
 	}
 	,setAnimation: function(animation) {
+		if(animation == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("animation cannot be null."));
+		}
 		this.animation = animation;
 	}
 	,getLoop: function() {
@@ -86824,8 +87551,26 @@ spine_TrackEntry.prototype = {
 	,setMixDuration: function(mixDuration) {
 		this.mixDuration = mixDuration;
 	}
+	,getMixBlend: function() {
+		return this.mixBlend;
+	}
+	,setMixBlend: function(mixBlend) {
+		if(mixBlend == 0) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("mixBlend cannot be null."));
+		}
+		this.mixBlend = mixBlend;
+	}
 	,getMixingFrom: function() {
 		return this.mixingFrom;
+	}
+	,getMixingTo: function() {
+		return this.mixingTo;
+	}
+	,setHoldPrevious: function(holdPrevious) {
+		this.holdPrevious = holdPrevious;
+	}
+	,getHoldPrevious: function() {
+		return this.holdPrevious;
 	}
 	,resetRotationDirections: function() {
 		var this1 = this.timelinesRotation;
@@ -86886,12 +87631,13 @@ spine_EventQueue.prototype = {
 		var listeners = this.AnimationState_this.listeners;
 		var i = 0;
 		while(i < objects.length) {
-			var type = js_Boot.__cast(objects[i] , Int);
-			var entry = js_Boot.__cast(objects[i + 1] , spine_TrackEntry);
-			var _continueAfterSwitch1 = false;
+			var type = objects[i];
+			var result = objects[i + 1];
+			var entry = result;
+			var _continueAfterSwitch2 = false;
 			while(true) {
-				var _switchCond1 = type;
-				if(_switchCond1 == 0) {
+				var _switchCond2 = type;
+				if(_switchCond2 == 0) {
 					if(entry.listener != null) {
 						entry.listener.start(entry);
 					}
@@ -86901,7 +87647,7 @@ spine_EventQueue.prototype = {
 						++ii;
 					}
 					break;
-				} else if(_switchCond1 == 1) {
+				} else if(_switchCond2 == 1) {
 					if(entry.listener != null) {
 						entry.listener.interrupt(entry);
 					}
@@ -86911,7 +87657,7 @@ spine_EventQueue.prototype = {
 						++ii1;
 					}
 					break;
-				} else if(_switchCond1 == 2) {
+				} else if(_switchCond2 == 2) {
 					if(entry.listener != null) {
 						entry.listener.end(entry);
 					}
@@ -86930,7 +87676,7 @@ spine_EventQueue.prototype = {
 					}
 					this.AnimationState_this.trackEntryPool.free(entry);
 					break;
-				} else if(_switchCond1 == 3) {
+				} else if(_switchCond2 == 3) {
 					if(entry.listener != null) {
 						entry.listener.dispose(entry);
 					}
@@ -86941,7 +87687,7 @@ spine_EventQueue.prototype = {
 					}
 					this.AnimationState_this.trackEntryPool.free(entry);
 					break;
-				} else if(_switchCond1 == 4) {
+				} else if(_switchCond2 == 4) {
 					if(entry.listener != null) {
 						entry.listener.complete(entry);
 					}
@@ -86951,8 +87697,9 @@ spine_EventQueue.prototype = {
 						++ii5;
 					}
 					break;
-				} else if(_switchCond1 == 5) {
-					var event = js_Boot.__cast(objects[i++ + 2] , spine_Event);
+				} else if(_switchCond2 == 5) {
+					var result1 = objects[i++ + 2];
+					var event = result1;
 					if(entry.listener != null) {
 						entry.listener.event(entry,event);
 					}
@@ -87118,7 +87865,7 @@ spine_EventType_$enum.valueOf = function(value) {
 };
 var spine_AnimationStateData = function(skeletonData) {
 	this.defaultMix = 0;
-	this.tempKey = new spine__$AnimationStateData_Key();
+	this.tempAnimationStateDataKey = new spine_AnimationStateDataKey();
 	this.animationToMixTime = new haxe_ds_IntMap();
 	if(skeletonData == null) {
 		throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("skeletonData cannot be null."));
@@ -87130,7 +87877,7 @@ spine_AnimationStateData.__name__ = "spine.AnimationStateData";
 spine_AnimationStateData.prototype = {
 	skeletonData: null
 	,animationToMixTime: null
-	,tempKey: null
+	,tempAnimationStateDataKey: null
 	,defaultMix: null
 	,getSkeletonData: function() {
 		return this.skeletonData;
@@ -87150,10 +87897,10 @@ spine_AnimationStateData.prototype = {
 		if(to == null) {
 			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("to cannot be null."));
 		}
-		var key = new spine__$AnimationStateData_Key();
+		var key = new spine_AnimationStateDataKey();
 		key.a1 = from;
 		key.a2 = to;
-		spine_support_utils_ObjectMap.put(this.animationToMixTime,key,duration);
+		spine_support_utils_AnimationStateMap.put(this.animationToMixTime,key,duration);
 	}
 	,setMix: function(from,to,duration) {
 		if(from == null) {
@@ -87162,10 +87909,10 @@ spine_AnimationStateData.prototype = {
 		if(to == null) {
 			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("to cannot be null."));
 		}
-		var key = new spine__$AnimationStateData_Key();
+		var key = new spine_AnimationStateDataKey();
 		key.a1 = from;
 		key.a2 = to;
-		spine_support_utils_ObjectMap.put(this.animationToMixTime,key,duration);
+		spine_support_utils_AnimationStateMap.put(this.animationToMixTime,key,duration);
 	}
 	,getMix: function(from,to) {
 		if(from == null) {
@@ -87174,9 +87921,30 @@ spine_AnimationStateData.prototype = {
 		if(to == null) {
 			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("to cannot be null."));
 		}
-		this.tempKey.a1 = from;
-		this.tempKey.a2 = to;
-		return spine_support_utils_ObjectMap.get(this.animationToMixTime,this.tempKey,this.defaultMix);
+		this.tempAnimationStateDataKey.a1 = from;
+		this.tempAnimationStateDataKey.a2 = to;
+		var this1 = this.animationToMixTime;
+		var key = this.tempAnimationStateDataKey;
+		var defaultValue = this.defaultMix;
+		if(defaultValue == null) {
+			defaultValue = 0.0;
+		}
+		var key1 = key.getHashCode();
+		var entries = this1.h[key1];
+		var result = defaultValue;
+		if(entries != null) {
+			var _g = 0;
+			var _g1 = entries.length;
+			while(_g < _g1) {
+				var i = _g++;
+				var entry = entries[i];
+				if(entry.key.equals(key)) {
+					result = entry.value;
+					break;
+				}
+			}
+		}
+		return result;
 	}
 	,getDefaultMix: function() {
 		return this.defaultMix;
@@ -87186,12 +87954,12 @@ spine_AnimationStateData.prototype = {
 	}
 	,__class__: spine_AnimationStateData
 };
-var spine__$AnimationStateData_Key = function() {
+var spine_AnimationStateDataKey = function() {
 	this.a2 = null;
 };
-$hxClasses["spine._AnimationStateData.Key"] = spine__$AnimationStateData_Key;
-spine__$AnimationStateData_Key.__name__ = "spine._AnimationStateData.Key";
-spine__$AnimationStateData_Key.prototype = {
+$hxClasses["spine.AnimationStateDataKey"] = spine_AnimationStateDataKey;
+spine_AnimationStateDataKey.__name__ = "spine.AnimationStateDataKey";
+spine_AnimationStateDataKey.prototype = {
 	a1: null
 	,a2: null
 	,getHashCode: function() {
@@ -87204,7 +87972,8 @@ spine__$AnimationStateData_Key.prototype = {
 		if(obj == null) {
 			return false;
 		}
-		var other = js_Boot.__cast(obj , spine__$AnimationStateData_Key);
+		var result = obj;
+		var other = result;
 		if(this.a1 == null) {
 			if(other.a1 != null) {
 				return false;
@@ -87224,7 +87993,7 @@ spine__$AnimationStateData_Key.prototype = {
 	,toString: function() {
 		return this.a1.name + "->" + this.a2.name;
 	}
-	,__class__: spine__$AnimationStateData_Key
+	,__class__: spine_AnimationStateDataKey
 };
 var spine_BlendMode_$enum = function() { };
 $hxClasses["spine.BlendMode_enum"] = spine_BlendMode_$enum;
@@ -87249,9 +88018,11 @@ spine_Updatable.__name__ = "spine.Updatable";
 spine_Updatable.__isInterface__ = true;
 spine_Updatable.prototype = {
 	update: null
+	,isActive: null
 	,__class__: spine_Updatable
 };
 var spine_Bone = function(data,skeleton,parent) {
+	this.active = false;
 	this.sorted = false;
 	this.worldY = 0;
 	this.d = 0;
@@ -87323,6 +88094,7 @@ spine_Bone.prototype = {
 	,d: null
 	,worldY: null
 	,sorted: null
+	,active: null
 	,update: function() {
 		this.updateWorldTransformWithData(this.x,this.y,this.rotation,this.scaleX,this.scaleY,this.shearX,this.shearY);
 	}
@@ -87340,28 +88112,16 @@ spine_Bone.prototype = {
 		this.appliedValid = true;
 		var parent = this.parent;
 		if(parent == null) {
-			var rotationY = rotation + 90 + shearY;
-			var la = js_Boot.__cast(Math.cos((rotation + shearX) * spine_utils_SpineUtils.degRad) , Float) * scaleX;
-			var lb = js_Boot.__cast(Math.cos(rotationY * spine_utils_SpineUtils.degRad) , Float) * scaleY;
-			var lc = js_Boot.__cast(Math.sin((rotation + shearX) * spine_utils_SpineUtils.degRad) , Float) * scaleX;
-			var ld = js_Boot.__cast(Math.sin(rotationY * spine_utils_SpineUtils.degRad) , Float) * scaleY;
 			var skeleton = this.skeleton;
-			if(skeleton.flipX) {
-				x = -x;
-				la = -la;
-				lb = -lb;
-			}
-			if(skeleton.flipY) {
-				y = -y;
-				lc = -lc;
-				ld = -ld;
-			}
-			this.a = la;
-			this.b = lb;
-			this.c = lc;
-			this.d = ld;
-			this.worldX = x + skeleton.x;
-			this.worldY = y + skeleton.y;
+			var rotationY = rotation + 90 + shearY;
+			var sx = skeleton.scaleX;
+			var sy = skeleton.scaleY;
+			this.a = Math.cos((rotation + shearX) * spine_utils_SpineUtils.degRad) * scaleX * sx;
+			this.b = Math.cos(rotationY * spine_utils_SpineUtils.degRad) * scaleY * sx;
+			this.c = Math.sin((rotation + shearX) * spine_utils_SpineUtils.degRad) * scaleX * sy;
+			this.d = Math.sin(rotationY * spine_utils_SpineUtils.degRad) * scaleY * sy;
+			this.worldX = x * sx + skeleton.x;
+			this.worldY = y * sy + skeleton.y;
 			return;
 		}
 		var pa = parent.a;
@@ -87375,10 +88135,10 @@ spine_Bone.prototype = {
 			var _switchCond0 = this.data.transformMode;
 			if(_switchCond0 == 0) {
 				var rotationY = rotation + 90 + shearY;
-				var la = js_Boot.__cast(Math.cos((rotation + shearX) * spine_utils_SpineUtils.degRad) , Float) * scaleX;
-				var lb = js_Boot.__cast(Math.cos(rotationY * spine_utils_SpineUtils.degRad) , Float) * scaleY;
-				var lc = js_Boot.__cast(Math.sin((rotation + shearX) * spine_utils_SpineUtils.degRad) , Float) * scaleX;
-				var ld = js_Boot.__cast(Math.sin(rotationY * spine_utils_SpineUtils.degRad) , Float) * scaleY;
+				var la = Math.cos((rotation + shearX) * spine_utils_SpineUtils.degRad) * scaleX;
+				var lb = Math.cos(rotationY * spine_utils_SpineUtils.degRad) * scaleY;
+				var lc = Math.sin((rotation + shearX) * spine_utils_SpineUtils.degRad) * scaleX;
+				var ld = Math.sin(rotationY * spine_utils_SpineUtils.degRad) * scaleY;
 				this.a = pa * la + pb * lc;
 				this.b = pa * lb + pb * ld;
 				this.c = pc * la + pd * lc;
@@ -87386,10 +88146,10 @@ spine_Bone.prototype = {
 				return;
 			} else if(_switchCond0 == 1) {
 				var rotationY1 = rotation + 90 + shearY;
-				this.a = js_Boot.__cast(Math.cos((rotation + shearX) * spine_utils_SpineUtils.degRad) , Float) * scaleX;
-				this.b = js_Boot.__cast(Math.cos(rotationY1 * spine_utils_SpineUtils.degRad) , Float) * scaleY;
-				this.c = js_Boot.__cast(Math.sin((rotation + shearX) * spine_utils_SpineUtils.degRad) , Float) * scaleX;
-				this.d = js_Boot.__cast(Math.sin(rotationY1 * spine_utils_SpineUtils.degRad) , Float) * scaleY;
+				this.a = Math.cos((rotation + shearX) * spine_utils_SpineUtils.degRad) * scaleX;
+				this.b = Math.cos(rotationY1 * spine_utils_SpineUtils.degRad) * scaleY;
+				this.c = Math.sin((rotation + shearX) * spine_utils_SpineUtils.degRad) * scaleX;
+				this.d = Math.sin(rotationY1 * spine_utils_SpineUtils.degRad) * scaleY;
 				break;
 			} else if(_switchCond0 == 2) {
 				var s = pa * pa + pc * pc;
@@ -87398,90 +88158,84 @@ spine_Bone.prototype = {
 					s = Math.abs(pa * pd - pb * pc) / s;
 					pb = pc * s;
 					pd = pa * s;
-					prx = js_Boot.__cast(Math.atan2(pc,pa) , Float) * spine_utils_SpineUtils.radDeg;
+					prx = Math.atan2(pc,pa) * spine_utils_SpineUtils.radDeg;
 				} else {
 					pa = 0;
 					pc = 0;
-					prx = 90 - js_Boot.__cast(Math.atan2(pd,pb) , Float) * spine_utils_SpineUtils.radDeg;
+					prx = 90 - Math.atan2(pd,pb) * spine_utils_SpineUtils.radDeg;
 				}
 				var rx = rotation + shearX - prx;
 				var ry = rotation + shearY - prx + 90;
-				var la1 = js_Boot.__cast(Math.cos(rx * spine_utils_SpineUtils.degRad) , Float) * scaleX;
-				var lb1 = js_Boot.__cast(Math.cos(ry * spine_utils_SpineUtils.degRad) , Float) * scaleY;
-				var lc1 = js_Boot.__cast(Math.sin(rx * spine_utils_SpineUtils.degRad) , Float) * scaleX;
-				var ld1 = js_Boot.__cast(Math.sin(ry * spine_utils_SpineUtils.degRad) , Float) * scaleY;
+				var la1 = Math.cos(rx * spine_utils_SpineUtils.degRad) * scaleX;
+				var lb1 = Math.cos(ry * spine_utils_SpineUtils.degRad) * scaleY;
+				var lc1 = Math.sin(rx * spine_utils_SpineUtils.degRad) * scaleX;
+				var ld1 = Math.sin(ry * spine_utils_SpineUtils.degRad) * scaleY;
 				this.a = pa * la1 - pb * lc1;
 				this.b = pa * lb1 - pb * ld1;
 				this.c = pc * la1 + pd * lc1;
 				this.d = pc * lb1 + pd * ld1;
 				break;
 			} else if(_switchCond0 == 3) {
-				var cos = js_Boot.__cast(Math.cos(rotation * spine_utils_SpineUtils.degRad) , Float);
-				var sin = js_Boot.__cast(Math.sin(rotation * spine_utils_SpineUtils.degRad) , Float);
-				var za = pa * cos + pb * sin;
-				var zc = pc * cos + pd * sin;
-				var s1 = js_Boot.__cast(Math.sqrt(za * za + zc * zc) , Float);
+				var cos = Math.cos(rotation * spine_utils_SpineUtils.degRad);
+				var sin = Math.sin(rotation * spine_utils_SpineUtils.degRad);
+				var za = (pa * cos + pb * sin) / this.skeleton.scaleX;
+				var zc = (pc * cos + pd * sin) / this.skeleton.scaleY;
+				var s1 = Math.sqrt(za * za + zc * zc);
 				if(s1 > 0.00001) {
 					s1 = 1 / s1;
 				}
 				za *= s1;
 				zc *= s1;
-				s1 = js_Boot.__cast(Math.sqrt(za * za + zc * zc) , Float);
-				var r = 1.57079635 + js_Boot.__cast(Math.atan2(zc,za) , Float);
+				s1 = Math.sqrt(za * za + zc * zc);
+				if(this.data.transformMode == 3 && pa * pd - pb * pc < 0 != (this.skeleton.scaleX < 0 != this.skeleton.scaleY < 0)) {
+					s1 = -s1;
+				}
+				var r = 1.57079635 + Math.atan2(zc,za);
 				var zb = Math.cos(r) * s1;
 				var zd = Math.sin(r) * s1;
-				var la2 = js_Boot.__cast(Math.cos(shearX * spine_utils_SpineUtils.degRad) , Float) * scaleX;
-				var lb2 = js_Boot.__cast(Math.cos((90 + shearY) * spine_utils_SpineUtils.degRad) , Float) * scaleY;
-				var lc2 = js_Boot.__cast(Math.sin(shearX * spine_utils_SpineUtils.degRad) , Float) * scaleX;
-				var ld2 = js_Boot.__cast(Math.sin((90 + shearY) * spine_utils_SpineUtils.degRad) , Float) * scaleY;
-				if(this.data.transformMode != 4 ? pa * pd - pb * pc < 0 : this.skeleton.flipX != this.skeleton.flipY) {
-					zb = -zb;
-					zd = -zd;
-				}
+				var la2 = Math.cos(shearX * spine_utils_SpineUtils.degRad) * scaleX;
+				var lb2 = Math.cos((90 + shearY) * spine_utils_SpineUtils.degRad) * scaleY;
+				var lc2 = Math.sin(shearX * spine_utils_SpineUtils.degRad) * scaleX;
+				var ld2 = Math.sin((90 + shearY) * spine_utils_SpineUtils.degRad) * scaleY;
 				this.a = za * la2 + zb * lc2;
 				this.b = za * lb2 + zb * ld2;
 				this.c = zc * la2 + zd * lc2;
 				this.d = zc * lb2 + zd * ld2;
-				return;
+				break;
 			} else if(_switchCond0 == 4) {
-				var cos1 = js_Boot.__cast(Math.cos(rotation * spine_utils_SpineUtils.degRad) , Float);
-				var sin1 = js_Boot.__cast(Math.sin(rotation * spine_utils_SpineUtils.degRad) , Float);
-				var za1 = pa * cos1 + pb * sin1;
-				var zc1 = pc * cos1 + pd * sin1;
-				var s2 = js_Boot.__cast(Math.sqrt(za1 * za1 + zc1 * zc1) , Float);
+				var cos1 = Math.cos(rotation * spine_utils_SpineUtils.degRad);
+				var sin1 = Math.sin(rotation * spine_utils_SpineUtils.degRad);
+				var za1 = (pa * cos1 + pb * sin1) / this.skeleton.scaleX;
+				var zc1 = (pc * cos1 + pd * sin1) / this.skeleton.scaleY;
+				var s2 = Math.sqrt(za1 * za1 + zc1 * zc1);
 				if(s2 > 0.00001) {
 					s2 = 1 / s2;
 				}
 				za1 *= s2;
 				zc1 *= s2;
-				s2 = js_Boot.__cast(Math.sqrt(za1 * za1 + zc1 * zc1) , Float);
-				var r1 = 1.57079635 + js_Boot.__cast(Math.atan2(zc1,za1) , Float);
+				s2 = Math.sqrt(za1 * za1 + zc1 * zc1);
+				if(this.data.transformMode == 3 && pa * pd - pb * pc < 0 != (this.skeleton.scaleX < 0 != this.skeleton.scaleY < 0)) {
+					s2 = -s2;
+				}
+				var r1 = 1.57079635 + Math.atan2(zc1,za1);
 				var zb1 = Math.cos(r1) * s2;
 				var zd1 = Math.sin(r1) * s2;
-				var la3 = js_Boot.__cast(Math.cos(shearX * spine_utils_SpineUtils.degRad) , Float) * scaleX;
-				var lb3 = js_Boot.__cast(Math.cos((90 + shearY) * spine_utils_SpineUtils.degRad) , Float) * scaleY;
-				var lc3 = js_Boot.__cast(Math.sin(shearX * spine_utils_SpineUtils.degRad) , Float) * scaleX;
-				var ld3 = js_Boot.__cast(Math.sin((90 + shearY) * spine_utils_SpineUtils.degRad) , Float) * scaleY;
-				if(this.data.transformMode != 4 ? pa * pd - pb * pc < 0 : this.skeleton.flipX != this.skeleton.flipY) {
-					zb1 = -zb1;
-					zd1 = -zd1;
-				}
+				var la3 = Math.cos(shearX * spine_utils_SpineUtils.degRad) * scaleX;
+				var lb3 = Math.cos((90 + shearY) * spine_utils_SpineUtils.degRad) * scaleY;
+				var lc3 = Math.sin(shearX * spine_utils_SpineUtils.degRad) * scaleX;
+				var ld3 = Math.sin((90 + shearY) * spine_utils_SpineUtils.degRad) * scaleY;
 				this.a = za1 * la3 + zb1 * lc3;
 				this.b = za1 * lb3 + zb1 * ld3;
 				this.c = zc1 * la3 + zd1 * lc3;
 				this.d = zc1 * lb3 + zd1 * ld3;
-				return;
+				break;
 			}
 			break;
 		}
-		if(this.skeleton.flipX) {
-			this.a = -this.a;
-			this.b = -this.b;
-		}
-		if(this.skeleton.flipY) {
-			this.c = -this.c;
-			this.d = -this.d;
-		}
+		this.a *= this.skeleton.scaleX;
+		this.b *= this.skeleton.scaleX;
+		this.c *= this.skeleton.scaleY;
+		this.d *= this.skeleton.scaleY;
 	}
 	,setToSetupPose: function() {
 		var data = this.data;
@@ -87504,6 +88258,9 @@ spine_Bone.prototype = {
 	}
 	,getChildren: function() {
 		return this.children;
+	}
+	,isActive: function() {
+		return this.active;
 	}
 	,getX: function() {
 		return this.x;
@@ -87613,11 +88370,11 @@ spine_Bone.prototype = {
 		if(parent == null) {
 			this.ax = this.worldX;
 			this.ay = this.worldY;
-			this.arotation = js_Boot.__cast(Math.atan2(this.c,this.a) , Float) * spine_utils_SpineUtils.radDeg;
-			this.ascaleX = js_Boot.__cast(Math.sqrt(this.a * this.a + this.c * this.c) , Float);
-			this.ascaleY = js_Boot.__cast(Math.sqrt(this.b * this.b + this.d * this.d) , Float);
+			this.arotation = Math.atan2(this.c,this.a) * spine_utils_SpineUtils.radDeg;
+			this.ascaleX = Math.sqrt(this.a * this.a + this.c * this.c);
+			this.ascaleY = Math.sqrt(this.b * this.b + this.d * this.d);
 			this.ashearX = 0;
-			this.ashearY = js_Boot.__cast(Math.atan2(this.a * this.b + this.c * this.d,this.a * this.d - this.b * this.c) , Float) * spine_utils_SpineUtils.radDeg;
+			this.ashearY = Math.atan2(this.a * this.b + this.c * this.d,this.a * this.d - this.b * this.c) * spine_utils_SpineUtils.radDeg;
 			return;
 		}
 		var pa = parent.a;
@@ -87638,17 +88395,17 @@ spine_Bone.prototype = {
 		var rc = id * this.c - ic * this.a;
 		var rd = id * this.d - ic * this.b;
 		this.ashearX = 0;
-		this.ascaleX = js_Boot.__cast(Math.sqrt(ra * ra + rc * rc) , Float);
+		this.ascaleX = Math.sqrt(ra * ra + rc * rc);
 		if(this.ascaleX > 0.0001) {
 			var det = ra * rd - rb * rc;
 			this.ascaleY = det / this.ascaleX;
-			this.ashearY = js_Boot.__cast(Math.atan2(ra * rb + rc * rd,det) , Float) * spine_utils_SpineUtils.radDeg;
-			this.arotation = js_Boot.__cast(Math.atan2(rc,ra) , Float) * spine_utils_SpineUtils.radDeg;
+			this.ashearY = Math.atan2(ra * rb + rc * rd,det) * spine_utils_SpineUtils.radDeg;
+			this.arotation = Math.atan2(rc,ra) * spine_utils_SpineUtils.radDeg;
 		} else {
 			this.ascaleX = 0;
-			this.ascaleY = js_Boot.__cast(Math.sqrt(rb * rb + rd * rd) , Float);
+			this.ascaleY = Math.sqrt(rb * rb + rd * rd);
 			this.ashearY = 0;
-			this.arotation = 90 - js_Boot.__cast(Math.atan2(rd,rb) , Float) * spine_utils_SpineUtils.radDeg;
+			this.arotation = 90 - Math.atan2(rd,rb) * spine_utils_SpineUtils.radDeg;
 		}
 	}
 	,getA: function() {
@@ -87688,16 +88445,16 @@ spine_Bone.prototype = {
 		this.worldY = worldY;
 	}
 	,getWorldRotationX: function() {
-		return js_Boot.__cast(Math.atan2(this.c,this.a) , Float) * spine_utils_SpineUtils.radDeg;
+		return Math.atan2(this.c,this.a) * spine_utils_SpineUtils.radDeg;
 	}
 	,getWorldRotationY: function() {
-		return js_Boot.__cast(Math.atan2(this.d,this.b) , Float) * spine_utils_SpineUtils.radDeg;
+		return Math.atan2(this.d,this.b) * spine_utils_SpineUtils.radDeg;
 	}
 	,getWorldScaleX: function() {
-		return js_Boot.__cast(Math.sqrt(this.a * this.a + this.c * this.c) , Float);
+		return Math.sqrt(this.a * this.a + this.c * this.c);
 	}
 	,getWorldScaleY: function() {
-		return js_Boot.__cast(Math.sqrt(this.b * this.b + this.d * this.d) , Float);
+		return Math.sqrt(this.b * this.b + this.d * this.d);
 	}
 	,getWorldTransform: function(worldTransform) {
 		if(worldTransform == null) {
@@ -87716,6 +88473,9 @@ spine_Bone.prototype = {
 		return worldTransform;
 	}
 	,worldToLocal: function(world) {
+		if(world == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("world cannot be null."));
+		}
 		var invDet = 1 / (this.a * this.d - this.b * this.c);
 		var x = world.x - this.worldX;
 		var y = world.y - this.worldY;
@@ -87724,6 +88484,9 @@ spine_Bone.prototype = {
 		return world;
 	}
 	,localToWorld: function(local) {
+		if(local == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("local cannot be null."));
+		}
 		var x = local.x;
 		var y = local.y;
 		local.x = x * this.a + y * this.b + this.worldX;
@@ -87731,18 +88494,19 @@ spine_Bone.prototype = {
 		return local;
 	}
 	,worldToLocalRotation: function(worldRotation) {
-		var sin = js_Boot.__cast(Math.sin(worldRotation * spine_utils_SpineUtils.degRad) , Float);
-		var cos = js_Boot.__cast(Math.cos(worldRotation * spine_utils_SpineUtils.degRad) , Float);
-		return js_Boot.__cast(Math.atan2(this.a * sin - this.c * cos,this.d * cos - this.b * sin) , Float) * spine_utils_SpineUtils.radDeg;
+		var sin = Math.sin(worldRotation * spine_utils_SpineUtils.degRad);
+		var cos = Math.cos(worldRotation * spine_utils_SpineUtils.degRad);
+		return Math.atan2(this.a * sin - this.c * cos,this.d * cos - this.b * sin) * spine_utils_SpineUtils.radDeg + this.rotation - this.shearX;
 	}
 	,localToWorldRotation: function(localRotation) {
-		var sin = js_Boot.__cast(Math.sin(localRotation * spine_utils_SpineUtils.degRad) , Float);
-		var cos = js_Boot.__cast(Math.cos(localRotation * spine_utils_SpineUtils.degRad) , Float);
-		return js_Boot.__cast(Math.atan2(cos * this.c + sin * this.d,cos * this.a + sin * this.b) , Float) * spine_utils_SpineUtils.radDeg;
+		localRotation -= this.rotation - this.shearX;
+		var sin = Math.sin(localRotation * spine_utils_SpineUtils.degRad);
+		var cos = Math.cos(localRotation * spine_utils_SpineUtils.degRad);
+		return Math.atan2(cos * this.c + sin * this.d,cos * this.a + sin * this.b) * spine_utils_SpineUtils.radDeg;
 	}
 	,rotateWorld: function(degrees) {
-		var cos = js_Boot.__cast(Math.cos(degrees * spine_utils_SpineUtils.degRad) , Float);
-		var sin = js_Boot.__cast(Math.sin(degrees * spine_utils_SpineUtils.degRad) , Float);
+		var cos = Math.cos(degrees * spine_utils_SpineUtils.degRad);
+		var sin = Math.sin(degrees * spine_utils_SpineUtils.degRad);
 		this.a = cos * this.a - sin * this.c;
 		this.b = cos * this.b - sin * this.d;
 		this.c = sin * this.a + cos * this.c;
@@ -87756,6 +88520,7 @@ spine_Bone.prototype = {
 };
 var spine_BoneData = function(index,name,parent) {
 	this.color = new spine_support_graphics_Color(0.61,0.61,0.61,1);
+	this.skinRequired = false;
 	this.transformMode = 0;
 	this.shearY = 0;
 	this.shearX = 0;
@@ -87791,6 +88556,7 @@ spine_BoneData.prototype = {
 	,shearX: null
 	,shearY: null
 	,transformMode: null
+	,skinRequired: null
 	,color: null
 	,getIndex: function() {
 		return this.index;
@@ -87863,6 +88629,12 @@ spine_BoneData.prototype = {
 	,setTransformMode: function(transformMode) {
 		this.transformMode = transformMode;
 	}
+	,getSkinRequired: function() {
+		return this.skinRequired;
+	}
+	,setSkinRequired: function(skinRequired) {
+		this.skinRequired = skinRequired;
+	}
 	,getColor: function() {
 		return this.color;
 	}
@@ -87890,17 +88662,44 @@ spine_TransformMode_$enum.valueOf = function(value) {
 		return 0;
 	}
 };
-var spine_Constraint = function() { };
-$hxClasses["spine.Constraint"] = spine_Constraint;
-spine_Constraint.__name__ = "spine.Constraint";
-spine_Constraint.__isInterface__ = true;
-spine_Constraint.__interfaces__ = [spine_Updatable];
-spine_Constraint.prototype = {
-	getOrder: null
-	,__class__: spine_Constraint
+var spine_ConstraintData = function(name) {
+	this.skinRequired = false;
+	this.order = 0;
+	if(name == null) {
+		throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("name cannot be null."));
+	}
+	this.name = name;
+};
+$hxClasses["spine.ConstraintData"] = spine_ConstraintData;
+spine_ConstraintData.__name__ = "spine.ConstraintData";
+spine_ConstraintData.prototype = {
+	name: null
+	,order: null
+	,skinRequired: null
+	,getName: function() {
+		return this.name;
+	}
+	,getOrder: function() {
+		return this.order;
+	}
+	,setOrder: function(order) {
+		this.order = order;
+	}
+	,getSkinRequired: function() {
+		return this.skinRequired;
+	}
+	,setSkinRequired: function(skinRequired) {
+		this.skinRequired = skinRequired;
+	}
+	,toString: function() {
+		return this.name;
+	}
+	,__class__: spine_ConstraintData
 };
 var spine_Event = function(time,data) {
 	this.time = 0;
+	this.balance = 0;
+	this.volume = 0;
 	this.floatValue = 0;
 	this.intValue = 0;
 	if(data == null) {
@@ -87916,6 +88715,8 @@ spine_Event.prototype = {
 	,intValue: null
 	,floatValue: null
 	,stringValue: null
+	,volume: null
+	,balance: null
 	,time: null
 	,getInt: function() {
 		return this.intValue;
@@ -87933,7 +88734,22 @@ spine_Event.prototype = {
 		return this.stringValue;
 	}
 	,setString: function(stringValue) {
+		if(stringValue == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("stringValue cannot be null."));
+		}
 		this.stringValue = stringValue;
+	}
+	,getVolume: function() {
+		return this.volume;
+	}
+	,setVolume: function(volume) {
+		this.volume = volume;
+	}
+	,getBalance: function() {
+		return this.balance;
+	}
+	,setBalance: function(balance) {
+		this.balance = balance;
 	}
 	,getTime: function() {
 		return this.time;
@@ -87947,6 +88763,9 @@ spine_Event.prototype = {
 	,__class__: spine_Event
 };
 var spine_EventData = function(name) {
+	this.balance = 0;
+	this.volume = 0;
+	this.audioPath = null;
 	this.floatValue = 0;
 	this.intValue = 0;
 	if(name == null) {
@@ -87961,6 +88780,9 @@ spine_EventData.prototype = {
 	,intValue: null
 	,floatValue: null
 	,stringValue: null
+	,audioPath: null
+	,volume: null
+	,balance: null
 	,getInt: function() {
 		return this.intValue;
 	}
@@ -87977,7 +88799,31 @@ spine_EventData.prototype = {
 		return this.stringValue;
 	}
 	,setString: function(stringValue) {
+		if(stringValue == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("stringValue cannot be null."));
+		}
 		this.stringValue = stringValue;
+	}
+	,getAudioPath: function() {
+		return this.audioPath;
+	}
+	,setAudioPath: function(audioPath) {
+		if(audioPath == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("audioPath cannot be null."));
+		}
+		this.audioPath = audioPath;
+	}
+	,getVolume: function() {
+		return this.volume;
+	}
+	,setVolume: function(volume) {
+		this.volume = volume;
+	}
+	,getBalance: function() {
+		return this.balance;
+	}
+	,setBalance: function(balance) {
+		this.balance = balance;
 	}
 	,getName: function() {
 		return this.name;
@@ -87988,8 +88834,12 @@ spine_EventData.prototype = {
 	,__class__: spine_EventData
 };
 var spine_IkConstraint = function(data,skeleton) {
-	this.bendDirection = 0;
+	this.active = false;
+	this.softness = 0;
 	this.mix = 1;
+	this.stretch = false;
+	this.compress = false;
+	this.bendDirection = 0;
 	if(data == null) {
 		throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("data cannot be null."));
 	}
@@ -87998,7 +88848,10 @@ var spine_IkConstraint = function(data,skeleton) {
 	}
 	this.data = data;
 	this.mix = data.mix;
+	this.softness = data.softness;
 	this.bendDirection = data.bendDirection;
+	this.compress = data.compress;
+	this.stretch = data.stretch;
 	var capacity = data.bones.length;
 	var this1 = [];
 	this.bones = this1;
@@ -88013,19 +88866,22 @@ var spine_IkConstraint = function(data,skeleton) {
 };
 $hxClasses["spine.IkConstraint"] = spine_IkConstraint;
 spine_IkConstraint.__name__ = "spine.IkConstraint";
-spine_IkConstraint.__interfaces__ = [spine_Constraint];
-spine_IkConstraint.applyOne = function(bone,targetX,targetY,alpha) {
+spine_IkConstraint.__interfaces__ = [spine_Updatable];
+spine_IkConstraint.applyOne = function(bone,targetX,targetY,compress,stretch,uniform,alpha) {
+	if(bone == null) {
+		throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("bone cannot be null."));
+	}
 	if(!bone.appliedValid) {
 		bone.appliedValid = true;
 		var parent = bone.parent;
 		if(parent == null) {
 			bone.ax = bone.worldX;
 			bone.ay = bone.worldY;
-			bone.arotation = js_Boot.__cast(Math.atan2(bone.c,bone.a) , Float) * spine_utils_SpineUtils.radDeg;
-			bone.ascaleX = js_Boot.__cast(Math.sqrt(bone.a * bone.a + bone.c * bone.c) , Float);
-			bone.ascaleY = js_Boot.__cast(Math.sqrt(bone.b * bone.b + bone.d * bone.d) , Float);
+			bone.arotation = Math.atan2(bone.c,bone.a) * spine_utils_SpineUtils.radDeg;
+			bone.ascaleX = Math.sqrt(bone.a * bone.a + bone.c * bone.c);
+			bone.ascaleY = Math.sqrt(bone.b * bone.b + bone.d * bone.d);
 			bone.ashearX = 0;
-			bone.ashearY = js_Boot.__cast(Math.atan2(bone.a * bone.b + bone.c * bone.d,bone.a * bone.d - bone.b * bone.c) , Float) * spine_utils_SpineUtils.radDeg;
+			bone.ashearY = Math.atan2(bone.a * bone.b + bone.c * bone.d,bone.a * bone.d - bone.b * bone.c) * spine_utils_SpineUtils.radDeg;
 		} else {
 			var pa = parent.a;
 			var pb = parent.b;
@@ -88045,17 +88901,17 @@ spine_IkConstraint.applyOne = function(bone,targetX,targetY,alpha) {
 			var rc = id * bone.c - ic * bone.a;
 			var rd = id * bone.d - ic * bone.b;
 			bone.ashearX = 0;
-			bone.ascaleX = js_Boot.__cast(Math.sqrt(ra * ra + rc * rc) , Float);
+			bone.ascaleX = Math.sqrt(ra * ra + rc * rc);
 			if(bone.ascaleX > 0.0001) {
 				var det = ra * rd - rb * rc;
 				bone.ascaleY = det / bone.ascaleX;
-				bone.ashearY = js_Boot.__cast(Math.atan2(ra * rb + rc * rd,det) , Float) * spine_utils_SpineUtils.radDeg;
-				bone.arotation = js_Boot.__cast(Math.atan2(rc,ra) , Float) * spine_utils_SpineUtils.radDeg;
+				bone.ashearY = Math.atan2(ra * rb + rc * rd,det) * spine_utils_SpineUtils.radDeg;
+				bone.arotation = Math.atan2(rc,ra) * spine_utils_SpineUtils.radDeg;
 			} else {
 				bone.ascaleX = 0;
-				bone.ascaleY = js_Boot.__cast(Math.sqrt(rb * rb + rd * rd) , Float);
+				bone.ascaleY = Math.sqrt(rb * rb + rd * rd);
 				bone.ashearY = 0;
-				bone.arotation = 90 - js_Boot.__cast(Math.atan2(rd,rb) , Float) * spine_utils_SpineUtils.radDeg;
+				bone.arotation = 90 - Math.atan2(rd,rb) * spine_utils_SpineUtils.radDeg;
 			}
 		}
 	}
@@ -88065,7 +88921,7 @@ spine_IkConstraint.applyOne = function(bone,targetX,targetY,alpha) {
 	var y = targetY - p.worldY;
 	var tx = (x * p.d - y * p.b) * id - bone.ax;
 	var ty = (y * p.a - x * p.c) * id - bone.ay;
-	var rotationIK = js_Boot.__cast(Math.atan2(ty,tx) , Float) * spine_utils_SpineUtils.radDeg - bone.ashearX - bone.arotation;
+	var rotationIK = Math.atan2(ty,tx) * spine_utils_SpineUtils.radDeg - bone.ashearX - bone.arotation;
 	if(bone.ascaleX < 0) {
 		rotationIK += 180;
 	}
@@ -88074,11 +88930,30 @@ spine_IkConstraint.applyOne = function(bone,targetX,targetY,alpha) {
 	} else if(rotationIK < -180) {
 		rotationIK += 360;
 	}
-	bone.updateWorldTransformWithData(bone.ax,bone.ay,bone.arotation + rotationIK * alpha,bone.ascaleX,bone.ascaleY,bone.ashearX,bone.ashearY);
+	var sx = bone.ascaleX;
+	var sy = bone.ascaleY;
+	if(compress || stretch) {
+		var b = bone.data.length * sx;
+		var dd = Math.sqrt(tx * tx + ty * ty);
+		if(compress && dd < b || stretch && dd > b && b > 0.0001) {
+			var s = (dd / b - 1) * alpha + 1;
+			sx *= s;
+			if(uniform) {
+				sy *= s;
+			}
+		}
+	}
+	bone.updateWorldTransformWithData(bone.ax,bone.ay,bone.arotation + rotationIK * alpha,sx,sy,bone.ashearX,bone.ashearY);
 };
-spine_IkConstraint.applyTwo = function(parent,child,targetX,targetY,bendDir,alpha) {
+spine_IkConstraint.apply = function(parent,child,targetX,targetY,bendDir,stretch,softness,alpha) {
+	if(parent == null) {
+		throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("parent cannot be null."));
+	}
+	if(child == null) {
+		throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("child cannot be null."));
+	}
 	if(alpha == 0) {
-		child.updateWorldTransform();
+		child.updateWorldTransformWithData(child.x,child.y,child.rotation,child.scaleX,child.scaleY,child.shearX,child.shearY);
 		return;
 	}
 	if(!parent.appliedValid) {
@@ -88087,11 +88962,11 @@ spine_IkConstraint.applyTwo = function(parent,child,targetX,targetY,bendDir,alph
 		if(parent1 == null) {
 			parent.ax = parent.worldX;
 			parent.ay = parent.worldY;
-			parent.arotation = js_Boot.__cast(Math.atan2(parent.c,parent.a) , Float) * spine_utils_SpineUtils.radDeg;
-			parent.ascaleX = js_Boot.__cast(Math.sqrt(parent.a * parent.a + parent.c * parent.c) , Float);
-			parent.ascaleY = js_Boot.__cast(Math.sqrt(parent.b * parent.b + parent.d * parent.d) , Float);
+			parent.arotation = Math.atan2(parent.c,parent.a) * spine_utils_SpineUtils.radDeg;
+			parent.ascaleX = Math.sqrt(parent.a * parent.a + parent.c * parent.c);
+			parent.ascaleY = Math.sqrt(parent.b * parent.b + parent.d * parent.d);
 			parent.ashearX = 0;
-			parent.ashearY = js_Boot.__cast(Math.atan2(parent.a * parent.b + parent.c * parent.d,parent.a * parent.d - parent.b * parent.c) , Float) * spine_utils_SpineUtils.radDeg;
+			parent.ashearY = Math.atan2(parent.a * parent.b + parent.c * parent.d,parent.a * parent.d - parent.b * parent.c) * spine_utils_SpineUtils.radDeg;
 		} else {
 			var pa = parent1.a;
 			var pb = parent1.b;
@@ -88111,17 +88986,17 @@ spine_IkConstraint.applyTwo = function(parent,child,targetX,targetY,bendDir,alph
 			var rc = id * parent.c - ic * parent.a;
 			var rd = id * parent.d - ic * parent.b;
 			parent.ashearX = 0;
-			parent.ascaleX = js_Boot.__cast(Math.sqrt(ra * ra + rc * rc) , Float);
+			parent.ascaleX = Math.sqrt(ra * ra + rc * rc);
 			if(parent.ascaleX > 0.0001) {
 				var det = ra * rd - rb * rc;
 				parent.ascaleY = det / parent.ascaleX;
-				parent.ashearY = js_Boot.__cast(Math.atan2(ra * rb + rc * rd,det) , Float) * spine_utils_SpineUtils.radDeg;
-				parent.arotation = js_Boot.__cast(Math.atan2(rc,ra) , Float) * spine_utils_SpineUtils.radDeg;
+				parent.ashearY = Math.atan2(ra * rb + rc * rd,det) * spine_utils_SpineUtils.radDeg;
+				parent.arotation = Math.atan2(rc,ra) * spine_utils_SpineUtils.radDeg;
 			} else {
 				parent.ascaleX = 0;
-				parent.ascaleY = js_Boot.__cast(Math.sqrt(rb * rb + rd * rd) , Float);
+				parent.ascaleY = Math.sqrt(rb * rb + rd * rd);
 				parent.ashearY = 0;
-				parent.arotation = 90 - js_Boot.__cast(Math.atan2(rd,rb) , Float) * spine_utils_SpineUtils.radDeg;
+				parent.arotation = 90 - Math.atan2(rd,rb) * spine_utils_SpineUtils.radDeg;
 			}
 		}
 	}
@@ -88131,11 +89006,11 @@ spine_IkConstraint.applyTwo = function(parent,child,targetX,targetY,bendDir,alph
 		if(parent1 == null) {
 			child.ax = child.worldX;
 			child.ay = child.worldY;
-			child.arotation = js_Boot.__cast(Math.atan2(child.c,child.a) , Float) * spine_utils_SpineUtils.radDeg;
-			child.ascaleX = js_Boot.__cast(Math.sqrt(child.a * child.a + child.c * child.c) , Float);
-			child.ascaleY = js_Boot.__cast(Math.sqrt(child.b * child.b + child.d * child.d) , Float);
+			child.arotation = Math.atan2(child.c,child.a) * spine_utils_SpineUtils.radDeg;
+			child.ascaleX = Math.sqrt(child.a * child.a + child.c * child.c);
+			child.ascaleY = Math.sqrt(child.b * child.b + child.d * child.d);
 			child.ashearX = 0;
-			child.ashearY = js_Boot.__cast(Math.atan2(child.a * child.b + child.c * child.d,child.a * child.d - child.b * child.c) , Float) * spine_utils_SpineUtils.radDeg;
+			child.ashearY = Math.atan2(child.a * child.b + child.c * child.d,child.a * child.d - child.b * child.c) * spine_utils_SpineUtils.radDeg;
 		} else {
 			var pa = parent1.a;
 			var pb = parent1.b;
@@ -88155,23 +89030,24 @@ spine_IkConstraint.applyTwo = function(parent,child,targetX,targetY,bendDir,alph
 			var rc = id * child.c - ic * child.a;
 			var rd = id * child.d - ic * child.b;
 			child.ashearX = 0;
-			child.ascaleX = js_Boot.__cast(Math.sqrt(ra * ra + rc * rc) , Float);
+			child.ascaleX = Math.sqrt(ra * ra + rc * rc);
 			if(child.ascaleX > 0.0001) {
 				var det = ra * rd - rb * rc;
 				child.ascaleY = det / child.ascaleX;
-				child.ashearY = js_Boot.__cast(Math.atan2(ra * rb + rc * rd,det) , Float) * spine_utils_SpineUtils.radDeg;
-				child.arotation = js_Boot.__cast(Math.atan2(rc,ra) , Float) * spine_utils_SpineUtils.radDeg;
+				child.ashearY = Math.atan2(ra * rb + rc * rd,det) * spine_utils_SpineUtils.radDeg;
+				child.arotation = Math.atan2(rc,ra) * spine_utils_SpineUtils.radDeg;
 			} else {
 				child.ascaleX = 0;
-				child.ascaleY = js_Boot.__cast(Math.sqrt(rb * rb + rd * rd) , Float);
+				child.ascaleY = Math.sqrt(rb * rb + rd * rd);
 				child.ashearY = 0;
-				child.arotation = 90 - js_Boot.__cast(Math.atan2(rd,rb) , Float) * spine_utils_SpineUtils.radDeg;
+				child.arotation = 90 - Math.atan2(rd,rb) * spine_utils_SpineUtils.radDeg;
 			}
 		}
 	}
 	var px = parent.ax;
 	var py = parent.ay;
 	var psx = parent.ascaleX;
+	var sx = psx;
 	var psy = parent.ascaleY;
 	var csx = child.ascaleX;
 	var os1 = 0;
@@ -88219,46 +89095,66 @@ spine_IkConstraint.applyTwo = function(parent,child,targetX,targetY,bendDir,alph
 	c = pp.c;
 	d = pp.d;
 	var id = 1 / (a * d - b * c);
-	var x = targetX - pp.worldX;
-	var y = targetY - pp.worldY;
-	var tx = (x * d - y * b) * id - px;
-	var ty = (y * a - x * c) * id - py;
-	x = cwx - pp.worldX;
-	y = cwy - pp.worldY;
+	var x = cwx - pp.worldX;
+	var y = cwy - pp.worldY;
 	var dx = (x * d - y * b) * id - px;
 	var dy = (y * a - x * c) * id - py;
-	var l1 = js_Boot.__cast(Math.sqrt(dx * dx + dy * dy) , Float);
+	var l1 = Math.sqrt(dx * dx + dy * dy);
 	var l2 = child.data.length * csx;
 	var a1 = 0;
 	var a2 = 0;
+	if(l1 < 0.0001) {
+		spine_IkConstraint.applyOne(parent,targetX,targetY,false,stretch,false,alpha);
+		child.updateWorldTransformWithData(cx,cy,0,child.ascaleX,child.ascaleY,child.ashearX,child.ashearY);
+		return;
+	}
+	x = targetX - pp.worldX;
+	y = targetY - pp.worldY;
+	var tx = (x * d - y * b) * id - px;
+	var ty = (y * a - x * c) * id - py;
+	var dd = tx * tx + ty * ty;
+	if(softness != 0) {
+		softness *= psx * (csx + 1) / 2;
+		var td = Math.sqrt(dd);
+		var sd = td - l1 - l2 * psx + softness;
+		if(sd > 0) {
+			var p = Math.min(1,sd / (softness * 2) | 0) - 1;
+			p = (sd - softness * (1 - p * p)) / td;
+			tx -= p * tx;
+			ty -= p * ty;
+			dd = tx * tx + ty * ty;
+		}
+	}
 	var _gotoLabel_outer;
 	while(true) {
 		_gotoLabel_outer = 0;
 		if(u) {
 			l2 *= psx;
-			var cos = (tx * tx + ty * ty - l1 * l1 - l2 * l2) / (2 * l1 * l2);
+			var cos = (dd - l1 * l1 - l2 * l2) / (2 * l1 * l2);
 			if(cos < -1) {
 				cos = -1;
 			} else if(cos > 1) {
 				cos = 1;
+				if(stretch) {
+					sx *= (Math.sqrt(dd) / (l1 + l2) - 1) * alpha + 1;
+				}
 			}
-			a2 = js_Boot.__cast(Math.acos(cos) * bendDir , Float);
+			a2 = Math.acos(cos) * bendDir;
 			a = l1 + l2 * cos;
-			b = l2 * js_Boot.__cast(Math.sin(a2) , Float);
-			a1 = js_Boot.__cast(Math.atan2(ty * a - tx * b,tx * a + ty * b) , Float);
+			b = l2 * Math.sin(a2);
+			a1 = Math.atan2(ty * a - tx * b,tx * a + ty * b);
 		} else {
 			a = psx * l2;
 			b = psy * l2;
 			var aa = a * a;
 			var bb = b * b;
-			var dd = tx * tx + ty * ty;
-			var ta = js_Boot.__cast(Math.atan2(ty,tx) , Float);
+			var ta = Math.atan2(ty,tx);
 			c = bb * l1 * l1 + aa * dd - aa * bb;
 			var c1 = -2 * bb * l1;
 			var c2 = bb - aa;
 			d = c1 * c1 - 4 * c2 * c;
 			if(d >= 0) {
-				var q = js_Boot.__cast(Math.sqrt(d) , Float);
+				var q = Math.sqrt(d);
 				if(c1 < 0) {
 					q = -q;
 				}
@@ -88267,9 +89163,9 @@ spine_IkConstraint.applyTwo = function(parent,child,targetX,targetY,bendDir,alph
 				var r1 = c / q;
 				var r = Math.abs(r0) < Math.abs(r1) ? r0 : r1;
 				if(r * r <= dd) {
-					y = js_Boot.__cast(Math.sqrt(dd - r * r) * bendDir , Float);
-					a1 = ta - js_Boot.__cast(Math.atan2(y,r) , Float);
-					a2 = js_Boot.__cast(Math.atan2(y / psy,(r - l1) / psx) , Float);
+					y = Math.sqrt(dd - r * r) * bendDir;
+					a1 = ta - Math.atan2(y,r);
+					a2 = Math.atan2(y / psy,(r - l1) / psx);
 					_gotoLabel_outer = 1;
 					break;
 				}
@@ -88284,9 +89180,9 @@ spine_IkConstraint.applyTwo = function(parent,child,targetX,targetY,bendDir,alph
 			var maxY = 0;
 			c = -a * l1 / (aa - bb);
 			if(c >= -1 && c <= 1) {
-				c = js_Boot.__cast(Math.acos(c) , Float);
-				x = a * js_Boot.__cast(Math.cos(c) , Float) + l1;
-				y = b * js_Boot.__cast(Math.sin(c) , Float);
+				c = Math.acos(c);
+				x = a * Math.cos(c) + l1;
+				y = b * Math.sin(c);
 				d = x * x + y * y;
 				if(d < minDist) {
 					minAngle = c;
@@ -88302,10 +89198,10 @@ spine_IkConstraint.applyTwo = function(parent,child,targetX,targetY,bendDir,alph
 				}
 			}
 			if(dd <= (minDist + maxDist) / 2) {
-				a1 = ta - js_Boot.__cast(Math.atan2(minY * bendDir,minX) , Float);
+				a1 = ta - Math.atan2(minY * bendDir,minX);
 				a2 = minAngle * bendDir;
 			} else {
-				a1 = ta - js_Boot.__cast(Math.atan2(maxY * bendDir,maxX) , Float);
+				a1 = ta - Math.atan2(maxY * bendDir,maxX);
 				a2 = maxAngle * bendDir;
 			}
 		}
@@ -88313,7 +89209,7 @@ spine_IkConstraint.applyTwo = function(parent,child,targetX,targetY,bendDir,alph
 			break;
 		}
 	}
-	var os = js_Boot.__cast(Math.atan2(cy,cx) , Float) * s2;
+	var os = Math.atan2(cy,cx) * s2;
 	var rotation = parent.arotation;
 	a1 = (a1 - os) * spine_utils_SpineUtils.radDeg + os1 - rotation;
 	if(a1 > 180) {
@@ -88321,7 +89217,7 @@ spine_IkConstraint.applyTwo = function(parent,child,targetX,targetY,bendDir,alph
 	} else if(a1 < -180) {
 		a1 += 360;
 	}
-	parent.updateWorldTransformWithData(px,py,rotation + a1 * alpha,parent.ascaleX,parent.ascaleY,0,0);
+	parent.updateWorldTransformWithData(px,py,rotation + a1 * alpha,sx,parent.ascaleY,0,0);
 	rotation = child.arotation;
 	a2 = ((a2 + os) * spine_utils_SpineUtils.radDeg - child.ashearX) * s2 + os2 - rotation;
 	if(a2 > 180) {
@@ -88335,18 +89231,22 @@ spine_IkConstraint.prototype = {
 	data: null
 	,bones: null
 	,target: null
-	,mix: null
 	,bendDirection: null
-	,apply: function() {
+	,compress: null
+	,stretch: null
+	,mix: null
+	,softness: null
+	,active: null
+	,applyNoArgs: function() {
 		var target = this.target;
 		var bones = this.bones;
 		while(true) {
 			var _switchCond0 = bones.length;
 			if(_switchCond0 == 1) {
-				spine_IkConstraint.applyOne(bones.length > 0 ? bones[0] : null,target.worldX,target.worldY,this.mix);
+				spine_IkConstraint.applyOne(bones.length > 0 ? bones[0] : null,target.worldX,target.worldY,this.compress,this.stretch,this.data.uniform,this.mix);
 				break;
 			} else if(_switchCond0 == 2) {
-				spine_IkConstraint.applyTwo(bones.length > 0 ? bones[0] : null,bones[1],target.worldX,target.worldY,this.bendDirection,this.mix);
+				spine_IkConstraint.apply(bones.length > 0 ? bones[0] : null,bones[1],target.worldX,target.worldY,this.bendDirection,this.stretch,this.softness,this.mix);
 				break;
 			}
 			break;
@@ -88359,74 +89259,14 @@ spine_IkConstraint.prototype = {
 		while(true) {
 			var _switchCond0 = bones.length;
 			if(_switchCond0 == 1) {
-				spine_IkConstraint.applyOne(bones.length > 0 ? bones[0] : null,target.worldX,target.worldY,this.mix);
+				spine_IkConstraint.applyOne(bones.length > 0 ? bones[0] : null,target.worldX,target.worldY,this.compress,this.stretch,this.data.uniform,this.mix);
 				break;
 			} else if(_switchCond0 == 2) {
-				spine_IkConstraint.applyTwo(bones.length > 0 ? bones[0] : null,bones[1],target.worldX,target.worldY,this.bendDirection,this.mix);
+				spine_IkConstraint.apply(bones.length > 0 ? bones[0] : null,bones[1],target.worldX,target.worldY,this.bendDirection,this.stretch,this.softness,this.mix);
 				break;
 			}
 			break;
 		}
-	}
-	,getOrder: function() {
-		return this.data.order;
-	}
-	,getBones: function() {
-		return this.bones;
-	}
-	,getTarget: function() {
-		return this.target;
-	}
-	,setTarget: function(target) {
-		this.target = target;
-	}
-	,getMix: function() {
-		return this.mix;
-	}
-	,setMix: function(mix) {
-		this.mix = mix;
-	}
-	,getBendDirection: function() {
-		return this.bendDirection;
-	}
-	,setBendDirection: function(bendDirection) {
-		this.bendDirection = bendDirection;
-	}
-	,getData: function() {
-		return this.data;
-	}
-	,toString: function() {
-		return this.data.name;
-	}
-	,__class__: spine_IkConstraint
-};
-var spine_IkConstraintData = function(name) {
-	this.mix = 1;
-	this.bendDirection = 1;
-	this.bones = [];
-	this.order = 0;
-	if(name == null) {
-		throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("name cannot be null."));
-	}
-	this.name = name;
-};
-$hxClasses["spine.IkConstraintData"] = spine_IkConstraintData;
-spine_IkConstraintData.__name__ = "spine.IkConstraintData";
-spine_IkConstraintData.prototype = {
-	name: null
-	,order: null
-	,bones: null
-	,target: null
-	,bendDirection: null
-	,mix: null
-	,getName: function() {
-		return this.name;
-	}
-	,getOrder: function() {
-		return this.order;
-	}
-	,setOrder: function(order) {
-		this.order = order;
 	}
 	,getBones: function() {
 		return this.bones;
@@ -88440,11 +89280,80 @@ spine_IkConstraintData.prototype = {
 		}
 		this.target = target;
 	}
+	,getMix: function() {
+		return this.mix;
+	}
+	,setMix: function(mix) {
+		this.mix = mix;
+	}
+	,getSoftness: function() {
+		return this.softness;
+	}
+	,setSoftness: function(softness) {
+		this.softness = softness;
+	}
 	,getBendDirection: function() {
 		return this.bendDirection;
 	}
 	,setBendDirection: function(bendDirection) {
 		this.bendDirection = bendDirection;
+	}
+	,getCompress: function() {
+		return this.compress;
+	}
+	,setCompress: function(compress) {
+		this.compress = compress;
+	}
+	,getStretch: function() {
+		return this.stretch;
+	}
+	,setStretch: function(stretch) {
+		this.stretch = stretch;
+	}
+	,isActive: function() {
+		return this.active;
+	}
+	,getData: function() {
+		return this.data;
+	}
+	,toString: function() {
+		return this.data.name;
+	}
+	,__class__: spine_IkConstraint
+};
+var spine_IkConstraintData = function(name) {
+	this.softness = 0;
+	this.mix = 1;
+	this.uniform = false;
+	this.stretch = false;
+	this.compress = false;
+	this.bendDirection = 1;
+	this.bones = [];
+	spine_ConstraintData.call(this,name);
+};
+$hxClasses["spine.IkConstraintData"] = spine_IkConstraintData;
+spine_IkConstraintData.__name__ = "spine.IkConstraintData";
+spine_IkConstraintData.__super__ = spine_ConstraintData;
+spine_IkConstraintData.prototype = $extend(spine_ConstraintData.prototype,{
+	bones: null
+	,target: null
+	,bendDirection: null
+	,compress: null
+	,stretch: null
+	,uniform: null
+	,mix: null
+	,softness: null
+	,getBones: function() {
+		return this.bones;
+	}
+	,getTarget: function() {
+		return this.target;
+	}
+	,setTarget: function(target) {
+		if(target == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("target cannot be null."));
+		}
+		this.target = target;
 	}
 	,getMix: function() {
 		return this.mix;
@@ -88452,11 +89361,38 @@ spine_IkConstraintData.prototype = {
 	,setMix: function(mix) {
 		this.mix = mix;
 	}
-	,toString: function() {
-		return this.name;
+	,getSoftness: function() {
+		return this.softness;
+	}
+	,setSoftness: function(softness) {
+		this.softness = softness;
+	}
+	,getBendDirection: function() {
+		return this.bendDirection;
+	}
+	,setBendDirection: function(bendDirection) {
+		this.bendDirection = bendDirection;
+	}
+	,getCompress: function() {
+		return this.compress;
+	}
+	,setCompress: function(compress) {
+		this.compress = compress;
+	}
+	,getStretch: function() {
+		return this.stretch;
+	}
+	,setStretch: function(stretch) {
+		this.stretch = stretch;
+	}
+	,getUniform: function() {
+		return this.uniform;
+	}
+	,setUniform: function(uniform) {
+		this.uniform = uniform;
 	}
 	,__class__: spine_IkConstraintData
-};
+});
 var spine_PathConstraint = function(data,skeleton) {
 	var array = [];
 	var len = array.length;
@@ -88474,6 +89410,7 @@ var spine_PathConstraint = function(data,skeleton) {
 	this.world = [];
 	this.positions = [];
 	this.spaces = [];
+	this.active = false;
 	this.translateMix = 0;
 	this.rotateMix = 0;
 	this.spacing = 0;
@@ -88503,7 +89440,7 @@ var spine_PathConstraint = function(data,skeleton) {
 };
 $hxClasses["spine.PathConstraint"] = spine_PathConstraint;
 spine_PathConstraint.__name__ = "spine.PathConstraint";
-spine_PathConstraint.__interfaces__ = [spine_Constraint];
+spine_PathConstraint.__interfaces__ = [spine_Updatable];
 spine_PathConstraint.prototype = {
 	data: null
 	,bones: null
@@ -88512,13 +89449,14 @@ spine_PathConstraint.prototype = {
 	,spacing: null
 	,rotateMix: null
 	,translateMix: null
+	,active: null
 	,spaces: null
 	,positions: null
 	,world: null
 	,curves: null
 	,lengths: null
 	,segments: null
-	,apply: function() {
+	,applyNoArgs: function() {
 		var attachment = this.target.attachment;
 		if(((attachment) instanceof spine_attachments_PathAttachment)) {
 			var rotateMix = this.rotateMix;
@@ -88527,8 +89465,7 @@ spine_PathConstraint.prototype = {
 			var rotate = rotateMix > 0;
 			if(!(!translate && !rotate)) {
 				var data = this.data;
-				var spacingMode = data.spacingMode;
-				var lengthSpacing = spacingMode == 0;
+				var percentSpacing = data.spacingMode == 2;
 				var rotateMode = data.rotateMode;
 				var tangents = rotateMode == 0;
 				var scale = rotateMode == 2;
@@ -88548,7 +89485,7 @@ spine_PathConstraint.prototype = {
 				var spaces = this1;
 				var lengths = null;
 				var spacing = this.spacing;
-				if(scale || lengthSpacing) {
+				if(scale || !percentSpacing) {
 					if(scale) {
 						var this1 = this.lengths;
 						var len = this1.length;
@@ -88562,24 +89499,34 @@ spine_PathConstraint.prototype = {
 						}
 						lengths = this1;
 					}
+					var lengthSpacing = data.spacingMode == 0;
 					var i = 0;
 					var n = spacesCount - 1;
 					while(i < n) {
-						var bone = js_Boot.__cast(bones[i] , spine_Bone);
+						var result = bones[i];
+						var bone = result;
 						var setupLength = bone.data.length;
 						if(setupLength < spine_PathConstraint.epsilon) {
 							if(scale) {
 								lengths[i] = 0;
 							}
 							spaces[++i] = 0;
-						} else {
-							var x = setupLength * bone.a;
-							var y = setupLength * bone.c;
-							var length = js_Boot.__cast(Math.sqrt(x * x + y * y) , Float);
+						} else if(percentSpacing) {
 							if(scale) {
+								var x = setupLength * bone.a;
+								var y = setupLength * bone.c;
+								var length = Math.sqrt(x * x + y * y);
 								lengths[i] = length;
 							}
-							spaces[++i] = (lengthSpacing ? setupLength + spacing : spacing) * length / setupLength;
+							spaces[++i] = spacing;
+						} else {
+							var x1 = setupLength * bone.a;
+							var y1 = setupLength * bone.c;
+							var length1 = Math.sqrt(x1 * x1 + y1 * y1);
+							if(scale) {
+								lengths[i] = length1;
+							}
+							spaces[++i] = (lengthSpacing ? setupLength + spacing : spacing) * length1 / setupLength;
 						}
 					}
 				} else {
@@ -88589,9 +89536,9 @@ spine_PathConstraint.prototype = {
 						++i;
 					}
 				}
-				var path = js_Boot.__cast(attachment , spine_attachments_PathAttachment);
+				var result = attachment;
+				var path = result;
 				var percentPosition = data.positionMode == 1;
-				var percentSpacing = spacingMode == 2;
 				var target = this.target;
 				var position = this.position;
 				var spaces1 = this.spaces;
@@ -88621,7 +89568,7 @@ spine_PathConstraint.prototype = {
 						position *= pathLength;
 					}
 					if(percentSpacing) {
-						var i = 0;
+						var i = 1;
 						while(i < spacesCount) {
 							spaces1[i] *= pathLength;
 							++i;
@@ -88656,7 +89603,7 @@ spine_PathConstraint.prototype = {
 								var count = 4;
 								count = (count >> 1) * 2;
 								var skeleton = target.bone.skeleton;
-								var deformArray = target.attachmentVertices;
+								var deformArray = target.deform;
 								var vertices = path.vertices;
 								var bones1 = path.bones;
 								if(bones1 == null) {
@@ -88700,7 +89647,8 @@ spine_PathConstraint.prototype = {
 											var n1 = bones1[v1++];
 											n1 += v1;
 											while(v1 < n1) {
-												var bone1 = js_Boot.__cast(skeletonBones[bones1[v1]] , spine_Bone);
+												var result = skeletonBones[bones1[v1]];
+												var bone1 = result;
 												var vx1 = vertices[b1];
 												var vy1 = vertices[b1 + 1];
 												var weight = vertices[b1 + 2];
@@ -88724,7 +89672,8 @@ spine_PathConstraint.prototype = {
 											var n2 = bones1[v1++];
 											n2 += v1;
 											while(v1 < n2) {
-												var bone2 = js_Boot.__cast(skeletonBones[bones1[v1]] , spine_Bone);
+												var result1 = skeletonBones[bones1[v1]];
+												var bone2 = result1;
 												var vx2 = vertices[b2] + deform[f];
 												var vy2 = vertices[b2 + 1] + deform[f + 1];
 												var weight1 = vertices[b2 + 2];
@@ -88745,9 +89694,9 @@ spine_PathConstraint.prototype = {
 							var y1 = world[1];
 							var dx = world[2] - x1;
 							var dy = world[3] - y1;
-							var r = js_Boot.__cast(Math.atan2(dy,dx) , Float);
-							out[o] = x1 + p * js_Boot.__cast(Math.cos(r) , Float);
-							out[o + 1] = y1 + p * js_Boot.__cast(Math.sin(r) , Float);
+							var r = Math.atan2(dy,dx);
+							out[o] = x1 + p * Math.cos(r);
+							out[o + 1] = y1 + p * Math.sin(r);
 							out[o + 2] = r;
 							++i;
 							o += 3;
@@ -88759,7 +89708,7 @@ spine_PathConstraint.prototype = {
 								var count1 = 4;
 								count1 = (count1 >> 1) * 2;
 								var skeleton1 = target.bone.skeleton;
-								var deformArray1 = target.attachmentVertices;
+								var deformArray1 = target.deform;
 								var vertices1 = path.vertices;
 								var bones2 = path.bones;
 								if(bones2 == null) {
@@ -88803,7 +89752,8 @@ spine_PathConstraint.prototype = {
 											var n4 = bones2[v3++];
 											n4 += v3;
 											while(v3 < n4) {
-												var bone4 = js_Boot.__cast(skeletonBones1[bones2[v3]] , spine_Bone);
+												var result2 = skeletonBones1[bones2[v3]];
+												var bone4 = result2;
 												var vx4 = vertices1[b4];
 												var vy4 = vertices1[b4 + 1];
 												var weight2 = vertices1[b4 + 2];
@@ -88827,7 +89777,8 @@ spine_PathConstraint.prototype = {
 											var n5 = bones2[v3++];
 											n5 += v3;
 											while(v3 < n5) {
-												var bone5 = js_Boot.__cast(skeletonBones1[bones2[v3]] , spine_Bone);
+												var result3 = skeletonBones1[bones2[v3]];
+												var bone5 = result3;
 												var vx5 = vertices1[b5] + deform1[f1];
 												var vy5 = vertices1[b5 + 1] + deform1[f1 + 1];
 												var weight3 = vertices1[b5 + 2];
@@ -88849,9 +89800,9 @@ spine_PathConstraint.prototype = {
 							var y11 = world[3];
 							var dx1 = x11 - world[0];
 							var dy1 = y11 - world[1];
-							var r1 = js_Boot.__cast(Math.atan2(dy1,dx1) , Float);
-							out[o] = x11 + p1 * js_Boot.__cast(Math.cos(r1) , Float);
-							out[o + 1] = y11 + p1 * js_Boot.__cast(Math.sin(r1) , Float);
+							var r1 = Math.atan2(dy1,dx1);
+							out[o] = x11 + p1 * Math.cos(r1);
+							out[o + 1] = y11 + p1 * Math.sin(r1);
 							out[o + 2] = r1;
 							++i;
 							o += 3;
@@ -88878,7 +89829,7 @@ spine_PathConstraint.prototype = {
 								var count2 = 4;
 								count2 = (count2 >> 1) * 2;
 								var skeleton2 = target.bone.skeleton;
-								var deformArray2 = target.attachmentVertices;
+								var deformArray2 = target.deform;
 								var vertices2 = path.vertices;
 								var bones3 = path.bones;
 								if(bones3 == null) {
@@ -88922,7 +89873,8 @@ spine_PathConstraint.prototype = {
 											var n7 = bones3[v5++];
 											n7 += v5;
 											while(v5 < n7) {
-												var bone7 = js_Boot.__cast(skeletonBones2[bones3[v5]] , spine_Bone);
+												var result4 = skeletonBones2[bones3[v5]];
+												var bone7 = result4;
 												var vx7 = vertices2[b7];
 												var vy7 = vertices2[b7 + 1];
 												var weight4 = vertices2[b7 + 2];
@@ -88946,7 +89898,8 @@ spine_PathConstraint.prototype = {
 											var n8 = bones3[v5++];
 											n8 += v5;
 											while(v5 < n8) {
-												var bone8 = js_Boot.__cast(skeletonBones2[bones3[v5]] , spine_Bone);
+												var result5 = skeletonBones2[bones3[v5]];
+												var bone8 = result5;
 												var vx8 = vertices2[b8] + deform2[f2];
 												var vy8 = vertices2[b8 + 1] + deform2[f2 + 1];
 												var weight5 = vertices2[b8 + 2];
@@ -88965,7 +89918,7 @@ spine_PathConstraint.prototype = {
 								var count3 = 4;
 								count3 = 4 + (count3 >> 1) * 2;
 								var skeleton3 = target.bone.skeleton;
-								var deformArray3 = target.attachmentVertices;
+								var deformArray3 = target.deform;
 								var vertices3 = path.vertices;
 								var bones4 = path.bones;
 								if(bones4 == null) {
@@ -89009,7 +89962,8 @@ spine_PathConstraint.prototype = {
 											var n10 = bones4[v7++];
 											n10 += v7;
 											while(v7 < n10) {
-												var bone10 = js_Boot.__cast(skeletonBones3[bones4[v7]] , spine_Bone);
+												var result6 = skeletonBones3[bones4[v7]];
+												var bone10 = result6;
 												var vx10 = vertices3[b10];
 												var vy10 = vertices3[b10 + 1];
 												var weight6 = vertices3[b10 + 2];
@@ -89033,7 +89987,8 @@ spine_PathConstraint.prototype = {
 											var n11 = bones4[v7++];
 											n11 += v7;
 											while(v7 < n11) {
-												var bone11 = js_Boot.__cast(skeletonBones3[bones4[v7]] , spine_Bone);
+												var result7 = skeletonBones3[bones4[v7]];
+												var bone11 = result7;
 												var vx11 = vertices3[b11] + deform3[f3];
 												var vy11 = vertices3[b11 + 1] + deform3[f3 + 1];
 												var weight7 = vertices3[b11 + 2];
@@ -89054,7 +90009,7 @@ spine_PathConstraint.prototype = {
 								var count4 = 8;
 								count4 = (count4 >> 1) * 2;
 								var skeleton4 = target.bone.skeleton;
-								var deformArray4 = target.attachmentVertices;
+								var deformArray4 = target.deform;
 								var vertices4 = path.vertices;
 								var bones5 = path.bones;
 								if(bones5 == null) {
@@ -89098,7 +90053,8 @@ spine_PathConstraint.prototype = {
 											var n13 = bones5[v9++];
 											n13 += v9;
 											while(v9 < n13) {
-												var bone13 = js_Boot.__cast(skeletonBones4[bones5[v9]] , spine_Bone);
+												var result8 = skeletonBones4[bones5[v9]];
+												var bone13 = result8;
 												var vx13 = vertices4[b13];
 												var vy13 = vertices4[b13 + 1];
 												var weight8 = vertices4[b13 + 2];
@@ -89122,7 +90078,8 @@ spine_PathConstraint.prototype = {
 											var n14 = bones5[v9++];
 											n14 += v9;
 											while(v9 < n14) {
-												var bone14 = js_Boot.__cast(skeletonBones4[bones5[v9]] , spine_Bone);
+												var result9 = skeletonBones4[bones5[v9]];
+												var bone14 = result9;
 												var vx14 = vertices4[b14] + deform4[f4];
 												var vy14 = vertices4[b14 + 1] + deform4[f4 + 1];
 												var weight9 = vertices4[b14 + 2];
@@ -89140,7 +90097,6 @@ spine_PathConstraint.prototype = {
 								}
 							}
 						}
-						var p2 = p;
 						var x12 = world[0];
 						var y12 = world[1];
 						var cx1 = world[2];
@@ -89148,24 +90104,31 @@ spine_PathConstraint.prototype = {
 						var cx2 = world[4];
 						var cy2 = world[5];
 						var tangents1 = tangents || i > 0 && space < spine_PathConstraint.epsilon;
-						if(p2 < spine_PathConstraint.epsilon || isNaN(p2)) {
-							p2 = spine_PathConstraint.epsilon;
-						}
-						var tt = p2 * p2;
-						var ttt = tt * p2;
-						var u = 1 - p2;
-						var uu = u * u;
-						var uuu = uu * u;
-						var ut = u * p2;
-						var ut3 = ut * 3;
-						var uut3 = u * ut3;
-						var utt3 = ut3 * p2;
-						var x6 = x12 * uuu + cx1 * uut3 + cx2 * utt3 + world[6] * ttt;
-						var y6 = y12 * uuu + cy1 * uut3 + cy2 * utt3 + world[7] * ttt;
-						out[o] = x6;
-						out[o + 1] = y6;
-						if(tangents1) {
-							out[o + 2] = js_Boot.__cast(Math.atan2(y6 - (y12 * uu + cy1 * ut * 2 + cy2 * tt),x6 - (x12 * uu + cx1 * ut * 2 + cx2 * tt)) , Float);
+						if(p < spine_PathConstraint.epsilon || isNaN(p)) {
+							out[o] = x12;
+							out[o + 1] = y12;
+							out[o + 2] = Math.atan2(cy1 - y12,cx1 - x12);
+						} else {
+							var tt = p * p;
+							var ttt = tt * p;
+							var u = 1 - p;
+							var uu = u * u;
+							var uuu = uu * u;
+							var ut = u * p;
+							var ut3 = ut * 3;
+							var uut3 = u * ut3;
+							var utt3 = ut3 * p;
+							var x6 = x12 * uuu + cx1 * uut3 + cx2 * utt3 + world[6] * ttt;
+							var y6 = y12 * uuu + cy1 * uut3 + cy2 * utt3 + world[7] * ttt;
+							out[o] = x6;
+							out[o + 1] = y6;
+							if(tangents1) {
+								if(p < 0.001) {
+									out[o + 2] = Math.atan2(cy1 - y12,cx1 - x12);
+								} else {
+									out[o + 2] = Math.atan2(y6 - (y12 * uu + cy1 * ut * 2 + cy2 * tt),x6 - (x12 * uu + cx1 * ut * 2 + cx2 * tt));
+								}
+							}
 						}
 						++i;
 						o += 3;
@@ -89188,7 +90151,7 @@ spine_PathConstraint.prototype = {
 						var count = verticesLength - 4;
 						count = (count >> 1) * 2;
 						var skeleton = target.bone.skeleton;
-						var deformArray = target.attachmentVertices;
+						var deformArray = target.deform;
 						var vertices = path.vertices;
 						var bones1 = path.bones;
 						if(bones1 == null) {
@@ -89232,7 +90195,8 @@ spine_PathConstraint.prototype = {
 									var n = bones1[v++];
 									n += v;
 									while(v < n) {
-										var bone = js_Boot.__cast(skeletonBones[bones1[v]] , spine_Bone);
+										var result = skeletonBones[bones1[v]];
+										var bone = result;
 										var vx = vertices[b];
 										var vy = vertices[b + 1];
 										var weight = vertices[b + 2];
@@ -89256,7 +90220,8 @@ spine_PathConstraint.prototype = {
 									var n = bones1[v++];
 									n += v;
 									while(v < n) {
-										var bone = js_Boot.__cast(skeletonBones[bones1[v]] , spine_Bone);
+										var result = skeletonBones[bones1[v]];
+										var bone = result;
 										var vx = vertices[b] + deform[f];
 										var vy = vertices[b + 1] + deform[f + 1];
 										var weight = vertices[b + 2];
@@ -89276,7 +90241,7 @@ spine_PathConstraint.prototype = {
 						var offset = verticesLength - 4;
 						count = offset + (count >> 1) * 2;
 						var skeleton = target.bone.skeleton;
-						var deformArray = target.attachmentVertices;
+						var deformArray = target.deform;
 						var vertices = path.vertices;
 						var bones1 = path.bones;
 						if(bones1 == null) {
@@ -89320,7 +90285,8 @@ spine_PathConstraint.prototype = {
 									var n = bones1[v++];
 									n += v;
 									while(v < n) {
-										var bone = js_Boot.__cast(skeletonBones[bones1[v]] , spine_Bone);
+										var result = skeletonBones[bones1[v]];
+										var bone = result;
 										var vx = vertices[b];
 										var vy = vertices[b + 1];
 										var weight = vertices[b + 2];
@@ -89344,7 +90310,8 @@ spine_PathConstraint.prototype = {
 									var n = bones1[v++];
 									n += v;
 									while(v < n) {
-										var bone = js_Boot.__cast(skeletonBones[bones1[v]] , spine_Bone);
+										var result = skeletonBones[bones1[v]];
+										var bone = result;
 										var vx = vertices[b] + deform[f];
 										var vy = vertices[b + 1] + deform[f + 1];
 										var weight = vertices[b + 2];
@@ -89379,7 +90346,7 @@ spine_PathConstraint.prototype = {
 						var count = verticesLength;
 						count = (count >> 1) * 2;
 						var skeleton = target.bone.skeleton;
-						var deformArray = target.attachmentVertices;
+						var deformArray = target.deform;
 						var vertices = path.vertices;
 						var bones1 = path.bones;
 						if(bones1 == null) {
@@ -89423,7 +90390,8 @@ spine_PathConstraint.prototype = {
 									var n = bones1[v++];
 									n += v;
 									while(v < n) {
-										var bone = js_Boot.__cast(skeletonBones[bones1[v]] , spine_Bone);
+										var result = skeletonBones[bones1[v]];
+										var bone = result;
 										var vx = vertices[b];
 										var vy = vertices[b + 1];
 										var weight = vertices[b + 2];
@@ -89447,7 +90415,8 @@ spine_PathConstraint.prototype = {
 									var n = bones1[v++];
 									n += v;
 									while(v < n) {
-										var bone = js_Boot.__cast(skeletonBones[bones1[v]] , spine_Bone);
+										var result = skeletonBones[bones1[v]];
+										var bone = result;
 										var vx = vertices[b] + deform[f];
 										var vy = vertices[b + 1] + deform[f + 1];
 										var weight = vertices[b + 2];
@@ -89509,18 +90478,18 @@ spine_PathConstraint.prototype = {
 						ddfy = tmpy * 2 + dddfy;
 						dfx = (cx1 - x1) * 0.75 + tmpx + dddfx * 0.16666667;
 						dfy = (cy1 - y1) * 0.75 + tmpy + dddfy * 0.16666667;
-						pathLength += js_Boot.__cast(Math.sqrt(dfx * dfx + dfy * dfy) , Float);
+						pathLength += Math.sqrt(dfx * dfx + dfy * dfy);
 						dfx += ddfx;
 						dfy += ddfy;
 						ddfx += dddfx;
 						ddfy += dddfy;
-						pathLength += js_Boot.__cast(Math.sqrt(dfx * dfx + dfy * dfy) , Float);
+						pathLength += Math.sqrt(dfx * dfx + dfy * dfy);
 						dfx += ddfx;
 						dfy += ddfy;
-						pathLength += js_Boot.__cast(Math.sqrt(dfx * dfx + dfy * dfy) , Float);
+						pathLength += Math.sqrt(dfx * dfx + dfy * dfy);
 						dfx += ddfx + dddfx;
 						dfy += ddfy + dddfy;
-						pathLength += js_Boot.__cast(Math.sqrt(dfx * dfx + dfy * dfy) , Float);
+						pathLength += Math.sqrt(dfx * dfx + dfy * dfy);
 						curves[i] = pathLength;
 						x1 = x2;
 						y1 = y2;
@@ -89529,9 +90498,11 @@ spine_PathConstraint.prototype = {
 					}
 					if(percentPosition) {
 						position *= pathLength;
+					} else {
+						position *= pathLength / path.lengths[curveCount - 1];
 					}
 					if(percentSpacing) {
-						var i = 0;
+						var i = 1;
 						while(i < spacesCount) {
 							spaces1[i] *= pathLength;
 							++i;
@@ -89557,9 +90528,9 @@ spine_PathConstraint.prototype = {
 							var y11 = world[1];
 							var dx = world[2] - x11;
 							var dy = world[3] - y11;
-							var r = js_Boot.__cast(Math.atan2(dy,dx) , Float);
-							out[o] = x11 + p * js_Boot.__cast(Math.cos(r) , Float);
-							out[o + 1] = y11 + p * js_Boot.__cast(Math.sin(r) , Float);
+							var r = Math.atan2(dy,dx);
+							out[o] = x11 + p * Math.cos(r);
+							out[o + 1] = y11 + p * Math.sin(r);
 							out[o + 2] = r;
 							++i;
 							o += 3;
@@ -89571,9 +90542,9 @@ spine_PathConstraint.prototype = {
 							var y12 = world[i1 + 3];
 							var dx1 = x12 - world[i1];
 							var dy1 = y12 - world[i1 + 1];
-							var r1 = js_Boot.__cast(Math.atan2(dy1,dx1) , Float);
-							out[o] = x12 + p1 * js_Boot.__cast(Math.cos(r1) , Float);
-							out[o + 1] = y12 + p1 * js_Boot.__cast(Math.sin(r1) , Float);
+							var r1 = Math.atan2(dy1,dx1);
+							out[o] = x12 + p1 * Math.cos(r1);
+							out[o + 1] = y12 + p1 * Math.sin(r1);
 							out[o + 2] = r1;
 							++i;
 							o += 3;
@@ -89612,7 +90583,7 @@ spine_PathConstraint.prototype = {
 							ddfy = tmpy * 2 + dddfy;
 							dfx = (cx1 - x1) * 0.3 + tmpx + dddfx * 0.16666667;
 							dfy = (cy1 - y1) * 0.3 + tmpy + dddfy * 0.16666667;
-							curveLength = js_Boot.__cast(Math.sqrt(dfx * dfx + dfy * dfy) , Float);
+							curveLength = Math.sqrt(dfx * dfx + dfy * dfy);
 							segments[0] = curveLength;
 							ii = 1;
 							while(ii < 8) {
@@ -89620,17 +90591,17 @@ spine_PathConstraint.prototype = {
 								dfy += ddfy;
 								ddfx += dddfx;
 								ddfy += dddfy;
-								curveLength += js_Boot.__cast(Math.sqrt(dfx * dfx + dfy * dfy) , Float);
+								curveLength += Math.sqrt(dfx * dfx + dfy * dfy);
 								segments[ii] = curveLength;
 								++ii;
 							}
 							dfx += ddfx;
 							dfy += ddfy;
-							curveLength += js_Boot.__cast(Math.sqrt(dfx * dfx + dfy * dfy) , Float);
+							curveLength += Math.sqrt(dfx * dfx + dfy * dfy);
 							segments[8] = curveLength;
 							dfx += ddfx + dddfx;
 							dfy += ddfy + dddfy;
-							curveLength += js_Boot.__cast(Math.sqrt(dfx * dfx + dfy * dfy) , Float);
+							curveLength += Math.sqrt(dfx * dfx + dfy * dfy);
 							segments[9] = curveLength;
 							segment = 0;
 						}
@@ -89652,23 +90623,30 @@ spine_PathConstraint.prototype = {
 						var p2 = p * 0.1;
 						var tangents1 = tangents || i > 0 && space < spine_PathConstraint.epsilon;
 						if(p2 < spine_PathConstraint.epsilon || isNaN(p2)) {
-							p2 = spine_PathConstraint.epsilon;
-						}
-						var tt = p2 * p2;
-						var ttt = tt * p2;
-						var u = 1 - p2;
-						var uu = u * u;
-						var uuu = uu * u;
-						var ut = u * p2;
-						var ut3 = ut * 3;
-						var uut3 = u * ut3;
-						var utt3 = ut3 * p2;
-						var x = x1 * uuu + cx1 * uut3 + cx2 * utt3 + x2 * ttt;
-						var y = y1 * uuu + cy1 * uut3 + cy2 * utt3 + y2 * ttt;
-						out[o] = x;
-						out[o + 1] = y;
-						if(tangents1) {
-							out[o + 2] = js_Boot.__cast(Math.atan2(y - (y1 * uu + cy1 * ut * 2 + cy2 * tt),x - (x1 * uu + cx1 * ut * 2 + cx2 * tt)) , Float);
+							out[o] = x1;
+							out[o + 1] = y1;
+							out[o + 2] = Math.atan2(cy1 - y1,cx1 - x1);
+						} else {
+							var tt = p2 * p2;
+							var ttt = tt * p2;
+							var u = 1 - p2;
+							var uu = u * u;
+							var uuu = uu * u;
+							var ut = u * p2;
+							var ut3 = ut * 3;
+							var uut3 = u * ut3;
+							var utt3 = ut3 * p2;
+							var x = x1 * uuu + cx1 * uut3 + cx2 * utt3 + x2 * ttt;
+							var y = y1 * uuu + cy1 * uut3 + cy2 * utt3 + y2 * ttt;
+							out[o] = x;
+							out[o + 1] = y;
+							if(tangents1) {
+								if(p2 < 0.001) {
+									out[o + 2] = Math.atan2(cy1 - y1,cx1 - x1);
+								} else {
+									out[o + 2] = Math.atan2(y - (y1 * uu + cy1 * ut * 2 + cy2 * tt),x - (x1 * uu + cx1 * ut * 2 + cx2 * tt));
+								}
+							}
 						}
 						++i;
 						o += 3;
@@ -89689,7 +90667,8 @@ spine_PathConstraint.prototype = {
 				var i = 0;
 				var p = 3;
 				while(i < boneCount) {
-					var bone = js_Boot.__cast(bones[i] , spine_Bone);
+					var result = bones[i];
+					var bone = result;
 					bone.worldX += (boneX - bone.worldX) * translateMix;
 					bone.worldY += (boneY - bone.worldY) * translateMix;
 					var x = positions[p];
@@ -89699,7 +90678,7 @@ spine_PathConstraint.prototype = {
 					if(scale) {
 						var length = lengths[i];
 						if(length >= spine_PathConstraint.epsilon) {
-							var s = js_Boot.__cast(Math.sqrt(dx * dx + dy * dy) / length - 1 , Float) * rotateMix + 1;
+							var s = (Math.sqrt(dx * dx + dy * dy) / length - 1) * rotateMix + 1;
 							bone.a *= s;
 							bone.c *= s;
 						}
@@ -89719,12 +90698,12 @@ spine_PathConstraint.prototype = {
 						} else if(spaces[i + 1] < spine_PathConstraint.epsilon) {
 							r = positions[p + 2];
 						} else {
-							r = js_Boot.__cast(Math.atan2(dy,dx) , Float);
+							r = Math.atan2(dy,dx);
 						}
-						r -= js_Boot.__cast(Math.atan2(c,a) , Float);
+						r -= Math.atan2(c,a);
 						if(tip) {
-							cos = js_Boot.__cast(Math.cos(r) , Float);
-							sin = js_Boot.__cast(Math.sin(r) , Float);
+							cos = Math.cos(r);
+							sin = Math.sin(r);
 							var length1 = bone.data.length;
 							boneX += (length1 * (cos * a - sin * c) - dx) * rotateMix;
 							boneY += (length1 * (sin * a + cos * c) - dy) * rotateMix;
@@ -89737,8 +90716,8 @@ spine_PathConstraint.prototype = {
 							r += 6.2831854;
 						}
 						r *= rotateMix;
-						cos = js_Boot.__cast(Math.cos(r) , Float);
-						sin = js_Boot.__cast(Math.sin(r) , Float);
+						cos = Math.cos(r);
+						sin = Math.sin(r);
 						bone.a = cos * a - sin * c;
 						bone.b = cos * b - sin * d;
 						bone.c = sin * a + cos * c;
@@ -89764,8 +90743,7 @@ spine_PathConstraint.prototype = {
 			return;
 		}
 		var data = this.data;
-		var spacingMode = data.spacingMode;
-		var lengthSpacing = spacingMode == 0;
+		var percentSpacing = data.spacingMode == 2;
 		var rotateMode = data.rotateMode;
 		var tangents = rotateMode == 0;
 		var scale = rotateMode == 2;
@@ -89785,7 +90763,7 @@ spine_PathConstraint.prototype = {
 		var spaces = this1;
 		var lengths = null;
 		var spacing = this.spacing;
-		if(scale || lengthSpacing) {
+		if(scale || !percentSpacing) {
 			if(scale) {
 				var this1 = this.lengths;
 				var len = this1.length;
@@ -89799,24 +90777,34 @@ spine_PathConstraint.prototype = {
 				}
 				lengths = this1;
 			}
+			var lengthSpacing = data.spacingMode == 0;
 			var i = 0;
 			var n = spacesCount - 1;
 			while(i < n) {
-				var bone = js_Boot.__cast(bones[i] , spine_Bone);
+				var result = bones[i];
+				var bone = result;
 				var setupLength = bone.data.length;
 				if(setupLength < spine_PathConstraint.epsilon) {
 					if(scale) {
 						lengths[i] = 0;
 					}
 					spaces[++i] = 0;
-				} else {
-					var x = setupLength * bone.a;
-					var y = setupLength * bone.c;
-					var length = js_Boot.__cast(Math.sqrt(x * x + y * y) , Float);
+				} else if(percentSpacing) {
 					if(scale) {
+						var x = setupLength * bone.a;
+						var y = setupLength * bone.c;
+						var length = Math.sqrt(x * x + y * y);
 						lengths[i] = length;
 					}
-					spaces[++i] = (lengthSpacing ? setupLength + spacing : spacing) * length / setupLength;
+					spaces[++i] = spacing;
+				} else {
+					var x1 = setupLength * bone.a;
+					var y1 = setupLength * bone.c;
+					var length1 = Math.sqrt(x1 * x1 + y1 * y1);
+					if(scale) {
+						lengths[i] = length1;
+					}
+					spaces[++i] = (lengthSpacing ? setupLength + spacing : spacing) * length1 / setupLength;
 				}
 			}
 		} else {
@@ -89826,9 +90814,9 @@ spine_PathConstraint.prototype = {
 				++i;
 			}
 		}
-		var path = js_Boot.__cast(attachment , spine_attachments_PathAttachment);
+		var result = attachment;
+		var path = result;
 		var percentPosition = data.positionMode == 1;
-		var percentSpacing = spacingMode == 2;
 		var target = this.target;
 		var position = this.position;
 		var spaces1 = this.spaces;
@@ -89858,7 +90846,7 @@ spine_PathConstraint.prototype = {
 				position *= pathLength;
 			}
 			if(percentSpacing) {
-				var i = 0;
+				var i = 1;
 				while(i < spacesCount) {
 					spaces1[i] *= pathLength;
 					++i;
@@ -89893,7 +90881,7 @@ spine_PathConstraint.prototype = {
 						var count = 4;
 						count = (count >> 1) * 2;
 						var skeleton = target.bone.skeleton;
-						var deformArray = target.attachmentVertices;
+						var deformArray = target.deform;
 						var vertices = path.vertices;
 						var bones1 = path.bones;
 						if(bones1 == null) {
@@ -89937,7 +90925,8 @@ spine_PathConstraint.prototype = {
 									var n1 = bones1[v1++];
 									n1 += v1;
 									while(v1 < n1) {
-										var bone1 = js_Boot.__cast(skeletonBones[bones1[v1]] , spine_Bone);
+										var result = skeletonBones[bones1[v1]];
+										var bone1 = result;
 										var vx1 = vertices[b1];
 										var vy1 = vertices[b1 + 1];
 										var weight = vertices[b1 + 2];
@@ -89961,7 +90950,8 @@ spine_PathConstraint.prototype = {
 									var n2 = bones1[v1++];
 									n2 += v1;
 									while(v1 < n2) {
-										var bone2 = js_Boot.__cast(skeletonBones[bones1[v1]] , spine_Bone);
+										var result1 = skeletonBones[bones1[v1]];
+										var bone2 = result1;
 										var vx2 = vertices[b2] + deform[f];
 										var vy2 = vertices[b2 + 1] + deform[f + 1];
 										var weight1 = vertices[b2 + 2];
@@ -89982,9 +90972,9 @@ spine_PathConstraint.prototype = {
 					var y1 = world[1];
 					var dx = world[2] - x1;
 					var dy = world[3] - y1;
-					var r = js_Boot.__cast(Math.atan2(dy,dx) , Float);
-					out[o] = x1 + p * js_Boot.__cast(Math.cos(r) , Float);
-					out[o + 1] = y1 + p * js_Boot.__cast(Math.sin(r) , Float);
+					var r = Math.atan2(dy,dx);
+					out[o] = x1 + p * Math.cos(r);
+					out[o + 1] = y1 + p * Math.sin(r);
 					out[o + 2] = r;
 					++i;
 					o += 3;
@@ -89996,7 +90986,7 @@ spine_PathConstraint.prototype = {
 						var count1 = 4;
 						count1 = (count1 >> 1) * 2;
 						var skeleton1 = target.bone.skeleton;
-						var deformArray1 = target.attachmentVertices;
+						var deformArray1 = target.deform;
 						var vertices1 = path.vertices;
 						var bones2 = path.bones;
 						if(bones2 == null) {
@@ -90040,7 +91030,8 @@ spine_PathConstraint.prototype = {
 									var n4 = bones2[v3++];
 									n4 += v3;
 									while(v3 < n4) {
-										var bone4 = js_Boot.__cast(skeletonBones1[bones2[v3]] , spine_Bone);
+										var result2 = skeletonBones1[bones2[v3]];
+										var bone4 = result2;
 										var vx4 = vertices1[b4];
 										var vy4 = vertices1[b4 + 1];
 										var weight2 = vertices1[b4 + 2];
@@ -90064,7 +91055,8 @@ spine_PathConstraint.prototype = {
 									var n5 = bones2[v3++];
 									n5 += v3;
 									while(v3 < n5) {
-										var bone5 = js_Boot.__cast(skeletonBones1[bones2[v3]] , spine_Bone);
+										var result3 = skeletonBones1[bones2[v3]];
+										var bone5 = result3;
 										var vx5 = vertices1[b5] + deform1[f1];
 										var vy5 = vertices1[b5 + 1] + deform1[f1 + 1];
 										var weight3 = vertices1[b5 + 2];
@@ -90086,9 +91078,9 @@ spine_PathConstraint.prototype = {
 					var y11 = world[3];
 					var dx1 = x11 - world[0];
 					var dy1 = y11 - world[1];
-					var r1 = js_Boot.__cast(Math.atan2(dy1,dx1) , Float);
-					out[o] = x11 + p1 * js_Boot.__cast(Math.cos(r1) , Float);
-					out[o + 1] = y11 + p1 * js_Boot.__cast(Math.sin(r1) , Float);
+					var r1 = Math.atan2(dy1,dx1);
+					out[o] = x11 + p1 * Math.cos(r1);
+					out[o + 1] = y11 + p1 * Math.sin(r1);
 					out[o + 2] = r1;
 					++i;
 					o += 3;
@@ -90115,7 +91107,7 @@ spine_PathConstraint.prototype = {
 						var count2 = 4;
 						count2 = (count2 >> 1) * 2;
 						var skeleton2 = target.bone.skeleton;
-						var deformArray2 = target.attachmentVertices;
+						var deformArray2 = target.deform;
 						var vertices2 = path.vertices;
 						var bones3 = path.bones;
 						if(bones3 == null) {
@@ -90159,7 +91151,8 @@ spine_PathConstraint.prototype = {
 									var n7 = bones3[v5++];
 									n7 += v5;
 									while(v5 < n7) {
-										var bone7 = js_Boot.__cast(skeletonBones2[bones3[v5]] , spine_Bone);
+										var result4 = skeletonBones2[bones3[v5]];
+										var bone7 = result4;
 										var vx7 = vertices2[b7];
 										var vy7 = vertices2[b7 + 1];
 										var weight4 = vertices2[b7 + 2];
@@ -90183,7 +91176,8 @@ spine_PathConstraint.prototype = {
 									var n8 = bones3[v5++];
 									n8 += v5;
 									while(v5 < n8) {
-										var bone8 = js_Boot.__cast(skeletonBones2[bones3[v5]] , spine_Bone);
+										var result5 = skeletonBones2[bones3[v5]];
+										var bone8 = result5;
 										var vx8 = vertices2[b8] + deform2[f2];
 										var vy8 = vertices2[b8 + 1] + deform2[f2 + 1];
 										var weight5 = vertices2[b8 + 2];
@@ -90202,7 +91196,7 @@ spine_PathConstraint.prototype = {
 						var count3 = 4;
 						count3 = 4 + (count3 >> 1) * 2;
 						var skeleton3 = target.bone.skeleton;
-						var deformArray3 = target.attachmentVertices;
+						var deformArray3 = target.deform;
 						var vertices3 = path.vertices;
 						var bones4 = path.bones;
 						if(bones4 == null) {
@@ -90246,7 +91240,8 @@ spine_PathConstraint.prototype = {
 									var n10 = bones4[v7++];
 									n10 += v7;
 									while(v7 < n10) {
-										var bone10 = js_Boot.__cast(skeletonBones3[bones4[v7]] , spine_Bone);
+										var result6 = skeletonBones3[bones4[v7]];
+										var bone10 = result6;
 										var vx10 = vertices3[b10];
 										var vy10 = vertices3[b10 + 1];
 										var weight6 = vertices3[b10 + 2];
@@ -90270,7 +91265,8 @@ spine_PathConstraint.prototype = {
 									var n11 = bones4[v7++];
 									n11 += v7;
 									while(v7 < n11) {
-										var bone11 = js_Boot.__cast(skeletonBones3[bones4[v7]] , spine_Bone);
+										var result7 = skeletonBones3[bones4[v7]];
+										var bone11 = result7;
 										var vx11 = vertices3[b11] + deform3[f3];
 										var vy11 = vertices3[b11 + 1] + deform3[f3 + 1];
 										var weight7 = vertices3[b11 + 2];
@@ -90291,7 +91287,7 @@ spine_PathConstraint.prototype = {
 						var count4 = 8;
 						count4 = (count4 >> 1) * 2;
 						var skeleton4 = target.bone.skeleton;
-						var deformArray4 = target.attachmentVertices;
+						var deformArray4 = target.deform;
 						var vertices4 = path.vertices;
 						var bones5 = path.bones;
 						if(bones5 == null) {
@@ -90335,7 +91331,8 @@ spine_PathConstraint.prototype = {
 									var n13 = bones5[v9++];
 									n13 += v9;
 									while(v9 < n13) {
-										var bone13 = js_Boot.__cast(skeletonBones4[bones5[v9]] , spine_Bone);
+										var result8 = skeletonBones4[bones5[v9]];
+										var bone13 = result8;
 										var vx13 = vertices4[b13];
 										var vy13 = vertices4[b13 + 1];
 										var weight8 = vertices4[b13 + 2];
@@ -90359,7 +91356,8 @@ spine_PathConstraint.prototype = {
 									var n14 = bones5[v9++];
 									n14 += v9;
 									while(v9 < n14) {
-										var bone14 = js_Boot.__cast(skeletonBones4[bones5[v9]] , spine_Bone);
+										var result9 = skeletonBones4[bones5[v9]];
+										var bone14 = result9;
 										var vx14 = vertices4[b14] + deform4[f4];
 										var vy14 = vertices4[b14 + 1] + deform4[f4 + 1];
 										var weight9 = vertices4[b14 + 2];
@@ -90377,7 +91375,6 @@ spine_PathConstraint.prototype = {
 						}
 					}
 				}
-				var p2 = p;
 				var x12 = world[0];
 				var y12 = world[1];
 				var cx1 = world[2];
@@ -90385,24 +91382,31 @@ spine_PathConstraint.prototype = {
 				var cx2 = world[4];
 				var cy2 = world[5];
 				var tangents1 = tangents || i > 0 && space < spine_PathConstraint.epsilon;
-				if(p2 < spine_PathConstraint.epsilon || isNaN(p2)) {
-					p2 = spine_PathConstraint.epsilon;
-				}
-				var tt = p2 * p2;
-				var ttt = tt * p2;
-				var u = 1 - p2;
-				var uu = u * u;
-				var uuu = uu * u;
-				var ut = u * p2;
-				var ut3 = ut * 3;
-				var uut3 = u * ut3;
-				var utt3 = ut3 * p2;
-				var x6 = x12 * uuu + cx1 * uut3 + cx2 * utt3 + world[6] * ttt;
-				var y6 = y12 * uuu + cy1 * uut3 + cy2 * utt3 + world[7] * ttt;
-				out[o] = x6;
-				out[o + 1] = y6;
-				if(tangents1) {
-					out[o + 2] = js_Boot.__cast(Math.atan2(y6 - (y12 * uu + cy1 * ut * 2 + cy2 * tt),x6 - (x12 * uu + cx1 * ut * 2 + cx2 * tt)) , Float);
+				if(p < spine_PathConstraint.epsilon || isNaN(p)) {
+					out[o] = x12;
+					out[o + 1] = y12;
+					out[o + 2] = Math.atan2(cy1 - y12,cx1 - x12);
+				} else {
+					var tt = p * p;
+					var ttt = tt * p;
+					var u = 1 - p;
+					var uu = u * u;
+					var uuu = uu * u;
+					var ut = u * p;
+					var ut3 = ut * 3;
+					var uut3 = u * ut3;
+					var utt3 = ut3 * p;
+					var x6 = x12 * uuu + cx1 * uut3 + cx2 * utt3 + world[6] * ttt;
+					var y6 = y12 * uuu + cy1 * uut3 + cy2 * utt3 + world[7] * ttt;
+					out[o] = x6;
+					out[o + 1] = y6;
+					if(tangents1) {
+						if(p < 0.001) {
+							out[o + 2] = Math.atan2(cy1 - y12,cx1 - x12);
+						} else {
+							out[o + 2] = Math.atan2(y6 - (y12 * uu + cy1 * ut * 2 + cy2 * tt),x6 - (x12 * uu + cx1 * ut * 2 + cx2 * tt));
+						}
+					}
 				}
 				++i;
 				o += 3;
@@ -90425,7 +91429,7 @@ spine_PathConstraint.prototype = {
 				var count = verticesLength - 4;
 				count = (count >> 1) * 2;
 				var skeleton = target.bone.skeleton;
-				var deformArray = target.attachmentVertices;
+				var deformArray = target.deform;
 				var vertices = path.vertices;
 				var bones1 = path.bones;
 				if(bones1 == null) {
@@ -90469,7 +91473,8 @@ spine_PathConstraint.prototype = {
 							var n = bones1[v++];
 							n += v;
 							while(v < n) {
-								var bone = js_Boot.__cast(skeletonBones[bones1[v]] , spine_Bone);
+								var result = skeletonBones[bones1[v]];
+								var bone = result;
 								var vx = vertices[b];
 								var vy = vertices[b + 1];
 								var weight = vertices[b + 2];
@@ -90493,7 +91498,8 @@ spine_PathConstraint.prototype = {
 							var n = bones1[v++];
 							n += v;
 							while(v < n) {
-								var bone = js_Boot.__cast(skeletonBones[bones1[v]] , spine_Bone);
+								var result = skeletonBones[bones1[v]];
+								var bone = result;
 								var vx = vertices[b] + deform[f];
 								var vy = vertices[b + 1] + deform[f + 1];
 								var weight = vertices[b + 2];
@@ -90513,7 +91519,7 @@ spine_PathConstraint.prototype = {
 				var offset = verticesLength - 4;
 				count = offset + (count >> 1) * 2;
 				var skeleton = target.bone.skeleton;
-				var deformArray = target.attachmentVertices;
+				var deformArray = target.deform;
 				var vertices = path.vertices;
 				var bones1 = path.bones;
 				if(bones1 == null) {
@@ -90557,7 +91563,8 @@ spine_PathConstraint.prototype = {
 							var n = bones1[v++];
 							n += v;
 							while(v < n) {
-								var bone = js_Boot.__cast(skeletonBones[bones1[v]] , spine_Bone);
+								var result = skeletonBones[bones1[v]];
+								var bone = result;
 								var vx = vertices[b];
 								var vy = vertices[b + 1];
 								var weight = vertices[b + 2];
@@ -90581,7 +91588,8 @@ spine_PathConstraint.prototype = {
 							var n = bones1[v++];
 							n += v;
 							while(v < n) {
-								var bone = js_Boot.__cast(skeletonBones[bones1[v]] , spine_Bone);
+								var result = skeletonBones[bones1[v]];
+								var bone = result;
 								var vx = vertices[b] + deform[f];
 								var vy = vertices[b + 1] + deform[f + 1];
 								var weight = vertices[b + 2];
@@ -90616,7 +91624,7 @@ spine_PathConstraint.prototype = {
 				var count = verticesLength;
 				count = (count >> 1) * 2;
 				var skeleton = target.bone.skeleton;
-				var deformArray = target.attachmentVertices;
+				var deformArray = target.deform;
 				var vertices = path.vertices;
 				var bones1 = path.bones;
 				if(bones1 == null) {
@@ -90660,7 +91668,8 @@ spine_PathConstraint.prototype = {
 							var n = bones1[v++];
 							n += v;
 							while(v < n) {
-								var bone = js_Boot.__cast(skeletonBones[bones1[v]] , spine_Bone);
+								var result = skeletonBones[bones1[v]];
+								var bone = result;
 								var vx = vertices[b];
 								var vy = vertices[b + 1];
 								var weight = vertices[b + 2];
@@ -90684,7 +91693,8 @@ spine_PathConstraint.prototype = {
 							var n = bones1[v++];
 							n += v;
 							while(v < n) {
-								var bone = js_Boot.__cast(skeletonBones[bones1[v]] , spine_Bone);
+								var result = skeletonBones[bones1[v]];
+								var bone = result;
 								var vx = vertices[b] + deform[f];
 								var vy = vertices[b + 1] + deform[f + 1];
 								var weight = vertices[b + 2];
@@ -90746,18 +91756,18 @@ spine_PathConstraint.prototype = {
 				ddfy = tmpy * 2 + dddfy;
 				dfx = (cx1 - x1) * 0.75 + tmpx + dddfx * 0.16666667;
 				dfy = (cy1 - y1) * 0.75 + tmpy + dddfy * 0.16666667;
-				pathLength += js_Boot.__cast(Math.sqrt(dfx * dfx + dfy * dfy) , Float);
+				pathLength += Math.sqrt(dfx * dfx + dfy * dfy);
 				dfx += ddfx;
 				dfy += ddfy;
 				ddfx += dddfx;
 				ddfy += dddfy;
-				pathLength += js_Boot.__cast(Math.sqrt(dfx * dfx + dfy * dfy) , Float);
+				pathLength += Math.sqrt(dfx * dfx + dfy * dfy);
 				dfx += ddfx;
 				dfy += ddfy;
-				pathLength += js_Boot.__cast(Math.sqrt(dfx * dfx + dfy * dfy) , Float);
+				pathLength += Math.sqrt(dfx * dfx + dfy * dfy);
 				dfx += ddfx + dddfx;
 				dfy += ddfy + dddfy;
-				pathLength += js_Boot.__cast(Math.sqrt(dfx * dfx + dfy * dfy) , Float);
+				pathLength += Math.sqrt(dfx * dfx + dfy * dfy);
 				curves[i] = pathLength;
 				x1 = x2;
 				y1 = y2;
@@ -90766,9 +91776,11 @@ spine_PathConstraint.prototype = {
 			}
 			if(percentPosition) {
 				position *= pathLength;
+			} else {
+				position *= pathLength / path.lengths[curveCount - 1];
 			}
 			if(percentSpacing) {
-				var i = 0;
+				var i = 1;
 				while(i < spacesCount) {
 					spaces1[i] *= pathLength;
 					++i;
@@ -90794,9 +91806,9 @@ spine_PathConstraint.prototype = {
 					var y11 = world[1];
 					var dx = world[2] - x11;
 					var dy = world[3] - y11;
-					var r = js_Boot.__cast(Math.atan2(dy,dx) , Float);
-					out[o] = x11 + p * js_Boot.__cast(Math.cos(r) , Float);
-					out[o + 1] = y11 + p * js_Boot.__cast(Math.sin(r) , Float);
+					var r = Math.atan2(dy,dx);
+					out[o] = x11 + p * Math.cos(r);
+					out[o + 1] = y11 + p * Math.sin(r);
 					out[o + 2] = r;
 					++i;
 					o += 3;
@@ -90808,9 +91820,9 @@ spine_PathConstraint.prototype = {
 					var y12 = world[i1 + 3];
 					var dx1 = x12 - world[i1];
 					var dy1 = y12 - world[i1 + 1];
-					var r1 = js_Boot.__cast(Math.atan2(dy1,dx1) , Float);
-					out[o] = x12 + p1 * js_Boot.__cast(Math.cos(r1) , Float);
-					out[o + 1] = y12 + p1 * js_Boot.__cast(Math.sin(r1) , Float);
+					var r1 = Math.atan2(dy1,dx1);
+					out[o] = x12 + p1 * Math.cos(r1);
+					out[o + 1] = y12 + p1 * Math.sin(r1);
 					out[o + 2] = r1;
 					++i;
 					o += 3;
@@ -90849,7 +91861,7 @@ spine_PathConstraint.prototype = {
 					ddfy = tmpy * 2 + dddfy;
 					dfx = (cx1 - x1) * 0.3 + tmpx + dddfx * 0.16666667;
 					dfy = (cy1 - y1) * 0.3 + tmpy + dddfy * 0.16666667;
-					curveLength = js_Boot.__cast(Math.sqrt(dfx * dfx + dfy * dfy) , Float);
+					curveLength = Math.sqrt(dfx * dfx + dfy * dfy);
 					segments[0] = curveLength;
 					ii = 1;
 					while(ii < 8) {
@@ -90857,17 +91869,17 @@ spine_PathConstraint.prototype = {
 						dfy += ddfy;
 						ddfx += dddfx;
 						ddfy += dddfy;
-						curveLength += js_Boot.__cast(Math.sqrt(dfx * dfx + dfy * dfy) , Float);
+						curveLength += Math.sqrt(dfx * dfx + dfy * dfy);
 						segments[ii] = curveLength;
 						++ii;
 					}
 					dfx += ddfx;
 					dfy += ddfy;
-					curveLength += js_Boot.__cast(Math.sqrt(dfx * dfx + dfy * dfy) , Float);
+					curveLength += Math.sqrt(dfx * dfx + dfy * dfy);
 					segments[8] = curveLength;
 					dfx += ddfx + dddfx;
 					dfy += ddfy + dddfy;
-					curveLength += js_Boot.__cast(Math.sqrt(dfx * dfx + dfy * dfy) , Float);
+					curveLength += Math.sqrt(dfx * dfx + dfy * dfy);
 					segments[9] = curveLength;
 					segment = 0;
 				}
@@ -90889,23 +91901,30 @@ spine_PathConstraint.prototype = {
 				var p2 = p * 0.1;
 				var tangents1 = tangents || i > 0 && space < spine_PathConstraint.epsilon;
 				if(p2 < spine_PathConstraint.epsilon || isNaN(p2)) {
-					p2 = spine_PathConstraint.epsilon;
-				}
-				var tt = p2 * p2;
-				var ttt = tt * p2;
-				var u = 1 - p2;
-				var uu = u * u;
-				var uuu = uu * u;
-				var ut = u * p2;
-				var ut3 = ut * 3;
-				var uut3 = u * ut3;
-				var utt3 = ut3 * p2;
-				var x = x1 * uuu + cx1 * uut3 + cx2 * utt3 + x2 * ttt;
-				var y = y1 * uuu + cy1 * uut3 + cy2 * utt3 + y2 * ttt;
-				out[o] = x;
-				out[o + 1] = y;
-				if(tangents1) {
-					out[o + 2] = js_Boot.__cast(Math.atan2(y - (y1 * uu + cy1 * ut * 2 + cy2 * tt),x - (x1 * uu + cx1 * ut * 2 + cx2 * tt)) , Float);
+					out[o] = x1;
+					out[o + 1] = y1;
+					out[o + 2] = Math.atan2(cy1 - y1,cx1 - x1);
+				} else {
+					var tt = p2 * p2;
+					var ttt = tt * p2;
+					var u = 1 - p2;
+					var uu = u * u;
+					var uuu = uu * u;
+					var ut = u * p2;
+					var ut3 = ut * 3;
+					var uut3 = u * ut3;
+					var utt3 = ut3 * p2;
+					var x = x1 * uuu + cx1 * uut3 + cx2 * utt3 + x2 * ttt;
+					var y = y1 * uuu + cy1 * uut3 + cy2 * utt3 + y2 * ttt;
+					out[o] = x;
+					out[o + 1] = y;
+					if(tangents1) {
+						if(p2 < 0.001) {
+							out[o + 2] = Math.atan2(cy1 - y1,cx1 - x1);
+						} else {
+							out[o + 2] = Math.atan2(y - (y1 * uu + cy1 * ut * 2 + cy2 * tt),x - (x1 * uu + cx1 * ut * 2 + cx2 * tt));
+						}
+					}
 				}
 				++i;
 				o += 3;
@@ -90926,7 +91945,8 @@ spine_PathConstraint.prototype = {
 		var i = 0;
 		var p = 3;
 		while(i < boneCount) {
-			var bone = js_Boot.__cast(bones[i] , spine_Bone);
+			var result = bones[i];
+			var bone = result;
 			bone.worldX += (boneX - bone.worldX) * translateMix;
 			bone.worldY += (boneY - bone.worldY) * translateMix;
 			var x = positions[p];
@@ -90936,7 +91956,7 @@ spine_PathConstraint.prototype = {
 			if(scale) {
 				var length = lengths[i];
 				if(length >= spine_PathConstraint.epsilon) {
-					var s = js_Boot.__cast(Math.sqrt(dx * dx + dy * dy) / length - 1 , Float) * rotateMix + 1;
+					var s = (Math.sqrt(dx * dx + dy * dy) / length - 1) * rotateMix + 1;
 					bone.a *= s;
 					bone.c *= s;
 				}
@@ -90956,12 +91976,12 @@ spine_PathConstraint.prototype = {
 				} else if(spaces[i + 1] < spine_PathConstraint.epsilon) {
 					r = positions[p + 2];
 				} else {
-					r = js_Boot.__cast(Math.atan2(dy,dx) , Float);
+					r = Math.atan2(dy,dx);
 				}
-				r -= js_Boot.__cast(Math.atan2(c,a) , Float);
+				r -= Math.atan2(c,a);
 				if(tip) {
-					cos = js_Boot.__cast(Math.cos(r) , Float);
-					sin = js_Boot.__cast(Math.sin(r) , Float);
+					cos = Math.cos(r);
+					sin = Math.sin(r);
 					var length1 = bone.data.length;
 					boneX += (length1 * (cos * a - sin * c) - dx) * rotateMix;
 					boneY += (length1 * (sin * a + cos * c) - dy) * rotateMix;
@@ -90974,8 +91994,8 @@ spine_PathConstraint.prototype = {
 					r += 6.2831854;
 				}
 				r *= rotateMix;
-				cos = js_Boot.__cast(Math.cos(r) , Float);
-				sin = js_Boot.__cast(Math.sin(r) , Float);
+				cos = Math.cos(r);
+				sin = Math.sin(r);
 				bone.a = cos * a - sin * c;
 				bone.b = cos * b - sin * d;
 				bone.c = sin * a + cos * c;
@@ -91015,7 +92035,7 @@ spine_PathConstraint.prototype = {
 				position *= pathLength;
 			}
 			if(percentSpacing) {
-				var i = 0;
+				var i = 1;
 				while(i < spacesCount) {
 					spaces[i] *= pathLength;
 					++i;
@@ -91050,7 +92070,7 @@ spine_PathConstraint.prototype = {
 						var count = 4;
 						count = (count >> 1) * 2;
 						var skeleton = target.bone.skeleton;
-						var deformArray = target.attachmentVertices;
+						var deformArray = target.deform;
 						var vertices = path.vertices;
 						var bones = path.bones;
 						if(bones == null) {
@@ -91094,7 +92114,8 @@ spine_PathConstraint.prototype = {
 									var n1 = bones[v1++];
 									n1 += v1;
 									while(v1 < n1) {
-										var bone1 = js_Boot.__cast(skeletonBones[bones[v1]] , spine_Bone);
+										var result = skeletonBones[bones[v1]];
+										var bone1 = result;
 										var vx1 = vertices[b1];
 										var vy1 = vertices[b1 + 1];
 										var weight = vertices[b1 + 2];
@@ -91118,7 +92139,8 @@ spine_PathConstraint.prototype = {
 									var n2 = bones[v1++];
 									n2 += v1;
 									while(v1 < n2) {
-										var bone2 = js_Boot.__cast(skeletonBones[bones[v1]] , spine_Bone);
+										var result1 = skeletonBones[bones[v1]];
+										var bone2 = result1;
 										var vx2 = vertices[b2] + deform[f];
 										var vy2 = vertices[b2 + 1] + deform[f + 1];
 										var weight1 = vertices[b2 + 2];
@@ -91139,9 +92161,9 @@ spine_PathConstraint.prototype = {
 					var y1 = world[1];
 					var dx = world[2] - x1;
 					var dy = world[3] - y1;
-					var r = js_Boot.__cast(Math.atan2(dy,dx) , Float);
-					out[o] = x1 + p * js_Boot.__cast(Math.cos(r) , Float);
-					out[o + 1] = y1 + p * js_Boot.__cast(Math.sin(r) , Float);
+					var r = Math.atan2(dy,dx);
+					out[o] = x1 + p * Math.cos(r);
+					out[o + 1] = y1 + p * Math.sin(r);
 					out[o + 2] = r;
 					++i;
 					o += 3;
@@ -91153,7 +92175,7 @@ spine_PathConstraint.prototype = {
 						var count1 = 4;
 						count1 = (count1 >> 1) * 2;
 						var skeleton1 = target.bone.skeleton;
-						var deformArray1 = target.attachmentVertices;
+						var deformArray1 = target.deform;
 						var vertices1 = path.vertices;
 						var bones1 = path.bones;
 						if(bones1 == null) {
@@ -91197,7 +92219,8 @@ spine_PathConstraint.prototype = {
 									var n4 = bones1[v3++];
 									n4 += v3;
 									while(v3 < n4) {
-										var bone4 = js_Boot.__cast(skeletonBones1[bones1[v3]] , spine_Bone);
+										var result2 = skeletonBones1[bones1[v3]];
+										var bone4 = result2;
 										var vx4 = vertices1[b4];
 										var vy4 = vertices1[b4 + 1];
 										var weight2 = vertices1[b4 + 2];
@@ -91221,7 +92244,8 @@ spine_PathConstraint.prototype = {
 									var n5 = bones1[v3++];
 									n5 += v3;
 									while(v3 < n5) {
-										var bone5 = js_Boot.__cast(skeletonBones1[bones1[v3]] , spine_Bone);
+										var result3 = skeletonBones1[bones1[v3]];
+										var bone5 = result3;
 										var vx5 = vertices1[b5] + deform1[f1];
 										var vy5 = vertices1[b5 + 1] + deform1[f1 + 1];
 										var weight3 = vertices1[b5 + 2];
@@ -91243,9 +92267,9 @@ spine_PathConstraint.prototype = {
 					var y11 = world[3];
 					var dx1 = x11 - world[0];
 					var dy1 = y11 - world[1];
-					var r1 = js_Boot.__cast(Math.atan2(dy1,dx1) , Float);
-					out[o] = x11 + p1 * js_Boot.__cast(Math.cos(r1) , Float);
-					out[o + 1] = y11 + p1 * js_Boot.__cast(Math.sin(r1) , Float);
+					var r1 = Math.atan2(dy1,dx1);
+					out[o] = x11 + p1 * Math.cos(r1);
+					out[o + 1] = y11 + p1 * Math.sin(r1);
 					out[o + 2] = r1;
 					++i;
 					o += 3;
@@ -91272,7 +92296,7 @@ spine_PathConstraint.prototype = {
 						var count2 = 4;
 						count2 = (count2 >> 1) * 2;
 						var skeleton2 = target.bone.skeleton;
-						var deformArray2 = target.attachmentVertices;
+						var deformArray2 = target.deform;
 						var vertices2 = path.vertices;
 						var bones2 = path.bones;
 						if(bones2 == null) {
@@ -91316,7 +92340,8 @@ spine_PathConstraint.prototype = {
 									var n7 = bones2[v5++];
 									n7 += v5;
 									while(v5 < n7) {
-										var bone7 = js_Boot.__cast(skeletonBones2[bones2[v5]] , spine_Bone);
+										var result4 = skeletonBones2[bones2[v5]];
+										var bone7 = result4;
 										var vx7 = vertices2[b7];
 										var vy7 = vertices2[b7 + 1];
 										var weight4 = vertices2[b7 + 2];
@@ -91340,7 +92365,8 @@ spine_PathConstraint.prototype = {
 									var n8 = bones2[v5++];
 									n8 += v5;
 									while(v5 < n8) {
-										var bone8 = js_Boot.__cast(skeletonBones2[bones2[v5]] , spine_Bone);
+										var result5 = skeletonBones2[bones2[v5]];
+										var bone8 = result5;
 										var vx8 = vertices2[b8] + deform2[f2];
 										var vy8 = vertices2[b8 + 1] + deform2[f2 + 1];
 										var weight5 = vertices2[b8 + 2];
@@ -91359,7 +92385,7 @@ spine_PathConstraint.prototype = {
 						var count3 = 4;
 						count3 = 4 + (count3 >> 1) * 2;
 						var skeleton3 = target.bone.skeleton;
-						var deformArray3 = target.attachmentVertices;
+						var deformArray3 = target.deform;
 						var vertices3 = path.vertices;
 						var bones3 = path.bones;
 						if(bones3 == null) {
@@ -91403,7 +92429,8 @@ spine_PathConstraint.prototype = {
 									var n10 = bones3[v7++];
 									n10 += v7;
 									while(v7 < n10) {
-										var bone10 = js_Boot.__cast(skeletonBones3[bones3[v7]] , spine_Bone);
+										var result6 = skeletonBones3[bones3[v7]];
+										var bone10 = result6;
 										var vx10 = vertices3[b10];
 										var vy10 = vertices3[b10 + 1];
 										var weight6 = vertices3[b10 + 2];
@@ -91427,7 +92454,8 @@ spine_PathConstraint.prototype = {
 									var n11 = bones3[v7++];
 									n11 += v7;
 									while(v7 < n11) {
-										var bone11 = js_Boot.__cast(skeletonBones3[bones3[v7]] , spine_Bone);
+										var result7 = skeletonBones3[bones3[v7]];
+										var bone11 = result7;
 										var vx11 = vertices3[b11] + deform3[f3];
 										var vy11 = vertices3[b11 + 1] + deform3[f3 + 1];
 										var weight7 = vertices3[b11 + 2];
@@ -91448,7 +92476,7 @@ spine_PathConstraint.prototype = {
 						var count4 = 8;
 						count4 = (count4 >> 1) * 2;
 						var skeleton4 = target.bone.skeleton;
-						var deformArray4 = target.attachmentVertices;
+						var deformArray4 = target.deform;
 						var vertices4 = path.vertices;
 						var bones4 = path.bones;
 						if(bones4 == null) {
@@ -91492,7 +92520,8 @@ spine_PathConstraint.prototype = {
 									var n13 = bones4[v9++];
 									n13 += v9;
 									while(v9 < n13) {
-										var bone13 = js_Boot.__cast(skeletonBones4[bones4[v9]] , spine_Bone);
+										var result8 = skeletonBones4[bones4[v9]];
+										var bone13 = result8;
 										var vx13 = vertices4[b13];
 										var vy13 = vertices4[b13 + 1];
 										var weight8 = vertices4[b13 + 2];
@@ -91516,7 +92545,8 @@ spine_PathConstraint.prototype = {
 									var n14 = bones4[v9++];
 									n14 += v9;
 									while(v9 < n14) {
-										var bone14 = js_Boot.__cast(skeletonBones4[bones4[v9]] , spine_Bone);
+										var result9 = skeletonBones4[bones4[v9]];
+										var bone14 = result9;
 										var vx14 = vertices4[b14] + deform4[f4];
 										var vy14 = vertices4[b14 + 1] + deform4[f4 + 1];
 										var weight9 = vertices4[b14 + 2];
@@ -91534,7 +92564,6 @@ spine_PathConstraint.prototype = {
 						}
 					}
 				}
-				var p2 = p;
 				var x12 = world[0];
 				var y12 = world[1];
 				var cx1 = world[2];
@@ -91542,24 +92571,31 @@ spine_PathConstraint.prototype = {
 				var cx2 = world[4];
 				var cy2 = world[5];
 				var tangents1 = tangents || i > 0 && space < spine_PathConstraint.epsilon;
-				if(p2 < spine_PathConstraint.epsilon || isNaN(p2)) {
-					p2 = spine_PathConstraint.epsilon;
-				}
-				var tt = p2 * p2;
-				var ttt = tt * p2;
-				var u = 1 - p2;
-				var uu = u * u;
-				var uuu = uu * u;
-				var ut = u * p2;
-				var ut3 = ut * 3;
-				var uut3 = u * ut3;
-				var utt3 = ut3 * p2;
-				var x6 = x12 * uuu + cx1 * uut3 + cx2 * utt3 + world[6] * ttt;
-				var y6 = y12 * uuu + cy1 * uut3 + cy2 * utt3 + world[7] * ttt;
-				out[o] = x6;
-				out[o + 1] = y6;
-				if(tangents1) {
-					out[o + 2] = js_Boot.__cast(Math.atan2(y6 - (y12 * uu + cy1 * ut * 2 + cy2 * tt),x6 - (x12 * uu + cx1 * ut * 2 + cx2 * tt)) , Float);
+				if(p < spine_PathConstraint.epsilon || isNaN(p)) {
+					out[o] = x12;
+					out[o + 1] = y12;
+					out[o + 2] = Math.atan2(cy1 - y12,cx1 - x12);
+				} else {
+					var tt = p * p;
+					var ttt = tt * p;
+					var u = 1 - p;
+					var uu = u * u;
+					var uuu = uu * u;
+					var ut = u * p;
+					var ut3 = ut * 3;
+					var uut3 = u * ut3;
+					var utt3 = ut3 * p;
+					var x6 = x12 * uuu + cx1 * uut3 + cx2 * utt3 + world[6] * ttt;
+					var y6 = y12 * uuu + cy1 * uut3 + cy2 * utt3 + world[7] * ttt;
+					out[o] = x6;
+					out[o + 1] = y6;
+					if(tangents1) {
+						if(p < 0.001) {
+							out[o + 2] = Math.atan2(cy1 - y12,cx1 - x12);
+						} else {
+							out[o + 2] = Math.atan2(y6 - (y12 * uu + cy1 * ut * 2 + cy2 * tt),x6 - (x12 * uu + cx1 * ut * 2 + cx2 * tt));
+						}
+					}
 				}
 				++i;
 				o += 3;
@@ -91582,7 +92618,7 @@ spine_PathConstraint.prototype = {
 			var count = verticesLength - 4;
 			count = (count >> 1) * 2;
 			var skeleton = target.bone.skeleton;
-			var deformArray = target.attachmentVertices;
+			var deformArray = target.deform;
 			var vertices = path.vertices;
 			var bones = path.bones;
 			if(bones == null) {
@@ -91626,7 +92662,8 @@ spine_PathConstraint.prototype = {
 						var n = bones[v++];
 						n += v;
 						while(v < n) {
-							var bone = js_Boot.__cast(skeletonBones[bones[v]] , spine_Bone);
+							var result = skeletonBones[bones[v]];
+							var bone = result;
 							var vx = vertices[b];
 							var vy = vertices[b + 1];
 							var weight = vertices[b + 2];
@@ -91650,7 +92687,8 @@ spine_PathConstraint.prototype = {
 						var n = bones[v++];
 						n += v;
 						while(v < n) {
-							var bone = js_Boot.__cast(skeletonBones[bones[v]] , spine_Bone);
+							var result = skeletonBones[bones[v]];
+							var bone = result;
 							var vx = vertices[b] + deform[f];
 							var vy = vertices[b + 1] + deform[f + 1];
 							var weight = vertices[b + 2];
@@ -91670,7 +92708,7 @@ spine_PathConstraint.prototype = {
 			var offset = verticesLength - 4;
 			count = offset + (count >> 1) * 2;
 			var skeleton = target.bone.skeleton;
-			var deformArray = target.attachmentVertices;
+			var deformArray = target.deform;
 			var vertices = path.vertices;
 			var bones = path.bones;
 			if(bones == null) {
@@ -91714,7 +92752,8 @@ spine_PathConstraint.prototype = {
 						var n = bones[v++];
 						n += v;
 						while(v < n) {
-							var bone = js_Boot.__cast(skeletonBones[bones[v]] , spine_Bone);
+							var result = skeletonBones[bones[v]];
+							var bone = result;
 							var vx = vertices[b];
 							var vy = vertices[b + 1];
 							var weight = vertices[b + 2];
@@ -91738,7 +92777,8 @@ spine_PathConstraint.prototype = {
 						var n = bones[v++];
 						n += v;
 						while(v < n) {
-							var bone = js_Boot.__cast(skeletonBones[bones[v]] , spine_Bone);
+							var result = skeletonBones[bones[v]];
+							var bone = result;
 							var vx = vertices[b] + deform[f];
 							var vy = vertices[b + 1] + deform[f + 1];
 							var weight = vertices[b + 2];
@@ -91773,7 +92813,7 @@ spine_PathConstraint.prototype = {
 			var count = verticesLength;
 			count = (count >> 1) * 2;
 			var skeleton = target.bone.skeleton;
-			var deformArray = target.attachmentVertices;
+			var deformArray = target.deform;
 			var vertices = path.vertices;
 			var bones = path.bones;
 			if(bones == null) {
@@ -91817,7 +92857,8 @@ spine_PathConstraint.prototype = {
 						var n = bones[v++];
 						n += v;
 						while(v < n) {
-							var bone = js_Boot.__cast(skeletonBones[bones[v]] , spine_Bone);
+							var result = skeletonBones[bones[v]];
+							var bone = result;
 							var vx = vertices[b];
 							var vy = vertices[b + 1];
 							var weight = vertices[b + 2];
@@ -91841,7 +92882,8 @@ spine_PathConstraint.prototype = {
 						var n = bones[v++];
 						n += v;
 						while(v < n) {
-							var bone = js_Boot.__cast(skeletonBones[bones[v]] , spine_Bone);
+							var result = skeletonBones[bones[v]];
+							var bone = result;
 							var vx = vertices[b] + deform[f];
 							var vy = vertices[b + 1] + deform[f + 1];
 							var weight = vertices[b + 2];
@@ -91903,18 +92945,18 @@ spine_PathConstraint.prototype = {
 			ddfy = tmpy * 2 + dddfy;
 			dfx = (cx1 - x1) * 0.75 + tmpx + dddfx * 0.16666667;
 			dfy = (cy1 - y1) * 0.75 + tmpy + dddfy * 0.16666667;
-			pathLength += js_Boot.__cast(Math.sqrt(dfx * dfx + dfy * dfy) , Float);
+			pathLength += Math.sqrt(dfx * dfx + dfy * dfy);
 			dfx += ddfx;
 			dfy += ddfy;
 			ddfx += dddfx;
 			ddfy += dddfy;
-			pathLength += js_Boot.__cast(Math.sqrt(dfx * dfx + dfy * dfy) , Float);
+			pathLength += Math.sqrt(dfx * dfx + dfy * dfy);
 			dfx += ddfx;
 			dfy += ddfy;
-			pathLength += js_Boot.__cast(Math.sqrt(dfx * dfx + dfy * dfy) , Float);
+			pathLength += Math.sqrt(dfx * dfx + dfy * dfy);
 			dfx += ddfx + dddfx;
 			dfy += ddfy + dddfy;
-			pathLength += js_Boot.__cast(Math.sqrt(dfx * dfx + dfy * dfy) , Float);
+			pathLength += Math.sqrt(dfx * dfx + dfy * dfy);
 			curves[i] = pathLength;
 			x1 = x2;
 			y1 = y2;
@@ -91923,9 +92965,11 @@ spine_PathConstraint.prototype = {
 		}
 		if(percentPosition) {
 			position *= pathLength;
+		} else {
+			position *= pathLength / path.lengths[curveCount - 1];
 		}
 		if(percentSpacing) {
-			var i = 0;
+			var i = 1;
 			while(i < spacesCount) {
 				spaces[i] *= pathLength;
 				++i;
@@ -91951,9 +92995,9 @@ spine_PathConstraint.prototype = {
 				var y11 = world[1];
 				var dx = world[2] - x11;
 				var dy = world[3] - y11;
-				var r = js_Boot.__cast(Math.atan2(dy,dx) , Float);
-				out[o] = x11 + p * js_Boot.__cast(Math.cos(r) , Float);
-				out[o + 1] = y11 + p * js_Boot.__cast(Math.sin(r) , Float);
+				var r = Math.atan2(dy,dx);
+				out[o] = x11 + p * Math.cos(r);
+				out[o + 1] = y11 + p * Math.sin(r);
 				out[o + 2] = r;
 				++i;
 				o += 3;
@@ -91965,9 +93009,9 @@ spine_PathConstraint.prototype = {
 				var y12 = world[i1 + 3];
 				var dx1 = x12 - world[i1];
 				var dy1 = y12 - world[i1 + 1];
-				var r1 = js_Boot.__cast(Math.atan2(dy1,dx1) , Float);
-				out[o] = x12 + p1 * js_Boot.__cast(Math.cos(r1) , Float);
-				out[o + 1] = y12 + p1 * js_Boot.__cast(Math.sin(r1) , Float);
+				var r1 = Math.atan2(dy1,dx1);
+				out[o] = x12 + p1 * Math.cos(r1);
+				out[o + 1] = y12 + p1 * Math.sin(r1);
 				out[o + 2] = r1;
 				++i;
 				o += 3;
@@ -92006,7 +93050,7 @@ spine_PathConstraint.prototype = {
 				ddfy = tmpy * 2 + dddfy;
 				dfx = (cx1 - x1) * 0.3 + tmpx + dddfx * 0.16666667;
 				dfy = (cy1 - y1) * 0.3 + tmpy + dddfy * 0.16666667;
-				curveLength = js_Boot.__cast(Math.sqrt(dfx * dfx + dfy * dfy) , Float);
+				curveLength = Math.sqrt(dfx * dfx + dfy * dfy);
 				segments[0] = curveLength;
 				ii = 1;
 				while(ii < 8) {
@@ -92014,17 +93058,17 @@ spine_PathConstraint.prototype = {
 					dfy += ddfy;
 					ddfx += dddfx;
 					ddfy += dddfy;
-					curveLength += js_Boot.__cast(Math.sqrt(dfx * dfx + dfy * dfy) , Float);
+					curveLength += Math.sqrt(dfx * dfx + dfy * dfy);
 					segments[ii] = curveLength;
 					++ii;
 				}
 				dfx += ddfx;
 				dfy += ddfy;
-				curveLength += js_Boot.__cast(Math.sqrt(dfx * dfx + dfy * dfy) , Float);
+				curveLength += Math.sqrt(dfx * dfx + dfy * dfy);
 				segments[8] = curveLength;
 				dfx += ddfx + dddfx;
 				dfy += ddfy + dddfy;
-				curveLength += js_Boot.__cast(Math.sqrt(dfx * dfx + dfy * dfy) , Float);
+				curveLength += Math.sqrt(dfx * dfx + dfy * dfy);
 				segments[9] = curveLength;
 				segment = 0;
 			}
@@ -92046,23 +93090,30 @@ spine_PathConstraint.prototype = {
 			var p2 = p * 0.1;
 			var tangents1 = tangents || i > 0 && space < spine_PathConstraint.epsilon;
 			if(p2 < spine_PathConstraint.epsilon || isNaN(p2)) {
-				p2 = spine_PathConstraint.epsilon;
-			}
-			var tt = p2 * p2;
-			var ttt = tt * p2;
-			var u = 1 - p2;
-			var uu = u * u;
-			var uuu = uu * u;
-			var ut = u * p2;
-			var ut3 = ut * 3;
-			var uut3 = u * ut3;
-			var utt3 = ut3 * p2;
-			var x = x1 * uuu + cx1 * uut3 + cx2 * utt3 + x2 * ttt;
-			var y = y1 * uuu + cy1 * uut3 + cy2 * utt3 + y2 * ttt;
-			out[o] = x;
-			out[o + 1] = y;
-			if(tangents1) {
-				out[o + 2] = js_Boot.__cast(Math.atan2(y - (y1 * uu + cy1 * ut * 2 + cy2 * tt),x - (x1 * uu + cx1 * ut * 2 + cx2 * tt)) , Float);
+				out[o] = x1;
+				out[o + 1] = y1;
+				out[o + 2] = Math.atan2(cy1 - y1,cx1 - x1);
+			} else {
+				var tt = p2 * p2;
+				var ttt = tt * p2;
+				var u = 1 - p2;
+				var uu = u * u;
+				var uuu = uu * u;
+				var ut = u * p2;
+				var ut3 = ut * 3;
+				var uut3 = u * ut3;
+				var utt3 = ut3 * p2;
+				var x = x1 * uuu + cx1 * uut3 + cx2 * utt3 + x2 * ttt;
+				var y = y1 * uuu + cy1 * uut3 + cy2 * utt3 + y2 * ttt;
+				out[o] = x;
+				out[o + 1] = y;
+				if(tangents1) {
+					if(p2 < 0.001) {
+						out[o + 2] = Math.atan2(cy1 - y1,cx1 - x1);
+					} else {
+						out[o + 2] = Math.atan2(y - (y1 * uu + cy1 * ut * 2 + cy2 * tt),x - (x1 * uu + cx1 * ut * 2 + cx2 * tt));
+					}
+				}
 			}
 			++i;
 			o += 3;
@@ -92074,9 +93125,9 @@ spine_PathConstraint.prototype = {
 		var y1 = temp[i + 1];
 		var dx = temp[i + 2] - x1;
 		var dy = temp[i + 3] - y1;
-		var r = js_Boot.__cast(Math.atan2(dy,dx) , Float);
-		out[o] = x1 + p * js_Boot.__cast(Math.cos(r) , Float);
-		out[o + 1] = y1 + p * js_Boot.__cast(Math.sin(r) , Float);
+		var r = Math.atan2(dy,dx);
+		out[o] = x1 + p * Math.cos(r);
+		out[o + 1] = y1 + p * Math.sin(r);
 		out[o + 2] = r;
 	}
 	,addAfterPosition: function(p,temp,i,out,o) {
@@ -92084,14 +93135,17 @@ spine_PathConstraint.prototype = {
 		var y1 = temp[i + 3];
 		var dx = x1 - temp[i];
 		var dy = y1 - temp[i + 1];
-		var r = js_Boot.__cast(Math.atan2(dy,dx) , Float);
-		out[o] = x1 + p * js_Boot.__cast(Math.cos(r) , Float);
-		out[o + 1] = y1 + p * js_Boot.__cast(Math.sin(r) , Float);
+		var r = Math.atan2(dy,dx);
+		out[o] = x1 + p * Math.cos(r);
+		out[o + 1] = y1 + p * Math.sin(r);
 		out[o + 2] = r;
 	}
 	,addCurvePosition: function(p,x1,y1,cx1,cy1,cx2,cy2,x2,y2,out,o,tangents) {
 		if(p < spine_PathConstraint.epsilon || isNaN(p)) {
-			p = spine_PathConstraint.epsilon;
+			out[o] = x1;
+			out[o + 1] = y1;
+			out[o + 2] = Math.atan2(cy1 - y1,cx1 - x1);
+			return;
 		}
 		var tt = p * p;
 		var ttt = tt * p;
@@ -92107,11 +93161,12 @@ spine_PathConstraint.prototype = {
 		out[o] = x;
 		out[o + 1] = y;
 		if(tangents) {
-			out[o + 2] = js_Boot.__cast(Math.atan2(y - (y1 * uu + cy1 * ut * 2 + cy2 * tt),x - (x1 * uu + cx1 * ut * 2 + cx2 * tt)) , Float);
+			if(p < 0.001) {
+				out[o + 2] = Math.atan2(cy1 - y1,cx1 - x1);
+			} else {
+				out[o + 2] = Math.atan2(y - (y1 * uu + cy1 * ut * 2 + cy2 * tt),x - (x1 * uu + cx1 * ut * 2 + cx2 * tt));
+			}
 		}
-	}
-	,getOrder: function() {
-		return this.data.order;
 	}
 	,getPosition: function() {
 		return this.position;
@@ -92144,7 +93199,13 @@ spine_PathConstraint.prototype = {
 		return this.target;
 	}
 	,setTarget: function(target) {
+		if(target == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("target cannot be null."));
+		}
 		this.target = target;
+	}
+	,isActive: function() {
+		return this.active;
 	}
 	,getData: function() {
 		return this.data;
@@ -92161,18 +93222,13 @@ var spine_PathConstraintData = function(name) {
 	this.position = 0;
 	this.offsetRotation = 0;
 	this.bones = [];
-	this.order = 0;
-	if(name == null) {
-		throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("name cannot be null."));
-	}
-	this.name = name;
+	spine_ConstraintData.call(this,name);
 };
 $hxClasses["spine.PathConstraintData"] = spine_PathConstraintData;
 spine_PathConstraintData.__name__ = "spine.PathConstraintData";
-spine_PathConstraintData.prototype = {
-	name: null
-	,order: null
-	,bones: null
+spine_PathConstraintData.__super__ = spine_ConstraintData;
+spine_PathConstraintData.prototype = $extend(spine_ConstraintData.prototype,{
+	bones: null
 	,target: null
 	,positionMode: null
 	,spacingMode: null
@@ -92182,15 +93238,6 @@ spine_PathConstraintData.prototype = {
 	,spacing: null
 	,rotateMix: null
 	,translateMix: null
-	,getName: function() {
-		return this.name;
-	}
-	,getOrder: function() {
-		return this.order;
-	}
-	,setOrder: function(order) {
-		this.order = order;
-	}
 	,getBones: function() {
 		return this.bones;
 	}
@@ -92198,6 +93245,9 @@ spine_PathConstraintData.prototype = {
 		return this.target;
 	}
 	,setTarget: function(target) {
+		if(target == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("target cannot be null."));
+		}
 		this.target = target;
 	}
 	,getPositionMode: function() {
@@ -92248,11 +93298,8 @@ spine_PathConstraintData.prototype = {
 	,setTranslateMix: function(translateMix) {
 		this.translateMix = translateMix;
 	}
-	,toString: function() {
-		return this.name;
-	}
 	,__class__: spine_PathConstraintData
-};
+});
 var spine_PositionMode_$enum = function() { };
 $hxClasses["spine.PositionMode_enum"] = spine_PositionMode_$enum;
 spine_PositionMode_$enum.__name__ = "spine.PositionMode_enum";
@@ -92299,8 +93346,8 @@ spine_RotateMode_$enum.valueOf = function(value) {
 var spine_Skeleton = function(data) {
 	this.y = 0;
 	this.x = 0;
-	this.flipY = false;
-	this.flipX = false;
+	this.scaleY = 1;
+	this.scaleX = 1;
 	this.time = 0;
 	this.cacheReset = [];
 	this.cache = [];
@@ -92377,19 +93424,41 @@ var spine_Skeleton = function(data) {
 	cache.splice(0,cache.length);
 	var this1 = this.cacheReset;
 	this1.splice(0,this1.length);
+	var boneCount = this.bones.length;
 	var bones = this.bones;
 	var i = 0;
-	var n = bones.length;
-	while(i < n) {
-		bones[i].sorted = false;
+	while(i < boneCount) {
+		var result = bones[i];
+		var bone = result;
+		bone.sorted = bone.data.skinRequired;
+		bone.active = !bone.sorted;
 		++i;
 	}
+	if(this.skin != null) {
+		var skinBones = this.skin.bones;
+		var i = 0;
+		var n = this.skin.bones.length;
+		while(i < n) {
+			var result = skinBones[i];
+			var result1 = bones[result.index];
+			var bone = result1;
+			while(true) {
+				bone.sorted = false;
+				bone.active = true;
+				bone = bone.parent;
+				if(bone == null) {
+					break;
+				}
+			}
+			++i;
+		}
+	}
+	var ikCount = this.ikConstraints.length;
+	var transformCount = this.transformConstraints.length;
+	var pathCount = this.pathConstraints.length;
 	var ikConstraints = this.ikConstraints;
 	var transformConstraints = this.transformConstraints;
 	var pathConstraints = this.pathConstraints;
-	var ikCount = ikConstraints.length;
-	var transformCount = transformConstraints.length;
-	var pathCount = pathConstraints.length;
 	var constraintCount = ikCount + transformCount + pathCount;
 	var _gotoLabel_outer;
 	while(true) {
@@ -92398,570 +93467,11 @@ var spine_Skeleton = function(data) {
 		while(i < constraintCount) {
 			var ii = 0;
 			while(ii < ikCount) {
-				var constraint = ikConstraints[ii];
+				var result = ikConstraints[ii];
+				var constraint = result;
 				if(constraint.data.order == i) {
-					var target = constraint.target;
-					if(!target.sorted) {
-						var parent = target.parent;
-						if(parent != null) {
-							if(!parent.sorted) {
-								var parent1 = parent.parent;
-								if(parent1 != null) {
-									this.sortBone(parent1);
-								}
-								parent.sorted = true;
-								this.cache.push(parent);
-							}
-						}
-						target.sorted = true;
-						this.cache.push(target);
-					}
-					var constrained = constraint.bones;
-					var parent2 = constrained.length > 0 ? constrained[0] : null;
-					if(!parent2.sorted) {
-						var parent3 = parent2.parent;
-						if(parent3 != null) {
-							if(!parent3.sorted) {
-								var parent4 = parent3.parent;
-								if(parent4 != null) {
-									this.sortBone(parent4);
-								}
-								parent3.sorted = true;
-								this.cache.push(parent3);
-							}
-						}
-						parent2.sorted = true;
-						this.cache.push(parent2);
-					}
-					if(constrained.length > 1) {
-						var child = constrained.length == 0 ? null : constrained[constrained.length - 1];
-						if(this.cache.indexOf(child) == -1) {
-							this.cacheReset.push(child);
-						}
-					}
-					this.cache.push(constraint);
-					var bones1 = parent2.children;
-					var i1 = 0;
-					var n = bones1.length;
-					while(i1 < n) {
-						var bone = bones1[i1];
-						if(bone.sorted) {
-							var bones2 = bone.children;
-							var i2 = 0;
-							var n1 = bones2.length;
-							while(i2 < n1) {
-								var bone1 = bones2[i2];
-								if(bone1.sorted) {
-									this.sortReset(bone1.children);
-								}
-								bone1.sorted = false;
-								++i2;
-							}
-						}
-						bone.sorted = false;
-						++i1;
-					}
-					(constrained.length == 0 ? null : constrained[constrained.length - 1]).sorted = true;
-					++ii;
-					_gotoLabel_outer = 2;
-					break;
-				}
-				++ii;
-			}
-			if(_gotoLabel_outer == 2) {
-				_gotoLabel_outer = 0;
-				++i;
-				continue;
-			}
-			if(_gotoLabel_outer >= 1) {
-				break;
-			}
-			var ii1 = 0;
-			while(ii1 < transformCount) {
-				var constraint1 = transformConstraints[ii1];
-				if(constraint1.data.order == i) {
-					var bone2 = constraint1.target;
-					if(!bone2.sorted) {
-						var parent5 = bone2.parent;
-						if(parent5 != null) {
-							if(!parent5.sorted) {
-								var parent6 = parent5.parent;
-								if(parent6 != null) {
-									this.sortBone(parent6);
-								}
-								parent5.sorted = true;
-								this.cache.push(parent5);
-							}
-						}
-						bone2.sorted = true;
-						this.cache.push(bone2);
-					}
-					var constrained1 = constraint1.bones;
-					var boneCount = constrained1.length;
-					if(constraint1.data.local) {
-						var i3 = 0;
-						while(i3 < boneCount) {
-							var child1 = constrained1[i3];
-							var bone3 = child1.parent;
-							if(!bone3.sorted) {
-								var parent7 = bone3.parent;
-								if(parent7 != null) {
-									if(!parent7.sorted) {
-										var parent8 = parent7.parent;
-										if(parent8 != null) {
-											this.sortBone(parent8);
-										}
-										parent7.sorted = true;
-										this.cache.push(parent7);
-									}
-								}
-								bone3.sorted = true;
-								this.cache.push(bone3);
-							}
-							if(this.cache.indexOf(child1) == -1) {
-								this.cacheReset.push(child1);
-							}
-							++i3;
-						}
-					} else {
-						var i4 = 0;
-						while(i4 < boneCount) {
-							var bone4 = constrained1[i4];
-							if(!bone4.sorted) {
-								var parent9 = bone4.parent;
-								if(parent9 != null) {
-									if(!parent9.sorted) {
-										var parent10 = parent9.parent;
-										if(parent10 != null) {
-											this.sortBone(parent10);
-										}
-										parent9.sorted = true;
-										this.cache.push(parent9);
-									}
-								}
-								bone4.sorted = true;
-								this.cache.push(bone4);
-							}
-							++i4;
-						}
-					}
-					this.cache.push(constraint1);
-					var i5 = 0;
-					while(i5 < boneCount) {
-						var bones3 = constrained1[i5].children;
-						var i6 = 0;
-						var n2 = bones3.length;
-						while(i6 < n2) {
-							var bone5 = bones3[i6];
-							if(bone5.sorted) {
-								var bones4 = bone5.children;
-								var i7 = 0;
-								var n3 = bones4.length;
-								while(i7 < n3) {
-									var bone6 = bones4[i7];
-									if(bone6.sorted) {
-										this.sortReset(bone6.children);
-									}
-									bone6.sorted = false;
-									++i7;
-								}
-							}
-							bone5.sorted = false;
-							++i6;
-						}
-						++i5;
-					}
-					var i8 = 0;
-					while(i8 < boneCount) {
-						constrained1[i8].sorted = true;
-						++i8;
-					}
-					++ii1;
-					_gotoLabel_outer = 2;
-					break;
-				}
-				++ii1;
-			}
-			if(_gotoLabel_outer == 2) {
-				_gotoLabel_outer = 0;
-				++i;
-				continue;
-			}
-			if(_gotoLabel_outer >= 1) {
-				break;
-			}
-			var ii2 = 0;
-			while(ii2 < pathCount) {
-				var constraint2 = pathConstraints[ii2];
-				if(constraint2.data.order == i) {
-					var slot = constraint2.target;
-					var slotIndex = slot.data.index;
-					var slotBone = slot.bone;
-					if(this.skin != null) {
-						var _g = 0;
-						var _g1 = spine_support_utils_ObjectMap.entries(this.skin.attachments);
-						while(_g < _g1.length) {
-							var entry = _g1[_g];
-							++_g;
-							if(entry.key.slotIndex == slotIndex) {
-								var attachment = entry.value;
-								if(((attachment) instanceof spine_attachments_PathAttachment)) {
-									var pathBones = (js_Boot.__cast(attachment , spine_attachments_PathAttachment)).bones;
-									if(pathBones == null) {
-										if(!slotBone.sorted) {
-											var parent11 = slotBone.parent;
-											if(parent11 != null) {
-												if(!parent11.sorted) {
-													var parent12 = parent11.parent;
-													if(parent12 != null) {
-														this.sortBone(parent12);
-													}
-													parent11.sorted = true;
-													this.cache.push(parent11);
-												}
-											}
-											slotBone.sorted = true;
-											this.cache.push(slotBone);
-										}
-									} else {
-										var bones5 = this.bones;
-										var i9 = 0;
-										var n4 = pathBones.length;
-										while(i9 < n4) {
-											var nn = pathBones[i9++];
-											nn += i9;
-											while(i9 < nn) {
-												var bone7 = bones5[pathBones[i9++]];
-												if(!bone7.sorted) {
-													var parent13 = bone7.parent;
-													if(parent13 != null) {
-														if(!parent13.sorted) {
-															var parent14 = parent13.parent;
-															if(parent14 != null) {
-																this.sortBone(parent14);
-															}
-															parent13.sorted = true;
-															this.cache.push(parent13);
-														}
-													}
-													bone7.sorted = true;
-													this.cache.push(bone7);
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-					if(this.data.defaultSkin != null && this.data.defaultSkin != this.skin) {
-						var _g2 = 0;
-						var _g3 = spine_support_utils_ObjectMap.entries(this.data.defaultSkin.attachments);
-						while(_g2 < _g3.length) {
-							var entry1 = _g3[_g2];
-							++_g2;
-							if(entry1.key.slotIndex == slotIndex) {
-								var attachment1 = entry1.value;
-								if(((attachment1) instanceof spine_attachments_PathAttachment)) {
-									var pathBones1 = (js_Boot.__cast(attachment1 , spine_attachments_PathAttachment)).bones;
-									if(pathBones1 == null) {
-										if(!slotBone.sorted) {
-											var parent15 = slotBone.parent;
-											if(parent15 != null) {
-												if(!parent15.sorted) {
-													var parent16 = parent15.parent;
-													if(parent16 != null) {
-														this.sortBone(parent16);
-													}
-													parent15.sorted = true;
-													this.cache.push(parent15);
-												}
-											}
-											slotBone.sorted = true;
-											this.cache.push(slotBone);
-										}
-									} else {
-										var bones6 = this.bones;
-										var i10 = 0;
-										var n5 = pathBones1.length;
-										while(i10 < n5) {
-											var nn1 = pathBones1[i10++];
-											nn1 += i10;
-											while(i10 < nn1) {
-												var bone8 = bones6[pathBones1[i10++]];
-												if(!bone8.sorted) {
-													var parent17 = bone8.parent;
-													if(parent17 != null) {
-														if(!parent17.sorted) {
-															var parent18 = parent17.parent;
-															if(parent18 != null) {
-																this.sortBone(parent18);
-															}
-															parent17.sorted = true;
-															this.cache.push(parent17);
-														}
-													}
-													bone8.sorted = true;
-													this.cache.push(bone8);
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-					var ii3 = 0;
-					var nn2 = this.data.skins.length;
-					while(ii3 < nn2) {
-						var _g4 = 0;
-						var _g5 = spine_support_utils_ObjectMap.entries(this.data.skins[ii3].attachments);
-						while(_g4 < _g5.length) {
-							var entry2 = _g5[_g4];
-							++_g4;
-							if(entry2.key.slotIndex == slotIndex) {
-								var attachment2 = entry2.value;
-								if(((attachment2) instanceof spine_attachments_PathAttachment)) {
-									var pathBones2 = (js_Boot.__cast(attachment2 , spine_attachments_PathAttachment)).bones;
-									if(pathBones2 == null) {
-										if(!slotBone.sorted) {
-											var parent19 = slotBone.parent;
-											if(parent19 != null) {
-												if(!parent19.sorted) {
-													var parent20 = parent19.parent;
-													if(parent20 != null) {
-														this.sortBone(parent20);
-													}
-													parent19.sorted = true;
-													this.cache.push(parent19);
-												}
-											}
-											slotBone.sorted = true;
-											this.cache.push(slotBone);
-										}
-									} else {
-										var bones7 = this.bones;
-										var i11 = 0;
-										var n6 = pathBones2.length;
-										while(i11 < n6) {
-											var nn3 = pathBones2[i11++];
-											nn3 += i11;
-											while(i11 < nn3) {
-												var bone9 = bones7[pathBones2[i11++]];
-												if(!bone9.sorted) {
-													var parent21 = bone9.parent;
-													if(parent21 != null) {
-														if(!parent21.sorted) {
-															var parent22 = parent21.parent;
-															if(parent22 != null) {
-																this.sortBone(parent22);
-															}
-															parent21.sorted = true;
-															this.cache.push(parent21);
-														}
-													}
-													bone9.sorted = true;
-													this.cache.push(bone9);
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-						++ii3;
-					}
-					var attachment3 = slot.attachment;
-					if(((attachment3) instanceof spine_attachments_PathAttachment)) {
-						if(((attachment3) instanceof spine_attachments_PathAttachment)) {
-							var pathBones3 = (js_Boot.__cast(attachment3 , spine_attachments_PathAttachment)).bones;
-							if(pathBones3 == null) {
-								if(!slotBone.sorted) {
-									var parent23 = slotBone.parent;
-									if(parent23 != null) {
-										if(!parent23.sorted) {
-											var parent24 = parent23.parent;
-											if(parent24 != null) {
-												this.sortBone(parent24);
-											}
-											parent23.sorted = true;
-											this.cache.push(parent23);
-										}
-									}
-									slotBone.sorted = true;
-									this.cache.push(slotBone);
-								}
-							} else {
-								var bones8 = this.bones;
-								var i12 = 0;
-								var n7 = pathBones3.length;
-								while(i12 < n7) {
-									var nn4 = pathBones3[i12++];
-									nn4 += i12;
-									while(i12 < nn4) {
-										var bone10 = bones8[pathBones3[i12++]];
-										if(!bone10.sorted) {
-											var parent25 = bone10.parent;
-											if(parent25 != null) {
-												if(!parent25.sorted) {
-													var parent26 = parent25.parent;
-													if(parent26 != null) {
-														this.sortBone(parent26);
-													}
-													parent25.sorted = true;
-													this.cache.push(parent25);
-												}
-											}
-											bone10.sorted = true;
-											this.cache.push(bone10);
-										}
-									}
-								}
-							}
-						}
-					}
-					var constrained2 = constraint2.bones;
-					var boneCount1 = constrained2.length;
-					var i13 = 0;
-					while(i13 < boneCount1) {
-						var bone11 = constrained2[i13];
-						if(!bone11.sorted) {
-							var parent27 = bone11.parent;
-							if(parent27 != null) {
-								if(!parent27.sorted) {
-									var parent28 = parent27.parent;
-									if(parent28 != null) {
-										this.sortBone(parent28);
-									}
-									parent27.sorted = true;
-									this.cache.push(parent27);
-								}
-							}
-							bone11.sorted = true;
-							this.cache.push(bone11);
-						}
-						++i13;
-					}
-					this.cache.push(constraint2);
-					var i14 = 0;
-					while(i14 < boneCount1) {
-						var bones9 = constrained2[i14].children;
-						var i15 = 0;
-						var n8 = bones9.length;
-						while(i15 < n8) {
-							var bone12 = bones9[i15];
-							if(bone12.sorted) {
-								var bones10 = bone12.children;
-								var i16 = 0;
-								var n9 = bones10.length;
-								while(i16 < n9) {
-									var bone13 = bones10[i16];
-									if(bone13.sorted) {
-										this.sortReset(bone13.children);
-									}
-									bone13.sorted = false;
-									++i16;
-								}
-							}
-							bone12.sorted = false;
-							++i15;
-						}
-						++i14;
-					}
-					var i17 = 0;
-					while(i17 < boneCount1) {
-						constrained2[i17].sorted = true;
-						++i17;
-					}
-					++ii2;
-					_gotoLabel_outer = 2;
-					break;
-				}
-				++ii2;
-			}
-			if(_gotoLabel_outer == 2) {
-				_gotoLabel_outer = 0;
-				++i;
-				continue;
-			}
-			if(_gotoLabel_outer >= 1) {
-				break;
-			}
-			++i;
-		}
-		if(_gotoLabel_outer == 0) {
-			break;
-		}
-	}
-	var i = 0;
-	var n = bones.length;
-	while(i < n) {
-		var bone = bones[i];
-		if(!bone.sorted) {
-			var parent = bone.parent;
-			if(parent != null) {
-				if(!parent.sorted) {
-					var parent1 = parent.parent;
-					if(parent1 != null) {
-						this.sortBone(parent1);
-					}
-					parent.sorted = true;
-					this.cache.push(parent);
-				}
-			}
-			bone.sorted = true;
-			this.cache.push(bone);
-		}
-		++i;
-	}
-};
-$hxClasses["spine.Skeleton"] = spine_Skeleton;
-spine_Skeleton.__name__ = "spine.Skeleton";
-spine_Skeleton.prototype = {
-	data: null
-	,bones: null
-	,slots: null
-	,drawOrder: null
-	,ikConstraints: null
-	,transformConstraints: null
-	,pathConstraints: null
-	,cache: null
-	,cacheReset: null
-	,skin: null
-	,color: null
-	,time: null
-	,flipX: null
-	,flipY: null
-	,x: null
-	,y: null
-	,updateCache: function() {
-		var cache = this.cache;
-		cache.splice(0,cache.length);
-		var this1 = this.cacheReset;
-		this1.splice(0,this1.length);
-		var bones = this.bones;
-		var i = 0;
-		var n = bones.length;
-		while(i < n) {
-			bones[i].sorted = false;
-			++i;
-		}
-		var ikConstraints = this.ikConstraints;
-		var transformConstraints = this.transformConstraints;
-		var pathConstraints = this.pathConstraints;
-		var ikCount = ikConstraints.length;
-		var transformCount = transformConstraints.length;
-		var pathCount = pathConstraints.length;
-		var constraintCount = ikCount + transformCount + pathCount;
-		var _gotoLabel_outer;
-		while(true) {
-			_gotoLabel_outer = 0;
-			var i = 0;
-			while(i < constraintCount) {
-				var ii = 0;
-				while(ii < ikCount) {
-					var constraint = ikConstraints[ii];
-					if(constraint.data.order == i) {
+					constraint.active = constraint.target.active && (!constraint.data.skinRequired || this.skin != null && this.skin.constraints.indexOf(constraint.data) != -1);
+					if(constraint.active) {
 						var target = constraint.target;
 						if(!target.sorted) {
 							var parent = target.parent;
@@ -93007,12 +93517,20 @@ spine_Skeleton.prototype = {
 						var n = bones1.length;
 						while(i1 < n) {
 							var bone = bones1[i1];
+							if(!bone.active) {
+								++i1;
+								continue;
+							}
 							if(bone.sorted) {
 								var bones2 = bone.children;
 								var i2 = 0;
 								var n1 = bones2.length;
 								while(i2 < n1) {
 									var bone1 = bones2[i2];
+									if(!bone1.active) {
+										++i2;
+										continue;
+									}
 									if(bone1.sorted) {
 										this.sortReset(bone1.children);
 									}
@@ -93024,24 +93542,28 @@ spine_Skeleton.prototype = {
 							++i1;
 						}
 						(constrained.length == 0 ? null : constrained[constrained.length - 1]).sorted = true;
-						++ii;
-						_gotoLabel_outer = 2;
-						break;
 					}
 					++ii;
-				}
-				if(_gotoLabel_outer == 2) {
-					_gotoLabel_outer = 0;
-					++i;
-					continue;
-				}
-				if(_gotoLabel_outer >= 1) {
+					_gotoLabel_outer = 2;
 					break;
 				}
-				var ii1 = 0;
-				while(ii1 < transformCount) {
-					var constraint1 = transformConstraints[ii1];
-					if(constraint1.data.order == i) {
+				++ii;
+			}
+			if(_gotoLabel_outer == 2) {
+				_gotoLabel_outer = 0;
+				++i;
+				continue;
+			}
+			if(_gotoLabel_outer >= 1) {
+				break;
+			}
+			var ii1 = 0;
+			while(ii1 < transformCount) {
+				var result1 = transformConstraints[ii1];
+				var constraint1 = result1;
+				if(constraint1.data.order == i) {
+					constraint1.active = constraint1.target.active && (!constraint1.data.skinRequired || this.skin != null && this.skin.constraints.indexOf(constraint1.data) != -1);
+					if(constraint1.active) {
 						var bone2 = constraint1.target;
 						if(!bone2.sorted) {
 							var parent5 = bone2.parent;
@@ -93059,10 +93581,10 @@ spine_Skeleton.prototype = {
 							this.cache.push(bone2);
 						}
 						var constrained1 = constraint1.bones;
-						var boneCount = constrained1.length;
+						var boneCount1 = constrained1.length;
 						if(constraint1.data.local) {
 							var i3 = 0;
-							while(i3 < boneCount) {
+							while(i3 < boneCount1) {
 								var child1 = constrained1[i3];
 								var bone3 = child1.parent;
 								if(!bone3.sorted) {
@@ -93087,7 +93609,7 @@ spine_Skeleton.prototype = {
 							}
 						} else {
 							var i4 = 0;
-							while(i4 < boneCount) {
+							while(i4 < boneCount1) {
 								var bone4 = constrained1[i4];
 								if(!bone4.sorted) {
 									var parent9 = bone4.parent;
@@ -93109,18 +93631,26 @@ spine_Skeleton.prototype = {
 						}
 						this.cache.push(constraint1);
 						var i5 = 0;
-						while(i5 < boneCount) {
+						while(i5 < boneCount1) {
 							var bones3 = constrained1[i5].children;
 							var i6 = 0;
 							var n2 = bones3.length;
 							while(i6 < n2) {
 								var bone5 = bones3[i6];
+								if(!bone5.active) {
+									++i6;
+									continue;
+								}
 								if(bone5.sorted) {
 									var bones4 = bone5.children;
 									var i7 = 0;
 									var n3 = bones4.length;
 									while(i7 < n3) {
 										var bone6 = bones4[i7];
+										if(!bone6.active) {
+											++i7;
+											continue;
+										}
 										if(bone6.sorted) {
 											this.sortReset(bone6.children);
 										}
@@ -93134,41 +93664,46 @@ spine_Skeleton.prototype = {
 							++i5;
 						}
 						var i8 = 0;
-						while(i8 < boneCount) {
+						while(i8 < boneCount1) {
 							constrained1[i8].sorted = true;
 							++i8;
 						}
-						++ii1;
-						_gotoLabel_outer = 2;
-						break;
 					}
 					++ii1;
-				}
-				if(_gotoLabel_outer == 2) {
-					_gotoLabel_outer = 0;
-					++i;
-					continue;
-				}
-				if(_gotoLabel_outer >= 1) {
+					_gotoLabel_outer = 2;
 					break;
 				}
-				var ii2 = 0;
-				while(ii2 < pathCount) {
-					var constraint2 = pathConstraints[ii2];
-					if(constraint2.data.order == i) {
+				++ii1;
+			}
+			if(_gotoLabel_outer == 2) {
+				_gotoLabel_outer = 0;
+				++i;
+				continue;
+			}
+			if(_gotoLabel_outer >= 1) {
+				break;
+			}
+			var ii2 = 0;
+			while(ii2 < pathCount) {
+				var result2 = pathConstraints[ii2];
+				var constraint2 = result2;
+				if(constraint2.data.order == i) {
+					constraint2.active = constraint2.target.bone.active && (!constraint2.data.skinRequired || this.skin != null && this.skin.constraints.indexOf(constraint2.data) != -1);
+					if(constraint2.active) {
 						var slot = constraint2.target;
 						var slotIndex = slot.data.index;
 						var slotBone = slot.bone;
 						if(this.skin != null) {
 							var _g = 0;
-							var _g1 = spine_support_utils_ObjectMap.entries(this.skin.attachments);
+							var _g1 = spine_support_utils_AttachmentMap.keys(this.skin.attachments);
 							while(_g < _g1.length) {
 								var entry = _g1[_g];
 								++_g;
-								if(entry.key.slotIndex == slotIndex) {
-									var attachment = entry.value;
+								if(entry.slotIndex == slotIndex) {
+									var attachment = entry.attachment;
 									if(((attachment) instanceof spine_attachments_PathAttachment)) {
-										var pathBones = (js_Boot.__cast(attachment , spine_attachments_PathAttachment)).bones;
+										var result3 = attachment;
+										var pathBones = result3.bones;
 										if(pathBones == null) {
 											if(!slotBone.sorted) {
 												var parent11 = slotBone.parent;
@@ -93218,14 +93753,15 @@ spine_Skeleton.prototype = {
 						}
 						if(this.data.defaultSkin != null && this.data.defaultSkin != this.skin) {
 							var _g2 = 0;
-							var _g3 = spine_support_utils_ObjectMap.entries(this.data.defaultSkin.attachments);
+							var _g3 = spine_support_utils_AttachmentMap.keys(this.data.defaultSkin.attachments);
 							while(_g2 < _g3.length) {
 								var entry1 = _g3[_g2];
 								++_g2;
-								if(entry1.key.slotIndex == slotIndex) {
-									var attachment1 = entry1.value;
+								if(entry1.slotIndex == slotIndex) {
+									var attachment1 = entry1.attachment;
 									if(((attachment1) instanceof spine_attachments_PathAttachment)) {
-										var pathBones1 = (js_Boot.__cast(attachment1 , spine_attachments_PathAttachment)).bones;
+										var result4 = attachment1;
+										var pathBones1 = result4.bones;
 										if(pathBones1 == null) {
 											if(!slotBone.sorted) {
 												var parent15 = slotBone.parent;
@@ -93273,109 +93809,50 @@ spine_Skeleton.prototype = {
 								}
 							}
 						}
-						var ii3 = 0;
-						var nn2 = this.data.skins.length;
-						while(ii3 < nn2) {
-							var _g4 = 0;
-							var _g5 = spine_support_utils_ObjectMap.entries(this.data.skins[ii3].attachments);
-							while(_g4 < _g5.length) {
-								var entry2 = _g5[_g4];
-								++_g4;
-								if(entry2.key.slotIndex == slotIndex) {
-									var attachment2 = entry2.value;
-									if(((attachment2) instanceof spine_attachments_PathAttachment)) {
-										var pathBones2 = (js_Boot.__cast(attachment2 , spine_attachments_PathAttachment)).bones;
-										if(pathBones2 == null) {
-											if(!slotBone.sorted) {
-												var parent19 = slotBone.parent;
-												if(parent19 != null) {
-													if(!parent19.sorted) {
-														var parent20 = parent19.parent;
-														if(parent20 != null) {
-															this.sortBone(parent20);
-														}
-														parent19.sorted = true;
-														this.cache.push(parent19);
-													}
-												}
-												slotBone.sorted = true;
-												this.cache.push(slotBone);
-											}
-										} else {
-											var bones7 = this.bones;
-											var i11 = 0;
-											var n6 = pathBones2.length;
-											while(i11 < n6) {
-												var nn3 = pathBones2[i11++];
-												nn3 += i11;
-												while(i11 < nn3) {
-													var bone9 = bones7[pathBones2[i11++]];
-													if(!bone9.sorted) {
-														var parent21 = bone9.parent;
-														if(parent21 != null) {
-															if(!parent21.sorted) {
-																var parent22 = parent21.parent;
-																if(parent22 != null) {
-																	this.sortBone(parent22);
-																}
-																parent21.sorted = true;
-																this.cache.push(parent21);
-															}
-														}
-														bone9.sorted = true;
-														this.cache.push(bone9);
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-							++ii3;
-						}
-						var attachment3 = slot.attachment;
-						if(((attachment3) instanceof spine_attachments_PathAttachment)) {
-							if(((attachment3) instanceof spine_attachments_PathAttachment)) {
-								var pathBones3 = (js_Boot.__cast(attachment3 , spine_attachments_PathAttachment)).bones;
-								if(pathBones3 == null) {
+						var attachment2 = slot.attachment;
+						if(((attachment2) instanceof spine_attachments_PathAttachment)) {
+							if(((attachment2) instanceof spine_attachments_PathAttachment)) {
+								var result5 = attachment2;
+								var pathBones2 = result5.bones;
+								if(pathBones2 == null) {
 									if(!slotBone.sorted) {
-										var parent23 = slotBone.parent;
-										if(parent23 != null) {
-											if(!parent23.sorted) {
-												var parent24 = parent23.parent;
-												if(parent24 != null) {
-													this.sortBone(parent24);
+										var parent19 = slotBone.parent;
+										if(parent19 != null) {
+											if(!parent19.sorted) {
+												var parent20 = parent19.parent;
+												if(parent20 != null) {
+													this.sortBone(parent20);
 												}
-												parent23.sorted = true;
-												this.cache.push(parent23);
+												parent19.sorted = true;
+												this.cache.push(parent19);
 											}
 										}
 										slotBone.sorted = true;
 										this.cache.push(slotBone);
 									}
 								} else {
-									var bones8 = this.bones;
-									var i12 = 0;
-									var n7 = pathBones3.length;
-									while(i12 < n7) {
-										var nn4 = pathBones3[i12++];
-										nn4 += i12;
-										while(i12 < nn4) {
-											var bone10 = bones8[pathBones3[i12++]];
-											if(!bone10.sorted) {
-												var parent25 = bone10.parent;
-												if(parent25 != null) {
-													if(!parent25.sorted) {
-														var parent26 = parent25.parent;
-														if(parent26 != null) {
-															this.sortBone(parent26);
+									var bones7 = this.bones;
+									var i11 = 0;
+									var n6 = pathBones2.length;
+									while(i11 < n6) {
+										var nn2 = pathBones2[i11++];
+										nn2 += i11;
+										while(i11 < nn2) {
+											var bone9 = bones7[pathBones2[i11++]];
+											if(!bone9.sorted) {
+												var parent21 = bone9.parent;
+												if(parent21 != null) {
+													if(!parent21.sorted) {
+														var parent22 = parent21.parent;
+														if(parent22 != null) {
+															this.sortBone(parent22);
 														}
-														parent25.sorted = true;
-														this.cache.push(parent25);
+														parent21.sorted = true;
+														this.cache.push(parent21);
 													}
 												}
-												bone10.sorted = true;
-												this.cache.push(bone10);
+												bone9.sorted = true;
+												this.cache.push(bone9);
 											}
 										}
 									}
@@ -93383,57 +93860,629 @@ spine_Skeleton.prototype = {
 							}
 						}
 						var constrained2 = constraint2.bones;
-						var boneCount1 = constrained2.length;
-						var i13 = 0;
-						while(i13 < boneCount1) {
-							var bone11 = constrained2[i13];
-							if(!bone11.sorted) {
-								var parent27 = bone11.parent;
-								if(parent27 != null) {
-									if(!parent27.sorted) {
-										var parent28 = parent27.parent;
-										if(parent28 != null) {
-											this.sortBone(parent28);
+						var boneCount2 = constrained2.length;
+						var i12 = 0;
+						while(i12 < boneCount2) {
+							var bone10 = constrained2[i12];
+							if(!bone10.sorted) {
+								var parent23 = bone10.parent;
+								if(parent23 != null) {
+									if(!parent23.sorted) {
+										var parent24 = parent23.parent;
+										if(parent24 != null) {
+											this.sortBone(parent24);
 										}
-										parent27.sorted = true;
-										this.cache.push(parent27);
+										parent23.sorted = true;
+										this.cache.push(parent23);
 									}
 								}
-								bone11.sorted = true;
-								this.cache.push(bone11);
+								bone10.sorted = true;
+								this.cache.push(bone10);
+							}
+							++i12;
+						}
+						this.cache.push(constraint2);
+						var i13 = 0;
+						while(i13 < boneCount2) {
+							var bones8 = constrained2[i13].children;
+							var i14 = 0;
+							var n7 = bones8.length;
+							while(i14 < n7) {
+								var bone11 = bones8[i14];
+								if(!bone11.active) {
+									++i14;
+									continue;
+								}
+								if(bone11.sorted) {
+									var bones9 = bone11.children;
+									var i15 = 0;
+									var n8 = bones9.length;
+									while(i15 < n8) {
+										var bone12 = bones9[i15];
+										if(!bone12.active) {
+											++i15;
+											continue;
+										}
+										if(bone12.sorted) {
+											this.sortReset(bone12.children);
+										}
+										bone12.sorted = false;
+										++i15;
+									}
+								}
+								bone11.sorted = false;
+								++i14;
 							}
 							++i13;
 						}
-						this.cache.push(constraint2);
-						var i14 = 0;
-						while(i14 < boneCount1) {
-							var bones9 = constrained2[i14].children;
-							var i15 = 0;
-							var n8 = bones9.length;
-							while(i15 < n8) {
-								var bone12 = bones9[i15];
-								if(bone12.sorted) {
-									var bones10 = bone12.children;
-									var i16 = 0;
-									var n9 = bones10.length;
-									while(i16 < n9) {
-										var bone13 = bones10[i16];
-										if(bone13.sorted) {
-											this.sortReset(bone13.children);
+						var i16 = 0;
+						while(i16 < boneCount2) {
+							constrained2[i16].sorted = true;
+							++i16;
+						}
+					}
+					++ii2;
+					_gotoLabel_outer = 2;
+					break;
+				}
+				++ii2;
+			}
+			if(_gotoLabel_outer == 2) {
+				_gotoLabel_outer = 0;
+				++i;
+				continue;
+			}
+			if(_gotoLabel_outer >= 1) {
+				break;
+			}
+			++i;
+		}
+		if(_gotoLabel_outer == 0) {
+			break;
+		}
+	}
+	var i = 0;
+	while(i < boneCount) {
+		var result = bones[i];
+		var bone = result;
+		if(!bone.sorted) {
+			var parent = bone.parent;
+			if(parent != null) {
+				if(!parent.sorted) {
+					var parent1 = parent.parent;
+					if(parent1 != null) {
+						this.sortBone(parent1);
+					}
+					parent.sorted = true;
+					this.cache.push(parent);
+				}
+			}
+			bone.sorted = true;
+			this.cache.push(bone);
+		}
+		++i;
+	}
+};
+$hxClasses["spine.Skeleton"] = spine_Skeleton;
+spine_Skeleton.__name__ = "spine.Skeleton";
+spine_Skeleton.prototype = {
+	data: null
+	,bones: null
+	,slots: null
+	,drawOrder: null
+	,ikConstraints: null
+	,transformConstraints: null
+	,pathConstraints: null
+	,cache: null
+	,cacheReset: null
+	,skin: null
+	,color: null
+	,time: null
+	,scaleX: null
+	,scaleY: null
+	,x: null
+	,y: null
+	,updateCache: function() {
+		var cache = this.cache;
+		cache.splice(0,cache.length);
+		var this1 = this.cacheReset;
+		this1.splice(0,this1.length);
+		var boneCount = this.bones.length;
+		var bones = this.bones;
+		var i = 0;
+		while(i < boneCount) {
+			var result = bones[i];
+			var bone = result;
+			bone.sorted = bone.data.skinRequired;
+			bone.active = !bone.sorted;
+			++i;
+		}
+		if(this.skin != null) {
+			var skinBones = this.skin.bones;
+			var i = 0;
+			var n = this.skin.bones.length;
+			while(i < n) {
+				var result = skinBones[i];
+				var result1 = bones[result.index];
+				var bone = result1;
+				while(true) {
+					bone.sorted = false;
+					bone.active = true;
+					bone = bone.parent;
+					if(!(bone != null)) {
+						break;
+					}
+				}
+				++i;
+			}
+		}
+		var ikCount = this.ikConstraints.length;
+		var transformCount = this.transformConstraints.length;
+		var pathCount = this.pathConstraints.length;
+		var ikConstraints = this.ikConstraints;
+		var transformConstraints = this.transformConstraints;
+		var pathConstraints = this.pathConstraints;
+		var constraintCount = ikCount + transformCount + pathCount;
+		var _gotoLabel_outer;
+		while(true) {
+			_gotoLabel_outer = 0;
+			var i = 0;
+			while(i < constraintCount) {
+				var ii = 0;
+				while(ii < ikCount) {
+					var result = ikConstraints[ii];
+					var constraint = result;
+					if(constraint.data.order == i) {
+						constraint.active = constraint.target.active && (!constraint.data.skinRequired || this.skin != null && this.skin.constraints.indexOf(constraint.data) != -1);
+						if(constraint.active) {
+							var target = constraint.target;
+							if(!target.sorted) {
+								var parent = target.parent;
+								if(parent != null) {
+									if(!parent.sorted) {
+										var parent1 = parent.parent;
+										if(parent1 != null) {
+											this.sortBone(parent1);
 										}
-										bone13.sorted = false;
-										++i16;
+										parent.sorted = true;
+										this.cache.push(parent);
 									}
 								}
-								bone12.sorted = false;
-								++i15;
+								target.sorted = true;
+								this.cache.push(target);
 							}
-							++i14;
+							var constrained = constraint.bones;
+							var parent2 = constrained.length > 0 ? constrained[0] : null;
+							if(!parent2.sorted) {
+								var parent3 = parent2.parent;
+								if(parent3 != null) {
+									if(!parent3.sorted) {
+										var parent4 = parent3.parent;
+										if(parent4 != null) {
+											this.sortBone(parent4);
+										}
+										parent3.sorted = true;
+										this.cache.push(parent3);
+									}
+								}
+								parent2.sorted = true;
+								this.cache.push(parent2);
+							}
+							if(constrained.length > 1) {
+								var child = constrained.length == 0 ? null : constrained[constrained.length - 1];
+								if(this.cache.indexOf(child) == -1) {
+									this.cacheReset.push(child);
+								}
+							}
+							this.cache.push(constraint);
+							var bones1 = parent2.children;
+							var i1 = 0;
+							var n = bones1.length;
+							while(i1 < n) {
+								var bone = bones1[i1];
+								if(!bone.active) {
+									++i1;
+									continue;
+								}
+								if(bone.sorted) {
+									var bones2 = bone.children;
+									var i2 = 0;
+									var n1 = bones2.length;
+									while(i2 < n1) {
+										var bone1 = bones2[i2];
+										if(!bone1.active) {
+											++i2;
+											continue;
+										}
+										if(bone1.sorted) {
+											this.sortReset(bone1.children);
+										}
+										bone1.sorted = false;
+										++i2;
+									}
+								}
+								bone.sorted = false;
+								++i1;
+							}
+							(constrained.length == 0 ? null : constrained[constrained.length - 1]).sorted = true;
 						}
-						var i17 = 0;
-						while(i17 < boneCount1) {
-							constrained2[i17].sorted = true;
-							++i17;
+						++ii;
+						_gotoLabel_outer = 2;
+						break;
+					}
+					++ii;
+				}
+				if(_gotoLabel_outer == 2) {
+					_gotoLabel_outer = 0;
+					++i;
+					continue;
+				}
+				if(_gotoLabel_outer >= 1) {
+					break;
+				}
+				var ii1 = 0;
+				while(ii1 < transformCount) {
+					var result1 = transformConstraints[ii1];
+					var constraint1 = result1;
+					if(constraint1.data.order == i) {
+						constraint1.active = constraint1.target.active && (!constraint1.data.skinRequired || this.skin != null && this.skin.constraints.indexOf(constraint1.data) != -1);
+						if(constraint1.active) {
+							var bone2 = constraint1.target;
+							if(!bone2.sorted) {
+								var parent5 = bone2.parent;
+								if(parent5 != null) {
+									if(!parent5.sorted) {
+										var parent6 = parent5.parent;
+										if(parent6 != null) {
+											this.sortBone(parent6);
+										}
+										parent5.sorted = true;
+										this.cache.push(parent5);
+									}
+								}
+								bone2.sorted = true;
+								this.cache.push(bone2);
+							}
+							var constrained1 = constraint1.bones;
+							var boneCount1 = constrained1.length;
+							if(constraint1.data.local) {
+								var i3 = 0;
+								while(i3 < boneCount1) {
+									var child1 = constrained1[i3];
+									var bone3 = child1.parent;
+									if(!bone3.sorted) {
+										var parent7 = bone3.parent;
+										if(parent7 != null) {
+											if(!parent7.sorted) {
+												var parent8 = parent7.parent;
+												if(parent8 != null) {
+													this.sortBone(parent8);
+												}
+												parent7.sorted = true;
+												this.cache.push(parent7);
+											}
+										}
+										bone3.sorted = true;
+										this.cache.push(bone3);
+									}
+									if(this.cache.indexOf(child1) == -1) {
+										this.cacheReset.push(child1);
+									}
+									++i3;
+								}
+							} else {
+								var i4 = 0;
+								while(i4 < boneCount1) {
+									var bone4 = constrained1[i4];
+									if(!bone4.sorted) {
+										var parent9 = bone4.parent;
+										if(parent9 != null) {
+											if(!parent9.sorted) {
+												var parent10 = parent9.parent;
+												if(parent10 != null) {
+													this.sortBone(parent10);
+												}
+												parent9.sorted = true;
+												this.cache.push(parent9);
+											}
+										}
+										bone4.sorted = true;
+										this.cache.push(bone4);
+									}
+									++i4;
+								}
+							}
+							this.cache.push(constraint1);
+							var i5 = 0;
+							while(i5 < boneCount1) {
+								var bones3 = constrained1[i5].children;
+								var i6 = 0;
+								var n2 = bones3.length;
+								while(i6 < n2) {
+									var bone5 = bones3[i6];
+									if(!bone5.active) {
+										++i6;
+										continue;
+									}
+									if(bone5.sorted) {
+										var bones4 = bone5.children;
+										var i7 = 0;
+										var n3 = bones4.length;
+										while(i7 < n3) {
+											var bone6 = bones4[i7];
+											if(!bone6.active) {
+												++i7;
+												continue;
+											}
+											if(bone6.sorted) {
+												this.sortReset(bone6.children);
+											}
+											bone6.sorted = false;
+											++i7;
+										}
+									}
+									bone5.sorted = false;
+									++i6;
+								}
+								++i5;
+							}
+							var i8 = 0;
+							while(i8 < boneCount1) {
+								constrained1[i8].sorted = true;
+								++i8;
+							}
+						}
+						++ii1;
+						_gotoLabel_outer = 2;
+						break;
+					}
+					++ii1;
+				}
+				if(_gotoLabel_outer == 2) {
+					_gotoLabel_outer = 0;
+					++i;
+					continue;
+				}
+				if(_gotoLabel_outer >= 1) {
+					break;
+				}
+				var ii2 = 0;
+				while(ii2 < pathCount) {
+					var result2 = pathConstraints[ii2];
+					var constraint2 = result2;
+					if(constraint2.data.order == i) {
+						constraint2.active = constraint2.target.bone.active && (!constraint2.data.skinRequired || this.skin != null && this.skin.constraints.indexOf(constraint2.data) != -1);
+						if(constraint2.active) {
+							var slot = constraint2.target;
+							var slotIndex = slot.data.index;
+							var slotBone = slot.bone;
+							if(this.skin != null) {
+								var _g = 0;
+								var _g1 = spine_support_utils_AttachmentMap.keys(this.skin.attachments);
+								while(_g < _g1.length) {
+									var entry = _g1[_g];
+									++_g;
+									if(entry.slotIndex == slotIndex) {
+										var attachment = entry.attachment;
+										if(((attachment) instanceof spine_attachments_PathAttachment)) {
+											var result3 = attachment;
+											var pathBones = result3.bones;
+											if(pathBones == null) {
+												if(!slotBone.sorted) {
+													var parent11 = slotBone.parent;
+													if(parent11 != null) {
+														if(!parent11.sorted) {
+															var parent12 = parent11.parent;
+															if(parent12 != null) {
+																this.sortBone(parent12);
+															}
+															parent11.sorted = true;
+															this.cache.push(parent11);
+														}
+													}
+													slotBone.sorted = true;
+													this.cache.push(slotBone);
+												}
+											} else {
+												var bones5 = this.bones;
+												var i9 = 0;
+												var n4 = pathBones.length;
+												while(i9 < n4) {
+													var nn = pathBones[i9++];
+													nn += i9;
+													while(i9 < nn) {
+														var bone7 = bones5[pathBones[i9++]];
+														if(!bone7.sorted) {
+															var parent13 = bone7.parent;
+															if(parent13 != null) {
+																if(!parent13.sorted) {
+																	var parent14 = parent13.parent;
+																	if(parent14 != null) {
+																		this.sortBone(parent14);
+																	}
+																	parent13.sorted = true;
+																	this.cache.push(parent13);
+																}
+															}
+															bone7.sorted = true;
+															this.cache.push(bone7);
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+							if(this.data.defaultSkin != null && this.data.defaultSkin != this.skin) {
+								var _g2 = 0;
+								var _g3 = spine_support_utils_AttachmentMap.keys(this.data.defaultSkin.attachments);
+								while(_g2 < _g3.length) {
+									var entry1 = _g3[_g2];
+									++_g2;
+									if(entry1.slotIndex == slotIndex) {
+										var attachment1 = entry1.attachment;
+										if(((attachment1) instanceof spine_attachments_PathAttachment)) {
+											var result4 = attachment1;
+											var pathBones1 = result4.bones;
+											if(pathBones1 == null) {
+												if(!slotBone.sorted) {
+													var parent15 = slotBone.parent;
+													if(parent15 != null) {
+														if(!parent15.sorted) {
+															var parent16 = parent15.parent;
+															if(parent16 != null) {
+																this.sortBone(parent16);
+															}
+															parent15.sorted = true;
+															this.cache.push(parent15);
+														}
+													}
+													slotBone.sorted = true;
+													this.cache.push(slotBone);
+												}
+											} else {
+												var bones6 = this.bones;
+												var i10 = 0;
+												var n5 = pathBones1.length;
+												while(i10 < n5) {
+													var nn1 = pathBones1[i10++];
+													nn1 += i10;
+													while(i10 < nn1) {
+														var bone8 = bones6[pathBones1[i10++]];
+														if(!bone8.sorted) {
+															var parent17 = bone8.parent;
+															if(parent17 != null) {
+																if(!parent17.sorted) {
+																	var parent18 = parent17.parent;
+																	if(parent18 != null) {
+																		this.sortBone(parent18);
+																	}
+																	parent17.sorted = true;
+																	this.cache.push(parent17);
+																}
+															}
+															bone8.sorted = true;
+															this.cache.push(bone8);
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+							var attachment2 = slot.attachment;
+							if(((attachment2) instanceof spine_attachments_PathAttachment)) {
+								if(((attachment2) instanceof spine_attachments_PathAttachment)) {
+									var result5 = attachment2;
+									var pathBones2 = result5.bones;
+									if(pathBones2 == null) {
+										if(!slotBone.sorted) {
+											var parent19 = slotBone.parent;
+											if(parent19 != null) {
+												if(!parent19.sorted) {
+													var parent20 = parent19.parent;
+													if(parent20 != null) {
+														this.sortBone(parent20);
+													}
+													parent19.sorted = true;
+													this.cache.push(parent19);
+												}
+											}
+											slotBone.sorted = true;
+											this.cache.push(slotBone);
+										}
+									} else {
+										var bones7 = this.bones;
+										var i11 = 0;
+										var n6 = pathBones2.length;
+										while(i11 < n6) {
+											var nn2 = pathBones2[i11++];
+											nn2 += i11;
+											while(i11 < nn2) {
+												var bone9 = bones7[pathBones2[i11++]];
+												if(!bone9.sorted) {
+													var parent21 = bone9.parent;
+													if(parent21 != null) {
+														if(!parent21.sorted) {
+															var parent22 = parent21.parent;
+															if(parent22 != null) {
+																this.sortBone(parent22);
+															}
+															parent21.sorted = true;
+															this.cache.push(parent21);
+														}
+													}
+													bone9.sorted = true;
+													this.cache.push(bone9);
+												}
+											}
+										}
+									}
+								}
+							}
+							var constrained2 = constraint2.bones;
+							var boneCount2 = constrained2.length;
+							var i12 = 0;
+							while(i12 < boneCount2) {
+								var bone10 = constrained2[i12];
+								if(!bone10.sorted) {
+									var parent23 = bone10.parent;
+									if(parent23 != null) {
+										if(!parent23.sorted) {
+											var parent24 = parent23.parent;
+											if(parent24 != null) {
+												this.sortBone(parent24);
+											}
+											parent23.sorted = true;
+											this.cache.push(parent23);
+										}
+									}
+									bone10.sorted = true;
+									this.cache.push(bone10);
+								}
+								++i12;
+							}
+							this.cache.push(constraint2);
+							var i13 = 0;
+							while(i13 < boneCount2) {
+								var bones8 = constrained2[i13].children;
+								var i14 = 0;
+								var n7 = bones8.length;
+								while(i14 < n7) {
+									var bone11 = bones8[i14];
+									if(!bone11.active) {
+										++i14;
+										continue;
+									}
+									if(bone11.sorted) {
+										var bones9 = bone11.children;
+										var i15 = 0;
+										var n8 = bones9.length;
+										while(i15 < n8) {
+											var bone12 = bones9[i15];
+											if(!bone12.active) {
+												++i15;
+												continue;
+											}
+											if(bone12.sorted) {
+												this.sortReset(bone12.children);
+											}
+											bone12.sorted = false;
+											++i15;
+										}
+									}
+									bone11.sorted = false;
+									++i14;
+								}
+								++i13;
+							}
+							var i16 = 0;
+							while(i16 < boneCount2) {
+								constrained2[i16].sorted = true;
+								++i16;
+							}
 						}
 						++ii2;
 						_gotoLabel_outer = 2;
@@ -93456,9 +94505,9 @@ spine_Skeleton.prototype = {
 			}
 		}
 		var i = 0;
-		var n = bones.length;
-		while(i < n) {
-			var bone = bones[i];
+		while(i < boneCount) {
+			var result = bones[i];
+			var bone = result;
 			if(!bone.sorted) {
 				var parent = bone.parent;
 				if(parent != null) {
@@ -93478,6 +94527,10 @@ spine_Skeleton.prototype = {
 		}
 	}
 	,sortIkConstraint: function(constraint) {
+		constraint.active = constraint.target.active && (!constraint.data.skinRequired || this.skin != null && this.skin.constraints.indexOf(constraint.data) != -1);
+		if(!constraint.active) {
+			return;
+		}
 		var target = constraint.target;
 		if(!target.sorted) {
 			var parent = target.parent;
@@ -93523,12 +94576,20 @@ spine_Skeleton.prototype = {
 		var n = bones.length;
 		while(i < n) {
 			var bone = bones[i];
+			if(!bone.active) {
+				++i;
+				continue;
+			}
 			if(bone.sorted) {
 				var bones1 = bone.children;
 				var i1 = 0;
 				var n1 = bones1.length;
 				while(i1 < n1) {
 					var bone1 = bones1[i1];
+					if(!bone1.active) {
+						++i1;
+						continue;
+					}
 					if(bone1.sorted) {
 						this.sortReset(bone1.children);
 					}
@@ -93542,19 +94603,24 @@ spine_Skeleton.prototype = {
 		(constrained.length == 0 ? null : constrained[constrained.length - 1]).sorted = true;
 	}
 	,sortPathConstraint: function(constraint) {
+		constraint.active = constraint.target.bone.active && (!constraint.data.skinRequired || this.skin != null && this.skin.constraints.indexOf(constraint.data) != -1);
+		if(!constraint.active) {
+			return;
+		}
 		var slot = constraint.target;
 		var slotIndex = slot.data.index;
 		var slotBone = slot.bone;
 		if(this.skin != null) {
 			var _g = 0;
-			var _g1 = spine_support_utils_ObjectMap.entries(this.skin.attachments);
+			var _g1 = spine_support_utils_AttachmentMap.keys(this.skin.attachments);
 			while(_g < _g1.length) {
 				var entry = _g1[_g];
 				++_g;
-				if(entry.key.slotIndex == slotIndex) {
-					var attachment = entry.value;
+				if(entry.slotIndex == slotIndex) {
+					var attachment = entry.attachment;
 					if(((attachment) instanceof spine_attachments_PathAttachment)) {
-						var pathBones = (js_Boot.__cast(attachment , spine_attachments_PathAttachment)).bones;
+						var result = attachment;
+						var pathBones = result.bones;
 						if(pathBones == null) {
 							if(!slotBone.sorted) {
 								var parent = slotBone.parent;
@@ -93604,14 +94670,15 @@ spine_Skeleton.prototype = {
 		}
 		if(this.data.defaultSkin != null && this.data.defaultSkin != this.skin) {
 			var _g = 0;
-			var _g1 = spine_support_utils_ObjectMap.entries(this.data.defaultSkin.attachments);
+			var _g1 = spine_support_utils_AttachmentMap.keys(this.data.defaultSkin.attachments);
 			while(_g < _g1.length) {
 				var entry = _g1[_g];
 				++_g;
-				if(entry.key.slotIndex == slotIndex) {
-					var attachment = entry.value;
+				if(entry.slotIndex == slotIndex) {
+					var attachment = entry.attachment;
 					if(((attachment) instanceof spine_attachments_PathAttachment)) {
-						var pathBones = (js_Boot.__cast(attachment , spine_attachments_PathAttachment)).bones;
+						var result = attachment;
+						var pathBones = result.bones;
 						if(pathBones == null) {
 							if(!slotBone.sorted) {
 								var parent = slotBone.parent;
@@ -93659,70 +94726,11 @@ spine_Skeleton.prototype = {
 				}
 			}
 		}
-		var ii = 0;
-		var nn = this.data.skins.length;
-		while(ii < nn) {
-			var _g = 0;
-			var _g1 = spine_support_utils_ObjectMap.entries(this.data.skins[ii].attachments);
-			while(_g < _g1.length) {
-				var entry = _g1[_g];
-				++_g;
-				if(entry.key.slotIndex == slotIndex) {
-					var attachment = entry.value;
-					if(((attachment) instanceof spine_attachments_PathAttachment)) {
-						var pathBones = (js_Boot.__cast(attachment , spine_attachments_PathAttachment)).bones;
-						if(pathBones == null) {
-							if(!slotBone.sorted) {
-								var parent = slotBone.parent;
-								if(parent != null) {
-									if(!parent.sorted) {
-										var parent1 = parent.parent;
-										if(parent1 != null) {
-											this.sortBone(parent1);
-										}
-										parent.sorted = true;
-										this.cache.push(parent);
-									}
-								}
-								slotBone.sorted = true;
-								this.cache.push(slotBone);
-							}
-						} else {
-							var bones = this.bones;
-							var i = 0;
-							var n = pathBones.length;
-							while(i < n) {
-								var nn1 = pathBones[i++];
-								nn1 += i;
-								while(i < nn1) {
-									var bone = bones[pathBones[i++]];
-									if(!bone.sorted) {
-										var parent2 = bone.parent;
-										if(parent2 != null) {
-											if(!parent2.sorted) {
-												var parent3 = parent2.parent;
-												if(parent3 != null) {
-													this.sortBone(parent3);
-												}
-												parent2.sorted = true;
-												this.cache.push(parent2);
-											}
-										}
-										bone.sorted = true;
-										this.cache.push(bone);
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-			++ii;
-		}
 		var attachment = slot.attachment;
 		if(((attachment) instanceof spine_attachments_PathAttachment)) {
 			if(((attachment) instanceof spine_attachments_PathAttachment)) {
-				var pathBones = (js_Boot.__cast(attachment , spine_attachments_PathAttachment)).bones;
+				var result = attachment;
+				var pathBones = result.bones;
 				if(pathBones == null) {
 					if(!slotBone.sorted) {
 						var parent = slotBone.parent;
@@ -93798,12 +94806,20 @@ spine_Skeleton.prototype = {
 			var n = bones.length;
 			while(i1 < n) {
 				var bone = bones[i1];
+				if(!bone.active) {
+					++i1;
+					continue;
+				}
 				if(bone.sorted) {
 					var bones1 = bone.children;
 					var i2 = 0;
 					var n1 = bones1.length;
 					while(i2 < n1) {
 						var bone1 = bones1[i2];
+						if(!bone1.active) {
+							++i2;
+							continue;
+						}
 						if(bone1.sorted) {
 							this.sortReset(bone1.children);
 						}
@@ -93823,6 +94839,10 @@ spine_Skeleton.prototype = {
 		}
 	}
 	,sortTransformConstraint: function(constraint) {
+		constraint.active = constraint.target.active && (!constraint.data.skinRequired || this.skin != null && this.skin.constraints.indexOf(constraint.data) != -1);
+		if(!constraint.active) {
+			return;
+		}
 		var bone = constraint.target;
 		if(!bone.sorted) {
 			var parent = bone.parent;
@@ -93896,12 +94916,20 @@ spine_Skeleton.prototype = {
 			var n = bones.length;
 			while(i1 < n) {
 				var bone = bones[i1];
+				if(!bone.active) {
+					++i1;
+					continue;
+				}
 				if(bone.sorted) {
 					var bones1 = bone.children;
 					var i2 = 0;
 					var n1 = bones1.length;
 					while(i2 < n1) {
 						var bone1 = bones1[i2];
+						if(!bone1.active) {
+							++i2;
+							continue;
+						}
 						if(bone1.sorted) {
 							this.sortReset(bone1.children);
 						}
@@ -93922,14 +94950,15 @@ spine_Skeleton.prototype = {
 	}
 	,sortPathConstraintAttachmentWithSkin: function(skin,slotIndex,slotBone) {
 		var _g = 0;
-		var _g1 = spine_support_utils_ObjectMap.entries(skin.attachments);
+		var _g1 = spine_support_utils_AttachmentMap.keys(skin.attachments);
 		while(_g < _g1.length) {
 			var entry = _g1[_g];
 			++_g;
-			if(entry.key.slotIndex == slotIndex) {
-				var attachment = entry.value;
+			if(entry.slotIndex == slotIndex) {
+				var attachment = entry.attachment;
 				if(((attachment) instanceof spine_attachments_PathAttachment)) {
-					var pathBones = (js_Boot.__cast(attachment , spine_attachments_PathAttachment)).bones;
+					var result = attachment;
+					var pathBones = result.bones;
 					if(pathBones == null) {
 						if(!slotBone.sorted) {
 							var parent = slotBone.parent;
@@ -93981,7 +95010,8 @@ spine_Skeleton.prototype = {
 		if(!((attachment) instanceof spine_attachments_PathAttachment)) {
 			return;
 		}
-		var pathBones = (js_Boot.__cast(attachment , spine_attachments_PathAttachment)).bones;
+		var result = attachment;
+		var pathBones = result.bones;
 		if(pathBones == null) {
 			if(!slotBone.sorted) {
 				var parent = slotBone.parent;
@@ -94042,6 +95072,10 @@ spine_Skeleton.prototype = {
 		var n = bones.length;
 		while(i < n) {
 			var bone = bones[i];
+			if(!bone.active) {
+				++i;
+				continue;
+			}
 			if(bone.sorted) {
 				this.sortReset(bone.children);
 			}
@@ -94074,6 +95108,9 @@ spine_Skeleton.prototype = {
 		}
 	}
 	,updateWorldTransformWithParent: function(parent) {
+		if(parent == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("parent cannot be null."));
+		}
 		var cacheReset = this.cacheReset;
 		var i = 0;
 		var n = cacheReset.length;
@@ -94097,22 +95134,14 @@ spine_Skeleton.prototype = {
 		rootBone.worldX = pa * this.x + pb * this.y + parent.worldX;
 		rootBone.worldY = pc * this.x + pd * this.y + parent.worldY;
 		var rotationY = rootBone.rotation + 90 + rootBone.shearY;
-		var la = js_Boot.__cast(Math.cos((rootBone.rotation + rootBone.shearX) * spine_utils_SpineUtils.degRad) , Float) * rootBone.scaleX;
-		var lb = js_Boot.__cast(Math.cos(rotationY * spine_utils_SpineUtils.degRad) , Float) * rootBone.scaleY;
-		var lc = js_Boot.__cast(Math.sin((rootBone.rotation + rootBone.shearX) * spine_utils_SpineUtils.degRad) , Float) * rootBone.scaleX;
-		var ld = js_Boot.__cast(Math.sin(rotationY * spine_utils_SpineUtils.degRad) , Float) * rootBone.scaleY;
-		rootBone.a = pa * la + pb * lc;
-		rootBone.b = pa * lb + pb * ld;
-		rootBone.c = pc * la + pd * lc;
-		rootBone.d = pc * lb + pd * ld;
-		if(this.flipY) {
-			rootBone.a = -rootBone.a;
-			rootBone.b = -rootBone.b;
-		}
-		if(this.flipX) {
-			rootBone.c = -rootBone.c;
-			rootBone.d = -rootBone.d;
-		}
+		var la = Math.cos((rootBone.rotation + rootBone.shearX) * spine_utils_SpineUtils.degRad) * rootBone.scaleX;
+		var lb = Math.cos(rotationY * spine_utils_SpineUtils.degRad) * rootBone.scaleY;
+		var lc = Math.sin((rootBone.rotation + rootBone.shearX) * spine_utils_SpineUtils.degRad) * rootBone.scaleX;
+		var ld = Math.sin(rotationY * spine_utils_SpineUtils.degRad) * rootBone.scaleY;
+		rootBone.a = (pa * la + pb * lc) * this.scaleX;
+		rootBone.b = (pa * lb + pb * ld) * this.scaleX;
+		rootBone.c = (pc * la + pd * lc) * this.scaleY;
+		rootBone.d = (pc * lb + pd * ld) * this.scaleY;
 		var cache = this.cache;
 		var i = 0;
 		var n = cache.length;
@@ -94145,8 +95174,11 @@ spine_Skeleton.prototype = {
 		var n = ikConstraints.length;
 		while(i < n) {
 			var constraint = ikConstraints[i];
-			constraint.bendDirection = constraint.data.bendDirection;
 			constraint.mix = constraint.data.mix;
+			constraint.softness = constraint.data.softness;
+			constraint.bendDirection = constraint.data.bendDirection;
+			constraint.compress = constraint.data.compress;
+			constraint.stretch = constraint.data.stretch;
 			++i;
 		}
 		var transformConstraints = this.transformConstraints;
@@ -94174,21 +95206,45 @@ spine_Skeleton.prototype = {
 			++i;
 		}
 		var slots = this.slots;
-		spine_support_utils_Array.copy(slots,0,this.drawOrder,0,slots.length);
+		var src = slots;
+		var dest = this.drawOrder;
+		var length = slots.length;
+		if(src == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("src cannot be null."));
+		}
+		if(dest == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("dest cannot be null."));
+		}
+		try {
+			spine_support_utils_Array.copy(src,0,dest,0,length);
+		} catch( _g ) {
+			haxe_NativeStackTrace.lastError = _g;
+			throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
+		}
 		var i = 0;
 		var n = slots.length;
 		while(i < n) {
 			var _this = slots[i];
-			_this.color.set(_this.data.color);
+			var _this1 = _this.color;
+			var color = _this.data.color;
+			_this1.r = color.r;
+			_this1.g = color.g;
+			_this1.b = color.b;
+			_this1.a = color.a;
 			if(_this.darkColor != null) {
-				_this.darkColor.set(_this.data.darkColor);
+				var _this2 = _this.darkColor;
+				var color1 = _this.data.darkColor;
+				_this2.r = color1.r;
+				_this2.g = color1.g;
+				_this2.b = color1.b;
+				_this2.a = color1.a;
 			}
 			if(_this.data.attachmentName == null) {
 				var attachment = null;
 				if(_this.attachment != attachment) {
 					_this.attachment = attachment;
 					_this.attachmentTime = _this.bone.skeleton.time;
-					var this1 = _this.attachmentVertices;
+					var this1 = _this.deform;
 					this1.splice(0,this1.length);
 				}
 			} else {
@@ -94197,7 +95253,7 @@ spine_Skeleton.prototype = {
 				if(_this.attachment != attachment1) {
 					_this.attachment = attachment1;
 					_this.attachmentTime = _this.bone.skeleton.time;
-					var this2 = _this.attachmentVertices;
+					var this2 = _this.deform;
 					this2.splice(0,this2.length);
 				}
 			}
@@ -94225,8 +95281,11 @@ spine_Skeleton.prototype = {
 		var n = ikConstraints.length;
 		while(i < n) {
 			var constraint = ikConstraints[i];
-			constraint.bendDirection = constraint.data.bendDirection;
 			constraint.mix = constraint.data.mix;
+			constraint.softness = constraint.data.softness;
+			constraint.bendDirection = constraint.data.bendDirection;
+			constraint.compress = constraint.data.compress;
+			constraint.stretch = constraint.data.stretch;
 			++i;
 		}
 		var transformConstraints = this.transformConstraints;
@@ -94256,21 +95315,45 @@ spine_Skeleton.prototype = {
 	}
 	,setSlotsToSetupPose: function() {
 		var slots = this.slots;
-		spine_support_utils_Array.copy(slots,0,this.drawOrder,0,slots.length);
+		var src = slots;
+		var dest = this.drawOrder;
+		var length = slots.length;
+		if(src == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("src cannot be null."));
+		}
+		if(dest == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("dest cannot be null."));
+		}
+		try {
+			spine_support_utils_Array.copy(src,0,dest,0,length);
+		} catch( _g ) {
+			haxe_NativeStackTrace.lastError = _g;
+			throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
+		}
 		var i = 0;
 		var n = slots.length;
 		while(i < n) {
 			var _this = slots[i];
-			_this.color.set(_this.data.color);
+			var _this1 = _this.color;
+			var color = _this.data.color;
+			_this1.r = color.r;
+			_this1.g = color.g;
+			_this1.b = color.b;
+			_this1.a = color.a;
 			if(_this.darkColor != null) {
-				_this.darkColor.set(_this.data.darkColor);
+				var _this2 = _this.darkColor;
+				var color1 = _this.data.darkColor;
+				_this2.r = color1.r;
+				_this2.g = color1.g;
+				_this2.b = color1.b;
+				_this2.a = color1.a;
 			}
 			if(_this.data.attachmentName == null) {
 				var attachment = null;
 				if(_this.attachment != attachment) {
 					_this.attachment = attachment;
 					_this.attachmentTime = _this.bone.skeleton.time;
-					var this1 = _this.attachmentVertices;
+					var this1 = _this.deform;
 					this1.splice(0,this1.length);
 				}
 			} else {
@@ -94279,7 +95362,7 @@ spine_Skeleton.prototype = {
 				if(_this.attachment != attachment1) {
 					_this.attachment = attachment1;
 					_this.attachmentTime = _this.bone.skeleton.time;
-					var this2 = _this.attachmentVertices;
+					var this2 = _this.deform;
 					this2.splice(0,this2.length);
 				}
 			}
@@ -94358,20 +95441,713 @@ spine_Skeleton.prototype = {
 		if(skin == null) {
 			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("Skin not found: " + skinName));
 		}
-		this.setSkin(skin);
+		if(skin != this.skin) {
+			if(skin != null) {
+				if(this.skin != null) {
+					var _g = 0;
+					var _g1 = spine_support_utils_AttachmentMap.keys(this.skin.attachments);
+					while(_g < _g1.length) {
+						var entry = _g1[_g];
+						++_g;
+						var slotIndex = entry.slotIndex;
+						var slot = this.slots[slotIndex];
+						if(slot.attachment == entry.attachment) {
+							var name = entry.name;
+							if(slotIndex < 0) {
+								throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("slotIndex must be >= 0."));
+							}
+							var _this = skin.lookup;
+							if(name == null) {
+								throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("name cannot be null."));
+							}
+							_this.slotIndex = slotIndex;
+							_this.name = name;
+							var hash = 0;
+							var chr;
+							var x;
+							if(name.length == 0) {
+								x = hash;
+							} else {
+								var _g2 = 0;
+								var _g3 = name.length;
+								while(_g2 < _g3) {
+									var i = _g2++;
+									chr = HxOverrides.cca(name,i);
+									hash = (hash << 5) - hash + chr;
+								}
+								x = hash;
+							}
+							_this.hashCode = x + slotIndex * 37 | 0;
+							var key = skin.lookup;
+							var entries = skin.attachments.h[key.hashCode];
+							var result = null;
+							if(entries != null) {
+								var _g4 = 0;
+								var _g5 = entries.length;
+								while(_g4 < _g5) {
+									var i1 = _g4++;
+									var entry1 = entries[i1];
+									var _this1 = entry1.key;
+									var object = key;
+									var tmp;
+									if(object == null) {
+										tmp = false;
+									} else {
+										var result1 = object;
+										var other = result1;
+										tmp = _this1.slotIndex != other.slotIndex ? false : _this1.name != other.name ? false : true;
+									}
+									if(tmp) {
+										result = entry1.value;
+										break;
+									}
+								}
+							}
+							var entry2 = result;
+							var attachment = entry2 != null ? entry2.attachment : null;
+							if(attachment != null) {
+								if(slot.attachment != attachment) {
+									slot.attachment = attachment;
+									slot.attachmentTime = slot.bone.skeleton.time;
+									var this1 = slot.deform;
+									this1.splice(0,this1.length);
+								}
+							}
+						}
+					}
+				} else {
+					var slots = this.slots;
+					var i = 0;
+					var n = slots.length;
+					while(i < n) {
+						var slot = slots[i];
+						var name = slot.data.attachmentName;
+						if(name != null) {
+							if(i < 0) {
+								throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("slotIndex must be >= 0."));
+							}
+							var _this = skin.lookup;
+							if(name == null) {
+								throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("name cannot be null."));
+							}
+							_this.slotIndex = i;
+							_this.name = name;
+							var hash = 0;
+							var chr;
+							var x;
+							if(name.length == 0) {
+								x = hash;
+							} else {
+								var _g = 0;
+								var _g1 = name.length;
+								while(_g < _g1) {
+									var i1 = _g++;
+									chr = HxOverrides.cca(name,i1);
+									hash = (hash << 5) - hash + chr;
+								}
+								x = hash;
+							}
+							_this.hashCode = x + i * 37 | 0;
+							var key = skin.lookup;
+							var entries = skin.attachments.h[key.hashCode];
+							var result = null;
+							if(entries != null) {
+								var _g2 = 0;
+								var _g3 = entries.length;
+								while(_g2 < _g3) {
+									var i2 = _g2++;
+									var entry = entries[i2];
+									var _this1 = entry.key;
+									var object = key;
+									var tmp;
+									if(object == null) {
+										tmp = false;
+									} else {
+										var result1 = object;
+										var other = result1;
+										tmp = _this1.slotIndex != other.slotIndex ? false : _this1.name != other.name ? false : true;
+									}
+									if(tmp) {
+										result = entry.value;
+										break;
+									}
+								}
+							}
+							var entry1 = result;
+							var attachment = entry1 != null ? entry1.attachment : null;
+							if(attachment != null) {
+								if(slot.attachment != attachment) {
+									slot.attachment = attachment;
+									slot.attachmentTime = slot.bone.skeleton.time;
+									var this1 = slot.deform;
+									this1.splice(0,this1.length);
+								}
+							}
+						}
+						++i;
+					}
+				}
+			}
+			this.skin = skin;
+			var cache = this.cache;
+			cache.splice(0,cache.length);
+			var this1 = this.cacheReset;
+			this1.splice(0,this1.length);
+			var boneCount = this.bones.length;
+			var bones = this.bones;
+			var i = 0;
+			while(i < boneCount) {
+				var result = bones[i];
+				var bone = result;
+				bone.sorted = bone.data.skinRequired;
+				bone.active = !bone.sorted;
+				++i;
+			}
+			if(this.skin != null) {
+				var skinBones = this.skin.bones;
+				var i = 0;
+				var n = this.skin.bones.length;
+				while(i < n) {
+					var result = skinBones[i];
+					var result1 = bones[result.index];
+					var bone = result1;
+					while(true) {
+						bone.sorted = false;
+						bone.active = true;
+						bone = bone.parent;
+						if(!(bone != null)) {
+							break;
+						}
+					}
+					++i;
+				}
+			}
+			var ikCount = this.ikConstraints.length;
+			var transformCount = this.transformConstraints.length;
+			var pathCount = this.pathConstraints.length;
+			var ikConstraints = this.ikConstraints;
+			var transformConstraints = this.transformConstraints;
+			var pathConstraints = this.pathConstraints;
+			var constraintCount = ikCount + transformCount + pathCount;
+			var _gotoLabel_outer;
+			while(true) {
+				_gotoLabel_outer = 0;
+				var i = 0;
+				while(i < constraintCount) {
+					var ii = 0;
+					while(ii < ikCount) {
+						var result = ikConstraints[ii];
+						var constraint = result;
+						if(constraint.data.order == i) {
+							constraint.active = constraint.target.active && (!constraint.data.skinRequired || this.skin != null && this.skin.constraints.indexOf(constraint.data) != -1);
+							if(constraint.active) {
+								var target = constraint.target;
+								if(!target.sorted) {
+									var parent = target.parent;
+									if(parent != null) {
+										if(!parent.sorted) {
+											var parent1 = parent.parent;
+											if(parent1 != null) {
+												this.sortBone(parent1);
+											}
+											parent.sorted = true;
+											this.cache.push(parent);
+										}
+									}
+									target.sorted = true;
+									this.cache.push(target);
+								}
+								var constrained = constraint.bones;
+								var parent2 = constrained.length > 0 ? constrained[0] : null;
+								if(!parent2.sorted) {
+									var parent3 = parent2.parent;
+									if(parent3 != null) {
+										if(!parent3.sorted) {
+											var parent4 = parent3.parent;
+											if(parent4 != null) {
+												this.sortBone(parent4);
+											}
+											parent3.sorted = true;
+											this.cache.push(parent3);
+										}
+									}
+									parent2.sorted = true;
+									this.cache.push(parent2);
+								}
+								if(constrained.length > 1) {
+									var child = constrained.length == 0 ? null : constrained[constrained.length - 1];
+									if(this.cache.indexOf(child) == -1) {
+										this.cacheReset.push(child);
+									}
+								}
+								this.cache.push(constraint);
+								var bones1 = parent2.children;
+								var i1 = 0;
+								var n = bones1.length;
+								while(i1 < n) {
+									var bone = bones1[i1];
+									if(!bone.active) {
+										++i1;
+										continue;
+									}
+									if(bone.sorted) {
+										var bones2 = bone.children;
+										var i2 = 0;
+										var n1 = bones2.length;
+										while(i2 < n1) {
+											var bone1 = bones2[i2];
+											if(!bone1.active) {
+												++i2;
+												continue;
+											}
+											if(bone1.sorted) {
+												this.sortReset(bone1.children);
+											}
+											bone1.sorted = false;
+											++i2;
+										}
+									}
+									bone.sorted = false;
+									++i1;
+								}
+								(constrained.length == 0 ? null : constrained[constrained.length - 1]).sorted = true;
+							}
+							++ii;
+							_gotoLabel_outer = 2;
+							break;
+						}
+						++ii;
+					}
+					if(_gotoLabel_outer == 2) {
+						_gotoLabel_outer = 0;
+						++i;
+						continue;
+					}
+					if(_gotoLabel_outer >= 1) {
+						break;
+					}
+					var ii1 = 0;
+					while(ii1 < transformCount) {
+						var result1 = transformConstraints[ii1];
+						var constraint1 = result1;
+						if(constraint1.data.order == i) {
+							constraint1.active = constraint1.target.active && (!constraint1.data.skinRequired || this.skin != null && this.skin.constraints.indexOf(constraint1.data) != -1);
+							if(constraint1.active) {
+								var bone2 = constraint1.target;
+								if(!bone2.sorted) {
+									var parent5 = bone2.parent;
+									if(parent5 != null) {
+										if(!parent5.sorted) {
+											var parent6 = parent5.parent;
+											if(parent6 != null) {
+												this.sortBone(parent6);
+											}
+											parent5.sorted = true;
+											this.cache.push(parent5);
+										}
+									}
+									bone2.sorted = true;
+									this.cache.push(bone2);
+								}
+								var constrained1 = constraint1.bones;
+								var boneCount1 = constrained1.length;
+								if(constraint1.data.local) {
+									var i3 = 0;
+									while(i3 < boneCount1) {
+										var child1 = constrained1[i3];
+										var bone3 = child1.parent;
+										if(!bone3.sorted) {
+											var parent7 = bone3.parent;
+											if(parent7 != null) {
+												if(!parent7.sorted) {
+													var parent8 = parent7.parent;
+													if(parent8 != null) {
+														this.sortBone(parent8);
+													}
+													parent7.sorted = true;
+													this.cache.push(parent7);
+												}
+											}
+											bone3.sorted = true;
+											this.cache.push(bone3);
+										}
+										if(this.cache.indexOf(child1) == -1) {
+											this.cacheReset.push(child1);
+										}
+										++i3;
+									}
+								} else {
+									var i4 = 0;
+									while(i4 < boneCount1) {
+										var bone4 = constrained1[i4];
+										if(!bone4.sorted) {
+											var parent9 = bone4.parent;
+											if(parent9 != null) {
+												if(!parent9.sorted) {
+													var parent10 = parent9.parent;
+													if(parent10 != null) {
+														this.sortBone(parent10);
+													}
+													parent9.sorted = true;
+													this.cache.push(parent9);
+												}
+											}
+											bone4.sorted = true;
+											this.cache.push(bone4);
+										}
+										++i4;
+									}
+								}
+								this.cache.push(constraint1);
+								var i5 = 0;
+								while(i5 < boneCount1) {
+									var bones3 = constrained1[i5].children;
+									var i6 = 0;
+									var n2 = bones3.length;
+									while(i6 < n2) {
+										var bone5 = bones3[i6];
+										if(!bone5.active) {
+											++i6;
+											continue;
+										}
+										if(bone5.sorted) {
+											var bones4 = bone5.children;
+											var i7 = 0;
+											var n3 = bones4.length;
+											while(i7 < n3) {
+												var bone6 = bones4[i7];
+												if(!bone6.active) {
+													++i7;
+													continue;
+												}
+												if(bone6.sorted) {
+													this.sortReset(bone6.children);
+												}
+												bone6.sorted = false;
+												++i7;
+											}
+										}
+										bone5.sorted = false;
+										++i6;
+									}
+									++i5;
+								}
+								var i8 = 0;
+								while(i8 < boneCount1) {
+									constrained1[i8].sorted = true;
+									++i8;
+								}
+							}
+							++ii1;
+							_gotoLabel_outer = 2;
+							break;
+						}
+						++ii1;
+					}
+					if(_gotoLabel_outer == 2) {
+						_gotoLabel_outer = 0;
+						++i;
+						continue;
+					}
+					if(_gotoLabel_outer >= 1) {
+						break;
+					}
+					var ii2 = 0;
+					while(ii2 < pathCount) {
+						var result2 = pathConstraints[ii2];
+						var constraint2 = result2;
+						if(constraint2.data.order == i) {
+							constraint2.active = constraint2.target.bone.active && (!constraint2.data.skinRequired || this.skin != null && this.skin.constraints.indexOf(constraint2.data) != -1);
+							if(constraint2.active) {
+								var slot = constraint2.target;
+								var slotIndex = slot.data.index;
+								var slotBone = slot.bone;
+								if(this.skin != null) {
+									var _g = 0;
+									var _g1 = spine_support_utils_AttachmentMap.keys(this.skin.attachments);
+									while(_g < _g1.length) {
+										var entry = _g1[_g];
+										++_g;
+										if(entry.slotIndex == slotIndex) {
+											var attachment = entry.attachment;
+											if(((attachment) instanceof spine_attachments_PathAttachment)) {
+												var result3 = attachment;
+												var pathBones = result3.bones;
+												if(pathBones == null) {
+													if(!slotBone.sorted) {
+														var parent11 = slotBone.parent;
+														if(parent11 != null) {
+															if(!parent11.sorted) {
+																var parent12 = parent11.parent;
+																if(parent12 != null) {
+																	this.sortBone(parent12);
+																}
+																parent11.sorted = true;
+																this.cache.push(parent11);
+															}
+														}
+														slotBone.sorted = true;
+														this.cache.push(slotBone);
+													}
+												} else {
+													var bones5 = this.bones;
+													var i9 = 0;
+													var n4 = pathBones.length;
+													while(i9 < n4) {
+														var nn = pathBones[i9++];
+														nn += i9;
+														while(i9 < nn) {
+															var bone7 = bones5[pathBones[i9++]];
+															if(!bone7.sorted) {
+																var parent13 = bone7.parent;
+																if(parent13 != null) {
+																	if(!parent13.sorted) {
+																		var parent14 = parent13.parent;
+																		if(parent14 != null) {
+																			this.sortBone(parent14);
+																		}
+																		parent13.sorted = true;
+																		this.cache.push(parent13);
+																	}
+																}
+																bone7.sorted = true;
+																this.cache.push(bone7);
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+								if(this.data.defaultSkin != null && this.data.defaultSkin != this.skin) {
+									var _g2 = 0;
+									var _g3 = spine_support_utils_AttachmentMap.keys(this.data.defaultSkin.attachments);
+									while(_g2 < _g3.length) {
+										var entry1 = _g3[_g2];
+										++_g2;
+										if(entry1.slotIndex == slotIndex) {
+											var attachment1 = entry1.attachment;
+											if(((attachment1) instanceof spine_attachments_PathAttachment)) {
+												var result4 = attachment1;
+												var pathBones1 = result4.bones;
+												if(pathBones1 == null) {
+													if(!slotBone.sorted) {
+														var parent15 = slotBone.parent;
+														if(parent15 != null) {
+															if(!parent15.sorted) {
+																var parent16 = parent15.parent;
+																if(parent16 != null) {
+																	this.sortBone(parent16);
+																}
+																parent15.sorted = true;
+																this.cache.push(parent15);
+															}
+														}
+														slotBone.sorted = true;
+														this.cache.push(slotBone);
+													}
+												} else {
+													var bones6 = this.bones;
+													var i10 = 0;
+													var n5 = pathBones1.length;
+													while(i10 < n5) {
+														var nn1 = pathBones1[i10++];
+														nn1 += i10;
+														while(i10 < nn1) {
+															var bone8 = bones6[pathBones1[i10++]];
+															if(!bone8.sorted) {
+																var parent17 = bone8.parent;
+																if(parent17 != null) {
+																	if(!parent17.sorted) {
+																		var parent18 = parent17.parent;
+																		if(parent18 != null) {
+																			this.sortBone(parent18);
+																		}
+																		parent17.sorted = true;
+																		this.cache.push(parent17);
+																	}
+																}
+																bone8.sorted = true;
+																this.cache.push(bone8);
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+								var attachment2 = slot.attachment;
+								if(((attachment2) instanceof spine_attachments_PathAttachment)) {
+									if(((attachment2) instanceof spine_attachments_PathAttachment)) {
+										var result5 = attachment2;
+										var pathBones2 = result5.bones;
+										if(pathBones2 == null) {
+											if(!slotBone.sorted) {
+												var parent19 = slotBone.parent;
+												if(parent19 != null) {
+													if(!parent19.sorted) {
+														var parent20 = parent19.parent;
+														if(parent20 != null) {
+															this.sortBone(parent20);
+														}
+														parent19.sorted = true;
+														this.cache.push(parent19);
+													}
+												}
+												slotBone.sorted = true;
+												this.cache.push(slotBone);
+											}
+										} else {
+											var bones7 = this.bones;
+											var i11 = 0;
+											var n6 = pathBones2.length;
+											while(i11 < n6) {
+												var nn2 = pathBones2[i11++];
+												nn2 += i11;
+												while(i11 < nn2) {
+													var bone9 = bones7[pathBones2[i11++]];
+													if(!bone9.sorted) {
+														var parent21 = bone9.parent;
+														if(parent21 != null) {
+															if(!parent21.sorted) {
+																var parent22 = parent21.parent;
+																if(parent22 != null) {
+																	this.sortBone(parent22);
+																}
+																parent21.sorted = true;
+																this.cache.push(parent21);
+															}
+														}
+														bone9.sorted = true;
+														this.cache.push(bone9);
+													}
+												}
+											}
+										}
+									}
+								}
+								var constrained2 = constraint2.bones;
+								var boneCount2 = constrained2.length;
+								var i12 = 0;
+								while(i12 < boneCount2) {
+									var bone10 = constrained2[i12];
+									if(!bone10.sorted) {
+										var parent23 = bone10.parent;
+										if(parent23 != null) {
+											if(!parent23.sorted) {
+												var parent24 = parent23.parent;
+												if(parent24 != null) {
+													this.sortBone(parent24);
+												}
+												parent23.sorted = true;
+												this.cache.push(parent23);
+											}
+										}
+										bone10.sorted = true;
+										this.cache.push(bone10);
+									}
+									++i12;
+								}
+								this.cache.push(constraint2);
+								var i13 = 0;
+								while(i13 < boneCount2) {
+									var bones8 = constrained2[i13].children;
+									var i14 = 0;
+									var n7 = bones8.length;
+									while(i14 < n7) {
+										var bone11 = bones8[i14];
+										if(!bone11.active) {
+											++i14;
+											continue;
+										}
+										if(bone11.sorted) {
+											var bones9 = bone11.children;
+											var i15 = 0;
+											var n8 = bones9.length;
+											while(i15 < n8) {
+												var bone12 = bones9[i15];
+												if(!bone12.active) {
+													++i15;
+													continue;
+												}
+												if(bone12.sorted) {
+													this.sortReset(bone12.children);
+												}
+												bone12.sorted = false;
+												++i15;
+											}
+										}
+										bone11.sorted = false;
+										++i14;
+									}
+									++i13;
+								}
+								var i16 = 0;
+								while(i16 < boneCount2) {
+									constrained2[i16].sorted = true;
+									++i16;
+								}
+							}
+							++ii2;
+							_gotoLabel_outer = 2;
+							break;
+						}
+						++ii2;
+					}
+					if(_gotoLabel_outer == 2) {
+						_gotoLabel_outer = 0;
+						++i;
+						continue;
+					}
+					if(_gotoLabel_outer >= 1) {
+						break;
+					}
+					++i;
+				}
+				if(_gotoLabel_outer == 0) {
+					break;
+				}
+			}
+			var i = 0;
+			while(i < boneCount) {
+				var result = bones[i];
+				var bone = result;
+				if(!bone.sorted) {
+					var parent = bone.parent;
+					if(parent != null) {
+						if(!parent.sorted) {
+							var parent1 = parent.parent;
+							if(parent1 != null) {
+								this.sortBone(parent1);
+							}
+							parent.sorted = true;
+							this.cache.push(parent);
+						}
+					}
+					bone.sorted = true;
+					this.cache.push(bone);
+				}
+				++i;
+			}
+		}
 	}
 	,setSkin: function(newSkin) {
+		if(newSkin == this.skin) {
+			return;
+		}
 		if(newSkin != null) {
 			if(this.skin != null) {
 				var _g = 0;
-				var _g1 = spine_support_utils_ObjectMap.entries(this.skin.attachments);
+				var _g1 = spine_support_utils_AttachmentMap.keys(this.skin.attachments);
 				while(_g < _g1.length) {
 					var entry = _g1[_g];
 					++_g;
-					var slotIndex = entry.key.slotIndex;
+					var slotIndex = entry.slotIndex;
 					var slot = this.slots[slotIndex];
-					if(slot.attachment == entry.value) {
-						var name = entry.key.name;
+					if(slot.attachment == entry.attachment) {
+						var name = entry.name;
 						if(slotIndex < 0) {
 							throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("slotIndex must be >= 0."));
 						}
@@ -94383,9 +96159,9 @@ spine_Skeleton.prototype = {
 						_this.name = name;
 						var hash = 0;
 						var chr;
-						var tmp;
+						var x;
 						if(name.length == 0) {
-							tmp = hash;
+							x = hash;
 						} else {
 							var _g2 = 0;
 							var _g3 = name.length;
@@ -94394,15 +96170,41 @@ spine_Skeleton.prototype = {
 								chr = HxOverrides.cca(name,i);
 								hash = (hash << 5) - hash + chr;
 							}
-							tmp = hash;
+							x = hash;
 						}
-						_this.hashCode = 31 * (31 + tmp) + slotIndex;
-						var attachment = spine_support_utils_ObjectMap.get(newSkin.attachments,newSkin.lookup);
+						_this.hashCode = x + slotIndex * 37 | 0;
+						var key = newSkin.lookup;
+						var entries = newSkin.attachments.h[key.hashCode];
+						var result = null;
+						if(entries != null) {
+							var _g4 = 0;
+							var _g5 = entries.length;
+							while(_g4 < _g5) {
+								var i1 = _g4++;
+								var entry1 = entries[i1];
+								var _this1 = entry1.key;
+								var object = key;
+								var tmp;
+								if(object == null) {
+									tmp = false;
+								} else {
+									var result1 = object;
+									var other = result1;
+									tmp = _this1.slotIndex != other.slotIndex ? false : _this1.name != other.name ? false : true;
+								}
+								if(tmp) {
+									result = entry1.value;
+									break;
+								}
+							}
+						}
+						var entry2 = result;
+						var attachment = entry2 != null ? entry2.attachment : null;
 						if(attachment != null) {
 							if(slot.attachment != attachment) {
 								slot.attachment = attachment;
 								slot.attachmentTime = slot.bone.skeleton.time;
-								var this1 = slot.attachmentVertices;
+								var this1 = slot.deform;
 								this1.splice(0,this1.length);
 							}
 						}
@@ -94427,9 +96229,9 @@ spine_Skeleton.prototype = {
 						_this.name = name;
 						var hash = 0;
 						var chr;
-						var tmp;
+						var x;
 						if(name.length == 0) {
-							tmp = hash;
+							x = hash;
 						} else {
 							var _g = 0;
 							var _g1 = name.length;
@@ -94438,15 +96240,41 @@ spine_Skeleton.prototype = {
 								chr = HxOverrides.cca(name,i1);
 								hash = (hash << 5) - hash + chr;
 							}
-							tmp = hash;
+							x = hash;
 						}
-						_this.hashCode = 31 * (31 + tmp) + i;
-						var attachment = spine_support_utils_ObjectMap.get(newSkin.attachments,newSkin.lookup);
+						_this.hashCode = x + i * 37 | 0;
+						var key = newSkin.lookup;
+						var entries = newSkin.attachments.h[key.hashCode];
+						var result = null;
+						if(entries != null) {
+							var _g2 = 0;
+							var _g3 = entries.length;
+							while(_g2 < _g3) {
+								var i2 = _g2++;
+								var entry = entries[i2];
+								var _this1 = entry.key;
+								var object = key;
+								var tmp;
+								if(object == null) {
+									tmp = false;
+								} else {
+									var result1 = object;
+									var other = result1;
+									tmp = _this1.slotIndex != other.slotIndex ? false : _this1.name != other.name ? false : true;
+								}
+								if(tmp) {
+									result = entry.value;
+									break;
+								}
+							}
+						}
+						var entry1 = result;
+						var attachment = entry1 != null ? entry1.attachment : null;
 						if(attachment != null) {
 							if(slot.attachment != attachment) {
 								slot.attachment = attachment;
 								slot.attachmentTime = slot.bone.skeleton.time;
-								var this1 = slot.attachmentVertices;
+								var this1 = slot.deform;
 								this1.splice(0,this1.length);
 							}
 						}
@@ -94456,6 +96284,548 @@ spine_Skeleton.prototype = {
 			}
 		}
 		this.skin = newSkin;
+		var cache = this.cache;
+		cache.splice(0,cache.length);
+		var this1 = this.cacheReset;
+		this1.splice(0,this1.length);
+		var boneCount = this.bones.length;
+		var bones = this.bones;
+		var i = 0;
+		while(i < boneCount) {
+			var result = bones[i];
+			var bone = result;
+			bone.sorted = bone.data.skinRequired;
+			bone.active = !bone.sorted;
+			++i;
+		}
+		if(this.skin != null) {
+			var skinBones = this.skin.bones;
+			var i = 0;
+			var n = this.skin.bones.length;
+			while(i < n) {
+				var result = skinBones[i];
+				var result1 = bones[result.index];
+				var bone = result1;
+				while(true) {
+					bone.sorted = false;
+					bone.active = true;
+					bone = bone.parent;
+					if(!(bone != null)) {
+						break;
+					}
+				}
+				++i;
+			}
+		}
+		var ikCount = this.ikConstraints.length;
+		var transformCount = this.transformConstraints.length;
+		var pathCount = this.pathConstraints.length;
+		var ikConstraints = this.ikConstraints;
+		var transformConstraints = this.transformConstraints;
+		var pathConstraints = this.pathConstraints;
+		var constraintCount = ikCount + transformCount + pathCount;
+		var _gotoLabel_outer;
+		while(true) {
+			_gotoLabel_outer = 0;
+			var i = 0;
+			while(i < constraintCount) {
+				var ii = 0;
+				while(ii < ikCount) {
+					var result = ikConstraints[ii];
+					var constraint = result;
+					if(constraint.data.order == i) {
+						constraint.active = constraint.target.active && (!constraint.data.skinRequired || this.skin != null && this.skin.constraints.indexOf(constraint.data) != -1);
+						if(constraint.active) {
+							var target = constraint.target;
+							if(!target.sorted) {
+								var parent = target.parent;
+								if(parent != null) {
+									if(!parent.sorted) {
+										var parent1 = parent.parent;
+										if(parent1 != null) {
+											this.sortBone(parent1);
+										}
+										parent.sorted = true;
+										this.cache.push(parent);
+									}
+								}
+								target.sorted = true;
+								this.cache.push(target);
+							}
+							var constrained = constraint.bones;
+							var parent2 = constrained.length > 0 ? constrained[0] : null;
+							if(!parent2.sorted) {
+								var parent3 = parent2.parent;
+								if(parent3 != null) {
+									if(!parent3.sorted) {
+										var parent4 = parent3.parent;
+										if(parent4 != null) {
+											this.sortBone(parent4);
+										}
+										parent3.sorted = true;
+										this.cache.push(parent3);
+									}
+								}
+								parent2.sorted = true;
+								this.cache.push(parent2);
+							}
+							if(constrained.length > 1) {
+								var child = constrained.length == 0 ? null : constrained[constrained.length - 1];
+								if(this.cache.indexOf(child) == -1) {
+									this.cacheReset.push(child);
+								}
+							}
+							this.cache.push(constraint);
+							var bones1 = parent2.children;
+							var i1 = 0;
+							var n = bones1.length;
+							while(i1 < n) {
+								var bone = bones1[i1];
+								if(!bone.active) {
+									++i1;
+									continue;
+								}
+								if(bone.sorted) {
+									var bones2 = bone.children;
+									var i2 = 0;
+									var n1 = bones2.length;
+									while(i2 < n1) {
+										var bone1 = bones2[i2];
+										if(!bone1.active) {
+											++i2;
+											continue;
+										}
+										if(bone1.sorted) {
+											this.sortReset(bone1.children);
+										}
+										bone1.sorted = false;
+										++i2;
+									}
+								}
+								bone.sorted = false;
+								++i1;
+							}
+							(constrained.length == 0 ? null : constrained[constrained.length - 1]).sorted = true;
+						}
+						++ii;
+						_gotoLabel_outer = 2;
+						break;
+					}
+					++ii;
+				}
+				if(_gotoLabel_outer == 2) {
+					_gotoLabel_outer = 0;
+					++i;
+					continue;
+				}
+				if(_gotoLabel_outer >= 1) {
+					break;
+				}
+				var ii1 = 0;
+				while(ii1 < transformCount) {
+					var result1 = transformConstraints[ii1];
+					var constraint1 = result1;
+					if(constraint1.data.order == i) {
+						constraint1.active = constraint1.target.active && (!constraint1.data.skinRequired || this.skin != null && this.skin.constraints.indexOf(constraint1.data) != -1);
+						if(constraint1.active) {
+							var bone2 = constraint1.target;
+							if(!bone2.sorted) {
+								var parent5 = bone2.parent;
+								if(parent5 != null) {
+									if(!parent5.sorted) {
+										var parent6 = parent5.parent;
+										if(parent6 != null) {
+											this.sortBone(parent6);
+										}
+										parent5.sorted = true;
+										this.cache.push(parent5);
+									}
+								}
+								bone2.sorted = true;
+								this.cache.push(bone2);
+							}
+							var constrained1 = constraint1.bones;
+							var boneCount1 = constrained1.length;
+							if(constraint1.data.local) {
+								var i3 = 0;
+								while(i3 < boneCount1) {
+									var child1 = constrained1[i3];
+									var bone3 = child1.parent;
+									if(!bone3.sorted) {
+										var parent7 = bone3.parent;
+										if(parent7 != null) {
+											if(!parent7.sorted) {
+												var parent8 = parent7.parent;
+												if(parent8 != null) {
+													this.sortBone(parent8);
+												}
+												parent7.sorted = true;
+												this.cache.push(parent7);
+											}
+										}
+										bone3.sorted = true;
+										this.cache.push(bone3);
+									}
+									if(this.cache.indexOf(child1) == -1) {
+										this.cacheReset.push(child1);
+									}
+									++i3;
+								}
+							} else {
+								var i4 = 0;
+								while(i4 < boneCount1) {
+									var bone4 = constrained1[i4];
+									if(!bone4.sorted) {
+										var parent9 = bone4.parent;
+										if(parent9 != null) {
+											if(!parent9.sorted) {
+												var parent10 = parent9.parent;
+												if(parent10 != null) {
+													this.sortBone(parent10);
+												}
+												parent9.sorted = true;
+												this.cache.push(parent9);
+											}
+										}
+										bone4.sorted = true;
+										this.cache.push(bone4);
+									}
+									++i4;
+								}
+							}
+							this.cache.push(constraint1);
+							var i5 = 0;
+							while(i5 < boneCount1) {
+								var bones3 = constrained1[i5].children;
+								var i6 = 0;
+								var n2 = bones3.length;
+								while(i6 < n2) {
+									var bone5 = bones3[i6];
+									if(!bone5.active) {
+										++i6;
+										continue;
+									}
+									if(bone5.sorted) {
+										var bones4 = bone5.children;
+										var i7 = 0;
+										var n3 = bones4.length;
+										while(i7 < n3) {
+											var bone6 = bones4[i7];
+											if(!bone6.active) {
+												++i7;
+												continue;
+											}
+											if(bone6.sorted) {
+												this.sortReset(bone6.children);
+											}
+											bone6.sorted = false;
+											++i7;
+										}
+									}
+									bone5.sorted = false;
+									++i6;
+								}
+								++i5;
+							}
+							var i8 = 0;
+							while(i8 < boneCount1) {
+								constrained1[i8].sorted = true;
+								++i8;
+							}
+						}
+						++ii1;
+						_gotoLabel_outer = 2;
+						break;
+					}
+					++ii1;
+				}
+				if(_gotoLabel_outer == 2) {
+					_gotoLabel_outer = 0;
+					++i;
+					continue;
+				}
+				if(_gotoLabel_outer >= 1) {
+					break;
+				}
+				var ii2 = 0;
+				while(ii2 < pathCount) {
+					var result2 = pathConstraints[ii2];
+					var constraint2 = result2;
+					if(constraint2.data.order == i) {
+						constraint2.active = constraint2.target.bone.active && (!constraint2.data.skinRequired || this.skin != null && this.skin.constraints.indexOf(constraint2.data) != -1);
+						if(constraint2.active) {
+							var slot = constraint2.target;
+							var slotIndex = slot.data.index;
+							var slotBone = slot.bone;
+							if(this.skin != null) {
+								var _g = 0;
+								var _g1 = spine_support_utils_AttachmentMap.keys(this.skin.attachments);
+								while(_g < _g1.length) {
+									var entry = _g1[_g];
+									++_g;
+									if(entry.slotIndex == slotIndex) {
+										var attachment = entry.attachment;
+										if(((attachment) instanceof spine_attachments_PathAttachment)) {
+											var result3 = attachment;
+											var pathBones = result3.bones;
+											if(pathBones == null) {
+												if(!slotBone.sorted) {
+													var parent11 = slotBone.parent;
+													if(parent11 != null) {
+														if(!parent11.sorted) {
+															var parent12 = parent11.parent;
+															if(parent12 != null) {
+																this.sortBone(parent12);
+															}
+															parent11.sorted = true;
+															this.cache.push(parent11);
+														}
+													}
+													slotBone.sorted = true;
+													this.cache.push(slotBone);
+												}
+											} else {
+												var bones5 = this.bones;
+												var i9 = 0;
+												var n4 = pathBones.length;
+												while(i9 < n4) {
+													var nn = pathBones[i9++];
+													nn += i9;
+													while(i9 < nn) {
+														var bone7 = bones5[pathBones[i9++]];
+														if(!bone7.sorted) {
+															var parent13 = bone7.parent;
+															if(parent13 != null) {
+																if(!parent13.sorted) {
+																	var parent14 = parent13.parent;
+																	if(parent14 != null) {
+																		this.sortBone(parent14);
+																	}
+																	parent13.sorted = true;
+																	this.cache.push(parent13);
+																}
+															}
+															bone7.sorted = true;
+															this.cache.push(bone7);
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+							if(this.data.defaultSkin != null && this.data.defaultSkin != this.skin) {
+								var _g2 = 0;
+								var _g3 = spine_support_utils_AttachmentMap.keys(this.data.defaultSkin.attachments);
+								while(_g2 < _g3.length) {
+									var entry1 = _g3[_g2];
+									++_g2;
+									if(entry1.slotIndex == slotIndex) {
+										var attachment1 = entry1.attachment;
+										if(((attachment1) instanceof spine_attachments_PathAttachment)) {
+											var result4 = attachment1;
+											var pathBones1 = result4.bones;
+											if(pathBones1 == null) {
+												if(!slotBone.sorted) {
+													var parent15 = slotBone.parent;
+													if(parent15 != null) {
+														if(!parent15.sorted) {
+															var parent16 = parent15.parent;
+															if(parent16 != null) {
+																this.sortBone(parent16);
+															}
+															parent15.sorted = true;
+															this.cache.push(parent15);
+														}
+													}
+													slotBone.sorted = true;
+													this.cache.push(slotBone);
+												}
+											} else {
+												var bones6 = this.bones;
+												var i10 = 0;
+												var n5 = pathBones1.length;
+												while(i10 < n5) {
+													var nn1 = pathBones1[i10++];
+													nn1 += i10;
+													while(i10 < nn1) {
+														var bone8 = bones6[pathBones1[i10++]];
+														if(!bone8.sorted) {
+															var parent17 = bone8.parent;
+															if(parent17 != null) {
+																if(!parent17.sorted) {
+																	var parent18 = parent17.parent;
+																	if(parent18 != null) {
+																		this.sortBone(parent18);
+																	}
+																	parent17.sorted = true;
+																	this.cache.push(parent17);
+																}
+															}
+															bone8.sorted = true;
+															this.cache.push(bone8);
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+							var attachment2 = slot.attachment;
+							if(((attachment2) instanceof spine_attachments_PathAttachment)) {
+								if(((attachment2) instanceof spine_attachments_PathAttachment)) {
+									var result5 = attachment2;
+									var pathBones2 = result5.bones;
+									if(pathBones2 == null) {
+										if(!slotBone.sorted) {
+											var parent19 = slotBone.parent;
+											if(parent19 != null) {
+												if(!parent19.sorted) {
+													var parent20 = parent19.parent;
+													if(parent20 != null) {
+														this.sortBone(parent20);
+													}
+													parent19.sorted = true;
+													this.cache.push(parent19);
+												}
+											}
+											slotBone.sorted = true;
+											this.cache.push(slotBone);
+										}
+									} else {
+										var bones7 = this.bones;
+										var i11 = 0;
+										var n6 = pathBones2.length;
+										while(i11 < n6) {
+											var nn2 = pathBones2[i11++];
+											nn2 += i11;
+											while(i11 < nn2) {
+												var bone9 = bones7[pathBones2[i11++]];
+												if(!bone9.sorted) {
+													var parent21 = bone9.parent;
+													if(parent21 != null) {
+														if(!parent21.sorted) {
+															var parent22 = parent21.parent;
+															if(parent22 != null) {
+																this.sortBone(parent22);
+															}
+															parent21.sorted = true;
+															this.cache.push(parent21);
+														}
+													}
+													bone9.sorted = true;
+													this.cache.push(bone9);
+												}
+											}
+										}
+									}
+								}
+							}
+							var constrained2 = constraint2.bones;
+							var boneCount2 = constrained2.length;
+							var i12 = 0;
+							while(i12 < boneCount2) {
+								var bone10 = constrained2[i12];
+								if(!bone10.sorted) {
+									var parent23 = bone10.parent;
+									if(parent23 != null) {
+										if(!parent23.sorted) {
+											var parent24 = parent23.parent;
+											if(parent24 != null) {
+												this.sortBone(parent24);
+											}
+											parent23.sorted = true;
+											this.cache.push(parent23);
+										}
+									}
+									bone10.sorted = true;
+									this.cache.push(bone10);
+								}
+								++i12;
+							}
+							this.cache.push(constraint2);
+							var i13 = 0;
+							while(i13 < boneCount2) {
+								var bones8 = constrained2[i13].children;
+								var i14 = 0;
+								var n7 = bones8.length;
+								while(i14 < n7) {
+									var bone11 = bones8[i14];
+									if(!bone11.active) {
+										++i14;
+										continue;
+									}
+									if(bone11.sorted) {
+										var bones9 = bone11.children;
+										var i15 = 0;
+										var n8 = bones9.length;
+										while(i15 < n8) {
+											var bone12 = bones9[i15];
+											if(!bone12.active) {
+												++i15;
+												continue;
+											}
+											if(bone12.sorted) {
+												this.sortReset(bone12.children);
+											}
+											bone12.sorted = false;
+											++i15;
+										}
+									}
+									bone11.sorted = false;
+									++i14;
+								}
+								++i13;
+							}
+							var i16 = 0;
+							while(i16 < boneCount2) {
+								constrained2[i16].sorted = true;
+								++i16;
+							}
+						}
+						++ii2;
+						_gotoLabel_outer = 2;
+						break;
+					}
+					++ii2;
+				}
+				if(_gotoLabel_outer == 2) {
+					_gotoLabel_outer = 0;
+					++i;
+					continue;
+				}
+				if(_gotoLabel_outer >= 1) {
+					break;
+				}
+				++i;
+			}
+			if(_gotoLabel_outer == 0) {
+				break;
+			}
+		}
+		var i = 0;
+		while(i < boneCount) {
+			var result = bones[i];
+			var bone = result;
+			if(!bone.sorted) {
+				var parent = bone.parent;
+				if(parent != null) {
+					if(!parent.sorted) {
+						var parent1 = parent.parent;
+						if(parent1 != null) {
+							this.sortBone(parent1);
+						}
+						parent.sorted = true;
+						this.cache.push(parent);
+					}
+				}
+				bone.sorted = true;
+				this.cache.push(bone);
+			}
+			++i;
+		}
 	}
 	,getAttachmentWithSlotName: function(slotName,attachmentName) {
 		var slot = this.data.findSlot(slotName);
@@ -94481,9 +96851,9 @@ spine_Skeleton.prototype = {
 			_this1.name = attachmentName;
 			var hash = 0;
 			var chr;
-			var tmp;
+			var x;
 			if(attachmentName.length == 0) {
-				tmp = hash;
+				x = hash;
 			} else {
 				var _g = 0;
 				var _g1 = attachmentName.length;
@@ -94492,10 +96862,36 @@ spine_Skeleton.prototype = {
 					chr = HxOverrides.cca(attachmentName,i);
 					hash = (hash << 5) - hash + chr;
 				}
-				tmp = hash;
+				x = hash;
 			}
-			_this1.hashCode = 31 * (31 + tmp) + slotIndex;
-			var attachment = spine_support_utils_ObjectMap.get(_this.attachments,_this.lookup);
+			_this1.hashCode = x + slotIndex * 37 | 0;
+			var key = _this.lookup;
+			var entries = _this.attachments.h[key.hashCode];
+			var result = null;
+			if(entries != null) {
+				var _g = 0;
+				var _g1 = entries.length;
+				while(_g < _g1) {
+					var i = _g++;
+					var entry = entries[i];
+					var _this = entry.key;
+					var object = key;
+					var tmp;
+					if(object == null) {
+						tmp = false;
+					} else {
+						var result1 = object;
+						var other = result1;
+						tmp = _this.slotIndex != other.slotIndex ? false : _this.name != other.name ? false : true;
+					}
+					if(tmp) {
+						result = entry.value;
+						break;
+					}
+				}
+			}
+			var entry = result;
+			var attachment = entry != null ? entry.attachment : null;
 			if(attachment != null) {
 				return attachment;
 			}
@@ -94513,9 +96909,9 @@ spine_Skeleton.prototype = {
 			_this1.name = attachmentName;
 			var hash = 0;
 			var chr;
-			var tmp;
+			var x;
 			if(attachmentName.length == 0) {
-				tmp = hash;
+				x = hash;
 			} else {
 				var _g = 0;
 				var _g1 = attachmentName.length;
@@ -94524,10 +96920,40 @@ spine_Skeleton.prototype = {
 					chr = HxOverrides.cca(attachmentName,i);
 					hash = (hash << 5) - hash + chr;
 				}
-				tmp = hash;
+				x = hash;
 			}
-			_this1.hashCode = 31 * (31 + tmp) + slotIndex;
-			return spine_support_utils_ObjectMap.get(_this.attachments,_this.lookup);
+			_this1.hashCode = x + slotIndex * 37 | 0;
+			var key = _this.lookup;
+			var entries = _this.attachments.h[key.hashCode];
+			var result = null;
+			if(entries != null) {
+				var _g = 0;
+				var _g1 = entries.length;
+				while(_g < _g1) {
+					var i = _g++;
+					var entry = entries[i];
+					var _this = entry.key;
+					var object = key;
+					var tmp;
+					if(object == null) {
+						tmp = false;
+					} else {
+						var result1 = object;
+						var other = result1;
+						tmp = _this.slotIndex != other.slotIndex ? false : _this.name != other.name ? false : true;
+					}
+					if(tmp) {
+						result = entry.value;
+						break;
+					}
+				}
+			}
+			var entry = result;
+			if(entry != null) {
+				return entry.attachment;
+			} else {
+				return null;
+			}
 		}
 		return null;
 	}
@@ -94549,7 +96975,7 @@ spine_Skeleton.prototype = {
 		if(slot.attachment != attachment) {
 			slot.attachment = attachment;
 			slot.attachmentTime = slot.bone.skeleton.time;
-			var this1 = slot.attachmentVertices;
+			var this1 = slot.deform;
 			this1.splice(0,this1.length);
 		}
 	}
@@ -94617,6 +97043,9 @@ spine_Skeleton.prototype = {
 		if(size == null) {
 			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("size cannot be null."));
 		}
+		if(temp == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("temp cannot be null."));
+		}
 		var drawOrder = this.drawOrder;
 		var minX = 999999999;
 		var minY = 999999999;
@@ -94626,6 +97055,10 @@ spine_Skeleton.prototype = {
 		var n = drawOrder.length;
 		while(i < n) {
 			var slot = drawOrder[i];
+			if(!slot.bone.active) {
+				++i;
+				continue;
+			}
 			var verticesLength = 0;
 			var vertices = null;
 			var attachment = slot.attachment;
@@ -94643,7 +97076,8 @@ spine_Skeleton.prototype = {
 				vertices = temp;
 				var bone = slot.bone;
 				var offset1 = 0;
-				var vertexOffset = (js_Boot.__cast(attachment , spine_attachments_RegionAttachment)).offset;
+				var result = attachment;
+				var vertexOffset = result.offset;
 				var x = bone.worldX;
 				var y = bone.worldY;
 				var a = bone.a;
@@ -94672,7 +97106,8 @@ spine_Skeleton.prototype = {
 				vertices[offset1] = offsetX * a + offsetY * b + x;
 				vertices[offset1 + 1] = offsetX * c + offsetY * d + y;
 			} else if(((attachment) instanceof spine_attachments_MeshAttachment)) {
-				var mesh = js_Boot.__cast(attachment , spine_attachments_MeshAttachment);
+				var result1 = attachment;
+				var mesh = result1;
 				verticesLength = mesh.worldVerticesLength;
 				var len1 = temp.length;
 				if(len1 > verticesLength) {
@@ -94687,7 +97122,7 @@ spine_Skeleton.prototype = {
 				var count = verticesLength;
 				count = (count >> 1) * 2;
 				var skeleton = slot.bone.skeleton;
-				var deformArray = slot.attachmentVertices;
+				var deformArray = slot.deform;
 				var vertices1 = mesh.vertices;
 				var bones = mesh.bones;
 				if(bones == null) {
@@ -94731,7 +97166,8 @@ spine_Skeleton.prototype = {
 							var n2 = bones[v1++];
 							n2 += v1;
 							while(v1 < n2) {
-								var bone2 = js_Boot.__cast(skeletonBones[bones[v1]] , spine_Bone);
+								var result2 = skeletonBones[bones[v1]];
+								var bone2 = result2;
 								var vx1 = vertices1[b2];
 								var vy1 = vertices1[b2 + 1];
 								var weight = vertices1[b2 + 2];
@@ -94755,7 +97191,8 @@ spine_Skeleton.prototype = {
 							var n3 = bones[v1++];
 							n3 += v1;
 							while(v1 < n3) {
-								var bone3 = js_Boot.__cast(skeletonBones[bones[v1]] , spine_Bone);
+								var result3 = skeletonBones[bones[v1]];
+								var bone3 = result3;
 								var vx2 = vertices1[b3] + deform[f];
 								var vy2 = vertices1[b3 + 1] + deform[f + 1];
 								var weight1 = vertices1[b3 + 2];
@@ -94798,23 +97235,27 @@ spine_Skeleton.prototype = {
 		if(color == null) {
 			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("color cannot be null."));
 		}
-		this.color.set(color);
+		var _this = this.color;
+		_this.r = color.r;
+		_this.g = color.g;
+		_this.b = color.b;
+		_this.a = color.a;
 	}
-	,getFlipX: function() {
-		return this.flipX;
+	,getScaleX: function() {
+		return this.scaleX;
 	}
-	,setFlipX: function(flipX) {
-		this.flipX = flipX;
+	,setScaleX: function(scaleX) {
+		this.scaleX = scaleX;
 	}
-	,getFlipY: function() {
-		return this.flipY;
+	,getScaleY: function() {
+		return this.scaleY;
 	}
-	,setFlipY: function(flipY) {
-		this.flipY = flipY;
+	,setScaleY: function(scaleY) {
+		this.scaleY = scaleY;
 	}
-	,setFlip: function(flipX,flipY) {
-		this.flipX = flipX;
-		this.flipY = flipY;
+	,setScale: function(scaleX,scaleY) {
+		this.scaleX = scaleX;
+		this.scaleY = scaleY;
 	}
 	,getX: function() {
 		return this.x;
@@ -94884,9 +97325,14 @@ spine_SkeletonBounds.prototype = {
 		var i = 0;
 		while(i < slotCount) {
 			var slot = slots[i];
+			if(!slot.bone.active) {
+				++i;
+				continue;
+			}
 			var attachment = slot.attachment;
 			if(((attachment) instanceof spine_attachments_BoundingBoxAttachment)) {
-				var boundingBox = js_Boot.__cast(attachment , spine_attachments_BoundingBoxAttachment);
+				var result = attachment;
+				var boundingBox = result;
 				boundingBoxes.push(boundingBox);
 				var polygon = this.polygonPool.obtain();
 				polygons.push(polygon);
@@ -94904,7 +97350,7 @@ spine_SkeletonBounds.prototype = {
 				var worldVertices = polygon;
 				count = (count >> 1) * 2;
 				var skeleton = slot.bone.skeleton;
-				var deformArray = slot.attachmentVertices;
+				var deformArray = slot.deform;
 				var vertices = boundingBox.vertices;
 				var bones = boundingBox.bones;
 				if(bones == null) {
@@ -94948,7 +97394,8 @@ spine_SkeletonBounds.prototype = {
 							var n1 = bones[v1++];
 							n1 += v1;
 							while(v1 < n1) {
-								var bone1 = js_Boot.__cast(skeletonBones[bones[v1]] , spine_Bone);
+								var result1 = skeletonBones[bones[v1]];
+								var bone1 = result1;
 								var vx1 = vertices[b1];
 								var vy1 = vertices[b1 + 1];
 								var weight = vertices[b1 + 2];
@@ -94972,7 +97419,8 @@ spine_SkeletonBounds.prototype = {
 							var n2 = bones[v1++];
 							n2 += v1;
 							while(v1 < n2) {
-								var bone2 = js_Boot.__cast(skeletonBones[bones[v1]] , spine_Bone);
+								var result2 = skeletonBones[bones[v1]];
+								var bone2 = result2;
 								var vx2 = vertices[b2] + deform[f];
 								var vy2 = vertices[b2 + 1] + deform[f + 1];
 								var weight1 = vertices[b2 + 2];
@@ -95090,6 +97538,9 @@ spine_SkeletonBounds.prototype = {
 		return false;
 	}
 	,aabbIntersectsSkeleton: function(bounds) {
+		if(bounds == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("bounds cannot be null."));
+		}
 		if(this.minX < bounds.maxX && this.maxX > bounds.minX && this.minY < bounds.maxY) {
 			return this.maxY > bounds.minY;
 		} else {
@@ -95102,6 +97553,9 @@ spine_SkeletonBounds.prototype = {
 		var n = polygons.length;
 		while(i < n) {
 			var polygon = polygons[i];
+			if(polygon == null) {
+				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("polygon cannot be null."));
+			}
 			var vertices = polygon;
 			var nn = polygon.length;
 			var prevIndex = nn - 2;
@@ -95127,6 +97581,9 @@ spine_SkeletonBounds.prototype = {
 		return null;
 	}
 	,polygonContainsPoint: function(polygon,x,y) {
+		if(polygon == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("polygon cannot be null."));
+		}
 		var vertices = polygon;
 		var nn = polygon.length;
 		var prevIndex = nn - 2;
@@ -95159,6 +97616,9 @@ spine_SkeletonBounds.prototype = {
 		return null;
 	}
 	,polygonIntersectsSegment: function(polygon,x1,y1,x2,y2) {
+		if(polygon == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("polygon cannot be null."));
+		}
 		var vertices = polygon;
 		var nn = polygon.length;
 		var width12 = x1 - x2;
@@ -95238,10 +97698,13 @@ spine__$SkeletonBounds_PolygonPool.prototype = $extend(spine_support_utils_Pool.
 	,__class__: spine__$SkeletonBounds_PolygonPool
 });
 var spine_SkeletonData = function() {
+	this.audioPath = null;
 	this.fps = 30;
 	this.hash = null;
 	this.height = 0;
 	this.width = 0;
+	this.y = 0;
+	this.x = 0;
 	this.pathConstraints = [];
 	this.transformConstraints = [];
 	this.ikConstraints = [];
@@ -95264,12 +97727,15 @@ spine_SkeletonData.prototype = {
 	,ikConstraints: null
 	,transformConstraints: null
 	,pathConstraints: null
+	,x: null
+	,y: null
 	,width: null
 	,height: null
 	,version: null
 	,hash: null
 	,fps: null
 	,imagesPath: null
+	,audioPath: null
 	,getBones: function() {
 		return this.bones;
 	}
@@ -95432,6 +97898,18 @@ spine_SkeletonData.prototype = {
 	,setName: function(name) {
 		this.name = name;
 	}
+	,getX: function() {
+		return this.x;
+	}
+	,setX: function(x) {
+		this.x = x;
+	}
+	,getY: function() {
+		return this.y;
+	}
+	,setY: function(y) {
+		this.y = y;
+	}
 	,getWidth: function() {
 		return this.width;
 	}
@@ -95461,6 +97939,12 @@ spine_SkeletonData.prototype = {
 	}
 	,setImagesPath: function(imagesPath) {
 		this.imagesPath = imagesPath;
+	}
+	,getAudioPath: function() {
+		return this.audioPath;
+	}
+	,setAudioPath: function(audioPath) {
+		this.audioPath = audioPath;
 	}
 	,getFps: function() {
 		return this.fps;
@@ -95527,7 +98011,16 @@ spine_SkeletonJson.prototype = {
 		return this.scale;
 	}
 	,setScale: function(scale) {
+		if(scale == 0) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("scale cannot be 0."));
+		}
 		this.scale = scale;
+	}
+	,parse: function(file) {
+		if(file == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("file cannot be null."));
+		}
+		return new spine_support_utils_JsonReader().parse(file);
 	}
 	,readSkeletonData: function(file) {
 		if(file == null) {
@@ -95536,15 +98029,21 @@ spine_SkeletonJson.prototype = {
 		var scale = this.scale;
 		var skeletonData = new spine_SkeletonData();
 		skeletonData.name = spine_support_extensions_FileExtensions.nameWithoutExtension(file);
+		if(file == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("file cannot be null."));
+		}
 		var root = new spine_support_utils_JsonReader().parse(file);
 		var skeletonMap = root.get("skeleton");
 		if(skeletonMap != null) {
 			skeletonData.hash = skeletonMap.getString("hash",null);
 			skeletonData.version = skeletonMap.getString("spine",null);
+			skeletonData.x = skeletonMap.getFloat("x",0);
+			skeletonData.y = skeletonMap.getFloat("y",0);
 			skeletonData.width = skeletonMap.getFloat("width",0);
 			skeletonData.height = skeletonMap.getFloat("height",0);
 			skeletonData.fps = skeletonMap.getFloat("fps",30);
 			skeletonData.imagesPath = skeletonMap.getString("images",null);
+			skeletonData.audioPath = skeletonMap.getString("audio",null);
 		}
 		var boneMap = root.getChild("bones");
 		while(boneMap != null) {
@@ -95586,9 +98085,15 @@ spine_SkeletonJson.prototype = {
 				tmp = 0;
 			}
 			data.transformMode = tmp;
+			data.skinRequired = boneMap.getBoolean("skin",false);
 			var color = boneMap.getString("color",null);
 			if(color != null) {
-				data.color.set(spine_support_graphics_Color.valueOf(color));
+				var _this = data.color;
+				var color1 = spine_support_graphics_Color.valueOf(color);
+				_this.r = color1.r;
+				_this.g = color1.g;
+				_this.b = color1.b;
+				_this.a = color1.a;
 			}
 			skeletonData.bones.push(data);
 			boneMap = boneMap.get_next();
@@ -95604,7 +98109,12 @@ spine_SkeletonJson.prototype = {
 			var data = new spine_SlotData(skeletonData.slots.length,slotName,boneData);
 			var color = slotMap.getString("color",null);
 			if(color != null) {
-				data.color.set(spine_support_graphics_Color.valueOf(color));
+				var _this = data.color;
+				var color1 = spine_support_graphics_Color.valueOf(color);
+				_this.r = color1.r;
+				_this.g = color1.g;
+				_this.b = color1.b;
+				_this.a = color1.a;
 			}
 			var dark = slotMap.getString("dark",null);
 			if(dark != null) {
@@ -95636,23 +98146,27 @@ spine_SkeletonJson.prototype = {
 		while(constraintMap != null) {
 			var data = new spine_IkConstraintData(constraintMap.getString("name"));
 			data.order = constraintMap.getInt("order",0);
-			var boneMap = constraintMap.getChild("bones");
-			while(boneMap != null) {
-				var boneName = boneMap.asString();
-				var bone = skeletonData.findBone(boneName);
+			data.skinRequired = constraintMap.getBoolean("skin",false);
+			var entry = constraintMap.getChild("bones");
+			while(entry != null) {
+				var bone = skeletonData.findBone(entry.asString());
 				if(bone == null) {
-					throw haxe_Exception.thrown(new spine_support_utils_SerializationException("IK bone not found: " + boneName));
+					throw haxe_Exception.thrown(new spine_support_utils_SerializationException("IK bone not found: " + Std.string(entry)));
 				}
 				data.bones.push(bone);
-				boneMap = boneMap.get_next();
+				entry = entry.get_next();
 			}
 			var targetName = constraintMap.getString("target");
 			data.target = skeletonData.findBone(targetName);
 			if(data.target == null) {
 				throw haxe_Exception.thrown(new spine_support_utils_SerializationException("IK target bone not found: " + targetName));
 			}
-			data.bendDirection = constraintMap.getBoolean("bendPositive",true) ? 1 : -1;
 			data.mix = constraintMap.getFloat("mix",1);
+			data.softness = constraintMap.getFloat("softness",0) * scale;
+			data.bendDirection = constraintMap.getBoolean("bendPositive",true) ? 1 : -1;
+			data.compress = constraintMap.getBoolean("compress",false);
+			data.stretch = constraintMap.getBoolean("stretch",false);
+			data.uniform = constraintMap.getBoolean("uniform",false);
 			skeletonData.ikConstraints.push(data);
 			constraintMap = constraintMap.get_next();
 		}
@@ -95660,15 +98174,15 @@ spine_SkeletonJson.prototype = {
 		while(constraintMap != null) {
 			var data = new spine_TransformConstraintData(constraintMap.getString("name"));
 			data.order = constraintMap.getInt("order",0);
-			var boneMap = constraintMap.getChild("bones");
-			while(boneMap != null) {
-				var boneName = boneMap.asString();
-				var bone = skeletonData.findBone(boneName);
+			data.skinRequired = constraintMap.getBoolean("skin",false);
+			var entry = constraintMap.getChild("bones");
+			while(entry != null) {
+				var bone = skeletonData.findBone(entry.asString());
 				if(bone == null) {
-					throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Transform constraint bone not found: " + boneName));
+					throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Transform constraint bone not found: " + Std.string(entry)));
 				}
 				data.bones.push(bone);
-				boneMap = boneMap.get_next();
+				entry = entry.get_next();
 			}
 			var targetName = constraintMap.getString("target");
 			data.target = skeletonData.findBone(targetName);
@@ -95694,15 +98208,15 @@ spine_SkeletonJson.prototype = {
 		while(constraintMap != null) {
 			var data = new spine_PathConstraintData(constraintMap.getString("name"));
 			data.order = constraintMap.getInt("order",0);
-			var boneMap = constraintMap.getChild("bones");
-			while(boneMap != null) {
-				var boneName = boneMap.asString();
-				var bone = skeletonData.findBone(boneName);
+			data.skinRequired = constraintMap.getBoolean("skin",false);
+			var entry = constraintMap.getChild("bones");
+			while(entry != null) {
+				var bone = skeletonData.findBone(entry.asString());
 				if(bone == null) {
-					throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Path bone not found: " + boneName));
+					throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Path bone not found: " + Std.string(entry)));
 				}
 				data.bones.push(bone);
-				boneMap = boneMap.get_next();
+				entry = entry.get_next();
 			}
 			var targetName = constraintMap.getString("target");
 			data.target = skeletonData.findSlot(targetName);
@@ -95767,55 +98281,74 @@ spine_SkeletonJson.prototype = {
 		}
 		var skinMap = root.getChild("skins");
 		while(skinMap != null) {
-			var skin = new spine_Skin(skinMap.get_name());
-			var slotEntry = skinMap.get_child();
+			var skin = new spine_Skin(skinMap.getString("name"));
+			var entry = skinMap.getChild("bones");
+			while(entry != null) {
+				var bone = skeletonData.findBone(entry.asString());
+				if(bone == null) {
+					throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Skin bone not found: " + Std.string(entry)));
+				}
+				skin.bones.push(bone);
+				entry = entry.get_next();
+			}
+			var entry1 = skinMap.getChild("ik");
+			while(entry1 != null) {
+				var constraint = skeletonData.findIkConstraint(entry1.asString());
+				if(constraint == null) {
+					throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Skin IK constraint not found: " + Std.string(entry1)));
+				}
+				skin.constraints.push(constraint);
+				entry1 = entry1.get_next();
+			}
+			var entry2 = skinMap.getChild("transform");
+			while(entry2 != null) {
+				var constraint1 = skeletonData.findTransformConstraint(entry2.asString());
+				if(constraint1 == null) {
+					throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Skin transform constraint not found: " + Std.string(entry2)));
+				}
+				skin.constraints.push(constraint1);
+				entry2 = entry2.get_next();
+			}
+			var entry3 = skinMap.getChild("path");
+			while(entry3 != null) {
+				var constraint2 = skeletonData.findPathConstraint(entry3.asString());
+				if(constraint2 == null) {
+					throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Skin path constraint not found: " + Std.string(entry3)));
+				}
+				skin.constraints.push(constraint2);
+				entry3 = entry3.get_next();
+			}
+			var slotEntry = skinMap.getChild("attachments");
 			while(slotEntry != null) {
 				var slot = skeletonData.findSlot(slotEntry.get_name());
 				if(slot == null) {
 					throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Slot not found: " + slotEntry.get_name()));
 				}
-				var entry = slotEntry.get_child();
-				while(entry != null) {
+				var entry4 = slotEntry.get_child();
+				while(entry4 != null) {
 					try {
-						var attachment = this.readAttachment(entry,skin,slot.index,entry.get_name(),skeletonData);
+						var attachment = this.readAttachment(entry4,skin,slot.index,entry4.get_name(),skeletonData);
 						if(attachment != null) {
 							var slotIndex = slot.index;
-							var name = entry.get_name();
-							if(attachment == null) {
-								throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("attachment cannot be null."));
-							}
+							var name = entry4.get_name();
 							if(slotIndex < 0) {
 								throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("slotIndex must be >= 0."));
 							}
-							var key = skin.keyPool.obtain();
-							if(name == null) {
-								throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("name cannot be null."));
+							if(attachment == null) {
+								throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("attachment cannot be null."));
 							}
-							key.slotIndex = slotIndex;
-							key.name = name;
-							var hash = 0;
-							var chr;
-							var tmp;
-							if(name.length == 0) {
-								tmp = hash;
-							} else {
-								var _g = 0;
-								var _g1 = name.length;
-								while(_g < _g1) {
-									var i = _g++;
-									chr = HxOverrides.cca(name,i);
-									hash = (hash << 5) - hash + chr;
-								}
-								tmp = hash;
+							var newEntry = new spine_SkinEntry(slotIndex,name,attachment);
+							var oldEntry = spine_support_utils_AttachmentMap.put(skin.attachments,newEntry,newEntry);
+							if(oldEntry != null) {
+								oldEntry.attachment = attachment;
 							}
-							key.hashCode = 31 * (31 + tmp) + slotIndex;
-							spine_support_utils_ObjectMap.put(skin.attachments,key,attachment);
 						}
-					} catch( _g2 ) {
-						var ex = haxe_Exception.caught(_g2).unwrap();
-						throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Error reading attachment: " + entry.get_name() + ", skin: " + Std.string(skin),ex));
+					} catch( _g ) {
+						haxe_NativeStackTrace.lastError = _g;
+						var ex = haxe_Exception.caught(_g).unwrap();
+						throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Error reading attachment: " + entry4.get_name() + ", skin: " + Std.string(skin),ex));
 					}
-					entry = entry.get_next();
+					entry4 = entry4.get_next();
 				}
 				slotEntry = slotEntry.get_next();
 			}
@@ -95829,7 +98362,7 @@ spine_SkeletonJson.prototype = {
 		var n = this.linkedMeshes.length;
 		while(i < n) {
 			var linkedMesh = this.linkedMeshes[i];
-			var skin = linkedMesh.skin == null ? skeletonData.getDefaultSkin() : skeletonData.findSkin(linkedMesh.skin);
+			var skin = linkedMesh.skin == null ? skeletonData.defaultSkin : skeletonData.findSkin(linkedMesh.skin);
 			if(skin == null) {
 				throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Skin not found: " + linkedMesh.skin));
 			}
@@ -95846,9 +98379,9 @@ spine_SkeletonJson.prototype = {
 			_this.name = name;
 			var hash = 0;
 			var chr;
-			var tmp;
+			var x;
 			if(name.length == 0) {
-				tmp = hash;
+				x = hash;
 			} else {
 				var _g = 0;
 				var _g1 = name.length;
@@ -95857,84 +98390,63 @@ spine_SkeletonJson.prototype = {
 					chr = HxOverrides.cca(name,i1);
 					hash = (hash << 5) - hash + chr;
 				}
-				tmp = hash;
+				x = hash;
 			}
-			_this.hashCode = 31 * (31 + tmp) + slotIndex;
-			var parent = spine_support_utils_ObjectMap.get(skin.attachments,skin.lookup);
+			_this.hashCode = x + slotIndex * 37 | 0;
+			var key = skin.lookup;
+			var entries = skin.attachments.h[key.hashCode];
+			var result = null;
+			if(entries != null) {
+				var _g2 = 0;
+				var _g3 = entries.length;
+				while(_g2 < _g3) {
+					var i2 = _g2++;
+					var entry = entries[i2];
+					var _this1 = entry.key;
+					var object = key;
+					var tmp;
+					if(object == null) {
+						tmp = false;
+					} else {
+						var result1 = object;
+						var other = result1;
+						tmp = _this1.slotIndex != other.slotIndex ? false : _this1.name != other.name ? false : true;
+					}
+					if(tmp) {
+						result = entry.value;
+						break;
+					}
+				}
+			}
+			var entry1 = result;
+			var parent = entry1 != null ? entry1.attachment : null;
 			if(parent == null) {
 				throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Parent mesh not found: " + linkedMesh.parent));
 			}
-			var _this1 = linkedMesh.mesh;
-			var parentMesh = js_Boot.__cast(parent , spine_attachments_MeshAttachment);
-			_this1.parentMesh = parentMesh;
-			if(parentMesh != null) {
-				_this1.bones = parentMesh.bones;
-				_this1.vertices = parentMesh.vertices;
-				_this1.regionUVs = parentMesh.regionUVs;
-				_this1.triangles = parentMesh.triangles;
-				_this1.hullLength = parentMesh.hullLength;
-				_this1.worldVerticesLength = parentMesh.worldVerticesLength;
-				_this1.edges = parentMesh.edges;
-				_this1.width = parentMesh.width;
-				_this1.height = parentMesh.height;
+			var deformAttachment;
+			if(linkedMesh.inheritDeform) {
+				var result2 = parent;
+				deformAttachment = result2;
+			} else {
+				deformAttachment = linkedMesh.mesh;
 			}
+			linkedMesh.mesh.deformAttachment = deformAttachment;
 			var _this2 = linkedMesh.mesh;
-			var u = 0;
-			var v = 0;
-			var width = 0;
-			var height = 0;
-			if(_this2.region == null) {
-				v = 0;
-				u = v;
-				height = 1;
-				width = height;
-			} else {
-				u = _this2.region.u;
-				v = _this2.region.v;
-				width = _this2.region.u2 - u;
-				height = _this2.region.v2 - v;
+			var result3 = parent;
+			var parentMesh = result3;
+			_this2.parentMesh = parentMesh;
+			if(parentMesh != null) {
+				_this2.bones = parentMesh.bones;
+				_this2.vertices = parentMesh.vertices;
+				_this2.regionUVs = parentMesh.regionUVs;
+				_this2.triangles = parentMesh.triangles;
+				_this2.hullLength = parentMesh.hullLength;
+				_this2.worldVerticesLength = parentMesh.worldVerticesLength;
+				_this2.edges = parentMesh.edges;
+				_this2.width = parentMesh.width;
+				_this2.height = parentMesh.height;
 			}
-			var regionUVs = _this2.regionUVs;
-			if(_this2.uvs == null || _this2.uvs.length != regionUVs.length) {
-				var length = regionUVs.length;
-				if(length == null) {
-					length = 0;
-				}
-				var len = length | 0;
-				var capacity = len != 0 ? len : 16;
-				var this1 = [];
-				var array = this1;
-				if(length > 0) {
-					var len1 = array.length;
-					if(len1 > len) {
-						array.splice(len,len - len1);
-					} else if(len1 < len) {
-						while(len1 < len) {
-							array.push(0);
-							++len1;
-						}
-					}
-				}
-				_this2.uvs = array;
-			}
-			var uvs = _this2.uvs;
-			if(((_this2.region) instanceof spine_support_graphics_AtlasRegion) && (js_Boot.__cast(_this2.region , spine_support_graphics_AtlasRegion)).rotate) {
-				var i2 = 0;
-				var n1 = uvs.length;
-				while(i2 < n1) {
-					uvs[i2] = u + regionUVs[i2 + 1] * width;
-					uvs[i2 + 1] = v + height - regionUVs[i2] * height;
-					i2 += 2;
-				}
-			} else {
-				var i3 = 0;
-				var n2 = uvs.length;
-				while(i3 < n2) {
-					uvs[i3] = u + regionUVs[i3] * width;
-					uvs[i3 + 1] = v + regionUVs[i3 + 1] * height;
-					i3 += 2;
-				}
-			}
+			linkedMesh.mesh.updateUVs();
 			++i;
 		}
 		var this1 = this.linkedMeshes;
@@ -95945,6 +98457,11 @@ spine_SkeletonJson.prototype = {
 			data.intValue = eventMap.getInt("int",0);
 			data.floatValue = eventMap.getFloat("float",0);
 			data.stringValue = eventMap.getString("string","");
+			data.audioPath = eventMap.getString("audio",null);
+			if(data.audioPath != null) {
+				data.volume = eventMap.getFloat("volume",1);
+				data.balance = eventMap.getFloat("balance",0);
+			}
 			skeletonData.events.push(data);
 			eventMap = eventMap.get_next();
 		}
@@ -95972,7 +98489,7 @@ spine_SkeletonJson.prototype = {
 							var valueMap = timelineMap.get_child();
 							while(valueMap != null) {
 								var frameIndex1 = frameIndex++;
-								var time = valueMap.getFloat("time");
+								var time = valueMap.getFloat("time",0);
 								var attachmentName = valueMap.getString("name");
 								timeline.frames[frameIndex1] = time;
 								timeline.attachmentNames[frameIndex1] = attachmentName;
@@ -95988,7 +98505,7 @@ spine_SkeletonJson.prototype = {
 							while(valueMap1 != null) {
 								var color = spine_support_graphics_Color.valueOf(valueMap1.getString("color"));
 								var frameIndex3 = frameIndex2;
-								var time1 = valueMap1.getFloat("time");
+								var time1 = valueMap1.getFloat("time",0);
 								frameIndex3 *= 5;
 								timeline1.frames[frameIndex3] = time1;
 								timeline1.frames[frameIndex3 + 1] = color.r;
@@ -95997,10 +98514,10 @@ spine_SkeletonJson.prototype = {
 								timeline1.frames[frameIndex3 + 4] = color.a;
 								var curve = valueMap1.get("curve");
 								if(curve != null) {
-									if(curve.isString() && curve.asString() == "stepped") {
+									if(curve.isString()) {
 										timeline1.curves[frameIndex2 * 19] = 1;
-									} else if(curve.isArray()) {
-										timeline1.setCurve(frameIndex2,curve.getFloat(0),curve.getFloat(1),curve.getFloat(2),curve.getFloat(3));
+									} else {
+										timeline1.setCurve(frameIndex2,curve.asFloat(),valueMap1.getFloat("c2",0),valueMap1.getFloat("c3",1),valueMap1.getFloat("c4",1));
 									}
 								}
 								++frameIndex2;
@@ -96017,7 +98534,7 @@ spine_SkeletonJson.prototype = {
 								var light = spine_support_graphics_Color.valueOf(valueMap2.getString("light"));
 								var dark = spine_support_graphics_Color.valueOf(valueMap2.getString("dark"));
 								var frameIndex5 = frameIndex4;
-								var time2 = valueMap2.getFloat("time");
+								var time2 = valueMap2.getFloat("time",0);
 								frameIndex5 *= 8;
 								timeline2.frames[frameIndex5] = time2;
 								timeline2.frames[frameIndex5 + 1] = light.r;
@@ -96029,10 +98546,10 @@ spine_SkeletonJson.prototype = {
 								timeline2.frames[frameIndex5 + 7] = dark.b;
 								var curve1 = valueMap2.get("curve");
 								if(curve1 != null) {
-									if(curve1.isString() && curve1.asString() == "stepped") {
+									if(curve1.isString()) {
 										timeline2.curves[frameIndex4 * 19] = 1;
-									} else if(curve1.isArray()) {
-										timeline2.setCurve(frameIndex4,curve1.getFloat(0),curve1.getFloat(1),curve1.getFloat(2),curve1.getFloat(3));
+									} else {
+										timeline2.setCurve(frameIndex4,curve1.asFloat(),valueMap2.getFloat("c2",0),valueMap2.getFloat("c3",1),valueMap2.getFloat("c4",1));
 									}
 								}
 								++frameIndex4;
@@ -96063,17 +98580,17 @@ spine_SkeletonJson.prototype = {
 							var valueMap3 = timelineMap1.get_child();
 							while(valueMap3 != null) {
 								var frameIndex7 = frameIndex6;
-								var time3 = valueMap3.getFloat("time");
-								var degrees = valueMap3.getFloat("angle");
+								var time3 = valueMap3.getFloat("time",0);
+								var degrees = valueMap3.getFloat("angle",0);
 								frameIndex7 <<= 1;
 								timeline3.frames[frameIndex7] = time3;
 								timeline3.frames[frameIndex7 + 1] = degrees;
 								var curve2 = valueMap3.get("curve");
 								if(curve2 != null) {
-									if(curve2.isString() && curve2.asString() == "stepped") {
+									if(curve2.isString()) {
 										timeline3.curves[frameIndex6 * 19] = 1;
-									} else if(curve2.isArray()) {
-										timeline3.setCurve(frameIndex6,curve2.getFloat(0),curve2.getFloat(1),curve2.getFloat(2),curve2.getFloat(3));
+									} else {
+										timeline3.setCurve(frameIndex6,curve2.asFloat(),valueMap3.getFloat("c2",0),valueMap3.getFloat("c3",1),valueMap3.getFloat("c4",1));
 									}
 								}
 								++frameIndex6;
@@ -96084,8 +98601,10 @@ spine_SkeletonJson.prototype = {
 						} else if(timelineName1 == "translate" || timelineName1 == "scale" || timelineName1 == "shear") {
 							var timeline4 = null;
 							var timelineScale = 1;
+							var defaultValue = 0;
 							if(timelineName1 == "scale") {
 								timeline4 = new spine_ScaleTimeline(timelineMap1.get_size());
+								defaultValue = 1;
 							} else if(timelineName1 == "shear") {
 								timeline4 = new spine_ShearTimeline(timelineMap1.get_size());
 							} else {
@@ -96096,20 +98615,20 @@ spine_SkeletonJson.prototype = {
 							var frameIndex8 = 0;
 							var valueMap4 = timelineMap1.get_child();
 							while(valueMap4 != null) {
-								var x = valueMap4.getFloat("x",0);
-								var y = valueMap4.getFloat("y",0);
+								var x = valueMap4.getFloat("x",defaultValue);
+								var y = valueMap4.getFloat("y",defaultValue);
 								var frameIndex9 = frameIndex8;
-								var time4 = valueMap4.getFloat("time");
+								var time4 = valueMap4.getFloat("time",0);
 								frameIndex9 *= 3;
 								timeline4.frames[frameIndex9] = time4;
 								timeline4.frames[frameIndex9 + 1] = x * timelineScale;
 								timeline4.frames[frameIndex9 + 2] = y * timelineScale;
 								var curve3 = valueMap4.get("curve");
 								if(curve3 != null) {
-									if(curve3.isString() && curve3.asString() == "stepped") {
+									if(curve3.isString()) {
 										timeline4.curves[frameIndex8 * 19] = 1;
-									} else if(curve3.isArray()) {
-										timeline4.setCurve(frameIndex8,curve3.getFloat(0),curve3.getFloat(1),curve3.getFloat(2),curve3.getFloat(3));
+									} else {
+										timeline4.setCurve(frameIndex8,curve3.asFloat(),valueMap4.getFloat("c2",0),valueMap4.getFloat("c3",1),valueMap4.getFloat("c4",1));
 									}
 								}
 								++frameIndex8;
@@ -96128,43 +98647,49 @@ spine_SkeletonJson.prototype = {
 				while(constraintMap != null) {
 					var constraint = skeletonData.findIkConstraint(constraintMap.get_name());
 					var timeline5 = new spine_IkConstraintTimeline(constraintMap.get_size());
-					timeline5.ikConstraintIndex = skeletonData.ikConstraints.indexOf(constraint);
+					timeline5.ikConstraintIndex = skeletonData.getIkConstraints().indexOf(constraint);
 					var frameIndex10 = 0;
 					var valueMap5 = constraintMap.get_child();
 					while(valueMap5 != null) {
 						var frameIndex11 = frameIndex10;
-						var time5 = valueMap5.getFloat("time");
+						var time5 = valueMap5.getFloat("time",0);
 						var mix = valueMap5.getFloat("mix",1);
+						var softness = valueMap5.getFloat("softness",0) * scale;
 						var bendDirection = valueMap5.getBoolean("bendPositive",true) ? 1 : -1;
-						frameIndex11 *= 3;
+						var compress = valueMap5.getBoolean("compress",false);
+						var stretch = valueMap5.getBoolean("stretch",false);
+						frameIndex11 *= 6;
 						timeline5.frames[frameIndex11] = time5;
 						timeline5.frames[frameIndex11 + 1] = mix;
-						timeline5.frames[frameIndex11 + 2] = bendDirection;
+						timeline5.frames[frameIndex11 + 2] = softness;
+						timeline5.frames[frameIndex11 + 3] = bendDirection;
+						timeline5.frames[frameIndex11 + 4] = compress ? 1 : 0;
+						timeline5.frames[frameIndex11 + 5] = stretch ? 1 : 0;
 						var curve4 = valueMap5.get("curve");
 						if(curve4 != null) {
-							if(curve4.isString() && curve4.asString() == "stepped") {
+							if(curve4.isString()) {
 								timeline5.curves[frameIndex10 * 19] = 1;
-							} else if(curve4.isArray()) {
-								timeline5.setCurve(frameIndex10,curve4.getFloat(0),curve4.getFloat(1),curve4.getFloat(2),curve4.getFloat(3));
+							} else {
+								timeline5.setCurve(frameIndex10,curve4.asFloat(),valueMap5.getFloat("c2",0),valueMap5.getFloat("c3",1),valueMap5.getFloat("c4",1));
 							}
 						}
 						++frameIndex10;
 						valueMap5 = valueMap5.get_next();
 					}
 					timelines.push(timeline5);
-					duration = Math.max(duration,timeline5.frames[((timeline5.curves.length / 19 + 1 | 0) - 1) * 3]);
+					duration = Math.max(duration,timeline5.frames[((timeline5.curves.length / 19 + 1 | 0) - 1) * 6]);
 					constraintMap = constraintMap.get_next();
 				}
 				var constraintMap1 = animationMap.getChild("transform");
 				while(constraintMap1 != null) {
 					var constraint1 = skeletonData.findTransformConstraint(constraintMap1.get_name());
 					var timeline6 = new spine_TransformConstraintTimeline(constraintMap1.get_size());
-					timeline6.transformConstraintIndex = skeletonData.transformConstraints.indexOf(constraint1);
+					timeline6.transformConstraintIndex = skeletonData.getTransformConstraints().indexOf(constraint1);
 					var frameIndex12 = 0;
 					var valueMap6 = constraintMap1.get_child();
 					while(valueMap6 != null) {
 						var frameIndex13 = frameIndex12;
-						var time6 = valueMap6.getFloat("time");
+						var time6 = valueMap6.getFloat("time",0);
 						var rotateMix = valueMap6.getFloat("rotateMix",1);
 						var translateMix = valueMap6.getFloat("translateMix",1);
 						var scaleMix = valueMap6.getFloat("scaleMix",1);
@@ -96177,10 +98702,10 @@ spine_SkeletonJson.prototype = {
 						timeline6.frames[frameIndex13 + 4] = shearMix;
 						var curve5 = valueMap6.get("curve");
 						if(curve5 != null) {
-							if(curve5.isString() && curve5.asString() == "stepped") {
+							if(curve5.isString()) {
 								timeline6.curves[frameIndex12 * 19] = 1;
-							} else if(curve5.isArray()) {
-								timeline6.setCurve(frameIndex12,curve5.getFloat(0),curve5.getFloat(1),curve5.getFloat(2),curve5.getFloat(3));
+							} else {
+								timeline6.setCurve(frameIndex12,curve5.asFloat(),valueMap6.getFloat("c2",0),valueMap6.getFloat("c3",1),valueMap6.getFloat("c4",1));
 							}
 						}
 						++frameIndex12;
@@ -96190,7 +98715,7 @@ spine_SkeletonJson.prototype = {
 					duration = Math.max(duration,timeline6.frames[((timeline6.curves.length / 19 + 1 | 0) - 1) * 5]);
 					constraintMap1 = constraintMap1.get_next();
 				}
-				var constraintMap2 = animationMap.getChild("paths");
+				var constraintMap2 = animationMap.getChild("path");
 				while(constraintMap2 != null) {
 					var data = skeletonData.findPathConstraint(constraintMap2.get_name());
 					if(data == null) {
@@ -96219,17 +98744,17 @@ spine_SkeletonJson.prototype = {
 							var valueMap7 = timelineMap2.get_child();
 							while(valueMap7 != null) {
 								var frameIndex15 = frameIndex14;
-								var time7 = valueMap7.getFloat("time");
+								var time7 = valueMap7.getFloat("time",0);
 								var position = valueMap7.getFloat(timelineName2,0) * timelineScale1;
 								frameIndex15 *= 2;
 								timeline7.frames[frameIndex15] = time7;
 								timeline7.frames[frameIndex15 + 1] = position;
 								var curve6 = valueMap7.get("curve");
 								if(curve6 != null) {
-									if(curve6.isString() && curve6.asString() == "stepped") {
+									if(curve6.isString()) {
 										timeline7.curves[frameIndex14 * 19] = 1;
-									} else if(curve6.isArray()) {
-										timeline7.setCurve(frameIndex14,curve6.getFloat(0),curve6.getFloat(1),curve6.getFloat(2),curve6.getFloat(3));
+									} else {
+										timeline7.setCurve(frameIndex14,curve6.asFloat(),valueMap7.getFloat("c2",0),valueMap7.getFloat("c3",1),valueMap7.getFloat("c4",1));
 									}
 								}
 								++frameIndex14;
@@ -96244,7 +98769,7 @@ spine_SkeletonJson.prototype = {
 							var valueMap8 = timelineMap2.get_child();
 							while(valueMap8 != null) {
 								var frameIndex17 = frameIndex16;
-								var time8 = valueMap8.getFloat("time");
+								var time8 = valueMap8.getFloat("time",0);
 								var rotateMix1 = valueMap8.getFloat("rotateMix",1);
 								var translateMix1 = valueMap8.getFloat("translateMix",1);
 								frameIndex17 *= 3;
@@ -96253,10 +98778,10 @@ spine_SkeletonJson.prototype = {
 								timeline8.frames[frameIndex17 + 2] = translateMix1;
 								var curve7 = valueMap8.get("curve");
 								if(curve7 != null) {
-									if(curve7.isString() && curve7.asString() == "stepped") {
+									if(curve7.isString()) {
 										timeline8.curves[frameIndex16 * 19] = 1;
-									} else if(curve7.isArray()) {
-										timeline8.setCurve(frameIndex16,curve7.getFloat(0),curve7.getFloat(1),curve7.getFloat(2),curve7.getFloat(3));
+									} else {
+										timeline8.setCurve(frameIndex16,curve7.asFloat(),valueMap8.getFloat("c2",0),valueMap8.getFloat("c3",1),valueMap8.getFloat("c4",1));
 									}
 								}
 								++frameIndex16;
@@ -96296,9 +98821,9 @@ spine_SkeletonJson.prototype = {
 							_this.name = name1;
 							var hash = 0;
 							var chr;
-							var attachment;
+							var x1;
 							if(name1.length == 0) {
-								attachment = hash;
+								x1 = hash;
 							} else {
 								var _g = 0;
 								var _g1 = name1.length;
@@ -96307,19 +98832,46 @@ spine_SkeletonJson.prototype = {
 									chr = HxOverrides.cca(name1,i);
 									hash = (hash << 5) - hash + chr;
 								}
-								attachment = hash;
+								x1 = hash;
 							}
-							_this.hashCode = 31 * (31 + attachment) + slotIndex;
-							var attachment1 = js_Boot.__cast(spine_support_utils_ObjectMap.get(skin.attachments,skin.lookup) , spine_attachments_VertexAttachment);
-							if(attachment1 == null) {
+							_this.hashCode = x1 + slotIndex * 37 | 0;
+							var key = skin.lookup;
+							var entries = skin.attachments.h[key.hashCode];
+							var result = null;
+							if(entries != null) {
+								var _g2 = 0;
+								var _g3 = entries.length;
+								while(_g2 < _g3) {
+									var i1 = _g2++;
+									var entry = entries[i1];
+									var _this1 = entry.key;
+									var object = key;
+									var value;
+									if(object == null) {
+										value = false;
+									} else {
+										var result1 = object;
+										var other = result1;
+										value = _this1.slotIndex != other.slotIndex ? false : _this1.name != other.name ? false : true;
+									}
+									if(value) {
+										result = entry.value;
+										break;
+									}
+								}
+							}
+							var entry1 = result;
+							var result2 = entry1 != null ? entry1.attachment : null;
+							var attachment = result2;
+							if(attachment == null) {
 								throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Deform attachment not found: " + timelineMap3.get_name()));
 							}
-							var weighted = attachment1.bones != null;
-							var vertices = attachment1.vertices;
+							var weighted = attachment.bones != null;
+							var vertices = attachment.vertices;
 							var deformLength = weighted ? vertices.length / 3 * 2 | 0 : vertices.length;
 							var timeline9 = new spine_DeformTimeline(timelineMap3.get_size());
 							timeline9.slotIndex = slot1.index;
-							timeline9.attachment = attachment1;
+							timeline9.attachment = attachment;
 							var frameIndex18 = 0;
 							var valueMap9 = timelineMap3.get_child();
 							while(valueMap9 != null) {
@@ -96372,32 +98924,46 @@ spine_SkeletonJson.prototype = {
 									}
 									deform = array1;
 									var start = valueMap9.getInt("offset",0);
-									spine_support_utils_Array.copy(verticesValue.asFloatArray(),0,deform,start,verticesValue.get_size());
-									if(scale != 1) {
-										var i1 = start;
-										var n = i1 + verticesValue.get_size();
-										while(i1 < n) {
-											deform[i1] *= scale;
-											++i1;
-										}
+									var src = verticesValue.asFloatArray();
+									var dest = deform;
+									var length2 = verticesValue.get_size();
+									if(src == null) {
+										throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("src cannot be null."));
 									}
-									if(!weighted) {
-										var i2 = 0;
-										while(i2 < deformLength) {
-											deform[i2] += vertices[i2];
+									if(dest == null) {
+										throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("dest cannot be null."));
+									}
+									try {
+										spine_support_utils_Array.copy(src,0,dest,start,length2);
+									} catch( _g4 ) {
+										haxe_NativeStackTrace.lastError = _g4;
+										throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + start + ", count: " + length2));
+									}
+									if(scale != 1) {
+										var i2 = start;
+										var n = i2 + verticesValue.get_size();
+										while(i2 < n) {
+											deform[i2] *= scale;
 											++i2;
 										}
 									}
+									if(!weighted) {
+										var i3 = 0;
+										while(i3 < deformLength) {
+											deform[i3] += vertices[i3];
+											++i3;
+										}
+									}
 								}
-								var time9 = valueMap9.getFloat("time");
+								var time9 = valueMap9.getFloat("time",0);
 								timeline9.frames[frameIndex18] = time9;
 								timeline9.frameVertices[frameIndex18] = deform;
 								var curve8 = valueMap9.get("curve");
 								if(curve8 != null) {
-									if(curve8.isString() && curve8.asString() == "stepped") {
+									if(curve8.isString()) {
 										timeline9.curves[frameIndex18 * 19] = 1;
-									} else if(curve8.isArray()) {
-										timeline9.setCurve(frameIndex18,curve8.getFloat(0),curve8.getFloat(1),curve8.getFloat(2),curve8.getFloat(3));
+									} else {
+										timeline9.setCurve(frameIndex18,curve8.asFloat(),valueMap9.getFloat("c2",0),valueMap9.getFloat("c3",1),valueMap9.getFloat("c4",1));
 									}
 								}
 								++frameIndex18;
@@ -96424,15 +98990,15 @@ spine_SkeletonJson.prototype = {
 						var drawOrder = null;
 						var offsets = drawOrderMap.get("offsets");
 						if(offsets != null) {
-							var length2 = slotCount;
-							if(length2 == null) {
-								length2 = 0;
+							var length3 = slotCount;
+							if(length3 == null) {
+								length3 = 0;
 							}
-							var len4 = length2 | 0;
+							var len4 = length3 | 0;
 							var capacity2 = len4 != 0 ? len4 : 16;
 							var this4 = [];
 							var array2 = this4;
-							if(length2 != 0) {
+							if(length3 != 0) {
 								var len5 = array2.length;
 								if(len5 > len4) {
 									array2.splice(len4,len4 - len5);
@@ -96444,20 +99010,20 @@ spine_SkeletonJson.prototype = {
 								}
 							}
 							drawOrder = array2;
-							var i3 = slotCount - 1;
-							while(i3 >= 0) {
-								drawOrder[i3] = -1;
-								--i3;
+							var i4 = slotCount - 1;
+							while(i4 >= 0) {
+								drawOrder[i4] = -1;
+								--i4;
 							}
-							var length3 = slotCount - offsets.get_size();
-							if(length3 == null) {
-								length3 = 0;
+							var length4 = slotCount - offsets.get_size();
+							if(length4 == null) {
+								length4 = 0;
 							}
-							var len6 = length3 | 0;
+							var len6 = length4 | 0;
 							var capacity3 = len6 != 0 ? len6 : 16;
 							var this5 = [];
 							var array3 = this5;
-							if(length3 != 0) {
+							if(length4 != 0) {
 								var len7 = array3.length;
 								if(len7 > len6) {
 									array3.splice(len6,len6 - len7);
@@ -96482,16 +99048,16 @@ spine_SkeletonJson.prototype = {
 								offsetMap = offsetMap.get_next();
 							}
 							while(originalIndex < slotCount) unchanged[unchangedIndex++] = originalIndex++;
-							var i4 = slotCount - 1;
-							while(i4 >= 0) {
-								if(drawOrder[i4] == -1) {
-									drawOrder[i4] = unchanged[--unchangedIndex];
+							var i5 = slotCount - 1;
+							while(i5 >= 0) {
+								if(drawOrder[i5] == -1) {
+									drawOrder[i5] = unchanged[--unchangedIndex];
 								}
-								--i4;
+								--i5;
 							}
 						}
 						var frameIndex20 = frameIndex19++;
-						var time10 = drawOrderMap.getFloat("time");
+						var time10 = drawOrderMap.getFloat("time",0);
 						timeline10.frames[frameIndex20] = time10;
 						timeline10.drawOrders[frameIndex20] = drawOrder;
 						drawOrderMap = drawOrderMap.get_next();
@@ -96509,10 +99075,14 @@ spine_SkeletonJson.prototype = {
 						if(eventData == null) {
 							throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Event not found: " + eventMap.getString("name")));
 						}
-						var event = new spine_Event(eventMap.getFloat("time"),eventData);
+						var event = new spine_Event(eventMap.getFloat("time",0),eventData);
 						event.intValue = eventMap.getInt("int",eventData.intValue);
 						event.floatValue = eventMap.getFloat("float",eventData.floatValue);
 						event.stringValue = eventMap.getString("string",eventData.stringValue);
+						if(event.data.audioPath != null) {
+							event.volume = eventMap.getFloat("volume",eventData.volume);
+							event.balance = eventMap.getFloat("balance",eventData.balance);
+						}
 						var frameIndex22 = frameIndex21++;
 						timeline11.frames[frameIndex22] = event.time;
 						timeline11.events[frameIndex22] = event;
@@ -96522,8 +99092,9 @@ spine_SkeletonJson.prototype = {
 					duration = Math.max(duration,timeline11.frames[timeline11.frames.length - 1]);
 				}
 				skeletonData.animations.push(new spine_Animation(name,timelines,duration));
-			} catch( _g2 ) {
-				var ex = haxe_Exception.caught(_g2).unwrap();
+			} catch( _g5 ) {
+				haxe_NativeStackTrace.lastError = _g5;
+				var ex = haxe_Exception.caught(_g5).unwrap();
 				throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Error reading animation: " + animationMap.get_name(),ex));
 			}
 			animationMap = animationMap.get_next();
@@ -96578,7 +99149,12 @@ spine_SkeletonJson.prototype = {
 				region.height = map.getFloat("height") * scale;
 				var color = map.getString("color",null);
 				if(color != null) {
-					region.color.set(spine_support_graphics_Color.valueOf(color));
+					var _this = region.color;
+					var color1 = spine_support_graphics_Color.valueOf(color);
+					_this.r = color1.r;
+					_this.g = color1.g;
+					_this.b = color1.b;
+					_this.a = color1.a;
 				}
 				var width = region.width;
 				var height = region.height;
@@ -96587,15 +99163,14 @@ spine_SkeletonJson.prototype = {
 				var localX = -localX2;
 				var localY = -localY2;
 				if(((region.region) instanceof spine_support_graphics_AtlasRegion)) {
-					var region1 = js_Boot.__cast(region.region , spine_support_graphics_AtlasRegion);
-					if(region1.rotate) {
-						localX += region1.offsetX / region1.originalWidth * width;
-						localY += region1.offsetY / region1.originalHeight * height;
+					var result = region.region;
+					var region1 = result;
+					localX += region1.offsetX / region1.originalWidth * width;
+					localY += region1.offsetY / region1.originalHeight * height;
+					if(region1.degrees == 90) {
 						localX2 -= (region1.originalWidth - region1.offsetX - region1.packedHeight) / region1.originalWidth * width;
 						localY2 -= (region1.originalHeight - region1.offsetY - region1.packedWidth) / region1.originalHeight * height;
 					} else {
-						localX += region1.offsetX / region1.originalWidth * width;
-						localY += region1.offsetY / region1.originalHeight * height;
 						localX2 -= (region1.originalWidth - region1.offsetX - region1.packedWidth) / region1.originalWidth * width;
 						localY2 -= (region1.originalHeight - region1.offsetY - region1.packedHeight) / region1.originalHeight * height;
 					}
@@ -96607,8 +99182,8 @@ spine_SkeletonJson.prototype = {
 				localX2 *= scaleX;
 				localY2 *= scaleY;
 				var rotation = region.rotation;
-				var cos = js_Boot.__cast(Math.cos(spine_support_math_MathUtils.degRad * rotation) , Float);
-				var sin = js_Boot.__cast(Math.sin(spine_support_math_MathUtils.degRad * rotation) , Float);
+				var cos = Math.cos(spine_support_math_MathUtils.degRad * rotation);
+				var sin = Math.sin(spine_support_math_MathUtils.degRad * rotation);
 				var x = region.x;
 				var y = region.y;
 				var localXCos = localX * cos + x;
@@ -96671,9 +99246,14 @@ spine_SkeletonJson.prototype = {
 					box.bones = bones;
 					box.vertices = weights;
 				}
-				var color1 = map.getString("color",null);
-				if(color1 != null) {
-					box.color.set(spine_support_graphics_Color.valueOf(color1));
+				var color2 = map.getString("color",null);
+				if(color2 != null) {
+					var _this1 = box.color;
+					var color3 = spine_support_graphics_Color.valueOf(color2);
+					_this1.r = color3.r;
+					_this1.g = color3.g;
+					_this1.b = color3.b;
+					_this1.a = color3.a;
 				}
 				return box;
 			} else if(_switchCond0 == 2) {
@@ -96683,16 +99263,20 @@ spine_SkeletonJson.prototype = {
 					return null;
 				}
 				mesh.path = path1;
-				var color2 = map.getString("color",null);
-				if(color2 != null) {
-					mesh.color.set(spine_support_graphics_Color.valueOf(color2));
+				var color4 = map.getString("color",null);
+				if(color4 != null) {
+					var _this2 = mesh.color;
+					var color5 = spine_support_graphics_Color.valueOf(color4);
+					_this2.r = color5.r;
+					_this2.g = color5.g;
+					_this2.b = color5.b;
+					_this2.a = color5.a;
 				}
 				mesh.width = map.getFloat("width",0) * scale;
 				mesh.height = map.getFloat("height",0) * scale;
 				var parent = map.getString("parent",null);
 				if(parent != null) {
-					mesh.inheritDeform = map.getBoolean("deform",true);
-					this.linkedMeshes.push(new spine_LinkedMesh(mesh,map.getString("skin",null),slotIndex,parent));
+					this.linkedMeshes.push(new spine_LinkedMesh(mesh,map.getString("skin",null),slotIndex,parent,map.getBoolean("deform",true)));
 					return mesh;
 				}
 				var uvs = map.require("uvs").asFloatArray();
@@ -96735,62 +99319,7 @@ spine_SkeletonJson.prototype = {
 				}
 				mesh.triangles = map.require("triangles").asShortArray();
 				mesh.regionUVs = uvs;
-				var u = 0;
-				var v = 0;
-				var width1 = 0;
-				var height1 = 0;
-				if(mesh.region == null) {
-					v = 0;
-					u = v;
-					height1 = 1;
-					width1 = height1;
-				} else {
-					u = mesh.region.u;
-					v = mesh.region.v;
-					width1 = mesh.region.u2 - u;
-					height1 = mesh.region.v2 - v;
-				}
-				var regionUVs = mesh.regionUVs;
-				if(mesh.uvs == null || mesh.uvs.length != regionUVs.length) {
-					var length = regionUVs.length;
-					if(length == null) {
-						length = 0;
-					}
-					var len = length | 0;
-					var capacity4 = len != 0 ? len : 16;
-					var this5 = [];
-					var array = this5;
-					if(length > 0) {
-						var len1 = array.length;
-						if(len1 > len) {
-							array.splice(len,len - len1);
-						} else if(len1 < len) {
-							while(len1 < len) {
-								array.push(0);
-								++len1;
-							}
-						}
-					}
-					mesh.uvs = array;
-				}
-				var uvs1 = mesh.uvs;
-				if(((mesh.region) instanceof spine_support_graphics_AtlasRegion) && (js_Boot.__cast(mesh.region , spine_support_graphics_AtlasRegion)).rotate) {
-					var i4 = 0;
-					var n4 = uvs1.length;
-					while(i4 < n4) {
-						uvs1[i4] = u + regionUVs[i4 + 1] * width1;
-						uvs1[i4 + 1] = v + height1 - regionUVs[i4] * height1;
-						i4 += 2;
-					}
-				} else {
-					var i5 = 0;
-					var n5 = uvs1.length;
-					while(i5 < n5) {
-						uvs1[i5] = u + regionUVs[i5] * width1;
-						uvs1[i5 + 1] = v + regionUVs[i5 + 1] * height1;
-						i5 += 2;
-					}
-				}
+				mesh.updateUVs();
 				if(map.has("hull")) {
 					mesh.hullLength = map.require("hull").asInt() * 2;
 				}
@@ -96805,114 +99334,63 @@ spine_SkeletonJson.prototype = {
 					return null;
 				}
 				mesh1.path = path2;
-				var color3 = map.getString("color",null);
-				if(color3 != null) {
-					mesh1.color.set(spine_support_graphics_Color.valueOf(color3));
+				var color6 = map.getString("color",null);
+				if(color6 != null) {
+					var _this3 = mesh1.color;
+					var color7 = spine_support_graphics_Color.valueOf(color6);
+					_this3.r = color7.r;
+					_this3.g = color7.g;
+					_this3.b = color7.b;
+					_this3.a = color7.a;
 				}
 				mesh1.width = map.getFloat("width",0) * scale;
 				mesh1.height = map.getFloat("height",0) * scale;
 				var parent1 = map.getString("parent",null);
 				if(parent1 != null) {
-					mesh1.inheritDeform = map.getBoolean("deform",true);
-					this.linkedMeshes.push(new spine_LinkedMesh(mesh1,map.getString("skin",null),slotIndex,parent1));
+					this.linkedMeshes.push(new spine_LinkedMesh(mesh1,map.getString("skin",null),slotIndex,parent1,map.getBoolean("deform",true)));
 					return mesh1;
 				}
-				var uvs2 = map.require("uvs").asFloatArray();
-				var verticesLength2 = uvs2.length;
+				var uvs1 = map.require("uvs").asFloatArray();
+				var verticesLength2 = uvs1.length;
 				mesh1.worldVerticesLength = verticesLength2;
 				var vertices2 = map.require("vertices").asFloatArray();
 				if(verticesLength2 == vertices2.length) {
 					if(this.scale != 1) {
-						var i6 = 0;
-						var n6 = vertices2.length;
-						while(i6 < n6) {
-							vertices2[i6] *= this.scale;
-							++i6;
+						var i4 = 0;
+						var n4 = vertices2.length;
+						while(i4 < n4) {
+							vertices2[i4] *= this.scale;
+							++i4;
 						}
 					}
 					mesh1.vertices = vertices2;
 				} else {
-					var capacity5 = verticesLength2 * 3 * 3;
+					var capacity4 = verticesLength2 * 3 * 3;
+					var this5 = [];
+					var weights2 = this5;
+					var capacity5 = verticesLength2 * 3;
 					var this6 = [];
-					var weights2 = this6;
-					var capacity6 = verticesLength2 * 3;
-					var this7 = [];
-					var bones2 = this7;
-					var i7 = 0;
-					var n7 = vertices2.length;
-					while(i7 < n7) {
-						var boneCount2 = vertices2[i7++] | 0;
+					var bones2 = this6;
+					var i5 = 0;
+					var n5 = vertices2.length;
+					while(i5 < n5) {
+						var boneCount2 = vertices2[i5++] | 0;
 						bones2.push(boneCount2);
-						var nn2 = i7 + boneCount2 * 4;
-						while(i7 < nn2) {
-							bones2.push(vertices2[i7] | 0);
-							weights2.push(vertices2[i7 + 1] * this.scale);
-							weights2.push(vertices2[i7 + 2] * this.scale);
-							weights2.push(vertices2[i7 + 3]);
-							i7 += 4;
+						var nn2 = i5 + boneCount2 * 4;
+						while(i5 < nn2) {
+							bones2.push(vertices2[i5] | 0);
+							weights2.push(vertices2[i5 + 1] * this.scale);
+							weights2.push(vertices2[i5 + 2] * this.scale);
+							weights2.push(vertices2[i5 + 3]);
+							i5 += 4;
 						}
 					}
 					mesh1.bones = bones2;
 					mesh1.vertices = weights2;
 				}
 				mesh1.triangles = map.require("triangles").asShortArray();
-				mesh1.regionUVs = uvs2;
-				var u1 = 0;
-				var v1 = 0;
-				var width2 = 0;
-				var height2 = 0;
-				if(mesh1.region == null) {
-					v1 = 0;
-					u1 = v1;
-					height2 = 1;
-					width2 = height2;
-				} else {
-					u1 = mesh1.region.u;
-					v1 = mesh1.region.v;
-					width2 = mesh1.region.u2 - u1;
-					height2 = mesh1.region.v2 - v1;
-				}
-				var regionUVs1 = mesh1.regionUVs;
-				if(mesh1.uvs == null || mesh1.uvs.length != regionUVs1.length) {
-					var length1 = regionUVs1.length;
-					if(length1 == null) {
-						length1 = 0;
-					}
-					var len2 = length1 | 0;
-					var capacity7 = len2 != 0 ? len2 : 16;
-					var this8 = [];
-					var array1 = this8;
-					if(length1 > 0) {
-						var len3 = array1.length;
-						if(len3 > len2) {
-							array1.splice(len2,len2 - len3);
-						} else if(len3 < len2) {
-							while(len3 < len2) {
-								array1.push(0);
-								++len3;
-							}
-						}
-					}
-					mesh1.uvs = array1;
-				}
-				var uvs3 = mesh1.uvs;
-				if(((mesh1.region) instanceof spine_support_graphics_AtlasRegion) && (js_Boot.__cast(mesh1.region , spine_support_graphics_AtlasRegion)).rotate) {
-					var i8 = 0;
-					var n8 = uvs3.length;
-					while(i8 < n8) {
-						uvs3[i8] = u1 + regionUVs1[i8 + 1] * width2;
-						uvs3[i8 + 1] = v1 + height2 - regionUVs1[i8] * height2;
-						i8 += 2;
-					}
-				} else {
-					var i9 = 0;
-					var n9 = uvs3.length;
-					while(i9 < n9) {
-						uvs3[i9] = u1 + regionUVs1[i9] * width2;
-						uvs3[i9 + 1] = v1 + regionUVs1[i9 + 1] * height2;
-						i9 += 2;
-					}
-				}
+				mesh1.regionUVs = uvs1;
+				mesh1.updateUVs();
 				if(map.has("hull")) {
 					mesh1.hullLength = map.require("hull").asInt() * 2;
 				}
@@ -96933,68 +99411,73 @@ spine_SkeletonJson.prototype = {
 				var vertices3 = map.require("vertices").asFloatArray();
 				if(verticesLength3 == vertices3.length) {
 					if(this.scale != 1) {
-						var i10 = 0;
-						var n10 = vertices3.length;
-						while(i10 < n10) {
-							vertices3[i10] *= this.scale;
-							++i10;
+						var i6 = 0;
+						var n6 = vertices3.length;
+						while(i6 < n6) {
+							vertices3[i6] *= this.scale;
+							++i6;
 						}
 					}
 					path3.vertices = vertices3;
 				} else {
-					var capacity8 = verticesLength3 * 3 * 3;
-					var this9 = [];
-					var weights3 = this9;
-					var capacity9 = verticesLength3 * 3;
-					var this10 = [];
-					var bones3 = this10;
-					var i11 = 0;
-					var n11 = vertices3.length;
-					while(i11 < n11) {
-						var boneCount3 = vertices3[i11++] | 0;
+					var capacity6 = verticesLength3 * 3 * 3;
+					var this7 = [];
+					var weights3 = this7;
+					var capacity7 = verticesLength3 * 3;
+					var this8 = [];
+					var bones3 = this8;
+					var i7 = 0;
+					var n7 = vertices3.length;
+					while(i7 < n7) {
+						var boneCount3 = vertices3[i7++] | 0;
 						bones3.push(boneCount3);
-						var nn3 = i11 + boneCount3 * 4;
-						while(i11 < nn3) {
-							bones3.push(vertices3[i11] | 0);
-							weights3.push(vertices3[i11 + 1] * this.scale);
-							weights3.push(vertices3[i11 + 2] * this.scale);
-							weights3.push(vertices3[i11 + 3]);
-							i11 += 4;
+						var nn3 = i7 + boneCount3 * 4;
+						while(i7 < nn3) {
+							bones3.push(vertices3[i7] | 0);
+							weights3.push(vertices3[i7 + 1] * this.scale);
+							weights3.push(vertices3[i7 + 2] * this.scale);
+							weights3.push(vertices3[i7 + 3]);
+							i7 += 4;
 						}
 					}
 					path3.bones = bones3;
 					path3.vertices = weights3;
 				}
-				var length2 = vertexCount / 3;
-				if(length2 == null) {
-					length2 = 0;
+				var length = vertexCount / 3;
+				if(length == null) {
+					length = 0;
 				}
-				var len4 = length2 | 0;
-				var capacity10 = len4 != 0 ? len4 : 16;
-				var this11 = [];
-				var array2 = this11;
-				if(length2 > 0) {
-					var len5 = array2.length;
-					if(len5 > len4) {
-						array2.splice(len4,len4 - len5);
-					} else if(len5 < len4) {
-						while(len5 < len4) {
-							array2.push(0);
-							++len5;
+				var len = length | 0;
+				var capacity8 = len != 0 ? len : 16;
+				var this9 = [];
+				var array = this9;
+				if(length > 0) {
+					var len1 = array.length;
+					if(len1 > len) {
+						array.splice(len,len - len1);
+					} else if(len1 < len) {
+						while(len1 < len) {
+							array.push(0);
+							++len1;
 						}
 					}
 				}
-				var lengths = array2;
-				var i12 = 0;
+				var lengths = array;
+				var i8 = 0;
 				var curves = map.require("lengths").get_child();
 				while(curves != null) {
-					lengths[i12++] = curves.asFloat() * scale;
+					lengths[i8++] = curves.asFloat() * scale;
 					curves = curves.get_next();
 				}
 				path3.lengths = lengths;
-				var color4 = map.getString("color",null);
-				if(color4 != null) {
-					path3.color.set(spine_support_graphics_Color.valueOf(color4));
+				var color8 = map.getString("color",null);
+				if(color8 != null) {
+					var _this4 = path3.color;
+					var color9 = spine_support_graphics_Color.valueOf(color8);
+					_this4.r = color9.r;
+					_this4.g = color9.g;
+					_this4.b = color9.b;
+					_this4.a = color9.a;
 				}
 				return path3;
 			} else if(_switchCond0 == 5) {
@@ -97005,9 +99488,14 @@ spine_SkeletonJson.prototype = {
 				point.x = map.getFloat("x",0) * scale;
 				point.y = map.getFloat("y",0) * scale;
 				point.rotation = map.getFloat("rotation",0);
-				var color5 = map.getString("color",null);
-				if(color5 != null) {
-					point.color.set(spine_support_graphics_Color.valueOf(color5));
+				var color10 = map.getString("color",null);
+				if(color10 != null) {
+					var _this5 = point.color;
+					var color11 = spine_support_graphics_Color.valueOf(color10);
+					_this5.r = color11.r;
+					_this5.g = color11.g;
+					_this5.b = color11.b;
+					_this5.a = color11.a;
 				}
 				return point;
 			} else if(_switchCond0 == 6) {
@@ -97028,41 +99516,46 @@ spine_SkeletonJson.prototype = {
 				var vertices4 = map.require("vertices").asFloatArray();
 				if(verticesLength4 == vertices4.length) {
 					if(this.scale != 1) {
-						var i13 = 0;
-						var n12 = vertices4.length;
-						while(i13 < n12) {
-							vertices4[i13] *= this.scale;
-							++i13;
+						var i9 = 0;
+						var n8 = vertices4.length;
+						while(i9 < n8) {
+							vertices4[i9] *= this.scale;
+							++i9;
 						}
 					}
 					clip.vertices = vertices4;
 				} else {
-					var capacity11 = verticesLength4 * 3 * 3;
-					var this12 = [];
-					var weights4 = this12;
-					var capacity12 = verticesLength4 * 3;
-					var this13 = [];
-					var bones4 = this13;
-					var i14 = 0;
-					var n13 = vertices4.length;
-					while(i14 < n13) {
-						var boneCount4 = vertices4[i14++] | 0;
+					var capacity9 = verticesLength4 * 3 * 3;
+					var this10 = [];
+					var weights4 = this10;
+					var capacity10 = verticesLength4 * 3;
+					var this11 = [];
+					var bones4 = this11;
+					var i10 = 0;
+					var n9 = vertices4.length;
+					while(i10 < n9) {
+						var boneCount4 = vertices4[i10++] | 0;
 						bones4.push(boneCount4);
-						var nn4 = i14 + boneCount4 * 4;
-						while(i14 < nn4) {
-							bones4.push(vertices4[i14] | 0);
-							weights4.push(vertices4[i14 + 1] * this.scale);
-							weights4.push(vertices4[i14 + 2] * this.scale);
-							weights4.push(vertices4[i14 + 3]);
-							i14 += 4;
+						var nn4 = i10 + boneCount4 * 4;
+						while(i10 < nn4) {
+							bones4.push(vertices4[i10] | 0);
+							weights4.push(vertices4[i10 + 1] * this.scale);
+							weights4.push(vertices4[i10 + 2] * this.scale);
+							weights4.push(vertices4[i10 + 3]);
+							i10 += 4;
 						}
 					}
 					clip.bones = bones4;
 					clip.vertices = weights4;
 				}
-				var color6 = map.getString("color",null);
-				if(color6 != null) {
-					clip.color.set(spine_support_graphics_Color.valueOf(color6));
+				var color12 = map.getString("color",null);
+				if(color12 != null) {
+					var _this6 = clip.color;
+					var color13 = spine_support_graphics_Color.valueOf(color12);
+					_this6.r = color13.r;
+					_this6.g = color13.g;
+					_this6.b = color13.b;
+					_this6.a = color13.a;
 				}
 				return clip;
 			}
@@ -97129,7 +99622,7 @@ spine_SkeletonJson.prototype = {
 					var valueMap = timelineMap.get_child();
 					while(valueMap != null) {
 						var frameIndex1 = frameIndex++;
-						var time = valueMap.getFloat("time");
+						var time = valueMap.getFloat("time",0);
 						var attachmentName = valueMap.getString("name");
 						timeline.frames[frameIndex1] = time;
 						timeline.attachmentNames[frameIndex1] = attachmentName;
@@ -97145,7 +99638,7 @@ spine_SkeletonJson.prototype = {
 					while(valueMap1 != null) {
 						var color = spine_support_graphics_Color.valueOf(valueMap1.getString("color"));
 						var frameIndex3 = frameIndex2;
-						var time1 = valueMap1.getFloat("time");
+						var time1 = valueMap1.getFloat("time",0);
 						frameIndex3 *= 5;
 						timeline1.frames[frameIndex3] = time1;
 						timeline1.frames[frameIndex3 + 1] = color.r;
@@ -97154,10 +99647,10 @@ spine_SkeletonJson.prototype = {
 						timeline1.frames[frameIndex3 + 4] = color.a;
 						var curve = valueMap1.get("curve");
 						if(curve != null) {
-							if(curve.isString() && curve.asString() == "stepped") {
+							if(curve.isString()) {
 								timeline1.curves[frameIndex2 * 19] = 1;
-							} else if(curve.isArray()) {
-								timeline1.setCurve(frameIndex2,curve.getFloat(0),curve.getFloat(1),curve.getFloat(2),curve.getFloat(3));
+							} else {
+								timeline1.setCurve(frameIndex2,curve.asFloat(),valueMap1.getFloat("c2",0),valueMap1.getFloat("c3",1),valueMap1.getFloat("c4",1));
 							}
 						}
 						++frameIndex2;
@@ -97174,7 +99667,7 @@ spine_SkeletonJson.prototype = {
 						var light = spine_support_graphics_Color.valueOf(valueMap2.getString("light"));
 						var dark = spine_support_graphics_Color.valueOf(valueMap2.getString("dark"));
 						var frameIndex5 = frameIndex4;
-						var time2 = valueMap2.getFloat("time");
+						var time2 = valueMap2.getFloat("time",0);
 						frameIndex5 *= 8;
 						timeline2.frames[frameIndex5] = time2;
 						timeline2.frames[frameIndex5 + 1] = light.r;
@@ -97186,10 +99679,10 @@ spine_SkeletonJson.prototype = {
 						timeline2.frames[frameIndex5 + 7] = dark.b;
 						var curve1 = valueMap2.get("curve");
 						if(curve1 != null) {
-							if(curve1.isString() && curve1.asString() == "stepped") {
+							if(curve1.isString()) {
 								timeline2.curves[frameIndex4 * 19] = 1;
-							} else if(curve1.isArray()) {
-								timeline2.setCurve(frameIndex4,curve1.getFloat(0),curve1.getFloat(1),curve1.getFloat(2),curve1.getFloat(3));
+							} else {
+								timeline2.setCurve(frameIndex4,curve1.asFloat(),valueMap2.getFloat("c2",0),valueMap2.getFloat("c3",1),valueMap2.getFloat("c4",1));
 							}
 						}
 						++frameIndex4;
@@ -97220,17 +99713,17 @@ spine_SkeletonJson.prototype = {
 					var valueMap = timelineMap.get_child();
 					while(valueMap != null) {
 						var frameIndex1 = frameIndex;
-						var time = valueMap.getFloat("time");
-						var degrees = valueMap.getFloat("angle");
+						var time = valueMap.getFloat("time",0);
+						var degrees = valueMap.getFloat("angle",0);
 						frameIndex1 <<= 1;
 						timeline.frames[frameIndex1] = time;
 						timeline.frames[frameIndex1 + 1] = degrees;
 						var curve = valueMap.get("curve");
 						if(curve != null) {
-							if(curve.isString() && curve.asString() == "stepped") {
+							if(curve.isString()) {
 								timeline.curves[frameIndex * 19] = 1;
-							} else if(curve.isArray()) {
-								timeline.setCurve(frameIndex,curve.getFloat(0),curve.getFloat(1),curve.getFloat(2),curve.getFloat(3));
+							} else {
+								timeline.setCurve(frameIndex,curve.asFloat(),valueMap.getFloat("c2",0),valueMap.getFloat("c3",1),valueMap.getFloat("c4",1));
 							}
 						}
 						++frameIndex;
@@ -97241,8 +99734,10 @@ spine_SkeletonJson.prototype = {
 				} else if(timelineName == "translate" || timelineName == "scale" || timelineName == "shear") {
 					var timeline1 = null;
 					var timelineScale = 1;
+					var defaultValue = 0;
 					if(timelineName == "scale") {
 						timeline1 = new spine_ScaleTimeline(timelineMap.get_size());
+						defaultValue = 1;
 					} else if(timelineName == "shear") {
 						timeline1 = new spine_ShearTimeline(timelineMap.get_size());
 					} else {
@@ -97253,20 +99748,20 @@ spine_SkeletonJson.prototype = {
 					var frameIndex2 = 0;
 					var valueMap1 = timelineMap.get_child();
 					while(valueMap1 != null) {
-						var x = valueMap1.getFloat("x",0);
-						var y = valueMap1.getFloat("y",0);
+						var x = valueMap1.getFloat("x",defaultValue);
+						var y = valueMap1.getFloat("y",defaultValue);
 						var frameIndex3 = frameIndex2;
-						var time1 = valueMap1.getFloat("time");
+						var time1 = valueMap1.getFloat("time",0);
 						frameIndex3 *= 3;
 						timeline1.frames[frameIndex3] = time1;
 						timeline1.frames[frameIndex3 + 1] = x * timelineScale;
 						timeline1.frames[frameIndex3 + 2] = y * timelineScale;
 						var curve1 = valueMap1.get("curve");
 						if(curve1 != null) {
-							if(curve1.isString() && curve1.asString() == "stepped") {
+							if(curve1.isString()) {
 								timeline1.curves[frameIndex2 * 19] = 1;
-							} else if(curve1.isArray()) {
-								timeline1.setCurve(frameIndex2,curve1.getFloat(0),curve1.getFloat(1),curve1.getFloat(2),curve1.getFloat(3));
+							} else {
+								timeline1.setCurve(frameIndex2,curve1.asFloat(),valueMap1.getFloat("c2",0),valueMap1.getFloat("c3",1),valueMap1.getFloat("c4",1));
 							}
 						}
 						++frameIndex2;
@@ -97285,43 +99780,49 @@ spine_SkeletonJson.prototype = {
 		while(constraintMap != null) {
 			var constraint = skeletonData.findIkConstraint(constraintMap.get_name());
 			var timeline = new spine_IkConstraintTimeline(constraintMap.get_size());
-			timeline.ikConstraintIndex = skeletonData.ikConstraints.indexOf(constraint);
+			timeline.ikConstraintIndex = skeletonData.getIkConstraints().indexOf(constraint);
 			var frameIndex = 0;
 			var valueMap = constraintMap.get_child();
 			while(valueMap != null) {
 				var frameIndex1 = frameIndex;
-				var time = valueMap.getFloat("time");
+				var time = valueMap.getFloat("time",0);
 				var mix = valueMap.getFloat("mix",1);
+				var softness = valueMap.getFloat("softness",0) * scale;
 				var bendDirection = valueMap.getBoolean("bendPositive",true) ? 1 : -1;
-				frameIndex1 *= 3;
+				var compress = valueMap.getBoolean("compress",false);
+				var stretch = valueMap.getBoolean("stretch",false);
+				frameIndex1 *= 6;
 				timeline.frames[frameIndex1] = time;
 				timeline.frames[frameIndex1 + 1] = mix;
-				timeline.frames[frameIndex1 + 2] = bendDirection;
+				timeline.frames[frameIndex1 + 2] = softness;
+				timeline.frames[frameIndex1 + 3] = bendDirection;
+				timeline.frames[frameIndex1 + 4] = compress ? 1 : 0;
+				timeline.frames[frameIndex1 + 5] = stretch ? 1 : 0;
 				var curve = valueMap.get("curve");
 				if(curve != null) {
-					if(curve.isString() && curve.asString() == "stepped") {
+					if(curve.isString()) {
 						timeline.curves[frameIndex * 19] = 1;
-					} else if(curve.isArray()) {
-						timeline.setCurve(frameIndex,curve.getFloat(0),curve.getFloat(1),curve.getFloat(2),curve.getFloat(3));
+					} else {
+						timeline.setCurve(frameIndex,curve.asFloat(),valueMap.getFloat("c2",0),valueMap.getFloat("c3",1),valueMap.getFloat("c4",1));
 					}
 				}
 				++frameIndex;
 				valueMap = valueMap.get_next();
 			}
 			timelines.push(timeline);
-			duration = Math.max(duration,timeline.frames[((timeline.curves.length / 19 + 1 | 0) - 1) * 3]);
+			duration = Math.max(duration,timeline.frames[((timeline.curves.length / 19 + 1 | 0) - 1) * 6]);
 			constraintMap = constraintMap.get_next();
 		}
 		var constraintMap = map.getChild("transform");
 		while(constraintMap != null) {
 			var constraint = skeletonData.findTransformConstraint(constraintMap.get_name());
 			var timeline = new spine_TransformConstraintTimeline(constraintMap.get_size());
-			timeline.transformConstraintIndex = skeletonData.transformConstraints.indexOf(constraint);
+			timeline.transformConstraintIndex = skeletonData.getTransformConstraints().indexOf(constraint);
 			var frameIndex = 0;
 			var valueMap = constraintMap.get_child();
 			while(valueMap != null) {
 				var frameIndex1 = frameIndex;
-				var time = valueMap.getFloat("time");
+				var time = valueMap.getFloat("time",0);
 				var rotateMix = valueMap.getFloat("rotateMix",1);
 				var translateMix = valueMap.getFloat("translateMix",1);
 				var scaleMix = valueMap.getFloat("scaleMix",1);
@@ -97334,10 +99835,10 @@ spine_SkeletonJson.prototype = {
 				timeline.frames[frameIndex1 + 4] = shearMix;
 				var curve = valueMap.get("curve");
 				if(curve != null) {
-					if(curve.isString() && curve.asString() == "stepped") {
+					if(curve.isString()) {
 						timeline.curves[frameIndex * 19] = 1;
-					} else if(curve.isArray()) {
-						timeline.setCurve(frameIndex,curve.getFloat(0),curve.getFloat(1),curve.getFloat(2),curve.getFloat(3));
+					} else {
+						timeline.setCurve(frameIndex,curve.asFloat(),valueMap.getFloat("c2",0),valueMap.getFloat("c3",1),valueMap.getFloat("c4",1));
 					}
 				}
 				++frameIndex;
@@ -97347,7 +99848,7 @@ spine_SkeletonJson.prototype = {
 			duration = Math.max(duration,timeline.frames[((timeline.curves.length / 19 + 1 | 0) - 1) * 5]);
 			constraintMap = constraintMap.get_next();
 		}
-		var constraintMap = map.getChild("paths");
+		var constraintMap = map.getChild("path");
 		while(constraintMap != null) {
 			var data = skeletonData.findPathConstraint(constraintMap.get_name());
 			if(data == null) {
@@ -97376,17 +99877,17 @@ spine_SkeletonJson.prototype = {
 					var valueMap = timelineMap.get_child();
 					while(valueMap != null) {
 						var frameIndex1 = frameIndex;
-						var time = valueMap.getFloat("time");
+						var time = valueMap.getFloat("time",0);
 						var position = valueMap.getFloat(timelineName,0) * timelineScale;
 						frameIndex1 *= 2;
 						timeline.frames[frameIndex1] = time;
 						timeline.frames[frameIndex1 + 1] = position;
 						var curve = valueMap.get("curve");
 						if(curve != null) {
-							if(curve.isString() && curve.asString() == "stepped") {
+							if(curve.isString()) {
 								timeline.curves[frameIndex * 19] = 1;
-							} else if(curve.isArray()) {
-								timeline.setCurve(frameIndex,curve.getFloat(0),curve.getFloat(1),curve.getFloat(2),curve.getFloat(3));
+							} else {
+								timeline.setCurve(frameIndex,curve.asFloat(),valueMap.getFloat("c2",0),valueMap.getFloat("c3",1),valueMap.getFloat("c4",1));
 							}
 						}
 						++frameIndex;
@@ -97401,7 +99902,7 @@ spine_SkeletonJson.prototype = {
 					var valueMap1 = timelineMap.get_child();
 					while(valueMap1 != null) {
 						var frameIndex3 = frameIndex2;
-						var time1 = valueMap1.getFloat("time");
+						var time1 = valueMap1.getFloat("time",0);
 						var rotateMix = valueMap1.getFloat("rotateMix",1);
 						var translateMix = valueMap1.getFloat("translateMix",1);
 						frameIndex3 *= 3;
@@ -97410,10 +99911,10 @@ spine_SkeletonJson.prototype = {
 						timeline1.frames[frameIndex3 + 2] = translateMix;
 						var curve1 = valueMap1.get("curve");
 						if(curve1 != null) {
-							if(curve1.isString() && curve1.asString() == "stepped") {
+							if(curve1.isString()) {
 								timeline1.curves[frameIndex2 * 19] = 1;
-							} else if(curve1.isArray()) {
-								timeline1.setCurve(frameIndex2,curve1.getFloat(0),curve1.getFloat(1),curve1.getFloat(2),curve1.getFloat(3));
+							} else {
+								timeline1.setCurve(frameIndex2,curve1.asFloat(),valueMap1.getFloat("c2",0),valueMap1.getFloat("c3",1),valueMap1.getFloat("c4",1));
 							}
 						}
 						++frameIndex2;
@@ -97453,9 +99954,9 @@ spine_SkeletonJson.prototype = {
 					_this.name = name1;
 					var hash = 0;
 					var chr;
-					var attachment;
+					var x;
 					if(name1.length == 0) {
-						attachment = hash;
+						x = hash;
 					} else {
 						var _g = 0;
 						var _g1 = name1.length;
@@ -97464,19 +99965,46 @@ spine_SkeletonJson.prototype = {
 							chr = HxOverrides.cca(name1,i);
 							hash = (hash << 5) - hash + chr;
 						}
-						attachment = hash;
+						x = hash;
 					}
-					_this.hashCode = 31 * (31 + attachment) + slotIndex;
-					var attachment1 = js_Boot.__cast(spine_support_utils_ObjectMap.get(skin.attachments,skin.lookup) , spine_attachments_VertexAttachment);
-					if(attachment1 == null) {
+					_this.hashCode = x + slotIndex * 37 | 0;
+					var key = skin.lookup;
+					var entries = skin.attachments.h[key.hashCode];
+					var result = null;
+					if(entries != null) {
+						var _g2 = 0;
+						var _g3 = entries.length;
+						while(_g2 < _g3) {
+							var i1 = _g2++;
+							var entry = entries[i1];
+							var _this1 = entry.key;
+							var object = key;
+							var value;
+							if(object == null) {
+								value = false;
+							} else {
+								var result1 = object;
+								var other = result1;
+								value = _this1.slotIndex != other.slotIndex ? false : _this1.name != other.name ? false : true;
+							}
+							if(value) {
+								result = entry.value;
+								break;
+							}
+						}
+					}
+					var entry1 = result;
+					var result2 = entry1 != null ? entry1.attachment : null;
+					var attachment = result2;
+					if(attachment == null) {
 						throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Deform attachment not found: " + timelineMap.get_name()));
 					}
-					var weighted = attachment1.bones != null;
-					var vertices = attachment1.vertices;
+					var weighted = attachment.bones != null;
+					var vertices = attachment.vertices;
 					var deformLength = weighted ? vertices.length / 3 * 2 | 0 : vertices.length;
 					var timeline = new spine_DeformTimeline(timelineMap.get_size());
 					timeline.slotIndex = slot.index;
-					timeline.attachment = attachment1;
+					timeline.attachment = attachment;
 					var frameIndex = 0;
 					var valueMap = timelineMap.get_child();
 					while(valueMap != null) {
@@ -97529,32 +100057,46 @@ spine_SkeletonJson.prototype = {
 							}
 							deform = array1;
 							var start = valueMap.getInt("offset",0);
-							spine_support_utils_Array.copy(verticesValue.asFloatArray(),0,deform,start,verticesValue.get_size());
-							if(scale != 1) {
-								var i1 = start;
-								var n = i1 + verticesValue.get_size();
-								while(i1 < n) {
-									deform[i1] *= scale;
-									++i1;
-								}
+							var src = verticesValue.asFloatArray();
+							var dest = deform;
+							var length2 = verticesValue.get_size();
+							if(src == null) {
+								throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("src cannot be null."));
 							}
-							if(!weighted) {
-								var i2 = 0;
-								while(i2 < deformLength) {
-									deform[i2] += vertices[i2];
+							if(dest == null) {
+								throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("dest cannot be null."));
+							}
+							try {
+								spine_support_utils_Array.copy(src,0,dest,start,length2);
+							} catch( _g4 ) {
+								haxe_NativeStackTrace.lastError = _g4;
+								throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + start + ", count: " + length2));
+							}
+							if(scale != 1) {
+								var i2 = start;
+								var n = i2 + verticesValue.get_size();
+								while(i2 < n) {
+									deform[i2] *= scale;
 									++i2;
 								}
 							}
+							if(!weighted) {
+								var i3 = 0;
+								while(i3 < deformLength) {
+									deform[i3] += vertices[i3];
+									++i3;
+								}
+							}
 						}
-						var time = valueMap.getFloat("time");
+						var time = valueMap.getFloat("time",0);
 						timeline.frames[frameIndex] = time;
 						timeline.frameVertices[frameIndex] = deform;
 						var curve = valueMap.get("curve");
 						if(curve != null) {
-							if(curve.isString() && curve.asString() == "stepped") {
+							if(curve.isString()) {
 								timeline.curves[frameIndex * 19] = 1;
-							} else if(curve.isArray()) {
-								timeline.setCurve(frameIndex,curve.getFloat(0),curve.getFloat(1),curve.getFloat(2),curve.getFloat(3));
+							} else {
+								timeline.setCurve(frameIndex,curve.asFloat(),valueMap.getFloat("c2",0),valueMap.getFloat("c3",1),valueMap.getFloat("c4",1));
 							}
 						}
 						++frameIndex;
@@ -97648,7 +100190,7 @@ spine_SkeletonJson.prototype = {
 					}
 				}
 				var frameIndex1 = frameIndex++;
-				var time = drawOrderMap.getFloat("time");
+				var time = drawOrderMap.getFloat("time",0);
 				timeline.frames[frameIndex1] = time;
 				timeline.drawOrders[frameIndex1] = drawOrder;
 				drawOrderMap = drawOrderMap.get_next();
@@ -97666,10 +100208,14 @@ spine_SkeletonJson.prototype = {
 				if(eventData == null) {
 					throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Event not found: " + eventMap.getString("name")));
 				}
-				var event = new spine_Event(eventMap.getFloat("time"),eventData);
+				var event = new spine_Event(eventMap.getFloat("time",0),eventData);
 				event.intValue = eventMap.getInt("int",eventData.intValue);
 				event.floatValue = eventMap.getFloat("float",eventData.floatValue);
 				event.stringValue = eventMap.getString("string",eventData.stringValue);
+				if(event.data.audioPath != null) {
+					event.volume = eventMap.getFloat("volume",eventData.volume);
+					event.balance = eventMap.getFloat("balance",eventData.balance);
+				}
 				var frameIndex1 = frameIndex++;
 				timeline.frames[frameIndex1] = event.time;
 				timeline.events[frameIndex1] = event;
@@ -97685,21 +100231,23 @@ spine_SkeletonJson.prototype = {
 		if(curve == null) {
 			return;
 		}
-		if(curve.isString() && curve.asString() == "stepped") {
+		if(curve.isString()) {
 			timeline.curves[frameIndex * 19] = 1;
-		} else if(curve.isArray()) {
-			timeline.setCurve(frameIndex,curve.getFloat(0),curve.getFloat(1),curve.getFloat(2),curve.getFloat(3));
+		} else {
+			timeline.setCurve(frameIndex,curve.asFloat(),map.getFloat("c2",0),map.getFloat("c3",1),map.getFloat("c4",1));
 		}
 	}
 	,__class__: spine_SkeletonJson
 };
-var spine_LinkedMesh = function(mesh,skin,slotIndex,parent) {
+var spine_LinkedMesh = function(mesh,skin,slotIndex,parent,inheritDeform) {
+	this.inheritDeform = false;
 	this.slotIndex = 0;
 	this.skin = null;
 	this.mesh = mesh;
 	this.skin = skin;
 	this.slotIndex = slotIndex;
 	this.parent = parent;
+	this.inheritDeform = inheritDeform;
 };
 $hxClasses["spine.LinkedMesh"] = spine_LinkedMesh;
 spine_LinkedMesh.__name__ = "spine.LinkedMesh";
@@ -97708,11 +100256,13 @@ spine_LinkedMesh.prototype = {
 	,skin: null
 	,slotIndex: null
 	,mesh: null
+	,inheritDeform: null
 	,__class__: spine_LinkedMesh
 };
 var spine_Skin = function(name) {
-	this.keyPool = new spine__$Skin_KeyPool(64);
-	this.lookup = new spine_Key();
+	this.lookup = new spine_SkinEntry(0,"",null);
+	this.constraints = [];
+	this.bones = [];
 	this.attachments = new haxe_ds_IntMap();
 	if(name == null) {
 		throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("name cannot be null."));
@@ -97724,77 +100274,149 @@ spine_Skin.__name__ = "spine.Skin";
 spine_Skin.prototype = {
 	name: null
 	,attachments: null
+	,bones: null
+	,constraints: null
 	,lookup: null
-	,keyPool: null
-	,addAttachment: function(slotIndex,name,attachment) {
-		if(attachment == null) {
-			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("attachment cannot be null."));
-		}
+	,setAttachment: function(slotIndex,name,attachment) {
 		if(slotIndex < 0) {
 			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("slotIndex must be >= 0."));
 		}
-		var key = this.keyPool.obtain();
-		if(name == null) {
-			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("name cannot be null."));
+		if(attachment == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("attachment cannot be null."));
 		}
-		key.slotIndex = slotIndex;
-		key.name = name;
-		var hash = 0;
-		var chr;
-		var tmp;
-		if(name.length == 0) {
-			tmp = hash;
-		} else {
-			var _g = 0;
-			var _g1 = name.length;
-			while(_g < _g1) {
-				var i = _g++;
-				chr = HxOverrides.cca(name,i);
-				hash = (hash << 5) - hash + chr;
-			}
-			tmp = hash;
+		var newEntry = new spine_SkinEntry(slotIndex,name,attachment);
+		var oldEntry = spine_support_utils_AttachmentMap.put(this.attachments,newEntry,newEntry);
+		if(oldEntry != null) {
+			oldEntry.attachment = attachment;
 		}
-		key.hashCode = 31 * (31 + tmp) + slotIndex;
-		spine_support_utils_ObjectMap.put(this.attachments,key,attachment);
 	}
-	,addAttachments: function(skin) {
+	,addSkin: function(skin) {
+		if(skin == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("skin cannot be null."));
+		}
 		var _g = 0;
-		var _g1 = spine_support_utils_ObjectMap.entries(skin.attachments);
+		var _g1 = skin.bones;
+		while(_g < _g1.length) {
+			var data = _g1[_g];
+			++_g;
+			if(this.bones.indexOf(data) == -1) {
+				this.bones.push(data);
+			}
+		}
+		var _g = 0;
+		var _g1 = skin.constraints;
+		while(_g < _g1.length) {
+			var data = _g1[_g];
+			++_g;
+			if(this.constraints.indexOf(data) == -1) {
+				this.constraints.push(data);
+			}
+		}
+		var _g = 0;
+		var _g1 = spine_support_utils_AttachmentMap.keys(skin.attachments);
 		while(_g < _g1.length) {
 			var entry = _g1[_g];
 			++_g;
-			var slotIndex = entry.key.slotIndex;
-			var name = entry.key.name;
-			var attachment = entry.value;
-			if(attachment == null) {
-				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("attachment cannot be null."));
-			}
+			var slotIndex = entry.slotIndex;
+			var name = entry.name;
+			var attachment = entry.attachment;
 			if(slotIndex < 0) {
 				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("slotIndex must be >= 0."));
 			}
-			var key = this.keyPool.obtain();
-			if(name == null) {
-				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("name cannot be null."));
+			if(attachment == null) {
+				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("attachment cannot be null."));
 			}
-			key.slotIndex = slotIndex;
-			key.name = name;
-			var hash = 0;
-			var chr;
-			var tmp;
-			if(name.length == 0) {
-				tmp = hash;
-			} else {
-				var _g2 = 0;
-				var _g3 = name.length;
-				while(_g2 < _g3) {
-					var i = _g2++;
-					chr = HxOverrides.cca(name,i);
-					hash = (hash << 5) - hash + chr;
+			var newEntry = new spine_SkinEntry(slotIndex,name,attachment);
+			var oldEntry = spine_support_utils_AttachmentMap.put(this.attachments,newEntry,newEntry);
+			if(oldEntry != null) {
+				oldEntry.attachment = attachment;
+			}
+		}
+	}
+	,copySkin: function(skin) {
+		if(skin == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("skin cannot be null."));
+		}
+		var _g = 0;
+		var _g1 = skin.bones;
+		while(_g < _g1.length) {
+			var data = _g1[_g];
+			++_g;
+			if(this.bones.indexOf(data) == -1) {
+				this.bones.push(data);
+			}
+		}
+		var _g = 0;
+		var _g1 = skin.constraints;
+		while(_g < _g1.length) {
+			var data = _g1[_g];
+			++_g;
+			if(this.constraints.indexOf(data) == -1) {
+				this.constraints.push(data);
+			}
+		}
+		var _g = 0;
+		var _g1 = spine_support_utils_AttachmentMap.keys(skin.attachments);
+		while(_g < _g1.length) {
+			var entry = _g1[_g];
+			++_g;
+			if(((entry.attachment) instanceof spine_attachments_MeshAttachment)) {
+				var slotIndex = entry.slotIndex;
+				var name = entry.name;
+				var result = entry.attachment;
+				var _this = result;
+				var mesh = new spine_attachments_MeshAttachment(_this.name);
+				mesh.region = _this.region;
+				mesh.path = _this.path;
+				var _this1 = mesh.color;
+				var color = _this.color;
+				_this1.r = color.r;
+				_this1.g = color.g;
+				_this1.b = color.b;
+				_this1.a = color.a;
+				mesh.deformAttachment = _this.deformAttachment != null ? _this.deformAttachment : _this;
+				var parentMesh = _this.parentMesh != null ? _this.parentMesh : _this;
+				mesh.parentMesh = parentMesh;
+				if(parentMesh != null) {
+					mesh.bones = parentMesh.bones;
+					mesh.vertices = parentMesh.vertices;
+					mesh.regionUVs = parentMesh.regionUVs;
+					mesh.triangles = parentMesh.triangles;
+					mesh.hullLength = parentMesh.hullLength;
+					mesh.worldVerticesLength = parentMesh.worldVerticesLength;
+					mesh.edges = parentMesh.edges;
+					mesh.width = parentMesh.width;
+					mesh.height = parentMesh.height;
 				}
-				tmp = hash;
+				mesh.updateUVs();
+				var attachment = mesh;
+				if(slotIndex < 0) {
+					throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("slotIndex must be >= 0."));
+				}
+				if(attachment == null) {
+					throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("attachment cannot be null."));
+				}
+				var newEntry = new spine_SkinEntry(slotIndex,name,attachment);
+				var oldEntry = spine_support_utils_AttachmentMap.put(this.attachments,newEntry,newEntry);
+				if(oldEntry != null) {
+					oldEntry.attachment = attachment;
+				}
+			} else {
+				var slotIndex1 = entry.slotIndex;
+				var name1 = entry.name;
+				var attachment1 = entry.attachment != null ? entry.attachment.copy() : null;
+				if(slotIndex1 < 0) {
+					throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("slotIndex must be >= 0."));
+				}
+				if(attachment1 == null) {
+					throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("attachment cannot be null."));
+				}
+				var newEntry1 = new spine_SkinEntry(slotIndex1,name1,attachment1);
+				var oldEntry1 = spine_support_utils_AttachmentMap.put(this.attachments,newEntry1,newEntry1);
+				if(oldEntry1 != null) {
+					oldEntry1.attachment = attachment1;
+				}
 			}
-			key.hashCode = 31 * (31 + tmp) + slotIndex;
-			spine_support_utils_ObjectMap.put(this.attachments,key,attachment);
 		}
 	}
 	,getAttachment: function(slotIndex,name) {
@@ -97809,9 +100431,9 @@ spine_Skin.prototype = {
 		_this.name = name;
 		var hash = 0;
 		var chr;
-		var tmp;
+		var x;
 		if(name.length == 0) {
-			tmp = hash;
+			x = hash;
 		} else {
 			var _g = 0;
 			var _g1 = name.length;
@@ -97820,53 +100442,90 @@ spine_Skin.prototype = {
 				chr = HxOverrides.cca(name,i);
 				hash = (hash << 5) - hash + chr;
 			}
-			tmp = hash;
+			x = hash;
 		}
-		_this.hashCode = 31 * (31 + tmp) + slotIndex;
-		return spine_support_utils_ObjectMap.get(this.attachments,this.lookup);
+		_this.hashCode = x + slotIndex * 37 | 0;
+		var key = this.lookup;
+		var entries = this.attachments.h[key.hashCode];
+		var result = null;
+		if(entries != null) {
+			var _g = 0;
+			var _g1 = entries.length;
+			while(_g < _g1) {
+				var i = _g++;
+				var entry = entries[i];
+				var _this = entry.key;
+				var object = key;
+				var tmp;
+				if(object == null) {
+					tmp = false;
+				} else {
+					var result1 = object;
+					var other = result1;
+					tmp = _this.slotIndex != other.slotIndex ? false : _this.name != other.name ? false : true;
+				}
+				if(tmp) {
+					result = entry.value;
+					break;
+				}
+			}
+		}
+		var entry = result;
+		if(entry != null) {
+			return entry.attachment;
+		} else {
+			return null;
+		}
 	}
-	,findNamesForSlot: function(slotIndex,names) {
-		if(names == null) {
-			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("names cannot be null."));
-		}
+	,removeAttachment: function(slotIndex,name) {
 		if(slotIndex < 0) {
 			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("slotIndex must be >= 0."));
 		}
-		var _g = 0;
-		var _g1 = spine_support_utils_ObjectMap.keys(this.attachments);
-		while(_g < _g1.length) {
-			var key = _g1[_g];
-			++_g;
-			if(key.slotIndex == slotIndex) {
-				names.push(key.name);
-			}
+		var _this = this.lookup;
+		if(name == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("name cannot be null."));
 		}
+		_this.slotIndex = slotIndex;
+		_this.name = name;
+		var hash = 0;
+		var chr;
+		var x;
+		if(name.length == 0) {
+			x = hash;
+		} else {
+			var _g = 0;
+			var _g1 = name.length;
+			while(_g < _g1) {
+				var i = _g++;
+				chr = HxOverrides.cca(name,i);
+				hash = (hash << 5) - hash + chr;
+			}
+			x = hash;
+		}
+		_this.hashCode = x + slotIndex * 37 | 0;
+		this.attachments.remove(this.lookup.hashCode);
 	}
-	,findAttachmentsForSlot: function(slotIndex,attachments) {
+	,getAttachments: function() {
+		return spine_support_utils_AttachmentMap.orderedKeys(this.attachments);
+	}
+	,getAttachmentsInSkinForSlot: function(slotIndex,attachments) {
+		if(slotIndex < 0) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("slotIndex must be >= 0."));
+		}
 		if(attachments == null) {
 			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("attachments cannot be null."));
 		}
-		if(slotIndex < 0) {
-			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("slotIndex must be >= 0."));
-		}
 		var _g = 0;
-		var _g1 = spine_support_utils_ObjectMap.entries(this.attachments);
+		var _g1 = spine_support_utils_AttachmentMap.keys(this.attachments);
 		while(_g < _g1.length) {
 			var entry = _g1[_g];
 			++_g;
-			if(entry.key.slotIndex == slotIndex) {
-				attachments.push(entry.value);
+			if(entry.slotIndex == slotIndex) {
+				attachments.push(entry);
 			}
 		}
 	}
 	,clear: function() {
-		var _g = 0;
-		var _g1 = spine_support_utils_ObjectMap.keys(this.attachments);
-		while(_g < _g1.length) {
-			var key = _g1[_g];
-			++_g;
-			this.keyPool.free(key);
-		}
 		var this1 = this.attachments;
 		var keys = [];
 		var key = this1.keys();
@@ -97880,6 +100539,16 @@ spine_Skin.prototype = {
 			++_g;
 			this1.remove(key);
 		}
+		var this1 = this.bones;
+		this1.splice(0,this1.length);
+		var this1 = this.constraints;
+		this1.splice(0,this1.length);
+	}
+	,getBones: function() {
+		return this.bones;
+	}
+	,getConstraints: function() {
+		return this.constraints;
 	}
 	,getName: function() {
 		return this.name;
@@ -97889,14 +100558,14 @@ spine_Skin.prototype = {
 	}
 	,attachAll: function(skeleton,oldSkin) {
 		var _g = 0;
-		var _g1 = spine_support_utils_ObjectMap.entries(oldSkin.attachments);
+		var _g1 = spine_support_utils_AttachmentMap.keys(oldSkin.attachments);
 		while(_g < _g1.length) {
 			var entry = _g1[_g];
 			++_g;
-			var slotIndex = entry.key.slotIndex;
+			var slotIndex = entry.slotIndex;
 			var slot = skeleton.slots[slotIndex];
-			if(slot.attachment == entry.value) {
-				var name = entry.key.name;
+			if(slot.attachment == entry.attachment) {
+				var name = entry.name;
 				if(slotIndex < 0) {
 					throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("slotIndex must be >= 0."));
 				}
@@ -97908,9 +100577,9 @@ spine_Skin.prototype = {
 				_this.name = name;
 				var hash = 0;
 				var chr;
-				var tmp;
+				var x;
 				if(name.length == 0) {
-					tmp = hash;
+					x = hash;
 				} else {
 					var _g2 = 0;
 					var _g3 = name.length;
@@ -97919,15 +100588,41 @@ spine_Skin.prototype = {
 						chr = HxOverrides.cca(name,i);
 						hash = (hash << 5) - hash + chr;
 					}
-					tmp = hash;
+					x = hash;
 				}
-				_this.hashCode = 31 * (31 + tmp) + slotIndex;
-				var attachment = spine_support_utils_ObjectMap.get(this.attachments,this.lookup);
+				_this.hashCode = x + slotIndex * 37 | 0;
+				var key = this.lookup;
+				var entries = this.attachments.h[key.hashCode];
+				var result = null;
+				if(entries != null) {
+					var _g4 = 0;
+					var _g5 = entries.length;
+					while(_g4 < _g5) {
+						var i1 = _g4++;
+						var entry1 = entries[i1];
+						var _this1 = entry1.key;
+						var object = key;
+						var tmp;
+						if(object == null) {
+							tmp = false;
+						} else {
+							var result1 = object;
+							var other = result1;
+							tmp = _this1.slotIndex != other.slotIndex ? false : _this1.name != other.name ? false : true;
+						}
+						if(tmp) {
+							result = entry1.value;
+							break;
+						}
+					}
+				}
+				var entry2 = result;
+				var attachment = entry2 != null ? entry2.attachment : null;
 				if(attachment != null) {
 					if(slot.attachment != attachment) {
 						slot.attachment = attachment;
 						slot.attachmentTime = slot.bone.skeleton.time;
-						var this1 = slot.attachmentVertices;
+						var this1 = slot.deform;
 						this1.splice(0,this1.length);
 					}
 				}
@@ -97936,15 +100631,38 @@ spine_Skin.prototype = {
 	}
 	,__class__: spine_Skin
 };
-var spine_Key = function() {
+var spine_SkinEntry = function(slotIndex,name,attachment) {
 	this.hashCode = 0;
 	this.slotIndex = 0;
+	if(name == null) {
+		throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("name cannot be null."));
+	}
+	this.slotIndex = slotIndex;
+	this.name = name;
+	var hash = 0;
+	var chr;
+	var x;
+	if(name.length == 0) {
+		x = hash;
+	} else {
+		var _g = 0;
+		var _g1 = name.length;
+		while(_g < _g1) {
+			var i = _g++;
+			chr = HxOverrides.cca(name,i);
+			hash = (hash << 5) - hash + chr;
+		}
+		x = hash;
+	}
+	this.hashCode = x + slotIndex * 37 | 0;
+	this.attachment = attachment;
 };
-$hxClasses["spine.Key"] = spine_Key;
-spine_Key.__name__ = "spine.Key";
-spine_Key.prototype = {
+$hxClasses["spine.SkinEntry"] = spine_SkinEntry;
+spine_SkinEntry.__name__ = "spine.SkinEntry";
+spine_SkinEntry.prototype = {
 	slotIndex: null
 	,name: null
+	,attachment: null
 	,hashCode: null
 	,set: function(slotIndex,name) {
 		if(name == null) {
@@ -97954,9 +100672,9 @@ spine_Key.prototype = {
 		this.name = name;
 		var hash = 0;
 		var chr;
-		var tmp;
+		var x;
 		if(name.length == 0) {
-			tmp = hash;
+			x = hash;
 		} else {
 			var _g = 0;
 			var _g1 = name.length;
@@ -97965,9 +100683,18 @@ spine_Key.prototype = {
 				chr = HxOverrides.cca(name,i);
 				hash = (hash << 5) - hash + chr;
 			}
-			tmp = hash;
+			x = hash;
 		}
-		this.hashCode = 31 * (31 + tmp) + slotIndex;
+		this.hashCode = x + slotIndex * 37 | 0;
+	}
+	,getSlotIndex: function() {
+		return this.slotIndex;
+	}
+	,getName: function() {
+		return this.name;
+	}
+	,getAttachment: function() {
+		return this.attachment;
 	}
 	,getHashCode: function() {
 		return this.hashCode;
@@ -97976,7 +100703,8 @@ spine_Key.prototype = {
 		if(object == null) {
 			return false;
 		}
-		var other = js_Boot.__cast(object , spine_Key);
+		var result = object;
+		var other = result;
 		if(this.slotIndex != other.slotIndex) {
 			return false;
 		}
@@ -97988,22 +100716,10 @@ spine_Key.prototype = {
 	,toString: function() {
 		return this.slotIndex + ":" + this.name;
 	}
-	,__class__: spine_Key
+	,__class__: spine_SkinEntry
 };
-var spine__$Skin_KeyPool = function(initialCapacity) {
-	spine_support_utils_Pool.call(this,initialCapacity,999999999);
-};
-$hxClasses["spine._Skin.KeyPool"] = spine__$Skin_KeyPool;
-spine__$Skin_KeyPool.__name__ = "spine._Skin.KeyPool";
-spine__$Skin_KeyPool.__super__ = spine_support_utils_Pool;
-spine__$Skin_KeyPool.prototype = $extend(spine_support_utils_Pool.prototype,{
-	newObject: function() {
-		return new spine_Key();
-	}
-	,__class__: spine__$Skin_KeyPool
-});
 var spine_Slot = function(data,bone) {
-	this.attachmentVertices = [];
+	this.deform = [];
 	this.attachmentTime = 0;
 	this.darkColor = null;
 	this.color = new spine_support_graphics_Color();
@@ -98016,16 +100732,26 @@ var spine_Slot = function(data,bone) {
 	this.data = data;
 	this.bone = bone;
 	this.darkColor = data.darkColor == null ? null : new spine_support_graphics_Color();
-	this.color.set(this.data.color);
+	var _this = this.color;
+	var color = this.data.color;
+	_this.r = color.r;
+	_this.g = color.g;
+	_this.b = color.b;
+	_this.a = color.a;
 	if(this.darkColor != null) {
-		this.darkColor.set(this.data.darkColor);
+		var _this = this.darkColor;
+		var color = this.data.darkColor;
+		_this.r = color.r;
+		_this.g = color.g;
+		_this.b = color.b;
+		_this.a = color.a;
 	}
 	if(this.data.attachmentName == null) {
 		var attachment = null;
 		if(this.attachment != attachment) {
 			this.attachment = attachment;
 			this.attachmentTime = this.bone.skeleton.time;
-			var this1 = this.attachmentVertices;
+			var this1 = this.deform;
 			this1.splice(0,this1.length);
 		}
 	} else {
@@ -98034,7 +100760,7 @@ var spine_Slot = function(data,bone) {
 		if(this.attachment != attachment) {
 			this.attachment = attachment;
 			this.attachmentTime = this.bone.skeleton.time;
-			var this1 = this.attachmentVertices;
+			var this1 = this.deform;
 			this1.splice(0,this1.length);
 		}
 	}
@@ -98048,7 +100774,7 @@ spine_Slot.prototype = {
 	,darkColor: null
 	,attachment: null
 	,attachmentTime: null
-	,attachmentVertices: null
+	,deform: null
 	,getData: function() {
 		return this.data;
 	}
@@ -98073,7 +100799,7 @@ spine_Slot.prototype = {
 		}
 		this.attachment = attachment;
 		this.attachmentTime = this.bone.skeleton.time;
-		var this1 = this.attachmentVertices;
+		var this1 = this.deform;
 		this1.splice(0,this1.length);
 	}
 	,getAttachmentTime: function() {
@@ -98082,26 +100808,36 @@ spine_Slot.prototype = {
 	,setAttachmentTime: function(time) {
 		this.attachmentTime = this.bone.skeleton.time - time;
 	}
-	,getAttachmentVertices: function() {
-		return this.attachmentVertices;
+	,getDeform: function() {
+		return this.deform;
 	}
-	,setAttachmentVertices: function(attachmentVertices) {
-		if(attachmentVertices == null) {
-			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("attachmentVertices cannot be null."));
+	,setDeform: function(deform) {
+		if(deform == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("deform cannot be null."));
 		}
-		this.attachmentVertices = attachmentVertices;
+		this.deform = deform;
 	}
 	,setToSetupPose: function() {
-		this.color.set(this.data.color);
+		var _this = this.color;
+		var color = this.data.color;
+		_this.r = color.r;
+		_this.g = color.g;
+		_this.b = color.b;
+		_this.a = color.a;
 		if(this.darkColor != null) {
-			this.darkColor.set(this.data.darkColor);
+			var _this = this.darkColor;
+			var color = this.data.darkColor;
+			_this.r = color.r;
+			_this.g = color.g;
+			_this.b = color.b;
+			_this.a = color.a;
 		}
 		if(this.data.attachmentName == null) {
 			var attachment = null;
 			if(this.attachment != attachment) {
 				this.attachment = attachment;
 				this.attachmentTime = this.bone.skeleton.time;
-				var this1 = this.attachmentVertices;
+				var this1 = this.deform;
 				this1.splice(0,this1.length);
 			}
 		} else {
@@ -98110,7 +100846,7 @@ spine_Slot.prototype = {
 			if(this.attachment != attachment) {
 				this.attachment = attachment;
 				this.attachmentTime = this.bone.skeleton.time;
-				var this1 = this.attachmentVertices;
+				var this1 = this.deform;
 				this1.splice(0,this1.length);
 			}
 		}
@@ -98183,6 +100919,7 @@ spine_SlotData.prototype = {
 };
 var spine_TransformConstraint = function(data,skeleton) {
 	this.temp = new spine_support_math_Vector2();
+	this.active = false;
 	this.shearMix = 0;
 	this.scaleMix = 0;
 	this.translateMix = 0;
@@ -98212,7 +100949,7 @@ var spine_TransformConstraint = function(data,skeleton) {
 };
 $hxClasses["spine.TransformConstraint"] = spine_TransformConstraint;
 spine_TransformConstraint.__name__ = "spine.TransformConstraint";
-spine_TransformConstraint.__interfaces__ = [spine_Constraint];
+spine_TransformConstraint.__interfaces__ = [spine_Updatable];
 spine_TransformConstraint.prototype = {
 	data: null
 	,bones: null
@@ -98221,8 +100958,9 @@ spine_TransformConstraint.prototype = {
 	,translateMix: null
 	,scaleMix: null
 	,shearMix: null
+	,active: null
 	,temp: null
-	,apply: function() {
+	,applyNoArgs: function() {
 		if(this.data.local) {
 			if(this.data.relative) {
 				var rotateMix = this.rotateMix;
@@ -98236,11 +100974,11 @@ spine_TransformConstraint.prototype = {
 					if(parent == null) {
 						target.ax = target.worldX;
 						target.ay = target.worldY;
-						target.arotation = js_Boot.__cast(Math.atan2(target.c,target.a) , Float) * spine_utils_SpineUtils.radDeg;
-						target.ascaleX = js_Boot.__cast(Math.sqrt(target.a * target.a + target.c * target.c) , Float);
-						target.ascaleY = js_Boot.__cast(Math.sqrt(target.b * target.b + target.d * target.d) , Float);
+						target.arotation = Math.atan2(target.c,target.a) * spine_utils_SpineUtils.radDeg;
+						target.ascaleX = Math.sqrt(target.a * target.a + target.c * target.c);
+						target.ascaleY = Math.sqrt(target.b * target.b + target.d * target.d);
 						target.ashearX = 0;
-						target.ashearY = js_Boot.__cast(Math.atan2(target.a * target.b + target.c * target.d,target.a * target.d - target.b * target.c) , Float) * spine_utils_SpineUtils.radDeg;
+						target.ashearY = Math.atan2(target.a * target.b + target.c * target.d,target.a * target.d - target.b * target.c) * spine_utils_SpineUtils.radDeg;
 					} else {
 						var pa = parent.a;
 						var pb = parent.b;
@@ -98260,17 +100998,17 @@ spine_TransformConstraint.prototype = {
 						var rc = id * target.c - ic * target.a;
 						var rd = id * target.d - ic * target.b;
 						target.ashearX = 0;
-						target.ascaleX = js_Boot.__cast(Math.sqrt(ra * ra + rc * rc) , Float);
+						target.ascaleX = Math.sqrt(ra * ra + rc * rc);
 						if(target.ascaleX > 0.0001) {
 							var det = ra * rd - rb * rc;
 							target.ascaleY = det / target.ascaleX;
-							target.ashearY = js_Boot.__cast(Math.atan2(ra * rb + rc * rd,det) , Float) * spine_utils_SpineUtils.radDeg;
-							target.arotation = js_Boot.__cast(Math.atan2(rc,ra) , Float) * spine_utils_SpineUtils.radDeg;
+							target.ashearY = Math.atan2(ra * rb + rc * rd,det) * spine_utils_SpineUtils.radDeg;
+							target.arotation = Math.atan2(rc,ra) * spine_utils_SpineUtils.radDeg;
 						} else {
 							target.ascaleX = 0;
-							target.ascaleY = js_Boot.__cast(Math.sqrt(rb * rb + rd * rd) , Float);
+							target.ascaleY = Math.sqrt(rb * rb + rd * rd);
 							target.ashearY = 0;
-							target.arotation = 90 - js_Boot.__cast(Math.atan2(rd,rb) , Float) * spine_utils_SpineUtils.radDeg;
+							target.arotation = 90 - Math.atan2(rd,rb) * spine_utils_SpineUtils.radDeg;
 						}
 					}
 				}
@@ -98285,11 +101023,11 @@ spine_TransformConstraint.prototype = {
 						if(parent == null) {
 							bone.ax = bone.worldX;
 							bone.ay = bone.worldY;
-							bone.arotation = js_Boot.__cast(Math.atan2(bone.c,bone.a) , Float) * spine_utils_SpineUtils.radDeg;
-							bone.ascaleX = js_Boot.__cast(Math.sqrt(bone.a * bone.a + bone.c * bone.c) , Float);
-							bone.ascaleY = js_Boot.__cast(Math.sqrt(bone.b * bone.b + bone.d * bone.d) , Float);
+							bone.arotation = Math.atan2(bone.c,bone.a) * spine_utils_SpineUtils.radDeg;
+							bone.ascaleX = Math.sqrt(bone.a * bone.a + bone.c * bone.c);
+							bone.ascaleY = Math.sqrt(bone.b * bone.b + bone.d * bone.d);
 							bone.ashearX = 0;
-							bone.ashearY = js_Boot.__cast(Math.atan2(bone.a * bone.b + bone.c * bone.d,bone.a * bone.d - bone.b * bone.c) , Float) * spine_utils_SpineUtils.radDeg;
+							bone.ashearY = Math.atan2(bone.a * bone.b + bone.c * bone.d,bone.a * bone.d - bone.b * bone.c) * spine_utils_SpineUtils.radDeg;
 						} else {
 							var pa = parent.a;
 							var pb = parent.b;
@@ -98309,17 +101047,17 @@ spine_TransformConstraint.prototype = {
 							var rc = id * bone.c - ic * bone.a;
 							var rd = id * bone.d - ic * bone.b;
 							bone.ashearX = 0;
-							bone.ascaleX = js_Boot.__cast(Math.sqrt(ra * ra + rc * rc) , Float);
+							bone.ascaleX = Math.sqrt(ra * ra + rc * rc);
 							if(bone.ascaleX > 0.0001) {
 								var det = ra * rd - rb * rc;
 								bone.ascaleY = det / bone.ascaleX;
-								bone.ashearY = js_Boot.__cast(Math.atan2(ra * rb + rc * rd,det) , Float) * spine_utils_SpineUtils.radDeg;
-								bone.arotation = js_Boot.__cast(Math.atan2(rc,ra) , Float) * spine_utils_SpineUtils.radDeg;
+								bone.ashearY = Math.atan2(ra * rb + rc * rd,det) * spine_utils_SpineUtils.radDeg;
+								bone.arotation = Math.atan2(rc,ra) * spine_utils_SpineUtils.radDeg;
 							} else {
 								bone.ascaleX = 0;
-								bone.ascaleY = js_Boot.__cast(Math.sqrt(rb * rb + rd * rd) , Float);
+								bone.ascaleY = Math.sqrt(rb * rb + rd * rd);
 								bone.ashearY = 0;
-								bone.arotation = 90 - js_Boot.__cast(Math.atan2(rd,rb) , Float) * spine_utils_SpineUtils.radDeg;
+								bone.arotation = 90 - Math.atan2(rd,rb) * spine_utils_SpineUtils.radDeg;
 							}
 						}
 					}
@@ -98335,12 +101073,12 @@ spine_TransformConstraint.prototype = {
 					}
 					var scaleX = bone.ascaleX;
 					var scaleY = bone.ascaleY;
-					if(scaleMix > 0) {
+					if(scaleMix != 0) {
 						scaleX *= (target.ascaleX - 1 + this.data.offsetScaleX) * scaleMix + 1;
 						scaleY *= (target.ascaleY - 1 + this.data.offsetScaleY) * scaleMix + 1;
 					}
 					var shearY = bone.ashearY;
-					if(shearMix > 0) {
+					if(shearMix != 0) {
 						shearY += (target.ashearY + this.data.offsetShearY) * shearMix;
 					}
 					bone.updateWorldTransformWithData(x,y,rotation,scaleX,scaleY,bone.ashearX,shearY);
@@ -98358,11 +101096,11 @@ spine_TransformConstraint.prototype = {
 					if(parent == null) {
 						target.ax = target.worldX;
 						target.ay = target.worldY;
-						target.arotation = js_Boot.__cast(Math.atan2(target.c,target.a) , Float) * spine_utils_SpineUtils.radDeg;
-						target.ascaleX = js_Boot.__cast(Math.sqrt(target.a * target.a + target.c * target.c) , Float);
-						target.ascaleY = js_Boot.__cast(Math.sqrt(target.b * target.b + target.d * target.d) , Float);
+						target.arotation = Math.atan2(target.c,target.a) * spine_utils_SpineUtils.radDeg;
+						target.ascaleX = Math.sqrt(target.a * target.a + target.c * target.c);
+						target.ascaleY = Math.sqrt(target.b * target.b + target.d * target.d);
 						target.ashearX = 0;
-						target.ashearY = js_Boot.__cast(Math.atan2(target.a * target.b + target.c * target.d,target.a * target.d - target.b * target.c) , Float) * spine_utils_SpineUtils.radDeg;
+						target.ashearY = Math.atan2(target.a * target.b + target.c * target.d,target.a * target.d - target.b * target.c) * spine_utils_SpineUtils.radDeg;
 					} else {
 						var pa = parent.a;
 						var pb = parent.b;
@@ -98382,17 +101120,17 @@ spine_TransformConstraint.prototype = {
 						var rc = id * target.c - ic * target.a;
 						var rd = id * target.d - ic * target.b;
 						target.ashearX = 0;
-						target.ascaleX = js_Boot.__cast(Math.sqrt(ra * ra + rc * rc) , Float);
+						target.ascaleX = Math.sqrt(ra * ra + rc * rc);
 						if(target.ascaleX > 0.0001) {
 							var det = ra * rd - rb * rc;
 							target.ascaleY = det / target.ascaleX;
-							target.ashearY = js_Boot.__cast(Math.atan2(ra * rb + rc * rd,det) , Float) * spine_utils_SpineUtils.radDeg;
-							target.arotation = js_Boot.__cast(Math.atan2(rc,ra) , Float) * spine_utils_SpineUtils.radDeg;
+							target.ashearY = Math.atan2(ra * rb + rc * rd,det) * spine_utils_SpineUtils.radDeg;
+							target.arotation = Math.atan2(rc,ra) * spine_utils_SpineUtils.radDeg;
 						} else {
 							target.ascaleX = 0;
-							target.ascaleY = js_Boot.__cast(Math.sqrt(rb * rb + rd * rd) , Float);
+							target.ascaleY = Math.sqrt(rb * rb + rd * rd);
 							target.ashearY = 0;
-							target.arotation = 90 - js_Boot.__cast(Math.atan2(rd,rb) , Float) * spine_utils_SpineUtils.radDeg;
+							target.arotation = 90 - Math.atan2(rd,rb) * spine_utils_SpineUtils.radDeg;
 						}
 					}
 				}
@@ -98407,11 +101145,11 @@ spine_TransformConstraint.prototype = {
 						if(parent == null) {
 							bone.ax = bone.worldX;
 							bone.ay = bone.worldY;
-							bone.arotation = js_Boot.__cast(Math.atan2(bone.c,bone.a) , Float) * spine_utils_SpineUtils.radDeg;
-							bone.ascaleX = js_Boot.__cast(Math.sqrt(bone.a * bone.a + bone.c * bone.c) , Float);
-							bone.ascaleY = js_Boot.__cast(Math.sqrt(bone.b * bone.b + bone.d * bone.d) , Float);
+							bone.arotation = Math.atan2(bone.c,bone.a) * spine_utils_SpineUtils.radDeg;
+							bone.ascaleX = Math.sqrt(bone.a * bone.a + bone.c * bone.c);
+							bone.ascaleY = Math.sqrt(bone.b * bone.b + bone.d * bone.d);
 							bone.ashearX = 0;
-							bone.ashearY = js_Boot.__cast(Math.atan2(bone.a * bone.b + bone.c * bone.d,bone.a * bone.d - bone.b * bone.c) , Float) * spine_utils_SpineUtils.radDeg;
+							bone.ashearY = Math.atan2(bone.a * bone.b + bone.c * bone.d,bone.a * bone.d - bone.b * bone.c) * spine_utils_SpineUtils.radDeg;
 						} else {
 							var pa = parent.a;
 							var pb = parent.b;
@@ -98431,17 +101169,17 @@ spine_TransformConstraint.prototype = {
 							var rc = id * bone.c - ic * bone.a;
 							var rd = id * bone.d - ic * bone.b;
 							bone.ashearX = 0;
-							bone.ascaleX = js_Boot.__cast(Math.sqrt(ra * ra + rc * rc) , Float);
+							bone.ascaleX = Math.sqrt(ra * ra + rc * rc);
 							if(bone.ascaleX > 0.0001) {
 								var det = ra * rd - rb * rc;
 								bone.ascaleY = det / bone.ascaleX;
-								bone.ashearY = js_Boot.__cast(Math.atan2(ra * rb + rc * rd,det) , Float) * spine_utils_SpineUtils.radDeg;
-								bone.arotation = js_Boot.__cast(Math.atan2(rc,ra) , Float) * spine_utils_SpineUtils.radDeg;
+								bone.ashearY = Math.atan2(ra * rb + rc * rd,det) * spine_utils_SpineUtils.radDeg;
+								bone.arotation = Math.atan2(rc,ra) * spine_utils_SpineUtils.radDeg;
 							} else {
 								bone.ascaleX = 0;
-								bone.ascaleY = js_Boot.__cast(Math.sqrt(rb * rb + rd * rd) , Float);
+								bone.ascaleY = Math.sqrt(rb * rb + rd * rd);
 								bone.ashearY = 0;
-								bone.arotation = 90 - js_Boot.__cast(Math.atan2(rd,rb) , Float) * spine_utils_SpineUtils.radDeg;
+								bone.arotation = 90 - Math.atan2(rd,rb) * spine_utils_SpineUtils.radDeg;
 							}
 						}
 					}
@@ -98459,7 +101197,7 @@ spine_TransformConstraint.prototype = {
 					}
 					var scaleX = bone.ascaleX;
 					var scaleY = bone.ascaleY;
-					if(scaleMix > 0) {
+					if(scaleMix != 0) {
 						if(scaleX != 0) {
 							scaleX = (scaleX + (target.ascaleX - scaleX + this.data.offsetScaleX) * scaleMix) / scaleX;
 						}
@@ -98468,10 +101206,10 @@ spine_TransformConstraint.prototype = {
 						}
 					}
 					var shearY = bone.ashearY;
-					if(shearMix > 0) {
+					if(shearMix != 0) {
 						var r1 = target.ashearY - shearY + this.data.offsetShearY;
 						r1 -= (16384 - (16384.499999999996 - r1 / 360 | 0)) * 360;
-						bone.shearY += r1 * shearMix;
+						shearY += r1 * shearMix;
 					}
 					bone.updateWorldTransformWithData(x,y,rotation,scaleX,scaleY,bone.ashearX,shearY);
 					++i;
@@ -98501,15 +101239,15 @@ spine_TransformConstraint.prototype = {
 					var b = bone.b;
 					var c = bone.c;
 					var d = bone.d;
-					var r = js_Boot.__cast(Math.atan2(tc,ta) , Float) + offsetRotation;
+					var r = Math.atan2(tc,ta) + offsetRotation;
 					if(r > 3.1415927) {
 						r -= 6.2831854;
 					} else if(r < -3.1415927) {
 						r += 6.2831854;
 					}
 					r *= rotateMix;
-					var cos = js_Boot.__cast(Math.cos(r) , Float);
-					var sin = js_Boot.__cast(Math.sin(r) , Float);
+					var cos = Math.cos(r);
+					var sin = Math.sin(r);
 					bone.a = cos * a - sin * c;
 					bone.b = cos * b - sin * d;
 					bone.c = sin * a + cos * c;
@@ -98521,6 +101259,9 @@ spine_TransformConstraint.prototype = {
 					temp.x = this.data.offsetX;
 					temp.y = this.data.offsetY;
 					var local = temp;
+					if(local == null) {
+						throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("local cannot be null."));
+					}
 					var x = local.x;
 					var y = local.y;
 					local.x = x * target.a + y * target.b + target.worldX;
@@ -98530,16 +101271,16 @@ spine_TransformConstraint.prototype = {
 					modified = true;
 				}
 				if(scaleMix > 0) {
-					var s = js_Boot.__cast(Math.sqrt(ta * ta + tc * tc) - 1 + this.data.offsetScaleX , Float) * scaleMix + 1;
+					var s = (Math.sqrt(ta * ta + tc * tc) - 1 + this.data.offsetScaleX) * scaleMix + 1;
 					bone.a *= s;
 					bone.c *= s;
-					s = js_Boot.__cast(Math.sqrt(tb * tb + td * td) - 1 + this.data.offsetScaleY , Float) * scaleMix + 1;
+					s = (Math.sqrt(tb * tb + td * td) - 1 + this.data.offsetScaleY) * scaleMix + 1;
 					bone.b *= s;
 					bone.d *= s;
 					modified = true;
 				}
 				if(shearMix > 0) {
-					var r1 = js_Boot.__cast(Math.atan2(td,tb) , Float) - js_Boot.__cast(Math.atan2(tc,ta) , Float);
+					var r1 = Math.atan2(td,tb) - Math.atan2(tc,ta);
 					if(r1 > 3.1415927) {
 						r1 -= 6.2831854;
 					} else if(r1 < -3.1415927) {
@@ -98547,10 +101288,10 @@ spine_TransformConstraint.prototype = {
 					}
 					var b1 = bone.b;
 					var d1 = bone.d;
-					r1 = js_Boot.__cast(Math.atan2(d1,b1) , Float) + (r1 - 1.57079635 + offsetShearY) * shearMix;
-					var s1 = js_Boot.__cast(Math.sqrt(b1 * b1 + d1 * d1) , Float);
-					bone.b = js_Boot.__cast(Math.cos(r1) , Float) * s1;
-					bone.d = js_Boot.__cast(Math.sin(r1) , Float) * s1;
+					r1 = Math.atan2(d1,b1) + (r1 - 1.57079635 + offsetShearY) * shearMix;
+					var s1 = Math.sqrt(b1 * b1 + d1 * d1);
+					bone.b = Math.cos(r1) * s1;
+					bone.d = Math.sin(r1) * s1;
 					modified = true;
 				}
 				if(modified) {
@@ -98582,15 +101323,15 @@ spine_TransformConstraint.prototype = {
 					var b = bone.b;
 					var c = bone.c;
 					var d = bone.d;
-					var r = js_Boot.__cast(Math.atan2(tc,ta) , Float) - js_Boot.__cast(Math.atan2(c,a) , Float) + offsetRotation;
+					var r = Math.atan2(tc,ta) - Math.atan2(c,a) + offsetRotation;
 					if(r > 3.1415927) {
 						r -= 6.2831854;
 					} else if(r < -3.1415927) {
 						r += 6.2831854;
 					}
 					r *= rotateMix;
-					var cos = js_Boot.__cast(Math.cos(r) , Float);
-					var sin = js_Boot.__cast(Math.sin(r) , Float);
+					var cos = Math.cos(r);
+					var sin = Math.sin(r);
 					bone.a = cos * a - sin * c;
 					bone.b = cos * b - sin * d;
 					bone.c = sin * a + cos * c;
@@ -98602,6 +101343,9 @@ spine_TransformConstraint.prototype = {
 					temp.x = this.data.offsetX;
 					temp.y = this.data.offsetY;
 					var local = temp;
+					if(local == null) {
+						throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("local cannot be null."));
+					}
 					var x = local.x;
 					var y = local.y;
 					local.x = x * target.a + y * target.b + target.worldX;
@@ -98611,15 +101355,15 @@ spine_TransformConstraint.prototype = {
 					modified = true;
 				}
 				if(scaleMix > 0) {
-					var s = js_Boot.__cast(Math.sqrt(bone.a * bone.a + bone.c * bone.c) , Float);
+					var s = Math.sqrt(bone.a * bone.a + bone.c * bone.c);
 					if(s != 0) {
-						s = (s + js_Boot.__cast(Math.sqrt(ta * ta + tc * tc) - s + this.data.offsetScaleX , Float) * scaleMix) / s;
+						s = (s + (Math.sqrt(ta * ta + tc * tc) - s + this.data.offsetScaleX) * scaleMix) / s;
 					}
 					bone.a *= s;
 					bone.c *= s;
-					s = js_Boot.__cast(Math.sqrt(bone.b * bone.b + bone.d * bone.d) , Float);
+					s = Math.sqrt(bone.b * bone.b + bone.d * bone.d);
 					if(s != 0) {
-						s = (s + js_Boot.__cast(Math.sqrt(tb * tb + td * td) - s + this.data.offsetScaleY , Float) * scaleMix) / s;
+						s = (s + (Math.sqrt(tb * tb + td * td) - s + this.data.offsetScaleY) * scaleMix) / s;
 					}
 					bone.b *= s;
 					bone.d *= s;
@@ -98628,17 +101372,17 @@ spine_TransformConstraint.prototype = {
 				if(shearMix > 0) {
 					var b1 = bone.b;
 					var d1 = bone.d;
-					var by = js_Boot.__cast(Math.atan2(d1,b1) , Float);
-					var r1 = js_Boot.__cast(Math.atan2(td,tb) , Float) - js_Boot.__cast(Math.atan2(tc,ta) , Float) - (by - js_Boot.__cast(Math.atan2(bone.c,bone.a) , Float));
+					var by = Math.atan2(d1,b1);
+					var r1 = Math.atan2(td,tb) - Math.atan2(tc,ta) - (by - Math.atan2(bone.c,bone.a));
 					if(r1 > 3.1415927) {
 						r1 -= 6.2831854;
 					} else if(r1 < -3.1415927) {
 						r1 += 6.2831854;
 					}
 					r1 = by + (r1 + offsetShearY) * shearMix;
-					var s1 = js_Boot.__cast(Math.sqrt(b1 * b1 + d1 * d1) , Float);
-					bone.b = js_Boot.__cast(Math.cos(r1) , Float) * s1;
-					bone.d = js_Boot.__cast(Math.sin(r1) , Float) * s1;
+					var s1 = Math.sqrt(b1 * b1 + d1 * d1);
+					bone.b = Math.cos(r1) * s1;
+					bone.d = Math.sin(r1) * s1;
 					modified = true;
 				}
 				if(modified) {
@@ -98662,11 +101406,11 @@ spine_TransformConstraint.prototype = {
 					if(parent == null) {
 						target.ax = target.worldX;
 						target.ay = target.worldY;
-						target.arotation = js_Boot.__cast(Math.atan2(target.c,target.a) , Float) * spine_utils_SpineUtils.radDeg;
-						target.ascaleX = js_Boot.__cast(Math.sqrt(target.a * target.a + target.c * target.c) , Float);
-						target.ascaleY = js_Boot.__cast(Math.sqrt(target.b * target.b + target.d * target.d) , Float);
+						target.arotation = Math.atan2(target.c,target.a) * spine_utils_SpineUtils.radDeg;
+						target.ascaleX = Math.sqrt(target.a * target.a + target.c * target.c);
+						target.ascaleY = Math.sqrt(target.b * target.b + target.d * target.d);
 						target.ashearX = 0;
-						target.ashearY = js_Boot.__cast(Math.atan2(target.a * target.b + target.c * target.d,target.a * target.d - target.b * target.c) , Float) * spine_utils_SpineUtils.radDeg;
+						target.ashearY = Math.atan2(target.a * target.b + target.c * target.d,target.a * target.d - target.b * target.c) * spine_utils_SpineUtils.radDeg;
 					} else {
 						var pa = parent.a;
 						var pb = parent.b;
@@ -98686,17 +101430,17 @@ spine_TransformConstraint.prototype = {
 						var rc = id * target.c - ic * target.a;
 						var rd = id * target.d - ic * target.b;
 						target.ashearX = 0;
-						target.ascaleX = js_Boot.__cast(Math.sqrt(ra * ra + rc * rc) , Float);
+						target.ascaleX = Math.sqrt(ra * ra + rc * rc);
 						if(target.ascaleX > 0.0001) {
 							var det = ra * rd - rb * rc;
 							target.ascaleY = det / target.ascaleX;
-							target.ashearY = js_Boot.__cast(Math.atan2(ra * rb + rc * rd,det) , Float) * spine_utils_SpineUtils.radDeg;
-							target.arotation = js_Boot.__cast(Math.atan2(rc,ra) , Float) * spine_utils_SpineUtils.radDeg;
+							target.ashearY = Math.atan2(ra * rb + rc * rd,det) * spine_utils_SpineUtils.radDeg;
+							target.arotation = Math.atan2(rc,ra) * spine_utils_SpineUtils.radDeg;
 						} else {
 							target.ascaleX = 0;
-							target.ascaleY = js_Boot.__cast(Math.sqrt(rb * rb + rd * rd) , Float);
+							target.ascaleY = Math.sqrt(rb * rb + rd * rd);
 							target.ashearY = 0;
-							target.arotation = 90 - js_Boot.__cast(Math.atan2(rd,rb) , Float) * spine_utils_SpineUtils.radDeg;
+							target.arotation = 90 - Math.atan2(rd,rb) * spine_utils_SpineUtils.radDeg;
 						}
 					}
 				}
@@ -98711,11 +101455,11 @@ spine_TransformConstraint.prototype = {
 						if(parent == null) {
 							bone.ax = bone.worldX;
 							bone.ay = bone.worldY;
-							bone.arotation = js_Boot.__cast(Math.atan2(bone.c,bone.a) , Float) * spine_utils_SpineUtils.radDeg;
-							bone.ascaleX = js_Boot.__cast(Math.sqrt(bone.a * bone.a + bone.c * bone.c) , Float);
-							bone.ascaleY = js_Boot.__cast(Math.sqrt(bone.b * bone.b + bone.d * bone.d) , Float);
+							bone.arotation = Math.atan2(bone.c,bone.a) * spine_utils_SpineUtils.radDeg;
+							bone.ascaleX = Math.sqrt(bone.a * bone.a + bone.c * bone.c);
+							bone.ascaleY = Math.sqrt(bone.b * bone.b + bone.d * bone.d);
 							bone.ashearX = 0;
-							bone.ashearY = js_Boot.__cast(Math.atan2(bone.a * bone.b + bone.c * bone.d,bone.a * bone.d - bone.b * bone.c) , Float) * spine_utils_SpineUtils.radDeg;
+							bone.ashearY = Math.atan2(bone.a * bone.b + bone.c * bone.d,bone.a * bone.d - bone.b * bone.c) * spine_utils_SpineUtils.radDeg;
 						} else {
 							var pa = parent.a;
 							var pb = parent.b;
@@ -98735,17 +101479,17 @@ spine_TransformConstraint.prototype = {
 							var rc = id * bone.c - ic * bone.a;
 							var rd = id * bone.d - ic * bone.b;
 							bone.ashearX = 0;
-							bone.ascaleX = js_Boot.__cast(Math.sqrt(ra * ra + rc * rc) , Float);
+							bone.ascaleX = Math.sqrt(ra * ra + rc * rc);
 							if(bone.ascaleX > 0.0001) {
 								var det = ra * rd - rb * rc;
 								bone.ascaleY = det / bone.ascaleX;
-								bone.ashearY = js_Boot.__cast(Math.atan2(ra * rb + rc * rd,det) , Float) * spine_utils_SpineUtils.radDeg;
-								bone.arotation = js_Boot.__cast(Math.atan2(rc,ra) , Float) * spine_utils_SpineUtils.radDeg;
+								bone.ashearY = Math.atan2(ra * rb + rc * rd,det) * spine_utils_SpineUtils.radDeg;
+								bone.arotation = Math.atan2(rc,ra) * spine_utils_SpineUtils.radDeg;
 							} else {
 								bone.ascaleX = 0;
-								bone.ascaleY = js_Boot.__cast(Math.sqrt(rb * rb + rd * rd) , Float);
+								bone.ascaleY = Math.sqrt(rb * rb + rd * rd);
 								bone.ashearY = 0;
-								bone.arotation = 90 - js_Boot.__cast(Math.atan2(rd,rb) , Float) * spine_utils_SpineUtils.radDeg;
+								bone.arotation = 90 - Math.atan2(rd,rb) * spine_utils_SpineUtils.radDeg;
 							}
 						}
 					}
@@ -98761,12 +101505,12 @@ spine_TransformConstraint.prototype = {
 					}
 					var scaleX = bone.ascaleX;
 					var scaleY = bone.ascaleY;
-					if(scaleMix > 0) {
+					if(scaleMix != 0) {
 						scaleX *= (target.ascaleX - 1 + this.data.offsetScaleX) * scaleMix + 1;
 						scaleY *= (target.ascaleY - 1 + this.data.offsetScaleY) * scaleMix + 1;
 					}
 					var shearY = bone.ashearY;
-					if(shearMix > 0) {
+					if(shearMix != 0) {
 						shearY += (target.ashearY + this.data.offsetShearY) * shearMix;
 					}
 					bone.updateWorldTransformWithData(x,y,rotation,scaleX,scaleY,bone.ashearX,shearY);
@@ -98784,11 +101528,11 @@ spine_TransformConstraint.prototype = {
 					if(parent == null) {
 						target.ax = target.worldX;
 						target.ay = target.worldY;
-						target.arotation = js_Boot.__cast(Math.atan2(target.c,target.a) , Float) * spine_utils_SpineUtils.radDeg;
-						target.ascaleX = js_Boot.__cast(Math.sqrt(target.a * target.a + target.c * target.c) , Float);
-						target.ascaleY = js_Boot.__cast(Math.sqrt(target.b * target.b + target.d * target.d) , Float);
+						target.arotation = Math.atan2(target.c,target.a) * spine_utils_SpineUtils.radDeg;
+						target.ascaleX = Math.sqrt(target.a * target.a + target.c * target.c);
+						target.ascaleY = Math.sqrt(target.b * target.b + target.d * target.d);
 						target.ashearX = 0;
-						target.ashearY = js_Boot.__cast(Math.atan2(target.a * target.b + target.c * target.d,target.a * target.d - target.b * target.c) , Float) * spine_utils_SpineUtils.radDeg;
+						target.ashearY = Math.atan2(target.a * target.b + target.c * target.d,target.a * target.d - target.b * target.c) * spine_utils_SpineUtils.radDeg;
 					} else {
 						var pa = parent.a;
 						var pb = parent.b;
@@ -98808,17 +101552,17 @@ spine_TransformConstraint.prototype = {
 						var rc = id * target.c - ic * target.a;
 						var rd = id * target.d - ic * target.b;
 						target.ashearX = 0;
-						target.ascaleX = js_Boot.__cast(Math.sqrt(ra * ra + rc * rc) , Float);
+						target.ascaleX = Math.sqrt(ra * ra + rc * rc);
 						if(target.ascaleX > 0.0001) {
 							var det = ra * rd - rb * rc;
 							target.ascaleY = det / target.ascaleX;
-							target.ashearY = js_Boot.__cast(Math.atan2(ra * rb + rc * rd,det) , Float) * spine_utils_SpineUtils.radDeg;
-							target.arotation = js_Boot.__cast(Math.atan2(rc,ra) , Float) * spine_utils_SpineUtils.radDeg;
+							target.ashearY = Math.atan2(ra * rb + rc * rd,det) * spine_utils_SpineUtils.radDeg;
+							target.arotation = Math.atan2(rc,ra) * spine_utils_SpineUtils.radDeg;
 						} else {
 							target.ascaleX = 0;
-							target.ascaleY = js_Boot.__cast(Math.sqrt(rb * rb + rd * rd) , Float);
+							target.ascaleY = Math.sqrt(rb * rb + rd * rd);
 							target.ashearY = 0;
-							target.arotation = 90 - js_Boot.__cast(Math.atan2(rd,rb) , Float) * spine_utils_SpineUtils.radDeg;
+							target.arotation = 90 - Math.atan2(rd,rb) * spine_utils_SpineUtils.radDeg;
 						}
 					}
 				}
@@ -98833,11 +101577,11 @@ spine_TransformConstraint.prototype = {
 						if(parent == null) {
 							bone.ax = bone.worldX;
 							bone.ay = bone.worldY;
-							bone.arotation = js_Boot.__cast(Math.atan2(bone.c,bone.a) , Float) * spine_utils_SpineUtils.radDeg;
-							bone.ascaleX = js_Boot.__cast(Math.sqrt(bone.a * bone.a + bone.c * bone.c) , Float);
-							bone.ascaleY = js_Boot.__cast(Math.sqrt(bone.b * bone.b + bone.d * bone.d) , Float);
+							bone.arotation = Math.atan2(bone.c,bone.a) * spine_utils_SpineUtils.radDeg;
+							bone.ascaleX = Math.sqrt(bone.a * bone.a + bone.c * bone.c);
+							bone.ascaleY = Math.sqrt(bone.b * bone.b + bone.d * bone.d);
 							bone.ashearX = 0;
-							bone.ashearY = js_Boot.__cast(Math.atan2(bone.a * bone.b + bone.c * bone.d,bone.a * bone.d - bone.b * bone.c) , Float) * spine_utils_SpineUtils.radDeg;
+							bone.ashearY = Math.atan2(bone.a * bone.b + bone.c * bone.d,bone.a * bone.d - bone.b * bone.c) * spine_utils_SpineUtils.radDeg;
 						} else {
 							var pa = parent.a;
 							var pb = parent.b;
@@ -98857,17 +101601,17 @@ spine_TransformConstraint.prototype = {
 							var rc = id * bone.c - ic * bone.a;
 							var rd = id * bone.d - ic * bone.b;
 							bone.ashearX = 0;
-							bone.ascaleX = js_Boot.__cast(Math.sqrt(ra * ra + rc * rc) , Float);
+							bone.ascaleX = Math.sqrt(ra * ra + rc * rc);
 							if(bone.ascaleX > 0.0001) {
 								var det = ra * rd - rb * rc;
 								bone.ascaleY = det / bone.ascaleX;
-								bone.ashearY = js_Boot.__cast(Math.atan2(ra * rb + rc * rd,det) , Float) * spine_utils_SpineUtils.radDeg;
-								bone.arotation = js_Boot.__cast(Math.atan2(rc,ra) , Float) * spine_utils_SpineUtils.radDeg;
+								bone.ashearY = Math.atan2(ra * rb + rc * rd,det) * spine_utils_SpineUtils.radDeg;
+								bone.arotation = Math.atan2(rc,ra) * spine_utils_SpineUtils.radDeg;
 							} else {
 								bone.ascaleX = 0;
-								bone.ascaleY = js_Boot.__cast(Math.sqrt(rb * rb + rd * rd) , Float);
+								bone.ascaleY = Math.sqrt(rb * rb + rd * rd);
 								bone.ashearY = 0;
-								bone.arotation = 90 - js_Boot.__cast(Math.atan2(rd,rb) , Float) * spine_utils_SpineUtils.radDeg;
+								bone.arotation = 90 - Math.atan2(rd,rb) * spine_utils_SpineUtils.radDeg;
 							}
 						}
 					}
@@ -98885,7 +101629,7 @@ spine_TransformConstraint.prototype = {
 					}
 					var scaleX = bone.ascaleX;
 					var scaleY = bone.ascaleY;
-					if(scaleMix > 0) {
+					if(scaleMix != 0) {
 						if(scaleX != 0) {
 							scaleX = (scaleX + (target.ascaleX - scaleX + this.data.offsetScaleX) * scaleMix) / scaleX;
 						}
@@ -98894,10 +101638,10 @@ spine_TransformConstraint.prototype = {
 						}
 					}
 					var shearY = bone.ashearY;
-					if(shearMix > 0) {
+					if(shearMix != 0) {
 						var r1 = target.ashearY - shearY + this.data.offsetShearY;
 						r1 -= (16384 - (16384.499999999996 - r1 / 360 | 0)) * 360;
-						bone.shearY += r1 * shearMix;
+						shearY += r1 * shearMix;
 					}
 					bone.updateWorldTransformWithData(x,y,rotation,scaleX,scaleY,bone.ashearX,shearY);
 					++i;
@@ -98927,15 +101671,15 @@ spine_TransformConstraint.prototype = {
 					var b = bone.b;
 					var c = bone.c;
 					var d = bone.d;
-					var r = js_Boot.__cast(Math.atan2(tc,ta) , Float) + offsetRotation;
+					var r = Math.atan2(tc,ta) + offsetRotation;
 					if(r > 3.1415927) {
 						r -= 6.2831854;
 					} else if(r < -3.1415927) {
 						r += 6.2831854;
 					}
 					r *= rotateMix;
-					var cos = js_Boot.__cast(Math.cos(r) , Float);
-					var sin = js_Boot.__cast(Math.sin(r) , Float);
+					var cos = Math.cos(r);
+					var sin = Math.sin(r);
 					bone.a = cos * a - sin * c;
 					bone.b = cos * b - sin * d;
 					bone.c = sin * a + cos * c;
@@ -98947,6 +101691,9 @@ spine_TransformConstraint.prototype = {
 					temp.x = this.data.offsetX;
 					temp.y = this.data.offsetY;
 					var local = temp;
+					if(local == null) {
+						throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("local cannot be null."));
+					}
 					var x = local.x;
 					var y = local.y;
 					local.x = x * target.a + y * target.b + target.worldX;
@@ -98956,16 +101703,16 @@ spine_TransformConstraint.prototype = {
 					modified = true;
 				}
 				if(scaleMix > 0) {
-					var s = js_Boot.__cast(Math.sqrt(ta * ta + tc * tc) - 1 + this.data.offsetScaleX , Float) * scaleMix + 1;
+					var s = (Math.sqrt(ta * ta + tc * tc) - 1 + this.data.offsetScaleX) * scaleMix + 1;
 					bone.a *= s;
 					bone.c *= s;
-					s = js_Boot.__cast(Math.sqrt(tb * tb + td * td) - 1 + this.data.offsetScaleY , Float) * scaleMix + 1;
+					s = (Math.sqrt(tb * tb + td * td) - 1 + this.data.offsetScaleY) * scaleMix + 1;
 					bone.b *= s;
 					bone.d *= s;
 					modified = true;
 				}
 				if(shearMix > 0) {
-					var r1 = js_Boot.__cast(Math.atan2(td,tb) , Float) - js_Boot.__cast(Math.atan2(tc,ta) , Float);
+					var r1 = Math.atan2(td,tb) - Math.atan2(tc,ta);
 					if(r1 > 3.1415927) {
 						r1 -= 6.2831854;
 					} else if(r1 < -3.1415927) {
@@ -98973,10 +101720,10 @@ spine_TransformConstraint.prototype = {
 					}
 					var b1 = bone.b;
 					var d1 = bone.d;
-					r1 = js_Boot.__cast(Math.atan2(d1,b1) , Float) + (r1 - 1.57079635 + offsetShearY) * shearMix;
-					var s1 = js_Boot.__cast(Math.sqrt(b1 * b1 + d1 * d1) , Float);
-					bone.b = js_Boot.__cast(Math.cos(r1) , Float) * s1;
-					bone.d = js_Boot.__cast(Math.sin(r1) , Float) * s1;
+					r1 = Math.atan2(d1,b1) + (r1 - 1.57079635 + offsetShearY) * shearMix;
+					var s1 = Math.sqrt(b1 * b1 + d1 * d1);
+					bone.b = Math.cos(r1) * s1;
+					bone.d = Math.sin(r1) * s1;
 					modified = true;
 				}
 				if(modified) {
@@ -99008,15 +101755,15 @@ spine_TransformConstraint.prototype = {
 					var b = bone.b;
 					var c = bone.c;
 					var d = bone.d;
-					var r = js_Boot.__cast(Math.atan2(tc,ta) , Float) - js_Boot.__cast(Math.atan2(c,a) , Float) + offsetRotation;
+					var r = Math.atan2(tc,ta) - Math.atan2(c,a) + offsetRotation;
 					if(r > 3.1415927) {
 						r -= 6.2831854;
 					} else if(r < -3.1415927) {
 						r += 6.2831854;
 					}
 					r *= rotateMix;
-					var cos = js_Boot.__cast(Math.cos(r) , Float);
-					var sin = js_Boot.__cast(Math.sin(r) , Float);
+					var cos = Math.cos(r);
+					var sin = Math.sin(r);
 					bone.a = cos * a - sin * c;
 					bone.b = cos * b - sin * d;
 					bone.c = sin * a + cos * c;
@@ -99028,6 +101775,9 @@ spine_TransformConstraint.prototype = {
 					temp.x = this.data.offsetX;
 					temp.y = this.data.offsetY;
 					var local = temp;
+					if(local == null) {
+						throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("local cannot be null."));
+					}
 					var x = local.x;
 					var y = local.y;
 					local.x = x * target.a + y * target.b + target.worldX;
@@ -99037,15 +101787,15 @@ spine_TransformConstraint.prototype = {
 					modified = true;
 				}
 				if(scaleMix > 0) {
-					var s = js_Boot.__cast(Math.sqrt(bone.a * bone.a + bone.c * bone.c) , Float);
+					var s = Math.sqrt(bone.a * bone.a + bone.c * bone.c);
 					if(s != 0) {
-						s = (s + js_Boot.__cast(Math.sqrt(ta * ta + tc * tc) - s + this.data.offsetScaleX , Float) * scaleMix) / s;
+						s = (s + (Math.sqrt(ta * ta + tc * tc) - s + this.data.offsetScaleX) * scaleMix) / s;
 					}
 					bone.a *= s;
 					bone.c *= s;
-					s = js_Boot.__cast(Math.sqrt(bone.b * bone.b + bone.d * bone.d) , Float);
+					s = Math.sqrt(bone.b * bone.b + bone.d * bone.d);
 					if(s != 0) {
-						s = (s + js_Boot.__cast(Math.sqrt(tb * tb + td * td) - s + this.data.offsetScaleY , Float) * scaleMix) / s;
+						s = (s + (Math.sqrt(tb * tb + td * td) - s + this.data.offsetScaleY) * scaleMix) / s;
 					}
 					bone.b *= s;
 					bone.d *= s;
@@ -99054,17 +101804,17 @@ spine_TransformConstraint.prototype = {
 				if(shearMix > 0) {
 					var b1 = bone.b;
 					var d1 = bone.d;
-					var by = js_Boot.__cast(Math.atan2(d1,b1) , Float);
-					var r1 = js_Boot.__cast(Math.atan2(td,tb) , Float) - js_Boot.__cast(Math.atan2(tc,ta) , Float) - (by - js_Boot.__cast(Math.atan2(bone.c,bone.a) , Float));
+					var by = Math.atan2(d1,b1);
+					var r1 = Math.atan2(td,tb) - Math.atan2(tc,ta) - (by - Math.atan2(bone.c,bone.a));
 					if(r1 > 3.1415927) {
 						r1 -= 6.2831854;
 					} else if(r1 < -3.1415927) {
 						r1 += 6.2831854;
 					}
 					r1 = by + (r1 + offsetShearY) * shearMix;
-					var s1 = js_Boot.__cast(Math.sqrt(b1 * b1 + d1 * d1) , Float);
-					bone.b = js_Boot.__cast(Math.cos(r1) , Float) * s1;
-					bone.d = js_Boot.__cast(Math.sin(r1) , Float) * s1;
+					var s1 = Math.sqrt(b1 * b1 + d1 * d1);
+					bone.b = Math.cos(r1) * s1;
+					bone.d = Math.sin(r1) * s1;
 					modified = true;
 				}
 				if(modified) {
@@ -99098,15 +101848,15 @@ spine_TransformConstraint.prototype = {
 				var b = bone.b;
 				var c = bone.c;
 				var d = bone.d;
-				var r = js_Boot.__cast(Math.atan2(tc,ta) , Float) - js_Boot.__cast(Math.atan2(c,a) , Float) + offsetRotation;
+				var r = Math.atan2(tc,ta) - Math.atan2(c,a) + offsetRotation;
 				if(r > 3.1415927) {
 					r -= 6.2831854;
 				} else if(r < -3.1415927) {
 					r += 6.2831854;
 				}
 				r *= rotateMix;
-				var cos = js_Boot.__cast(Math.cos(r) , Float);
-				var sin = js_Boot.__cast(Math.sin(r) , Float);
+				var cos = Math.cos(r);
+				var sin = Math.sin(r);
 				bone.a = cos * a - sin * c;
 				bone.b = cos * b - sin * d;
 				bone.c = sin * a + cos * c;
@@ -99118,6 +101868,9 @@ spine_TransformConstraint.prototype = {
 				temp.x = this.data.offsetX;
 				temp.y = this.data.offsetY;
 				var local = temp;
+				if(local == null) {
+					throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("local cannot be null."));
+				}
 				var x = local.x;
 				var y = local.y;
 				local.x = x * target.a + y * target.b + target.worldX;
@@ -99127,15 +101880,15 @@ spine_TransformConstraint.prototype = {
 				modified = true;
 			}
 			if(scaleMix > 0) {
-				var s = js_Boot.__cast(Math.sqrt(bone.a * bone.a + bone.c * bone.c) , Float);
+				var s = Math.sqrt(bone.a * bone.a + bone.c * bone.c);
 				if(s != 0) {
-					s = (s + js_Boot.__cast(Math.sqrt(ta * ta + tc * tc) - s + this.data.offsetScaleX , Float) * scaleMix) / s;
+					s = (s + (Math.sqrt(ta * ta + tc * tc) - s + this.data.offsetScaleX) * scaleMix) / s;
 				}
 				bone.a *= s;
 				bone.c *= s;
-				s = js_Boot.__cast(Math.sqrt(bone.b * bone.b + bone.d * bone.d) , Float);
+				s = Math.sqrt(bone.b * bone.b + bone.d * bone.d);
 				if(s != 0) {
-					s = (s + js_Boot.__cast(Math.sqrt(tb * tb + td * td) - s + this.data.offsetScaleY , Float) * scaleMix) / s;
+					s = (s + (Math.sqrt(tb * tb + td * td) - s + this.data.offsetScaleY) * scaleMix) / s;
 				}
 				bone.b *= s;
 				bone.d *= s;
@@ -99144,17 +101897,17 @@ spine_TransformConstraint.prototype = {
 			if(shearMix > 0) {
 				var b1 = bone.b;
 				var d1 = bone.d;
-				var by = js_Boot.__cast(Math.atan2(d1,b1) , Float);
-				var r1 = js_Boot.__cast(Math.atan2(td,tb) , Float) - js_Boot.__cast(Math.atan2(tc,ta) , Float) - (by - js_Boot.__cast(Math.atan2(bone.c,bone.a) , Float));
+				var by = Math.atan2(d1,b1);
+				var r1 = Math.atan2(td,tb) - Math.atan2(tc,ta) - (by - Math.atan2(bone.c,bone.a));
 				if(r1 > 3.1415927) {
 					r1 -= 6.2831854;
 				} else if(r1 < -3.1415927) {
 					r1 += 6.2831854;
 				}
 				r1 = by + (r1 + offsetShearY) * shearMix;
-				var s1 = js_Boot.__cast(Math.sqrt(b1 * b1 + d1 * d1) , Float);
-				bone.b = js_Boot.__cast(Math.cos(r1) , Float) * s1;
-				bone.d = js_Boot.__cast(Math.sin(r1) , Float) * s1;
+				var s1 = Math.sqrt(b1 * b1 + d1 * d1);
+				bone.b = Math.cos(r1) * s1;
+				bone.d = Math.sin(r1) * s1;
 				modified = true;
 			}
 			if(modified) {
@@ -99187,15 +101940,15 @@ spine_TransformConstraint.prototype = {
 				var b = bone.b;
 				var c = bone.c;
 				var d = bone.d;
-				var r = js_Boot.__cast(Math.atan2(tc,ta) , Float) + offsetRotation;
+				var r = Math.atan2(tc,ta) + offsetRotation;
 				if(r > 3.1415927) {
 					r -= 6.2831854;
 				} else if(r < -3.1415927) {
 					r += 6.2831854;
 				}
 				r *= rotateMix;
-				var cos = js_Boot.__cast(Math.cos(r) , Float);
-				var sin = js_Boot.__cast(Math.sin(r) , Float);
+				var cos = Math.cos(r);
+				var sin = Math.sin(r);
 				bone.a = cos * a - sin * c;
 				bone.b = cos * b - sin * d;
 				bone.c = sin * a + cos * c;
@@ -99207,6 +101960,9 @@ spine_TransformConstraint.prototype = {
 				temp.x = this.data.offsetX;
 				temp.y = this.data.offsetY;
 				var local = temp;
+				if(local == null) {
+					throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("local cannot be null."));
+				}
 				var x = local.x;
 				var y = local.y;
 				local.x = x * target.a + y * target.b + target.worldX;
@@ -99216,16 +101972,16 @@ spine_TransformConstraint.prototype = {
 				modified = true;
 			}
 			if(scaleMix > 0) {
-				var s = js_Boot.__cast(Math.sqrt(ta * ta + tc * tc) - 1 + this.data.offsetScaleX , Float) * scaleMix + 1;
+				var s = (Math.sqrt(ta * ta + tc * tc) - 1 + this.data.offsetScaleX) * scaleMix + 1;
 				bone.a *= s;
 				bone.c *= s;
-				s = js_Boot.__cast(Math.sqrt(tb * tb + td * td) - 1 + this.data.offsetScaleY , Float) * scaleMix + 1;
+				s = (Math.sqrt(tb * tb + td * td) - 1 + this.data.offsetScaleY) * scaleMix + 1;
 				bone.b *= s;
 				bone.d *= s;
 				modified = true;
 			}
 			if(shearMix > 0) {
-				var r1 = js_Boot.__cast(Math.atan2(td,tb) , Float) - js_Boot.__cast(Math.atan2(tc,ta) , Float);
+				var r1 = Math.atan2(td,tb) - Math.atan2(tc,ta);
 				if(r1 > 3.1415927) {
 					r1 -= 6.2831854;
 				} else if(r1 < -3.1415927) {
@@ -99233,10 +101989,10 @@ spine_TransformConstraint.prototype = {
 				}
 				var b1 = bone.b;
 				var d1 = bone.d;
-				r1 = js_Boot.__cast(Math.atan2(d1,b1) , Float) + (r1 - 1.57079635 + offsetShearY) * shearMix;
-				var s1 = js_Boot.__cast(Math.sqrt(b1 * b1 + d1 * d1) , Float);
-				bone.b = js_Boot.__cast(Math.cos(r1) , Float) * s1;
-				bone.d = js_Boot.__cast(Math.sin(r1) , Float) * s1;
+				r1 = Math.atan2(d1,b1) + (r1 - 1.57079635 + offsetShearY) * shearMix;
+				var s1 = Math.sqrt(b1 * b1 + d1 * d1);
+				bone.b = Math.cos(r1) * s1;
+				bone.d = Math.sin(r1) * s1;
 				modified = true;
 			}
 			if(modified) {
@@ -99257,11 +102013,11 @@ spine_TransformConstraint.prototype = {
 			if(parent == null) {
 				target.ax = target.worldX;
 				target.ay = target.worldY;
-				target.arotation = js_Boot.__cast(Math.atan2(target.c,target.a) , Float) * spine_utils_SpineUtils.radDeg;
-				target.ascaleX = js_Boot.__cast(Math.sqrt(target.a * target.a + target.c * target.c) , Float);
-				target.ascaleY = js_Boot.__cast(Math.sqrt(target.b * target.b + target.d * target.d) , Float);
+				target.arotation = Math.atan2(target.c,target.a) * spine_utils_SpineUtils.radDeg;
+				target.ascaleX = Math.sqrt(target.a * target.a + target.c * target.c);
+				target.ascaleY = Math.sqrt(target.b * target.b + target.d * target.d);
 				target.ashearX = 0;
-				target.ashearY = js_Boot.__cast(Math.atan2(target.a * target.b + target.c * target.d,target.a * target.d - target.b * target.c) , Float) * spine_utils_SpineUtils.radDeg;
+				target.ashearY = Math.atan2(target.a * target.b + target.c * target.d,target.a * target.d - target.b * target.c) * spine_utils_SpineUtils.radDeg;
 			} else {
 				var pa = parent.a;
 				var pb = parent.b;
@@ -99281,17 +102037,17 @@ spine_TransformConstraint.prototype = {
 				var rc = id * target.c - ic * target.a;
 				var rd = id * target.d - ic * target.b;
 				target.ashearX = 0;
-				target.ascaleX = js_Boot.__cast(Math.sqrt(ra * ra + rc * rc) , Float);
+				target.ascaleX = Math.sqrt(ra * ra + rc * rc);
 				if(target.ascaleX > 0.0001) {
 					var det = ra * rd - rb * rc;
 					target.ascaleY = det / target.ascaleX;
-					target.ashearY = js_Boot.__cast(Math.atan2(ra * rb + rc * rd,det) , Float) * spine_utils_SpineUtils.radDeg;
-					target.arotation = js_Boot.__cast(Math.atan2(rc,ra) , Float) * spine_utils_SpineUtils.radDeg;
+					target.ashearY = Math.atan2(ra * rb + rc * rd,det) * spine_utils_SpineUtils.radDeg;
+					target.arotation = Math.atan2(rc,ra) * spine_utils_SpineUtils.radDeg;
 				} else {
 					target.ascaleX = 0;
-					target.ascaleY = js_Boot.__cast(Math.sqrt(rb * rb + rd * rd) , Float);
+					target.ascaleY = Math.sqrt(rb * rb + rd * rd);
 					target.ashearY = 0;
-					target.arotation = 90 - js_Boot.__cast(Math.atan2(rd,rb) , Float) * spine_utils_SpineUtils.radDeg;
+					target.arotation = 90 - Math.atan2(rd,rb) * spine_utils_SpineUtils.radDeg;
 				}
 			}
 		}
@@ -99306,11 +102062,11 @@ spine_TransformConstraint.prototype = {
 				if(parent == null) {
 					bone.ax = bone.worldX;
 					bone.ay = bone.worldY;
-					bone.arotation = js_Boot.__cast(Math.atan2(bone.c,bone.a) , Float) * spine_utils_SpineUtils.radDeg;
-					bone.ascaleX = js_Boot.__cast(Math.sqrt(bone.a * bone.a + bone.c * bone.c) , Float);
-					bone.ascaleY = js_Boot.__cast(Math.sqrt(bone.b * bone.b + bone.d * bone.d) , Float);
+					bone.arotation = Math.atan2(bone.c,bone.a) * spine_utils_SpineUtils.radDeg;
+					bone.ascaleX = Math.sqrt(bone.a * bone.a + bone.c * bone.c);
+					bone.ascaleY = Math.sqrt(bone.b * bone.b + bone.d * bone.d);
 					bone.ashearX = 0;
-					bone.ashearY = js_Boot.__cast(Math.atan2(bone.a * bone.b + bone.c * bone.d,bone.a * bone.d - bone.b * bone.c) , Float) * spine_utils_SpineUtils.radDeg;
+					bone.ashearY = Math.atan2(bone.a * bone.b + bone.c * bone.d,bone.a * bone.d - bone.b * bone.c) * spine_utils_SpineUtils.radDeg;
 				} else {
 					var pa = parent.a;
 					var pb = parent.b;
@@ -99330,17 +102086,17 @@ spine_TransformConstraint.prototype = {
 					var rc = id * bone.c - ic * bone.a;
 					var rd = id * bone.d - ic * bone.b;
 					bone.ashearX = 0;
-					bone.ascaleX = js_Boot.__cast(Math.sqrt(ra * ra + rc * rc) , Float);
+					bone.ascaleX = Math.sqrt(ra * ra + rc * rc);
 					if(bone.ascaleX > 0.0001) {
 						var det = ra * rd - rb * rc;
 						bone.ascaleY = det / bone.ascaleX;
-						bone.ashearY = js_Boot.__cast(Math.atan2(ra * rb + rc * rd,det) , Float) * spine_utils_SpineUtils.radDeg;
-						bone.arotation = js_Boot.__cast(Math.atan2(rc,ra) , Float) * spine_utils_SpineUtils.radDeg;
+						bone.ashearY = Math.atan2(ra * rb + rc * rd,det) * spine_utils_SpineUtils.radDeg;
+						bone.arotation = Math.atan2(rc,ra) * spine_utils_SpineUtils.radDeg;
 					} else {
 						bone.ascaleX = 0;
-						bone.ascaleY = js_Boot.__cast(Math.sqrt(rb * rb + rd * rd) , Float);
+						bone.ascaleY = Math.sqrt(rb * rb + rd * rd);
 						bone.ashearY = 0;
-						bone.arotation = 90 - js_Boot.__cast(Math.atan2(rd,rb) , Float) * spine_utils_SpineUtils.radDeg;
+						bone.arotation = 90 - Math.atan2(rd,rb) * spine_utils_SpineUtils.radDeg;
 					}
 				}
 			}
@@ -99358,7 +102114,7 @@ spine_TransformConstraint.prototype = {
 			}
 			var scaleX = bone.ascaleX;
 			var scaleY = bone.ascaleY;
-			if(scaleMix > 0) {
+			if(scaleMix != 0) {
 				if(scaleX != 0) {
 					scaleX = (scaleX + (target.ascaleX - scaleX + this.data.offsetScaleX) * scaleMix) / scaleX;
 				}
@@ -99367,10 +102123,10 @@ spine_TransformConstraint.prototype = {
 				}
 			}
 			var shearY = bone.ashearY;
-			if(shearMix > 0) {
+			if(shearMix != 0) {
 				var r1 = target.ashearY - shearY + this.data.offsetShearY;
 				r1 -= (16384 - (16384.499999999996 - r1 / 360 | 0)) * 360;
-				bone.shearY += r1 * shearMix;
+				shearY += r1 * shearMix;
 			}
 			bone.updateWorldTransformWithData(x,y,rotation,scaleX,scaleY,bone.ashearX,shearY);
 			++i;
@@ -99388,11 +102144,11 @@ spine_TransformConstraint.prototype = {
 			if(parent == null) {
 				target.ax = target.worldX;
 				target.ay = target.worldY;
-				target.arotation = js_Boot.__cast(Math.atan2(target.c,target.a) , Float) * spine_utils_SpineUtils.radDeg;
-				target.ascaleX = js_Boot.__cast(Math.sqrt(target.a * target.a + target.c * target.c) , Float);
-				target.ascaleY = js_Boot.__cast(Math.sqrt(target.b * target.b + target.d * target.d) , Float);
+				target.arotation = Math.atan2(target.c,target.a) * spine_utils_SpineUtils.radDeg;
+				target.ascaleX = Math.sqrt(target.a * target.a + target.c * target.c);
+				target.ascaleY = Math.sqrt(target.b * target.b + target.d * target.d);
 				target.ashearX = 0;
-				target.ashearY = js_Boot.__cast(Math.atan2(target.a * target.b + target.c * target.d,target.a * target.d - target.b * target.c) , Float) * spine_utils_SpineUtils.radDeg;
+				target.ashearY = Math.atan2(target.a * target.b + target.c * target.d,target.a * target.d - target.b * target.c) * spine_utils_SpineUtils.radDeg;
 			} else {
 				var pa = parent.a;
 				var pb = parent.b;
@@ -99412,17 +102168,17 @@ spine_TransformConstraint.prototype = {
 				var rc = id * target.c - ic * target.a;
 				var rd = id * target.d - ic * target.b;
 				target.ashearX = 0;
-				target.ascaleX = js_Boot.__cast(Math.sqrt(ra * ra + rc * rc) , Float);
+				target.ascaleX = Math.sqrt(ra * ra + rc * rc);
 				if(target.ascaleX > 0.0001) {
 					var det = ra * rd - rb * rc;
 					target.ascaleY = det / target.ascaleX;
-					target.ashearY = js_Boot.__cast(Math.atan2(ra * rb + rc * rd,det) , Float) * spine_utils_SpineUtils.radDeg;
-					target.arotation = js_Boot.__cast(Math.atan2(rc,ra) , Float) * spine_utils_SpineUtils.radDeg;
+					target.ashearY = Math.atan2(ra * rb + rc * rd,det) * spine_utils_SpineUtils.radDeg;
+					target.arotation = Math.atan2(rc,ra) * spine_utils_SpineUtils.radDeg;
 				} else {
 					target.ascaleX = 0;
-					target.ascaleY = js_Boot.__cast(Math.sqrt(rb * rb + rd * rd) , Float);
+					target.ascaleY = Math.sqrt(rb * rb + rd * rd);
 					target.ashearY = 0;
-					target.arotation = 90 - js_Boot.__cast(Math.atan2(rd,rb) , Float) * spine_utils_SpineUtils.radDeg;
+					target.arotation = 90 - Math.atan2(rd,rb) * spine_utils_SpineUtils.radDeg;
 				}
 			}
 		}
@@ -99437,11 +102193,11 @@ spine_TransformConstraint.prototype = {
 				if(parent == null) {
 					bone.ax = bone.worldX;
 					bone.ay = bone.worldY;
-					bone.arotation = js_Boot.__cast(Math.atan2(bone.c,bone.a) , Float) * spine_utils_SpineUtils.radDeg;
-					bone.ascaleX = js_Boot.__cast(Math.sqrt(bone.a * bone.a + bone.c * bone.c) , Float);
-					bone.ascaleY = js_Boot.__cast(Math.sqrt(bone.b * bone.b + bone.d * bone.d) , Float);
+					bone.arotation = Math.atan2(bone.c,bone.a) * spine_utils_SpineUtils.radDeg;
+					bone.ascaleX = Math.sqrt(bone.a * bone.a + bone.c * bone.c);
+					bone.ascaleY = Math.sqrt(bone.b * bone.b + bone.d * bone.d);
 					bone.ashearX = 0;
-					bone.ashearY = js_Boot.__cast(Math.atan2(bone.a * bone.b + bone.c * bone.d,bone.a * bone.d - bone.b * bone.c) , Float) * spine_utils_SpineUtils.radDeg;
+					bone.ashearY = Math.atan2(bone.a * bone.b + bone.c * bone.d,bone.a * bone.d - bone.b * bone.c) * spine_utils_SpineUtils.radDeg;
 				} else {
 					var pa = parent.a;
 					var pb = parent.b;
@@ -99461,17 +102217,17 @@ spine_TransformConstraint.prototype = {
 					var rc = id * bone.c - ic * bone.a;
 					var rd = id * bone.d - ic * bone.b;
 					bone.ashearX = 0;
-					bone.ascaleX = js_Boot.__cast(Math.sqrt(ra * ra + rc * rc) , Float);
+					bone.ascaleX = Math.sqrt(ra * ra + rc * rc);
 					if(bone.ascaleX > 0.0001) {
 						var det = ra * rd - rb * rc;
 						bone.ascaleY = det / bone.ascaleX;
-						bone.ashearY = js_Boot.__cast(Math.atan2(ra * rb + rc * rd,det) , Float) * spine_utils_SpineUtils.radDeg;
-						bone.arotation = js_Boot.__cast(Math.atan2(rc,ra) , Float) * spine_utils_SpineUtils.radDeg;
+						bone.ashearY = Math.atan2(ra * rb + rc * rd,det) * spine_utils_SpineUtils.radDeg;
+						bone.arotation = Math.atan2(rc,ra) * spine_utils_SpineUtils.radDeg;
 					} else {
 						bone.ascaleX = 0;
-						bone.ascaleY = js_Boot.__cast(Math.sqrt(rb * rb + rd * rd) , Float);
+						bone.ascaleY = Math.sqrt(rb * rb + rd * rd);
 						bone.ashearY = 0;
-						bone.arotation = 90 - js_Boot.__cast(Math.atan2(rd,rb) , Float) * spine_utils_SpineUtils.radDeg;
+						bone.arotation = 90 - Math.atan2(rd,rb) * spine_utils_SpineUtils.radDeg;
 					}
 				}
 			}
@@ -99487,20 +102243,17 @@ spine_TransformConstraint.prototype = {
 			}
 			var scaleX = bone.ascaleX;
 			var scaleY = bone.ascaleY;
-			if(scaleMix > 0) {
+			if(scaleMix != 0) {
 				scaleX *= (target.ascaleX - 1 + this.data.offsetScaleX) * scaleMix + 1;
 				scaleY *= (target.ascaleY - 1 + this.data.offsetScaleY) * scaleMix + 1;
 			}
 			var shearY = bone.ashearY;
-			if(shearMix > 0) {
+			if(shearMix != 0) {
 				shearY += (target.ashearY + this.data.offsetShearY) * shearMix;
 			}
 			bone.updateWorldTransformWithData(x,y,rotation,scaleX,scaleY,bone.ashearX,shearY);
 			++i;
 		}
-	}
-	,getOrder: function() {
-		return this.data.order;
 	}
 	,getBones: function() {
 		return this.bones;
@@ -99509,6 +102262,9 @@ spine_TransformConstraint.prototype = {
 		return this.target;
 	}
 	,setTarget: function(target) {
+		if(target == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("target cannot be null."));
+		}
 		this.target = target;
 	}
 	,getRotateMix: function() {
@@ -99535,6 +102291,9 @@ spine_TransformConstraint.prototype = {
 	,setShearMix: function(shearMix) {
 		this.shearMix = shearMix;
 	}
+	,isActive: function() {
+		return this.active;
+	}
 	,getData: function() {
 		return this.data;
 	}
@@ -99557,18 +102316,13 @@ var spine_TransformConstraintData = function(name) {
 	this.translateMix = 0;
 	this.rotateMix = 0;
 	this.bones = [];
-	this.order = 0;
-	if(name == null) {
-		throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("name cannot be null."));
-	}
-	this.name = name;
+	spine_ConstraintData.call(this,name);
 };
 $hxClasses["spine.TransformConstraintData"] = spine_TransformConstraintData;
 spine_TransformConstraintData.__name__ = "spine.TransformConstraintData";
-spine_TransformConstraintData.prototype = {
-	name: null
-	,order: null
-	,bones: null
+spine_TransformConstraintData.__super__ = spine_ConstraintData;
+spine_TransformConstraintData.prototype = $extend(spine_ConstraintData.prototype,{
+	bones: null
 	,target: null
 	,rotateMix: null
 	,translateMix: null
@@ -99582,15 +102336,6 @@ spine_TransformConstraintData.prototype = {
 	,offsetShearY: null
 	,relative: null
 	,local: null
-	,getName: function() {
-		return this.name;
-	}
-	,getOrder: function() {
-		return this.order;
-	}
-	,setOrder: function(order) {
-		this.order = order;
-	}
 	,getBones: function() {
 		return this.bones;
 	}
@@ -99675,11 +102420,8 @@ spine_TransformConstraintData.prototype = {
 	,setLocal: function(local) {
 		this.local = local;
 	}
-	,toString: function() {
-		return this.name;
-	}
 	,__class__: spine_TransformConstraintData
-};
+});
 var spine_attachments_AttachmentLoader = function() { };
 $hxClasses["spine.attachments.AttachmentLoader"] = spine_attachments_AttachmentLoader;
 spine_attachments_AttachmentLoader.__name__ = "spine.attachments.AttachmentLoader";
@@ -99715,7 +102457,14 @@ spine_attachments_AtlasAttachmentLoader.prototype = {
 		}
 		attachment.region = region;
 		var uvs = attachment.uvs;
-		if(((region) instanceof spine_support_graphics_AtlasRegion) && (js_Boot.__cast(region , spine_support_graphics_AtlasRegion)).rotate) {
+		var tmp;
+		if(((region) instanceof spine_support_graphics_AtlasRegion)) {
+			var result = region;
+			tmp = result.degrees == 90;
+		} else {
+			tmp = false;
+		}
+		if(tmp) {
 			uvs[4] = region.u;
 			uvs[5] = region.v2;
 			uvs[6] = region.u;
@@ -99742,10 +102491,7 @@ spine_attachments_AtlasAttachmentLoader.prototype = {
 			throw haxe_Exception.thrown(new spine_support_error_RuntimeException("Region not found in atlas: " + path + " (mesh attachment: " + name + ")"));
 		}
 		var attachment = new spine_attachments_MeshAttachment(name);
-		if(region == null) {
-			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("region cannot be null."));
-		}
-		attachment.region = region;
+		attachment.setRegion(region);
 		return attachment;
 	}
 	,newBoundingBoxAttachment: function(skin,name) {
@@ -99778,6 +102524,9 @@ spine_attachments_Attachment.prototype = {
 	,toString: function() {
 		return this.name;
 	}
+	,copy: function() {
+		return null;
+	}
 	,__class__: spine_attachments_Attachment
 };
 var spine_attachments_AttachmentType_$enum = function() { };
@@ -99804,22 +102553,37 @@ spine_attachments_AttachmentType_$enum.valueOf = function(value) {
 	}
 };
 var spine_attachments_VertexAttachment = function(name) {
+	this.deformAttachment = null;
 	this.worldVerticesLength = 0;
 	this.id = (spine_attachments_VertexAttachment.nextID++ & 65535) << 11;
 	spine_attachments_Attachment.call(this,name);
 };
 $hxClasses["spine.attachments.VertexAttachment"] = spine_attachments_VertexAttachment;
 spine_attachments_VertexAttachment.__name__ = "spine.attachments.VertexAttachment";
+spine_attachments_VertexAttachment.getNextID = function() {
+	return spine_attachments_VertexAttachment.nextID++;
+};
 spine_attachments_VertexAttachment.__super__ = spine_attachments_Attachment;
 spine_attachments_VertexAttachment.prototype = $extend(spine_attachments_Attachment.prototype,{
 	id: null
 	,bones: null
 	,vertices: null
 	,worldVerticesLength: null
+	,deformAttachment: null
+	,get_deformAttachment: function() {
+		if(this.deformAttachment != null) {
+			return this.deformAttachment;
+		} else {
+			return this;
+		}
+	}
+	,set_deformAttachment: function(deformAttachment) {
+		return this.deformAttachment = deformAttachment;
+	}
 	,computeWorldVertices: function(slot,start,count,worldVertices,offset,stride) {
 		count = offset + (count >> 1) * stride;
 		var skeleton = slot.bone.skeleton;
-		var deformArray = slot.attachmentVertices;
+		var deformArray = slot.deform;
 		var vertices = this.vertices;
 		var bones = this.bones;
 		if(bones == null) {
@@ -99864,7 +102628,8 @@ spine_attachments_VertexAttachment.prototype = $extend(spine_attachments_Attachm
 				var n = bones[v++];
 				n += v;
 				while(v < n) {
-					var bone = js_Boot.__cast(skeletonBones[bones[v]] , spine_Bone);
+					var result = skeletonBones[bones[v]];
+					var bone = result;
 					var vx = vertices[b];
 					var vy = vertices[b + 1];
 					var weight = vertices[b + 2];
@@ -99888,7 +102653,8 @@ spine_attachments_VertexAttachment.prototype = $extend(spine_attachments_Attachm
 				var n = bones[v++];
 				n += v;
 				while(v < n) {
-					var bone = js_Boot.__cast(skeletonBones[bones[v]] , spine_Bone);
+					var result = skeletonBones[bones[v]];
+					var bone = result;
 					var vx = vertices[b] + deform[f];
 					var vy = vertices[b + 1] + deform[f + 1];
 					var weight = vertices[b + 2];
@@ -99904,8 +102670,15 @@ spine_attachments_VertexAttachment.prototype = $extend(spine_attachments_Attachm
 			}
 		}
 	}
-	,applyDeform: function(sourceAttachment) {
-		return this == sourceAttachment;
+	,getDeformAttachment: function() {
+		if(this.deformAttachment != null) {
+			return this.deformAttachment;
+		} else {
+			return this;
+		}
+	}
+	,setDeformAttachment: function(deformAttachment) {
+		this.deformAttachment = deformAttachment;
 	}
 	,getBones: function() {
 		return this.bones;
@@ -99928,7 +102701,90 @@ spine_attachments_VertexAttachment.prototype = $extend(spine_attachments_Attachm
 	,getId: function() {
 		return this.id;
 	}
+	,copyTo: function(attachment) {
+		if(this.bones != null) {
+			var length = this.bones.length;
+			if(length == null) {
+				length = 0;
+			}
+			var len = length | 0;
+			var capacity = len != 0 ? len : 16;
+			var this1 = [];
+			var array = this1;
+			if(length != 0) {
+				var len1 = array.length;
+				if(len1 > len) {
+					array.splice(len,len - len1);
+				} else if(len1 < len) {
+					while(len1 < len) {
+						array.push(0);
+						++len1;
+					}
+				}
+			}
+			attachment.bones = array;
+			var src = this.bones;
+			var dest = attachment.bones;
+			var length = this.bones.length;
+			if(src == null) {
+				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("src cannot be null."));
+			}
+			if(dest == null) {
+				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("dest cannot be null."));
+			}
+			try {
+				spine_support_utils_Array.copy(src,0,dest,0,length);
+			} catch( _g ) {
+				haxe_NativeStackTrace.lastError = _g;
+				throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
+			}
+		} else {
+			attachment.bones = null;
+		}
+		if(this.vertices != null) {
+			var length = this.vertices.length;
+			if(length == null) {
+				length = 0;
+			}
+			var len = length | 0;
+			var capacity = len != 0 ? len : 16;
+			var this1 = [];
+			var array = this1;
+			if(length > 0) {
+				var len1 = array.length;
+				if(len1 > len) {
+					array.splice(len,len - len1);
+				} else if(len1 < len) {
+					while(len1 < len) {
+						array.push(0);
+						++len1;
+					}
+				}
+			}
+			attachment.vertices = array;
+			var src = this.vertices;
+			var dest = attachment.vertices;
+			var length = this.vertices.length;
+			if(src == null) {
+				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("src cannot be null."));
+			}
+			if(dest == null) {
+				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("dest cannot be null."));
+			}
+			try {
+				spine_support_utils_Array.copy(src,0,dest,0,length);
+			} catch( _g ) {
+				haxe_NativeStackTrace.lastError = _g;
+				throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
+			}
+		} else {
+			attachment.vertices = null;
+		}
+		attachment.worldVerticesLength = this.worldVerticesLength;
+		attachment.deformAttachment = this.deformAttachment != null ? this.deformAttachment : this;
+	}
 	,__class__: spine_attachments_VertexAttachment
+	,__properties__: {set_deformAttachment:"set_deformAttachment",get_deformAttachment:"get_deformAttachment"}
 });
 var spine_attachments_BoundingBoxAttachment = function(name) {
 	this.color = new spine_support_graphics_Color(0.38,0.94,0,1);
@@ -99941,6 +102797,96 @@ spine_attachments_BoundingBoxAttachment.prototype = $extend(spine_attachments_Ve
 	color: null
 	,getColor: function() {
 		return this.color;
+	}
+	,copy: function() {
+		var copy = new spine_attachments_BoundingBoxAttachment(this.name);
+		if(this.bones != null) {
+			var length = this.bones.length;
+			if(length == null) {
+				length = 0;
+			}
+			var len = length | 0;
+			var capacity = len != 0 ? len : 16;
+			var this1 = [];
+			var array = this1;
+			if(length != 0) {
+				var len1 = array.length;
+				if(len1 > len) {
+					array.splice(len,len - len1);
+				} else if(len1 < len) {
+					while(len1 < len) {
+						array.push(0);
+						++len1;
+					}
+				}
+			}
+			copy.bones = array;
+			var src = this.bones;
+			var dest = copy.bones;
+			var length = this.bones.length;
+			if(src == null) {
+				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("src cannot be null."));
+			}
+			if(dest == null) {
+				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("dest cannot be null."));
+			}
+			try {
+				spine_support_utils_Array.copy(src,0,dest,0,length);
+			} catch( _g ) {
+				haxe_NativeStackTrace.lastError = _g;
+				throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
+			}
+		} else {
+			copy.bones = null;
+		}
+		if(this.vertices != null) {
+			var length = this.vertices.length;
+			if(length == null) {
+				length = 0;
+			}
+			var len = length | 0;
+			var capacity = len != 0 ? len : 16;
+			var this1 = [];
+			var array = this1;
+			if(length > 0) {
+				var len1 = array.length;
+				if(len1 > len) {
+					array.splice(len,len - len1);
+				} else if(len1 < len) {
+					while(len1 < len) {
+						array.push(0);
+						++len1;
+					}
+				}
+			}
+			copy.vertices = array;
+			var src = this.vertices;
+			var dest = copy.vertices;
+			var length = this.vertices.length;
+			if(src == null) {
+				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("src cannot be null."));
+			}
+			if(dest == null) {
+				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("dest cannot be null."));
+			}
+			try {
+				spine_support_utils_Array.copy(src,0,dest,0,length);
+			} catch( _g ) {
+				haxe_NativeStackTrace.lastError = _g;
+				throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
+			}
+		} else {
+			copy.vertices = null;
+		}
+		copy.worldVerticesLength = this.worldVerticesLength;
+		copy.deformAttachment = this.deformAttachment != null ? this.deformAttachment : this;
+		var _this = copy.color;
+		var color = this.color;
+		_this.r = color.r;
+		_this.g = color.g;
+		_this.b = color.b;
+		_this.a = color.a;
+		return copy;
 	}
 	,__class__: spine_attachments_BoundingBoxAttachment
 });
@@ -99963,12 +102909,102 @@ spine_attachments_ClippingAttachment.prototype = $extend(spine_attachments_Verte
 	,getColor: function() {
 		return this.color;
 	}
+	,copy: function() {
+		var copy = new spine_attachments_ClippingAttachment(this.name);
+		if(this.bones != null) {
+			var length = this.bones.length;
+			if(length == null) {
+				length = 0;
+			}
+			var len = length | 0;
+			var capacity = len != 0 ? len : 16;
+			var this1 = [];
+			var array = this1;
+			if(length != 0) {
+				var len1 = array.length;
+				if(len1 > len) {
+					array.splice(len,len - len1);
+				} else if(len1 < len) {
+					while(len1 < len) {
+						array.push(0);
+						++len1;
+					}
+				}
+			}
+			copy.bones = array;
+			var src = this.bones;
+			var dest = copy.bones;
+			var length = this.bones.length;
+			if(src == null) {
+				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("src cannot be null."));
+			}
+			if(dest == null) {
+				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("dest cannot be null."));
+			}
+			try {
+				spine_support_utils_Array.copy(src,0,dest,0,length);
+			} catch( _g ) {
+				haxe_NativeStackTrace.lastError = _g;
+				throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
+			}
+		} else {
+			copy.bones = null;
+		}
+		if(this.vertices != null) {
+			var length = this.vertices.length;
+			if(length == null) {
+				length = 0;
+			}
+			var len = length | 0;
+			var capacity = len != 0 ? len : 16;
+			var this1 = [];
+			var array = this1;
+			if(length > 0) {
+				var len1 = array.length;
+				if(len1 > len) {
+					array.splice(len,len - len1);
+				} else if(len1 < len) {
+					while(len1 < len) {
+						array.push(0);
+						++len1;
+					}
+				}
+			}
+			copy.vertices = array;
+			var src = this.vertices;
+			var dest = copy.vertices;
+			var length = this.vertices.length;
+			if(src == null) {
+				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("src cannot be null."));
+			}
+			if(dest == null) {
+				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("dest cannot be null."));
+			}
+			try {
+				spine_support_utils_Array.copy(src,0,dest,0,length);
+			} catch( _g ) {
+				haxe_NativeStackTrace.lastError = _g;
+				throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
+			}
+		} else {
+			copy.vertices = null;
+		}
+		copy.worldVerticesLength = this.worldVerticesLength;
+		copy.deformAttachment = this.deformAttachment != null ? this.deformAttachment : this;
+		copy.endSlot = this.endSlot;
+		var _this = copy.color;
+		var color = this.color;
+		_this.r = color.r;
+		_this.g = color.g;
+		_this.b = color.b;
+		_this.a = color.a;
+		return copy;
+	}
 	,__class__: spine_attachments_ClippingAttachment
 });
 var spine_attachments_MeshAttachment = function(name) {
 	this.height = 0;
 	this.width = 0;
-	this.inheritDeform = false;
 	this.hullLength = 0;
 	this.color = new spine_support_graphics_Color(1,1,1,1);
 	this.uvs = null;
@@ -99986,7 +103022,6 @@ spine_attachments_MeshAttachment.prototype = $extend(spine_attachments_VertexAtt
 	,color: null
 	,hullLength: null
 	,parentMesh: null
-	,inheritDeform: null
 	,edges: null
 	,width: null
 	,height: null
@@ -100003,21 +103038,6 @@ spine_attachments_MeshAttachment.prototype = $extend(spine_attachments_VertexAtt
 		return this.region;
 	}
 	,updateUVs: function() {
-		var u = 0;
-		var v = 0;
-		var width = 0;
-		var height = 0;
-		if(this.region == null) {
-			v = 0;
-			u = v;
-			height = 1;
-			width = height;
-		} else {
-			u = this.region.u;
-			v = this.region.v;
-			width = this.region.u2 - u;
-			height = this.region.v2 - v;
-		}
 		var regionUVs = this.regionUVs;
 		if(this.uvs == null || this.uvs.length != regionUVs.length) {
 			var length = regionUVs.length;
@@ -100042,33 +103062,80 @@ spine_attachments_MeshAttachment.prototype = $extend(spine_attachments_VertexAtt
 			this.uvs = array;
 		}
 		var uvs = this.uvs;
-		if(((this.region) instanceof spine_support_graphics_AtlasRegion) && (js_Boot.__cast(this.region , spine_support_graphics_AtlasRegion)).rotate) {
-			var i = 0;
-			var n = uvs.length;
-			while(i < n) {
-				uvs[i] = u + regionUVs[i + 1] * width;
-				uvs[i + 1] = v + height - regionUVs[i] * height;
-				i += 2;
+		var n = uvs.length;
+		var u = 0;
+		var v = 0;
+		var width = 0;
+		var height = 0;
+		if(((this.region) instanceof spine_support_graphics_AtlasRegion)) {
+			u = this.region.u;
+			v = this.region.v;
+			var result = this.region;
+			var region = result;
+			var textureWidth = region.page.width;
+			var textureHeight = region.page.height;
+			var _continueAfterSwitch0 = false;
+			while(true) {
+				var _switchCond0 = region.degrees;
+				if(_switchCond0 == 90) {
+					u -= (region.originalHeight - region.offsetY - region.packedWidth) / textureWidth;
+					v -= (region.originalWidth - region.offsetX - region.packedHeight) / textureHeight;
+					width = region.originalHeight / textureWidth;
+					height = region.originalWidth / textureHeight;
+					var i = 0;
+					while(i < n) {
+						uvs[i] = u + regionUVs[i + 1] * width;
+						uvs[i + 1] = v + (1 - regionUVs[i]) * height;
+						i += 2;
+					}
+					return;
+				} else if(_switchCond0 == 180) {
+					u -= (region.originalWidth - region.offsetX - region.packedWidth) / textureWidth;
+					v -= region.offsetY / textureHeight;
+					width = region.originalWidth / textureWidth;
+					height = region.originalHeight / textureHeight;
+					var i1 = 0;
+					while(i1 < n) {
+						uvs[i1] = u + (1 - regionUVs[i1]) * width;
+						uvs[i1 + 1] = v + (1 - regionUVs[i1 + 1]) * height;
+						i1 += 2;
+					}
+					return;
+				} else if(_switchCond0 == 270) {
+					u -= region.offsetY / textureWidth;
+					v -= region.offsetX / textureHeight;
+					width = region.originalHeight / textureWidth;
+					height = region.originalWidth / textureHeight;
+					var i2 = 0;
+					while(i2 < n) {
+						uvs[i2] = u + (1 - regionUVs[i2 + 1]) * width;
+						uvs[i2 + 1] = v + regionUVs[i2] * height;
+						i2 += 2;
+					}
+					return;
+				}
+				break;
 			}
+			u -= region.offsetX / textureWidth;
+			v -= (region.originalHeight - region.offsetY - region.packedHeight) / textureHeight;
+			width = region.originalWidth / textureWidth;
+			height = region.originalHeight / textureHeight;
+		} else if(this.region == null) {
+			v = 0;
+			u = v;
+			height = 1;
+			width = height;
 		} else {
-			var i = 0;
-			var n = uvs.length;
-			while(i < n) {
-				uvs[i] = u + regionUVs[i] * width;
-				uvs[i + 1] = v + regionUVs[i + 1] * height;
-				i += 2;
-			}
+			u = this.region.u;
+			v = this.region.v;
+			width = this.region.u2 - u;
+			height = this.region.v2 - v;
 		}
-	}
-	,applyDeform: function(sourceAttachment) {
-		if(this != sourceAttachment) {
-			if(this.inheritDeform) {
-				return this.parentMesh == sourceAttachment;
-			} else {
-				return false;
-			}
-		} else {
-			return true;
+		var i = 0;
+		while(i < n) {
+			uvs[i] = u + regionUVs[i] * width;
+			uvs[i + 1] = v + regionUVs[i + 1] * height;
+			i += 2;
 		}
 	}
 	,getTriangles: function() {
@@ -100139,11 +103206,296 @@ spine_attachments_MeshAttachment.prototype = $extend(spine_attachments_VertexAtt
 			this.height = parentMesh.height;
 		}
 	}
-	,getInheritDeform: function() {
-		return this.inheritDeform;
+	,copy: function() {
+		if(this.parentMesh != null) {
+			var mesh = new spine_attachments_MeshAttachment(this.name);
+			mesh.region = this.region;
+			mesh.path = this.path;
+			var _this = mesh.color;
+			var color = this.color;
+			_this.r = color.r;
+			_this.g = color.g;
+			_this.b = color.b;
+			_this.a = color.a;
+			mesh.deformAttachment = this.deformAttachment != null ? this.deformAttachment : this;
+			var parentMesh = this.parentMesh != null ? this.parentMesh : this;
+			mesh.parentMesh = parentMesh;
+			if(parentMesh != null) {
+				mesh.bones = parentMesh.bones;
+				mesh.vertices = parentMesh.vertices;
+				mesh.regionUVs = parentMesh.regionUVs;
+				mesh.triangles = parentMesh.triangles;
+				mesh.hullLength = parentMesh.hullLength;
+				mesh.worldVerticesLength = parentMesh.worldVerticesLength;
+				mesh.edges = parentMesh.edges;
+				mesh.width = parentMesh.width;
+				mesh.height = parentMesh.height;
+			}
+			mesh.updateUVs();
+			return mesh;
+		}
+		var copy = new spine_attachments_MeshAttachment(this.name);
+		copy.region = this.region;
+		copy.path = this.path;
+		var _this = copy.color;
+		var color = this.color;
+		_this.r = color.r;
+		_this.g = color.g;
+		_this.b = color.b;
+		_this.a = color.a;
+		if(this.bones != null) {
+			var length = this.bones.length;
+			if(length == null) {
+				length = 0;
+			}
+			var len = length | 0;
+			var capacity = len != 0 ? len : 16;
+			var this1 = [];
+			var array = this1;
+			if(length != 0) {
+				var len1 = array.length;
+				if(len1 > len) {
+					array.splice(len,len - len1);
+				} else if(len1 < len) {
+					while(len1 < len) {
+						array.push(0);
+						++len1;
+					}
+				}
+			}
+			copy.bones = array;
+			var src = this.bones;
+			var dest = copy.bones;
+			var length = this.bones.length;
+			if(src == null) {
+				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("src cannot be null."));
+			}
+			if(dest == null) {
+				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("dest cannot be null."));
+			}
+			try {
+				spine_support_utils_Array.copy(src,0,dest,0,length);
+			} catch( _g ) {
+				haxe_NativeStackTrace.lastError = _g;
+				throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
+			}
+		} else {
+			copy.bones = null;
+		}
+		if(this.vertices != null) {
+			var length = this.vertices.length;
+			if(length == null) {
+				length = 0;
+			}
+			var len = length | 0;
+			var capacity = len != 0 ? len : 16;
+			var this1 = [];
+			var array = this1;
+			if(length > 0) {
+				var len1 = array.length;
+				if(len1 > len) {
+					array.splice(len,len - len1);
+				} else if(len1 < len) {
+					while(len1 < len) {
+						array.push(0);
+						++len1;
+					}
+				}
+			}
+			copy.vertices = array;
+			var src = this.vertices;
+			var dest = copy.vertices;
+			var length = this.vertices.length;
+			if(src == null) {
+				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("src cannot be null."));
+			}
+			if(dest == null) {
+				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("dest cannot be null."));
+			}
+			try {
+				spine_support_utils_Array.copy(src,0,dest,0,length);
+			} catch( _g ) {
+				haxe_NativeStackTrace.lastError = _g;
+				throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
+			}
+		} else {
+			copy.vertices = null;
+		}
+		copy.worldVerticesLength = this.worldVerticesLength;
+		copy.deformAttachment = this.deformAttachment != null ? this.deformAttachment : this;
+		var length = this.regionUVs.length;
+		if(length == null) {
+			length = 0;
+		}
+		var len = length | 0;
+		var capacity = len != 0 ? len : 16;
+		var this1 = [];
+		var array = this1;
+		if(length > 0) {
+			var len1 = array.length;
+			if(len1 > len) {
+				array.splice(len,len - len1);
+			} else if(len1 < len) {
+				while(len1 < len) {
+					array.push(0);
+					++len1;
+				}
+			}
+		}
+		copy.regionUVs = array;
+		var src = this.regionUVs;
+		var dest = copy.regionUVs;
+		var length = this.regionUVs.length;
+		if(src == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("src cannot be null."));
+		}
+		if(dest == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("dest cannot be null."));
+		}
+		try {
+			spine_support_utils_Array.copy(src,0,dest,0,length);
+		} catch( _g ) {
+			haxe_NativeStackTrace.lastError = _g;
+			throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
+		}
+		var length = this.uvs.length;
+		if(length == null) {
+			length = 0;
+		}
+		var len = length | 0;
+		var capacity = len != 0 ? len : 16;
+		var this1 = [];
+		var array = this1;
+		if(length > 0) {
+			var len1 = array.length;
+			if(len1 > len) {
+				array.splice(len,len - len1);
+			} else if(len1 < len) {
+				while(len1 < len) {
+					array.push(0);
+					++len1;
+				}
+			}
+		}
+		copy.uvs = array;
+		var src = this.uvs;
+		var dest = copy.uvs;
+		var length = this.uvs.length;
+		if(src == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("src cannot be null."));
+		}
+		if(dest == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("dest cannot be null."));
+		}
+		try {
+			spine_support_utils_Array.copy(src,0,dest,0,length);
+		} catch( _g ) {
+			haxe_NativeStackTrace.lastError = _g;
+			throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
+		}
+		var length = this.triangles.length;
+		if(length == null) {
+			length = 0;
+		}
+		var len = length | 0;
+		var capacity = len != 0 ? len : 16;
+		var this1 = [];
+		var array = this1;
+		if(length != 0) {
+			var len1 = array.length;
+			if(len1 > len) {
+				array.splice(len,len - len1);
+			} else if(len1 < len) {
+				while(len1 < len) {
+					array.push(0);
+					++len1;
+				}
+			}
+		}
+		copy.triangles = array;
+		var src = this.triangles;
+		var dest = copy.triangles;
+		var length = this.triangles.length;
+		if(src == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("src cannot be null."));
+		}
+		if(dest == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("dest cannot be null."));
+		}
+		try {
+			spine_support_utils_Array.copy(src,0,dest,0,length);
+		} catch( _g ) {
+			haxe_NativeStackTrace.lastError = _g;
+			throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
+		}
+		copy.hullLength = this.hullLength;
+		if(this.edges != null) {
+			var length = this.edges.length;
+			if(length == null) {
+				length = 0;
+			}
+			var len = length | 0;
+			var capacity = len != 0 ? len : 16;
+			var this1 = [];
+			var array = this1;
+			if(length != 0) {
+				var len1 = array.length;
+				if(len1 > len) {
+					array.splice(len,len - len1);
+				} else if(len1 < len) {
+					while(len1 < len) {
+						array.push(0);
+						++len1;
+					}
+				}
+			}
+			copy.edges = array;
+			var src = this.edges;
+			var dest = copy.edges;
+			var length = this.edges.length;
+			if(src == null) {
+				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("src cannot be null."));
+			}
+			if(dest == null) {
+				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("dest cannot be null."));
+			}
+			try {
+				spine_support_utils_Array.copy(src,0,dest,0,length);
+			} catch( _g ) {
+				haxe_NativeStackTrace.lastError = _g;
+				throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
+			}
+		}
+		copy.width = this.width;
+		copy.height = this.height;
+		return copy;
 	}
-	,setInheritDeform: function(inheritDeform) {
-		this.inheritDeform = inheritDeform;
+	,newLinkedMesh: function() {
+		var mesh = new spine_attachments_MeshAttachment(this.name);
+		mesh.region = this.region;
+		mesh.path = this.path;
+		var _this = mesh.color;
+		var color = this.color;
+		_this.r = color.r;
+		_this.g = color.g;
+		_this.b = color.b;
+		_this.a = color.a;
+		mesh.deformAttachment = this.deformAttachment != null ? this.deformAttachment : this;
+		var parentMesh = this.parentMesh != null ? this.parentMesh : this;
+		mesh.parentMesh = parentMesh;
+		if(parentMesh != null) {
+			mesh.bones = parentMesh.bones;
+			mesh.vertices = parentMesh.vertices;
+			mesh.regionUVs = parentMesh.regionUVs;
+			mesh.triangles = parentMesh.triangles;
+			mesh.hullLength = parentMesh.hullLength;
+			mesh.worldVerticesLength = parentMesh.worldVerticesLength;
+			mesh.edges = parentMesh.edges;
+			mesh.width = parentMesh.width;
+			mesh.height = parentMesh.height;
+		}
+		mesh.updateUVs();
+		return mesh;
 	}
 	,__class__: spine_attachments_MeshAttachment
 });
@@ -100181,6 +103533,133 @@ spine_attachments_PathAttachment.prototype = $extend(spine_attachments_VertexAtt
 	}
 	,getColor: function() {
 		return this.color;
+	}
+	,copy: function() {
+		var copy = new spine_attachments_PathAttachment(this.name);
+		if(this.bones != null) {
+			var length = this.bones.length;
+			if(length == null) {
+				length = 0;
+			}
+			var len = length | 0;
+			var capacity = len != 0 ? len : 16;
+			var this1 = [];
+			var array = this1;
+			if(length != 0) {
+				var len1 = array.length;
+				if(len1 > len) {
+					array.splice(len,len - len1);
+				} else if(len1 < len) {
+					while(len1 < len) {
+						array.push(0);
+						++len1;
+					}
+				}
+			}
+			copy.bones = array;
+			var src = this.bones;
+			var dest = copy.bones;
+			var length = this.bones.length;
+			if(src == null) {
+				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("src cannot be null."));
+			}
+			if(dest == null) {
+				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("dest cannot be null."));
+			}
+			try {
+				spine_support_utils_Array.copy(src,0,dest,0,length);
+			} catch( _g ) {
+				haxe_NativeStackTrace.lastError = _g;
+				throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
+			}
+		} else {
+			copy.bones = null;
+		}
+		if(this.vertices != null) {
+			var length = this.vertices.length;
+			if(length == null) {
+				length = 0;
+			}
+			var len = length | 0;
+			var capacity = len != 0 ? len : 16;
+			var this1 = [];
+			var array = this1;
+			if(length > 0) {
+				var len1 = array.length;
+				if(len1 > len) {
+					array.splice(len,len - len1);
+				} else if(len1 < len) {
+					while(len1 < len) {
+						array.push(0);
+						++len1;
+					}
+				}
+			}
+			copy.vertices = array;
+			var src = this.vertices;
+			var dest = copy.vertices;
+			var length = this.vertices.length;
+			if(src == null) {
+				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("src cannot be null."));
+			}
+			if(dest == null) {
+				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("dest cannot be null."));
+			}
+			try {
+				spine_support_utils_Array.copy(src,0,dest,0,length);
+			} catch( _g ) {
+				haxe_NativeStackTrace.lastError = _g;
+				throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
+			}
+		} else {
+			copy.vertices = null;
+		}
+		copy.worldVerticesLength = this.worldVerticesLength;
+		copy.deformAttachment = this.deformAttachment != null ? this.deformAttachment : this;
+		var length = this.lengths.length;
+		if(length == null) {
+			length = 0;
+		}
+		var len = length | 0;
+		var capacity = len != 0 ? len : 16;
+		var this1 = [];
+		var array = this1;
+		if(length > 0) {
+			var len1 = array.length;
+			if(len1 > len) {
+				array.splice(len,len - len1);
+			} else if(len1 < len) {
+				while(len1 < len) {
+					array.push(0);
+					++len1;
+				}
+			}
+		}
+		copy.lengths = array;
+		var src = this.lengths;
+		var dest = copy.lengths;
+		var length = this.lengths.length;
+		if(src == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("src cannot be null."));
+		}
+		if(dest == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("dest cannot be null."));
+		}
+		try {
+			spine_support_utils_Array.copy(src,0,dest,0,length);
+		} catch( _g ) {
+			haxe_NativeStackTrace.lastError = _g;
+			throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
+		}
+		copy.closed = this.closed;
+		copy.constantSpeed = this.constantSpeed;
+		var _this = copy.color;
+		var color = this.color;
+		_this.r = color.r;
+		_this.g = color.g;
+		_this.b = color.b;
+		_this.a = color.a;
+		return copy;
 	}
 	,__class__: spine_attachments_PathAttachment
 });
@@ -100230,7 +103709,20 @@ spine_attachments_PointAttachment.prototype = $extend(spine_attachments_Attachme
 		var sin = Math.sin(this.rotation * spine_support_math_MathUtils.degRad);
 		var x = cos * bone.a + sin * bone.b;
 		var y = cos * bone.c + sin * bone.d;
-		return js_Boot.__cast(Math.atan2(y,x) * spine_support_math_MathUtils.radDeg , Float);
+		return Math.atan2(y,x) * spine_support_math_MathUtils.radDeg;
+	}
+	,copy: function() {
+		var copy = new spine_attachments_PointAttachment(this.name);
+		copy.x = this.x;
+		copy.y = this.y;
+		copy.rotation = this.rotation;
+		var _this = copy.color;
+		var color = this.color;
+		_this.r = color.r;
+		_this.g = color.g;
+		_this.b = color.b;
+		_this.a = color.a;
+		return copy;
 	}
 	,__class__: spine_attachments_PointAttachment
 });
@@ -100291,15 +103783,14 @@ spine_attachments_RegionAttachment.prototype = $extend(spine_attachments_Attachm
 		var localX = -localX2;
 		var localY = -localY2;
 		if(((this.region) instanceof spine_support_graphics_AtlasRegion)) {
-			var region = js_Boot.__cast(this.region , spine_support_graphics_AtlasRegion);
-			if(region.rotate) {
-				localX += region.offsetX / region.originalWidth * width;
-				localY += region.offsetY / region.originalHeight * height;
+			var result = this.region;
+			var region = result;
+			localX += region.offsetX / region.originalWidth * width;
+			localY += region.offsetY / region.originalHeight * height;
+			if(region.degrees == 90) {
 				localX2 -= (region.originalWidth - region.offsetX - region.packedHeight) / region.originalWidth * width;
 				localY2 -= (region.originalHeight - region.offsetY - region.packedWidth) / region.originalHeight * height;
 			} else {
-				localX += region.offsetX / region.originalWidth * width;
-				localY += region.offsetY / region.originalHeight * height;
 				localX2 -= (region.originalWidth - region.offsetX - region.packedWidth) / region.originalWidth * width;
 				localY2 -= (region.originalHeight - region.offsetY - region.packedHeight) / region.originalHeight * height;
 			}
@@ -100311,8 +103802,8 @@ spine_attachments_RegionAttachment.prototype = $extend(spine_attachments_Attachm
 		localX2 *= scaleX;
 		localY2 *= scaleY;
 		var rotation = this.rotation;
-		var cos = js_Boot.__cast(Math.cos(spine_support_math_MathUtils.degRad * rotation) , Float);
-		var sin = js_Boot.__cast(Math.sin(spine_support_math_MathUtils.degRad * rotation) , Float);
+		var cos = Math.cos(spine_support_math_MathUtils.degRad * rotation);
+		var sin = Math.sin(spine_support_math_MathUtils.degRad * rotation);
 		var x = this.x;
 		var y = this.y;
 		var localXCos = localX * cos + x;
@@ -100339,7 +103830,14 @@ spine_attachments_RegionAttachment.prototype = $extend(spine_attachments_Attachm
 		}
 		this.region = region;
 		var uvs = this.uvs;
-		if(((region) instanceof spine_support_graphics_AtlasRegion) && (js_Boot.__cast(region , spine_support_graphics_AtlasRegion)).rotate) {
+		var tmp;
+		if(((region) instanceof spine_support_graphics_AtlasRegion)) {
+			var result = region;
+			tmp = result.degrees == 90;
+		} else {
+			tmp = false;
+		}
+		if(tmp) {
 			uvs[4] = region.u;
 			uvs[5] = region.v2;
 			uvs[6] = region.u;
@@ -100452,6 +103950,53 @@ spine_attachments_RegionAttachment.prototype = $extend(spine_attachments_Attachm
 	,setPath: function(path) {
 		this.path = path;
 	}
+	,copy: function() {
+		var copy = new spine_attachments_RegionAttachment(this.name);
+		copy.region = this.region;
+		copy.path = this.path;
+		copy.x = this.x;
+		copy.y = this.y;
+		copy.scaleX = this.scaleX;
+		copy.scaleY = this.scaleY;
+		copy.rotation = this.rotation;
+		copy.width = this.width;
+		copy.height = this.height;
+		var src = this.uvs;
+		var dest = copy.uvs;
+		if(src == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("src cannot be null."));
+		}
+		if(dest == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("dest cannot be null."));
+		}
+		try {
+			spine_support_utils_Array.copy(src,0,dest,0,8);
+		} catch( _g ) {
+			haxe_NativeStackTrace.lastError = _g;
+			throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + 8));
+		}
+		var src = this.offset;
+		var dest = copy.offset;
+		if(src == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("src cannot be null."));
+		}
+		if(dest == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("dest cannot be null."));
+		}
+		try {
+			spine_support_utils_Array.copy(src,0,dest,0,8);
+		} catch( _g ) {
+			haxe_NativeStackTrace.lastError = _g;
+			throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + 8));
+		}
+		var _this = copy.color;
+		var color = this.color;
+		_this.r = color.r;
+		_this.g = color.g;
+		_this.b = color.b;
+		_this.a = color.a;
+		return copy;
+	}
 	,__class__: spine_attachments_RegionAttachment
 });
 var spine_base_SpineBaseDisplay = function() { };
@@ -100495,7 +104040,7 @@ spine_openfl_BitmapDataTextureLoader.prototype = {
 		if(region.offsetX == 0 && region.offsetY == 0) {
 			return;
 		}
-		if(region.rotate) {
+		if(region.degrees == 90) {
 			var v1 = region.width;
 			region.width = region.height;
 			region.height = v1;
@@ -100604,7 +104149,7 @@ spine_utils_SkeletonClipping.prototype = {
 		var count = n;
 		count = (count >> 1) * 2;
 		var skeleton = slot.bone.skeleton;
-		var deformArray = slot.attachmentVertices;
+		var deformArray = slot.deform;
 		var vertices1 = clip.vertices;
 		var bones = clip.bones;
 		if(bones == null) {
@@ -100648,7 +104193,8 @@ spine_utils_SkeletonClipping.prototype = {
 					var n = bones[v++];
 					n += v;
 					while(v < n) {
-						var bone = js_Boot.__cast(skeletonBones[bones[v]] , spine_Bone);
+						var result = skeletonBones[bones[v]];
+						var bone = result;
 						var vx = vertices1[b];
 						var vy = vertices1[b + 1];
 						var weight = vertices1[b + 2];
@@ -100672,7 +104218,8 @@ spine_utils_SkeletonClipping.prototype = {
 					var n = bones[v++];
 					n += v;
 					while(v < n) {
-						var bone = js_Boot.__cast(skeletonBones[bones[v]] , spine_Bone);
+						var result = skeletonBones[bones[v]];
+						var bone = result;
 						var vx = vertices1[b] + deform[f];
 						var vy = vertices1[b + 1] + deform[f + 1];
 						var weight = vertices1[b + 2];
@@ -101125,8 +104672,7 @@ spine_utils_SkeletonClipping.prototype = {
 				var p = 0;
 				while(p < polygonsCount) {
 					var s = clippedVertices.length;
-					var bool = this.clip(x1,y1,x2,y2,x3,y3,polygons[p],clipOutput);
-					if(bool) {
+					if(this.clip(x1,y1,x2,y2,x3,y3,polygons[p],clipOutput)) {
 						var clipOutputLength = clipOutput.length;
 						if(clipOutputLength == 0) {
 							++p;
@@ -101195,8 +104741,8 @@ spine_utils_SkeletonClipping.prototype = {
 						var ii1 = 1;
 						while(ii1 < clipOutputCount) {
 							clippedTrianglesItems[s] = index;
-							clippedTrianglesItems[s + 1] = js_Boot.__cast(index + ii1 , Int);
-							clippedTrianglesItems[s + 2] = js_Boot.__cast(index + ii1 + 1 , Int);
+							clippedTrianglesItems[s + 1] = index + ii1 | 0;
+							clippedTrianglesItems[s + 2] = index + ii1 + 1 | 0;
 							s += 3;
 							++ii1;
 						}
@@ -101265,8 +104811,8 @@ spine_utils_SkeletonClipping.prototype = {
 						}
 						var clippedTrianglesItems1 = clippedTriangles;
 						clippedTrianglesItems1[s] = index;
-						clippedTrianglesItems1[s + 1] = js_Boot.__cast(index + 1 , Int);
-						clippedTrianglesItems1[s + 2] = js_Boot.__cast(index + 2 , Int);
+						clippedTrianglesItems1[s + 1] = index + 1 | 0;
+						clippedTrianglesItems1[s + 2] = index + 2 | 0;
 						index += 3;
 						++p;
 						_gotoLabel_outer = 2;
@@ -101338,15 +104884,27 @@ spine_utils_SkeletonClipping.prototype = {
 					}
 					var c0 = inputY2 - inputY;
 					var c2 = inputX2 - inputX;
-					var ua = (c2 * (edgeY - inputY) - c0 * (edgeX - inputX)) / (c0 * (edgeX2 - edgeX) - c2 * (edgeY2 - edgeY));
-					output.push(edgeX + (edgeX2 - edgeX) * ua);
-					output.push(edgeY + (edgeY2 - edgeY) * ua);
+					var s = c0 * (edgeX2 - edgeX) - c2 * (edgeY2 - edgeY);
+					if(Math.abs(s) > 0.000001) {
+						var ua = (c2 * (edgeY - inputY) - c0 * (edgeX - inputX)) / s;
+						output.push(edgeX + (edgeX2 - edgeX) * ua);
+						output.push(edgeY + (edgeY2 - edgeY) * ua);
+					} else {
+						output.push(edgeX);
+						output.push(edgeY);
+					}
 				} else if(side2) {
 					var c01 = inputY2 - inputY;
 					var c21 = inputX2 - inputX;
-					var ua1 = (c21 * (edgeY - inputY) - c01 * (edgeX - inputX)) / (c01 * (edgeX2 - edgeX) - c21 * (edgeY2 - edgeY));
-					output.push(edgeX + (edgeX2 - edgeX) * ua1);
-					output.push(edgeY + (edgeY2 - edgeY) * ua1);
+					var s1 = c01 * (edgeX2 - edgeX) - c21 * (edgeY2 - edgeY);
+					if(Math.abs(s1) > 0.000001) {
+						var ua1 = (c21 * (edgeY - inputY) - c01 * (edgeX - inputX)) / s1;
+						output.push(edgeX + (edgeX2 - edgeX) * ua1);
+						output.push(edgeY + (edgeY2 - edgeY) * ua1);
+					} else {
+						output.push(edgeX);
+						output.push(edgeY);
+					}
 					output.push(inputX2);
 					output.push(inputY2);
 				}
@@ -101671,7 +105229,7 @@ spine_openfl_SkeletonSprite.prototype = $extend(zygame_display_DisplayObjectCont
 					var worldVertices1 = this._tempVerticesArray;
 					count = (count >> 1) * 2;
 					var skeleton = slot.bone.skeleton;
-					var deformArray = slot.attachmentVertices;
+					var deformArray = slot.deform;
 					var vertices = region1.vertices;
 					var bones = region1.bones;
 					if(bones == null) {
@@ -101715,7 +105273,8 @@ spine_openfl_SkeletonSprite.prototype = $extend(zygame_display_DisplayObjectCont
 								var n1 = bones[v1++];
 								n1 += v1;
 								while(v1 < n1) {
-									var bone2 = js_Boot.__cast(skeletonBones[bones[v1]] , spine_Bone);
+									var result = skeletonBones[bones[v1]];
+									var bone2 = result;
 									var vx1 = vertices[b2];
 									var vy1 = vertices[b2 + 1];
 									var weight = vertices[b2 + 2];
@@ -101739,7 +105298,8 @@ spine_openfl_SkeletonSprite.prototype = $extend(zygame_display_DisplayObjectCont
 								var n2 = bones[v1++];
 								n2 += v1;
 								while(v1 < n2) {
-									var bone3 = js_Boot.__cast(skeletonBones[bones[v1]] , spine_Bone);
+									var result1 = skeletonBones[bones[v1]];
+									var bone3 = result1;
 									var vx2 = vertices[b3] + deform[f];
 									var vy2 = vertices[b3 + 1] + deform[f + 1];
 									var weight1 = vertices[b3 + 2];
@@ -101757,10 +105317,7 @@ spine_openfl_SkeletonSprite.prototype = $extend(zygame_display_DisplayObjectCont
 					}
 					uvs = region1.uvs;
 					triangles = region1.triangles;
-					if(region1.region == null) {
-						throw haxe_Exception.thrown(new spine_support_error_IllegalStateException("Region has not been set: " + Std.string(region1)));
-					}
-					atlasRegion = region1.region;
+					atlasRegion = region1.getRegion();
 				}
 				if(atlasRegion != null) {
 					var spr = this._spritePool.get();
@@ -101869,7 +105426,7 @@ spine_openfl_SkeletonSprite.prototype = $extend(zygame_display_DisplayObjectCont
 					var worldVertices1 = this._tempVerticesArray;
 					count = (count >> 1) * 2;
 					var skeleton = slot.bone.skeleton;
-					var deformArray = slot.attachmentVertices;
+					var deformArray = slot.deform;
 					var vertices = region1.vertices;
 					var bones = region1.bones;
 					if(bones == null) {
@@ -101913,7 +105470,8 @@ spine_openfl_SkeletonSprite.prototype = $extend(zygame_display_DisplayObjectCont
 								var n1 = bones[v1++];
 								n1 += v1;
 								while(v1 < n1) {
-									var bone2 = js_Boot.__cast(skeletonBones[bones[v1]] , spine_Bone);
+									var result = skeletonBones[bones[v1]];
+									var bone2 = result;
 									var vx1 = vertices[b2];
 									var vy1 = vertices[b2 + 1];
 									var weight = vertices[b2 + 2];
@@ -101937,7 +105495,8 @@ spine_openfl_SkeletonSprite.prototype = $extend(zygame_display_DisplayObjectCont
 								var n2 = bones[v1++];
 								n2 += v1;
 								while(v1 < n2) {
-									var bone3 = js_Boot.__cast(skeletonBones[bones[v1]] , spine_Bone);
+									var result1 = skeletonBones[bones[v1]];
+									var bone3 = result1;
 									var vx2 = vertices[b3] + deform[f];
 									var vy2 = vertices[b3 + 1] + deform[f + 1];
 									var weight1 = vertices[b3 + 2];
@@ -101955,10 +105514,7 @@ spine_openfl_SkeletonSprite.prototype = $extend(zygame_display_DisplayObjectCont
 					}
 					uvs = region1.uvs;
 					triangles = region1.triangles;
-					if(region1.region == null) {
-						throw haxe_Exception.thrown(new spine_support_error_IllegalStateException("Region has not been set: " + Std.string(region1)));
-					}
-					atlasRegion = region1.region;
+					atlasRegion = region1.getRegion();
 				}
 				if(atlasRegion != null) {
 					if(this.batchs != null) {
@@ -102044,7 +105600,7 @@ spine_openfl_SkeletonSprite.prototype = $extend(zygame_display_DisplayObjectCont
 var spine_openfl_SkeletonAnimation = function(skeletonData,stateData) {
 	this.assetsId = null;
 	spine_openfl_SkeletonSprite.call(this,skeletonData);
-	this.skeleton.flipY = true;
+	this.skeleton.scaleY = -1;
 	this.state = new spine_AnimationState(stateData == null ? new spine_AnimationStateData(skeletonData) : stateData);
 	this.advanceTime(0);
 	this.setSkeletonData(skeletonData);
@@ -102061,7 +105617,7 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 			return;
 		}
 		this.skeleton = new spine_Skeleton(skeletonData);
-		this.skeleton.flipY = true;
+		this.skeleton.scaleY = -1;
 		this.state.data.skeletonData = skeletonData;
 		var _this = this.skeleton;
 		var cacheReset = _this.cacheReset;
@@ -102119,7 +105675,7 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 				var nextTime = current.trackLast - next.delay;
 				if(nextTime >= 0) {
 					next.delay = 0;
-					next.trackTime = nextTime + delta * next.timeScale;
+					next.trackTime += current.timeScale == 0 ? 0 : (nextTime / current.timeScale + delta) * next.timeScale;
 					current.trackTime += currentDelta;
 					var from;
 					if(i < _this.tracks.length) {
@@ -102141,6 +105697,7 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 						_this1.objects.push(1);
 						_this1.objects.push(from);
 						next.mixingFrom = from;
+						from.mixingTo = next;
 						next.mixTime = 0;
 						if(from.mixingFrom != null && from.mixDuration > 0) {
 							next.interruptAlpha *= Math.min(1,from.mixTime / from.mixDuration | 0);
@@ -102153,7 +105710,7 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 					_this2.objects.push(next);
 					_this2.AnimationState_this.animationsChanged = true;
 					while(next.mixingFrom != null) {
-						next.mixTime += currentDelta;
+						next.mixTime += delta;
 						next = next.mixingFrom;
 					}
 					++i;
@@ -102190,9 +105747,12 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 						var finished1 = _this.updateMixingFrom(from2,delta);
 						from2.animationLast = from2.nextAnimationLast;
 						from2.trackLast = from2.nextTrackLast;
-						if(from1.mixTime > 0 && (from1.mixTime >= from1.mixDuration || from1.timeScale == 0)) {
+						if(from1.mixTime > 0 && from1.mixTime >= from1.mixDuration) {
 							if(from2.totalAlpha == 0 || from1.mixDuration == 0) {
 								from1.mixingFrom = from2.mixingFrom;
+								if(from2.mixingFrom != null) {
+									from2.mixingFrom.mixingTo = from1;
+								}
 								from1.interruptAlpha = from2.interruptAlpha;
 								var _this5 = _this.queue;
 								_this5.objects.push(2);
@@ -102202,15 +105762,18 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 							finished = finished1;
 						} else {
 							from2.trackTime += delta * from2.timeScale;
-							from1.mixTime += delta * from1.timeScale;
+							from1.mixTime += delta;
 							finished = false;
 						}
 					}
 					from1.animationLast = from1.nextAnimationLast;
 					from1.trackLast = from1.nextTrackLast;
-					if(current.mixTime > 0 && (current.mixTime >= current.mixDuration || current.timeScale == 0)) {
+					if(current.mixTime > 0 && current.mixTime >= current.mixDuration) {
 						if(from1.totalAlpha == 0 || current.mixDuration == 0) {
 							current.mixingFrom = from1.mixingFrom;
+							if(from1.mixingFrom != null) {
+								from1.mixingFrom.mixingTo = current;
+							}
 							current.interruptAlpha = from1.interruptAlpha;
 							var _this6 = _this.queue;
 							_this6.objects.push(2);
@@ -102220,7 +105783,7 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 						tmp = finished;
 					} else {
 						from1.trackTime += delta * from1.timeScale;
-						current.mixTime += delta * current.timeScale;
+						current.mixTime += delta;
 						tmp = false;
 					}
 				}
@@ -102230,6 +105793,9 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 			if(tmp) {
 				var from3 = current.mixingFrom;
 				current.mixingFrom = null;
+				if(from3 != null) {
+					from3.mixingTo = null;
+				}
 				while(from3 != null) {
 					var _this7 = _this.queue;
 					_this7.objects.push(2);
@@ -102248,11 +105814,12 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 			var listeners = _this1.AnimationState_this.listeners;
 			var i = 0;
 			while(i < objects.length) {
-				var type = js_Boot.__cast(objects[i] , Int);
-				var entry = js_Boot.__cast(objects[i + 1] , spine_TrackEntry);
+				var type = objects[i];
+				var result = objects[i + 1];
+				var entry = result;
 				while(true) {
-					var _switchCond1 = type;
-					if(_switchCond1 == 0) {
+					var _switchCond2 = type;
+					if(_switchCond2 == 0) {
 						if(entry.listener != null) {
 							entry.listener.start(entry);
 						}
@@ -102262,7 +105829,7 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 							++ii;
 						}
 						break;
-					} else if(_switchCond1 == 1) {
+					} else if(_switchCond2 == 1) {
 						if(entry.listener != null) {
 							entry.listener.interrupt(entry);
 						}
@@ -102272,7 +105839,7 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 							++ii1;
 						}
 						break;
-					} else if(_switchCond1 == 2) {
+					} else if(_switchCond2 == 2) {
 						if(entry.listener != null) {
 							entry.listener.end(entry);
 						}
@@ -102291,7 +105858,7 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 						}
 						_this1.AnimationState_this.trackEntryPool.free(entry);
 						break;
-					} else if(_switchCond1 == 3) {
+					} else if(_switchCond2 == 3) {
 						if(entry.listener != null) {
 							entry.listener.dispose(entry);
 						}
@@ -102302,7 +105869,7 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 						}
 						_this1.AnimationState_this.trackEntryPool.free(entry);
 						break;
-					} else if(_switchCond1 == 4) {
+					} else if(_switchCond2 == 4) {
 						if(entry.listener != null) {
 							entry.listener.complete(entry);
 						}
@@ -102312,8 +105879,9 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 							++ii5;
 						}
 						break;
-					} else if(_switchCond1 == 5) {
-						var event = js_Boot.__cast(objects[i++ + 2] , spine_Event);
+					} else if(_switchCond2 == 5) {
+						var result1 = objects[i++ + 2];
+						var event = result1;
 						if(entry.listener != null) {
 							entry.listener.event(entry,event);
 						}
@@ -102429,6 +105997,7 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 			entry.trackIndex = 0;
 			entry.animation = animation;
 			entry.loop = loop;
+			entry.holdPrevious = false;
 			entry.eventThreshold = 0;
 			entry.attachmentThreshold = 0;
 			entry.drawOrderThreshold = 0;
@@ -102457,9 +106026,30 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 				if(animation == null) {
 					throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("to cannot be null."));
 				}
-				_this1.tempKey.a1 = from;
-				_this1.tempKey.a2 = animation;
-				tmp = spine_support_utils_ObjectMap.get(_this1.animationToMixTime,_this1.tempKey,_this1.defaultMix);
+				_this1.tempAnimationStateDataKey.a1 = from;
+				_this1.tempAnimationStateDataKey.a2 = animation;
+				var this1 = _this1.animationToMixTime;
+				var key = _this1.tempAnimationStateDataKey;
+				var defaultValue = _this1.defaultMix;
+				if(defaultValue == null) {
+					defaultValue = 0.0;
+				}
+				var key1 = key.getHashCode();
+				var entries = this1.h[key1];
+				var result = defaultValue;
+				if(entries != null) {
+					var _g = 0;
+					var _g1 = entries.length;
+					while(_g < _g1) {
+						var i = _g++;
+						var entry1 = entries[i];
+						if(entry1.key.equals(key)) {
+							result = entry1.value;
+							break;
+						}
+					}
+				}
+				tmp = result;
 			}
 			entry.mixDuration = tmp;
 			var entry1 = entry;
@@ -102485,6 +106075,7 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 					_this1.objects.push(from);
 				}
 				entry1.mixingFrom = from;
+				from.mixingTo = entry1;
 				entry1.mixTime = 0;
 				if(from.mixingFrom != null && from.mixDuration > 0) {
 					entry1.interruptAlpha *= Math.min(1,from.mixTime / from.mixDuration | 0);
@@ -102503,11 +106094,12 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 				var listeners = _this1.AnimationState_this.listeners;
 				var i = 0;
 				while(i < objects.length) {
-					var type = js_Boot.__cast(objects[i] , Int);
-					var entry = js_Boot.__cast(objects[i + 1] , spine_TrackEntry);
+					var type = objects[i];
+					var result = objects[i + 1];
+					var entry = result;
 					while(true) {
-						var _switchCond1 = type;
-						if(_switchCond1 == 0) {
+						var _switchCond2 = type;
+						if(_switchCond2 == 0) {
 							if(entry.listener != null) {
 								entry.listener.start(entry);
 							}
@@ -102517,7 +106109,7 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 								++ii;
 							}
 							break;
-						} else if(_switchCond1 == 1) {
+						} else if(_switchCond2 == 1) {
 							if(entry.listener != null) {
 								entry.listener.interrupt(entry);
 							}
@@ -102527,7 +106119,7 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 								++ii1;
 							}
 							break;
-						} else if(_switchCond1 == 2) {
+						} else if(_switchCond2 == 2) {
 							if(entry.listener != null) {
 								entry.listener.end(entry);
 							}
@@ -102546,7 +106138,7 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 							}
 							_this1.AnimationState_this.trackEntryPool.free(entry);
 							break;
-						} else if(_switchCond1 == 3) {
+						} else if(_switchCond2 == 3) {
 							if(entry.listener != null) {
 								entry.listener.dispose(entry);
 							}
@@ -102557,7 +106149,7 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 							}
 							_this1.AnimationState_this.trackEntryPool.free(entry);
 							break;
-						} else if(_switchCond1 == 4) {
+						} else if(_switchCond2 == 4) {
 							if(entry.listener != null) {
 								entry.listener.complete(entry);
 							}
@@ -102567,8 +106159,9 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 								++ii5;
 							}
 							break;
-						} else if(_switchCond1 == 5) {
-							var event = js_Boot.__cast(objects[i++ + 2] , spine_Event);
+						} else if(_switchCond2 == 5) {
+							var result1 = objects[i++ + 2];
+							var event = result1;
 							if(entry.listener != null) {
 								entry.listener.event(entry,event);
 							}
@@ -102667,6 +106260,7 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 			entry.trackIndex = 0;
 			entry.animation = animation;
 			entry.loop = loop;
+			entry.holdPrevious = false;
 			entry.eventThreshold = 0;
 			entry.attachmentThreshold = 0;
 			entry.drawOrderThreshold = 0;
@@ -102695,9 +106289,30 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 				if(animation == null) {
 					throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("to cannot be null."));
 				}
-				_this1.tempKey.a1 = from;
-				_this1.tempKey.a2 = animation;
-				tmp = spine_support_utils_ObjectMap.get(_this1.animationToMixTime,_this1.tempKey,_this1.defaultMix);
+				_this1.tempAnimationStateDataKey.a1 = from;
+				_this1.tempAnimationStateDataKey.a2 = animation;
+				var this1 = _this1.animationToMixTime;
+				var key = _this1.tempAnimationStateDataKey;
+				var defaultValue = _this1.defaultMix;
+				if(defaultValue == null) {
+					defaultValue = 0.0;
+				}
+				var key1 = key.getHashCode();
+				var entries = this1.h[key1];
+				var result = defaultValue;
+				if(entries != null) {
+					var _g = 0;
+					var _g1 = entries.length;
+					while(_g < _g1) {
+						var i = _g++;
+						var entry1 = entries[i];
+						if(entry1.key.equals(key)) {
+							result = entry1.value;
+							break;
+						}
+					}
+				}
+				tmp = result;
 			}
 			entry.mixDuration = tmp;
 			var entry1 = entry;
@@ -102723,6 +106338,7 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 					_this1.objects.push(from);
 				}
 				entry1.mixingFrom = from;
+				from.mixingTo = entry1;
 				entry1.mixTime = 0;
 				if(from.mixingFrom != null && from.mixDuration > 0) {
 					entry1.interruptAlpha *= Math.min(1,from.mixTime / from.mixDuration | 0);
@@ -102741,11 +106357,12 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 				var listeners = _this1.AnimationState_this.listeners;
 				var i = 0;
 				while(i < objects.length) {
-					var type = js_Boot.__cast(objects[i] , Int);
-					var entry = js_Boot.__cast(objects[i + 1] , spine_TrackEntry);
+					var type = objects[i];
+					var result = objects[i + 1];
+					var entry = result;
 					while(true) {
-						var _switchCond1 = type;
-						if(_switchCond1 == 0) {
+						var _switchCond2 = type;
+						if(_switchCond2 == 0) {
 							if(entry.listener != null) {
 								entry.listener.start(entry);
 							}
@@ -102755,7 +106372,7 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 								++ii;
 							}
 							break;
-						} else if(_switchCond1 == 1) {
+						} else if(_switchCond2 == 1) {
 							if(entry.listener != null) {
 								entry.listener.interrupt(entry);
 							}
@@ -102765,7 +106382,7 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 								++ii1;
 							}
 							break;
-						} else if(_switchCond1 == 2) {
+						} else if(_switchCond2 == 2) {
 							if(entry.listener != null) {
 								entry.listener.end(entry);
 							}
@@ -102784,7 +106401,7 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 							}
 							_this1.AnimationState_this.trackEntryPool.free(entry);
 							break;
-						} else if(_switchCond1 == 3) {
+						} else if(_switchCond2 == 3) {
 							if(entry.listener != null) {
 								entry.listener.dispose(entry);
 							}
@@ -102795,7 +106412,7 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 							}
 							_this1.AnimationState_this.trackEntryPool.free(entry);
 							break;
-						} else if(_switchCond1 == 4) {
+						} else if(_switchCond2 == 4) {
 							if(entry.listener != null) {
 								entry.listener.complete(entry);
 							}
@@ -102805,8 +106422,9 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 								++ii5;
 							}
 							break;
-						} else if(_switchCond1 == 5) {
-							var event = js_Boot.__cast(objects[i++ + 2] , spine_Event);
+						} else if(_switchCond2 == 5) {
+							var result1 = objects[i++ + 2];
+							var event = result1;
 							if(entry.listener != null) {
 								entry.listener.event(entry,event);
 							}
@@ -102924,14 +106542,19 @@ spine_openfl_SkeletonBatchs.prototype = $extend(openfl_display_Sprite.prototype,
 	}
 	,__class__: spine_openfl_SkeletonBatchs
 });
-var spine_support_concurrent_atomic_AtomicInteger = {};
-spine_support_concurrent_atomic_AtomicInteger._new = function() {
-	var this1 = 0;
-	return this1;
+var spine_support_error_ArrayIndexOutOfBoundsException = function(message) {
+	if(message == null) {
+		message = "";
+	}
+	spine_support_error_Error.call(this,message);
+	this.name = "ArrayIndexOutOfBoundsException";
 };
-spine_support_concurrent_atomic_AtomicInteger.getAndIncrement = function(this1) {
-	return this1++;
-};
+$hxClasses["spine.support.error.ArrayIndexOutOfBoundsException"] = spine_support_error_ArrayIndexOutOfBoundsException;
+spine_support_error_ArrayIndexOutOfBoundsException.__name__ = "spine.support.error.ArrayIndexOutOfBoundsException";
+spine_support_error_ArrayIndexOutOfBoundsException.__super__ = spine_support_error_Error;
+spine_support_error_ArrayIndexOutOfBoundsException.prototype = $extend(spine_support_error_Error.prototype,{
+	__class__: spine_support_error_ArrayIndexOutOfBoundsException
+});
 var spine_support_error_IllegalStateException = function(message) {
 	if(message == null) {
 		message = "";
@@ -103066,29 +106689,22 @@ spine_support_graphics_Color.prototype = {
 	,g: null
 	,b: null
 	,a: null
+	,setColor: function(color) {
+		this.r = color.r;
+		this.g = color.g;
+		this.b = color.b;
+		this.a = color.a;
+		return this;
+	}
 	,set: function(r,g,b,a) {
 		if(a == null) {
 			a = -1;
 		}
-		if(b == null) {
-			b = -1;
-		}
-		if(g == null) {
-			g = -1;
-		}
-		if(typeof(r) == "number") {
-			this.r = r;
-			this.g = g;
-			this.b = b;
-			if(a != -1) {
-				this.a = a;
-			}
-		} else {
-			var color = r;
-			this.r = color.r;
-			this.g = color.g;
-			this.b = color.b;
-			this.a = color.a;
+		this.r = r;
+		this.g = g;
+		this.b = b;
+		if(a != -1) {
+			this.a = a;
 		}
 		return this;
 	}
@@ -103173,7 +106789,8 @@ spine_support_graphics_TextureAtlas.prototype = {
 				var region = new spine_support_graphics_AtlasRegion();
 				region.name = line;
 				region.page = page;
-				region.rotate = reader.readValue() == "true";
+				var rotate = reader.readValue() == "true";
+				region.degrees = rotate ? 90 : 0;
 				reader.readTuple(tuple);
 				var x = Std.parseInt(tuple[0]);
 				var y = Std.parseInt(tuple[1]);
@@ -103182,7 +106799,7 @@ spine_support_graphics_TextureAtlas.prototype = {
 				var height = Std.parseInt(tuple[1]);
 				region.u = x / page.width;
 				region.v = y / page.height;
-				if(region.rotate) {
+				if(region.degrees == 90) {
 					region.u2 = (x + height) / page.width;
 					region.v2 = (y + width) / page.height;
 				} else {
@@ -103202,7 +106819,7 @@ spine_support_graphics_TextureAtlas.prototype = {
 				}
 				region.originalWidth = Std.parseInt(tuple[0]);
 				region.originalHeight = Std.parseInt(tuple[1]);
-				if(region.rotate) {
+				if(region.degrees == 90) {
 					region.packedWidth = region.originalHeight;
 					region.packedHeight = region.originalWidth;
 				} else {
@@ -103332,7 +106949,7 @@ spine_support_graphics_TextureRegion.prototype = {
 	,__class__: spine_support_graphics_TextureRegion
 };
 var spine_support_graphics_AtlasRegion = function() {
-	this.rotate = false;
+	this.degrees = 0;
 	this.index = 0;
 	this.originalHeight = 0;
 	this.originalWidth = 0;
@@ -103362,12 +106979,30 @@ spine_support_graphics_AtlasRegion.prototype = $extend(spine_support_graphics_Te
 	,originalWidth: null
 	,originalHeight: null
 	,index: null
-	,rotate: null
+	,degrees: null
 	,splits: null
 	,pads: null
 	,page: null
+	,get_rotate: function() {
+		return this.degrees == 90;
+	}
+	,set_rotate: function(rotate) {
+		this.degrees = rotate ? 90 : 0;
+		return rotate;
+	}
+	,getTexture: function() {
+		return this;
+	}
 	,__class__: spine_support_graphics_AtlasRegion
+	,__properties__: {set_rotate:"set_rotate",get_rotate:"get_rotate"}
 });
+var spine_support_graphics_AtlasRegionTexture = {};
+spine_support_graphics_AtlasRegionTexture.getWidth = function(this1) {
+	return this1.page.width;
+};
+spine_support_graphics_AtlasRegionTexture.getHeight = function(this1) {
+	return this1.page.height;
+};
 var spine_support_graphics_TextureWrap = function(ordinal,name) {
 	this.ordinal = ordinal;
 	this.name = name;
@@ -103461,15 +107096,149 @@ spine_support_math_Vector2.prototype = {
 	}
 	,__class__: spine_support_math_Vector2
 };
+var spine_support_utils_AnimationStateMap = {};
+spine_support_utils_AnimationStateMap._new = function(initialCapacity,loadFactor) {
+	if(loadFactor == null) {
+		loadFactor = 0.8;
+	}
+	if(initialCapacity == null) {
+		initialCapacity = 51;
+	}
+	var this1 = new haxe_ds_IntMap();
+	return this1;
+};
+spine_support_utils_AnimationStateMap.get = function(this1,key,defaultValue) {
+	if(defaultValue == null) {
+		defaultValue = 0.0;
+	}
+	var key1 = key.getHashCode();
+	var entries = this1.h[key1];
+	var result = defaultValue;
+	if(entries != null) {
+		var _g = 0;
+		var _g1 = entries.length;
+		while(_g < _g1) {
+			var i = _g++;
+			var entry = entries[i];
+			if(entry.key.equals(key)) {
+				result = entry.value;
+				break;
+			}
+		}
+	}
+	return result;
+};
+spine_support_utils_AnimationStateMap.clear = function(this1) {
+	var keys = [];
+	var key = this1.keys();
+	while(key.hasNext()) {
+		var key1 = key.next();
+		keys.push(key1);
+	}
+	var _g = 0;
+	while(_g < keys.length) {
+		var key = keys[_g];
+		++_g;
+		this1.remove(key);
+	}
+};
+spine_support_utils_AnimationStateMap.put = function(this1,key,value) {
+	var hashCode = key.getHashCode();
+	var entries = this1.h[hashCode];
+	if(entries == null) {
+		entries = [];
+		this1.h[hashCode] = entries;
+	}
+	var i = 0;
+	var didSet = false;
+	var _g = 0;
+	var _g1 = entries;
+	while(_g < _g1.length) {
+		var entry = _g1[_g];
+		++_g;
+		if(entry.key.equals(key)) {
+			entries[i].key = key;
+			entries[i].value = value;
+			didSet = true;
+			break;
+		}
+		++i;
+	}
+	if(!didSet) {
+		entries.push(new spine_support_utils__$AnimationStateMap_Entry(key,value));
+	}
+};
+spine_support_utils_AnimationStateMap.entries = function(this1) {
+	var entries = [];
+	var entryList = this1.iterator();
+	while(entryList.hasNext()) {
+		var entryList1 = entryList.next();
+		if(entryList1 != null) {
+			var _g = 0;
+			var _g1 = entryList1;
+			while(_g < _g1.length) {
+				var entry = _g1[_g];
+				++_g;
+				entries.push(entry);
+			}
+		}
+	}
+	return entries;
+};
+spine_support_utils_AnimationStateMap.keys = function(this1) {
+	var keys = [];
+	var entryList = this1.iterator();
+	while(entryList.hasNext()) {
+		var entryList1 = entryList.next();
+		var _g = 0;
+		var _g1 = entryList1;
+		while(_g < _g1.length) {
+			var entry = _g1[_g];
+			++_g;
+			keys.push(entry.key);
+		}
+	}
+	return keys;
+};
+var spine_support_utils__$AnimationStateMap_Entry = function(key,value) {
+	this.key = key;
+	this.value = value;
+};
+$hxClasses["spine.support.utils._AnimationStateMap.Entry"] = spine_support_utils__$AnimationStateMap_Entry;
+spine_support_utils__$AnimationStateMap_Entry.__name__ = "spine.support.utils._AnimationStateMap.Entry";
+spine_support_utils__$AnimationStateMap_Entry.prototype = {
+	key: null
+	,value: null
+	,__class__: spine_support_utils__$AnimationStateMap_Entry
+};
 var spine_support_utils_Array = {};
 spine_support_utils_Array.__properties__ = {set_size:"set_size",get_size:"get_size",get_items:"get_items"};
 spine_support_utils_Array.copy = function(src,srcPos,dest,destPos,length) {
-	var _g = 0;
-	var _g1 = length;
-	while(_g < _g1) {
-		var i = _g++;
-		dest[i + destPos] = src[i + srcPos];
+	var val;
+	var srcIndex = srcPos;
+	var destIndex = destPos;
+	var end = length + srcPos;
+	while(srcIndex < end) {
+		val = src[srcIndex];
+		dest[destIndex] = val;
+		++srcIndex;
+		++destIndex;
 	}
+};
+spine_support_utils_Array.copyFloats = function(src,srcPos,dest,destPos,length) {
+	var val;
+	var srcIndex = srcPos;
+	var destIndex = destPos;
+	var end = length + srcPos;
+	while(srcIndex < end) {
+		val = src[srcIndex];
+		dest[destIndex] = val;
+		++srcIndex;
+		++destIndex;
+	}
+};
+spine_support_utils_Array.getLengthOf = function(array) {
+	return array.length;
 };
 spine_support_utils_Array.create = function(length) {
 	if(length == null) {
@@ -103666,12 +107435,13 @@ spine_support_utils_Array.addAll = function(this1,items,start,count) {
 	} else if(len1 < len) {
 		this1[len - 1] = null;
 	}
+	var val;
 	var _g = 0;
-	var _g1 = items;
-	while(_g < _g1.length) {
-		var item = _g1[_g];
-		++_g;
-		this1[i++] = item;
+	var _g1 = items.length;
+	while(_g < _g1) {
+		var j = _g++;
+		val = items[j];
+		this1[i++] = val;
 		if(--count <= 0) {
 			break;
 		}
@@ -103693,6 +107463,196 @@ spine_support_utils_Array.removeIndex = function(this1,index) {
 };
 spine_support_utils_Array.ensureCapacity = function(this1,size) {
 	return this1;
+};
+var spine_support_utils_AttachmentMap = {};
+spine_support_utils_AttachmentMap.__properties__ = {get_size:"get_size"};
+spine_support_utils_AttachmentMap._new = function() {
+	var this1 = new haxe_ds_IntMap();
+	return this1;
+};
+spine_support_utils_AttachmentMap.get = function(this1,key,defaultValue) {
+	var entries = this1.h[key.hashCode];
+	var result = defaultValue;
+	if(entries != null) {
+		var _g = 0;
+		var _g1 = entries.length;
+		while(_g < _g1) {
+			var i = _g++;
+			var entry = entries[i];
+			var _this = entry.key;
+			var object = key;
+			var tmp;
+			if(object == null) {
+				tmp = false;
+			} else {
+				var result1 = object;
+				var other = result1;
+				tmp = _this.slotIndex != other.slotIndex ? false : _this.name != other.name ? false : true;
+			}
+			if(tmp) {
+				result = entry.value;
+				break;
+			}
+		}
+	}
+	return result;
+};
+spine_support_utils_AttachmentMap.clear = function(this1) {
+	var keys = [];
+	var key = this1.keys();
+	while(key.hasNext()) {
+		var key1 = key.next();
+		keys.push(key1);
+	}
+	var _g = 0;
+	while(_g < keys.length) {
+		var key = keys[_g];
+		++_g;
+		this1.remove(key);
+	}
+};
+spine_support_utils_AttachmentMap.put = function(this1,key,value) {
+	var prevValue = null;
+	var hashCode = key.hashCode;
+	var entries = this1.h[hashCode];
+	if(entries == null) {
+		entries = [];
+		this1.h[hashCode] = entries;
+	} else {
+		var _g = 0;
+		var _g1 = entries.length;
+		while(_g < _g1) {
+			var i = _g++;
+			var entry = entries[i];
+			var _this = entry.key;
+			var object = key;
+			var tmp;
+			if(object == null) {
+				tmp = false;
+			} else {
+				var result = object;
+				var other = result;
+				tmp = _this.slotIndex != other.slotIndex ? false : _this.name != other.name ? false : true;
+			}
+			if(tmp) {
+				prevValue = entry.value;
+				break;
+			}
+		}
+	}
+	var i = 0;
+	var didSet = false;
+	var _g = 0;
+	var _g1 = entries;
+	while(_g < _g1.length) {
+		var entry = _g1[_g];
+		++_g;
+		var _this = entry.key;
+		var object = key;
+		var tmp;
+		if(object == null) {
+			tmp = false;
+		} else {
+			var result = object;
+			var other = result;
+			tmp = _this.slotIndex != other.slotIndex ? false : _this.name != other.name ? false : true;
+		}
+		if(tmp) {
+			entries[i].key = key;
+			entries[i].value = value;
+			didSet = true;
+			break;
+		}
+		++i;
+	}
+	if(!didSet) {
+		entries.push(new spine_support_utils_AttachmentMapEntry(key,value));
+	}
+	return prevValue;
+};
+spine_support_utils_AttachmentMap.remove = function(this1,key) {
+	this1.remove(key.hashCode);
+};
+spine_support_utils_AttachmentMap.entries = function(this1) {
+	var entries = [];
+	var entryList = this1.iterator();
+	while(entryList.hasNext()) {
+		var entryList1 = entryList.next();
+		var _g = 0;
+		var _g1 = entryList1.length;
+		while(_g < _g1) {
+			var i = _g++;
+			entries.push(entryList1[i]);
+		}
+	}
+	return entries;
+};
+spine_support_utils_AttachmentMap.keys = function(this1) {
+	var keys = [];
+	var entryList = this1.iterator();
+	while(entryList.hasNext()) {
+		var entryList1 = entryList.next();
+		var _g = 0;
+		var _g1 = entryList1.length;
+		while(_g < _g1) {
+			var i = _g++;
+			keys.push(entryList1[i].key);
+		}
+	}
+	return keys;
+};
+spine_support_utils_AttachmentMap.orderedKeys = function(this1) {
+	var keys = [];
+	var entryList = this1.iterator();
+	while(entryList.hasNext()) {
+		var entryList1 = entryList.next();
+		var _g = 0;
+		var _g1 = entryList1.length;
+		while(_g < _g1) {
+			var i = _g++;
+			keys.push(entryList1[i].key);
+		}
+	}
+	return keys;
+};
+spine_support_utils_AttachmentMap.values = function(this1) {
+	var values = [];
+	var entryList = this1.iterator();
+	while(entryList.hasNext()) {
+		var entryList1 = entryList.next();
+		var _g = 0;
+		var _g1 = entryList1.length;
+		while(_g < _g1) {
+			var i = _g++;
+			values.push(entryList1[i].value);
+		}
+	}
+	return values;
+};
+spine_support_utils_AttachmentMap.get_size = function(this1) {
+	var numEntries = 0;
+	var entryList = this1.iterator();
+	while(entryList.hasNext()) {
+		var entryList1 = entryList.next();
+		var _g = 0;
+		var _g1 = entryList1.length;
+		while(_g < _g1) {
+			var i = _g++;
+			++numEntries;
+		}
+	}
+	return numEntries;
+};
+var spine_support_utils_AttachmentMapEntry = function(key,value) {
+	this.key = key;
+	this.value = value;
+};
+$hxClasses["spine.support.utils.AttachmentMapEntry"] = spine_support_utils_AttachmentMapEntry;
+spine_support_utils_AttachmentMapEntry.__name__ = "spine.support.utils.AttachmentMapEntry";
+spine_support_utils_AttachmentMapEntry.prototype = {
+	key: null
+	,value: null
+	,__class__: spine_support_utils_AttachmentMapEntry
 };
 var spine_support_utils_BooleanArray = {};
 spine_support_utils_BooleanArray.__properties__ = {get_size:"get_size",get_items:"get_items"};
@@ -103799,6 +107759,13 @@ spine_support_utils_BooleanArray.removeIndex = function(this1,index) {
 	var item = this1[index];
 	this1.splice(index,1);
 	return item;
+};
+var spine_support_utils_FastCast = function() { };
+$hxClasses["spine.support.utils.FastCast"] = spine_support_utils_FastCast;
+spine_support_utils_FastCast.__name__ = "spine.support.utils.FastCast";
+spine_support_utils_FastCast.fastCast = function(value,toClass) {
+	var result = value;
+	return result;
 };
 var spine_support_utils_FloatArray = {};
 spine_support_utils_FloatArray.__properties__ = {get_size:"get_size",get_items:"get_items"};
@@ -104027,6 +107994,9 @@ spine_support_utils_IntSet.add = function(this1,val) {
 	this1.h[val] = true;
 	return true;
 };
+spine_support_utils_IntSet.contains = function(this1,val) {
+	return this1.h.hasOwnProperty(val);
+};
 spine_support_utils_IntSet.clear = function(this1) {
 	var keys = [];
 	var key = this1.keys();
@@ -104226,7 +108196,7 @@ spine_support_utils_JsonChild.__name__ = "spine.support.utils.JsonChild";
 spine_support_utils_JsonChild.__interfaces__ = [spine_support_utils_JsonValue];
 spine_support_utils_JsonChild.prototype = {
 	toString: function() {
-		return "JsonChild:" + Std.string(this.data[this.index]);
+		return "JsonChild:" + this.data[this.index];
 	}
 	,keys: null
 	,data: null
@@ -104356,116 +108326,11 @@ spine_support_utils_JsonChild.prototype = {
 	,asShortArray: function() {
 		return this.data[this.index];
 	}
+	,getByIndex: function() {
+		return this.data[this.index];
+	}
 	,__class__: spine_support_utils_JsonChild
 	,__properties__: {get_child:"get_child",get_size:"get_size",get_name:"get_name",get_next:"get_next"}
-};
-var spine_support_utils_ObjectMap = {};
-spine_support_utils_ObjectMap._new = function() {
-	var this1 = new haxe_ds_IntMap();
-	return this1;
-};
-spine_support_utils_ObjectMap.get = function(this1,key,defaultValue) {
-	var dKey = key;
-	var key1 = dKey.getHashCode();
-	var entries = this1.h[key1];
-	if(entries != null) {
-		var _g = 0;
-		var _g1 = entries;
-		while(_g < _g1.length) {
-			var entry = _g1[_g];
-			++_g;
-			var dEntryKey = entry.key;
-			if(dEntryKey.equals(key)) {
-				return entry.value;
-			}
-		}
-	}
-	return defaultValue;
-};
-spine_support_utils_ObjectMap.clear = function(this1) {
-	var keys = [];
-	var key = this1.keys();
-	while(key.hasNext()) {
-		var key1 = key.next();
-		keys.push(key1);
-	}
-	var _g = 0;
-	while(_g < keys.length) {
-		var key = keys[_g];
-		++_g;
-		this1.remove(key);
-	}
-};
-spine_support_utils_ObjectMap.put = function(this1,key,value) {
-	var dKey = key;
-	var hashCode = dKey.getHashCode();
-	var entries = this1.h[hashCode];
-	if(entries == null) {
-		entries = [];
-		this1.h[hashCode] = entries;
-	}
-	var i = 0;
-	var didSet = false;
-	var _g = 0;
-	var _g1 = entries;
-	while(_g < _g1.length) {
-		var entry = _g1[_g];
-		++_g;
-		var dEntryKey = entry.key;
-		if(dEntryKey.equals(key)) {
-			entries[i].key = key;
-			entries[i].value = value;
-			didSet = true;
-			break;
-		}
-		++i;
-	}
-	if(!didSet) {
-		entries.push(new spine_support_utils_Entry(key,value));
-	}
-};
-spine_support_utils_ObjectMap.entries = function(this1) {
-	var entries = [];
-	var entryList = this1.iterator();
-	while(entryList.hasNext()) {
-		var entryList1 = entryList.next();
-		if(entryList1 != null) {
-			var _g = 0;
-			var _g1 = entryList1;
-			while(_g < _g1.length) {
-				var entry = _g1[_g];
-				++_g;
-				entries.push(entry);
-			}
-		}
-	}
-	return entries;
-};
-spine_support_utils_ObjectMap.keys = function(this1) {
-	var keys = [];
-	var entryList = this1.iterator();
-	while(entryList.hasNext()) {
-		var entryList1 = entryList.next();
-		var _g = 0;
-		var _g1 = entryList1;
-		while(_g < _g1.length) {
-			var entry = _g1[_g];
-			++_g;
-			keys.push(entry.key);
-		}
-	}
-	return keys;
-};
-var spine_support_utils_Entry = function(key,value) {
-	this.key = key;
-	this.value = value;
-};
-$hxClasses["spine.support.utils.Entry"] = spine_support_utils_Entry;
-spine_support_utils_Entry.__name__ = "spine.support.utils.Entry";
-spine_support_utils_Entry.prototype = {
-	key: null
-	,value: null
-	,__class__: spine_support_utils_Entry
 };
 var spine_support_utils_SerializationException = function(message,originalError) {
 	if(message == null) {
@@ -104718,7 +108583,6 @@ spine_tilemap_BaseSkeletonDraw.prototype = $extend(zygame_display_batch_BSprite.
 		if(!this.get_visible() || this.skeleton == null) {
 			return;
 		}
-		this.skeleton.flipY = true;
 		var drawOrder = this.skeleton.drawOrder;
 		var n = drawOrder.length;
 		var atlasRegion;
@@ -104754,7 +108618,7 @@ spine_tilemap_BaseSkeletonDraw.prototype = $extend(zygame_display_batch_BSprite.
 							tile = wrapper.getTileAt(0);
 							tile.setFrame(atlasRegion.page.rendererObject.getFrameByRegion(atlasRegion));
 						}
-						var regionHeight = atlasRegion.rotate ? atlasRegion.width : atlasRegion.height;
+						var regionHeight = atlasRegion.degrees == 90 ? atlasRegion.width : atlasRegion.height;
 						tile.set_rotation(-region.rotation);
 						tile.set_scaleX(region.scaleX * (region.width / atlasRegion.width));
 						tile.set_scaleY(region.scaleY * (region.height / atlasRegion.height));
@@ -104763,7 +108627,7 @@ spine_tilemap_BaseSkeletonDraw.prototype = $extend(zygame_display_batch_BSprite.
 						var sin = Math.sin(radians);
 						var shiftX = -region.width / 2 * region.scaleX;
 						var shiftY = -region.height / 2 * region.scaleY;
-						if(atlasRegion.rotate) {
+						if(atlasRegion.degrees == 90) {
 							var _g2 = tile;
 							_g2.set_rotation(_g2.get_rotation() + 90);
 							shiftX += regionHeight * (region.width / atlasRegion.width);
@@ -104773,13 +108637,13 @@ spine_tilemap_BaseSkeletonDraw.prototype = $extend(zygame_display_batch_BSprite.
 						var bone = slot.bone;
 						wrapper.set_x(bone.worldX);
 						wrapper.set_y(bone.worldY);
-						wrapper.set_rotation(js_Boot.__cast(Math.atan2(bone.c,bone.a) , Float) * spine_utils_SpineUtils.radDeg);
+						wrapper.set_rotation(Math.atan2(bone.c,bone.a) * spine_utils_SpineUtils.radDeg);
 						if(bone.scaleX < 0) {
 							var _g3 = wrapper;
 							_g3.set_rotation(_g3.get_rotation() - 180);
 						}
-						wrapper.set_scaleX(js_Boot.__cast(Math.sqrt(bone.a * bone.a + bone.c * bone.c) , Float) * (bone.scaleX < 0 ? -1 : 1));
-						wrapper.set_scaleY(js_Boot.__cast(Math.sqrt(bone.b * bone.b + bone.d * bone.d) , Float) * (bone.scaleY < 0 ? -1 : 1));
+						wrapper.set_scaleX(Math.sqrt(bone.a * bone.a + bone.c * bone.c) * (bone.scaleX < 0 ? -1 : 1));
+						wrapper.set_scaleY(Math.sqrt(bone.b * bone.b + bone.d * bone.d) * (bone.scaleY < 0 ? -1 : 1));
 						this.addTile(wrapper);
 						if(!this.disableColor) {
 							wrapper.set_alpha(slot.color.a * this.skeleton.color.a * region.color.a);
@@ -104849,13 +108713,13 @@ spine_tilemap_BitmapDataTextureLoader.prototype = {
 		page.height = bitmapData.height;
 	}
 	,loadRegion: function(region) {
-		var regionWidth = region.rotate ? region.height : region.width;
-		var regionHeight = region.rotate ? region.width : region.height;
+		var regionWidth = region.degrees == 90 ? region.height : region.width;
+		var regionHeight = region.degrees == 90 ? region.width : region.height;
 		this._widths.set(region,region.width);
 		var rect = new openfl_geom_Rectangle(region.x,region.y,regionWidth,regionHeight);
 		var id = this._tileset.addRect(rect);
 		this._ids.set(region,id);
-		if(!region.rotate) {
+		if(region.degrees != 90) {
 			region.width = region.packedWidth;
 			region.height = region.packedHeight;
 		} else {
@@ -104867,12 +108731,12 @@ spine_tilemap_BitmapDataTextureLoader.prototype = {
 		frame.y = rect.y;
 		frame.width = rect.width;
 		frame.height = rect.height;
-		if(region.rotate) {
+		if(region.degrees == 90) {
 			frame.width = rect.height;
 			frame.height = rect.width;
 		}
 		frame.name = region.name;
-		frame.rotate = region.rotate;
+		frame.rotate = region.degrees == 90;
 		frame.id = id;
 		this.frameMaps.h[region.name] = frame;
 		this.frameMapsIds.h[id] = frame;
@@ -104994,7 +108858,7 @@ spine_tilemap_SkeletonSprite.prototype = $extend(spine_tilemap_BaseSkeletonDraw.
 var spine_tilemap_SkeletonAnimation = function(skeletonData,stateData) {
 	this.assetsId = null;
 	spine_tilemap_SkeletonSprite.call(this,skeletonData);
-	this.skeleton.flipY = true;
+	this.skeleton.scaleY = -1;
 	this.state = new spine_AnimationState(stateData == null ? new spine_AnimationStateData(skeletonData) : stateData);
 	this.advanceTime(0);
 };
@@ -105036,7 +108900,7 @@ spine_tilemap_SkeletonAnimation.prototype = $extend(spine_tilemap_SkeletonSprite
 				var nextTime = current.trackLast - next.delay;
 				if(nextTime >= 0) {
 					next.delay = 0;
-					next.trackTime = nextTime + delta * next.timeScale;
+					next.trackTime += current.timeScale == 0 ? 0 : (nextTime / current.timeScale + delta) * next.timeScale;
 					current.trackTime += currentDelta;
 					var from;
 					if(i < _this.tracks.length) {
@@ -105058,6 +108922,7 @@ spine_tilemap_SkeletonAnimation.prototype = $extend(spine_tilemap_SkeletonSprite
 						_this1.objects.push(1);
 						_this1.objects.push(from);
 						next.mixingFrom = from;
+						from.mixingTo = next;
 						next.mixTime = 0;
 						if(from.mixingFrom != null && from.mixDuration > 0) {
 							next.interruptAlpha *= Math.min(1,from.mixTime / from.mixDuration | 0);
@@ -105070,7 +108935,7 @@ spine_tilemap_SkeletonAnimation.prototype = $extend(spine_tilemap_SkeletonSprite
 					_this2.objects.push(next);
 					_this2.AnimationState_this.animationsChanged = true;
 					while(next.mixingFrom != null) {
-						next.mixTime += currentDelta;
+						next.mixTime += delta;
 						next = next.mixingFrom;
 					}
 					++i;
@@ -105107,9 +108972,12 @@ spine_tilemap_SkeletonAnimation.prototype = $extend(spine_tilemap_SkeletonSprite
 						var finished1 = _this.updateMixingFrom(from2,delta);
 						from2.animationLast = from2.nextAnimationLast;
 						from2.trackLast = from2.nextTrackLast;
-						if(from1.mixTime > 0 && (from1.mixTime >= from1.mixDuration || from1.timeScale == 0)) {
+						if(from1.mixTime > 0 && from1.mixTime >= from1.mixDuration) {
 							if(from2.totalAlpha == 0 || from1.mixDuration == 0) {
 								from1.mixingFrom = from2.mixingFrom;
+								if(from2.mixingFrom != null) {
+									from2.mixingFrom.mixingTo = from1;
+								}
 								from1.interruptAlpha = from2.interruptAlpha;
 								var _this5 = _this.queue;
 								_this5.objects.push(2);
@@ -105119,15 +108987,18 @@ spine_tilemap_SkeletonAnimation.prototype = $extend(spine_tilemap_SkeletonSprite
 							finished = finished1;
 						} else {
 							from2.trackTime += delta * from2.timeScale;
-							from1.mixTime += delta * from1.timeScale;
+							from1.mixTime += delta;
 							finished = false;
 						}
 					}
 					from1.animationLast = from1.nextAnimationLast;
 					from1.trackLast = from1.nextTrackLast;
-					if(current.mixTime > 0 && (current.mixTime >= current.mixDuration || current.timeScale == 0)) {
+					if(current.mixTime > 0 && current.mixTime >= current.mixDuration) {
 						if(from1.totalAlpha == 0 || current.mixDuration == 0) {
 							current.mixingFrom = from1.mixingFrom;
+							if(from1.mixingFrom != null) {
+								from1.mixingFrom.mixingTo = current;
+							}
 							current.interruptAlpha = from1.interruptAlpha;
 							var _this6 = _this.queue;
 							_this6.objects.push(2);
@@ -105137,7 +109008,7 @@ spine_tilemap_SkeletonAnimation.prototype = $extend(spine_tilemap_SkeletonSprite
 						tmp = finished;
 					} else {
 						from1.trackTime += delta * from1.timeScale;
-						current.mixTime += delta * current.timeScale;
+						current.mixTime += delta;
 						tmp = false;
 					}
 				}
@@ -105147,6 +109018,9 @@ spine_tilemap_SkeletonAnimation.prototype = $extend(spine_tilemap_SkeletonSprite
 			if(tmp) {
 				var from3 = current.mixingFrom;
 				current.mixingFrom = null;
+				if(from3 != null) {
+					from3.mixingTo = null;
+				}
 				while(from3 != null) {
 					var _this7 = _this.queue;
 					_this7.objects.push(2);
@@ -105165,11 +109039,12 @@ spine_tilemap_SkeletonAnimation.prototype = $extend(spine_tilemap_SkeletonSprite
 			var listeners = _this1.AnimationState_this.listeners;
 			var i = 0;
 			while(i < objects.length) {
-				var type = js_Boot.__cast(objects[i] , Int);
-				var entry = js_Boot.__cast(objects[i + 1] , spine_TrackEntry);
+				var type = objects[i];
+				var result = objects[i + 1];
+				var entry = result;
 				while(true) {
-					var _switchCond1 = type;
-					if(_switchCond1 == 0) {
+					var _switchCond2 = type;
+					if(_switchCond2 == 0) {
 						if(entry.listener != null) {
 							entry.listener.start(entry);
 						}
@@ -105179,7 +109054,7 @@ spine_tilemap_SkeletonAnimation.prototype = $extend(spine_tilemap_SkeletonSprite
 							++ii;
 						}
 						break;
-					} else if(_switchCond1 == 1) {
+					} else if(_switchCond2 == 1) {
 						if(entry.listener != null) {
 							entry.listener.interrupt(entry);
 						}
@@ -105189,7 +109064,7 @@ spine_tilemap_SkeletonAnimation.prototype = $extend(spine_tilemap_SkeletonSprite
 							++ii1;
 						}
 						break;
-					} else if(_switchCond1 == 2) {
+					} else if(_switchCond2 == 2) {
 						if(entry.listener != null) {
 							entry.listener.end(entry);
 						}
@@ -105208,7 +109083,7 @@ spine_tilemap_SkeletonAnimation.prototype = $extend(spine_tilemap_SkeletonSprite
 						}
 						_this1.AnimationState_this.trackEntryPool.free(entry);
 						break;
-					} else if(_switchCond1 == 3) {
+					} else if(_switchCond2 == 3) {
 						if(entry.listener != null) {
 							entry.listener.dispose(entry);
 						}
@@ -105219,7 +109094,7 @@ spine_tilemap_SkeletonAnimation.prototype = $extend(spine_tilemap_SkeletonSprite
 						}
 						_this1.AnimationState_this.trackEntryPool.free(entry);
 						break;
-					} else if(_switchCond1 == 4) {
+					} else if(_switchCond2 == 4) {
 						if(entry.listener != null) {
 							entry.listener.complete(entry);
 						}
@@ -105229,8 +109104,9 @@ spine_tilemap_SkeletonAnimation.prototype = $extend(spine_tilemap_SkeletonSprite
 							++ii5;
 						}
 						break;
-					} else if(_switchCond1 == 5) {
-						var event = js_Boot.__cast(objects[i++ + 2] , spine_Event);
+					} else if(_switchCond2 == 5) {
+						var result1 = objects[i++ + 2];
+						var event = result1;
 						if(entry.listener != null) {
 							entry.listener.event(entry,event);
 						}
@@ -105338,6 +109214,7 @@ spine_tilemap_SkeletonAnimation.prototype = $extend(spine_tilemap_SkeletonSprite
 			entry.trackIndex = 0;
 			entry.animation = animation;
 			entry.loop = loop;
+			entry.holdPrevious = false;
 			entry.eventThreshold = 0;
 			entry.attachmentThreshold = 0;
 			entry.drawOrderThreshold = 0;
@@ -105366,9 +109243,30 @@ spine_tilemap_SkeletonAnimation.prototype = $extend(spine_tilemap_SkeletonSprite
 				if(animation == null) {
 					throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("to cannot be null."));
 				}
-				_this1.tempKey.a1 = from;
-				_this1.tempKey.a2 = animation;
-				tmp = spine_support_utils_ObjectMap.get(_this1.animationToMixTime,_this1.tempKey,_this1.defaultMix);
+				_this1.tempAnimationStateDataKey.a1 = from;
+				_this1.tempAnimationStateDataKey.a2 = animation;
+				var this1 = _this1.animationToMixTime;
+				var key = _this1.tempAnimationStateDataKey;
+				var defaultValue = _this1.defaultMix;
+				if(defaultValue == null) {
+					defaultValue = 0.0;
+				}
+				var key1 = key.getHashCode();
+				var entries = this1.h[key1];
+				var result = defaultValue;
+				if(entries != null) {
+					var _g = 0;
+					var _g1 = entries.length;
+					while(_g < _g1) {
+						var i = _g++;
+						var entry1 = entries[i];
+						if(entry1.key.equals(key)) {
+							result = entry1.value;
+							break;
+						}
+					}
+				}
+				tmp = result;
 			}
 			entry.mixDuration = tmp;
 			var entry1 = entry;
@@ -105394,6 +109292,7 @@ spine_tilemap_SkeletonAnimation.prototype = $extend(spine_tilemap_SkeletonSprite
 					_this1.objects.push(from);
 				}
 				entry1.mixingFrom = from;
+				from.mixingTo = entry1;
 				entry1.mixTime = 0;
 				if(from.mixingFrom != null && from.mixDuration > 0) {
 					entry1.interruptAlpha *= Math.min(1,from.mixTime / from.mixDuration | 0);
@@ -105412,11 +109311,12 @@ spine_tilemap_SkeletonAnimation.prototype = $extend(spine_tilemap_SkeletonSprite
 				var listeners = _this1.AnimationState_this.listeners;
 				var i = 0;
 				while(i < objects.length) {
-					var type = js_Boot.__cast(objects[i] , Int);
-					var entry = js_Boot.__cast(objects[i + 1] , spine_TrackEntry);
+					var type = objects[i];
+					var result = objects[i + 1];
+					var entry = result;
 					while(true) {
-						var _switchCond1 = type;
-						if(_switchCond1 == 0) {
+						var _switchCond2 = type;
+						if(_switchCond2 == 0) {
 							if(entry.listener != null) {
 								entry.listener.start(entry);
 							}
@@ -105426,7 +109326,7 @@ spine_tilemap_SkeletonAnimation.prototype = $extend(spine_tilemap_SkeletonSprite
 								++ii;
 							}
 							break;
-						} else if(_switchCond1 == 1) {
+						} else if(_switchCond2 == 1) {
 							if(entry.listener != null) {
 								entry.listener.interrupt(entry);
 							}
@@ -105436,7 +109336,7 @@ spine_tilemap_SkeletonAnimation.prototype = $extend(spine_tilemap_SkeletonSprite
 								++ii1;
 							}
 							break;
-						} else if(_switchCond1 == 2) {
+						} else if(_switchCond2 == 2) {
 							if(entry.listener != null) {
 								entry.listener.end(entry);
 							}
@@ -105455,7 +109355,7 @@ spine_tilemap_SkeletonAnimation.prototype = $extend(spine_tilemap_SkeletonSprite
 							}
 							_this1.AnimationState_this.trackEntryPool.free(entry);
 							break;
-						} else if(_switchCond1 == 3) {
+						} else if(_switchCond2 == 3) {
 							if(entry.listener != null) {
 								entry.listener.dispose(entry);
 							}
@@ -105466,7 +109366,7 @@ spine_tilemap_SkeletonAnimation.prototype = $extend(spine_tilemap_SkeletonSprite
 							}
 							_this1.AnimationState_this.trackEntryPool.free(entry);
 							break;
-						} else if(_switchCond1 == 4) {
+						} else if(_switchCond2 == 4) {
 							if(entry.listener != null) {
 								entry.listener.complete(entry);
 							}
@@ -105476,8 +109376,9 @@ spine_tilemap_SkeletonAnimation.prototype = $extend(spine_tilemap_SkeletonSprite
 								++ii5;
 							}
 							break;
-						} else if(_switchCond1 == 5) {
-							var event = js_Boot.__cast(objects[i++ + 2] , spine_Event);
+						} else if(_switchCond2 == 5) {
+							var result1 = objects[i++ + 2];
+							var event = result1;
 							if(entry.listener != null) {
 								entry.listener.event(entry,event);
 							}
@@ -105505,6 +109406,21 @@ var spine_utils_JSONVersionUtils = function() { };
 $hxClasses["spine.utils.JSONVersionUtils"] = spine_utils_JSONVersionUtils;
 spine_utils_JSONVersionUtils.__name__ = "spine.utils.JSONVersionUtils";
 spine_utils_JSONVersionUtils.getSpineObjectData = function(data) {
+	var spineversion = data.skeleton.spine;
+	var array = spineversion.split(".");
+	spineversion = array[0] + array[1];
+	if(Std.parseInt(spineversion) <= 37) {
+		data.skeleton.spine = "3.8.99";
+		var skins = [];
+		var keys = Reflect.fields(data.skins);
+		var _g = 0;
+		while(_g < keys.length) {
+			var key = keys[_g];
+			++_g;
+			skins.push({ name : key, attachments : Reflect.getProperty(data.skins,key)});
+		}
+		data.skins = skins;
+	}
 	return JSON.stringify(data);
 };
 var spine_utils_SpineUtils = function() {
@@ -105512,19 +109428,33 @@ var spine_utils_SpineUtils = function() {
 $hxClasses["spine.utils.SpineUtils"] = spine_utils_SpineUtils;
 spine_utils_SpineUtils.__name__ = "spine.utils.SpineUtils";
 spine_utils_SpineUtils.cosDeg = function(angle) {
-	return js_Boot.__cast(Math.cos(angle * spine_utils_SpineUtils.degRad) , Float);
+	return Math.cos(angle * spine_utils_SpineUtils.degRad);
 };
 spine_utils_SpineUtils.sinDeg = function(angle) {
-	return js_Boot.__cast(Math.sin(angle * spine_utils_SpineUtils.degRad) , Float);
+	return Math.sin(angle * spine_utils_SpineUtils.degRad);
 };
 spine_utils_SpineUtils.cos = function(angle) {
-	return js_Boot.__cast(Math.cos(angle) , Float);
+	return Math.cos(angle);
 };
 spine_utils_SpineUtils.sin = function(angle) {
-	return js_Boot.__cast(Math.sin(angle) , Float);
+	return Math.sin(angle);
 };
 spine_utils_SpineUtils.atan2 = function(y,x) {
-	return js_Boot.__cast(Math.atan2(y,x) , Float);
+	return Math.atan2(y,x);
+};
+spine_utils_SpineUtils.arraycopy = function(src,srcPos,dest,destPos,length) {
+	if(src == null) {
+		throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("src cannot be null."));
+	}
+	if(dest == null) {
+		throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("dest cannot be null."));
+	}
+	try {
+		spine_support_utils_Array.copy(src,srcPos,dest,destPos,length);
+	} catch( _g ) {
+		haxe_NativeStackTrace.lastError = _g;
+		throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + srcPos + ", dest: " + dest.length + ", " + destPos + ", count: " + length));
+	}
 };
 spine_utils_SpineUtils.prototype = {
 	__class__: spine_utils_SpineUtils
@@ -107742,11 +111672,10 @@ zygame_components_ZBuilder.build = function(xml,parent,superInit,defalutArgs) {
 	}
 	return builder;
 };
-zygame_components_ZBuilder.buildui = function(xml,parent,builder,superInit,defalutArgs) {
+zygame_components_ZBuilder.buildui = function(xml,parent,builder,superInit,defalutArgs,idpush) {
 	if(defalutArgs == null) {
 		defalutArgs = [];
 	}
-	haxe_Log.trace("buildui",{ fileName : "Source/zygame/components/ZBuilder.hx", lineNumber : 729, className : "zygame.components.ZBuilder", methodName : "buildui", customParams : [xml]});
 	if(xml.exists("if")) {
 		var isExists = false;
 		var array = xml.get("if").split(" ");
@@ -107791,9 +111720,10 @@ zygame_components_ZBuilder.buildui = function(xml,parent,builder,superInit,defal
 		base = zygame_components_ZBuilder.classMaps.h[className];
 	}
 	if(base == null) {
-		var xml1 = zygame_components_ZBuilder.getXml(className);
-		if(xml1 != null) {
-			ui = zygame_components_ZBuilder.buildui(xml1.firstElement(),parent,builder);
+		var childxml = zygame_components_ZBuilder.getXml(className);
+		if(childxml != null) {
+			haxe_Log.trace("子集：",{ fileName : "Source/zygame/components/ZBuilder.hx", lineNumber : 776, className : "zygame.components.ZBuilder", methodName : "buildui", customParams : [xml.get("id")]});
+			ui = zygame_components_ZBuilder.buildui(childxml.firstElement(),parent,builder,null,null,xml.get("id"));
 		} else {
 			throw haxe_Exception.thrown("Class name " + className + " is not define xml assets!");
 		}
@@ -107813,7 +111743,7 @@ zygame_components_ZBuilder.buildui = function(xml,parent,builder,superInit,defal
 				var tmp = haxe_Log.trace;
 				var tmp1 = e.get_message() + "\n";
 				var tmp2 = e.get_stack();
-				tmp("异常：",{ fileName : "Source/zygame/components/ZBuilder.hx", lineNumber : 781, className : "zygame.components.ZBuilder", methodName : "buildui", customParams : [tmp1 + (tmp2 == null ? "null" : haxe_CallStack.toString(tmp2))]});
+				tmp("异常：",{ fileName : "Source/zygame/components/ZBuilder.hx", lineNumber : 793, className : "zygame.components.ZBuilder", methodName : "buildui", customParams : [tmp1 + (tmp2 == null ? "null" : haxe_CallStack.toString(tmp2))]});
 				if(((parent) instanceof openfl_display_DisplayObject)) {
 					(js_Boot.__cast(parent , openfl_display_DisplayObject)).set_shader(null);
 				} else if(((parent) instanceof openfl_display_Tile)) {
@@ -107823,7 +111753,7 @@ zygame_components_ZBuilder.buildui = function(xml,parent,builder,superInit,defal
 		}
 		var idname = xml.get("id");
 		if(idname != null) {
-			builder.ids.h[idname] = ui;
+			builder.ids.h[(idpush != null ? idpush + "_" : "") + idname] = ui;
 			if(((ui) instanceof zygame_script_ZHaxe)) {
 				if(idname == "super") {
 					(js_Boot.__cast(ui , zygame_script_ZHaxe)).bindBuilder(builder);
@@ -107842,7 +111772,7 @@ zygame_components_ZBuilder.buildui = function(xml,parent,builder,superInit,defal
 			var items = xml.elements();
 			while(items.hasNext()) {
 				var itemxml = items.next();
-				zygame_components_ZBuilder.buildui(itemxml,ui,builder);
+				zygame_components_ZBuilder.buildui(itemxml,ui,builder,null,null,idpush);
 			}
 		}
 		return ui;
@@ -107875,9 +111805,8 @@ zygame_components_ZBuilder.buildui = function(xml,parent,builder,superInit,defal
 	while(attr.hasNext()) {
 		var name = attr.next();
 		if(name == "id") {
-			var this1 = builder.ids;
-			var key = xml.get(name);
-			this1.h[key] = ui;
+			var idname = (idpush != null ? idpush + "_" : "") + xml.get(name);
+			builder.ids.h[idname] = ui;
 			if(!xml.exists("name")) {
 				zygame_components_ZBuilder.setProperty(ui,"name",xml.get(name));
 			}
@@ -107924,7 +111853,7 @@ zygame_components_ZBuilder.buildui = function(xml,parent,builder,superInit,defal
 	var items = xml.elements();
 	while(items.hasNext()) {
 		var itemxml = items.next();
-		zygame_components_ZBuilder.buildui(itemxml,ui,builder);
+		zygame_components_ZBuilder.buildui(itemxml,ui,builder,null,null,idpush);
 	}
 	if(Object.prototype.hasOwnProperty.call(zygame_components_ZBuilder.endMaps.h,className)) {
 		zygame_components_ZBuilder.endMaps.h[className](ui);
@@ -109526,7 +113455,702 @@ zygame_components_ZSpine.prototype = $extend(zygame_components_ZBox.prototype,{
 		if(this.btilemap != null) {
 			this.bspine.set_spineSkin(name);
 		} else {
-			this.spine.skeleton.setSkinByName(name);
+			var _this = this.spine.skeleton;
+			var skin = _this.data.findSkin(name);
+			if(skin == null) {
+				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("Skin not found: " + name));
+			}
+			if(skin != _this.skin) {
+				if(skin != null) {
+					if(_this.skin != null) {
+						var _g = 0;
+						var _g1 = spine_support_utils_AttachmentMap.keys(_this.skin.attachments);
+						while(_g < _g1.length) {
+							var entry = _g1[_g];
+							++_g;
+							var slotIndex = entry.slotIndex;
+							var slot = _this.slots[slotIndex];
+							if(slot.attachment == entry.attachment) {
+								var name1 = entry.name;
+								if(slotIndex < 0) {
+									throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("slotIndex must be >= 0."));
+								}
+								var _this1 = skin.lookup;
+								if(name1 == null) {
+									throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("name cannot be null."));
+								}
+								_this1.slotIndex = slotIndex;
+								_this1.name = name1;
+								var hash = 0;
+								var chr;
+								var x;
+								if(name1.length == 0) {
+									x = hash;
+								} else {
+									var _g2 = 0;
+									var _g3 = name1.length;
+									while(_g2 < _g3) {
+										var i = _g2++;
+										chr = HxOverrides.cca(name1,i);
+										hash = (hash << 5) - hash + chr;
+									}
+									x = hash;
+								}
+								_this1.hashCode = x + slotIndex * 37 | 0;
+								var key = skin.lookup;
+								var entries = skin.attachments.h[key.hashCode];
+								var result = null;
+								if(entries != null) {
+									var _g4 = 0;
+									var _g5 = entries.length;
+									while(_g4 < _g5) {
+										var i1 = _g4++;
+										var entry1 = entries[i1];
+										var _this2 = entry1.key;
+										var object = key;
+										var tmp;
+										if(object == null) {
+											tmp = false;
+										} else {
+											var result1 = object;
+											var other = result1;
+											tmp = _this2.slotIndex != other.slotIndex ? false : _this2.name != other.name ? false : true;
+										}
+										if(tmp) {
+											result = entry1.value;
+											break;
+										}
+									}
+								}
+								var entry2 = result;
+								var attachment = entry2 != null ? entry2.attachment : null;
+								if(attachment != null) {
+									if(slot.attachment != attachment) {
+										slot.attachment = attachment;
+										slot.attachmentTime = slot.bone.skeleton.time;
+										var this1 = slot.deform;
+										this1.splice(0,this1.length);
+									}
+								}
+							}
+						}
+					} else {
+						var slots = _this.slots;
+						var i = 0;
+						var n = slots.length;
+						while(i < n) {
+							var slot = slots[i];
+							var name1 = slot.data.attachmentName;
+							if(name1 != null) {
+								if(i < 0) {
+									throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("slotIndex must be >= 0."));
+								}
+								var _this1 = skin.lookup;
+								if(name1 == null) {
+									throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("name cannot be null."));
+								}
+								_this1.slotIndex = i;
+								_this1.name = name1;
+								var hash = 0;
+								var chr;
+								var x;
+								if(name1.length == 0) {
+									x = hash;
+								} else {
+									var _g = 0;
+									var _g1 = name1.length;
+									while(_g < _g1) {
+										var i1 = _g++;
+										chr = HxOverrides.cca(name1,i1);
+										hash = (hash << 5) - hash + chr;
+									}
+									x = hash;
+								}
+								_this1.hashCode = x + i * 37 | 0;
+								var key = skin.lookup;
+								var entries = skin.attachments.h[key.hashCode];
+								var result = null;
+								if(entries != null) {
+									var _g2 = 0;
+									var _g3 = entries.length;
+									while(_g2 < _g3) {
+										var i2 = _g2++;
+										var entry = entries[i2];
+										var _this2 = entry.key;
+										var object = key;
+										var tmp;
+										if(object == null) {
+											tmp = false;
+										} else {
+											var result1 = object;
+											var other = result1;
+											tmp = _this2.slotIndex != other.slotIndex ? false : _this2.name != other.name ? false : true;
+										}
+										if(tmp) {
+											result = entry.value;
+											break;
+										}
+									}
+								}
+								var entry1 = result;
+								var attachment = entry1 != null ? entry1.attachment : null;
+								if(attachment != null) {
+									if(slot.attachment != attachment) {
+										slot.attachment = attachment;
+										slot.attachmentTime = slot.bone.skeleton.time;
+										var this1 = slot.deform;
+										this1.splice(0,this1.length);
+									}
+								}
+							}
+							++i;
+						}
+					}
+				}
+				_this.skin = skin;
+				var cache = _this.cache;
+				cache.splice(0,cache.length);
+				var this1 = _this.cacheReset;
+				this1.splice(0,this1.length);
+				var boneCount = _this.bones.length;
+				var bones = _this.bones;
+				var i = 0;
+				while(i < boneCount) {
+					var result = bones[i];
+					var bone = result;
+					bone.sorted = bone.data.skinRequired;
+					bone.active = !bone.sorted;
+					++i;
+				}
+				if(_this.skin != null) {
+					var skinBones = _this.skin.bones;
+					var i = 0;
+					var n = _this.skin.bones.length;
+					while(i < n) {
+						var result = skinBones[i];
+						var result1 = bones[result.index];
+						var bone = result1;
+						while(true) {
+							bone.sorted = false;
+							bone.active = true;
+							bone = bone.parent;
+							if(!(bone != null)) {
+								break;
+							}
+						}
+						++i;
+					}
+				}
+				var ikCount = _this.ikConstraints.length;
+				var transformCount = _this.transformConstraints.length;
+				var pathCount = _this.pathConstraints.length;
+				var ikConstraints = _this.ikConstraints;
+				var transformConstraints = _this.transformConstraints;
+				var pathConstraints = _this.pathConstraints;
+				var constraintCount = ikCount + transformCount + pathCount;
+				var _gotoLabel_outer;
+				while(true) {
+					_gotoLabel_outer = 0;
+					var i = 0;
+					while(i < constraintCount) {
+						var ii = 0;
+						while(ii < ikCount) {
+							var result = ikConstraints[ii];
+							var constraint = result;
+							if(constraint.data.order == i) {
+								constraint.active = constraint.target.active && (!constraint.data.skinRequired || _this.skin != null && _this.skin.constraints.indexOf(constraint.data) != -1);
+								if(constraint.active) {
+									var target = constraint.target;
+									if(!target.sorted) {
+										var parent = target.parent;
+										if(parent != null) {
+											if(!parent.sorted) {
+												var parent1 = parent.parent;
+												if(parent1 != null) {
+													_this.sortBone(parent1);
+												}
+												parent.sorted = true;
+												_this.cache.push(parent);
+											}
+										}
+										target.sorted = true;
+										_this.cache.push(target);
+									}
+									var constrained = constraint.bones;
+									var parent2 = constrained.length > 0 ? constrained[0] : null;
+									if(!parent2.sorted) {
+										var parent3 = parent2.parent;
+										if(parent3 != null) {
+											if(!parent3.sorted) {
+												var parent4 = parent3.parent;
+												if(parent4 != null) {
+													_this.sortBone(parent4);
+												}
+												parent3.sorted = true;
+												_this.cache.push(parent3);
+											}
+										}
+										parent2.sorted = true;
+										_this.cache.push(parent2);
+									}
+									if(constrained.length > 1) {
+										var child = constrained.length == 0 ? null : constrained[constrained.length - 1];
+										if(_this.cache.indexOf(child) == -1) {
+											_this.cacheReset.push(child);
+										}
+									}
+									_this.cache.push(constraint);
+									var bones1 = parent2.children;
+									var i1 = 0;
+									var n = bones1.length;
+									while(i1 < n) {
+										var bone = bones1[i1];
+										if(!bone.active) {
+											++i1;
+											continue;
+										}
+										if(bone.sorted) {
+											var bones2 = bone.children;
+											var i2 = 0;
+											var n1 = bones2.length;
+											while(i2 < n1) {
+												var bone1 = bones2[i2];
+												if(!bone1.active) {
+													++i2;
+													continue;
+												}
+												if(bone1.sorted) {
+													_this.sortReset(bone1.children);
+												}
+												bone1.sorted = false;
+												++i2;
+											}
+										}
+										bone.sorted = false;
+										++i1;
+									}
+									(constrained.length == 0 ? null : constrained[constrained.length - 1]).sorted = true;
+								}
+								++ii;
+								_gotoLabel_outer = 2;
+								break;
+							}
+							++ii;
+						}
+						if(_gotoLabel_outer == 2) {
+							_gotoLabel_outer = 0;
+							++i;
+							continue;
+						}
+						if(_gotoLabel_outer >= 1) {
+							break;
+						}
+						var ii1 = 0;
+						while(ii1 < transformCount) {
+							var result1 = transformConstraints[ii1];
+							var constraint1 = result1;
+							if(constraint1.data.order == i) {
+								constraint1.active = constraint1.target.active && (!constraint1.data.skinRequired || _this.skin != null && _this.skin.constraints.indexOf(constraint1.data) != -1);
+								if(constraint1.active) {
+									var bone2 = constraint1.target;
+									if(!bone2.sorted) {
+										var parent5 = bone2.parent;
+										if(parent5 != null) {
+											if(!parent5.sorted) {
+												var parent6 = parent5.parent;
+												if(parent6 != null) {
+													_this.sortBone(parent6);
+												}
+												parent5.sorted = true;
+												_this.cache.push(parent5);
+											}
+										}
+										bone2.sorted = true;
+										_this.cache.push(bone2);
+									}
+									var constrained1 = constraint1.bones;
+									var boneCount1 = constrained1.length;
+									if(constraint1.data.local) {
+										var i3 = 0;
+										while(i3 < boneCount1) {
+											var child1 = constrained1[i3];
+											var bone3 = child1.parent;
+											if(!bone3.sorted) {
+												var parent7 = bone3.parent;
+												if(parent7 != null) {
+													if(!parent7.sorted) {
+														var parent8 = parent7.parent;
+														if(parent8 != null) {
+															_this.sortBone(parent8);
+														}
+														parent7.sorted = true;
+														_this.cache.push(parent7);
+													}
+												}
+												bone3.sorted = true;
+												_this.cache.push(bone3);
+											}
+											if(_this.cache.indexOf(child1) == -1) {
+												_this.cacheReset.push(child1);
+											}
+											++i3;
+										}
+									} else {
+										var i4 = 0;
+										while(i4 < boneCount1) {
+											var bone4 = constrained1[i4];
+											if(!bone4.sorted) {
+												var parent9 = bone4.parent;
+												if(parent9 != null) {
+													if(!parent9.sorted) {
+														var parent10 = parent9.parent;
+														if(parent10 != null) {
+															_this.sortBone(parent10);
+														}
+														parent9.sorted = true;
+														_this.cache.push(parent9);
+													}
+												}
+												bone4.sorted = true;
+												_this.cache.push(bone4);
+											}
+											++i4;
+										}
+									}
+									_this.cache.push(constraint1);
+									var i5 = 0;
+									while(i5 < boneCount1) {
+										var bones3 = constrained1[i5].children;
+										var i6 = 0;
+										var n2 = bones3.length;
+										while(i6 < n2) {
+											var bone5 = bones3[i6];
+											if(!bone5.active) {
+												++i6;
+												continue;
+											}
+											if(bone5.sorted) {
+												var bones4 = bone5.children;
+												var i7 = 0;
+												var n3 = bones4.length;
+												while(i7 < n3) {
+													var bone6 = bones4[i7];
+													if(!bone6.active) {
+														++i7;
+														continue;
+													}
+													if(bone6.sorted) {
+														_this.sortReset(bone6.children);
+													}
+													bone6.sorted = false;
+													++i7;
+												}
+											}
+											bone5.sorted = false;
+											++i6;
+										}
+										++i5;
+									}
+									var i8 = 0;
+									while(i8 < boneCount1) {
+										constrained1[i8].sorted = true;
+										++i8;
+									}
+								}
+								++ii1;
+								_gotoLabel_outer = 2;
+								break;
+							}
+							++ii1;
+						}
+						if(_gotoLabel_outer == 2) {
+							_gotoLabel_outer = 0;
+							++i;
+							continue;
+						}
+						if(_gotoLabel_outer >= 1) {
+							break;
+						}
+						var ii2 = 0;
+						while(ii2 < pathCount) {
+							var result2 = pathConstraints[ii2];
+							var constraint2 = result2;
+							if(constraint2.data.order == i) {
+								constraint2.active = constraint2.target.bone.active && (!constraint2.data.skinRequired || _this.skin != null && _this.skin.constraints.indexOf(constraint2.data) != -1);
+								if(constraint2.active) {
+									var slot = constraint2.target;
+									var slotIndex = slot.data.index;
+									var slotBone = slot.bone;
+									if(_this.skin != null) {
+										var _g = 0;
+										var _g1 = spine_support_utils_AttachmentMap.keys(_this.skin.attachments);
+										while(_g < _g1.length) {
+											var entry = _g1[_g];
+											++_g;
+											if(entry.slotIndex == slotIndex) {
+												var attachment = entry.attachment;
+												if(((attachment) instanceof spine_attachments_PathAttachment)) {
+													var result3 = attachment;
+													var pathBones = result3.bones;
+													if(pathBones == null) {
+														if(!slotBone.sorted) {
+															var parent11 = slotBone.parent;
+															if(parent11 != null) {
+																if(!parent11.sorted) {
+																	var parent12 = parent11.parent;
+																	if(parent12 != null) {
+																		_this.sortBone(parent12);
+																	}
+																	parent11.sorted = true;
+																	_this.cache.push(parent11);
+																}
+															}
+															slotBone.sorted = true;
+															_this.cache.push(slotBone);
+														}
+													} else {
+														var bones5 = _this.bones;
+														var i9 = 0;
+														var n4 = pathBones.length;
+														while(i9 < n4) {
+															var nn = pathBones[i9++];
+															nn += i9;
+															while(i9 < nn) {
+																var bone7 = bones5[pathBones[i9++]];
+																if(!bone7.sorted) {
+																	var parent13 = bone7.parent;
+																	if(parent13 != null) {
+																		if(!parent13.sorted) {
+																			var parent14 = parent13.parent;
+																			if(parent14 != null) {
+																				_this.sortBone(parent14);
+																			}
+																			parent13.sorted = true;
+																			_this.cache.push(parent13);
+																		}
+																	}
+																	bone7.sorted = true;
+																	_this.cache.push(bone7);
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+									if(_this.data.defaultSkin != null && _this.data.defaultSkin != _this.skin) {
+										var _g2 = 0;
+										var _g3 = spine_support_utils_AttachmentMap.keys(_this.data.defaultSkin.attachments);
+										while(_g2 < _g3.length) {
+											var entry1 = _g3[_g2];
+											++_g2;
+											if(entry1.slotIndex == slotIndex) {
+												var attachment1 = entry1.attachment;
+												if(((attachment1) instanceof spine_attachments_PathAttachment)) {
+													var result4 = attachment1;
+													var pathBones1 = result4.bones;
+													if(pathBones1 == null) {
+														if(!slotBone.sorted) {
+															var parent15 = slotBone.parent;
+															if(parent15 != null) {
+																if(!parent15.sorted) {
+																	var parent16 = parent15.parent;
+																	if(parent16 != null) {
+																		_this.sortBone(parent16);
+																	}
+																	parent15.sorted = true;
+																	_this.cache.push(parent15);
+																}
+															}
+															slotBone.sorted = true;
+															_this.cache.push(slotBone);
+														}
+													} else {
+														var bones6 = _this.bones;
+														var i10 = 0;
+														var n5 = pathBones1.length;
+														while(i10 < n5) {
+															var nn1 = pathBones1[i10++];
+															nn1 += i10;
+															while(i10 < nn1) {
+																var bone8 = bones6[pathBones1[i10++]];
+																if(!bone8.sorted) {
+																	var parent17 = bone8.parent;
+																	if(parent17 != null) {
+																		if(!parent17.sorted) {
+																			var parent18 = parent17.parent;
+																			if(parent18 != null) {
+																				_this.sortBone(parent18);
+																			}
+																			parent17.sorted = true;
+																			_this.cache.push(parent17);
+																		}
+																	}
+																	bone8.sorted = true;
+																	_this.cache.push(bone8);
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+									var attachment2 = slot.attachment;
+									if(((attachment2) instanceof spine_attachments_PathAttachment)) {
+										if(((attachment2) instanceof spine_attachments_PathAttachment)) {
+											var result5 = attachment2;
+											var pathBones2 = result5.bones;
+											if(pathBones2 == null) {
+												if(!slotBone.sorted) {
+													var parent19 = slotBone.parent;
+													if(parent19 != null) {
+														if(!parent19.sorted) {
+															var parent20 = parent19.parent;
+															if(parent20 != null) {
+																_this.sortBone(parent20);
+															}
+															parent19.sorted = true;
+															_this.cache.push(parent19);
+														}
+													}
+													slotBone.sorted = true;
+													_this.cache.push(slotBone);
+												}
+											} else {
+												var bones7 = _this.bones;
+												var i11 = 0;
+												var n6 = pathBones2.length;
+												while(i11 < n6) {
+													var nn2 = pathBones2[i11++];
+													nn2 += i11;
+													while(i11 < nn2) {
+														var bone9 = bones7[pathBones2[i11++]];
+														if(!bone9.sorted) {
+															var parent21 = bone9.parent;
+															if(parent21 != null) {
+																if(!parent21.sorted) {
+																	var parent22 = parent21.parent;
+																	if(parent22 != null) {
+																		_this.sortBone(parent22);
+																	}
+																	parent21.sorted = true;
+																	_this.cache.push(parent21);
+																}
+															}
+															bone9.sorted = true;
+															_this.cache.push(bone9);
+														}
+													}
+												}
+											}
+										}
+									}
+									var constrained2 = constraint2.bones;
+									var boneCount2 = constrained2.length;
+									var i12 = 0;
+									while(i12 < boneCount2) {
+										var bone10 = constrained2[i12];
+										if(!bone10.sorted) {
+											var parent23 = bone10.parent;
+											if(parent23 != null) {
+												if(!parent23.sorted) {
+													var parent24 = parent23.parent;
+													if(parent24 != null) {
+														_this.sortBone(parent24);
+													}
+													parent23.sorted = true;
+													_this.cache.push(parent23);
+												}
+											}
+											bone10.sorted = true;
+											_this.cache.push(bone10);
+										}
+										++i12;
+									}
+									_this.cache.push(constraint2);
+									var i13 = 0;
+									while(i13 < boneCount2) {
+										var bones8 = constrained2[i13].children;
+										var i14 = 0;
+										var n7 = bones8.length;
+										while(i14 < n7) {
+											var bone11 = bones8[i14];
+											if(!bone11.active) {
+												++i14;
+												continue;
+											}
+											if(bone11.sorted) {
+												var bones9 = bone11.children;
+												var i15 = 0;
+												var n8 = bones9.length;
+												while(i15 < n8) {
+													var bone12 = bones9[i15];
+													if(!bone12.active) {
+														++i15;
+														continue;
+													}
+													if(bone12.sorted) {
+														_this.sortReset(bone12.children);
+													}
+													bone12.sorted = false;
+													++i15;
+												}
+											}
+											bone11.sorted = false;
+											++i14;
+										}
+										++i13;
+									}
+									var i16 = 0;
+									while(i16 < boneCount2) {
+										constrained2[i16].sorted = true;
+										++i16;
+									}
+								}
+								++ii2;
+								_gotoLabel_outer = 2;
+								break;
+							}
+							++ii2;
+						}
+						if(_gotoLabel_outer == 2) {
+							_gotoLabel_outer = 0;
+							++i;
+							continue;
+						}
+						if(_gotoLabel_outer >= 1) {
+							break;
+						}
+						++i;
+					}
+					if(_gotoLabel_outer == 0) {
+						break;
+					}
+				}
+				var i = 0;
+				while(i < boneCount) {
+					var result = bones[i];
+					var bone = result;
+					if(!bone.sorted) {
+						var parent = bone.parent;
+						if(parent != null) {
+							if(!parent.sorted) {
+								var parent1 = parent.parent;
+								if(parent1 != null) {
+									_this.sortBone(parent1);
+								}
+								parent.sorted = true;
+								_this.cache.push(parent);
+							}
+						}
+						bone.sorted = true;
+						_this.cache.push(bone);
+					}
+					++i;
+				}
+			}
 			var _this = this.spine.skeleton;
 			var bones = _this.bones;
 			var i = 0;
@@ -109548,8 +114172,11 @@ zygame_components_ZSpine.prototype = $extend(zygame_components_ZBox.prototype,{
 			var n = ikConstraints.length;
 			while(i < n) {
 				var constraint = ikConstraints[i];
-				constraint.bendDirection = constraint.data.bendDirection;
 				constraint.mix = constraint.data.mix;
+				constraint.softness = constraint.data.softness;
+				constraint.bendDirection = constraint.data.bendDirection;
+				constraint.compress = constraint.data.compress;
+				constraint.stretch = constraint.data.stretch;
 				++i;
 			}
 			var transformConstraints = _this.transformConstraints;
@@ -109578,21 +114205,45 @@ zygame_components_ZSpine.prototype = $extend(zygame_components_ZBox.prototype,{
 			}
 			var _this = this.spine.skeleton;
 			var slots = _this.slots;
-			spine_support_utils_Array.copy(slots,0,_this.drawOrder,0,slots.length);
+			var src = slots;
+			var dest = _this.drawOrder;
+			var length = slots.length;
+			if(src == null) {
+				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("src cannot be null."));
+			}
+			if(dest == null) {
+				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("dest cannot be null."));
+			}
+			try {
+				spine_support_utils_Array.copy(src,0,dest,0,length);
+			} catch( _g ) {
+				haxe_NativeStackTrace.lastError = _g;
+				throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
+			}
 			var i = 0;
 			var n = slots.length;
 			while(i < n) {
 				var _this = slots[i];
-				_this.color.set(_this.data.color);
+				var _this1 = _this.color;
+				var color = _this.data.color;
+				_this1.r = color.r;
+				_this1.g = color.g;
+				_this1.b = color.b;
+				_this1.a = color.a;
 				if(_this.darkColor != null) {
-					_this.darkColor.set(_this.data.darkColor);
+					var _this2 = _this.darkColor;
+					var color1 = _this.data.darkColor;
+					_this2.r = color1.r;
+					_this2.g = color1.g;
+					_this2.b = color1.b;
+					_this2.a = color1.a;
 				}
 				if(_this.data.attachmentName == null) {
 					var attachment = null;
 					if(_this.attachment != attachment) {
 						_this.attachment = attachment;
 						_this.attachmentTime = _this.bone.skeleton.time;
-						var this1 = _this.attachmentVertices;
+						var this1 = _this.deform;
 						this1.splice(0,this1.length);
 					}
 				} else {
@@ -109601,7 +114252,7 @@ zygame_components_ZSpine.prototype = $extend(zygame_components_ZBox.prototype,{
 					if(_this.attachment != attachment1) {
 						_this.attachment = attachment1;
 						_this.attachmentTime = _this.bone.skeleton.time;
-						var this2 = _this.attachmentVertices;
+						var this2 = _this.deform;
 						this2.splice(0,this2.length);
 					}
 				}
@@ -109612,16 +114263,16 @@ zygame_components_ZSpine.prototype = $extend(zygame_components_ZBox.prototype,{
 	}
 	,get_spineSkin: function() {
 		if(this.bspine == null) {
-			if(this.spine.skeleton.getSkin() != null) {
-				return this.spine.skeleton.getSkin().name;
+			if(this.spine.skeleton.skin != null) {
+				return this.spine.skeleton.skin.name;
 			} else {
 				return null;
 			}
 		}
-		if(this.bspine.spine.skeleton.getSkin() == null) {
+		if(this.bspine.spine.skeleton.skin == null) {
 			return null;
 		}
-		return this.bspine.spine.skeleton.getSkin().name;
+		return this.bspine.spine.skeleton.skin.name;
 	}
 	,get_state: function() {
 		if(this.bspine != null) {
@@ -112268,7 +116919,702 @@ zygame_display_batch_BSpine.__super__ = zygame_display_batch_BBox;
 zygame_display_batch_BSpine.prototype = $extend(zygame_display_batch_BBox.prototype,{
 	spine: null
 	,set_spineSkin: function(name) {
-		this.spine.skeleton.setSkinByName(name);
+		var _this = this.spine.skeleton;
+		var skin = _this.data.findSkin(name);
+		if(skin == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("Skin not found: " + name));
+		}
+		if(skin != _this.skin) {
+			if(skin != null) {
+				if(_this.skin != null) {
+					var _g = 0;
+					var _g1 = spine_support_utils_AttachmentMap.keys(_this.skin.attachments);
+					while(_g < _g1.length) {
+						var entry = _g1[_g];
+						++_g;
+						var slotIndex = entry.slotIndex;
+						var slot = _this.slots[slotIndex];
+						if(slot.attachment == entry.attachment) {
+							var name1 = entry.name;
+							if(slotIndex < 0) {
+								throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("slotIndex must be >= 0."));
+							}
+							var _this1 = skin.lookup;
+							if(name1 == null) {
+								throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("name cannot be null."));
+							}
+							_this1.slotIndex = slotIndex;
+							_this1.name = name1;
+							var hash = 0;
+							var chr;
+							var x;
+							if(name1.length == 0) {
+								x = hash;
+							} else {
+								var _g2 = 0;
+								var _g3 = name1.length;
+								while(_g2 < _g3) {
+									var i = _g2++;
+									chr = HxOverrides.cca(name1,i);
+									hash = (hash << 5) - hash + chr;
+								}
+								x = hash;
+							}
+							_this1.hashCode = x + slotIndex * 37 | 0;
+							var key = skin.lookup;
+							var entries = skin.attachments.h[key.hashCode];
+							var result = null;
+							if(entries != null) {
+								var _g4 = 0;
+								var _g5 = entries.length;
+								while(_g4 < _g5) {
+									var i1 = _g4++;
+									var entry1 = entries[i1];
+									var _this2 = entry1.key;
+									var object = key;
+									var tmp;
+									if(object == null) {
+										tmp = false;
+									} else {
+										var result1 = object;
+										var other = result1;
+										tmp = _this2.slotIndex != other.slotIndex ? false : _this2.name != other.name ? false : true;
+									}
+									if(tmp) {
+										result = entry1.value;
+										break;
+									}
+								}
+							}
+							var entry2 = result;
+							var attachment = entry2 != null ? entry2.attachment : null;
+							if(attachment != null) {
+								if(slot.attachment != attachment) {
+									slot.attachment = attachment;
+									slot.attachmentTime = slot.bone.skeleton.time;
+									var this1 = slot.deform;
+									this1.splice(0,this1.length);
+								}
+							}
+						}
+					}
+				} else {
+					var slots = _this.slots;
+					var i = 0;
+					var n = slots.length;
+					while(i < n) {
+						var slot = slots[i];
+						var name1 = slot.data.attachmentName;
+						if(name1 != null) {
+							if(i < 0) {
+								throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("slotIndex must be >= 0."));
+							}
+							var _this1 = skin.lookup;
+							if(name1 == null) {
+								throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("name cannot be null."));
+							}
+							_this1.slotIndex = i;
+							_this1.name = name1;
+							var hash = 0;
+							var chr;
+							var x;
+							if(name1.length == 0) {
+								x = hash;
+							} else {
+								var _g = 0;
+								var _g1 = name1.length;
+								while(_g < _g1) {
+									var i1 = _g++;
+									chr = HxOverrides.cca(name1,i1);
+									hash = (hash << 5) - hash + chr;
+								}
+								x = hash;
+							}
+							_this1.hashCode = x + i * 37 | 0;
+							var key = skin.lookup;
+							var entries = skin.attachments.h[key.hashCode];
+							var result = null;
+							if(entries != null) {
+								var _g2 = 0;
+								var _g3 = entries.length;
+								while(_g2 < _g3) {
+									var i2 = _g2++;
+									var entry = entries[i2];
+									var _this2 = entry.key;
+									var object = key;
+									var tmp;
+									if(object == null) {
+										tmp = false;
+									} else {
+										var result1 = object;
+										var other = result1;
+										tmp = _this2.slotIndex != other.slotIndex ? false : _this2.name != other.name ? false : true;
+									}
+									if(tmp) {
+										result = entry.value;
+										break;
+									}
+								}
+							}
+							var entry1 = result;
+							var attachment = entry1 != null ? entry1.attachment : null;
+							if(attachment != null) {
+								if(slot.attachment != attachment) {
+									slot.attachment = attachment;
+									slot.attachmentTime = slot.bone.skeleton.time;
+									var this1 = slot.deform;
+									this1.splice(0,this1.length);
+								}
+							}
+						}
+						++i;
+					}
+				}
+			}
+			_this.skin = skin;
+			var cache = _this.cache;
+			cache.splice(0,cache.length);
+			var this1 = _this.cacheReset;
+			this1.splice(0,this1.length);
+			var boneCount = _this.bones.length;
+			var bones = _this.bones;
+			var i = 0;
+			while(i < boneCount) {
+				var result = bones[i];
+				var bone = result;
+				bone.sorted = bone.data.skinRequired;
+				bone.active = !bone.sorted;
+				++i;
+			}
+			if(_this.skin != null) {
+				var skinBones = _this.skin.bones;
+				var i = 0;
+				var n = _this.skin.bones.length;
+				while(i < n) {
+					var result = skinBones[i];
+					var result1 = bones[result.index];
+					var bone = result1;
+					while(true) {
+						bone.sorted = false;
+						bone.active = true;
+						bone = bone.parent;
+						if(!(bone != null)) {
+							break;
+						}
+					}
+					++i;
+				}
+			}
+			var ikCount = _this.ikConstraints.length;
+			var transformCount = _this.transformConstraints.length;
+			var pathCount = _this.pathConstraints.length;
+			var ikConstraints = _this.ikConstraints;
+			var transformConstraints = _this.transformConstraints;
+			var pathConstraints = _this.pathConstraints;
+			var constraintCount = ikCount + transformCount + pathCount;
+			var _gotoLabel_outer;
+			while(true) {
+				_gotoLabel_outer = 0;
+				var i = 0;
+				while(i < constraintCount) {
+					var ii = 0;
+					while(ii < ikCount) {
+						var result = ikConstraints[ii];
+						var constraint = result;
+						if(constraint.data.order == i) {
+							constraint.active = constraint.target.active && (!constraint.data.skinRequired || _this.skin != null && _this.skin.constraints.indexOf(constraint.data) != -1);
+							if(constraint.active) {
+								var target = constraint.target;
+								if(!target.sorted) {
+									var parent = target.parent;
+									if(parent != null) {
+										if(!parent.sorted) {
+											var parent1 = parent.parent;
+											if(parent1 != null) {
+												_this.sortBone(parent1);
+											}
+											parent.sorted = true;
+											_this.cache.push(parent);
+										}
+									}
+									target.sorted = true;
+									_this.cache.push(target);
+								}
+								var constrained = constraint.bones;
+								var parent2 = constrained.length > 0 ? constrained[0] : null;
+								if(!parent2.sorted) {
+									var parent3 = parent2.parent;
+									if(parent3 != null) {
+										if(!parent3.sorted) {
+											var parent4 = parent3.parent;
+											if(parent4 != null) {
+												_this.sortBone(parent4);
+											}
+											parent3.sorted = true;
+											_this.cache.push(parent3);
+										}
+									}
+									parent2.sorted = true;
+									_this.cache.push(parent2);
+								}
+								if(constrained.length > 1) {
+									var child = constrained.length == 0 ? null : constrained[constrained.length - 1];
+									if(_this.cache.indexOf(child) == -1) {
+										_this.cacheReset.push(child);
+									}
+								}
+								_this.cache.push(constraint);
+								var bones1 = parent2.children;
+								var i1 = 0;
+								var n = bones1.length;
+								while(i1 < n) {
+									var bone = bones1[i1];
+									if(!bone.active) {
+										++i1;
+										continue;
+									}
+									if(bone.sorted) {
+										var bones2 = bone.children;
+										var i2 = 0;
+										var n1 = bones2.length;
+										while(i2 < n1) {
+											var bone1 = bones2[i2];
+											if(!bone1.active) {
+												++i2;
+												continue;
+											}
+											if(bone1.sorted) {
+												_this.sortReset(bone1.children);
+											}
+											bone1.sorted = false;
+											++i2;
+										}
+									}
+									bone.sorted = false;
+									++i1;
+								}
+								(constrained.length == 0 ? null : constrained[constrained.length - 1]).sorted = true;
+							}
+							++ii;
+							_gotoLabel_outer = 2;
+							break;
+						}
+						++ii;
+					}
+					if(_gotoLabel_outer == 2) {
+						_gotoLabel_outer = 0;
+						++i;
+						continue;
+					}
+					if(_gotoLabel_outer >= 1) {
+						break;
+					}
+					var ii1 = 0;
+					while(ii1 < transformCount) {
+						var result1 = transformConstraints[ii1];
+						var constraint1 = result1;
+						if(constraint1.data.order == i) {
+							constraint1.active = constraint1.target.active && (!constraint1.data.skinRequired || _this.skin != null && _this.skin.constraints.indexOf(constraint1.data) != -1);
+							if(constraint1.active) {
+								var bone2 = constraint1.target;
+								if(!bone2.sorted) {
+									var parent5 = bone2.parent;
+									if(parent5 != null) {
+										if(!parent5.sorted) {
+											var parent6 = parent5.parent;
+											if(parent6 != null) {
+												_this.sortBone(parent6);
+											}
+											parent5.sorted = true;
+											_this.cache.push(parent5);
+										}
+									}
+									bone2.sorted = true;
+									_this.cache.push(bone2);
+								}
+								var constrained1 = constraint1.bones;
+								var boneCount1 = constrained1.length;
+								if(constraint1.data.local) {
+									var i3 = 0;
+									while(i3 < boneCount1) {
+										var child1 = constrained1[i3];
+										var bone3 = child1.parent;
+										if(!bone3.sorted) {
+											var parent7 = bone3.parent;
+											if(parent7 != null) {
+												if(!parent7.sorted) {
+													var parent8 = parent7.parent;
+													if(parent8 != null) {
+														_this.sortBone(parent8);
+													}
+													parent7.sorted = true;
+													_this.cache.push(parent7);
+												}
+											}
+											bone3.sorted = true;
+											_this.cache.push(bone3);
+										}
+										if(_this.cache.indexOf(child1) == -1) {
+											_this.cacheReset.push(child1);
+										}
+										++i3;
+									}
+								} else {
+									var i4 = 0;
+									while(i4 < boneCount1) {
+										var bone4 = constrained1[i4];
+										if(!bone4.sorted) {
+											var parent9 = bone4.parent;
+											if(parent9 != null) {
+												if(!parent9.sorted) {
+													var parent10 = parent9.parent;
+													if(parent10 != null) {
+														_this.sortBone(parent10);
+													}
+													parent9.sorted = true;
+													_this.cache.push(parent9);
+												}
+											}
+											bone4.sorted = true;
+											_this.cache.push(bone4);
+										}
+										++i4;
+									}
+								}
+								_this.cache.push(constraint1);
+								var i5 = 0;
+								while(i5 < boneCount1) {
+									var bones3 = constrained1[i5].children;
+									var i6 = 0;
+									var n2 = bones3.length;
+									while(i6 < n2) {
+										var bone5 = bones3[i6];
+										if(!bone5.active) {
+											++i6;
+											continue;
+										}
+										if(bone5.sorted) {
+											var bones4 = bone5.children;
+											var i7 = 0;
+											var n3 = bones4.length;
+											while(i7 < n3) {
+												var bone6 = bones4[i7];
+												if(!bone6.active) {
+													++i7;
+													continue;
+												}
+												if(bone6.sorted) {
+													_this.sortReset(bone6.children);
+												}
+												bone6.sorted = false;
+												++i7;
+											}
+										}
+										bone5.sorted = false;
+										++i6;
+									}
+									++i5;
+								}
+								var i8 = 0;
+								while(i8 < boneCount1) {
+									constrained1[i8].sorted = true;
+									++i8;
+								}
+							}
+							++ii1;
+							_gotoLabel_outer = 2;
+							break;
+						}
+						++ii1;
+					}
+					if(_gotoLabel_outer == 2) {
+						_gotoLabel_outer = 0;
+						++i;
+						continue;
+					}
+					if(_gotoLabel_outer >= 1) {
+						break;
+					}
+					var ii2 = 0;
+					while(ii2 < pathCount) {
+						var result2 = pathConstraints[ii2];
+						var constraint2 = result2;
+						if(constraint2.data.order == i) {
+							constraint2.active = constraint2.target.bone.active && (!constraint2.data.skinRequired || _this.skin != null && _this.skin.constraints.indexOf(constraint2.data) != -1);
+							if(constraint2.active) {
+								var slot = constraint2.target;
+								var slotIndex = slot.data.index;
+								var slotBone = slot.bone;
+								if(_this.skin != null) {
+									var _g = 0;
+									var _g1 = spine_support_utils_AttachmentMap.keys(_this.skin.attachments);
+									while(_g < _g1.length) {
+										var entry = _g1[_g];
+										++_g;
+										if(entry.slotIndex == slotIndex) {
+											var attachment = entry.attachment;
+											if(((attachment) instanceof spine_attachments_PathAttachment)) {
+												var result3 = attachment;
+												var pathBones = result3.bones;
+												if(pathBones == null) {
+													if(!slotBone.sorted) {
+														var parent11 = slotBone.parent;
+														if(parent11 != null) {
+															if(!parent11.sorted) {
+																var parent12 = parent11.parent;
+																if(parent12 != null) {
+																	_this.sortBone(parent12);
+																}
+																parent11.sorted = true;
+																_this.cache.push(parent11);
+															}
+														}
+														slotBone.sorted = true;
+														_this.cache.push(slotBone);
+													}
+												} else {
+													var bones5 = _this.bones;
+													var i9 = 0;
+													var n4 = pathBones.length;
+													while(i9 < n4) {
+														var nn = pathBones[i9++];
+														nn += i9;
+														while(i9 < nn) {
+															var bone7 = bones5[pathBones[i9++]];
+															if(!bone7.sorted) {
+																var parent13 = bone7.parent;
+																if(parent13 != null) {
+																	if(!parent13.sorted) {
+																		var parent14 = parent13.parent;
+																		if(parent14 != null) {
+																			_this.sortBone(parent14);
+																		}
+																		parent13.sorted = true;
+																		_this.cache.push(parent13);
+																	}
+																}
+																bone7.sorted = true;
+																_this.cache.push(bone7);
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+								if(_this.data.defaultSkin != null && _this.data.defaultSkin != _this.skin) {
+									var _g2 = 0;
+									var _g3 = spine_support_utils_AttachmentMap.keys(_this.data.defaultSkin.attachments);
+									while(_g2 < _g3.length) {
+										var entry1 = _g3[_g2];
+										++_g2;
+										if(entry1.slotIndex == slotIndex) {
+											var attachment1 = entry1.attachment;
+											if(((attachment1) instanceof spine_attachments_PathAttachment)) {
+												var result4 = attachment1;
+												var pathBones1 = result4.bones;
+												if(pathBones1 == null) {
+													if(!slotBone.sorted) {
+														var parent15 = slotBone.parent;
+														if(parent15 != null) {
+															if(!parent15.sorted) {
+																var parent16 = parent15.parent;
+																if(parent16 != null) {
+																	_this.sortBone(parent16);
+																}
+																parent15.sorted = true;
+																_this.cache.push(parent15);
+															}
+														}
+														slotBone.sorted = true;
+														_this.cache.push(slotBone);
+													}
+												} else {
+													var bones6 = _this.bones;
+													var i10 = 0;
+													var n5 = pathBones1.length;
+													while(i10 < n5) {
+														var nn1 = pathBones1[i10++];
+														nn1 += i10;
+														while(i10 < nn1) {
+															var bone8 = bones6[pathBones1[i10++]];
+															if(!bone8.sorted) {
+																var parent17 = bone8.parent;
+																if(parent17 != null) {
+																	if(!parent17.sorted) {
+																		var parent18 = parent17.parent;
+																		if(parent18 != null) {
+																			_this.sortBone(parent18);
+																		}
+																		parent17.sorted = true;
+																		_this.cache.push(parent17);
+																	}
+																}
+																bone8.sorted = true;
+																_this.cache.push(bone8);
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+								var attachment2 = slot.attachment;
+								if(((attachment2) instanceof spine_attachments_PathAttachment)) {
+									if(((attachment2) instanceof spine_attachments_PathAttachment)) {
+										var result5 = attachment2;
+										var pathBones2 = result5.bones;
+										if(pathBones2 == null) {
+											if(!slotBone.sorted) {
+												var parent19 = slotBone.parent;
+												if(parent19 != null) {
+													if(!parent19.sorted) {
+														var parent20 = parent19.parent;
+														if(parent20 != null) {
+															_this.sortBone(parent20);
+														}
+														parent19.sorted = true;
+														_this.cache.push(parent19);
+													}
+												}
+												slotBone.sorted = true;
+												_this.cache.push(slotBone);
+											}
+										} else {
+											var bones7 = _this.bones;
+											var i11 = 0;
+											var n6 = pathBones2.length;
+											while(i11 < n6) {
+												var nn2 = pathBones2[i11++];
+												nn2 += i11;
+												while(i11 < nn2) {
+													var bone9 = bones7[pathBones2[i11++]];
+													if(!bone9.sorted) {
+														var parent21 = bone9.parent;
+														if(parent21 != null) {
+															if(!parent21.sorted) {
+																var parent22 = parent21.parent;
+																if(parent22 != null) {
+																	_this.sortBone(parent22);
+																}
+																parent21.sorted = true;
+																_this.cache.push(parent21);
+															}
+														}
+														bone9.sorted = true;
+														_this.cache.push(bone9);
+													}
+												}
+											}
+										}
+									}
+								}
+								var constrained2 = constraint2.bones;
+								var boneCount2 = constrained2.length;
+								var i12 = 0;
+								while(i12 < boneCount2) {
+									var bone10 = constrained2[i12];
+									if(!bone10.sorted) {
+										var parent23 = bone10.parent;
+										if(parent23 != null) {
+											if(!parent23.sorted) {
+												var parent24 = parent23.parent;
+												if(parent24 != null) {
+													_this.sortBone(parent24);
+												}
+												parent23.sorted = true;
+												_this.cache.push(parent23);
+											}
+										}
+										bone10.sorted = true;
+										_this.cache.push(bone10);
+									}
+									++i12;
+								}
+								_this.cache.push(constraint2);
+								var i13 = 0;
+								while(i13 < boneCount2) {
+									var bones8 = constrained2[i13].children;
+									var i14 = 0;
+									var n7 = bones8.length;
+									while(i14 < n7) {
+										var bone11 = bones8[i14];
+										if(!bone11.active) {
+											++i14;
+											continue;
+										}
+										if(bone11.sorted) {
+											var bones9 = bone11.children;
+											var i15 = 0;
+											var n8 = bones9.length;
+											while(i15 < n8) {
+												var bone12 = bones9[i15];
+												if(!bone12.active) {
+													++i15;
+													continue;
+												}
+												if(bone12.sorted) {
+													_this.sortReset(bone12.children);
+												}
+												bone12.sorted = false;
+												++i15;
+											}
+										}
+										bone11.sorted = false;
+										++i14;
+									}
+									++i13;
+								}
+								var i16 = 0;
+								while(i16 < boneCount2) {
+									constrained2[i16].sorted = true;
+									++i16;
+								}
+							}
+							++ii2;
+							_gotoLabel_outer = 2;
+							break;
+						}
+						++ii2;
+					}
+					if(_gotoLabel_outer == 2) {
+						_gotoLabel_outer = 0;
+						++i;
+						continue;
+					}
+					if(_gotoLabel_outer >= 1) {
+						break;
+					}
+					++i;
+				}
+				if(_gotoLabel_outer == 0) {
+					break;
+				}
+			}
+			var i = 0;
+			while(i < boneCount) {
+				var result = bones[i];
+				var bone = result;
+				if(!bone.sorted) {
+					var parent = bone.parent;
+					if(parent != null) {
+						if(!parent.sorted) {
+							var parent1 = parent.parent;
+							if(parent1 != null) {
+								_this.sortBone(parent1);
+							}
+							parent.sorted = true;
+							_this.cache.push(parent);
+						}
+					}
+					bone.sorted = true;
+					_this.cache.push(bone);
+				}
+				++i;
+			}
+		}
 		var _this = this.spine.skeleton;
 		var bones = _this.bones;
 		var i = 0;
@@ -112290,8 +117636,11 @@ zygame_display_batch_BSpine.prototype = $extend(zygame_display_batch_BBox.protot
 		var n = ikConstraints.length;
 		while(i < n) {
 			var constraint = ikConstraints[i];
-			constraint.bendDirection = constraint.data.bendDirection;
 			constraint.mix = constraint.data.mix;
+			constraint.softness = constraint.data.softness;
+			constraint.bendDirection = constraint.data.bendDirection;
+			constraint.compress = constraint.data.compress;
+			constraint.stretch = constraint.data.stretch;
 			++i;
 		}
 		var transformConstraints = _this.transformConstraints;
@@ -112320,21 +117669,45 @@ zygame_display_batch_BSpine.prototype = $extend(zygame_display_batch_BBox.protot
 		}
 		var _this = this.spine.skeleton;
 		var slots = _this.slots;
-		spine_support_utils_Array.copy(slots,0,_this.drawOrder,0,slots.length);
+		var src = slots;
+		var dest = _this.drawOrder;
+		var length = slots.length;
+		if(src == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("src cannot be null."));
+		}
+		if(dest == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("dest cannot be null."));
+		}
+		try {
+			spine_support_utils_Array.copy(src,0,dest,0,length);
+		} catch( _g ) {
+			haxe_NativeStackTrace.lastError = _g;
+			throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
+		}
 		var i = 0;
 		var n = slots.length;
 		while(i < n) {
 			var _this = slots[i];
-			_this.color.set(_this.data.color);
+			var _this1 = _this.color;
+			var color = _this.data.color;
+			_this1.r = color.r;
+			_this1.g = color.g;
+			_this1.b = color.b;
+			_this1.a = color.a;
 			if(_this.darkColor != null) {
-				_this.darkColor.set(_this.data.darkColor);
+				var _this2 = _this.darkColor;
+				var color1 = _this.data.darkColor;
+				_this2.r = color1.r;
+				_this2.g = color1.g;
+				_this2.b = color1.b;
+				_this2.a = color1.a;
 			}
 			if(_this.data.attachmentName == null) {
 				var attachment = null;
 				if(_this.attachment != attachment) {
 					_this.attachment = attachment;
 					_this.attachmentTime = _this.bone.skeleton.time;
-					var this1 = _this.attachmentVertices;
+					var this1 = _this.deform;
 					this1.splice(0,this1.length);
 				}
 			} else {
@@ -112343,7 +117716,7 @@ zygame_display_batch_BSpine.prototype = $extend(zygame_display_batch_BBox.protot
 				if(_this.attachment != attachment1) {
 					_this.attachment = attachment1;
 					_this.attachmentTime = _this.bone.skeleton.time;
-					var this2 = _this.attachmentVertices;
+					var this2 = _this.deform;
 					this2.splice(0,this2.length);
 				}
 			}
@@ -112352,8 +117725,8 @@ zygame_display_batch_BSpine.prototype = $extend(zygame_display_batch_BBox.protot
 		return name;
 	}
 	,get_spineSkin: function() {
-		if(this.spine.skeleton.getSkin() != null) {
-			return this.spine.skeleton.getSkin().name;
+		if(this.spine.skeleton.skin != null) {
+			return this.spine.skeleton.skin.name;
 		} else {
 			return null;
 		}
@@ -112503,7 +117876,7 @@ zygame_display_batch_TouchImageBatchsContainer.prototype = $extend(zygame_displa
 		this.dispatchTileEvent(e);
 	}
 	,onTouchEnd: function(e) {
-		if(e.target == this || e.currentTarget == this.stage) {
+		if(((e.target) instanceof zygame_display_batch_TouchImageBatchsContainer) && e.target == this || ((e.currentTarget) instanceof openfl_display_Stage)) {
 			this.dispatchTileEvent(e);
 		}
 	}
@@ -112524,7 +117897,7 @@ zygame_display_batch_TouchImageBatchsContainer.prototype = $extend(zygame_displa
 		var tile = this.getTilePosAt(this.get_mouseX(),this.get_mouseY());
 		if(tile != null) {
 			if(((tile) instanceof zygame_display_batch_BTouchSprite)) {
-				if(e.currentTarget != this.stage) {
+				if(!((e.currentTarget) instanceof openfl_display_Stage)) {
 					var touchTile = tile;
 					switch(e.type + "Tile") {
 					case "touchBeginTile":
@@ -112538,14 +117911,14 @@ zygame_display_batch_TouchImageBatchsContainer.prototype = $extend(zygame_displa
 						break;
 					}
 				}
-				if(e.target == this) {
+				if(((e.target) instanceof zygame_display_batch_TouchImageBatchsContainer) && e.target == this) {
 					this.dispatchEvent(new zygame_events_TileTouchEvent(e.type + "Tile",tile));
 				}
-			} else if(e.target == this) {
+			} else if(((e.target) instanceof zygame_display_batch_TouchImageBatchsContainer) && e.target == this) {
 				this.dispatchEvent(new zygame_events_TileTouchEvent(e.type + "Tile",tile));
 			}
 		}
-		if(e.currentTarget == this.stage) {
+		if(((e.currentTarget) instanceof openfl_display_Stage)) {
 			var num = this.get_numChildren() - 1;
 			while(num >= 0) {
 				this.getBatchs(num).getBSprite().dispatchTouchEvent(e);
@@ -113132,6 +118505,7 @@ zygame_media_SoundChannelManager.prototype = {
 					return c;
 				}
 			} catch( _g ) {
+				haxe_NativeStackTrace.lastError = _g;
 				var e = haxe_Exception.caught(_g).unwrap();
 				haxe_Log.trace("音频播放异常：",{ fileName : "Source/zygame/media/SoundChannelManager.hx", lineNumber : 62, className : "zygame.media.SoundChannelManager", methodName : "playEffect", customParams : [e]});
 			}
@@ -113152,6 +118526,7 @@ zygame_media_SoundChannelManager.prototype = {
 				}
 			}
 		} catch( _g ) {
+			haxe_NativeStackTrace.lastError = _g;
 			var e = haxe_Exception.caught(_g).unwrap();
 			haxe_Log.trace("音频播放异常：",{ fileName : "Source/zygame/media/SoundChannelManager.hx", lineNumber : 85, className : "zygame.media.SoundChannelManager", methodName : "playMusic", customParams : [e]});
 		}
@@ -113749,11 +119124,11 @@ zygame_utils_ZAssets.prototype = {
 		var parser = this._parsers[this.currentLoadIndex];
 		this.currentLoadIndex++;
 		this.currentLoadNumber++;
-		haxe_Log.trace("载入进度：" + this.currentLoadIndex,{ fileName : "Source/zygame/utils/ZAssets.hx", lineNumber : 384, className : "zygame.utils.ZAssets", methodName : "loadNext", customParams : [parser,this._parsers.length]});
 		if(parser == null) {
 			this.loadNext();
 			return;
 		}
+		haxe_Log.trace("载入进度：" + this.currentLoadIndex,{ fileName : "Source/zygame/utils/ZAssets.hx", lineNumber : 388, className : "zygame.utils.ZAssets", methodName : "loadNext", customParams : [parser,this._parsers.length,parser.getName()]});
 		parser.out = $bind(this,this.onAssetsOut);
 		parser.done = $bind(this,this.loadDone);
 		parser.error = $bind(this,this.loadError);
@@ -117216,6 +122591,7 @@ zygame_utils_load_TextureAtlas.prototype = $extend(zygame_utils_load_Atlas.proto
 		try {
 			xmls = xml.firstElement().elements();
 		} catch( _g ) {
+			haxe_NativeStackTrace.lastError = _g;
 			return null;
 		}
 		var rect = new openfl_geom_Rectangle();
@@ -118185,15 +123561,21 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 		var scale = _this.scale;
 		var skeletonData = new spine_SkeletonData();
 		skeletonData.name = spine_support_extensions_FileExtensions.nameWithoutExtension(file);
+		if(file == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("file cannot be null."));
+		}
 		var root = new spine_support_utils_JsonReader().parse(file);
 		var skeletonMap = root.get("skeleton");
 		if(skeletonMap != null) {
 			skeletonData.hash = skeletonMap.getString("hash",null);
 			skeletonData.version = skeletonMap.getString("spine",null);
+			skeletonData.x = skeletonMap.getFloat("x",0);
+			skeletonData.y = skeletonMap.getFloat("y",0);
 			skeletonData.width = skeletonMap.getFloat("width",0);
 			skeletonData.height = skeletonMap.getFloat("height",0);
 			skeletonData.fps = skeletonMap.getFloat("fps",30);
 			skeletonData.imagesPath = skeletonMap.getString("images",null);
+			skeletonData.audioPath = skeletonMap.getString("audio",null);
 		}
 		var boneMap = root.getChild("bones");
 		while(boneMap != null) {
@@ -118235,9 +123617,15 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 				tmp = 0;
 			}
 			data.transformMode = tmp;
+			data.skinRequired = boneMap.getBoolean("skin",false);
 			var color = boneMap.getString("color",null);
 			if(color != null) {
-				data.color.set(spine_support_graphics_Color.valueOf(color));
+				var _this1 = data.color;
+				var color1 = spine_support_graphics_Color.valueOf(color);
+				_this1.r = color1.r;
+				_this1.g = color1.g;
+				_this1.b = color1.b;
+				_this1.a = color1.a;
 			}
 			skeletonData.bones.push(data);
 			boneMap = boneMap.get_next();
@@ -118253,7 +123641,12 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 			var data = new spine_SlotData(skeletonData.slots.length,slotName,boneData);
 			var color = slotMap.getString("color",null);
 			if(color != null) {
-				data.color.set(spine_support_graphics_Color.valueOf(color));
+				var _this1 = data.color;
+				var color1 = spine_support_graphics_Color.valueOf(color);
+				_this1.r = color1.r;
+				_this1.g = color1.g;
+				_this1.b = color1.b;
+				_this1.a = color1.a;
 			}
 			var dark = slotMap.getString("dark",null);
 			if(dark != null) {
@@ -118285,23 +123678,27 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 		while(constraintMap != null) {
 			var data = new spine_IkConstraintData(constraintMap.getString("name"));
 			data.order = constraintMap.getInt("order",0);
-			var boneMap = constraintMap.getChild("bones");
-			while(boneMap != null) {
-				var boneName = boneMap.asString();
-				var bone = skeletonData.findBone(boneName);
+			data.skinRequired = constraintMap.getBoolean("skin",false);
+			var entry = constraintMap.getChild("bones");
+			while(entry != null) {
+				var bone = skeletonData.findBone(entry.asString());
 				if(bone == null) {
-					throw haxe_Exception.thrown(new spine_support_utils_SerializationException("IK bone not found: " + boneName));
+					throw haxe_Exception.thrown(new spine_support_utils_SerializationException("IK bone not found: " + Std.string(entry)));
 				}
 				data.bones.push(bone);
-				boneMap = boneMap.get_next();
+				entry = entry.get_next();
 			}
 			var targetName = constraintMap.getString("target");
 			data.target = skeletonData.findBone(targetName);
 			if(data.target == null) {
 				throw haxe_Exception.thrown(new spine_support_utils_SerializationException("IK target bone not found: " + targetName));
 			}
-			data.bendDirection = constraintMap.getBoolean("bendPositive",true) ? 1 : -1;
 			data.mix = constraintMap.getFloat("mix",1);
+			data.softness = constraintMap.getFloat("softness",0) * scale;
+			data.bendDirection = constraintMap.getBoolean("bendPositive",true) ? 1 : -1;
+			data.compress = constraintMap.getBoolean("compress",false);
+			data.stretch = constraintMap.getBoolean("stretch",false);
+			data.uniform = constraintMap.getBoolean("uniform",false);
 			skeletonData.ikConstraints.push(data);
 			constraintMap = constraintMap.get_next();
 		}
@@ -118309,15 +123706,15 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 		while(constraintMap != null) {
 			var data = new spine_TransformConstraintData(constraintMap.getString("name"));
 			data.order = constraintMap.getInt("order",0);
-			var boneMap = constraintMap.getChild("bones");
-			while(boneMap != null) {
-				var boneName = boneMap.asString();
-				var bone = skeletonData.findBone(boneName);
+			data.skinRequired = constraintMap.getBoolean("skin",false);
+			var entry = constraintMap.getChild("bones");
+			while(entry != null) {
+				var bone = skeletonData.findBone(entry.asString());
 				if(bone == null) {
-					throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Transform constraint bone not found: " + boneName));
+					throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Transform constraint bone not found: " + Std.string(entry)));
 				}
 				data.bones.push(bone);
-				boneMap = boneMap.get_next();
+				entry = entry.get_next();
 			}
 			var targetName = constraintMap.getString("target");
 			data.target = skeletonData.findBone(targetName);
@@ -118343,15 +123740,15 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 		while(constraintMap != null) {
 			var data = new spine_PathConstraintData(constraintMap.getString("name"));
 			data.order = constraintMap.getInt("order",0);
-			var boneMap = constraintMap.getChild("bones");
-			while(boneMap != null) {
-				var boneName = boneMap.asString();
-				var bone = skeletonData.findBone(boneName);
+			data.skinRequired = constraintMap.getBoolean("skin",false);
+			var entry = constraintMap.getChild("bones");
+			while(entry != null) {
+				var bone = skeletonData.findBone(entry.asString());
 				if(bone == null) {
-					throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Path bone not found: " + boneName));
+					throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Path bone not found: " + Std.string(entry)));
 				}
 				data.bones.push(bone);
-				boneMap = boneMap.get_next();
+				entry = entry.get_next();
 			}
 			var targetName = constraintMap.getString("target");
 			data.target = skeletonData.findSlot(targetName);
@@ -118416,55 +123813,74 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 		}
 		var skinMap = root.getChild("skins");
 		while(skinMap != null) {
-			var skin = new spine_Skin(skinMap.get_name());
-			var slotEntry = skinMap.get_child();
+			var skin = new spine_Skin(skinMap.getString("name"));
+			var entry = skinMap.getChild("bones");
+			while(entry != null) {
+				var bone = skeletonData.findBone(entry.asString());
+				if(bone == null) {
+					throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Skin bone not found: " + Std.string(entry)));
+				}
+				skin.bones.push(bone);
+				entry = entry.get_next();
+			}
+			var entry1 = skinMap.getChild("ik");
+			while(entry1 != null) {
+				var constraint = skeletonData.findIkConstraint(entry1.asString());
+				if(constraint == null) {
+					throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Skin IK constraint not found: " + Std.string(entry1)));
+				}
+				skin.constraints.push(constraint);
+				entry1 = entry1.get_next();
+			}
+			var entry2 = skinMap.getChild("transform");
+			while(entry2 != null) {
+				var constraint1 = skeletonData.findTransformConstraint(entry2.asString());
+				if(constraint1 == null) {
+					throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Skin transform constraint not found: " + Std.string(entry2)));
+				}
+				skin.constraints.push(constraint1);
+				entry2 = entry2.get_next();
+			}
+			var entry3 = skinMap.getChild("path");
+			while(entry3 != null) {
+				var constraint2 = skeletonData.findPathConstraint(entry3.asString());
+				if(constraint2 == null) {
+					throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Skin path constraint not found: " + Std.string(entry3)));
+				}
+				skin.constraints.push(constraint2);
+				entry3 = entry3.get_next();
+			}
+			var slotEntry = skinMap.getChild("attachments");
 			while(slotEntry != null) {
 				var slot = skeletonData.findSlot(slotEntry.get_name());
 				if(slot == null) {
 					throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Slot not found: " + slotEntry.get_name()));
 				}
-				var entry = slotEntry.get_child();
-				while(entry != null) {
+				var entry4 = slotEntry.get_child();
+				while(entry4 != null) {
 					try {
-						var attachment = _this.readAttachment(entry,skin,slot.index,entry.get_name(),skeletonData);
+						var attachment = _this.readAttachment(entry4,skin,slot.index,entry4.get_name(),skeletonData);
 						if(attachment != null) {
 							var slotIndex = slot.index;
-							var name = entry.get_name();
-							if(attachment == null) {
-								throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("attachment cannot be null."));
-							}
+							var name = entry4.get_name();
 							if(slotIndex < 0) {
 								throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("slotIndex must be >= 0."));
 							}
-							var key = skin.keyPool.obtain();
-							if(name == null) {
-								throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("name cannot be null."));
+							if(attachment == null) {
+								throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("attachment cannot be null."));
 							}
-							key.slotIndex = slotIndex;
-							key.name = name;
-							var hash = 0;
-							var chr;
-							var tmp;
-							if(name.length == 0) {
-								tmp = hash;
-							} else {
-								var _g = 0;
-								var _g1 = name.length;
-								while(_g < _g1) {
-									var i = _g++;
-									chr = HxOverrides.cca(name,i);
-									hash = (hash << 5) - hash + chr;
-								}
-								tmp = hash;
+							var newEntry = new spine_SkinEntry(slotIndex,name,attachment);
+							var oldEntry = spine_support_utils_AttachmentMap.put(skin.attachments,newEntry,newEntry);
+							if(oldEntry != null) {
+								oldEntry.attachment = attachment;
 							}
-							key.hashCode = 31 * (31 + tmp) + slotIndex;
-							spine_support_utils_ObjectMap.put(skin.attachments,key,attachment);
 						}
-					} catch( _g2 ) {
-						var ex = haxe_Exception.caught(_g2).unwrap();
-						throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Error reading attachment: " + entry.get_name() + ", skin: " + Std.string(skin),ex));
+					} catch( _g ) {
+						haxe_NativeStackTrace.lastError = _g;
+						var ex = haxe_Exception.caught(_g).unwrap();
+						throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Error reading attachment: " + entry4.get_name() + ", skin: " + Std.string(skin),ex));
 					}
-					entry = entry.get_next();
+					entry4 = entry4.get_next();
 				}
 				slotEntry = slotEntry.get_next();
 			}
@@ -118478,7 +123894,7 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 		var n = _this.linkedMeshes.length;
 		while(i < n) {
 			var linkedMesh = _this.linkedMeshes[i];
-			var skin = linkedMesh.skin == null ? skeletonData.getDefaultSkin() : skeletonData.findSkin(linkedMesh.skin);
+			var skin = linkedMesh.skin == null ? skeletonData.defaultSkin : skeletonData.findSkin(linkedMesh.skin);
 			if(skin == null) {
 				throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Skin not found: " + linkedMesh.skin));
 			}
@@ -118495,9 +123911,9 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 			_this1.name = name;
 			var hash = 0;
 			var chr;
-			var tmp;
+			var x;
 			if(name.length == 0) {
-				tmp = hash;
+				x = hash;
 			} else {
 				var _g = 0;
 				var _g1 = name.length;
@@ -118506,84 +123922,63 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 					chr = HxOverrides.cca(name,i1);
 					hash = (hash << 5) - hash + chr;
 				}
-				tmp = hash;
+				x = hash;
 			}
-			_this1.hashCode = 31 * (31 + tmp) + slotIndex;
-			var parent = spine_support_utils_ObjectMap.get(skin.attachments,skin.lookup);
+			_this1.hashCode = x + slotIndex * 37 | 0;
+			var key = skin.lookup;
+			var entries = skin.attachments.h[key.hashCode];
+			var result = null;
+			if(entries != null) {
+				var _g2 = 0;
+				var _g3 = entries.length;
+				while(_g2 < _g3) {
+					var i2 = _g2++;
+					var entry = entries[i2];
+					var _this2 = entry.key;
+					var object = key;
+					var tmp;
+					if(object == null) {
+						tmp = false;
+					} else {
+						var result1 = object;
+						var other = result1;
+						tmp = _this2.slotIndex != other.slotIndex ? false : _this2.name != other.name ? false : true;
+					}
+					if(tmp) {
+						result = entry.value;
+						break;
+					}
+				}
+			}
+			var entry1 = result;
+			var parent = entry1 != null ? entry1.attachment : null;
 			if(parent == null) {
 				throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Parent mesh not found: " + linkedMesh.parent));
 			}
-			var _this2 = linkedMesh.mesh;
-			var parentMesh = js_Boot.__cast(parent , spine_attachments_MeshAttachment);
-			_this2.parentMesh = parentMesh;
-			if(parentMesh != null) {
-				_this2.bones = parentMesh.bones;
-				_this2.vertices = parentMesh.vertices;
-				_this2.regionUVs = parentMesh.regionUVs;
-				_this2.triangles = parentMesh.triangles;
-				_this2.hullLength = parentMesh.hullLength;
-				_this2.worldVerticesLength = parentMesh.worldVerticesLength;
-				_this2.edges = parentMesh.edges;
-				_this2.width = parentMesh.width;
-				_this2.height = parentMesh.height;
+			var deformAttachment;
+			if(linkedMesh.inheritDeform) {
+				var result2 = parent;
+				deformAttachment = result2;
+			} else {
+				deformAttachment = linkedMesh.mesh;
 			}
+			linkedMesh.mesh.deformAttachment = deformAttachment;
 			var _this3 = linkedMesh.mesh;
-			var u = 0;
-			var v = 0;
-			var width = 0;
-			var height = 0;
-			if(_this3.region == null) {
-				v = 0;
-				u = v;
-				height = 1;
-				width = height;
-			} else {
-				u = _this3.region.u;
-				v = _this3.region.v;
-				width = _this3.region.u2 - u;
-				height = _this3.region.v2 - v;
+			var result3 = parent;
+			var parentMesh = result3;
+			_this3.parentMesh = parentMesh;
+			if(parentMesh != null) {
+				_this3.bones = parentMesh.bones;
+				_this3.vertices = parentMesh.vertices;
+				_this3.regionUVs = parentMesh.regionUVs;
+				_this3.triangles = parentMesh.triangles;
+				_this3.hullLength = parentMesh.hullLength;
+				_this3.worldVerticesLength = parentMesh.worldVerticesLength;
+				_this3.edges = parentMesh.edges;
+				_this3.width = parentMesh.width;
+				_this3.height = parentMesh.height;
 			}
-			var regionUVs = _this3.regionUVs;
-			if(_this3.uvs == null || _this3.uvs.length != regionUVs.length) {
-				var length = regionUVs.length;
-				if(length == null) {
-					length = 0;
-				}
-				var len = length | 0;
-				var capacity = len != 0 ? len : 16;
-				var this1 = [];
-				var array = this1;
-				if(length > 0) {
-					var len1 = array.length;
-					if(len1 > len) {
-						array.splice(len,len - len1);
-					} else if(len1 < len) {
-						while(len1 < len) {
-							array.push(0);
-							++len1;
-						}
-					}
-				}
-				_this3.uvs = array;
-			}
-			var uvs = _this3.uvs;
-			if(((_this3.region) instanceof spine_support_graphics_AtlasRegion) && (js_Boot.__cast(_this3.region , spine_support_graphics_AtlasRegion)).rotate) {
-				var i2 = 0;
-				var n1 = uvs.length;
-				while(i2 < n1) {
-					uvs[i2] = u + regionUVs[i2 + 1] * width;
-					uvs[i2 + 1] = v + height - regionUVs[i2] * height;
-					i2 += 2;
-				}
-			} else {
-				var i3 = 0;
-				var n2 = uvs.length;
-				while(i3 < n2) {
-					uvs[i3] = u + regionUVs[i3] * width;
-					uvs[i3 + 1] = v + regionUVs[i3 + 1] * height;
-					i3 += 2;
-				}
-			}
+			linkedMesh.mesh.updateUVs();
 			++i;
 		}
 		var this1 = _this.linkedMeshes;
@@ -118594,6 +123989,11 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 			data.intValue = eventMap.getInt("int",0);
 			data.floatValue = eventMap.getFloat("float",0);
 			data.stringValue = eventMap.getString("string","");
+			data.audioPath = eventMap.getString("audio",null);
+			if(data.audioPath != null) {
+				data.volume = eventMap.getFloat("volume",1);
+				data.balance = eventMap.getFloat("balance",0);
+			}
 			skeletonData.events.push(data);
 			eventMap = eventMap.get_next();
 		}
@@ -118621,7 +124021,7 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 							var valueMap = timelineMap.get_child();
 							while(valueMap != null) {
 								var frameIndex1 = frameIndex++;
-								var time = valueMap.getFloat("time");
+								var time = valueMap.getFloat("time",0);
 								var attachmentName = valueMap.getString("name");
 								timeline.frames[frameIndex1] = time;
 								timeline.attachmentNames[frameIndex1] = attachmentName;
@@ -118637,7 +124037,7 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 							while(valueMap1 != null) {
 								var color = spine_support_graphics_Color.valueOf(valueMap1.getString("color"));
 								var frameIndex3 = frameIndex2;
-								var time1 = valueMap1.getFloat("time");
+								var time1 = valueMap1.getFloat("time",0);
 								frameIndex3 *= 5;
 								timeline1.frames[frameIndex3] = time1;
 								timeline1.frames[frameIndex3 + 1] = color.r;
@@ -118646,10 +124046,10 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 								timeline1.frames[frameIndex3 + 4] = color.a;
 								var curve = valueMap1.get("curve");
 								if(curve != null) {
-									if(curve.isString() && curve.asString() == "stepped") {
+									if(curve.isString()) {
 										timeline1.curves[frameIndex2 * 19] = 1;
-									} else if(curve.isArray()) {
-										timeline1.setCurve(frameIndex2,curve.getFloat(0),curve.getFloat(1),curve.getFloat(2),curve.getFloat(3));
+									} else {
+										timeline1.setCurve(frameIndex2,curve.asFloat(),valueMap1.getFloat("c2",0),valueMap1.getFloat("c3",1),valueMap1.getFloat("c4",1));
 									}
 								}
 								++frameIndex2;
@@ -118666,7 +124066,7 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 								var light = spine_support_graphics_Color.valueOf(valueMap2.getString("light"));
 								var dark = spine_support_graphics_Color.valueOf(valueMap2.getString("dark"));
 								var frameIndex5 = frameIndex4;
-								var time2 = valueMap2.getFloat("time");
+								var time2 = valueMap2.getFloat("time",0);
 								frameIndex5 *= 8;
 								timeline2.frames[frameIndex5] = time2;
 								timeline2.frames[frameIndex5 + 1] = light.r;
@@ -118678,10 +124078,10 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 								timeline2.frames[frameIndex5 + 7] = dark.b;
 								var curve1 = valueMap2.get("curve");
 								if(curve1 != null) {
-									if(curve1.isString() && curve1.asString() == "stepped") {
+									if(curve1.isString()) {
 										timeline2.curves[frameIndex4 * 19] = 1;
-									} else if(curve1.isArray()) {
-										timeline2.setCurve(frameIndex4,curve1.getFloat(0),curve1.getFloat(1),curve1.getFloat(2),curve1.getFloat(3));
+									} else {
+										timeline2.setCurve(frameIndex4,curve1.asFloat(),valueMap2.getFloat("c2",0),valueMap2.getFloat("c3",1),valueMap2.getFloat("c4",1));
 									}
 								}
 								++frameIndex4;
@@ -118712,17 +124112,17 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 							var valueMap3 = timelineMap1.get_child();
 							while(valueMap3 != null) {
 								var frameIndex7 = frameIndex6;
-								var time3 = valueMap3.getFloat("time");
-								var degrees = valueMap3.getFloat("angle");
+								var time3 = valueMap3.getFloat("time",0);
+								var degrees = valueMap3.getFloat("angle",0);
 								frameIndex7 <<= 1;
 								timeline3.frames[frameIndex7] = time3;
 								timeline3.frames[frameIndex7 + 1] = degrees;
 								var curve2 = valueMap3.get("curve");
 								if(curve2 != null) {
-									if(curve2.isString() && curve2.asString() == "stepped") {
+									if(curve2.isString()) {
 										timeline3.curves[frameIndex6 * 19] = 1;
-									} else if(curve2.isArray()) {
-										timeline3.setCurve(frameIndex6,curve2.getFloat(0),curve2.getFloat(1),curve2.getFloat(2),curve2.getFloat(3));
+									} else {
+										timeline3.setCurve(frameIndex6,curve2.asFloat(),valueMap3.getFloat("c2",0),valueMap3.getFloat("c3",1),valueMap3.getFloat("c4",1));
 									}
 								}
 								++frameIndex6;
@@ -118733,8 +124133,10 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 						} else if(timelineName1 == "translate" || timelineName1 == "scale" || timelineName1 == "shear") {
 							var timeline4 = null;
 							var timelineScale = 1;
+							var defaultValue = 0;
 							if(timelineName1 == "scale") {
 								timeline4 = new spine_ScaleTimeline(timelineMap1.get_size());
+								defaultValue = 1;
 							} else if(timelineName1 == "shear") {
 								timeline4 = new spine_ShearTimeline(timelineMap1.get_size());
 							} else {
@@ -118745,20 +124147,20 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 							var frameIndex8 = 0;
 							var valueMap4 = timelineMap1.get_child();
 							while(valueMap4 != null) {
-								var x = valueMap4.getFloat("x",0);
-								var y = valueMap4.getFloat("y",0);
+								var x = valueMap4.getFloat("x",defaultValue);
+								var y = valueMap4.getFloat("y",defaultValue);
 								var frameIndex9 = frameIndex8;
-								var time4 = valueMap4.getFloat("time");
+								var time4 = valueMap4.getFloat("time",0);
 								frameIndex9 *= 3;
 								timeline4.frames[frameIndex9] = time4;
 								timeline4.frames[frameIndex9 + 1] = x * timelineScale;
 								timeline4.frames[frameIndex9 + 2] = y * timelineScale;
 								var curve3 = valueMap4.get("curve");
 								if(curve3 != null) {
-									if(curve3.isString() && curve3.asString() == "stepped") {
+									if(curve3.isString()) {
 										timeline4.curves[frameIndex8 * 19] = 1;
-									} else if(curve3.isArray()) {
-										timeline4.setCurve(frameIndex8,curve3.getFloat(0),curve3.getFloat(1),curve3.getFloat(2),curve3.getFloat(3));
+									} else {
+										timeline4.setCurve(frameIndex8,curve3.asFloat(),valueMap4.getFloat("c2",0),valueMap4.getFloat("c3",1),valueMap4.getFloat("c4",1));
 									}
 								}
 								++frameIndex8;
@@ -118777,43 +124179,49 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 				while(constraintMap != null) {
 					var constraint = skeletonData.findIkConstraint(constraintMap.get_name());
 					var timeline5 = new spine_IkConstraintTimeline(constraintMap.get_size());
-					timeline5.ikConstraintIndex = skeletonData.ikConstraints.indexOf(constraint);
+					timeline5.ikConstraintIndex = skeletonData.getIkConstraints().indexOf(constraint);
 					var frameIndex10 = 0;
 					var valueMap5 = constraintMap.get_child();
 					while(valueMap5 != null) {
 						var frameIndex11 = frameIndex10;
-						var time5 = valueMap5.getFloat("time");
+						var time5 = valueMap5.getFloat("time",0);
 						var mix = valueMap5.getFloat("mix",1);
+						var softness = valueMap5.getFloat("softness",0) * scale;
 						var bendDirection = valueMap5.getBoolean("bendPositive",true) ? 1 : -1;
-						frameIndex11 *= 3;
+						var compress = valueMap5.getBoolean("compress",false);
+						var stretch = valueMap5.getBoolean("stretch",false);
+						frameIndex11 *= 6;
 						timeline5.frames[frameIndex11] = time5;
 						timeline5.frames[frameIndex11 + 1] = mix;
-						timeline5.frames[frameIndex11 + 2] = bendDirection;
+						timeline5.frames[frameIndex11 + 2] = softness;
+						timeline5.frames[frameIndex11 + 3] = bendDirection;
+						timeline5.frames[frameIndex11 + 4] = compress ? 1 : 0;
+						timeline5.frames[frameIndex11 + 5] = stretch ? 1 : 0;
 						var curve4 = valueMap5.get("curve");
 						if(curve4 != null) {
-							if(curve4.isString() && curve4.asString() == "stepped") {
+							if(curve4.isString()) {
 								timeline5.curves[frameIndex10 * 19] = 1;
-							} else if(curve4.isArray()) {
-								timeline5.setCurve(frameIndex10,curve4.getFloat(0),curve4.getFloat(1),curve4.getFloat(2),curve4.getFloat(3));
+							} else {
+								timeline5.setCurve(frameIndex10,curve4.asFloat(),valueMap5.getFloat("c2",0),valueMap5.getFloat("c3",1),valueMap5.getFloat("c4",1));
 							}
 						}
 						++frameIndex10;
 						valueMap5 = valueMap5.get_next();
 					}
 					timelines.push(timeline5);
-					duration = Math.max(duration,timeline5.frames[((timeline5.curves.length / 19 + 1 | 0) - 1) * 3]);
+					duration = Math.max(duration,timeline5.frames[((timeline5.curves.length / 19 + 1 | 0) - 1) * 6]);
 					constraintMap = constraintMap.get_next();
 				}
 				var constraintMap1 = animationMap.getChild("transform");
 				while(constraintMap1 != null) {
 					var constraint1 = skeletonData.findTransformConstraint(constraintMap1.get_name());
 					var timeline6 = new spine_TransformConstraintTimeline(constraintMap1.get_size());
-					timeline6.transformConstraintIndex = skeletonData.transformConstraints.indexOf(constraint1);
+					timeline6.transformConstraintIndex = skeletonData.getTransformConstraints().indexOf(constraint1);
 					var frameIndex12 = 0;
 					var valueMap6 = constraintMap1.get_child();
 					while(valueMap6 != null) {
 						var frameIndex13 = frameIndex12;
-						var time6 = valueMap6.getFloat("time");
+						var time6 = valueMap6.getFloat("time",0);
 						var rotateMix = valueMap6.getFloat("rotateMix",1);
 						var translateMix = valueMap6.getFloat("translateMix",1);
 						var scaleMix = valueMap6.getFloat("scaleMix",1);
@@ -118826,10 +124234,10 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 						timeline6.frames[frameIndex13 + 4] = shearMix;
 						var curve5 = valueMap6.get("curve");
 						if(curve5 != null) {
-							if(curve5.isString() && curve5.asString() == "stepped") {
+							if(curve5.isString()) {
 								timeline6.curves[frameIndex12 * 19] = 1;
-							} else if(curve5.isArray()) {
-								timeline6.setCurve(frameIndex12,curve5.getFloat(0),curve5.getFloat(1),curve5.getFloat(2),curve5.getFloat(3));
+							} else {
+								timeline6.setCurve(frameIndex12,curve5.asFloat(),valueMap6.getFloat("c2",0),valueMap6.getFloat("c3",1),valueMap6.getFloat("c4",1));
 							}
 						}
 						++frameIndex12;
@@ -118839,7 +124247,7 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 					duration = Math.max(duration,timeline6.frames[((timeline6.curves.length / 19 + 1 | 0) - 1) * 5]);
 					constraintMap1 = constraintMap1.get_next();
 				}
-				var constraintMap2 = animationMap.getChild("paths");
+				var constraintMap2 = animationMap.getChild("path");
 				while(constraintMap2 != null) {
 					var data = skeletonData.findPathConstraint(constraintMap2.get_name());
 					if(data == null) {
@@ -118868,17 +124276,17 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 							var valueMap7 = timelineMap2.get_child();
 							while(valueMap7 != null) {
 								var frameIndex15 = frameIndex14;
-								var time7 = valueMap7.getFloat("time");
+								var time7 = valueMap7.getFloat("time",0);
 								var position = valueMap7.getFloat(timelineName2,0) * timelineScale1;
 								frameIndex15 *= 2;
 								timeline7.frames[frameIndex15] = time7;
 								timeline7.frames[frameIndex15 + 1] = position;
 								var curve6 = valueMap7.get("curve");
 								if(curve6 != null) {
-									if(curve6.isString() && curve6.asString() == "stepped") {
+									if(curve6.isString()) {
 										timeline7.curves[frameIndex14 * 19] = 1;
-									} else if(curve6.isArray()) {
-										timeline7.setCurve(frameIndex14,curve6.getFloat(0),curve6.getFloat(1),curve6.getFloat(2),curve6.getFloat(3));
+									} else {
+										timeline7.setCurve(frameIndex14,curve6.asFloat(),valueMap7.getFloat("c2",0),valueMap7.getFloat("c3",1),valueMap7.getFloat("c4",1));
 									}
 								}
 								++frameIndex14;
@@ -118893,7 +124301,7 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 							var valueMap8 = timelineMap2.get_child();
 							while(valueMap8 != null) {
 								var frameIndex17 = frameIndex16;
-								var time8 = valueMap8.getFloat("time");
+								var time8 = valueMap8.getFloat("time",0);
 								var rotateMix1 = valueMap8.getFloat("rotateMix",1);
 								var translateMix1 = valueMap8.getFloat("translateMix",1);
 								frameIndex17 *= 3;
@@ -118902,10 +124310,10 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 								timeline8.frames[frameIndex17 + 2] = translateMix1;
 								var curve7 = valueMap8.get("curve");
 								if(curve7 != null) {
-									if(curve7.isString() && curve7.asString() == "stepped") {
+									if(curve7.isString()) {
 										timeline8.curves[frameIndex16 * 19] = 1;
-									} else if(curve7.isArray()) {
-										timeline8.setCurve(frameIndex16,curve7.getFloat(0),curve7.getFloat(1),curve7.getFloat(2),curve7.getFloat(3));
+									} else {
+										timeline8.setCurve(frameIndex16,curve7.asFloat(),valueMap8.getFloat("c2",0),valueMap8.getFloat("c3",1),valueMap8.getFloat("c4",1));
 									}
 								}
 								++frameIndex16;
@@ -118945,9 +124353,9 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 							_this1.name = name1;
 							var hash = 0;
 							var chr;
-							var attachment;
+							var x1;
 							if(name1.length == 0) {
-								attachment = hash;
+								x1 = hash;
 							} else {
 								var _g = 0;
 								var _g1 = name1.length;
@@ -118956,19 +124364,46 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 									chr = HxOverrides.cca(name1,i);
 									hash = (hash << 5) - hash + chr;
 								}
-								attachment = hash;
+								x1 = hash;
 							}
-							_this1.hashCode = 31 * (31 + attachment) + slotIndex;
-							var attachment1 = js_Boot.__cast(spine_support_utils_ObjectMap.get(skin.attachments,skin.lookup) , spine_attachments_VertexAttachment);
-							if(attachment1 == null) {
+							_this1.hashCode = x1 + slotIndex * 37 | 0;
+							var key = skin.lookup;
+							var entries = skin.attachments.h[key.hashCode];
+							var result = null;
+							if(entries != null) {
+								var _g2 = 0;
+								var _g3 = entries.length;
+								while(_g2 < _g3) {
+									var i1 = _g2++;
+									var entry = entries[i1];
+									var _this2 = entry.key;
+									var object = key;
+									var value;
+									if(object == null) {
+										value = false;
+									} else {
+										var result1 = object;
+										var other = result1;
+										value = _this2.slotIndex != other.slotIndex ? false : _this2.name != other.name ? false : true;
+									}
+									if(value) {
+										result = entry.value;
+										break;
+									}
+								}
+							}
+							var entry1 = result;
+							var result2 = entry1 != null ? entry1.attachment : null;
+							var attachment = result2;
+							if(attachment == null) {
 								throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Deform attachment not found: " + timelineMap3.get_name()));
 							}
-							var weighted = attachment1.bones != null;
-							var vertices = attachment1.vertices;
+							var weighted = attachment.bones != null;
+							var vertices = attachment.vertices;
 							var deformLength = weighted ? vertices.length / 3 * 2 | 0 : vertices.length;
 							var timeline9 = new spine_DeformTimeline(timelineMap3.get_size());
 							timeline9.slotIndex = slot1.index;
-							timeline9.attachment = attachment1;
+							timeline9.attachment = attachment;
 							var frameIndex18 = 0;
 							var valueMap9 = timelineMap3.get_child();
 							while(valueMap9 != null) {
@@ -119021,32 +124456,46 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 									}
 									deform = array1;
 									var start = valueMap9.getInt("offset",0);
-									spine_support_utils_Array.copy(verticesValue.asFloatArray(),0,deform,start,verticesValue.get_size());
-									if(scale != 1) {
-										var i1 = start;
-										var n = i1 + verticesValue.get_size();
-										while(i1 < n) {
-											deform[i1] *= scale;
-											++i1;
-										}
+									var src = verticesValue.asFloatArray();
+									var dest = deform;
+									var length2 = verticesValue.get_size();
+									if(src == null) {
+										throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("src cannot be null."));
 									}
-									if(!weighted) {
-										var i2 = 0;
-										while(i2 < deformLength) {
-											deform[i2] += vertices[i2];
+									if(dest == null) {
+										throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("dest cannot be null."));
+									}
+									try {
+										spine_support_utils_Array.copy(src,0,dest,start,length2);
+									} catch( _g4 ) {
+										haxe_NativeStackTrace.lastError = _g4;
+										throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + start + ", count: " + length2));
+									}
+									if(scale != 1) {
+										var i2 = start;
+										var n = i2 + verticesValue.get_size();
+										while(i2 < n) {
+											deform[i2] *= scale;
 											++i2;
 										}
 									}
+									if(!weighted) {
+										var i3 = 0;
+										while(i3 < deformLength) {
+											deform[i3] += vertices[i3];
+											++i3;
+										}
+									}
 								}
-								var time9 = valueMap9.getFloat("time");
+								var time9 = valueMap9.getFloat("time",0);
 								timeline9.frames[frameIndex18] = time9;
 								timeline9.frameVertices[frameIndex18] = deform;
 								var curve8 = valueMap9.get("curve");
 								if(curve8 != null) {
-									if(curve8.isString() && curve8.asString() == "stepped") {
+									if(curve8.isString()) {
 										timeline9.curves[frameIndex18 * 19] = 1;
-									} else if(curve8.isArray()) {
-										timeline9.setCurve(frameIndex18,curve8.getFloat(0),curve8.getFloat(1),curve8.getFloat(2),curve8.getFloat(3));
+									} else {
+										timeline9.setCurve(frameIndex18,curve8.asFloat(),valueMap9.getFloat("c2",0),valueMap9.getFloat("c3",1),valueMap9.getFloat("c4",1));
 									}
 								}
 								++frameIndex18;
@@ -119073,15 +124522,15 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 						var drawOrder = null;
 						var offsets = drawOrderMap.get("offsets");
 						if(offsets != null) {
-							var length2 = slotCount;
-							if(length2 == null) {
-								length2 = 0;
+							var length3 = slotCount;
+							if(length3 == null) {
+								length3 = 0;
 							}
-							var len4 = length2 | 0;
+							var len4 = length3 | 0;
 							var capacity2 = len4 != 0 ? len4 : 16;
 							var this4 = [];
 							var array2 = this4;
-							if(length2 != 0) {
+							if(length3 != 0) {
 								var len5 = array2.length;
 								if(len5 > len4) {
 									array2.splice(len4,len4 - len5);
@@ -119093,20 +124542,20 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 								}
 							}
 							drawOrder = array2;
-							var i3 = slotCount - 1;
-							while(i3 >= 0) {
-								drawOrder[i3] = -1;
-								--i3;
+							var i4 = slotCount - 1;
+							while(i4 >= 0) {
+								drawOrder[i4] = -1;
+								--i4;
 							}
-							var length3 = slotCount - offsets.get_size();
-							if(length3 == null) {
-								length3 = 0;
+							var length4 = slotCount - offsets.get_size();
+							if(length4 == null) {
+								length4 = 0;
 							}
-							var len6 = length3 | 0;
+							var len6 = length4 | 0;
 							var capacity3 = len6 != 0 ? len6 : 16;
 							var this5 = [];
 							var array3 = this5;
-							if(length3 != 0) {
+							if(length4 != 0) {
 								var len7 = array3.length;
 								if(len7 > len6) {
 									array3.splice(len6,len6 - len7);
@@ -119131,16 +124580,16 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 								offsetMap = offsetMap.get_next();
 							}
 							while(originalIndex < slotCount) unchanged[unchangedIndex++] = originalIndex++;
-							var i4 = slotCount - 1;
-							while(i4 >= 0) {
-								if(drawOrder[i4] == -1) {
-									drawOrder[i4] = unchanged[--unchangedIndex];
+							var i5 = slotCount - 1;
+							while(i5 >= 0) {
+								if(drawOrder[i5] == -1) {
+									drawOrder[i5] = unchanged[--unchangedIndex];
 								}
-								--i4;
+								--i5;
 							}
 						}
 						var frameIndex20 = frameIndex19++;
-						var time10 = drawOrderMap.getFloat("time");
+						var time10 = drawOrderMap.getFloat("time",0);
 						timeline10.frames[frameIndex20] = time10;
 						timeline10.drawOrders[frameIndex20] = drawOrder;
 						drawOrderMap = drawOrderMap.get_next();
@@ -119158,10 +124607,14 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 						if(eventData == null) {
 							throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Event not found: " + eventMap.getString("name")));
 						}
-						var event = new spine_Event(eventMap.getFloat("time"),eventData);
+						var event = new spine_Event(eventMap.getFloat("time",0),eventData);
 						event.intValue = eventMap.getInt("int",eventData.intValue);
 						event.floatValue = eventMap.getFloat("float",eventData.floatValue);
 						event.stringValue = eventMap.getString("string",eventData.stringValue);
+						if(event.data.audioPath != null) {
+							event.volume = eventMap.getFloat("volume",eventData.volume);
+							event.balance = eventMap.getFloat("balance",eventData.balance);
+						}
 						var frameIndex22 = frameIndex21++;
 						timeline11.frames[frameIndex22] = event.time;
 						timeline11.events[frameIndex22] = event;
@@ -119171,8 +124624,9 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 					duration = Math.max(duration,timeline11.frames[timeline11.frames.length - 1]);
 				}
 				skeletonData.animations.push(new spine_Animation(name,timelines,duration));
-			} catch( _g2 ) {
-				var ex = haxe_Exception.caught(_g2).unwrap();
+			} catch( _g5 ) {
+				haxe_NativeStackTrace.lastError = _g5;
+				var ex = haxe_Exception.caught(_g5).unwrap();
 				throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Error reading animation: " + animationMap.get_name(),ex));
 			}
 			animationMap = animationMap.get_next();
@@ -119193,15 +124647,21 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 		var scale = _this.scale;
 		var skeletonData = new spine_SkeletonData();
 		skeletonData.name = spine_support_extensions_FileExtensions.nameWithoutExtension(file);
+		if(file == null) {
+			throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("file cannot be null."));
+		}
 		var root = new spine_support_utils_JsonReader().parse(file);
 		var skeletonMap = root.get("skeleton");
 		if(skeletonMap != null) {
 			skeletonData.hash = skeletonMap.getString("hash",null);
 			skeletonData.version = skeletonMap.getString("spine",null);
+			skeletonData.x = skeletonMap.getFloat("x",0);
+			skeletonData.y = skeletonMap.getFloat("y",0);
 			skeletonData.width = skeletonMap.getFloat("width",0);
 			skeletonData.height = skeletonMap.getFloat("height",0);
 			skeletonData.fps = skeletonMap.getFloat("fps",30);
 			skeletonData.imagesPath = skeletonMap.getString("images",null);
+			skeletonData.audioPath = skeletonMap.getString("audio",null);
 		}
 		var boneMap = root.getChild("bones");
 		while(boneMap != null) {
@@ -119243,9 +124703,15 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 				tmp = 0;
 			}
 			data.transformMode = tmp;
+			data.skinRequired = boneMap.getBoolean("skin",false);
 			var color = boneMap.getString("color",null);
 			if(color != null) {
-				data.color.set(spine_support_graphics_Color.valueOf(color));
+				var _this1 = data.color;
+				var color1 = spine_support_graphics_Color.valueOf(color);
+				_this1.r = color1.r;
+				_this1.g = color1.g;
+				_this1.b = color1.b;
+				_this1.a = color1.a;
 			}
 			skeletonData.bones.push(data);
 			boneMap = boneMap.get_next();
@@ -119261,7 +124727,12 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 			var data = new spine_SlotData(skeletonData.slots.length,slotName,boneData);
 			var color = slotMap.getString("color",null);
 			if(color != null) {
-				data.color.set(spine_support_graphics_Color.valueOf(color));
+				var _this1 = data.color;
+				var color1 = spine_support_graphics_Color.valueOf(color);
+				_this1.r = color1.r;
+				_this1.g = color1.g;
+				_this1.b = color1.b;
+				_this1.a = color1.a;
 			}
 			var dark = slotMap.getString("dark",null);
 			if(dark != null) {
@@ -119293,23 +124764,27 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 		while(constraintMap != null) {
 			var data = new spine_IkConstraintData(constraintMap.getString("name"));
 			data.order = constraintMap.getInt("order",0);
-			var boneMap = constraintMap.getChild("bones");
-			while(boneMap != null) {
-				var boneName = boneMap.asString();
-				var bone = skeletonData.findBone(boneName);
+			data.skinRequired = constraintMap.getBoolean("skin",false);
+			var entry = constraintMap.getChild("bones");
+			while(entry != null) {
+				var bone = skeletonData.findBone(entry.asString());
 				if(bone == null) {
-					throw haxe_Exception.thrown(new spine_support_utils_SerializationException("IK bone not found: " + boneName));
+					throw haxe_Exception.thrown(new spine_support_utils_SerializationException("IK bone not found: " + Std.string(entry)));
 				}
 				data.bones.push(bone);
-				boneMap = boneMap.get_next();
+				entry = entry.get_next();
 			}
 			var targetName = constraintMap.getString("target");
 			data.target = skeletonData.findBone(targetName);
 			if(data.target == null) {
 				throw haxe_Exception.thrown(new spine_support_utils_SerializationException("IK target bone not found: " + targetName));
 			}
-			data.bendDirection = constraintMap.getBoolean("bendPositive",true) ? 1 : -1;
 			data.mix = constraintMap.getFloat("mix",1);
+			data.softness = constraintMap.getFloat("softness",0) * scale;
+			data.bendDirection = constraintMap.getBoolean("bendPositive",true) ? 1 : -1;
+			data.compress = constraintMap.getBoolean("compress",false);
+			data.stretch = constraintMap.getBoolean("stretch",false);
+			data.uniform = constraintMap.getBoolean("uniform",false);
 			skeletonData.ikConstraints.push(data);
 			constraintMap = constraintMap.get_next();
 		}
@@ -119317,15 +124792,15 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 		while(constraintMap != null) {
 			var data = new spine_TransformConstraintData(constraintMap.getString("name"));
 			data.order = constraintMap.getInt("order",0);
-			var boneMap = constraintMap.getChild("bones");
-			while(boneMap != null) {
-				var boneName = boneMap.asString();
-				var bone = skeletonData.findBone(boneName);
+			data.skinRequired = constraintMap.getBoolean("skin",false);
+			var entry = constraintMap.getChild("bones");
+			while(entry != null) {
+				var bone = skeletonData.findBone(entry.asString());
 				if(bone == null) {
-					throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Transform constraint bone not found: " + boneName));
+					throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Transform constraint bone not found: " + Std.string(entry)));
 				}
 				data.bones.push(bone);
-				boneMap = boneMap.get_next();
+				entry = entry.get_next();
 			}
 			var targetName = constraintMap.getString("target");
 			data.target = skeletonData.findBone(targetName);
@@ -119351,15 +124826,15 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 		while(constraintMap != null) {
 			var data = new spine_PathConstraintData(constraintMap.getString("name"));
 			data.order = constraintMap.getInt("order",0);
-			var boneMap = constraintMap.getChild("bones");
-			while(boneMap != null) {
-				var boneName = boneMap.asString();
-				var bone = skeletonData.findBone(boneName);
+			data.skinRequired = constraintMap.getBoolean("skin",false);
+			var entry = constraintMap.getChild("bones");
+			while(entry != null) {
+				var bone = skeletonData.findBone(entry.asString());
 				if(bone == null) {
-					throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Path bone not found: " + boneName));
+					throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Path bone not found: " + Std.string(entry)));
 				}
 				data.bones.push(bone);
-				boneMap = boneMap.get_next();
+				entry = entry.get_next();
 			}
 			var targetName = constraintMap.getString("target");
 			data.target = skeletonData.findSlot(targetName);
@@ -119424,55 +124899,74 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 		}
 		var skinMap = root.getChild("skins");
 		while(skinMap != null) {
-			var skin = new spine_Skin(skinMap.get_name());
-			var slotEntry = skinMap.get_child();
+			var skin = new spine_Skin(skinMap.getString("name"));
+			var entry = skinMap.getChild("bones");
+			while(entry != null) {
+				var bone = skeletonData.findBone(entry.asString());
+				if(bone == null) {
+					throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Skin bone not found: " + Std.string(entry)));
+				}
+				skin.bones.push(bone);
+				entry = entry.get_next();
+			}
+			var entry1 = skinMap.getChild("ik");
+			while(entry1 != null) {
+				var constraint = skeletonData.findIkConstraint(entry1.asString());
+				if(constraint == null) {
+					throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Skin IK constraint not found: " + Std.string(entry1)));
+				}
+				skin.constraints.push(constraint);
+				entry1 = entry1.get_next();
+			}
+			var entry2 = skinMap.getChild("transform");
+			while(entry2 != null) {
+				var constraint1 = skeletonData.findTransformConstraint(entry2.asString());
+				if(constraint1 == null) {
+					throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Skin transform constraint not found: " + Std.string(entry2)));
+				}
+				skin.constraints.push(constraint1);
+				entry2 = entry2.get_next();
+			}
+			var entry3 = skinMap.getChild("path");
+			while(entry3 != null) {
+				var constraint2 = skeletonData.findPathConstraint(entry3.asString());
+				if(constraint2 == null) {
+					throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Skin path constraint not found: " + Std.string(entry3)));
+				}
+				skin.constraints.push(constraint2);
+				entry3 = entry3.get_next();
+			}
+			var slotEntry = skinMap.getChild("attachments");
 			while(slotEntry != null) {
 				var slot = skeletonData.findSlot(slotEntry.get_name());
 				if(slot == null) {
 					throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Slot not found: " + slotEntry.get_name()));
 				}
-				var entry = slotEntry.get_child();
-				while(entry != null) {
+				var entry4 = slotEntry.get_child();
+				while(entry4 != null) {
 					try {
-						var attachment = _this.readAttachment(entry,skin,slot.index,entry.get_name(),skeletonData);
+						var attachment = _this.readAttachment(entry4,skin,slot.index,entry4.get_name(),skeletonData);
 						if(attachment != null) {
 							var slotIndex = slot.index;
-							var name = entry.get_name();
-							if(attachment == null) {
-								throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("attachment cannot be null."));
-							}
+							var name = entry4.get_name();
 							if(slotIndex < 0) {
 								throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("slotIndex must be >= 0."));
 							}
-							var key = skin.keyPool.obtain();
-							if(name == null) {
-								throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("name cannot be null."));
+							if(attachment == null) {
+								throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("attachment cannot be null."));
 							}
-							key.slotIndex = slotIndex;
-							key.name = name;
-							var hash = 0;
-							var chr;
-							var tmp;
-							if(name.length == 0) {
-								tmp = hash;
-							} else {
-								var _g = 0;
-								var _g1 = name.length;
-								while(_g < _g1) {
-									var i = _g++;
-									chr = HxOverrides.cca(name,i);
-									hash = (hash << 5) - hash + chr;
-								}
-								tmp = hash;
+							var newEntry = new spine_SkinEntry(slotIndex,name,attachment);
+							var oldEntry = spine_support_utils_AttachmentMap.put(skin.attachments,newEntry,newEntry);
+							if(oldEntry != null) {
+								oldEntry.attachment = attachment;
 							}
-							key.hashCode = 31 * (31 + tmp) + slotIndex;
-							spine_support_utils_ObjectMap.put(skin.attachments,key,attachment);
 						}
-					} catch( _g2 ) {
-						var ex = haxe_Exception.caught(_g2).unwrap();
-						throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Error reading attachment: " + entry.get_name() + ", skin: " + Std.string(skin),ex));
+					} catch( _g ) {
+						haxe_NativeStackTrace.lastError = _g;
+						var ex = haxe_Exception.caught(_g).unwrap();
+						throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Error reading attachment: " + entry4.get_name() + ", skin: " + Std.string(skin),ex));
 					}
-					entry = entry.get_next();
+					entry4 = entry4.get_next();
 				}
 				slotEntry = slotEntry.get_next();
 			}
@@ -119486,7 +124980,7 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 		var n = _this.linkedMeshes.length;
 		while(i < n) {
 			var linkedMesh = _this.linkedMeshes[i];
-			var skin = linkedMesh.skin == null ? skeletonData.getDefaultSkin() : skeletonData.findSkin(linkedMesh.skin);
+			var skin = linkedMesh.skin == null ? skeletonData.defaultSkin : skeletonData.findSkin(linkedMesh.skin);
 			if(skin == null) {
 				throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Skin not found: " + linkedMesh.skin));
 			}
@@ -119503,9 +124997,9 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 			_this1.name = name;
 			var hash = 0;
 			var chr;
-			var tmp;
+			var x;
 			if(name.length == 0) {
-				tmp = hash;
+				x = hash;
 			} else {
 				var _g = 0;
 				var _g1 = name.length;
@@ -119514,84 +125008,63 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 					chr = HxOverrides.cca(name,i1);
 					hash = (hash << 5) - hash + chr;
 				}
-				tmp = hash;
+				x = hash;
 			}
-			_this1.hashCode = 31 * (31 + tmp) + slotIndex;
-			var parent = spine_support_utils_ObjectMap.get(skin.attachments,skin.lookup);
+			_this1.hashCode = x + slotIndex * 37 | 0;
+			var key = skin.lookup;
+			var entries = skin.attachments.h[key.hashCode];
+			var result = null;
+			if(entries != null) {
+				var _g2 = 0;
+				var _g3 = entries.length;
+				while(_g2 < _g3) {
+					var i2 = _g2++;
+					var entry = entries[i2];
+					var _this2 = entry.key;
+					var object = key;
+					var tmp;
+					if(object == null) {
+						tmp = false;
+					} else {
+						var result1 = object;
+						var other = result1;
+						tmp = _this2.slotIndex != other.slotIndex ? false : _this2.name != other.name ? false : true;
+					}
+					if(tmp) {
+						result = entry.value;
+						break;
+					}
+				}
+			}
+			var entry1 = result;
+			var parent = entry1 != null ? entry1.attachment : null;
 			if(parent == null) {
 				throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Parent mesh not found: " + linkedMesh.parent));
 			}
-			var _this2 = linkedMesh.mesh;
-			var parentMesh = js_Boot.__cast(parent , spine_attachments_MeshAttachment);
-			_this2.parentMesh = parentMesh;
-			if(parentMesh != null) {
-				_this2.bones = parentMesh.bones;
-				_this2.vertices = parentMesh.vertices;
-				_this2.regionUVs = parentMesh.regionUVs;
-				_this2.triangles = parentMesh.triangles;
-				_this2.hullLength = parentMesh.hullLength;
-				_this2.worldVerticesLength = parentMesh.worldVerticesLength;
-				_this2.edges = parentMesh.edges;
-				_this2.width = parentMesh.width;
-				_this2.height = parentMesh.height;
+			var deformAttachment;
+			if(linkedMesh.inheritDeform) {
+				var result2 = parent;
+				deformAttachment = result2;
+			} else {
+				deformAttachment = linkedMesh.mesh;
 			}
+			linkedMesh.mesh.deformAttachment = deformAttachment;
 			var _this3 = linkedMesh.mesh;
-			var u = 0;
-			var v = 0;
-			var width = 0;
-			var height = 0;
-			if(_this3.region == null) {
-				v = 0;
-				u = v;
-				height = 1;
-				width = height;
-			} else {
-				u = _this3.region.u;
-				v = _this3.region.v;
-				width = _this3.region.u2 - u;
-				height = _this3.region.v2 - v;
+			var result3 = parent;
+			var parentMesh = result3;
+			_this3.parentMesh = parentMesh;
+			if(parentMesh != null) {
+				_this3.bones = parentMesh.bones;
+				_this3.vertices = parentMesh.vertices;
+				_this3.regionUVs = parentMesh.regionUVs;
+				_this3.triangles = parentMesh.triangles;
+				_this3.hullLength = parentMesh.hullLength;
+				_this3.worldVerticesLength = parentMesh.worldVerticesLength;
+				_this3.edges = parentMesh.edges;
+				_this3.width = parentMesh.width;
+				_this3.height = parentMesh.height;
 			}
-			var regionUVs = _this3.regionUVs;
-			if(_this3.uvs == null || _this3.uvs.length != regionUVs.length) {
-				var length = regionUVs.length;
-				if(length == null) {
-					length = 0;
-				}
-				var len = length | 0;
-				var capacity = len != 0 ? len : 16;
-				var this1 = [];
-				var array = this1;
-				if(length > 0) {
-					var len1 = array.length;
-					if(len1 > len) {
-						array.splice(len,len - len1);
-					} else if(len1 < len) {
-						while(len1 < len) {
-							array.push(0);
-							++len1;
-						}
-					}
-				}
-				_this3.uvs = array;
-			}
-			var uvs = _this3.uvs;
-			if(((_this3.region) instanceof spine_support_graphics_AtlasRegion) && (js_Boot.__cast(_this3.region , spine_support_graphics_AtlasRegion)).rotate) {
-				var i2 = 0;
-				var n1 = uvs.length;
-				while(i2 < n1) {
-					uvs[i2] = u + regionUVs[i2 + 1] * width;
-					uvs[i2 + 1] = v + height - regionUVs[i2] * height;
-					i2 += 2;
-				}
-			} else {
-				var i3 = 0;
-				var n2 = uvs.length;
-				while(i3 < n2) {
-					uvs[i3] = u + regionUVs[i3] * width;
-					uvs[i3 + 1] = v + regionUVs[i3 + 1] * height;
-					i3 += 2;
-				}
-			}
+			linkedMesh.mesh.updateUVs();
 			++i;
 		}
 		var this1 = _this.linkedMeshes;
@@ -119602,6 +125075,11 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 			data.intValue = eventMap.getInt("int",0);
 			data.floatValue = eventMap.getFloat("float",0);
 			data.stringValue = eventMap.getString("string","");
+			data.audioPath = eventMap.getString("audio",null);
+			if(data.audioPath != null) {
+				data.volume = eventMap.getFloat("volume",1);
+				data.balance = eventMap.getFloat("balance",0);
+			}
 			skeletonData.events.push(data);
 			eventMap = eventMap.get_next();
 		}
@@ -119629,7 +125107,7 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 							var valueMap = timelineMap.get_child();
 							while(valueMap != null) {
 								var frameIndex1 = frameIndex++;
-								var time = valueMap.getFloat("time");
+								var time = valueMap.getFloat("time",0);
 								var attachmentName = valueMap.getString("name");
 								timeline.frames[frameIndex1] = time;
 								timeline.attachmentNames[frameIndex1] = attachmentName;
@@ -119645,7 +125123,7 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 							while(valueMap1 != null) {
 								var color = spine_support_graphics_Color.valueOf(valueMap1.getString("color"));
 								var frameIndex3 = frameIndex2;
-								var time1 = valueMap1.getFloat("time");
+								var time1 = valueMap1.getFloat("time",0);
 								frameIndex3 *= 5;
 								timeline1.frames[frameIndex3] = time1;
 								timeline1.frames[frameIndex3 + 1] = color.r;
@@ -119654,10 +125132,10 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 								timeline1.frames[frameIndex3 + 4] = color.a;
 								var curve = valueMap1.get("curve");
 								if(curve != null) {
-									if(curve.isString() && curve.asString() == "stepped") {
+									if(curve.isString()) {
 										timeline1.curves[frameIndex2 * 19] = 1;
-									} else if(curve.isArray()) {
-										timeline1.setCurve(frameIndex2,curve.getFloat(0),curve.getFloat(1),curve.getFloat(2),curve.getFloat(3));
+									} else {
+										timeline1.setCurve(frameIndex2,curve.asFloat(),valueMap1.getFloat("c2",0),valueMap1.getFloat("c3",1),valueMap1.getFloat("c4",1));
 									}
 								}
 								++frameIndex2;
@@ -119674,7 +125152,7 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 								var light = spine_support_graphics_Color.valueOf(valueMap2.getString("light"));
 								var dark = spine_support_graphics_Color.valueOf(valueMap2.getString("dark"));
 								var frameIndex5 = frameIndex4;
-								var time2 = valueMap2.getFloat("time");
+								var time2 = valueMap2.getFloat("time",0);
 								frameIndex5 *= 8;
 								timeline2.frames[frameIndex5] = time2;
 								timeline2.frames[frameIndex5 + 1] = light.r;
@@ -119686,10 +125164,10 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 								timeline2.frames[frameIndex5 + 7] = dark.b;
 								var curve1 = valueMap2.get("curve");
 								if(curve1 != null) {
-									if(curve1.isString() && curve1.asString() == "stepped") {
+									if(curve1.isString()) {
 										timeline2.curves[frameIndex4 * 19] = 1;
-									} else if(curve1.isArray()) {
-										timeline2.setCurve(frameIndex4,curve1.getFloat(0),curve1.getFloat(1),curve1.getFloat(2),curve1.getFloat(3));
+									} else {
+										timeline2.setCurve(frameIndex4,curve1.asFloat(),valueMap2.getFloat("c2",0),valueMap2.getFloat("c3",1),valueMap2.getFloat("c4",1));
 									}
 								}
 								++frameIndex4;
@@ -119720,17 +125198,17 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 							var valueMap3 = timelineMap1.get_child();
 							while(valueMap3 != null) {
 								var frameIndex7 = frameIndex6;
-								var time3 = valueMap3.getFloat("time");
-								var degrees = valueMap3.getFloat("angle");
+								var time3 = valueMap3.getFloat("time",0);
+								var degrees = valueMap3.getFloat("angle",0);
 								frameIndex7 <<= 1;
 								timeline3.frames[frameIndex7] = time3;
 								timeline3.frames[frameIndex7 + 1] = degrees;
 								var curve2 = valueMap3.get("curve");
 								if(curve2 != null) {
-									if(curve2.isString() && curve2.asString() == "stepped") {
+									if(curve2.isString()) {
 										timeline3.curves[frameIndex6 * 19] = 1;
-									} else if(curve2.isArray()) {
-										timeline3.setCurve(frameIndex6,curve2.getFloat(0),curve2.getFloat(1),curve2.getFloat(2),curve2.getFloat(3));
+									} else {
+										timeline3.setCurve(frameIndex6,curve2.asFloat(),valueMap3.getFloat("c2",0),valueMap3.getFloat("c3",1),valueMap3.getFloat("c4",1));
 									}
 								}
 								++frameIndex6;
@@ -119741,8 +125219,10 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 						} else if(timelineName1 == "translate" || timelineName1 == "scale" || timelineName1 == "shear") {
 							var timeline4 = null;
 							var timelineScale = 1;
+							var defaultValue = 0;
 							if(timelineName1 == "scale") {
 								timeline4 = new spine_ScaleTimeline(timelineMap1.get_size());
+								defaultValue = 1;
 							} else if(timelineName1 == "shear") {
 								timeline4 = new spine_ShearTimeline(timelineMap1.get_size());
 							} else {
@@ -119753,20 +125233,20 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 							var frameIndex8 = 0;
 							var valueMap4 = timelineMap1.get_child();
 							while(valueMap4 != null) {
-								var x = valueMap4.getFloat("x",0);
-								var y = valueMap4.getFloat("y",0);
+								var x = valueMap4.getFloat("x",defaultValue);
+								var y = valueMap4.getFloat("y",defaultValue);
 								var frameIndex9 = frameIndex8;
-								var time4 = valueMap4.getFloat("time");
+								var time4 = valueMap4.getFloat("time",0);
 								frameIndex9 *= 3;
 								timeline4.frames[frameIndex9] = time4;
 								timeline4.frames[frameIndex9 + 1] = x * timelineScale;
 								timeline4.frames[frameIndex9 + 2] = y * timelineScale;
 								var curve3 = valueMap4.get("curve");
 								if(curve3 != null) {
-									if(curve3.isString() && curve3.asString() == "stepped") {
+									if(curve3.isString()) {
 										timeline4.curves[frameIndex8 * 19] = 1;
-									} else if(curve3.isArray()) {
-										timeline4.setCurve(frameIndex8,curve3.getFloat(0),curve3.getFloat(1),curve3.getFloat(2),curve3.getFloat(3));
+									} else {
+										timeline4.setCurve(frameIndex8,curve3.asFloat(),valueMap4.getFloat("c2",0),valueMap4.getFloat("c3",1),valueMap4.getFloat("c4",1));
 									}
 								}
 								++frameIndex8;
@@ -119785,43 +125265,49 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 				while(constraintMap != null) {
 					var constraint = skeletonData.findIkConstraint(constraintMap.get_name());
 					var timeline5 = new spine_IkConstraintTimeline(constraintMap.get_size());
-					timeline5.ikConstraintIndex = skeletonData.ikConstraints.indexOf(constraint);
+					timeline5.ikConstraintIndex = skeletonData.getIkConstraints().indexOf(constraint);
 					var frameIndex10 = 0;
 					var valueMap5 = constraintMap.get_child();
 					while(valueMap5 != null) {
 						var frameIndex11 = frameIndex10;
-						var time5 = valueMap5.getFloat("time");
+						var time5 = valueMap5.getFloat("time",0);
 						var mix = valueMap5.getFloat("mix",1);
+						var softness = valueMap5.getFloat("softness",0) * scale;
 						var bendDirection = valueMap5.getBoolean("bendPositive",true) ? 1 : -1;
-						frameIndex11 *= 3;
+						var compress = valueMap5.getBoolean("compress",false);
+						var stretch = valueMap5.getBoolean("stretch",false);
+						frameIndex11 *= 6;
 						timeline5.frames[frameIndex11] = time5;
 						timeline5.frames[frameIndex11 + 1] = mix;
-						timeline5.frames[frameIndex11 + 2] = bendDirection;
+						timeline5.frames[frameIndex11 + 2] = softness;
+						timeline5.frames[frameIndex11 + 3] = bendDirection;
+						timeline5.frames[frameIndex11 + 4] = compress ? 1 : 0;
+						timeline5.frames[frameIndex11 + 5] = stretch ? 1 : 0;
 						var curve4 = valueMap5.get("curve");
 						if(curve4 != null) {
-							if(curve4.isString() && curve4.asString() == "stepped") {
+							if(curve4.isString()) {
 								timeline5.curves[frameIndex10 * 19] = 1;
-							} else if(curve4.isArray()) {
-								timeline5.setCurve(frameIndex10,curve4.getFloat(0),curve4.getFloat(1),curve4.getFloat(2),curve4.getFloat(3));
+							} else {
+								timeline5.setCurve(frameIndex10,curve4.asFloat(),valueMap5.getFloat("c2",0),valueMap5.getFloat("c3",1),valueMap5.getFloat("c4",1));
 							}
 						}
 						++frameIndex10;
 						valueMap5 = valueMap5.get_next();
 					}
 					timelines.push(timeline5);
-					duration = Math.max(duration,timeline5.frames[((timeline5.curves.length / 19 + 1 | 0) - 1) * 3]);
+					duration = Math.max(duration,timeline5.frames[((timeline5.curves.length / 19 + 1 | 0) - 1) * 6]);
 					constraintMap = constraintMap.get_next();
 				}
 				var constraintMap1 = animationMap.getChild("transform");
 				while(constraintMap1 != null) {
 					var constraint1 = skeletonData.findTransformConstraint(constraintMap1.get_name());
 					var timeline6 = new spine_TransformConstraintTimeline(constraintMap1.get_size());
-					timeline6.transformConstraintIndex = skeletonData.transformConstraints.indexOf(constraint1);
+					timeline6.transformConstraintIndex = skeletonData.getTransformConstraints().indexOf(constraint1);
 					var frameIndex12 = 0;
 					var valueMap6 = constraintMap1.get_child();
 					while(valueMap6 != null) {
 						var frameIndex13 = frameIndex12;
-						var time6 = valueMap6.getFloat("time");
+						var time6 = valueMap6.getFloat("time",0);
 						var rotateMix = valueMap6.getFloat("rotateMix",1);
 						var translateMix = valueMap6.getFloat("translateMix",1);
 						var scaleMix = valueMap6.getFloat("scaleMix",1);
@@ -119834,10 +125320,10 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 						timeline6.frames[frameIndex13 + 4] = shearMix;
 						var curve5 = valueMap6.get("curve");
 						if(curve5 != null) {
-							if(curve5.isString() && curve5.asString() == "stepped") {
+							if(curve5.isString()) {
 								timeline6.curves[frameIndex12 * 19] = 1;
-							} else if(curve5.isArray()) {
-								timeline6.setCurve(frameIndex12,curve5.getFloat(0),curve5.getFloat(1),curve5.getFloat(2),curve5.getFloat(3));
+							} else {
+								timeline6.setCurve(frameIndex12,curve5.asFloat(),valueMap6.getFloat("c2",0),valueMap6.getFloat("c3",1),valueMap6.getFloat("c4",1));
 							}
 						}
 						++frameIndex12;
@@ -119847,7 +125333,7 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 					duration = Math.max(duration,timeline6.frames[((timeline6.curves.length / 19 + 1 | 0) - 1) * 5]);
 					constraintMap1 = constraintMap1.get_next();
 				}
-				var constraintMap2 = animationMap.getChild("paths");
+				var constraintMap2 = animationMap.getChild("path");
 				while(constraintMap2 != null) {
 					var data = skeletonData.findPathConstraint(constraintMap2.get_name());
 					if(data == null) {
@@ -119876,17 +125362,17 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 							var valueMap7 = timelineMap2.get_child();
 							while(valueMap7 != null) {
 								var frameIndex15 = frameIndex14;
-								var time7 = valueMap7.getFloat("time");
+								var time7 = valueMap7.getFloat("time",0);
 								var position = valueMap7.getFloat(timelineName2,0) * timelineScale1;
 								frameIndex15 *= 2;
 								timeline7.frames[frameIndex15] = time7;
 								timeline7.frames[frameIndex15 + 1] = position;
 								var curve6 = valueMap7.get("curve");
 								if(curve6 != null) {
-									if(curve6.isString() && curve6.asString() == "stepped") {
+									if(curve6.isString()) {
 										timeline7.curves[frameIndex14 * 19] = 1;
-									} else if(curve6.isArray()) {
-										timeline7.setCurve(frameIndex14,curve6.getFloat(0),curve6.getFloat(1),curve6.getFloat(2),curve6.getFloat(3));
+									} else {
+										timeline7.setCurve(frameIndex14,curve6.asFloat(),valueMap7.getFloat("c2",0),valueMap7.getFloat("c3",1),valueMap7.getFloat("c4",1));
 									}
 								}
 								++frameIndex14;
@@ -119901,7 +125387,7 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 							var valueMap8 = timelineMap2.get_child();
 							while(valueMap8 != null) {
 								var frameIndex17 = frameIndex16;
-								var time8 = valueMap8.getFloat("time");
+								var time8 = valueMap8.getFloat("time",0);
 								var rotateMix1 = valueMap8.getFloat("rotateMix",1);
 								var translateMix1 = valueMap8.getFloat("translateMix",1);
 								frameIndex17 *= 3;
@@ -119910,10 +125396,10 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 								timeline8.frames[frameIndex17 + 2] = translateMix1;
 								var curve7 = valueMap8.get("curve");
 								if(curve7 != null) {
-									if(curve7.isString() && curve7.asString() == "stepped") {
+									if(curve7.isString()) {
 										timeline8.curves[frameIndex16 * 19] = 1;
-									} else if(curve7.isArray()) {
-										timeline8.setCurve(frameIndex16,curve7.getFloat(0),curve7.getFloat(1),curve7.getFloat(2),curve7.getFloat(3));
+									} else {
+										timeline8.setCurve(frameIndex16,curve7.asFloat(),valueMap8.getFloat("c2",0),valueMap8.getFloat("c3",1),valueMap8.getFloat("c4",1));
 									}
 								}
 								++frameIndex16;
@@ -119953,9 +125439,9 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 							_this1.name = name1;
 							var hash = 0;
 							var chr;
-							var attachment;
+							var x1;
 							if(name1.length == 0) {
-								attachment = hash;
+								x1 = hash;
 							} else {
 								var _g = 0;
 								var _g1 = name1.length;
@@ -119964,19 +125450,46 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 									chr = HxOverrides.cca(name1,i);
 									hash = (hash << 5) - hash + chr;
 								}
-								attachment = hash;
+								x1 = hash;
 							}
-							_this1.hashCode = 31 * (31 + attachment) + slotIndex;
-							var attachment1 = js_Boot.__cast(spine_support_utils_ObjectMap.get(skin.attachments,skin.lookup) , spine_attachments_VertexAttachment);
-							if(attachment1 == null) {
+							_this1.hashCode = x1 + slotIndex * 37 | 0;
+							var key = skin.lookup;
+							var entries = skin.attachments.h[key.hashCode];
+							var result = null;
+							if(entries != null) {
+								var _g2 = 0;
+								var _g3 = entries.length;
+								while(_g2 < _g3) {
+									var i1 = _g2++;
+									var entry = entries[i1];
+									var _this2 = entry.key;
+									var object = key;
+									var value;
+									if(object == null) {
+										value = false;
+									} else {
+										var result1 = object;
+										var other = result1;
+										value = _this2.slotIndex != other.slotIndex ? false : _this2.name != other.name ? false : true;
+									}
+									if(value) {
+										result = entry.value;
+										break;
+									}
+								}
+							}
+							var entry1 = result;
+							var result2 = entry1 != null ? entry1.attachment : null;
+							var attachment = result2;
+							if(attachment == null) {
 								throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Deform attachment not found: " + timelineMap3.get_name()));
 							}
-							var weighted = attachment1.bones != null;
-							var vertices = attachment1.vertices;
+							var weighted = attachment.bones != null;
+							var vertices = attachment.vertices;
 							var deformLength = weighted ? vertices.length / 3 * 2 | 0 : vertices.length;
 							var timeline9 = new spine_DeformTimeline(timelineMap3.get_size());
 							timeline9.slotIndex = slot1.index;
-							timeline9.attachment = attachment1;
+							timeline9.attachment = attachment;
 							var frameIndex18 = 0;
 							var valueMap9 = timelineMap3.get_child();
 							while(valueMap9 != null) {
@@ -120029,32 +125542,46 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 									}
 									deform = array1;
 									var start = valueMap9.getInt("offset",0);
-									spine_support_utils_Array.copy(verticesValue.asFloatArray(),0,deform,start,verticesValue.get_size());
-									if(scale != 1) {
-										var i1 = start;
-										var n = i1 + verticesValue.get_size();
-										while(i1 < n) {
-											deform[i1] *= scale;
-											++i1;
-										}
+									var src = verticesValue.asFloatArray();
+									var dest = deform;
+									var length2 = verticesValue.get_size();
+									if(src == null) {
+										throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("src cannot be null."));
 									}
-									if(!weighted) {
-										var i2 = 0;
-										while(i2 < deformLength) {
-											deform[i2] += vertices[i2];
+									if(dest == null) {
+										throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("dest cannot be null."));
+									}
+									try {
+										spine_support_utils_Array.copy(src,0,dest,start,length2);
+									} catch( _g4 ) {
+										haxe_NativeStackTrace.lastError = _g4;
+										throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + start + ", count: " + length2));
+									}
+									if(scale != 1) {
+										var i2 = start;
+										var n = i2 + verticesValue.get_size();
+										while(i2 < n) {
+											deform[i2] *= scale;
 											++i2;
 										}
 									}
+									if(!weighted) {
+										var i3 = 0;
+										while(i3 < deformLength) {
+											deform[i3] += vertices[i3];
+											++i3;
+										}
+									}
 								}
-								var time9 = valueMap9.getFloat("time");
+								var time9 = valueMap9.getFloat("time",0);
 								timeline9.frames[frameIndex18] = time9;
 								timeline9.frameVertices[frameIndex18] = deform;
 								var curve8 = valueMap9.get("curve");
 								if(curve8 != null) {
-									if(curve8.isString() && curve8.asString() == "stepped") {
+									if(curve8.isString()) {
 										timeline9.curves[frameIndex18 * 19] = 1;
-									} else if(curve8.isArray()) {
-										timeline9.setCurve(frameIndex18,curve8.getFloat(0),curve8.getFloat(1),curve8.getFloat(2),curve8.getFloat(3));
+									} else {
+										timeline9.setCurve(frameIndex18,curve8.asFloat(),valueMap9.getFloat("c2",0),valueMap9.getFloat("c3",1),valueMap9.getFloat("c4",1));
 									}
 								}
 								++frameIndex18;
@@ -120081,15 +125608,15 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 						var drawOrder = null;
 						var offsets = drawOrderMap.get("offsets");
 						if(offsets != null) {
-							var length2 = slotCount;
-							if(length2 == null) {
-								length2 = 0;
+							var length3 = slotCount;
+							if(length3 == null) {
+								length3 = 0;
 							}
-							var len4 = length2 | 0;
+							var len4 = length3 | 0;
 							var capacity2 = len4 != 0 ? len4 : 16;
 							var this4 = [];
 							var array2 = this4;
-							if(length2 != 0) {
+							if(length3 != 0) {
 								var len5 = array2.length;
 								if(len5 > len4) {
 									array2.splice(len4,len4 - len5);
@@ -120101,20 +125628,20 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 								}
 							}
 							drawOrder = array2;
-							var i3 = slotCount - 1;
-							while(i3 >= 0) {
-								drawOrder[i3] = -1;
-								--i3;
+							var i4 = slotCount - 1;
+							while(i4 >= 0) {
+								drawOrder[i4] = -1;
+								--i4;
 							}
-							var length3 = slotCount - offsets.get_size();
-							if(length3 == null) {
-								length3 = 0;
+							var length4 = slotCount - offsets.get_size();
+							if(length4 == null) {
+								length4 = 0;
 							}
-							var len6 = length3 | 0;
+							var len6 = length4 | 0;
 							var capacity3 = len6 != 0 ? len6 : 16;
 							var this5 = [];
 							var array3 = this5;
-							if(length3 != 0) {
+							if(length4 != 0) {
 								var len7 = array3.length;
 								if(len7 > len6) {
 									array3.splice(len6,len6 - len7);
@@ -120139,16 +125666,16 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 								offsetMap = offsetMap.get_next();
 							}
 							while(originalIndex < slotCount) unchanged[unchangedIndex++] = originalIndex++;
-							var i4 = slotCount - 1;
-							while(i4 >= 0) {
-								if(drawOrder[i4] == -1) {
-									drawOrder[i4] = unchanged[--unchangedIndex];
+							var i5 = slotCount - 1;
+							while(i5 >= 0) {
+								if(drawOrder[i5] == -1) {
+									drawOrder[i5] = unchanged[--unchangedIndex];
 								}
-								--i4;
+								--i5;
 							}
 						}
 						var frameIndex20 = frameIndex19++;
-						var time10 = drawOrderMap.getFloat("time");
+						var time10 = drawOrderMap.getFloat("time",0);
 						timeline10.frames[frameIndex20] = time10;
 						timeline10.drawOrders[frameIndex20] = drawOrder;
 						drawOrderMap = drawOrderMap.get_next();
@@ -120166,10 +125693,14 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 						if(eventData == null) {
 							throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Event not found: " + eventMap.getString("name")));
 						}
-						var event = new spine_Event(eventMap.getFloat("time"),eventData);
+						var event = new spine_Event(eventMap.getFloat("time",0),eventData);
 						event.intValue = eventMap.getInt("int",eventData.intValue);
 						event.floatValue = eventMap.getFloat("float",eventData.floatValue);
 						event.stringValue = eventMap.getString("string",eventData.stringValue);
+						if(event.data.audioPath != null) {
+							event.volume = eventMap.getFloat("volume",eventData.volume);
+							event.balance = eventMap.getFloat("balance",eventData.balance);
+						}
 						var frameIndex22 = frameIndex21++;
 						timeline11.frames[frameIndex22] = event.time;
 						timeline11.events[frameIndex22] = event;
@@ -120179,8 +125710,9 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 					duration = Math.max(duration,timeline11.frames[timeline11.frames.length - 1]);
 				}
 				skeletonData.animations.push(new spine_Animation(name,timelines,duration));
-			} catch( _g2 ) {
-				var ex = haxe_Exception.caught(_g2).unwrap();
+			} catch( _g5 ) {
+				haxe_NativeStackTrace.lastError = _g5;
+				var ex = haxe_Exception.caught(_g5).unwrap();
 				throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Error reading animation: " + animationMap.get_name(),ex));
 			}
 			animationMap = animationMap.get_next();
@@ -120564,8 +126096,6 @@ openfl_ui_Multitouch.supportedGestures = null;
 openfl_ui_Multitouch.supportsGestureEvents = false;
 openfl_ui_Multitouch.inputMode = 2;
 openfl_Vector.__meta__ = { statics : { toNullVector : { SuppressWarnings : ["checkstyle:Dynamic"]}}};
-openfl__$Vector_IVector.__meta__ = { obj : { SuppressWarnings : ["checkstyle:FieldDocComment"]}};
-openfl__$Vector_ObjectVector.__meta__ = { obj : { SuppressWarnings : ["checkstyle:FieldDocComment"]}, fields : { concat : { SuppressWarnings : ["checkstyle:Dynamic"]}, toJSON : { SuppressWarnings : ["checkstyle:Dynamic"]}, _ : { SuppressWarnings : ["checkstyle:Dynamic"]}}};
 openfl_display_DisplayObject.__meta__ = { fields : { __cairo : { SuppressWarnings : ["checkstyle:Dynamic"]}, addEventListener : { SuppressWarnings : ["checkstyle:Dynamic"]}, removeEventListener : { SuppressWarnings : ["checkstyle:Dynamic"]}}};
 openfl_display_DisplayObject.__broadcastEvents = new haxe_ds_StringMap();
 openfl_display_DisplayObject.__instanceCount = 0;
@@ -121969,10 +127499,12 @@ lime_utils_UInt8ClampedArray.BYTES_PER_ELEMENT = 1;
 openfl_Lib.__lastTimerID = 0;
 openfl_Lib.__sentWarnings = new haxe_ds_StringMap();
 openfl_Lib.__timers = new haxe_ds_IntMap();
+openfl__$Vector_IVector.__meta__ = { obj : { SuppressWarnings : ["checkstyle:FieldDocComment"]}};
 openfl__$Vector_BoolVector.__meta__ = { obj : { SuppressWarnings : ["checkstyle:FieldDocComment"]}, fields : { toJSON : { SuppressWarnings : ["checkstyle:Dynamic"]}}};
 openfl__$Vector_FloatVector.__meta__ = { obj : { SuppressWarnings : ["checkstyle:FieldDocComment"]}, fields : { toJSON : { SuppressWarnings : ["checkstyle:Dynamic"]}, _ : { SuppressWarnings : ["checkstyle:Dynamic"]}}};
 openfl__$Vector_FunctionVector.__meta__ = { obj : { SuppressWarnings : ["checkstyle:FieldDocComment"]}, fields : { toJSON : { SuppressWarnings : ["checkstyle:Dynamic"]}}};
 openfl__$Vector_IntVector.__meta__ = { obj : { SuppressWarnings : ["checkstyle:FieldDocComment"]}, fields : { toJSON : { SuppressWarnings : ["checkstyle:Dynamic"]}}};
+openfl__$Vector_ObjectVector.__meta__ = { obj : { SuppressWarnings : ["checkstyle:FieldDocComment"]}, fields : { concat : { SuppressWarnings : ["checkstyle:Dynamic"]}, toJSON : { SuppressWarnings : ["checkstyle:Dynamic"]}, _ : { SuppressWarnings : ["checkstyle:Dynamic"]}}};
 openfl__$internal_Lib.__meta__ = { obj : { SuppressWarnings : ["checkstyle:FieldDocComment"]}, statics : { notImplemented : { SuppressWarnings : ["checkstyle:NullableParameter"]}}};
 openfl__$internal_Lib.__sentWarnings = new haxe_ds_StringMap();
 openfl__$internal_formats_agal_AGALConverter.__meta__ = { obj : { SuppressWarnings : ["checkstyle:FieldDocComment"]}};
@@ -123044,12 +128576,18 @@ spine_DeformTimeline.LINEAR = 0;
 spine_DeformTimeline.STEPPED = 1;
 spine_DeformTimeline.BEZIER = 2;
 spine_DeformTimeline.BEZIER_SIZE = 19;
-spine_IkConstraintTimeline.ENTRIES = 3;
-spine_IkConstraintTimeline.PREV_TIME = -3;
-spine_IkConstraintTimeline.PREV_MIX = -2;
-spine_IkConstraintTimeline.PREV_BEND_DIRECTION = -1;
+spine_IkConstraintTimeline.ENTRIES = 6;
+spine_IkConstraintTimeline.PREV_TIME = -6;
+spine_IkConstraintTimeline.PREV_MIX = -5;
+spine_IkConstraintTimeline.PREV_SOFTNESS = -4;
+spine_IkConstraintTimeline.PREV_BEND_DIRECTION = -3;
+spine_IkConstraintTimeline.PREV_COMPRESS = -2;
+spine_IkConstraintTimeline.PREV_STRETCH = -1;
 spine_IkConstraintTimeline.MIX = 1;
-spine_IkConstraintTimeline.BEND_DIRECTION = 2;
+spine_IkConstraintTimeline.SOFTNESS = 2;
+spine_IkConstraintTimeline.BEND_DIRECTION = 3;
+spine_IkConstraintTimeline.COMPRESS = 4;
+spine_IkConstraintTimeline.STRETCH = 5;
 spine_IkConstraintTimeline.LINEAR = 0;
 spine_IkConstraintTimeline.STEPPED = 1;
 spine_IkConstraintTimeline.BEZIER = 2;
@@ -123094,12 +128632,14 @@ spine_PathConstraintMixTimeline.LINEAR = 0;
 spine_PathConstraintMixTimeline.STEPPED = 1;
 spine_PathConstraintMixTimeline.BEZIER = 2;
 spine_PathConstraintMixTimeline.BEZIER_SIZE = 19;
-spine_MixPose_$enum.setup_value = 0;
-spine_MixPose_$enum.current_value = 1;
-spine_MixPose_$enum.currentLayered_value = 2;
-spine_MixPose_$enum.setup_name = "setup";
-spine_MixPose_$enum.current_name = "current";
-spine_MixPose_$enum.currentLayered_name = "currentLayered";
+spine_MixBlend_$enum.setup_value = 0;
+spine_MixBlend_$enum.first_value = 1;
+spine_MixBlend_$enum.replace_value = 2;
+spine_MixBlend_$enum.add_value = 3;
+spine_MixBlend_$enum.setup_name = "setup";
+spine_MixBlend_$enum.first_name = "first";
+spine_MixBlend_$enum.replace_name = "replace";
+spine_MixBlend_$enum.add_name = "add";
 spine_MixDirection_$enum.directionIn_value = 0;
 spine_MixDirection_$enum.directionOut_value = 1;
 spine_MixDirection_$enum.directionIn_name = "directionIn";
@@ -123143,8 +128683,9 @@ spine_AnimationState.emptyAnimation = (function($this) {
 }(this));
 spine_AnimationState.SUBSEQUENT = 0;
 spine_AnimationState.FIRST = 1;
-spine_AnimationState.DIP = 2;
-spine_AnimationState.DIP_MIX = 3;
+spine_AnimationState.HOLD = 2;
+spine_AnimationState.HOLD_MIX = 3;
+spine_AnimationState.NOT_LAST = 4;
 spine_EventType_$enum.start_value = 0;
 spine_EventType_$enum.interrupt_value = 1;
 spine_EventType_$enum.end_value = 2;
@@ -123211,12 +128752,7 @@ spine_attachments_AttachmentType_$enum.linkedmesh_name = "linkedmesh";
 spine_attachments_AttachmentType_$enum.path_name = "path";
 spine_attachments_AttachmentType_$enum.point_name = "point";
 spine_attachments_AttachmentType_$enum.clipping_name = "clipping";
-spine_attachments_VertexAttachment.nextID = (function($this) {
-	var $r;
-	var this1 = 0;
-	$r = this1;
-	return $r;
-}(this));
+spine_attachments_VertexAttachment.nextID = 0;
 spine_attachments_RegionAttachment.BLX = 0;
 spine_attachments_RegionAttachment.BLY = 1;
 spine_attachments_RegionAttachment.ULX = 2;
