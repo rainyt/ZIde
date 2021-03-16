@@ -29,6 +29,10 @@ class Main extends Application {
 		fixPath();
 		console.log(process.env.PATH);");
 
+		IpcRenderer.on("debug", function(){
+			Menu.current.onDebug();
+		});
+
 		IpcRenderer.on("formatxml", function() {
 			Editor.current.formatXml();
 		});

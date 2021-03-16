@@ -108,6 +108,7 @@ class StageCavans extends LayoutGroup {
 			getStart().HDWidth = App.currentProject.HDWidth == 0 ? Std.int(this.width) : App.currentProject.HDWidth;
 		}
 		if (stage != null) {
+			stage.color = App.currentProject == null ? 0x373737 : App.currentProject.stagecolor;
 			stage.window.resize(Std.int(this.width), Std.int(this.height));
 			@:privateAccess stage.__resize();
 			getStart().onStageSizeChange();

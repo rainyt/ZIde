@@ -55,9 +55,11 @@ class Menu extends LayoutGroup {
 		var debug = new MenuButton();
 		debug.text = "调试";
 		this.addChild(debug);
-		Utils.click(debug, function() {
-			Remote.getCurrentWebContents().openDevTools();
-		});
+		Utils.click(debug, onDebug);
+	}
+
+	public function onDebug():Void {
+		Remote.getCurrentWebContents().openDevTools();
 	}
 
 	public function onBuild():Void {

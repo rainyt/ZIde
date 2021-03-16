@@ -13,7 +13,9 @@ MainCore.main = function() {
 		return MainCore.window.send("save");
 	}}]},{ label : "构造", submenu : [{ label : "编译", accelerator : "CmdOrCtrl+B", selector : null, click : function() {
 		return MainCore.window.send("build");
-	}}]},{ label : "工具", submenu : [{ label : "联想提示", accelerator : "CmdOrCtrl+D", selector : null, click : function() {
+	}}]},{ label : "工具", submenu : [{ label : "开发者工具", accelerator : "F12", selector : null, click : function() {
+		return MainCore.window.send("debug");
+	}},{ label : "联想提示", accelerator : "CmdOrCtrl+D", selector : null, click : function() {
 		return MainCore.window.send("codetips");
 	}}]}];
 	electron_main_Menu.setApplicationMenu(electron_main_Menu.buildFromTemplate(template));

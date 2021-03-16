@@ -45,6 +45,8 @@ class BottomHead extends LayoutGroup {
 		version.layoutData = AnchorLayoutData.middleRight(0, 10);
 
 		this.addEventListener(Event.ENTER_FRAME, function(e) {
+			if(StageCavans.current.getStart() == null)
+				return;
 			updateConfig({
 				drawcall: StageCavans.current.getStart().fps.getDrawCall(),
 				filesize: StageCavans.current.assetsSize

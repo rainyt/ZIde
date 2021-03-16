@@ -56,6 +56,11 @@ class ZProjectData {
 	public var HDHeight:Int = 0;
 
 	/**
+	 *	舞台颜色值 
+	 */
+	public var stagecolor:UInt = 0;
+
+	/**
 	 * 是否横屏
 	 * @return Bool
 	 */
@@ -94,6 +99,10 @@ class ZProjectData {
 						HDWidth = Std.parseInt(item.get("hdwidth"));
 					if (item.exists("hdheight"))
 						HDHeight = Std.parseInt(item.get("hdheight"));
+					if (item.exists("stagecolor"))
+						this.stagecolor = Std.parseInt(item.get("stagecolor"));
+					else
+						this.stagecolor = 0x373737;
 			}
 		}
 	}
