@@ -894,7 +894,7 @@ ApplicationMain.main = function() {
 ApplicationMain.create = function(config) {
 	var app = new openfl_display_Application();
 	ManifestResources.init(config);
-	app.meta.h["build"] = "36";
+	app.meta.h["build"] = "37";
 	app.meta.h["company"] = "Company Name";
 	app.meta.h["file"] = "ZIde-UI";
 	app.meta.h["name"] = "ZIde";
@@ -1192,6 +1192,99 @@ openfl_display_IBitmapDrawable.prototype = {
 	,__scrollRect: null
 	,__class__: openfl_display_IBitmapDrawable
 };
+var haxe_IMap = function() { };
+$hxClasses["haxe.IMap"] = haxe_IMap;
+haxe_IMap.__name__ = "haxe.IMap";
+haxe_IMap.__isInterface__ = true;
+haxe_IMap.prototype = {
+	get: null
+	,set: null
+	,exists: null
+	,remove: null
+	,keys: null
+	,iterator: null
+	,keyValueIterator: null
+	,__class__: haxe_IMap
+};
+var haxe_ds_StringMap = function() {
+	this.h = Object.create(null);
+};
+$hxClasses["haxe.ds.StringMap"] = haxe_ds_StringMap;
+haxe_ds_StringMap.__name__ = "haxe.ds.StringMap";
+haxe_ds_StringMap.__interfaces__ = [haxe_IMap];
+haxe_ds_StringMap.keysIterator = function(h) {
+	var keys = Object.keys(h);
+	var len = keys.length;
+	var idx = 0;
+	return { hasNext : function() {
+		return idx < len;
+	}, next : function() {
+		idx += 1;
+		return keys[idx - 1];
+	}};
+};
+haxe_ds_StringMap.valueIterator = function(h) {
+	var keys = Object.keys(h);
+	var len = keys.length;
+	var idx = 0;
+	return { hasNext : function() {
+		return idx < len;
+	}, next : function() {
+		idx += 1;
+		return h[keys[idx - 1]];
+	}};
+};
+haxe_ds_StringMap.kvIterator = function(h) {
+	var keys = Object.keys(h);
+	var len = keys.length;
+	var idx = 0;
+	return { hasNext : function() {
+		return idx < len;
+	}, next : function() {
+		idx += 1;
+		var k = keys[idx - 1];
+		return { key : k, value : h[k]};
+	}};
+};
+haxe_ds_StringMap.stringify = function(h) {
+	var s = "{";
+	var first = true;
+	for (var key in h) {
+		if (first) first = false; else s += ',';
+		s += key + ' => ' + Std.string(h[key]);
+	}
+	return s + "}";
+};
+haxe_ds_StringMap.prototype = {
+	h: null
+	,exists: function(key) {
+		return Object.prototype.hasOwnProperty.call(this.h,key);
+	}
+	,get: function(key) {
+		return this.h[key];
+	}
+	,set: function(key,value) {
+		this.h[key] = value;
+	}
+	,remove: function(key) {
+		if(Object.prototype.hasOwnProperty.call(this.h,key)) {
+			delete(this.h[key]);
+			return true;
+		} else {
+			return false;
+		}
+	}
+	,keys: function() {
+		return haxe_ds_StringMap.keysIterator(this.h);
+	}
+	,iterator: function() {
+		return haxe_ds_StringMap.valueIterator(this.h);
+	}
+	,keyValueIterator: function() {
+		return haxe_ds_StringMap.kvIterator(this.h);
+	}
+	,__class__: haxe_ds_StringMap
+};
 var openfl_Vector = {};
 openfl_Vector.__properties__ = {set_length:"set_length",get_length:"get_length",set_fixed:"set_fixed",get_fixed:"get_fixed"};
 openfl_Vector.concat = function(this1,vec) {
@@ -1314,6 +1407,237 @@ openfl_Vector.get_length = function(this1) {
 };
 openfl_Vector.set_length = function(this1,value) {
 	return this1.set_length(value);
+};
+var openfl__$Vector_IVector = function() { };
+$hxClasses["openfl._Vector.IVector"] = openfl__$Vector_IVector;
+openfl__$Vector_IVector.__name__ = "openfl._Vector.IVector";
+openfl__$Vector_IVector.__isInterface__ = true;
+openfl__$Vector_IVector.prototype = {
+	get_length: null
+	,set_length: null
+	,fixed: null
+	,concat: null
+	,copy: null
+	,filter: null
+	,get: null
+	,indexOf: null
+	,insertAt: null
+	,iterator: null
+	,join: null
+	,lastIndexOf: null
+	,pop: null
+	,push: null
+	,removeAt: null
+	,reverse: null
+	,set: null
+	,shift: null
+	,slice: null
+	,sort: null
+	,splice: null
+	,toString: null
+	,unshift: null
+	,__class__: openfl__$Vector_IVector
+	,__properties__: {set_length:"set_length",get_length:"get_length"}
+};
+var openfl__$Vector_ObjectVector = function(length,fixed,array,forceCopy) {
+	if(forceCopy == null) {
+		forceCopy = false;
+	}
+	if(fixed == null) {
+		fixed = false;
+	}
+	if(length == null) {
+		length = 0;
+	}
+	if(forceCopy) {
+		this.__array = [];
+		if(array != null) {
+			var _g = 0;
+			var _g1 = array.length;
+			while(_g < _g1) {
+				var i = _g++;
+				this.__array[i] = array[i];
+			}
+		}
+	} else {
+		if(array == null) {
+			array = [];
+		}
+		this.__array = array;
+	}
+	if(length > 0) {
+		this.set_length(length);
+	}
+	this.fixed = fixed;
+};
+$hxClasses["openfl._Vector.ObjectVector"] = openfl__$Vector_ObjectVector;
+openfl__$Vector_ObjectVector.__name__ = "openfl._Vector.ObjectVector";
+openfl__$Vector_ObjectVector.__interfaces__ = [openfl__$Vector_IVector];
+openfl__$Vector_ObjectVector.prototype = {
+	fixed: null
+	,__array: null
+	,concat: function(a) {
+		if(a == null) {
+			return new openfl__$Vector_ObjectVector(0,false,this.__array.slice());
+		} else {
+			var other = a;
+			if(other.__array.length > 0) {
+				return new openfl__$Vector_ObjectVector(0,false,this.__array.concat(other.__array));
+			} else {
+				return new openfl__$Vector_ObjectVector(0,false,this.__array.slice());
+			}
+		}
+	}
+	,copy: function() {
+		return new openfl__$Vector_ObjectVector(0,this.fixed,this.__array.slice());
+	}
+	,filter: function(callback) {
+		var tmp = this.fixed;
+		var _g = [];
+		var _g1 = 0;
+		var _g2 = this.__array;
+		while(_g1 < _g2.length) {
+			var v = _g2[_g1];
+			++_g1;
+			if(callback(v)) {
+				_g.push(v);
+			}
+		}
+		return new openfl__$Vector_ObjectVector(0,tmp,_g);
+	}
+	,get: function(index) {
+		return this.__array[index];
+	}
+	,indexOf: function(x,from) {
+		if(from == null) {
+			from = 0;
+		}
+		var _g = from;
+		var _g1 = this.__array.length;
+		while(_g < _g1) {
+			var i = _g++;
+			if(this.__array[i] == x) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	,insertAt: function(index,element) {
+		if(!this.fixed || index < this.__array.length) {
+			this.__array.splice(index,0,element);
+		}
+	}
+	,iterator: function() {
+		return new haxe_iterators_ArrayIterator(this.__array);
+	}
+	,join: function(sep) {
+		if(sep == null) {
+			sep = ",";
+		}
+		return this.__array.join(sep);
+	}
+	,lastIndexOf: function(x,from) {
+		var i = from == null || from >= this.__array.length ? this.__array.length - 1 : from;
+		while(i >= 0) {
+			if(this.__array[i] == x) {
+				return i;
+			}
+			--i;
+		}
+		return -1;
+	}
+	,pop: function() {
+		if(!this.fixed) {
+			return this.__array.pop();
+		} else {
+			return null;
+		}
+	}
+	,push: function(x) {
+		if(!this.fixed) {
+			return this.__array.push(x);
+		} else {
+			return this.__array.length;
+		}
+	}
+	,removeAt: function(index) {
+		if(!this.fixed || index < this.__array.length) {
+			return this.__array.splice(index,1)[0];
+		}
+		return null;
+	}
+	,reverse: function() {
+		this.__array.reverse();
+		return this;
+	}
+	,set: function(index,value) {
+		if(!this.fixed || index < this.__array.length) {
+			return this.__array[index] = value;
+		} else {
+			return value;
+		}
+	}
+	,shift: function() {
+		if(!this.fixed) {
+			return this.__array.shift();
+		} else {
+			return null;
+		}
+	}
+	,slice: function(startIndex,endIndex) {
+		if(startIndex == null) {
+			startIndex = 0;
+		}
+		if(endIndex == null) {
+			endIndex = 16777215;
+		}
+		return new openfl__$Vector_ObjectVector(0,false,this.__array.slice(startIndex,endIndex));
+	}
+	,sort: function(f) {
+		this.__array.sort(f);
+	}
+	,splice: function(pos,len) {
+		return new openfl__$Vector_ObjectVector(0,false,this.__array.splice(pos,len));
+	}
+	,toJSON: function() {
+		return this.__array;
+	}
+	,toString: function() {
+		if(this.__array != null) {
+			return this.__array.toString();
+		} else {
+			return null;
+		}
+	}
+	,unshift: function(x) {
+		if(!this.fixed) {
+			this.__array.unshift(x);
+		}
+	}
+	,get_length: function() {
+		return this.__array.length;
+	}
+	,set_length: function(value) {
+		if(!this.fixed) {
+			var currentLength = this.__array.length;
+			if(value < 0) {
+				value = 0;
+			}
+			if(value > currentLength) {
+				var _g = currentLength;
+				var _g1 = value;
+				while(_g < _g1) {
+					var i = _g++;
+					this.__array.push(null);
+				}
+			} else {
+				while(this.__array.length > value) this.__array.pop();
+			}
+		}
+		return this.__array.length;
+	}
+	,__class__: openfl__$Vector_ObjectVector
+	,__properties__: {set_length:"set_length",get_length:"get_length"}
 };
 var lime_utils_ObjectPool = function(create,clean,size) {
 	this.__pool = new haxe_ds_ObjectMap();
@@ -1531,20 +1855,6 @@ lime_utils_ObjectPool.prototype = {
 	}
 	,__class__: lime_utils_ObjectPool
 	,__properties__: {set_size:"set_size",get_size:"get_size"}
-};
-var haxe_IMap = function() { };
-$hxClasses["haxe.IMap"] = haxe_IMap;
-haxe_IMap.__name__ = "haxe.IMap";
-haxe_IMap.__isInterface__ = true;
-haxe_IMap.prototype = {
-	get: null
-	,set: null
-	,exists: null
-	,remove: null
-	,keys: null
-	,iterator: null
-	,keyValueIterator: null
-	,__class__: haxe_IMap
 };
 var haxe_ds_ObjectMap = function() {
 	this.h = { __keys__ : { }};
@@ -4738,7 +5048,7 @@ var zygame_core_Start = function(HDWidth,HDHeight,isDebug) {
 	this.isDebug = isDebug;
 	this.updates = openfl_Vector.toObjectVector(null);
 	zygame_core_Start.current = this;
-	this.log("[zygameui] build time:","2021-03-16 09:57:50");
+	this.log("[zygameui] build time:","2021-03-16 19:43:45");
 	this.log("[zygameui] channel=" + zygame_utils_Lib.getChannel() + " render=" + zygame_utils_Lib.getRenderMode());
 	var defines = JSON.parse("{\"js\":\"1\",\"utf16\":\"1\",\"no-compilation\":\"1\",\"hscript\":\"2.4.0\",\"lime_html5\":\"1\",\"hxargs\":\"3.0.2\",\"source-header\":\"Generated by Haxe 4.1.5\",\"haxe4\":\"1\",\"haxe_ver\":\"4.105\",\"lime_webgl\":\"1\",\"true\":\"1\",\"lime-webgl\":\"1\",\"js_es\":\"5\",\"haxe\":\"4.1.5\",\"openfl_disable_graphics_upscaling\":\"1\",\"target.name\":\"js\",\"lime-canvas\":\"1\",\"castle\":\"1.6.1\",\"openfl-disable-graphics-upscaling\":\"1\",\"lime-dom\":\"1\",\"disable_res\":\"1\",\"lime_canvas\":\"1\",\"js_es5\":\"1\",\"lime_dom\":\"1\",\"openfl-html5\":\"1\",\"no_compilation\":\"1\",\"lime\":\"7.7.6\",\"feathersui\":\"1.0.0-beta.2\",\"dce\":\"std\",\"haxe3\":\"1\",\"target.utf16\":\"true\",\"spine_hx\":\"3.8.1\",\"lime-html5\":\"1\",\"js-es5\":\"1\",\"spine-hx\":\"3.8.1\",\"tweenxcore\":\"1.0.4\",\"spine38\":\"1\",\"lime_howlerjs\":\"1\",\"differ\":\"1.3.0\",\"spine3.8\":\"1\",\"gl_stats\":\"1\",\"openfl_html5\":\"1\",\"openfl\":\"8.9.8\",\"web\":\"1\",\"html5\":\"1\",\"howlerjs\":\"1\",\"actuate\":\"1.8.9\",\"zygameui\":\"10.1.0\",\"tools\":\"7.7.6\",\"lime-howlerjs\":\"1\",\"target.unicode\":\"true\",\"zygame\":\"1\"}");
 	this.log(defines);
@@ -5194,17 +5504,17 @@ UIStart.prototype = $extend(zygame_core_Start.prototype,{
 				tmp1 = false;
 			}
 			if(tmp1) {
-				var this2 = this._project.xmlFiles;
+				var this11 = this._project.xmlFiles;
 				if(item1.nodeType != Xml.Element) {
 					throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
 				}
-				if(Object.prototype.hasOwnProperty.call(this2.h,item1.nodeName)) {
-					var this3 = this._project.xmlDatas;
-					var this4 = this._project.xmlFiles;
+				if(Object.prototype.hasOwnProperty.call(this11.h,item1.nodeName)) {
+					var this12 = this._project.xmlDatas;
+					var this13 = this._project.xmlFiles;
 					if(item1.nodeType != Xml.Element) {
 						throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
 					}
-					var childXmlContent = this3.h[this4.h[item1.nodeName]];
+					var childXmlContent = this12.h[this13.h[item1.nodeName]];
 					var tmp2 = haxe_Log.trace;
 					if(item1.nodeType != Xml.Element) {
 						throw haxe_Exception.thrown("Bad node type, expected Element but found " + (item1.nodeType == null ? "null" : XmlType.toString(item1.nodeType)));
@@ -5442,7 +5752,6 @@ Reflect.field = function(o,field) {
 	try {
 		return o[field];
 	} catch( _g ) {
-		haxe_NativeStackTrace.lastError = _g;
 		return null;
 	}
 };
@@ -5823,7 +6132,6 @@ Type.enumEq = function(a,b) {
 			}
 		}
 	} catch( _g ) {
-		haxe_NativeStackTrace.lastError = _g;
 		return false;
 	}
 	return true;
@@ -6293,6 +6601,7 @@ cdb_Parser.save = function(data) {
 	return str;
 };
 var data_ZProjectData = function(path,xml) {
+	this.stagecolor = 0;
 	this.HDHeight = 0;
 	this.HDWidth = 0;
 	this.xmlDatas = new haxe_ds_StringMap();
@@ -6316,6 +6625,7 @@ data_ZProjectData.prototype = {
 	,xmlDatas: null
 	,HDWidth: null
 	,HDHeight: null
+	,stagecolor: null
 	,isLandsapce: function() {
 		return this.HDWidth > this.HDHeight;
 	}
@@ -8233,7 +8543,6 @@ haxe_ds_BalancedTree.prototype = {
 			this.root = this.removeLoop(key,this.root);
 			return true;
 		} catch( _g ) {
-			haxe_NativeStackTrace.lastError = _g;
 			if(typeof(haxe_Exception.caught(_g).unwrap()) == "string") {
 				return false;
 			} else {
@@ -8527,85 +8836,6 @@ haxe_ds__$List_ListIterator.prototype = {
 	}
 	,__class__: haxe_ds__$List_ListIterator
 };
-var haxe_ds_StringMap = function() {
-	this.h = Object.create(null);
-};
-$hxClasses["haxe.ds.StringMap"] = haxe_ds_StringMap;
-haxe_ds_StringMap.__name__ = "haxe.ds.StringMap";
-haxe_ds_StringMap.__interfaces__ = [haxe_IMap];
-haxe_ds_StringMap.keysIterator = function(h) {
-	var keys = Object.keys(h);
-	var len = keys.length;
-	var idx = 0;
-	return { hasNext : function() {
-		return idx < len;
-	}, next : function() {
-		idx += 1;
-		return keys[idx - 1];
-	}};
-};
-haxe_ds_StringMap.valueIterator = function(h) {
-	var keys = Object.keys(h);
-	var len = keys.length;
-	var idx = 0;
-	return { hasNext : function() {
-		return idx < len;
-	}, next : function() {
-		idx += 1;
-		return h[keys[idx - 1]];
-	}};
-};
-haxe_ds_StringMap.kvIterator = function(h) {
-	var keys = Object.keys(h);
-	var len = keys.length;
-	var idx = 0;
-	return { hasNext : function() {
-		return idx < len;
-	}, next : function() {
-		idx += 1;
-		var k = keys[idx - 1];
-		return { key : k, value : h[k]};
-	}};
-};
-haxe_ds_StringMap.stringify = function(h) {
-	var s = "{";
-	var first = true;
-	for (var key in h) {
-		if (first) first = false; else s += ',';
-		s += key + ' => ' + Std.string(h[key]);
-	}
-	return s + "}";
-};
-haxe_ds_StringMap.prototype = {
-	h: null
-	,exists: function(key) {
-		return Object.prototype.hasOwnProperty.call(this.h,key);
-	}
-	,get: function(key) {
-		return this.h[key];
-	}
-	,set: function(key,value) {
-		this.h[key] = value;
-	}
-	,remove: function(key) {
-		if(Object.prototype.hasOwnProperty.call(this.h,key)) {
-			delete(this.h[key]);
-			return true;
-		} else {
-			return false;
-		}
-	}
-	,keys: function() {
-		return haxe_ds_StringMap.keysIterator(this.h);
-	}
-	,iterator: function() {
-		return haxe_ds_StringMap.valueIterator(this.h);
-	}
-	,keyValueIterator: function() {
-		return haxe_ds_StringMap.kvIterator(this.h);
-	}
-	,__class__: haxe_ds_StringMap
-};
 var haxe_io_BytesBuffer = function() {
 	this.pos = 0;
 	this.size = 0;
@@ -8694,7 +8924,6 @@ haxe_io_Input.prototype = {
 				--k;
 			}
 		} catch( _g ) {
-			haxe_NativeStackTrace.lastError = _g;
 			if(!((haxe_Exception.caught(_g).unwrap()) instanceof haxe_io_Eof)) {
 				throw _g;
 			}
@@ -10520,7 +10749,6 @@ hscript_Interp.prototype = {
 		try {
 			return this.expr(e);
 		} catch( _g ) {
-			haxe_NativeStackTrace.lastError = _g;
 			var _g1 = haxe_Exception.caught(_g).unwrap();
 			if(js_Boot.__instanceof(_g1,hscript__$Interp_Stop)) {
 				var e = _g1;
@@ -10771,7 +10999,6 @@ hscript_Interp.prototype = {
 					try {
 						r = me.exprReturn(fexpr);
 					} catch( _g ) {
-						haxe_NativeStackTrace.lastError = _g;
 						var e = haxe_Exception.caught(_g).unwrap();
 						me.locals = old;
 						me.depth = depth;
@@ -10914,7 +11141,6 @@ hscript_Interp.prototype = {
 				this.inTry = oldTry;
 				return v;
 			} catch( _g ) {
-				haxe_NativeStackTrace.lastError = _g;
 				var _g1 = haxe_Exception.caught(_g).unwrap();
 				if(js_Boot.__instanceof(_g1,hscript__$Interp_Stop)) {
 					var err = _g1;
@@ -11003,7 +11229,6 @@ hscript_Interp.prototype = {
 			try {
 				this.expr(e);
 			} catch( _g ) {
-				haxe_NativeStackTrace.lastError = _g;
 				var _g1 = haxe_Exception.caught(_g).unwrap();
 				if(js_Boot.__instanceof(_g1,hscript__$Interp_Stop)) {
 					var err = _g1;
@@ -11030,7 +11255,6 @@ hscript_Interp.prototype = {
 		_hx_loop1: while(this.expr(econd) == true) try {
 			this.expr(e);
 		} catch( _g ) {
-			haxe_NativeStackTrace.lastError = _g;
 			var _g1 = haxe_Exception.caught(_g).unwrap();
 			if(js_Boot.__instanceof(_g1,hscript__$Interp_Stop)) {
 				var err = _g1;
@@ -11052,7 +11276,6 @@ hscript_Interp.prototype = {
 		try {
 			v = $getIterator(v);
 		} catch( _g ) {
-			haxe_NativeStackTrace.lastError = _g;
 		}
 		if(v.hasNext == null || v.next == null) {
 			var e = hscript_Error.EInvalidIterator(v);
@@ -11071,7 +11294,6 @@ hscript_Interp.prototype = {
 			try {
 				this.expr(e);
 			} catch( _g ) {
-				haxe_NativeStackTrace.lastError = _g;
 				var _g1 = haxe_Exception.caught(_g).unwrap();
 				if(js_Boot.__instanceof(_g1,hscript__$Interp_Stop)) {
 					var err = _g1;
@@ -14025,7 +14247,6 @@ js_Boot.__string_rec = function(o,s) {
 		try {
 			tostr = o.toString;
 		} catch( _g ) {
-			haxe_NativeStackTrace.lastError = _g;
 			return "???";
 		}
 		if(tostr != null && tostr != Object.toString && typeof(tostr) == "function") {
@@ -14173,7 +14394,6 @@ js_Browser.getLocalStorage = function() {
 		}
 		return s;
 	} catch( _g ) {
-		haxe_NativeStackTrace.lastError = _g;
 		return null;
 	}
 };
@@ -19812,7 +20032,6 @@ var lime_app_Future = function(work,async) {
 				this.value = work();
 				this.isComplete = true;
 			} catch( _g ) {
-				haxe_NativeStackTrace.lastError = _g;
 				var e = haxe_Exception.caught(_g).unwrap();
 				this.error = e;
 				this.isError = true;
@@ -19955,7 +20174,6 @@ lime_app__$Future_FutureWork.threadPool_doWork = function(state) {
 		var result = state.work();
 		lime_app__$Future_FutureWork.threadPool.sendComplete({ promise : state.promise, result : result});
 	} catch( _g ) {
-		haxe_NativeStackTrace.lastError = _g;
 		var e = haxe_Exception.caught(_g).unwrap();
 		lime_app__$Future_FutureWork.threadPool.sendError({ promise : state.promise, error : e});
 	}
@@ -26935,7 +27153,6 @@ var lime_media_AudioContext = function(type) {
 				this.web = new window.AudioContext ();
 				this.type = "web";
 			} catch( _g ) {
-				haxe_NativeStackTrace.lastError = _g;
 			}
 		}
 		if(this.web == null && type != "web") {
@@ -30258,7 +30475,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 678247;
+	this.version = 785881;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = "lime.utils.AssetCache";
@@ -32653,37 +32870,6 @@ openfl_Lib.get_current = function() {
 	}
 	return openfl__$internal_Lib.current;
 };
-var openfl__$Vector_IVector = function() { };
-$hxClasses["openfl._Vector.IVector"] = openfl__$Vector_IVector;
-openfl__$Vector_IVector.__name__ = "openfl._Vector.IVector";
-openfl__$Vector_IVector.__isInterface__ = true;
-openfl__$Vector_IVector.prototype = {
-	get_length: null
-	,set_length: null
-	,fixed: null
-	,concat: null
-	,copy: null
-	,filter: null
-	,get: null
-	,indexOf: null
-	,insertAt: null
-	,iterator: null
-	,join: null
-	,lastIndexOf: null
-	,pop: null
-	,push: null
-	,removeAt: null
-	,reverse: null
-	,set: null
-	,shift: null
-	,slice: null
-	,sort: null
-	,splice: null
-	,toString: null
-	,unshift: null
-	,__class__: openfl__$Vector_IVector
-	,__properties__: {set_length:"set_length",get_length:"get_length"}
-};
 var openfl__$Vector_BoolVector = function(length,fixed,array) {
 	if(fixed == null) {
 		fixed = false;
@@ -33445,206 +33631,6 @@ openfl__$Vector_IntVector.prototype = {
 		return this.__array.length;
 	}
 	,__class__: openfl__$Vector_IntVector
-	,__properties__: {set_length:"set_length",get_length:"get_length"}
-};
-var openfl__$Vector_ObjectVector = function(length,fixed,array,forceCopy) {
-	if(forceCopy == null) {
-		forceCopy = false;
-	}
-	if(fixed == null) {
-		fixed = false;
-	}
-	if(length == null) {
-		length = 0;
-	}
-	if(forceCopy) {
-		this.__array = [];
-		if(array != null) {
-			var _g = 0;
-			var _g1 = array.length;
-			while(_g < _g1) {
-				var i = _g++;
-				this.__array[i] = array[i];
-			}
-		}
-	} else {
-		if(array == null) {
-			array = [];
-		}
-		this.__array = array;
-	}
-	if(length > 0) {
-		this.set_length(length);
-	}
-	this.fixed = fixed;
-};
-$hxClasses["openfl._Vector.ObjectVector"] = openfl__$Vector_ObjectVector;
-openfl__$Vector_ObjectVector.__name__ = "openfl._Vector.ObjectVector";
-openfl__$Vector_ObjectVector.__interfaces__ = [openfl__$Vector_IVector];
-openfl__$Vector_ObjectVector.prototype = {
-	fixed: null
-	,__array: null
-	,concat: function(a) {
-		if(a == null) {
-			return new openfl__$Vector_ObjectVector(0,false,this.__array.slice());
-		} else {
-			var other = a;
-			if(other.__array.length > 0) {
-				return new openfl__$Vector_ObjectVector(0,false,this.__array.concat(other.__array));
-			} else {
-				return new openfl__$Vector_ObjectVector(0,false,this.__array.slice());
-			}
-		}
-	}
-	,copy: function() {
-		return new openfl__$Vector_ObjectVector(0,this.fixed,this.__array.slice());
-	}
-	,filter: function(callback) {
-		var tmp = this.fixed;
-		var _g = [];
-		var _g1 = 0;
-		var _g2 = this.__array;
-		while(_g1 < _g2.length) {
-			var v = _g2[_g1];
-			++_g1;
-			if(callback(v)) {
-				_g.push(v);
-			}
-		}
-		return new openfl__$Vector_ObjectVector(0,tmp,_g);
-	}
-	,get: function(index) {
-		return this.__array[index];
-	}
-	,indexOf: function(x,from) {
-		if(from == null) {
-			from = 0;
-		}
-		var _g = from;
-		var _g1 = this.__array.length;
-		while(_g < _g1) {
-			var i = _g++;
-			if(this.__array[i] == x) {
-				return i;
-			}
-		}
-		return -1;
-	}
-	,insertAt: function(index,element) {
-		if(!this.fixed || index < this.__array.length) {
-			this.__array.splice(index,0,element);
-		}
-	}
-	,iterator: function() {
-		return new haxe_iterators_ArrayIterator(this.__array);
-	}
-	,join: function(sep) {
-		if(sep == null) {
-			sep = ",";
-		}
-		return this.__array.join(sep);
-	}
-	,lastIndexOf: function(x,from) {
-		var i = from == null || from >= this.__array.length ? this.__array.length - 1 : from;
-		while(i >= 0) {
-			if(this.__array[i] == x) {
-				return i;
-			}
-			--i;
-		}
-		return -1;
-	}
-	,pop: function() {
-		if(!this.fixed) {
-			return this.__array.pop();
-		} else {
-			return null;
-		}
-	}
-	,push: function(x) {
-		if(!this.fixed) {
-			return this.__array.push(x);
-		} else {
-			return this.__array.length;
-		}
-	}
-	,removeAt: function(index) {
-		if(!this.fixed || index < this.__array.length) {
-			return this.__array.splice(index,1)[0];
-		}
-		return null;
-	}
-	,reverse: function() {
-		this.__array.reverse();
-		return this;
-	}
-	,set: function(index,value) {
-		if(!this.fixed || index < this.__array.length) {
-			return this.__array[index] = value;
-		} else {
-			return value;
-		}
-	}
-	,shift: function() {
-		if(!this.fixed) {
-			return this.__array.shift();
-		} else {
-			return null;
-		}
-	}
-	,slice: function(startIndex,endIndex) {
-		if(startIndex == null) {
-			startIndex = 0;
-		}
-		if(endIndex == null) {
-			endIndex = 16777215;
-		}
-		return new openfl__$Vector_ObjectVector(0,false,this.__array.slice(startIndex,endIndex));
-	}
-	,sort: function(f) {
-		this.__array.sort(f);
-	}
-	,splice: function(pos,len) {
-		return new openfl__$Vector_ObjectVector(0,false,this.__array.splice(pos,len));
-	}
-	,toJSON: function() {
-		return this.__array;
-	}
-	,toString: function() {
-		if(this.__array != null) {
-			return this.__array.toString();
-		} else {
-			return null;
-		}
-	}
-	,unshift: function(x) {
-		if(!this.fixed) {
-			this.__array.unshift(x);
-		}
-	}
-	,get_length: function() {
-		return this.__array.length;
-	}
-	,set_length: function(value) {
-		if(!this.fixed) {
-			var currentLength = this.__array.length;
-			if(value < 0) {
-				value = 0;
-			}
-			if(value > currentLength) {
-				var _g = currentLength;
-				var _g1 = value;
-				while(_g < _g1) {
-					var i = _g++;
-					this.__array.push(null);
-				}
-			} else {
-				while(this.__array.length > value) this.__array.pop();
-			}
-		}
-		return this.__array.length;
-	}
-	,__class__: openfl__$Vector_ObjectVector
 	,__properties__: {set_length:"set_length",get_length:"get_length"}
 };
 var openfl__$internal_Lib = function() { };
@@ -61350,7 +61336,6 @@ openfl_display_MovieClip.prototype = $extend(openfl_display_Sprite.prototype,{
 					})(interp,program);
 					this.__frameScripts.h[frame] = script;
 				} catch( _g2 ) {
-					haxe_NativeStackTrace.lastError = _g2;
 					if(this.__symbol.className != null) {
 						lime_utils_Log.warn("Unable to evaluate frame script source for symbol \"" + this.__symbol.className + "\" frame " + frame + "\n" + frameData.scriptSource,{ fileName : "openfl/display/MovieClip.hx", lineNumber : 675, className : "openfl.display.MovieClip", methodName : "__fromSymbol"});
 					} else {
@@ -63759,7 +63744,6 @@ openfl_display_Stage.prototype = $extend(openfl_display_DisplayObjectContainer.p
 					try {
 						dispatcher.__dispatch(event);
 					} catch( _g1 ) {
-						haxe_NativeStackTrace.lastError = _g1;
 						var e = haxe_Exception.caught(_g1).unwrap();
 						this.__handleError(e);
 					}
@@ -63805,7 +63789,6 @@ openfl_display_Stage.prototype = $extend(openfl_display_DisplayObjectContainer.p
 		try {
 			return openfl_display_DisplayObjectContainer.prototype.__dispatchEvent.call(this,event);
 		} catch( _g ) {
-			haxe_NativeStackTrace.lastError = _g;
 			var e = haxe_Exception.caught(_g).unwrap();
 			this.__handleError(e);
 			return false;
@@ -63856,7 +63839,6 @@ openfl_display_Stage.prototype = $extend(openfl_display_DisplayObjectContainer.p
 				}
 			}
 		} catch( _g ) {
-			haxe_NativeStackTrace.lastError = _g;
 			var e = haxe_Exception.caught(_g).unwrap();
 			this.__handleError(e);
 		}
@@ -63865,7 +63847,6 @@ openfl_display_Stage.prototype = $extend(openfl_display_DisplayObjectContainer.p
 		try {
 			return target.__dispatchEvent(event);
 		} catch( _g ) {
-			haxe_NativeStackTrace.lastError = _g;
 			var e = haxe_Exception.caught(_g).unwrap();
 			this.__handleError(e);
 			return false;
@@ -63919,7 +63900,6 @@ openfl_display_Stage.prototype = $extend(openfl_display_DisplayObjectContainer.p
 		try {
 			openfl_Lib.get_current().__loaderInfo.uncaughtErrorEvents.dispatchEvent(event);
 		} catch( _g ) {
-			haxe_NativeStackTrace.lastError = _g;
 		}
 		if(!event.__preventDefault) {
 			try {
@@ -63929,7 +63909,6 @@ openfl_display_Stage.prototype = $extend(openfl_display_DisplayObjectContainer.p
 					e.stack = exc.stack;
 				}
 			} catch( _g ) {
-				haxe_NativeStackTrace.lastError = _g;
 			}
 			throw e;
 		}
@@ -64580,7 +64559,6 @@ openfl_display_Stage.prototype = $extend(openfl_display_DisplayObjectContainer.p
 		try {
 			openfl_ui_GameInput.__onGamepadAxisMove(gamepad,axis,value);
 		} catch( _g ) {
-			haxe_NativeStackTrace.lastError = _g;
 			var e = haxe_Exception.caught(_g).unwrap();
 			this.__handleError(e);
 		}
@@ -64589,7 +64567,6 @@ openfl_display_Stage.prototype = $extend(openfl_display_DisplayObjectContainer.p
 		try {
 			openfl_ui_GameInput.__onGamepadButtonDown(gamepad,button);
 		} catch( _g ) {
-			haxe_NativeStackTrace.lastError = _g;
 			var e = haxe_Exception.caught(_g).unwrap();
 			this.__handleError(e);
 		}
@@ -64598,7 +64575,6 @@ openfl_display_Stage.prototype = $extend(openfl_display_DisplayObjectContainer.p
 		try {
 			openfl_ui_GameInput.__onGamepadButtonUp(gamepad,button);
 		} catch( _g ) {
-			haxe_NativeStackTrace.lastError = _g;
 			var e = haxe_Exception.caught(_g).unwrap();
 			this.__handleError(e);
 		}
@@ -64607,7 +64583,6 @@ openfl_display_Stage.prototype = $extend(openfl_display_DisplayObjectContainer.p
 		try {
 			openfl_ui_GameInput.__onGamepadConnect(gamepad);
 		} catch( _g ) {
-			haxe_NativeStackTrace.lastError = _g;
 			var e = haxe_Exception.caught(_g).unwrap();
 			this.__handleError(e);
 		}
@@ -64640,7 +64615,6 @@ openfl_display_Stage.prototype = $extend(openfl_display_DisplayObjectContainer.p
 		try {
 			openfl_ui_GameInput.__onGamepadDisconnect(gamepad);
 		} catch( _g ) {
-			haxe_NativeStackTrace.lastError = _g;
 			var e = haxe_Exception.caught(_g).unwrap();
 			this.__handleError(e);
 		}
@@ -67189,7 +67163,6 @@ var openfl_display_Window = function(application,attributes) {
 		try {
 			this.stage.get_loaderInfo().parameters = attributes.parameters;
 		} catch( _g ) {
-			haxe_NativeStackTrace.lastError = _g;
 		}
 	}
 	if(Object.prototype.hasOwnProperty.call(attributes,"resizable") && !attributes.resizable) {
@@ -74669,7 +74642,6 @@ openfl_net_NetStream.prototype = $extend(openfl_events_EventDispatcher.prototype
 				var handler = this.client.onPlayStatus;
 				handler({ code : code, duration : this.__video.duration, position : this.__video.currentTime, speed : this.__video.playbackRate, start : this.__video.startTime});
 			} catch( _g ) {
-				haxe_NativeStackTrace.lastError = _g;
 			}
 		}
 	}
@@ -74700,7 +74672,6 @@ openfl_net_NetStream.prototype = $extend(openfl_events_EventDispatcher.prototype
 				var handler = this.client.onMetaData;
 				handler({ width : this.__video.videoWidth, height : this.__video.videoHeight, duration : this.__video.duration});
 			} catch( _g ) {
-				haxe_NativeStackTrace.lastError = _g;
 			}
 		}
 	}
@@ -74822,7 +74793,6 @@ openfl_net_SharedObject.getLocal = function(name,localPath,secure) {
 				encodedData = storage.getItem(localPath + ":" + name);
 			}
 		} catch( _g ) {
-			haxe_NativeStackTrace.lastError = _g;
 		}
 		var sharedObject = new openfl_net_SharedObject();
 		sharedObject.data = { };
@@ -74834,7 +74804,6 @@ openfl_net_SharedObject.getLocal = function(name,localPath,secure) {
 				unserializer.setResolver({ resolveEnum : Type.resolveEnum, resolveClass : openfl_net_SharedObject.__resolveClass});
 				sharedObject.data = unserializer.unserialize();
 			} catch( _g ) {
-				haxe_NativeStackTrace.lastError = _g;
 			}
 		}
 		openfl_net_SharedObject.__sharedObjects.h[id] = sharedObject;
@@ -74920,7 +74889,6 @@ openfl_net_SharedObject.prototype = $extend(openfl_events_EventDispatcher.protot
 				storage.removeItem(this.__localPath + ":" + this.__name);
 			}
 		} catch( _g ) {
-			haxe_NativeStackTrace.lastError = _g;
 		}
 	}
 	,close: function() {
@@ -74943,7 +74911,6 @@ openfl_net_SharedObject.prototype = $extend(openfl_events_EventDispatcher.protot
 				storage.setItem(this.__localPath + ":" + this.__name,encodedData);
 			}
 		} catch( _g ) {
-			haxe_NativeStackTrace.lastError = _g;
 			return 1;
 		}
 		return 0;
@@ -74963,7 +74930,6 @@ openfl_net_SharedObject.prototype = $extend(openfl_events_EventDispatcher.protot
 			var d = haxe_Serializer.run(this.data);
 			return haxe_io_Bytes.ofString(d).length;
 		} catch( _g ) {
-			haxe_NativeStackTrace.lastError = _g;
 			return 0;
 		}
 	}
@@ -76102,7 +76068,6 @@ openfl_text_TextField.prototype = $extend(openfl_display_InteractiveObject.proto
 					rect.setTo(x,group1.offsetY,lastPosition,group1.ascent + group1.descent);
 					return true;
 				} catch( _g2 ) {
-					haxe_NativeStackTrace.lastError = _g2;
 				}
 			}
 		}
@@ -82604,7 +82569,6 @@ spine_DeformTimeline.prototype = $extend(spine_CurveTimeline.prototype,{
 					try {
 						spine_support_utils_Array.copy(src,0,dest,0,vertexCount);
 					} catch( _g ) {
-						haxe_NativeStackTrace.lastError = _g;
 						throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + vertexCount));
 					}
 				}
@@ -82977,7 +82941,6 @@ spine_DrawOrderTimeline.prototype = {
 			try {
 				spine_support_utils_Array.copy(src,0,dest,0,length);
 			} catch( _g ) {
-				haxe_NativeStackTrace.lastError = _g;
 				throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
 			}
 			return;
@@ -82997,7 +82960,6 @@ spine_DrawOrderTimeline.prototype = {
 				try {
 					spine_support_utils_Array.copy(src,0,dest,0,length);
 				} catch( _g ) {
-					haxe_NativeStackTrace.lastError = _g;
 					throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
 				}
 			}
@@ -83023,7 +82985,6 @@ spine_DrawOrderTimeline.prototype = {
 			try {
 				spine_support_utils_Array.copy(src,0,dest,0,length);
 			} catch( _g ) {
-				haxe_NativeStackTrace.lastError = _g;
 				throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
 			}
 		} else {
@@ -95218,7 +95179,6 @@ spine_Skeleton.prototype = {
 		try {
 			spine_support_utils_Array.copy(src,0,dest,0,length);
 		} catch( _g ) {
-			haxe_NativeStackTrace.lastError = _g;
 			throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
 		}
 		var i = 0;
@@ -95327,7 +95287,6 @@ spine_Skeleton.prototype = {
 		try {
 			spine_support_utils_Array.copy(src,0,dest,0,length);
 		} catch( _g ) {
-			haxe_NativeStackTrace.lastError = _g;
 			throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
 		}
 		var i = 0;
@@ -98344,7 +98303,6 @@ spine_SkeletonJson.prototype = {
 							}
 						}
 					} catch( _g ) {
-						haxe_NativeStackTrace.lastError = _g;
 						var ex = haxe_Exception.caught(_g).unwrap();
 						throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Error reading attachment: " + entry4.get_name() + ", skin: " + Std.string(skin),ex));
 					}
@@ -98936,7 +98894,6 @@ spine_SkeletonJson.prototype = {
 									try {
 										spine_support_utils_Array.copy(src,0,dest,start,length2);
 									} catch( _g4 ) {
-										haxe_NativeStackTrace.lastError = _g4;
 										throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + start + ", count: " + length2));
 									}
 									if(scale != 1) {
@@ -99093,7 +99050,6 @@ spine_SkeletonJson.prototype = {
 				}
 				skeletonData.animations.push(new spine_Animation(name,timelines,duration));
 			} catch( _g5 ) {
-				haxe_NativeStackTrace.lastError = _g5;
 				var ex = haxe_Exception.caught(_g5).unwrap();
 				throw haxe_Exception.thrown(new spine_support_utils_SerializationException("Error reading animation: " + animationMap.get_name(),ex));
 			}
@@ -100069,7 +100025,6 @@ spine_SkeletonJson.prototype = {
 							try {
 								spine_support_utils_Array.copy(src,0,dest,start,length2);
 							} catch( _g4 ) {
-								haxe_NativeStackTrace.lastError = _g4;
 								throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + start + ", count: " + length2));
 							}
 							if(scale != 1) {
@@ -102735,7 +102690,6 @@ spine_attachments_VertexAttachment.prototype = $extend(spine_attachments_Attachm
 			try {
 				spine_support_utils_Array.copy(src,0,dest,0,length);
 			} catch( _g ) {
-				haxe_NativeStackTrace.lastError = _g;
 				throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
 			}
 		} else {
@@ -102774,7 +102728,6 @@ spine_attachments_VertexAttachment.prototype = $extend(spine_attachments_Attachm
 			try {
 				spine_support_utils_Array.copy(src,0,dest,0,length);
 			} catch( _g ) {
-				haxe_NativeStackTrace.lastError = _g;
 				throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
 			}
 		} else {
@@ -102833,7 +102786,6 @@ spine_attachments_BoundingBoxAttachment.prototype = $extend(spine_attachments_Ve
 			try {
 				spine_support_utils_Array.copy(src,0,dest,0,length);
 			} catch( _g ) {
-				haxe_NativeStackTrace.lastError = _g;
 				throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
 			}
 		} else {
@@ -102872,7 +102824,6 @@ spine_attachments_BoundingBoxAttachment.prototype = $extend(spine_attachments_Ve
 			try {
 				spine_support_utils_Array.copy(src,0,dest,0,length);
 			} catch( _g ) {
-				haxe_NativeStackTrace.lastError = _g;
 				throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
 			}
 		} else {
@@ -102944,7 +102895,6 @@ spine_attachments_ClippingAttachment.prototype = $extend(spine_attachments_Verte
 			try {
 				spine_support_utils_Array.copy(src,0,dest,0,length);
 			} catch( _g ) {
-				haxe_NativeStackTrace.lastError = _g;
 				throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
 			}
 		} else {
@@ -102983,7 +102933,6 @@ spine_attachments_ClippingAttachment.prototype = $extend(spine_attachments_Verte
 			try {
 				spine_support_utils_Array.copy(src,0,dest,0,length);
 			} catch( _g ) {
-				haxe_NativeStackTrace.lastError = _g;
 				throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
 			}
 		} else {
@@ -103276,7 +103225,6 @@ spine_attachments_MeshAttachment.prototype = $extend(spine_attachments_VertexAtt
 			try {
 				spine_support_utils_Array.copy(src,0,dest,0,length);
 			} catch( _g ) {
-				haxe_NativeStackTrace.lastError = _g;
 				throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
 			}
 		} else {
@@ -103315,7 +103263,6 @@ spine_attachments_MeshAttachment.prototype = $extend(spine_attachments_VertexAtt
 			try {
 				spine_support_utils_Array.copy(src,0,dest,0,length);
 			} catch( _g ) {
-				haxe_NativeStackTrace.lastError = _g;
 				throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
 			}
 		} else {
@@ -103355,7 +103302,6 @@ spine_attachments_MeshAttachment.prototype = $extend(spine_attachments_VertexAtt
 		try {
 			spine_support_utils_Array.copy(src,0,dest,0,length);
 		} catch( _g ) {
-			haxe_NativeStackTrace.lastError = _g;
 			throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
 		}
 		var length = this.uvs.length;
@@ -103390,7 +103336,6 @@ spine_attachments_MeshAttachment.prototype = $extend(spine_attachments_VertexAtt
 		try {
 			spine_support_utils_Array.copy(src,0,dest,0,length);
 		} catch( _g ) {
-			haxe_NativeStackTrace.lastError = _g;
 			throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
 		}
 		var length = this.triangles.length;
@@ -103425,7 +103370,6 @@ spine_attachments_MeshAttachment.prototype = $extend(spine_attachments_VertexAtt
 		try {
 			spine_support_utils_Array.copy(src,0,dest,0,length);
 		} catch( _g ) {
-			haxe_NativeStackTrace.lastError = _g;
 			throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
 		}
 		copy.hullLength = this.hullLength;
@@ -103462,7 +103406,6 @@ spine_attachments_MeshAttachment.prototype = $extend(spine_attachments_VertexAtt
 			try {
 				spine_support_utils_Array.copy(src,0,dest,0,length);
 			} catch( _g ) {
-				haxe_NativeStackTrace.lastError = _g;
 				throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
 			}
 		}
@@ -103569,7 +103512,6 @@ spine_attachments_PathAttachment.prototype = $extend(spine_attachments_VertexAtt
 			try {
 				spine_support_utils_Array.copy(src,0,dest,0,length);
 			} catch( _g ) {
-				haxe_NativeStackTrace.lastError = _g;
 				throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
 			}
 		} else {
@@ -103608,7 +103550,6 @@ spine_attachments_PathAttachment.prototype = $extend(spine_attachments_VertexAtt
 			try {
 				spine_support_utils_Array.copy(src,0,dest,0,length);
 			} catch( _g ) {
-				haxe_NativeStackTrace.lastError = _g;
 				throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
 			}
 		} else {
@@ -103648,7 +103589,6 @@ spine_attachments_PathAttachment.prototype = $extend(spine_attachments_VertexAtt
 		try {
 			spine_support_utils_Array.copy(src,0,dest,0,length);
 		} catch( _g ) {
-			haxe_NativeStackTrace.lastError = _g;
 			throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + length));
 		}
 		copy.closed = this.closed;
@@ -103972,7 +103912,6 @@ spine_attachments_RegionAttachment.prototype = $extend(spine_attachments_Attachm
 		try {
 			spine_support_utils_Array.copy(src,0,dest,0,8);
 		} catch( _g ) {
-			haxe_NativeStackTrace.lastError = _g;
 			throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + 8));
 		}
 		var src = this.offset;
@@ -103986,7 +103925,6 @@ spine_attachments_RegionAttachment.prototype = $extend(spine_attachments_Attachm
 		try {
 			spine_support_utils_Array.copy(src,0,dest,0,8);
 		} catch( _g ) {
-			haxe_NativeStackTrace.lastError = _g;
 			throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + 0 + ", dest: " + dest.length + ", " + 0 + ", count: " + 8));
 		}
 		var _this = copy.color;
@@ -104007,6 +103945,58 @@ spine_base_SpineBaseDisplay.prototype = {
 	onSpineUpdate: null
 	,__class__: spine_base_SpineBaseDisplay
 };
+var spine_events_AnimationEvent = function(target) {
+	openfl_events_EventDispatcher.call(this,target);
+};
+$hxClasses["spine.events.AnimationEvent"] = spine_events_AnimationEvent;
+spine_events_AnimationEvent.__name__ = "spine.events.AnimationEvent";
+spine_events_AnimationEvent.__interfaces__ = [spine_AnimationStateListener];
+spine_events_AnimationEvent.__super__ = openfl_events_EventDispatcher;
+spine_events_AnimationEvent.prototype = $extend(openfl_events_EventDispatcher.prototype,{
+	start: function(entry) {
+		var event2 = new spine_events_SpineEvent("start");
+		event2.entry = entry;
+		this.dispatchEvent(event2);
+	}
+	,interrupt: function(entry) {
+		var event2 = new spine_events_SpineEvent("interrupt");
+		event2.entry = entry;
+		this.dispatchEvent(event2);
+	}
+	,end: function(entry) {
+		var event2 = new spine_events_SpineEvent("end");
+		event2.entry = entry;
+		this.dispatchEvent(event2);
+	}
+	,dispose: function(entry) {
+		var event2 = new spine_events_SpineEvent("dispose");
+		event2.entry = entry;
+		this.dispatchEvent(event2);
+	}
+	,complete: function(entry) {
+		var event2 = new spine_events_SpineEvent("complete");
+		event2.entry = entry;
+		this.dispatchEvent(event2);
+	}
+	,event: function(entry,event) {
+		var event2 = new spine_events_SpineEvent("event");
+		event2.event = event;
+		event2.entry = entry;
+		this.dispatchEvent(event2);
+	}
+	,__class__: spine_events_AnimationEvent
+});
+var spine_events_SpineEvent = function(type,bubbles,cancelable) {
+	openfl_events_Event.call(this,type,bubbles,cancelable);
+};
+$hxClasses["spine.events.SpineEvent"] = spine_events_SpineEvent;
+spine_events_SpineEvent.__name__ = "spine.events.SpineEvent";
+spine_events_SpineEvent.__super__ = openfl_events_Event;
+spine_events_SpineEvent.prototype = $extend(openfl_events_Event.prototype,{
+	entry: null
+	,event: null
+	,__class__: spine_events_SpineEvent
+});
 var spine_support_graphics_TextureLoader = function() { };
 $hxClasses["spine.support.graphics.TextureLoader"] = spine_support_graphics_TextureLoader;
 spine_support_graphics_TextureLoader.__name__ = "spine.support.graphics.TextureLoader";
@@ -105705,10 +105695,10 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 						var this2 = from.timelinesRotation;
 						this2.splice(0,this2.length);
 					}
-					var _this2 = _this.queue;
-					_this2.objects.push(0);
-					_this2.objects.push(next);
-					_this2.AnimationState_this.animationsChanged = true;
+					var _this11 = _this.queue;
+					_this11.objects.push(0);
+					_this11.objects.push(next);
+					_this11.AnimationState_this.animationsChanged = true;
 					while(next.mixingFrom != null) {
 						next.mixTime += delta;
 						next = next.mixingFrom;
@@ -105718,15 +105708,15 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 				}
 			} else if(current.trackLast >= current.trackEnd && current.mixingFrom == null) {
 				_this.tracks[i] = null;
-				var _this3 = _this.queue;
-				_this3.objects.push(2);
-				_this3.objects.push(current);
-				_this3.AnimationState_this.animationsChanged = true;
+				var _this2 = _this.queue;
+				_this2.objects.push(2);
+				_this2.objects.push(current);
+				_this2.AnimationState_this.animationsChanged = true;
 				var next1 = current.next;
 				while(next1 != null) {
-					var _this4 = _this.queue;
-					_this4.objects.push(3);
-					_this4.objects.push(next1);
+					var _this3 = _this.queue;
+					_this3.objects.push(3);
+					_this3.objects.push(next1);
 					next1 = next1.next;
 				}
 				current.next = null;
@@ -105754,10 +105744,10 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 									from2.mixingFrom.mixingTo = from1;
 								}
 								from1.interruptAlpha = from2.interruptAlpha;
-								var _this5 = _this.queue;
-								_this5.objects.push(2);
-								_this5.objects.push(from2);
-								_this5.AnimationState_this.animationsChanged = true;
+								var _this4 = _this.queue;
+								_this4.objects.push(2);
+								_this4.objects.push(from2);
+								_this4.AnimationState_this.animationsChanged = true;
 							}
 							finished = finished1;
 						} else {
@@ -105775,10 +105765,10 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 								from1.mixingFrom.mixingTo = current;
 							}
 							current.interruptAlpha = from1.interruptAlpha;
-							var _this6 = _this.queue;
-							_this6.objects.push(2);
-							_this6.objects.push(from1);
-							_this6.AnimationState_this.animationsChanged = true;
+							var _this5 = _this.queue;
+							_this5.objects.push(2);
+							_this5.objects.push(from1);
+							_this5.AnimationState_this.animationsChanged = true;
 						}
 						tmp = finished;
 					} else {
@@ -105797,10 +105787,10 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 					from3.mixingTo = null;
 				}
 				while(from3 != null) {
-					var _this7 = _this.queue;
-					_this7.objects.push(2);
-					_this7.objects.push(from3);
-					_this7.AnimationState_this.animationsChanged = true;
+					var _this6 = _this.queue;
+					_this6.objects.push(2);
+					_this6.objects.push(from3);
+					_this6.AnimationState_this.animationsChanged = true;
 					from3 = from3.mixingFrom;
 				}
 			}
@@ -106452,6 +106442,41 @@ spine_openfl_SkeletonAnimation.prototype = $extend(spine_openfl_SkeletonSprite.p
 			return this._currentAnimation.getDuration();
 		}
 		return spine_openfl_SkeletonSprite.prototype.getMaxTime.call(this);
+	}
+	,_event: null
+	,addEventListener: function(type,listener,useCapture,priority,useWeakReference) {
+		if(useWeakReference == null) {
+			useWeakReference = false;
+		}
+		if(priority == null) {
+			priority = 0;
+		}
+		if(useCapture == null) {
+			useCapture = false;
+		}
+		if(this._event == null && this.state != null) {
+			this._event = new spine_events_AnimationEvent();
+			var _this = this.state;
+			var listener1 = this._event;
+			if(listener1 == null) {
+				throw haxe_Exception.thrown(new spine_support_error_IllegalArgumentException("listener cannot be null."));
+			}
+			_this.listeners.push(listener1);
+			haxe_Log.trace("事件侦听：",{ fileName : "Source/spine/openfl/SkeletonAnimation.hx", lineNumber : 152, className : "spine.openfl.SkeletonAnimation", methodName : "addEventListener", customParams : [type]});
+		}
+		if(this._event != null) {
+			this._event.addEventListener(type,listener);
+		}
+		spine_openfl_SkeletonSprite.prototype.addEventListener.call(this,type,listener,useCapture,priority,useWeakReference);
+	}
+	,removeEventListener: function(type,listener,useCapture) {
+		if(useCapture == null) {
+			useCapture = false;
+		}
+		spine_openfl_SkeletonSprite.prototype.removeEventListener.call(this,type,listener,useCapture);
+		if(this._event != null) {
+			this._event.addEventListener(type,listener);
+		}
 	}
 	,__class__: spine_openfl_SkeletonAnimation
 });
@@ -108930,10 +108955,10 @@ spine_tilemap_SkeletonAnimation.prototype = $extend(spine_tilemap_SkeletonSprite
 						var this2 = from.timelinesRotation;
 						this2.splice(0,this2.length);
 					}
-					var _this2 = _this.queue;
-					_this2.objects.push(0);
-					_this2.objects.push(next);
-					_this2.AnimationState_this.animationsChanged = true;
+					var _this11 = _this.queue;
+					_this11.objects.push(0);
+					_this11.objects.push(next);
+					_this11.AnimationState_this.animationsChanged = true;
 					while(next.mixingFrom != null) {
 						next.mixTime += delta;
 						next = next.mixingFrom;
@@ -108943,15 +108968,15 @@ spine_tilemap_SkeletonAnimation.prototype = $extend(spine_tilemap_SkeletonSprite
 				}
 			} else if(current.trackLast >= current.trackEnd && current.mixingFrom == null) {
 				_this.tracks[i] = null;
-				var _this3 = _this.queue;
-				_this3.objects.push(2);
-				_this3.objects.push(current);
-				_this3.AnimationState_this.animationsChanged = true;
+				var _this2 = _this.queue;
+				_this2.objects.push(2);
+				_this2.objects.push(current);
+				_this2.AnimationState_this.animationsChanged = true;
 				var next1 = current.next;
 				while(next1 != null) {
-					var _this4 = _this.queue;
-					_this4.objects.push(3);
-					_this4.objects.push(next1);
+					var _this3 = _this.queue;
+					_this3.objects.push(3);
+					_this3.objects.push(next1);
 					next1 = next1.next;
 				}
 				current.next = null;
@@ -108979,10 +109004,10 @@ spine_tilemap_SkeletonAnimation.prototype = $extend(spine_tilemap_SkeletonSprite
 									from2.mixingFrom.mixingTo = from1;
 								}
 								from1.interruptAlpha = from2.interruptAlpha;
-								var _this5 = _this.queue;
-								_this5.objects.push(2);
-								_this5.objects.push(from2);
-								_this5.AnimationState_this.animationsChanged = true;
+								var _this4 = _this.queue;
+								_this4.objects.push(2);
+								_this4.objects.push(from2);
+								_this4.AnimationState_this.animationsChanged = true;
 							}
 							finished = finished1;
 						} else {
@@ -109000,10 +109025,10 @@ spine_tilemap_SkeletonAnimation.prototype = $extend(spine_tilemap_SkeletonSprite
 								from1.mixingFrom.mixingTo = current;
 							}
 							current.interruptAlpha = from1.interruptAlpha;
-							var _this6 = _this.queue;
-							_this6.objects.push(2);
-							_this6.objects.push(from1);
-							_this6.AnimationState_this.animationsChanged = true;
+							var _this5 = _this.queue;
+							_this5.objects.push(2);
+							_this5.objects.push(from1);
+							_this5.AnimationState_this.animationsChanged = true;
 						}
 						tmp = finished;
 					} else {
@@ -109022,10 +109047,10 @@ spine_tilemap_SkeletonAnimation.prototype = $extend(spine_tilemap_SkeletonSprite
 					from3.mixingTo = null;
 				}
 				while(from3 != null) {
-					var _this7 = _this.queue;
-					_this7.objects.push(2);
-					_this7.objects.push(from3);
-					_this7.AnimationState_this.animationsChanged = true;
+					var _this6 = _this.queue;
+					_this6.objects.push(2);
+					_this6.objects.push(from3);
+					_this6.AnimationState_this.animationsChanged = true;
 					from3 = from3.mixingFrom;
 				}
 			}
@@ -109452,7 +109477,6 @@ spine_utils_SpineUtils.arraycopy = function(src,srcPos,dest,destPos,length) {
 	try {
 		spine_support_utils_Array.copy(src,srcPos,dest,destPos,length);
 	} catch( _g ) {
-		haxe_NativeStackTrace.lastError = _g;
 		throw haxe_Exception.thrown(new spine_support_error_ArrayIndexOutOfBoundsException("Src: " + src.length + ", " + srcPos + ", dest: " + dest.length + ", " + destPos + ", count: " + length));
 	}
 };
@@ -111128,6 +111152,7 @@ zygame_components_ZBuilder.init = function() {
 	zygame_components_ZBuilder.bind(zygame_components_ZBitmapLabel);
 	zygame_components_ZBuilder.bind(zygame_components_ZSpine);
 	zygame_components_ZBuilder.bind(zygame_display_batch_BSpine);
+	zygame_components_ZBuilder.bind(zygame_components_ZStack);
 	zygame_components_ZBuilder.bindParsing(zygame_components_ZImage,"src",function(ui,name,value) {
 		var values = value.split(":");
 		if(values.length >= 3) {
@@ -111335,7 +111360,7 @@ zygame_components_ZBuilder.init = function() {
 		var target = xml.get("src");
 		if(target != null) {
 			var data = target.split(":");
-			return [data[0],data[1],xml.get("tilemap") == "true",xml.get("native") == "true"];
+			return [data[0],data[1],xml.get("tilemap") == "true",xml.get("native") == "true",!xml.exists("isLoop") || xml.get("isLoop") == "true"];
 		}
 		return [];
 	});
@@ -111722,7 +111747,7 @@ zygame_components_ZBuilder.buildui = function(xml,parent,builder,superInit,defal
 	if(base == null) {
 		var childxml = zygame_components_ZBuilder.getXml(className);
 		if(childxml != null) {
-			haxe_Log.trace("子集：",{ fileName : "Source/zygame/components/ZBuilder.hx", lineNumber : 776, className : "zygame.components.ZBuilder", methodName : "buildui", customParams : [xml.get("id")]});
+			haxe_Log.trace("子集：",{ fileName : "Source/zygame/components/ZBuilder.hx", lineNumber : 783, className : "zygame.components.ZBuilder", methodName : "buildui", customParams : [xml.get("id")]});
 			ui = zygame_components_ZBuilder.buildui(childxml.firstElement(),parent,builder,null,null,xml.get("id"));
 		} else {
 			throw haxe_Exception.thrown("Class name " + className + " is not define xml assets!");
@@ -111743,7 +111768,7 @@ zygame_components_ZBuilder.buildui = function(xml,parent,builder,superInit,defal
 				var tmp = haxe_Log.trace;
 				var tmp1 = e.get_message() + "\n";
 				var tmp2 = e.get_stack();
-				tmp("异常：",{ fileName : "Source/zygame/components/ZBuilder.hx", lineNumber : 793, className : "zygame.components.ZBuilder", methodName : "buildui", customParams : [tmp1 + (tmp2 == null ? "null" : haxe_CallStack.toString(tmp2))]});
+				tmp("异常：",{ fileName : "Source/zygame/components/ZBuilder.hx", lineNumber : 799, className : "zygame.components.ZBuilder", methodName : "buildui", customParams : [tmp1 + (tmp2 == null ? "null" : haxe_CallStack.toString(tmp2))]});
 				if(((parent) instanceof openfl_display_DisplayObject)) {
 					(js_Boot.__cast(parent , openfl_display_DisplayObject)).set_shader(null);
 				} else if(((parent) instanceof openfl_display_Tile)) {
@@ -111762,7 +111787,7 @@ zygame_components_ZBuilder.buildui = function(xml,parent,builder,superInit,defal
 					(js_Boot.__cast(ui , zygame_script_ZHaxe)).argsName = xml.get("args").split(",");
 				}
 			} else if(((ui) instanceof zygame_components_ZTween)) {
-				(js_Boot.__cast(ui , zygame_components_ZTween)).bindBuilder(builder);
+				(js_Boot.__cast(ui , zygame_components_ZTween)).bindBuilder(builder,idpush);
 			}
 		} else {
 			throw haxe_Exception.thrown("Create " + className + " not define id.");
@@ -113425,7 +113450,10 @@ zygame_components_ZQuad.prototype = $extend(zygame_components_ZBox.prototype,{
 	,__class__: zygame_components_ZQuad
 	,__properties__: $extend(zygame_components_ZBox.prototype.__properties__,{set_color:"set_color",get_color:"get_color"})
 });
-var zygame_components_ZSpine = function(atlasName,skeletionName,tilemap,native) {
+var zygame_components_ZSpine = function(atlasName,skeletionName,tilemap,native,isLoop) {
+	if(isLoop == null) {
+		isLoop = true;
+	}
 	if(native == null) {
 		native = false;
 	}
@@ -113434,6 +113462,7 @@ var zygame_components_ZSpine = function(atlasName,skeletionName,tilemap,native) 
 	}
 	this.isLoop = true;
 	zygame_components_ZBox.call(this);
+	this.isLoop = isLoop;
 	if(tilemap) {
 		this.btilemap = new zygame_display_batch_ImageBatchs(zygame_components_ZBuilder.getBaseTextureAtlas(atlasName));
 		this.addChild(this.btilemap);
@@ -113455,6 +113484,12 @@ zygame_components_ZSpine.prototype = $extend(zygame_components_ZBox.prototype,{
 	,btilemap: null
 	,bspine: null
 	,isLoop: null
+	,getNativeSpine: function() {
+		return this.spine;
+	}
+	,getTilemapSpine: function() {
+		return this.bspine.spine;
+	}
 	,set_spineSkin: function(name) {
 		if(this.btilemap != null) {
 			this.bspine.set_spineSkin(name);
@@ -113510,7 +113545,7 @@ zygame_components_ZSpine.prototype = $extend(zygame_components_ZBox.prototype,{
 									while(_g4 < _g5) {
 										var i1 = _g4++;
 										var entry1 = entries[i1];
-										var _this2 = entry1.key;
+										var _this11 = entry1.key;
 										var object = key;
 										var tmp;
 										if(object == null) {
@@ -113518,7 +113553,7 @@ zygame_components_ZSpine.prototype = $extend(zygame_components_ZBox.prototype,{
 										} else {
 											var result1 = object;
 											var other = result1;
-											tmp = _this2.slotIndex != other.slotIndex ? false : _this2.name != other.name ? false : true;
+											tmp = _this11.slotIndex != other.slotIndex ? false : _this11.name != other.name ? false : true;
 										}
 										if(tmp) {
 											result = entry1.value;
@@ -113580,7 +113615,7 @@ zygame_components_ZSpine.prototype = $extend(zygame_components_ZBox.prototype,{
 									while(_g2 < _g3) {
 										var i2 = _g2++;
 										var entry = entries[i2];
-										var _this2 = entry.key;
+										var _this11 = entry.key;
 										var object = key;
 										var tmp;
 										if(object == null) {
@@ -113588,7 +113623,7 @@ zygame_components_ZSpine.prototype = $extend(zygame_components_ZBox.prototype,{
 										} else {
 											var result1 = object;
 											var other = result1;
-											tmp = _this2.slotIndex != other.slotIndex ? false : _this2.name != other.name ? false : true;
+											tmp = _this11.slotIndex != other.slotIndex ? false : _this11.name != other.name ? false : true;
 										}
 										if(tmp) {
 											result = entry.value;
@@ -114333,6 +114368,35 @@ zygame_components_ZSpine.prototype = $extend(zygame_components_ZBox.prototype,{
 	,__class__: zygame_components_ZSpine
 	,__properties__: $extend(zygame_components_ZBox.prototype.__properties__,{get_state:"get_state",set_spineSkin:"set_spineSkin",get_spineSkin:"get_spineSkin",set_action:"set_action",get_action:"get_action"})
 });
+var zygame_components_ZStack = function() {
+	zygame_components_ZBox.call(this);
+};
+$hxClasses["zygame.components.ZStack"] = zygame_components_ZStack;
+zygame_components_ZStack.__name__ = "zygame.components.ZStack";
+zygame_components_ZStack.__super__ = zygame_components_ZBox;
+zygame_components_ZStack.prototype = $extend(zygame_components_ZBox.prototype,{
+	addChildAt: function(display,index) {
+		display.set_visible(display.get_name() == this.get_currentId());
+		return zygame_components_ZBox.prototype.addChildAt.call(this,display,index);
+	}
+	,_id: null
+	,get_currentId: function() {
+		return this._id;
+	}
+	,set_currentId: function(value) {
+		this._id = value;
+		var _g = 0;
+		var _g1 = this.get_numChildren();
+		while(_g < _g1) {
+			var i = _g++;
+			var child = this.getChildAt(i);
+			child.set_visible(child.get_name() == value);
+		}
+		return value;
+	}
+	,__class__: zygame_components_ZStack
+	,__properties__: $extend(zygame_components_ZBox.prototype.__properties__,{set_currentId:"set_currentId",get_currentId:"get_currentId"})
+});
 var zygame_components_ZTween = function(xml) {
 	this.loop = 0;
 	this._onFrameId = -1;
@@ -114354,7 +114418,7 @@ zygame_components_ZTween.prototype = {
 	,_isPlay: null
 	,_onFrameId: null
 	,loop: null
-	,bindBuilder: function(builder) {
+	,bindBuilder: function(builder,parentid) {
 		this._builder = builder;
 		if(this._baseXml.get("auto") == "true") {
 			this.play();
@@ -114367,7 +114431,7 @@ zygame_components_ZTween.prototype = {
 		while(frames.hasNext()) {
 			var xml = frames.next();
 			var this1 = builder.ids;
-			var key = xml.get("bind");
+			var key = (parentid == null ? "" : parentid + "_") + xml.get("bind");
 			var tw = new zygame_components_TweenFrame(xml,this1.h[key]);
 			if(!xml.exists("start")) {
 				tw.start = lastStart;
@@ -114729,14 +114793,14 @@ zygame_components_renders_text_HTML5CacheTextFieldBitmapData.prototype = {
 			} else {
 				if(this.isZh) {
 					this.drawText += char + " ";
-					var this2 = this.rects;
+					var this11 = this.rects;
 					var value1 = this.updateMaxWidthAndHeight(new openfl_geom_Rectangle(px - bwidth * 0.125,(this.line - 1) * (height + this.gapHeight) + this.gapHeight,width + bwidth * 0.25,height + this.gapHeight));
-					this2.h[char] = value1;
+					this11.h[char] = value1;
 				} else {
 					this.drawTime++;
-					var this3 = this.rects;
+					var this12 = this.rects;
 					var value2 = this.updateMaxWidthAndHeight(new openfl_geom_Rectangle(px - bwidth * 0.125,(this.line - 1) * (height + this.gapHeight) + this.gapHeight,width + bwidth * 0.25,height + this.gapHeight));
-					this3.h[char] = value2;
+					this12.h[char] = value2;
 					this._fillTextCommand.push(new zygame_components_renders_text_FillTextCommand(char,px,this.line * (this.textFormat.size + this.gapHeight)));
 				}
 				px += width + bwidth;
@@ -116974,7 +117038,7 @@ zygame_display_batch_BSpine.prototype = $extend(zygame_display_batch_BBox.protot
 								while(_g4 < _g5) {
 									var i1 = _g4++;
 									var entry1 = entries[i1];
-									var _this2 = entry1.key;
+									var _this11 = entry1.key;
 									var object = key;
 									var tmp;
 									if(object == null) {
@@ -116982,7 +117046,7 @@ zygame_display_batch_BSpine.prototype = $extend(zygame_display_batch_BBox.protot
 									} else {
 										var result1 = object;
 										var other = result1;
-										tmp = _this2.slotIndex != other.slotIndex ? false : _this2.name != other.name ? false : true;
+										tmp = _this11.slotIndex != other.slotIndex ? false : _this11.name != other.name ? false : true;
 									}
 									if(tmp) {
 										result = entry1.value;
@@ -117044,7 +117108,7 @@ zygame_display_batch_BSpine.prototype = $extend(zygame_display_batch_BBox.protot
 								while(_g2 < _g3) {
 									var i2 = _g2++;
 									var entry = entries[i2];
-									var _this2 = entry.key;
+									var _this11 = entry.key;
 									var object = key;
 									var tmp;
 									if(object == null) {
@@ -117052,7 +117116,7 @@ zygame_display_batch_BSpine.prototype = $extend(zygame_display_batch_BBox.protot
 									} else {
 										var result1 = object;
 										var other = result1;
-										tmp = _this2.slotIndex != other.slotIndex ? false : _this2.name != other.name ? false : true;
+										tmp = _this11.slotIndex != other.slotIndex ? false : _this11.name != other.name ? false : true;
 									}
 									if(tmp) {
 										result = entry.value;
@@ -118509,7 +118573,6 @@ zygame_media_SoundChannelManager.prototype = {
 					return c;
 				}
 			} catch( _g ) {
-				haxe_NativeStackTrace.lastError = _g;
 				var e = haxe_Exception.caught(_g).unwrap();
 				haxe_Log.trace("音频播放异常：",{ fileName : "Source/zygame/media/SoundChannelManager.hx", lineNumber : 62, className : "zygame.media.SoundChannelManager", methodName : "playEffect", customParams : [e]});
 			}
@@ -118530,7 +118593,6 @@ zygame_media_SoundChannelManager.prototype = {
 				}
 			}
 		} catch( _g ) {
-			haxe_NativeStackTrace.lastError = _g;
 			var e = haxe_Exception.caught(_g).unwrap();
 			haxe_Log.trace("音频播放异常：",{ fileName : "Source/zygame/media/SoundChannelManager.hx", lineNumber : 85, className : "zygame.media.SoundChannelManager", methodName : "playMusic", customParams : [e]});
 		}
@@ -122613,15 +122675,15 @@ zygame_utils_load_TextureAtlas.prototype = $extend(zygame_utils_load_Atlas.proto
 			var this1 = this._tileRects;
 			var key = txml.get("name");
 			if(Object.prototype.hasOwnProperty.call(this1.h,key)) {
-				var this2 = this._tileRects;
+				var this11 = this._tileRects;
 				var key1 = txml.get("name");
-				frame = this2.h[key1];
+				frame = this11.h[key1];
 			} else {
 				frame = new zygame_utils_load_Frame();
 				frame.name = txml.get("name");
-				var this3 = this._tileRects;
+				var this12 = this._tileRects;
 				var key2 = txml.get("name");
-				this3.h[key2] = frame;
+				this12.h[key2] = frame;
 			}
 			frame.id = rects.length - 1;
 			frame.x = trect.x;
@@ -123938,7 +124000,7 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 				while(_g2 < _g3) {
 					var i2 = _g2++;
 					var entry = entries[i2];
-					var _this2 = entry.key;
+					var _this11 = entry.key;
 					var object = key;
 					var tmp;
 					if(object == null) {
@@ -123946,7 +124008,7 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 					} else {
 						var result1 = object;
 						var other = result1;
-						tmp = _this2.slotIndex != other.slotIndex ? false : _this2.name != other.name ? false : true;
+						tmp = _this11.slotIndex != other.slotIndex ? false : _this11.name != other.name ? false : true;
 					}
 					if(tmp) {
 						result = entry.value;
@@ -123967,20 +124029,20 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 				deformAttachment = linkedMesh.mesh;
 			}
 			linkedMesh.mesh.deformAttachment = deformAttachment;
-			var _this3 = linkedMesh.mesh;
+			var _this2 = linkedMesh.mesh;
 			var result3 = parent;
 			var parentMesh = result3;
-			_this3.parentMesh = parentMesh;
+			_this2.parentMesh = parentMesh;
 			if(parentMesh != null) {
-				_this3.bones = parentMesh.bones;
-				_this3.vertices = parentMesh.vertices;
-				_this3.regionUVs = parentMesh.regionUVs;
-				_this3.triangles = parentMesh.triangles;
-				_this3.hullLength = parentMesh.hullLength;
-				_this3.worldVerticesLength = parentMesh.worldVerticesLength;
-				_this3.edges = parentMesh.edges;
-				_this3.width = parentMesh.width;
-				_this3.height = parentMesh.height;
+				_this2.bones = parentMesh.bones;
+				_this2.vertices = parentMesh.vertices;
+				_this2.regionUVs = parentMesh.regionUVs;
+				_this2.triangles = parentMesh.triangles;
+				_this2.hullLength = parentMesh.hullLength;
+				_this2.worldVerticesLength = parentMesh.worldVerticesLength;
+				_this2.edges = parentMesh.edges;
+				_this2.width = parentMesh.width;
+				_this2.height = parentMesh.height;
 			}
 			linkedMesh.mesh.updateUVs();
 			++i;
@@ -124380,7 +124442,7 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 								while(_g2 < _g3) {
 									var i1 = _g2++;
 									var entry = entries[i1];
-									var _this2 = entry.key;
+									var _this11 = entry.key;
 									var object = key;
 									var value;
 									if(object == null) {
@@ -124388,7 +124450,7 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 									} else {
 										var result1 = object;
 										var other = result1;
-										value = _this2.slotIndex != other.slotIndex ? false : _this2.name != other.name ? false : true;
+										value = _this11.slotIndex != other.slotIndex ? false : _this11.name != other.name ? false : true;
 									}
 									if(value) {
 										result = entry.value;
@@ -125024,7 +125086,7 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 				while(_g2 < _g3) {
 					var i2 = _g2++;
 					var entry = entries[i2];
-					var _this2 = entry.key;
+					var _this11 = entry.key;
 					var object = key;
 					var tmp;
 					if(object == null) {
@@ -125032,7 +125094,7 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 					} else {
 						var result1 = object;
 						var other = result1;
-						tmp = _this2.slotIndex != other.slotIndex ? false : _this2.name != other.name ? false : true;
+						tmp = _this11.slotIndex != other.slotIndex ? false : _this11.name != other.name ? false : true;
 					}
 					if(tmp) {
 						result = entry.value;
@@ -125053,20 +125115,20 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 				deformAttachment = linkedMesh.mesh;
 			}
 			linkedMesh.mesh.deformAttachment = deformAttachment;
-			var _this3 = linkedMesh.mesh;
+			var _this2 = linkedMesh.mesh;
 			var result3 = parent;
 			var parentMesh = result3;
-			_this3.parentMesh = parentMesh;
+			_this2.parentMesh = parentMesh;
 			if(parentMesh != null) {
-				_this3.bones = parentMesh.bones;
-				_this3.vertices = parentMesh.vertices;
-				_this3.regionUVs = parentMesh.regionUVs;
-				_this3.triangles = parentMesh.triangles;
-				_this3.hullLength = parentMesh.hullLength;
-				_this3.worldVerticesLength = parentMesh.worldVerticesLength;
-				_this3.edges = parentMesh.edges;
-				_this3.width = parentMesh.width;
-				_this3.height = parentMesh.height;
+				_this2.bones = parentMesh.bones;
+				_this2.vertices = parentMesh.vertices;
+				_this2.regionUVs = parentMesh.regionUVs;
+				_this2.triangles = parentMesh.triangles;
+				_this2.hullLength = parentMesh.hullLength;
+				_this2.worldVerticesLength = parentMesh.worldVerticesLength;
+				_this2.edges = parentMesh.edges;
+				_this2.width = parentMesh.width;
+				_this2.height = parentMesh.height;
 			}
 			linkedMesh.mesh.updateUVs();
 			++i;
@@ -125466,7 +125528,7 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 								while(_g2 < _g3) {
 									var i1 = _g2++;
 									var entry = entries[i1];
-									var _this2 = entry.key;
+									var _this11 = entry.key;
 									var object = key;
 									var value;
 									if(object == null) {
@@ -125474,7 +125536,7 @@ zygame_utils_load_SpineTextureAtals.prototype = $extend(zygame_utils_load_Atlas.
 									} else {
 										var result1 = object;
 										var other = result1;
-										value = _this2.slotIndex != other.slotIndex ? false : _this2.name != other.name ? false : true;
+										value = _this11.slotIndex != other.slotIndex ? false : _this11.name != other.name ? false : true;
 									}
 									if(value) {
 										result = entry.value;
@@ -126100,6 +126162,8 @@ openfl_ui_Multitouch.supportedGestures = null;
 openfl_ui_Multitouch.supportsGestureEvents = false;
 openfl_ui_Multitouch.inputMode = 2;
 openfl_Vector.__meta__ = { statics : { toNullVector : { SuppressWarnings : ["checkstyle:Dynamic"]}}};
+openfl__$Vector_IVector.__meta__ = { obj : { SuppressWarnings : ["checkstyle:FieldDocComment"]}};
+openfl__$Vector_ObjectVector.__meta__ = { obj : { SuppressWarnings : ["checkstyle:FieldDocComment"]}, fields : { concat : { SuppressWarnings : ["checkstyle:Dynamic"]}, toJSON : { SuppressWarnings : ["checkstyle:Dynamic"]}, _ : { SuppressWarnings : ["checkstyle:Dynamic"]}}};
 openfl_display_DisplayObject.__meta__ = { fields : { __cairo : { SuppressWarnings : ["checkstyle:Dynamic"]}, addEventListener : { SuppressWarnings : ["checkstyle:Dynamic"]}, removeEventListener : { SuppressWarnings : ["checkstyle:Dynamic"]}}};
 openfl_display_DisplayObject.__broadcastEvents = new haxe_ds_StringMap();
 openfl_display_DisplayObject.__instanceCount = 0;
@@ -127503,12 +127567,10 @@ lime_utils_UInt8ClampedArray.BYTES_PER_ELEMENT = 1;
 openfl_Lib.__lastTimerID = 0;
 openfl_Lib.__sentWarnings = new haxe_ds_StringMap();
 openfl_Lib.__timers = new haxe_ds_IntMap();
-openfl__$Vector_IVector.__meta__ = { obj : { SuppressWarnings : ["checkstyle:FieldDocComment"]}};
 openfl__$Vector_BoolVector.__meta__ = { obj : { SuppressWarnings : ["checkstyle:FieldDocComment"]}, fields : { toJSON : { SuppressWarnings : ["checkstyle:Dynamic"]}}};
 openfl__$Vector_FloatVector.__meta__ = { obj : { SuppressWarnings : ["checkstyle:FieldDocComment"]}, fields : { toJSON : { SuppressWarnings : ["checkstyle:Dynamic"]}, _ : { SuppressWarnings : ["checkstyle:Dynamic"]}}};
 openfl__$Vector_FunctionVector.__meta__ = { obj : { SuppressWarnings : ["checkstyle:FieldDocComment"]}, fields : { toJSON : { SuppressWarnings : ["checkstyle:Dynamic"]}}};
 openfl__$Vector_IntVector.__meta__ = { obj : { SuppressWarnings : ["checkstyle:FieldDocComment"]}, fields : { toJSON : { SuppressWarnings : ["checkstyle:Dynamic"]}}};
-openfl__$Vector_ObjectVector.__meta__ = { obj : { SuppressWarnings : ["checkstyle:FieldDocComment"]}, fields : { concat : { SuppressWarnings : ["checkstyle:Dynamic"]}, toJSON : { SuppressWarnings : ["checkstyle:Dynamic"]}, _ : { SuppressWarnings : ["checkstyle:Dynamic"]}}};
 openfl__$internal_Lib.__meta__ = { obj : { SuppressWarnings : ["checkstyle:FieldDocComment"]}, statics : { notImplemented : { SuppressWarnings : ["checkstyle:NullableParameter"]}}};
 openfl__$internal_Lib.__sentWarnings = new haxe_ds_StringMap();
 openfl__$internal_formats_agal_AGALConverter.__meta__ = { obj : { SuppressWarnings : ["checkstyle:FieldDocComment"]}};
@@ -128765,6 +128827,12 @@ spine_attachments_RegionAttachment.URX = 4;
 spine_attachments_RegionAttachment.URY = 5;
 spine_attachments_RegionAttachment.BRX = 6;
 spine_attachments_RegionAttachment.BRY = 7;
+spine_events_SpineEvent.END = "end";
+spine_events_SpineEvent.COMPLETE = "complete";
+spine_events_SpineEvent.DISPOSE = "dispose";
+spine_events_SpineEvent.INTERRUPT = "interrupt";
+spine_events_SpineEvent.START = "start";
+spine_events_SpineEvent.EVENT = "event";
 spine_openfl_SkeletonSprite.clipper = new spine_utils_SkeletonClipping();
 spine_support_graphics_Color.CLEAR = new spine_support_graphics_Color(0,0,0,0);
 spine_support_graphics_Color.BLACK = new spine_support_graphics_Color(0,0,0,1);

@@ -1,6 +1,7 @@
 ## 1.0.8
 - 新增：升级StageCanvas的zygameui库。
 - 新增：支持识别app标签的stagecolor舞台颜色值。
+- 新增：新增ZStack组件的支持。
 
 ## 1.0.7
 - 修复：修复TouchImageBatchsContainer提示错误的问题。

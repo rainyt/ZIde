@@ -66,6 +66,8 @@
 --macro keep("spine.Skin")
 --macro keep("spine.support.extensions.SpineExtensions")
 --macro keep("spine.support.extensions.StringExtensions")
+--connect
+6000
 -js Export/html5/bin/ZIde-UI.js
 -cp Export/html5/haxe
 -D html5
