@@ -1,3 +1,6 @@
+## 1.0.9
+- 修复：修复`ZStack`的currentId无效的问题。
+
 ## 1.0.8
 - 新增：升级StageCanvas的zygameui库。
 - 新增：支持识别app标签的stagecolor舞台颜色值。

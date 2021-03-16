@@ -1,6 +1,6 @@
 -main ApplicationMain 
 -cp /Users/grtf/haxelib/zygameui/Source
--D zygameui=10.1.0
+-D zygameui=10.1.1
 --macro lime._internal.macros.DefineMacro.run()
 -cp /Users/grtf/haxelib/lime/src
 -D lime=7.7.6
