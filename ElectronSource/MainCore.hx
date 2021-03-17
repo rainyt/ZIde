@@ -88,6 +88,14 @@ class MainCore {
 						click: () -> {
 							untyped window.send("build");
 						}
+					},
+					{
+						label: "刷新缓存",
+						accelerator: "F5",
+						selector: null,
+						click: () -> {
+							untyped window.send("f5");
+						}
 					}
 				]
 			},

@@ -13,6 +13,8 @@ class ZProjectData {
 	 */
 	public var rootPath:String = "";
 
+	public var rootXmlPath:String = "";
+
 	private var baseXml:Xml;
 
 	/**
@@ -69,6 +71,7 @@ class ZProjectData {
 	}
 
 	public function new(path:String, xml:Xml = null) {
+		rootXmlPath = path;
 		#if electron
 		if (path.indexOf(".xml") != -1) {
 			rootPath = path.substr(0, path.lastIndexOf("/"));

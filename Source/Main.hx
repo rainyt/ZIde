@@ -1,3 +1,4 @@
+import zygame.events.ZEvent;
 import electron.renderer.Remote;
 import tools.update.UpdateCore;
 import electron.renderer.IpcRenderer;
@@ -29,7 +30,19 @@ class Main extends Application {
 		fixPath();
 		console.log(process.env.PATH);");
 
-		IpcRenderer.on("debug", function(){
+		IpcRenderer.on("f5", function() {
+			// 刷新缓存
+			if (App.currentProject != null) {
+				trace("update Cache:", App.currentProject.rootXmlPath);
+				Utils.listener.dispatchEvent(new ZEvent("openProject", {
+					path: App.currentProject.rootXmlPath
+				}));
+			} else {
+				Alert.show("提示", "需要打开一个项目才能清理缓存");
+			}
+		});
+
+		IpcRenderer.on("debug", function() {
 			Menu.current.onDebug();
 		});
 
@@ -49,7 +62,7 @@ class Main extends Application {
 			trace("联想提示");
 		});
 
-		IpcRenderer.on("selectFile", function(event,args){
+		IpcRenderer.on("selectFile", function(event, args) {
 			trace("选择文件夹：" + args);
 			@:privateAccess Utils._openFileSaveCB(args);
 		});

@@ -1,5 +1,6 @@
 ## 1.0.9
 - 修复：修复`ZStack`的currentId无效的问题。
+- 新增：新增F5快捷刷新资源（清理缓存）的功能。
 
 ## 1.0.8
 - 新增：升级StageCanvas的zygameui库。
