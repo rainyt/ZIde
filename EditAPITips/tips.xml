@@ -41,8 +41,14 @@
     <ZTween tips="动画">
         <auto tips="自动播放(Bool)" />
     </ZTween>
-    <ZSpine class="Base" tips="Spine动画"></ZSpine>
-    <ZScroll class="Base" tips="Scroll窗口"></ZScroll>
+    <ZSpine class="Base" tips="Spine动画">
+        <action tips="动画名"/>
+        <isLoop tips="是否循环播放"/>
+    </ZSpine>
+    <ZScroll class="Base" tips="Scroll窗口">
+        <vscrollState tips="竖向滑行"/>
+        <hscrollState tips="横向滑行"/>
+    </ZScroll>
     <ZList class="Base" tips="数据列表窗口"></ZList>
     <ZButton class="Base" tips="按钮">
         <src tips="设置图像" />
