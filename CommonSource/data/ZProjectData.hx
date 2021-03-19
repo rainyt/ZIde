@@ -132,7 +132,7 @@ class ZProjectData {
 					// 普通XML文件
 					xmlFiles.set(StringUtils.getName(path), path);
 					xmlDatas.set(path, File.getContent(path));
-				case "png":
+				case "png","jpg":
 					// 图片文件缓存
 					pngFiles.set(StringUtils.getName(path), path);
 				case "json":
