@@ -90,4 +90,8 @@
     <ZHaxe tips="HScript">
         <id tips="调用名" />
     </ZHaxe>
+    <ZSound tips="音频">
+        <id tips="调用名" />
+        <src tips="音频ID" />
+    </ZSound>
 </tips>
