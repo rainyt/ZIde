@@ -38,6 +38,11 @@ class ZProjectData {
 	public var jsonFiles:Map<String, String> = [];
 
 	/**
+	 * MP3文件缓存
+	 */
+	public var mp3Files:Map<String, String> = [];
+
+	/**
 	 * Atlas文件缓存
 	 */
 	public var atlasFiles:Map<String, String> = [];
@@ -61,6 +66,8 @@ class ZProjectData {
 	 *	舞台颜色值 
 	 */
 	public var stagecolor:UInt = 0;
+
+	public var assetsPaths:Array<String> = [];
 
 	/**
 	 * 是否横屏
@@ -96,7 +103,10 @@ class ZProjectData {
 			switch (item.nodeName) {
 				case "assets":
 					var assetsPath = rootPath + "/" + item.get("path");
-					proessFile(assetsPath);
+					if(assetsPaths.indexOf(assetsPath) == -1){
+						assetsPaths.push(assetsPath);
+						proessFile(assetsPath);
+					}					
 				case "app":
 					if (item.exists("hdwidth"))
 						HDWidth = Std.parseInt(item.get("hdwidth"));
@@ -139,6 +149,8 @@ class ZProjectData {
 					jsonFiles.set(StringUtils.getName(path), path);
 				case "atlas":
 					atlasFiles.set(StringUtils.getName(path), path);
+				case "mp3":
+					mp3Files.set(StringUtils.getName(path), path);
 			}
 		}
 	}

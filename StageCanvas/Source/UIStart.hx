@@ -100,7 +100,14 @@ class UIStart extends Start {
 				var xfile:String = this._project.xmlFiles.get(file);
 				var jfile:String = this._project.jsonFiles.get(file);
 				var afile:String = this._project.atlasFiles.get(file);
-				if (png != null && afile != null) {
+				var mfile:String = this._project.mp3Files.get(file);
+				if (mfile != null){
+					// 载入MP3
+					filesConfig.push({
+						file: mfile
+					});
+				}
+				else if (png != null && afile != null) {
 					// Spine格式
 					trace("载入Spine", png, afile);
 					filesConfig.push({
