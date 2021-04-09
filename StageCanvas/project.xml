@@ -9,4 +9,5 @@
     <source path="../CommonSource" />
     <window height="0" width="0" />
     <haxedef name="disable_res" />
+    <!-- <window allow-high-dpi="true"/> -->
 </project>

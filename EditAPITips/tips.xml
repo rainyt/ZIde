@@ -94,4 +94,7 @@
         <id tips="调用名" />
         <src tips="音频ID" />
     </ZSound>
+    <ZParticles parent="Base">
+        <src tips="设置粒子的图片:JSON数据" />
+    </ZParticles>
 </tips>
