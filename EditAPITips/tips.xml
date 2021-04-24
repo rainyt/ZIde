@@ -94,7 +94,10 @@
         <id tips="调用名" />
         <src tips="音频ID" />
     </ZSound>
-    <ZParticles parent="Base">
+    <ZParticles class="Base">
         <src tips="设置粒子的图片:JSON数据" />
     </ZParticles>
+    <BStack class="BBox">
+        <currentId tips="设置当前显示的ID" />
+    </BStack>
 </tips>
