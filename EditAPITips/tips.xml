@@ -36,6 +36,7 @@
         <color tips="文本颜色" />
         <size tips="文本大小" />
         <fontName tips="文本字体" />
+        <wordWrap tips="是否自动换行"/>
     </ZLabel>
     <ZInputLabel class="ZLabel" tips="输入文本框"></ZInputLabel>
     <ZTween tips="动画">
@@ -100,4 +101,6 @@
     <BStack class="BBox">
         <currentId tips="设置当前显示的ID" />
     </BStack>
+    <ZCacheBitmapLabel class="ZLabel">
+    </ZCacheBitmapLabel>
 </tips>

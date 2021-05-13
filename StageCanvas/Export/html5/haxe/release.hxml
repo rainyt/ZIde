@@ -1,6 +1,6 @@
 -main ApplicationMain 
 -cp /Users/grtf/haxelib/zygameui/Source
--D zygameui=10.3.3
+-D zygameui=10.3.4
 --macro lime._internal.macros.DefineMacro.run()
 -cp /Users/grtf/haxelib/lime/src
 -D lime=7.9.2
@@ -73,7 +73,7 @@
 --macro keep("spine.support.extensions.SpineExtensions")
 --macro keep("spine.support.extensions.StringExtensions")
 --connect
-6004
+6003
 -js Export/html5/bin/ZIde-UI.js
 -cp Export/html5/haxe
 -D html5
