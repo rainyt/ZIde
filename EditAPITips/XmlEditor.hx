@@ -48,10 +48,10 @@ class XmlEditorContent {
 		} else if (leftInput.indexOf("<") == 0) {
 			// <开头时，应输入类型
 			var copy = tipsPool.classes.copy();
-			if(TipsPool.cacheData != null){
+			if (TipsPool.cacheData != null) {
 				for (index => value in TipsPool.cacheData.builderFiles) {
-					var cName = StringTools.replace(value.name,".xml","");
-					copy.push(Suggestions.create(cName,cName,value.path));
+					var cName = StringTools.replace(value.name, ".xml", "");
+					copy.push(Suggestions.create(cName, cName, value.path));
 				}
 			}
 			return returnSuggestions(filterSuggestions(position, sym, content, copy));
@@ -69,6 +69,9 @@ class XmlEditorContent {
 			var xmlid = leftInput.substr(leftInput.indexOf("\"") + 1);
 			xmlid = xmlid.substr(0, xmlid.indexOf(":"));
 			return returnSuggestions(filterSuggestions(position, sym, content, tipsPool.getCacheFileMapsByXml(xmlid)));
+		} else if (sym == "\"" && leftInput.indexOf("type=\"") != -1) {
+			// src参数 精灵图的子内容
+			return returnSuggestions(filterSuggestions(position, sym, content, TweenApi.returnSuggestions()));
 		}
 		return {};
 	}

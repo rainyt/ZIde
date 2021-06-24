@@ -36,19 +36,19 @@
         <color tips="文本颜色" />
         <size tips="文本大小" />
         <fontName tips="文本字体" />
-        <wordWrap tips="是否自动换行"/>
+        <wordWrap tips="是否自动换行" />
     </ZLabel>
     <ZInputLabel class="ZLabel" tips="输入文本框"></ZInputLabel>
     <ZTween tips="动画">
         <auto tips="自动播放(Bool)" />
     </ZTween>
     <ZSpine class="Base" tips="Spine动画">
-        <action tips="动画名"/>
-        <isLoop tips="是否循环播放"/>
+        <action tips="动画名" />
+        <isLoop tips="是否循环播放" />
     </ZSpine>
     <ZScroll class="Base" tips="Scroll窗口">
-        <vscrollState tips="竖向滑行"/>
-        <hscrollState tips="横向滑行"/>
+        <vscrollState tips="竖向滑行" />
+        <hscrollState tips="横向滑行" />
     </ZScroll>
     <ZList class="Base" tips="数据列表窗口"></ZList>
     <ZButton class="Base" tips="按钮">
@@ -84,6 +84,7 @@
         <start tips="开始帧" />
         <end tips="结束帧" />
         <to tips="修改值" />
+        <type tips="类型" />
     </add>
     <tween parent="ZTween" class="add" tips="过渡动画">
         <from tips="初始值" />
@@ -101,6 +102,5 @@
     <BStack class="BBox">
         <currentId tips="设置当前显示的ID" />
     </BStack>
-    <ZCacheBitmapLabel class="ZLabel">
-    </ZCacheBitmapLabel>
+    <ZCacheBitmapLabel class="ZLabel"></ZCacheBitmapLabel>
 </tips>

@@ -188,7 +188,7 @@ var TipsPool = function() {
 	this.attartMaps = new haxe_ds_StringMap();
 	this.classesend = [];
 	this.classes = [];
-	var xml = Xml.parse("<tips>\n    <Base igone=\"true\">\n        <id tips=\"设置ID标示\" />\n        <width tips=\"宽度\" />\n        <height tips=\"高度\" />\n        <scaleX tips=\"ScaleX缩放\" />\n        <scaleY tips=\"ScaleY缩放\" />\n        <alpha tips=\"透明度\" />\n        <x tips=\"X轴坐标\" />\n        <y tips=\"Y轴坐标\" />\n        <visible tips=\"可见\" />\n        <left tips=\"左对齐\" />\n        <right tips=\"右对齐\" />\n        <top tips=\"顶部对齐\" />\n        <bottom tips=\"底部对齐\" />\n        <centerX tips=\"横向对齐\" />\n        <centerY tips=\"垂直对齐\" />\n    </Base>\n    <BaseBox class=\"Base\" igone=\"true\">\n        <gap tips=\"间隔\" />\n    </BaseBox>\n    <ZImage class=\"Base\" tips=\"图像对象\">\n        <src tips=\"设置图像，支持网络地址、图集地址\" />\n    </ZImage>\n    <ZBox class=\"Base\" tips=\"基本容器\"></ZBox>\n    <ZStack class=\"ZBox\">\n        <currentId tips=\"设置当前显示的ID\" />\n    </ZStack>\n    <VBox class=\"BaseBox\" tips=\"基本容器(竖向)\"></VBox>\n    <HBox class=\"BaseBox\" tips=\"基本容器(横向)\"></HBox>\n    <ZQuad class=\"Base\" tips=\"色块\">\n        <color tips=\"颜色\" />\n    </ZQuad>\n    <ZLabel class=\"Base\" tips=\"文本\">\n        <text tips=\"文本\" />\n        <color tips=\"文本颜色\" />\n        <size tips=\"文本大小\" />\n        <fontName tips=\"文本字体\" />\n        <wordWrap tips=\"是否自动换行\"/>\n    </ZLabel>\n    <ZInputLabel class=\"ZLabel\" tips=\"输入文本框\"></ZInputLabel>\n    <ZTween tips=\"动画\">\n        <auto tips=\"自动播放(Bool)\" />\n    </ZTween>\n    <ZSpine class=\"Base\" tips=\"Spine动画\">\n        <action tips=\"动画名\"/>\n        <isLoop tips=\"是否循环播放\"/>\n    </ZSpine>\n    <ZScroll class=\"Base\" tips=\"Scroll窗口\">\n        <vscrollState tips=\"竖向滑行\"/>\n        <hscrollState tips=\"横向滑行\"/>\n    </ZScroll>\n    <ZList class=\"Base\" tips=\"数据列表窗口\"></ZList>\n    <ZButton class=\"Base\" tips=\"按钮\">\n        <src tips=\"设置图像\" />\n        <text tips=\"设置按钮文案\" />\n        <size tips=\"设置文案大小\" />\n    </ZButton>\n    <ZBitmapLabel class=\"ZLabel\" tips=\"位图文本\">\n        <src tips=\"设置图集或者Fnt\" />\n    </ZBitmapLabel>\n    <ImageBatchs class=\"Base\" tips=\"批渲染对象（无触摸）\">\n        <src tips=\"设置图集\" />\n    </ImageBatchs>\n    <TouchImageBatchsContainer class=\"ImageBatchs\" tips=\"批渲染对象（含触摸）\"></TouchImageBatchsContainer>\n    <BButton class=\"Base\" tips=\"批渲染按钮\">\n        <src tips=\"设置图集\" />\n    </BButton>\n    <BBox class=\"Base\" tips=\"批渲染布局\"></BBox>\n    <VBBox class=\"Base\" tips=\"批渲染布局V\"></VBBox>\n    <HBBox class=\"Base\" tips=\"批渲染布局H\"></HBBox>\n    <BImage class=\"Base\" tips=\"批渲染图片\">\n        <src tips=\"设置图集\" />\n    </BImage>\n    <BScale9Image class=\"Base\" tips=\"批渲染图片（九宫格）\"></BScale9Image>\n    <BLabel class=\"Base\" tips=\"批渲染文本\">\n        <src tips=\"设置图集或者Fnt\" />\n        <fontName tips=\"文本字体\" />\n        <size tips=\"文本大小\" />\n    </BLabel>\n    <add parent=\"ZTween\" tips=\"递增动画\">\n        <bind tips=\"绑定ID值\" />\n        <key tips=\"修改的属性\" />\n        <start tips=\"开始帧\" />\n        <end tips=\"结束帧\" />\n        <to tips=\"修改值\" />\n    </add>\n    <tween parent=\"ZTween\" class=\"add\" tips=\"过渡动画\">\n        <from tips=\"初始值\" />\n    </tween>\n    <ZHaxe tips=\"HScript\">\n        <id tips=\"调用名\" />\n    </ZHaxe>\n    <ZSound tips=\"音频\">\n        <id tips=\"调用名\" />\n        <src tips=\"音频ID\" />\n    </ZSound>\n    <ZParticles class=\"Base\">\n        <src tips=\"设置粒子的图片:JSON数据\" />\n    </ZParticles>\n    <BStack class=\"BBox\">\n        <currentId tips=\"设置当前显示的ID\" />\n    </BStack>\n    <ZCacheBitmapLabel class=\"ZLabel\">\n    </ZCacheBitmapLabel>\n</tips>");
+	var xml = Xml.parse("<tips>\n    <Base igone=\"true\">\n        <id tips=\"设置ID标示\" />\n        <width tips=\"宽度\" />\n        <height tips=\"高度\" />\n        <scaleX tips=\"ScaleX缩放\" />\n        <scaleY tips=\"ScaleY缩放\" />\n        <alpha tips=\"透明度\" />\n        <x tips=\"X轴坐标\" />\n        <y tips=\"Y轴坐标\" />\n        <visible tips=\"可见\" />\n        <left tips=\"左对齐\" />\n        <right tips=\"右对齐\" />\n        <top tips=\"顶部对齐\" />\n        <bottom tips=\"底部对齐\" />\n        <centerX tips=\"横向对齐\" />\n        <centerY tips=\"垂直对齐\" />\n    </Base>\n    <BaseBox class=\"Base\" igone=\"true\">\n        <gap tips=\"间隔\" />\n    </BaseBox>\n    <ZImage class=\"Base\" tips=\"图像对象\">\n        <src tips=\"设置图像，支持网络地址、图集地址\" />\n    </ZImage>\n    <ZBox class=\"Base\" tips=\"基本容器\"></ZBox>\n    <ZStack class=\"ZBox\">\n        <currentId tips=\"设置当前显示的ID\" />\n    </ZStack>\n    <VBox class=\"BaseBox\" tips=\"基本容器(竖向)\"></VBox>\n    <HBox class=\"BaseBox\" tips=\"基本容器(横向)\"></HBox>\n    <ZQuad class=\"Base\" tips=\"色块\">\n        <color tips=\"颜色\" />\n    </ZQuad>\n    <ZLabel class=\"Base\" tips=\"文本\">\n        <text tips=\"文本\" />\n        <color tips=\"文本颜色\" />\n        <size tips=\"文本大小\" />\n        <fontName tips=\"文本字体\" />\n        <wordWrap tips=\"是否自动换行\" />\n    </ZLabel>\n    <ZInputLabel class=\"ZLabel\" tips=\"输入文本框\"></ZInputLabel>\n    <ZTween tips=\"动画\">\n        <auto tips=\"自动播放(Bool)\" />\n    </ZTween>\n    <ZSpine class=\"Base\" tips=\"Spine动画\">\n        <action tips=\"动画名\" />\n        <isLoop tips=\"是否循环播放\" />\n    </ZSpine>\n    <ZScroll class=\"Base\" tips=\"Scroll窗口\">\n        <vscrollState tips=\"竖向滑行\" />\n        <hscrollState tips=\"横向滑行\" />\n    </ZScroll>\n    <ZList class=\"Base\" tips=\"数据列表窗口\"></ZList>\n    <ZButton class=\"Base\" tips=\"按钮\">\n        <src tips=\"设置图像\" />\n        <text tips=\"设置按钮文案\" />\n        <size tips=\"设置文案大小\" />\n    </ZButton>\n    <ZBitmapLabel class=\"ZLabel\" tips=\"位图文本\">\n        <src tips=\"设置图集或者Fnt\" />\n    </ZBitmapLabel>\n    <ImageBatchs class=\"Base\" tips=\"批渲染对象（无触摸）\">\n        <src tips=\"设置图集\" />\n    </ImageBatchs>\n    <TouchImageBatchsContainer class=\"ImageBatchs\" tips=\"批渲染对象（含触摸）\"></TouchImageBatchsContainer>\n    <BButton class=\"Base\" tips=\"批渲染按钮\">\n        <src tips=\"设置图集\" />\n    </BButton>\n    <BBox class=\"Base\" tips=\"批渲染布局\"></BBox>\n    <VBBox class=\"Base\" tips=\"批渲染布局V\"></VBBox>\n    <HBBox class=\"Base\" tips=\"批渲染布局H\"></HBBox>\n    <BImage class=\"Base\" tips=\"批渲染图片\">\n        <src tips=\"设置图集\" />\n    </BImage>\n    <BScale9Image class=\"Base\" tips=\"批渲染图片（九宫格）\"></BScale9Image>\n    <BLabel class=\"Base\" tips=\"批渲染文本\">\n        <src tips=\"设置图集或者Fnt\" />\n        <fontName tips=\"文本字体\" />\n        <size tips=\"文本大小\" />\n    </BLabel>\n    <add parent=\"ZTween\" tips=\"递增动画\">\n        <bind tips=\"绑定ID值\" />\n        <key tips=\"修改的属性\" />\n        <start tips=\"开始帧\" />\n        <end tips=\"结束帧\" />\n        <to tips=\"修改值\" />\n        <type tips=\"类型\" />\n    </add>\n    <tween parent=\"ZTween\" class=\"add\" tips=\"过渡动画\">\n        <from tips=\"初始值\" />\n    </tween>\n    <ZHaxe tips=\"HScript\">\n        <id tips=\"调用名\" />\n    </ZHaxe>\n    <ZSound tips=\"音频\">\n        <id tips=\"调用名\" />\n        <src tips=\"音频ID\" />\n    </ZSound>\n    <ZParticles class=\"Base\">\n        <src tips=\"设置粒子的图片:JSON数据\" />\n    </ZParticles>\n    <BStack class=\"BBox\">\n        <currentId tips=\"设置当前显示的ID\" />\n    </BStack>\n    <ZCacheBitmapLabel class=\"ZLabel\"></ZCacheBitmapLabel>\n</tips>");
 	var item = xml.firstElement().elements();
 	while(item.hasNext()) {
 		var item1 = item.next();
@@ -313,6 +313,21 @@ TipsPool.prototype = {
 		}
 	}
 	,__class__: TipsPool
+};
+var TweenApi = function() { };
+TweenApi.__name__ = "TweenApi";
+TweenApi.returnSuggestions = function() {
+	var array = [];
+	var _g_current = 0;
+	var _g_array = TweenApi._type;
+	while(_g_current < _g_array.length) {
+		var _g1_value = _g_array[_g_current];
+		var _g1_key = _g_current++;
+		var index = _g1_key;
+		var value = _g1_value;
+		array.push(Suggestions.create(value,value,value));
+	}
+	return array;
 };
 var XmlType = {};
 XmlType.toString = function(this1) {
@@ -528,6 +543,8 @@ XmlEditorContent.prototype = {
 			var xmlid = HxOverrides.substr(leftInput,leftInput.indexOf("\"") + 1,null);
 			xmlid = HxOverrides.substr(xmlid,0,xmlid.indexOf(":"));
 			return this.returnSuggestions(this.filterSuggestions(position,sym,content,this.tipsPool.getCacheFileMapsByXml(xmlid)));
+		} else if(sym == "\"" && leftInput.indexOf("type=\"") != -1) {
+			return this.returnSuggestions(this.filterSuggestions(position,sym,content,TweenApi.returnSuggestions()));
 		}
 		return { };
 	}
@@ -538,11 +555,11 @@ XmlEditorContent.prototype = {
 			var i = _g++;
 			var index = line - i;
 			var content = model.getLineContent(index);
-			haxe_Log.trace("检查：",{ fileName : "XmlEditor.hx", lineNumber : 85, className : "XmlEditorContent", methodName : "getLastClassName", customParams : [content]});
+			haxe_Log.trace("检查：",{ fileName : "XmlEditor.hx", lineNumber : 88, className : "XmlEditorContent", methodName : "getLastClassName", customParams : [content]});
 			if(content.indexOf("<") != -1) {
 				var c = HxOverrides.substr(content,content.indexOf("<") + 1,null);
 				c = HxOverrides.substr(c,0,content.indexOf(" "));
-				haxe_Log.trace("类型判断",{ fileName : "XmlEditor.hx", lineNumber : 89, className : "XmlEditorContent", methodName : "getLastClassName", customParams : [c]});
+				haxe_Log.trace("类型判断",{ fileName : "XmlEditor.hx", lineNumber : 92, className : "XmlEditorContent", methodName : "getLastClassName", customParams : [c]});
 				if(Object.prototype.hasOwnProperty.call(this.tipsPool.xmlItemMaps.h,c)) {
 					return c;
 				}
@@ -1490,6 +1507,7 @@ String.prototype.__class__ = String;
 String.__name__ = "String";
 Array.__name__ = "Array";
 js_Boot.__toStr = ({ }).toString;
+TweenApi._type = "linear\nsineIn\nsineOut\nsineInOut\nsineOutIn\nquadIn\nquadOut\nquadInOut\nquadOutIn\ncubicIn\ncubicOut\ncubicInOut\ncubicOutIn\nquartIn\nquartOut\nquartInOut\nquartOutIn\nquintIn\nquintOut\nquintInOut\nquintOutIn\nexpoIn\nexpoOut\nexpoInOut\nexpoOutIn\ncircIn\ncircOut\ncircInOut\ncircOutIn\nbounceIn\nbounceOut\nbounceInOut\nbounceOutIn\nbackIn\nbackOut\nbackInOut\nbackOutIn\nelasticIn\nelasticOut\nelasticInOut\nelasticOutIn\nwarpOut\nwarpIn\nwarpInOut\nwarpOutIn".split("\n");
 Xml.Element = 0;
 Xml.PCData = 1;
 Xml.CData = 2;
