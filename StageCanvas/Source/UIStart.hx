@@ -101,13 +101,12 @@ class UIStart extends Start {
 				var jfile:String = this._project.jsonFiles.get(file);
 				var afile:String = this._project.atlasFiles.get(file);
 				var mfile:String = this._project.mp3Files.get(file);
-				if (mfile != null){
+				if (mfile != null) {
 					// 载入MP3
 					filesConfig.push({
 						file: mfile
 					});
-				}
-				else if (png != null && afile != null) {
+				} else if (png != null && afile != null) {
 					// Spine格式
 					trace("载入Spine", png, afile);
 					filesConfig.push({
@@ -172,56 +171,68 @@ class UIStart extends Start {
 	 * @param array
 	 */
 	private function findXmlAssets(xml:Xml, array:Array<String>):Void {
+		findXmlItemAssets(xml, array);
 		for (item in xml.elements()) {
-			if (item.exists("src")) {
-				var src = item.get("src");
-				var path:String = "";
-				if (src.indexOf(",") != -1) {
-					// 多图协议
-					var a = src.split(",");
-					for (key => value in a) {
-						if (value.indexOf(":") != -1) {
-							// 图集协议
-							path = value.substr(0, value.indexOf(":"));
-						} else {
-							// 图集、或者整张图片
-							path = value;
-						}
-						if (array.indexOf(path) == -1) {
-							array.push(path);
-						}
-					}
-					continue;
-				} else if (src.indexOf(":") != -1) {
-					// 图集协议
-					var datas = src.split(":");
-					path = datas[0];
-					// 可能是JSON格式
-					if (array.indexOf(datas[1]) == -1) {
-						// 排除BImage和ZImage，这两个是使用图集，没有JSON可能性
-						if (item.nodeName != "BImage" && item.nodeName != "ZImage")
-							array.push(datas[1]);
-					}
-				} else {
-					// 图集、或者整张图片
-					path = src;
-				}
-				if (array.indexOf(path) == -1) {
-					array.push(path);
-				}
-			}
-			if (! @:privateAccess ZBuilder.classMaps.exists(item.nodeName) && array.indexOf(item.nodeName) == -1) {
-				if (_project.xmlFiles.exists(item.nodeName)) {
-					// 深度查询
-					var childXmlContent = _project.xmlDatas.get(_project.xmlFiles.get(item.nodeName));
-					trace("子集查询：" + item.nodeName,childXmlContent);
-					var childXml = Xml.parse(childXmlContent);
-					trace("深度查询：", childXml.toString());
-					findXmlAssets(childXml.firstElement(), array);
-					array.push(item.nodeName);
-				}
-			}
-			findXmlAssets(item, array);
+			findXmlItemAssets(item, array, true);
 		}
+	}
+
+	private function findXmlItemAssets(item:Xml, array:Array<String>, findChild:Bool = false) {
+		if (item.exists("tween")) {
+			// 动画文件
+			var src = item.get("tween");
+			array.push(src);
+		}
+		if (item.exists("src")) {
+			var src = item.get("src");
+			var path:String = "";
+			if (src.indexOf(",") != -1) {
+				// 多图协议
+				var a = src.split(",");
+				for (key => value in a) {
+					if (value.indexOf(":") != -1) {
+						// 图集协议
+						path = value.substr(0, value.indexOf(":"));
+					} else {
+						// 图集、或者整张图片
+						path = value;
+					}
+					if (array.indexOf(path) == -1) {
+						array.push(path);
+					}
+				}
+				return;
+			} else if (src.indexOf(":") != -1) {
+				// 图集协议
+				var datas = src.split(":");
+				path = datas[0];
+				// 可能是JSON格式
+				if (array.indexOf(datas[1]) == -1) {
+					// 排除BImage和ZImage，这两个是使用图集，没有JSON可能性
+					if (item.nodeName != "BImage" && item.nodeName != "ZImage")
+						array.push(datas[1]);
+				}
+			} else {
+				// 图集、或者整张图片
+				path = src;
+			}
+			if (array.indexOf(path) == -1) {
+				array.push(path);
+			}
+		}
+		if (! @:privateAccess ZBuilder.classMaps.exists(item.nodeName) && array.indexOf(item.nodeName) == -1) {
+			if (_project.xmlFiles.exists(item.nodeName)) {
+				// 深度查询
+				var childXmlContent = _project.xmlDatas.get(_project.xmlFiles.get(item.nodeName));
+				trace("子集查询：" + item.nodeName, childXmlContent);
+				var childXml = Xml.parse(childXmlContent);
+				trace("深度查询：", childXml.toString());
+				if (findChild)
+					findXmlAssets(childXml.firstElement(), array);
+				array.push(item.nodeName);
+			}
+		}
+		if (findChild)
+			findXmlAssets(item, array);
 	}
 }
