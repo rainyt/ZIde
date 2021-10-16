@@ -61,7 +61,7 @@ class AssetsList extends LayoutGroup {
 			App.currentEditPath = list.selectedItem.path;
 			var xmlData = File.getContent(list.selectedItem.path);
 			Editor.current.setEditorData(xmlData);
-			StageCavans.current.getStart().openFile(xmlData, App.currentProject);
+			StageCavans.current.getStart().openFile( list.selectedItem.path,xmlData, App.currentProject);
 		});
 
 		f.onFilter = function(data) {

@@ -29,10 +29,49 @@ class UIStart extends Start {
 		Browser.window.addEventListener("click", function(e) {
 			stage.dispatchEvent(new MouseEvent(MouseEvent.MOUSE_UP));
 		});
+		stage.addEventListener(MouseEvent.MOUSE_DOWN, onDown);
+		stage.addEventListener(MouseEvent.MOUSE_UP, onUp);
+		stage.addEventListener(MouseEvent.MOUSE_MOVE, onMove);
 	}
 
-	public function openFile(xmlData:String, project:data.ZProjectData):Void {
+	private var isClick = false;
+	private var _viewX:Float = 0;
+	private var _viewY:Float = 0;
+	private var clickX:Float = 0;
+	private var clickY:Float = 0;
+
+	public function onDown(e:MouseEvent):Void {
+		trace("onDown");
+		isClick = true;
+		this.clickX = stage.mouseX;
+		this.clickY = stage.mouseY;
+		this._viewX = this.x;
+		this._viewY = this.y;
+	}
+
+	public function onUp(e:MouseEvent):Void {
+		trace("onUp");
+		isClick = false;
+	}
+
+	public function onMove(e:MouseEvent):Void {
+		trace("onMove", this.clickX - stage.mouseX, this.clickY - stage.mouseY);
+		if (isClick) {
+			this.x = this._viewX - (this.clickX - stage.mouseX);
+			this.y = this._viewY - (this.clickY - stage.mouseY);
+		}
+	}
+
+	private var _xmlPath:String = null;
+
+	public function openFile(xmlPath:String, xmlData:String, project:data.ZProjectData):Void {
+		if (xmlPath != null && _xmlPath != xmlPath) {
+			this.x = 0;
+			this.y = 0;
+			_xmlPath = xmlPath;
+		}
 		_project = project;
+		trace("_project.rootXmlPath=", _project.rootXmlPath);
 		while (this.numChildren > 0) {
 			this.removeChildAt(0);
 		}
