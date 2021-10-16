@@ -37,10 +37,16 @@
         <size tips="文本大小" />
         <fontName tips="文本字体" />
         <wordWrap tips="是否自动换行" />
+        <hAlign tips="横向对齐"/>
+        <vAlign tips="纵向对齐"/>
+        <stroke tips="描边颜色"/>
     </ZLabel>
     <ZInputLabel class="ZLabel" tips="输入文本框"></ZInputLabel>
     <ZTween tips="动画">
+        <id tips="设置ID标示"/>
         <auto tips="自动播放(Bool)" />
+        <sync tips="同步渲染"/>
+        <loop tips="循环次数，-1为无限循环"/>
     </ZTween>
     <ZSpine class="Base" tips="Spine动画">
         <action tips="动画名" />

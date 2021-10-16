@@ -1,6 +1,6 @@
 -main ApplicationMain 
 -cp /Users/grtf/haxelib/zygameui/Source
--D zygameui=10.9.3
+-D zygameui=11.0.4
 --macro lime._internal.macros.DefineMacro.run()
 -cp /Users/grtf/haxelib/lime/src
 -D lime=7.9.2
@@ -18,17 +18,17 @@
 -cp /Users/grtf/haxelib/differ/1,3,0
 -D differ=1.3.0
 -cp /Users/grtf/haxelib/openfl-gpu-particles/src
--D openfl-gpu-particles=0.0.6
+-D openfl-gpu-particles=0.0.8
 -cp /Users/grtf/haxelib/openfl-spine/src
--D openfl-spine=1.7.6
+-D openfl-spine=1.8.2
 -cp /Users/grtf/haxelib/spine-hx/3,8,1
 -D spine-hx=3.8.1
 -cp /Users/grtf/haxelib/openfl-glsl/Source
 -D openfl-glsl=0.1.1
 -cp /Users/grtf/haxelib/vector-math
 -D vector-math=2.1.2
--cp /Users/grtf/haxelib/feathersui/1,0,0-beta,3/src
--D feathersui=1.0.0-beta.3
+-cp /Users/grtf/haxelib/feathersui/1,0,0-beta,4/src
+-D feathersui=1.0.0-beta.4
 -cp /Users/grtf/haxelib/actuate/1,8,9/src
 -D actuate=1.8.9
 -cp /Users/grtf/haxelib/hxargs/3,0,2
@@ -53,6 +53,7 @@
 -D lime-html5
 -D spine38
 -D gpu_particles
+-D macro_times
 -D gl_stats
 -D tools=7.9.2
 -D lime-canvas
@@ -93,6 +94,9 @@
 --macro keep("tweenxcore.FloatTools")
 --macro keep("tweenxcore.PointTools")
 --macro keep("tweenxcore.MatrixTools")
+--times
+--connect
+6003
 -js Export/html5/bin/ZIde-UI.js
 -cp Export/html5/haxe
 -D html5

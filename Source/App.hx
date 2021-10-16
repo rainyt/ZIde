@@ -18,6 +18,7 @@ class App {
 
 	public static function init():Void {
 		applicationPath = Sys.programPath();
+		applicationPath = StringTools.replace(applicationPath, "\\", "/");
 		applicationPath = applicationPath.substr(0, applicationPath.lastIndexOf("/"));
 		trace("applicationPath=" + applicationPath);
 	}
