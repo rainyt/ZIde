@@ -27,8 +27,10 @@ class Head extends LayoutGroup {
 		Utils.listener.addEventListener("openProject", function(e:ZEvent):Void {
 			if (e.data == null)
 				return;
-			label.text = e.data.path;
-			App.currentProject = new ZProjectData(e.data.path);
+			var filepath = e.data.path;
+			filepath = StringTools.replace(filepath, "\\", "/");
+			label.text = filepath;
+			App.currentProject = new ZProjectData(filepath);
 			Utils.listener.dispatchEvent(new ZEvent("assetsProess"));
 			StageCavans.current.onWindowResize();
 			Editor.current.bindZProjectData(App.currentProject);

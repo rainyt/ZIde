@@ -9,5 +9,6 @@
     <source path="../CommonSource" />
     <window height="0" width="0" />
     <haxedef name="disable_res" />
+    <haxedef name="gpu_particles"/>
     <!-- <window allow-high-dpi="true"/> -->
 </project>
