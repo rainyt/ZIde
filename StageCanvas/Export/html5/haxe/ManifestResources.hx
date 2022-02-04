@@ -55,7 +55,6 @@ import sys.FileSystem;
 
 		var data, manifest, library, bundle;
 
-
 		#if (zygame && un_use_openfl_assets)
 
 		data = '{}';

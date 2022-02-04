@@ -1,3 +1,4 @@
+import openfl.geom.Rectangle;
 import AutoExportCut;
 import AutoExportSlice9.Slice9;
 import openfl.display.PNGEncoderOptions;
@@ -9,15 +10,19 @@ import sys.FileSystem;
 class Main {
 	static function main() {
 		var args = Sys.args();
-		trace("创建图集", args , Sys.programPath());
+		trace("创建图集", args, Sys.programPath());
 		var isCreateFnt = args[0] == "-fnt";
-		if(isCreateFnt)
+		if (isCreateFnt)
 			args.shift();
 		var xml:Xml = Xml.createDocument();
 		var textureXml:Xml = Xml.createElement("TextureAtlas");
 		textureXml.set("build", "Use zyeditui create.");
 		xml.insertChild(textureXml, 0);
-		var atlas = new MaxRectsBinPack(2048, 2048, false);
+		var pwidth = 2048;
+		var pheight = 2048;
+		if (args[2] != null)
+			pwidth = Std.parseInt(args[2]);
+		var atlas = new MaxRectsBinPack(pwidth, pheight, false);
 		var atlasBitmap:BitmapData = new BitmapData(2048, 2048, true, 0x0);
 		// 九宫格图
 		var atlasBitmapScale9:BitmapData = null;
@@ -62,12 +67,12 @@ class Main {
 				// 字符格式
 				var fnt = AutoExportFnt.createFnt(read + "/" + file, newBitmap);
 				var fontName = file.substr(0, file.lastIndexOf("."));
-				if(fontName.indexOf("#") != -1)
-					fontName = fontName.substr(0,fontName.lastIndexOf("#"));
+				if (fontName.indexOf("#") != -1)
+					fontName = fontName.substr(0, fontName.lastIndexOf("#"));
 				for (key => value in fnt.maps) {
 					newBitmap = value;
 					// trace("install",newBitmap.width,newBitmap.height);
-					var rect = atlas.insert(newBitmap.width + 2, newBitmap.height + 2, MaxRectsBinPack.FreeRectangleChoiceHeuristic.BottomLeftRule);
+					var rect = addToPack(atlas, newBitmap.width + 2, newBitmap.height + 2);
 					if (rect.width == 0 || rect.height == 0)
 						continue;
 					rect.x++;
@@ -114,7 +119,7 @@ class Main {
 					newBitmap = cut.bitmapData;
 				}
 			}
-			var rect = atlas.insert(newBitmap.width + 2, newBitmap.height + 2, MaxRectsBinPack.FreeRectangleChoiceHeuristic.BottomLeftRule);
+			var rect = addToPack(atlas, newBitmap.width + 2, newBitmap.height + 2);
 			if (rect.width == 0 || rect.height == 0)
 				continue;
 			rect.x++;
@@ -131,12 +136,11 @@ class Main {
 			if (mheight > minHeight)
 				minHeight = mheight;
 			if (newBitmap != null) {
-				if (file.indexOf("s9_") != -1){
-					if(atlasBitmapScale9 == null)
+				if (file.indexOf("s9_") != -1) {
+					if (atlasBitmapScale9 == null)
 						atlasBitmapScale9 = new BitmapData(2048, 2048, true, 0x0);
 					atlasBitmapScale9.draw(newBitmap, m);
-				}
-				else
+				} else
 					atlasBitmap.draw(newBitmap, m);
 			}
 			var a = Xml.createElement("SubTexture");
@@ -175,10 +179,10 @@ class Main {
 		// 	var s9_bytes = atlasBitmapScale9.encode(atlasBitmapScale9.rect,png);
 		// 	File.saveBytes(out + "_s9.png", s9_bytes);
 		// }
-		//开始压缩计算
-		trace("压缩png",Sys.programPath(),"./pngquant/pngquant --force --speed=1 "+ out + ".png");
-		Sys.command(Sys.programPath().substr(0,Sys.programPath().lastIndexOf("/")) + "/pngquant/pngquant --force --speed=1 "+ out + ".png");
-		if(atlasBitmapScale9 != null){
+		// 开始压缩计算
+		trace("压缩png", Sys.programPath(), "./pngquant/pngquant --force --speed=1 " + out + ".png");
+		Sys.command(Sys.programPath().substr(0, Sys.programPath().lastIndexOf("/")) + "/pngquant/pngquant --force --speed=1 " + out + ".png");
+		if (atlasBitmapScale9 != null) {
 			var pngfs8:BitmapData = BitmapData.fromFile(out + "-fs8.png");
 			pngfs8.draw(atlasBitmapScale9);
 			var png = new PNGEncoderOptions();
@@ -186,16 +190,20 @@ class Main {
 			File.saveBytes(out + "-s9.png", bytes);
 			FileSystem.deleteFile(out + "-fs8.png");
 			FileSystem.deleteFile(out + ".png");
-			FileSystem.rename(out + "-s9.png",out + ".png");
+			FileSystem.rename(out + "-s9.png", out + ".png");
 			// Sys.command(Sys.programPath().substr(0,Sys.programPath().lastIndexOf("/")) + "/pngquant/pngquant --force --speed=1 "+ out + "-s9.png");
 			// FileSystem.rename(out + "-s9-fs8.png",out + ".png");
 			// FileSystem.deleteFile(out + "-s9.png");
 			trace("合并九宫格图完毕");
-		}
-		else{
+		} else {
 			FileSystem.deleteFile(out + ".png");
-			FileSystem.rename(out + "-fs8.png",out + ".png");
+			FileSystem.rename(out + "-fs8.png", out + ".png");
 		}
+	}
+
+	public static function addToPack(atlas:MaxRectsBinPack, width:Int, height:Int):Rectangle {
+		var rect = atlas.insert(width, height, MaxRectsBinPack.FreeRectangleChoiceHeuristic.BestAreaFit);
+		return rect;
 	}
 
 	public static function minSize(size:Float):Int {

@@ -27,7 +27,13 @@ class PSDTools {
 	private var isCreateAtals:Bool = false;
 	private var psdOutDir:String;
 	private var atlasName:String;
+	private var atlasSize:Int = 2048;
 	private var callBack:Bool->Void;
+
+	/**
+	 * 是否将九宫图图额外分离实现
+	 */
+	private var outSlice9:Bool = false;
 
 	/**
 	 * 导出PSD UI文件
@@ -36,16 +42,20 @@ class PSDTools {
 	 * @param createXml 是否创建XML
 	 * @param createAtlas 是否创建精灵图集
 	 * @param fileName 导出文件名
+	 * @param atlasSize 导出精灵图的尺寸
 	 * @param createBatch 是否创建批渲染布局
 	 */
-	public function exportPsdUIFiles(psdfile:String, outdir:String, createXml:Bool, createAtlas:Bool, fileName:String, createBatch:Bool, cb:Bool->Void):Void {
+	public function exportPsdUIFiles(psdfile:String, outdir:String, createXml:Bool, createAtlas:Bool, fileName:String, atlasSize:Int, createBatch:Bool,
+			cb:Bool->Void, outSlice9:Bool):Void {
 		// 初始化所需要的参数
+		this.outSlice9 = outSlice9;
 		this.callBack = cb;
 		this.saveList = [];
 		this.psdCount = 0;
 		this.psdExported = 0;
 		this.isCreateAtals = createAtlas;
 		this.psdOutDir = outdir;
+		this.atlasSize = atlasSize;
 		trace("输出目录：" + psdOutDir);
 		trace("是否创建精灵图：" + isCreateAtals);
 		trace("是否创建批渲染：" + createBatch);
@@ -121,7 +131,7 @@ class PSDTools {
 						saveList.push(savePath);
 						psdCount++;
 						untyped window.compositeGroupOrLayer(layer, maxWidth, maxHeight, layer.offestX, layer.offestY).then(function(data:Dynamic):Void {
-							File.saveBytes(savePath, Bytes.ofData(data));
+							File.saveBytes(this.getSavePath(savePath), Bytes.ofData(data));
 							trace("保存成功", savePath);
 							psdExported++;
 							onPsdExported(psdExported / psdCount);
@@ -169,13 +179,28 @@ class PSDTools {
 					+ psdOutDir
 					+ "\" \""
 					+ atlasName
-					+ "\"";
+					+ "\" "
+					+ atlasSize;
 				trace("command = ", command);
 				ChildProcess.exec(command, null, function(err:Dynamic, stdout, stderr) {
 					trace(err, stdout, stderr);
 					if (err == null) {
-						Alert.show("提示", "导出完成");
-						callBack(true);
+						if (outSlice9) {
+							// 单独合并九宫格图
+							var atlasSlice9 = 'neko ${StringTools.replace(Sys.programPath(), "index.html", "atlas/tools.n")} ${psdOutDir}/slice9 ${atlasName}_slice9 ${atlasSize}';
+							ChildProcess.exec(atlasSlice9, null, function(err:Dynamic, stdout, stderr) {
+								trace(err, stdout, stderr);
+								if (err == null) {
+									Alert.show("提示", "导出完成");
+									callBack(true);
+								} else {
+									Alert.show("错误", err);
+								}
+							});
+						} else {
+							Alert.show("提示", "导出完成");
+							callBack(true);
+						}
 					} else {
 						Alert.show("错误", err);
 					}
@@ -185,6 +210,17 @@ class PSDTools {
 				callBack(true);
 			}
 		}
+	}
+
+	public function getSavePath(path:String):String {
+		if (path.indexOf("s9_") != -1 && outSlice9) {
+			// 当为九宫格图时，并且希望脱离九宫格图时，请返回新的路径
+			var p = path.substr(0, path.indexOf("s9_")) + "/slice9";
+			if (!FileSystem.exists(p))
+				FileSystem.createDirectory(p);
+			return StringTools.replace(path, "s9_", "slice9/s9_");
+		}
+		return path;
 	}
 
 	public function parserPsGroup(layerChildren:PSTree, outdir:String, a:Dynamic, createBatch:Bool):String {
@@ -201,7 +237,7 @@ class PSDTools {
 					saveList.push(savePath2);
 					psdCount++;
 					untyped window.compositeGroupOrLayer(layer, maxWidth, maxHeight, offestX, offestY).then(function(data:Dynamic):Void {
-						File.saveBytes(savePath2, Bytes.ofData(data));
+						File.saveBytes(this.getSavePath(savePath2), Bytes.ofData(data));
 						trace("保存成功", savePath2);
 						psdExported++;
 						onPsdExported(psdExported / psdCount);
@@ -237,7 +273,7 @@ class PSDTools {
 					saveList.push(savePath);
 					psdCount++;
 					untyped window.compositeGroupOrLayer(layer, maxWidth, maxHeight, offestX, offestY).then(function(data:Dynamic):Void {
-						File.saveBytes(savePath, Bytes.ofData(data));
+						File.saveBytes(this.getSavePath(savePath), Bytes.ofData(data));
 						trace("保存成功", savePath);
 						psdExported++;
 						onPsdExported(psdExported / psdCount);

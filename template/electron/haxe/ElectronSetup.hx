@@ -53,6 +53,7 @@ class ElectronSetup
 					{
 						webPreferences:{
 							nodeIntegration:true,
+							contextIsolation:false,
 							enableRemoteModule: true,
 							devTools:true
 						},

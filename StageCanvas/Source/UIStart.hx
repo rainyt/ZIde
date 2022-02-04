@@ -1,3 +1,5 @@
+import zygame.components.ZBuilderScene;
+import openfl.display.DisplayObject;
 import zygame.utils.Lib;
 import js.Browser;
 import openfl.events.MouseEvent;
@@ -22,6 +24,7 @@ class UIStart extends Start {
 
 	public function new() {
 		super(1080, 600, false);
+		this.lowFps = true;
 		untyped window.uiContext = this.stage;
 		untyped window.uiStart = this;
 		this.stage.color = 0x373737;
@@ -55,7 +58,7 @@ class UIStart extends Start {
 	}
 
 	public function onMove(e:MouseEvent):Void {
-		trace("onMove", this.clickX - stage.mouseX, this.clickY - stage.mouseY);
+		trace("onMove",  stage.mouseX,  stage.mouseY);
 		if (isClick) {
 			this.x = this._viewX - (this.clickX - stage.mouseX);
 			this.y = this._viewY - (this.clickY - stage.mouseY);
@@ -90,6 +93,7 @@ class UIStart extends Start {
 				isTile = #if cpp false #else (c != null && c.toString().indexOf("zygame_display_batch") != -1) #end;
 				var swidth:Float = child.exists("swidth") ? Std.parseFloat(child.get("swidth")) : Start.current.getStageWidth();
 				var sheight:Float = child.exists("sheight") ? Std.parseFloat(child.get("sheight")) : Start.current.getStageHeight();
+				var display:DisplayObject = null;
 				if (isTile) {
 					var atlas = findTextureAtlasName(child);
 					if (atlas != null) {
@@ -97,11 +101,18 @@ class UIStart extends Start {
 							Std.int(sheight));
 						this.addChild(nativeTilemap);
 						_build = ZBuilder.build(xml, nativeTilemap);
+						display = nativeTilemap;
 					} else
 						trace("需要指定精灵表！");
 				} else {
-					_build = ZBuilder.build(xml, this);
+					_assets.setXml("layout_xml",xml);
+					var scene = new ZBuilderScene("layout_xml.xml");
+					this.addChild(scene);
+					// _build = ZBuilder.build(, this);
+					// display = _build.display;
 				}
+				// display.scaleX = 0.5;
+				// display.scaleY = 0.5;
 			});
 		} catch (e:Dynamic) {
 			trace("预览失败：", e);

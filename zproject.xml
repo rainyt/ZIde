@@ -23,4 +23,5 @@
     <!-- <template path="html5/package.json" rename="package.json" /> -->
     <template path="./template" />
     <haxedef name="disable_res" />
+    <window allow-high-dpi="true"/>
 </project>
