@@ -131,5 +131,13 @@ class MainCore {
 					untyped window.send("selectFile", promise.filePath);
 			});
 		});
+
+		IpcMain.on("debug", function(evnet) {
+			window.webContents.openDevTools();
+		});
+
+		IpcMain.on("reload", function(evnet) {
+			window.webContents.reload();
+		});
 	}
 }

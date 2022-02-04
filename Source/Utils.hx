@@ -1,6 +1,5 @@
 import electron.renderer.IpcRenderer;
 import electron.remote.Dialog;
-import electron.renderer.Remote;
 import zygame.components.ZBuilder;
 import sys.io.File;
 import haxe.Exception;

@@ -1,5 +1,4 @@
 import zygame.events.ZEvent;
-import electron.renderer.Remote;
 import tools.update.UpdateCore;
 import electron.renderer.IpcRenderer;
 import feathers.layout.VerticalAlign;
@@ -73,7 +72,9 @@ class Main extends Application {
 				if (code == 0) {
 					Alert.showSelect("提示", "已更新成功，是否马上重启？", function(data) {
 						if (data == "确定") {
-							Remote.getCurrentWebContents().reload();
+							// Electron16已不支持
+							// Remote.getCurrentWebContents().reload();
+							IpcRenderer.send("reload");
 						}
 					});
 				} else

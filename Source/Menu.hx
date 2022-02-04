@@ -1,5 +1,4 @@
 import electron.renderer.IpcRenderer;
-import electron.renderer.Remote;
 import haxe.Exception;
 import zygame.events.ZEvent;
 import sys.io.File;
@@ -59,7 +58,9 @@ class Menu extends LayoutGroup {
 	}
 
 	public function onDebug():Void {
-		Remote.getCurrentWebContents().openDevTools();
+		// 不兼容electron16
+		// Remote.getCurrentWebContents().openDevTools();
+		IpcRenderer.send("debug");
 	}
 
 	public function onBuild():Void {
