@@ -4,8 +4,8 @@
   "main": "ElectronSetup.js",
   "scripts": {
     "start": "electron ElectronSetup.js",
-    "package": "electron-packager . 'ZIde' --platform=darwin/arm64 --arch=x64 --out=./dist --overwrite --icon=icon.ico --ignore='(.vscode|asconfig.json)'",
-    "package-win": "electron-packager . 'ZIde' --platform=win32 --arch=x64 --out=./dist --overwrite --icon=icon.ico --ignore='(.vscode|asconfig.json)'"
+    "package": "electron-packager . \"ZIde\" --platform=darwin/arm64 --arch=x64 --out=./dist --overwrite --icon=icon.ico --ignore=\"(.vscode|asconfig.json)\"",
+    "package-win": "electron-packager . \"ZIde\" --platform=win32 --arch=x64 --out=./dist --overwrite --icon=icon.ico --ignore=\"(.vscode|asconfig.json)\""
   },
   "devDependencies": {
     "electron-packager": "^14.2.1",
