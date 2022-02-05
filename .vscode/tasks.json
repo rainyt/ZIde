@@ -540,9 +540,28 @@
             "group": {
                 "kind": "build"
             }
-        },{
+        },
+        {
             "label": "上传新版本到热更服务器",
             "command": "cd Export/electron/bin && zip -o update.zip md/editor.html md/xml-editor.js atlas china game/* icons lib manifest photoshop electron-core.js ElectronSetup.js index.html ZIde.js && haxelib run aliyun-oss-upload /Users/rainy/Documents/Github/ZIde/Export/electron/bin/update.zip kengsdk_tools_res:1002",
+            "type": "shell",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
+            "label": "生成EXE版本(需要先运行Electron编译)",
+            "command": "cd Export/electron/bin && arch -x86_64 npm run package-win",
+            "type": "shell",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
+            "label": "生成Mac版本(需要先运行Electron编译)",
+            "command": "cd Export/electron/bin && npm run package",
             "type": "shell",
             "problemMatcher": [],
             "group": {
