@@ -50,8 +50,8 @@ class AssetsList extends LayoutGroup {
 		cast(list.layoutData, AnchorLayoutData).top = 32;
 		cast(list.layoutData, AnchorLayoutData).bottom = 20;
 		Utils.listener.addEventListener("assetsProess", function(e) {
-			f.bindData(App.currentProject.builderFiles);
 			list.dataProvider = new ArrayCollection(App.currentProject.builderFiles);
+			f.bindData(App.currentProject.builderFiles);
 		});
 		list.doubleClickEnabled = true;
 		list.addEventListener(Event.CHANGE, function(e) {

@@ -46,8 +46,11 @@ class FilterText extends LayoutGroup {
 	}
 
 	public function bindData(data:Array<Dynamic>):Void {
-		this.input.text = "";
+		// this.input.text = "";
 		_data = data;
+		if (input.text != "") {
+			onFiltered(_data.filter(onFilter));
+		}
 	}
 
 	dynamic public function onFilter(data:Dynamic):Bool {
