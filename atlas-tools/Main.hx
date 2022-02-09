@@ -28,6 +28,7 @@ class Main {
 		var atlasBitmapScale9:BitmapData = null;
 		var read = args[0];
 		var out = read + "/" + args[1];
+		out = StringTools.replace(out, "//", "/");
 		var files:Array<String> = FileSystem.readDirectory(args[0]);
 		var minWidth:Int = 256;
 		var minHeight:Int = 256;
@@ -181,7 +182,12 @@ class Main {
 		// }
 		// 开始压缩计算
 		trace("压缩png", Sys.programPath(), "./pngquant/pngquant --force --speed=1 " + out + ".png");
-		Sys.command(Sys.programPath().substr(0, Sys.programPath().lastIndexOf("/")) + "/pngquant/pngquant --force --speed=1 " + out + ".png");
+		Sys.command(Sys.programPath().substr(0, Sys.programPath().lastIndexOf("/"))
+			+ "/pngquant/pngquant"
+			+ (Sys.systemName() == "Windows" ? ".exe" : "")
+			+ " --force --speed=1 "
+			+ out
+			+ ".png");
 		if (atlasBitmapScale9 != null) {
 			var pngfs8:BitmapData = BitmapData.fromFile(out + "-fs8.png");
 			pngfs8.draw(atlasBitmapScale9);
@@ -196,8 +202,10 @@ class Main {
 			// FileSystem.deleteFile(out + "-s9.png");
 			trace("合并九宫格图完毕");
 		} else {
-			FileSystem.deleteFile(out + ".png");
-			FileSystem.rename(out + "-fs8.png", out + ".png");
+			if (FileSystem.exists(out + "-fs8.png")) {
+				FileSystem.deleteFile(out + ".png");
+				FileSystem.rename(out + "-fs8.png", out + ".png");
+			}
 		}
 	}
 

@@ -77,13 +77,14 @@ class PSDView extends TitleView {
 			// 开始导出
 			var psd = new tools.psd.PSDTools();
 			var psdfile = this.getTextInput("PSD文件").text;
+			psdfile = StringTools.replace(psdfile, "\\", "/");
 			psd.exportPsdUIFiles(psdfile, psdfile.substr(0, psdfile.lastIndexOf("/")) + "/bin/", this.getPopUpListView("导出布局文件").selectedIndex == 0,
 				this.getPopUpListView("导出为图集").selectedIndex == 0, StringUtils.getName(psdfile),
 				Std.parseInt(this.getPopUpListView("精灵图最大尺寸").selectedItem.id), this.getPopUpListView("使用批渲染布局").selectedIndex == 0, function(bool) {
 					if (bool) {
 						this.parent.removeChild(this);
 					}
-			},this.getPopUpListView("九宫格图分离").selectedIndex == 0);
+			}, this.getPopUpListView("九宫格图分离").selectedIndex == 0);
 		});
 		this.createOkButton("取消", function() {
 			this.parent.removeChild(this);

@@ -1,6 +1,6 @@
 -main ApplicationMain 
 -cp /Users/rainy/Documents/haxelib/zygameui/Source
--D zygameui=11.0.6
+-D zygameui=11.0.7
 --macro lime._internal.macros.DefineMacro.run()
 -cp /Users/rainy/Documents/haxelib/lime/7,9,2/src
 -D lime=7.9.2
@@ -19,7 +19,7 @@
 -D differ=1.4.0
 -cp /Users/rainy/Documents/haxelib/openfl-gpu-particles/0,0,9/src
 -D openfl-gpu-particles=0.0.9
--cp /Users/rainy/Documents/haxelib/openfl-spine/1,8,3/src
+-cp /Users/rainy/Documents/haxelib/openfl-spine/src
 -D openfl-spine=1.8.3
 -cp /Users/rainy/Documents/haxelib/spine-hx/3,8,1
 -D spine-hx=3.8.1
@@ -34,12 +34,12 @@
 -cp /Users/rainy/Documents/haxelib/hxargs/3,0,2
 -D hxargs=3.0.2
 --macro openfl.utils._internal.ExtraParamsMacro.include()
--cp /Users/rainy/Documents/haxelib/openfl/9,1,3/src
--D openfl=9.1.3
+-cp /Users/rainy/Documents/haxelib/openfl/src
+-D openfl=9.1.0
 -cp /Users/rainy/Documents/haxelib/zygameui/Source
 -cp /Users/rainy/Documents/haxelib/zygameui/openfl9-source
 -cp /Users/rainy/Documents/haxelib/openfl-gpu-particles/0,0,9/src
--cp /Users/rainy/Documents/haxelib/openfl-spine/1,8,3/src
+-cp /Users/rainy/Documents/haxelib/openfl-spine/src
 -cp /Users/rainy/Documents/haxelib/openfl-glsl/0,1,1/Source
 -cp /Users/rainy/Documents/haxelib/zygameui
 -cp Source
@@ -95,7 +95,7 @@
 --macro keep("tweenxcore.PointTools")
 --macro keep("tweenxcore.MatrixTools")
 --connect
-6031
+6008
 -js Export/html5/bin/ZIde-UI.js
 -cp Export/html5/haxe
 -D html5
