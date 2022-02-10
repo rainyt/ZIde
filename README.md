@@ -13,4 +13,6 @@ Zygameui的UI可视化编辑器
 - Ctrl+B（Command+B）可进行快速编译界面。
 
 ## WINDOW
-Window版本需要手动为app运行`npm install`来确保库的完整性。
+- Window版本需要手动为app运行`npm install`来确保库的完整性。
+- 需要在app目录下放置zip/unzip.exe命令行工具，以便允许Zide进行更新操作。
+- 需要在app/node_moudle下重新安装完整的`sharp`环境，以便允许Zide进行PSD导出操作。
