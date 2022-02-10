@@ -29,6 +29,8 @@ class Main extends Application {
 		fixPath();
 		console.log(process.env.PATH);");
 
+		trace("系统环境：", Sys.systemName());
+
 		IpcRenderer.on("f5", function() {
 			// 刷新缓存
 			if (App.currentProject != null) {

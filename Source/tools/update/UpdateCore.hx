@@ -27,10 +27,16 @@ class UpdateCore {
 			trace("保存至：" + savePath);
 			File.saveBytes(savePath, data);
 			// 解压
-			ChildProcess.exec("cd " + App.applicationPath + " && unzip -o app.zip && rm -rf app.zip", null, function(err, stdout, stderr) {
-				trace(err, stdout, stderr);
-				cb(err == null ? 0 : -2);
-			});
+			var cmd = "cd " + App.applicationPath + "\nunzip -o app.zip\nrm -rf app.zip";
+			if (Sys.systemName() == "Windows") {
+				var cdto = App.applicationPath.charAt(0);
+				cmd = cdto.toLowerCase() + ": & ";
+				cmd += "cd " + App.applicationPath + " & zip\\unzip.exe -o app.zip"; //& rm -f app.zip
+			}
+			trace("cmd=", cmd);
+			var code = Sys.command(cmd);
+			trace("运行结果：", Sys.systemName(), code);
+			cb(code == 0 ? 0 : -2);
 		}
 		http.request();
 	}

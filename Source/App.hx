@@ -1,3 +1,4 @@
+import system.window.Install;
 import data.ZProjectData;
 
 /**
@@ -21,5 +22,8 @@ class App {
 		applicationPath = StringTools.replace(applicationPath, "\\", "/");
 		applicationPath = applicationPath.substr(0, applicationPath.lastIndexOf("/"));
 		trace("applicationPath=" + applicationPath);
+		// if (Sys.systemName() == "Windows") {
+			// Install.init();
+		// }
 	}
 }

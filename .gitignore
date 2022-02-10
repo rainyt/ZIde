@@ -1,3 +1,6 @@
 Assets/node_modules
 Export
 StageCanvas/Export
+template/zip
+template/sharp
+*/.DS_Store

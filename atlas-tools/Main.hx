@@ -182,12 +182,10 @@ class Main {
 		// }
 		// 开始压缩计算
 		trace("压缩png", Sys.programPath(), "./pngquant/pngquant --force --speed=1 " + out + ".png");
-		Sys.command(Sys.programPath().substr(0, Sys.programPath().lastIndexOf("/"))
-			+ "/pngquant/pngquant"
-			+ (Sys.systemName() == "Windows" ? ".exe" : "")
-			+ " --force --speed=1 "
-			+ out
-			+ ".png");
+		var path = Sys.programPath();
+		path = StringTools.replace(path, "\\", "/");
+		path = path.substr(0, path.lastIndexOf("/"));
+		Sys.command(path + "/pngquant/pngquant" + (Sys.systemName() == "Windows" ? ".exe" : "") + " --force --speed=1 " + out + ".png");
 		if (atlasBitmapScale9 != null) {
 			var pngfs8:BitmapData = BitmapData.fromFile(out + "-fs8.png");
 			pngfs8.draw(atlasBitmapScale9);
