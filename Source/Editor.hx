@@ -25,13 +25,8 @@ class Editor extends LayoutGroup {
 		iframe.id = "editor";
 		var dom:DOMElement = new DOMElement(iframe);
 		this.addChild(dom);
-		dom.width = this.width;
-		dom.height = this.height;
-		dom.x = this.x;
-		dom.y = this.y;
 		iframe.style.border = "none";
 		iframe.src = "md/editor.html";
-		this.layoutData = new HorizontalLayoutData(100, 100);
 		this.visible = true;
 	}
 
@@ -40,7 +35,6 @@ class Editor extends LayoutGroup {
 	 */
 	public function formatXml():Void {
 		var f = zygame.utils.XMLUtils.fromat(getEditorData());
-		trace("格式化后：",f);
 		setEditorData(f);
 	}
 
@@ -56,7 +50,7 @@ class Editor extends LayoutGroup {
 	 * 绑定ZProjectData
 	 * @param zproject 
 	 */
-	public function bindZProjectData(zproject:ZProjectData):Void{
+	public function bindZProjectData(zproject:ZProjectData):Void {
 		untyped iframe.contentWindow.registerZProjectData(zproject);
 	}
 

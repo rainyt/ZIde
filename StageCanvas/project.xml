@@ -11,5 +11,5 @@
     <haxedef name="disable_res" />
     <haxedef name="gpu_particles"/>
     <postbuild command="cp -rf Export/html5/bin/ZIde-UI.js ../Export/electron/bin/game/ZIde-UI.js"/>
-    <!-- <window allow-high-dpi="true"/> -->
+    <window allow-high-dpi="true"/>
 </project>

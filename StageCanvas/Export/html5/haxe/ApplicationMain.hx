@@ -15,6 +15,7 @@ class ApplicationMain
 	#if !macro
 	public static function main()
 	{
+		trace("SDL:main");
 		lime.system.System.__registerEntryPoint("ZIde-UI", create);
 
 		#if (js && html5)
@@ -32,7 +33,7 @@ class ApplicationMain
 
 		ManifestResources.init(config);
 
-		app.meta["build"] = "60";
+		app.meta["build"] = "64";
 		app.meta["company"] = "Company Name";
 		app.meta["file"] = "ZIde-UI";
 		app.meta["name"] = "ZIde";
@@ -44,7 +45,7 @@ class ApplicationMain
 		#if !flash
 		
 		var attributes:lime.ui.WindowAttributes = {
-			allowHighDPI: false,
+			allowHighDPI: true,
 			alwaysOnTop: false,
 			borderless: false,
 			// display: 0,

@@ -23,7 +23,7 @@
 -D openfl-spine=1.8.3
 -cp /Users/rainy/Documents/haxelib/spine-hx/3,8,1
 -D spine-hx=3.8.1
--cp /Users/rainy/Documents/haxelib/openfl-glsl/0,1,1/Source
+-cp /Users/rainy/Documents/haxelib/openfl-glsl/Source
 -D openfl-glsl=0.1.1
 -cp /Users/rainy/Documents/haxelib/vector-math/2,1,2
 -D vector-math=2.1.2
@@ -40,10 +40,12 @@
 -cp /Users/rainy/Documents/haxelib/zygameui/openfl9-source
 -cp /Users/rainy/Documents/haxelib/openfl-gpu-particles/0,0,9/src
 -cp /Users/rainy/Documents/haxelib/openfl-spine/src
--cp /Users/rainy/Documents/haxelib/openfl-glsl/0,1,1/Source
+-cp /Users/rainy/Documents/haxelib/openfl-glsl/Source
 -cp /Users/rainy/Documents/haxelib/zygameui
 -cp Source
 -cp ../CommonSource
+-D ANDROID_SETUP=true
+-D ANDROID_NDK_ROOT=/Users/rainy/Documents/SDK/android-ndk-r15c
 -D howlerjs
 -D lime-webgl
 -D zygame
@@ -56,10 +58,15 @@
 -D MAC_USE_CURRENT_SDK=1
 -D gl_stats
 -D tools=7.9.2
+-D ANDROID_SDK=/Users/rainy/Library/Android/sdk
 -D lime-canvas
+-D HXCPP_STACK_TRACE
+-D HXCPP_CHECK_POINTER
 -D no-compilation
 -D openfl-html5
+-D HXCPP_STACK_LINE
 -D disable_res
+-D HXCPP_DEBUG_LINK
 -D un_scale_label
 -D openfl_swf
 -D html5
@@ -94,8 +101,6 @@
 --macro keep("tweenxcore.FloatTools")
 --macro keep("tweenxcore.PointTools")
 --macro keep("tweenxcore.MatrixTools")
---connect
-6008
 -js Export/html5/bin/ZIde-UI.js
 -cp Export/html5/haxe
 -D html5

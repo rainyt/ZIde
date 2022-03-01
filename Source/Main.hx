@@ -1,3 +1,4 @@
+import feathers.controls.HDividedBox;
 import zygame.events.ZEvent;
 import tools.update.UpdateCore;
 import electron.renderer.IpcRenderer;
@@ -38,6 +39,7 @@ class Main extends Application {
 				Utils.listener.dispatchEvent(new ZEvent("openProject", {
 					path: App.currentProject.rootXmlPath
 				}));
+				changeLandsapce(App.currentProject.isLandsapce());
 			} else {
 				Alert.show("提示", "需要打开一个项目才能清理缓存");
 			}
@@ -92,19 +94,6 @@ class Main extends Application {
 		this.backgroundSkin = new RectangleSkin(SolidColor(0x252525));
 		this.layout = new AnchorLayout();
 
-		var stageLayoutGroup = new LayoutGroup();
-		stageLayoutGroup.backgroundSkin = new RectangleSkin(SolidColor(0x1e1e1e));
-		this.addChild(stageLayoutGroup);
-		stageLayoutGroup.layout = new HorizontalLayout();
-		cast(stageLayoutGroup.layout, HorizontalLayout).horizontalAlign = HorizontalAlign.CENTER;
-		cast(stageLayoutGroup.layout, HorizontalLayout).verticalAlign = VerticalAlign.MIDDLE;
-
-		var editor = new Editor();
-		stageLayoutGroup.addChild(editor);
-
-		var stageCanvas = new StageCavans();
-		stageLayoutGroup.addChild(stageCanvas);
-
 		var menu = new Menu();
 		this.addChild(menu);
 		var head = new Head();
@@ -115,6 +104,38 @@ class Main extends Application {
 		this.addChild(bottom);
 		bottom.layoutData = new AnchorLayoutData(null, 0, 0, 50);
 
-		stageLayoutGroup.layoutData = new AnchorLayoutData(36, 0, 20, 50 + assets.width);
+		var layout:LayoutGroup = new LayoutGroup();
+		this.addChild(layout);
+		layout.layout = new AnchorLayout();
+		layout.layoutData = new AnchorLayoutData(36, 0, 20, 50 + assets.width);
+
+		stageCanvas = new StageCavans();
+		layout.addChild(stageCanvas);
+		stageCanvas.width = 400 * 0.85;
+		stageCanvas.height = 800 * 0.85;
+		stageCanvas.layoutData = new AnchorLayoutData(null, 0, null, null, null, 0);
+
+		editor = new Editor();
+		layout.addChild(editor);
+		editor.layoutData = new AnchorLayoutData(0, stageCanvas.width, 0, 0);
+
+		// changeLandsapce(true);
+	}
+
+	private var stageCanvas:StageCavans;
+	private var editor:Editor;
+
+	public function changeLandsapce(isLandsapce:Bool = false):Void {
+		if (!isLandsapce) {
+			stageCanvas.width = 400 * 0.85;
+			stageCanvas.height = 800 * 0.85;
+			stageCanvas.layoutData = new AnchorLayoutData(null, 0, null, null, null, 0);
+			editor.layoutData = new AnchorLayoutData(0, stageCanvas.width, 0, 0);
+		} else {
+			stageCanvas.width = 800 * 0.85;
+			stageCanvas.height = 400 * 0.85;
+			stageCanvas.layoutData = new AnchorLayoutData(0, null, null, null, 0, null);
+			editor.layoutData = new AnchorLayoutData(stageCanvas.height, 0, 0, 0);
+		}
 	}
 }

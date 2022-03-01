@@ -14,7 +14,7 @@
     <assets path="Assets/md" rename="md" embed="false" />
     <assets path="Assets/china" rename="china" embed="false" />
     <assets path="Assets/photoshop" rename="photoshop" embed="false" />
-    <assets path="Assets/node_modules" rename="node_modules" embed="false" />
+    <!-- <assets path="Assets/node_modules" rename="node_modules" embed="false" /> -->
     <assets path="Assets/atlas" rename="atlas" embed="false" />
     <assets path="./StageCanvas/Export/html5/bin" rename="game" embed="false" />
     <!-- <perbuild command="cd StageCavans && lime build html5" /> -->
