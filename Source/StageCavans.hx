@@ -103,7 +103,7 @@ class StageCavans extends LayoutGroup {
 			stage.color = App.currentProject == null ? 0x373737 : App.currentProject.stagecolor;
 			// stage.window.resize(Std.int(this.width), Std.int(this.height));
 			// @:privateAccess stage.__resize();
-			// getStart().onStageSizeChange();
+			getStart().onStageSizeChange();
 			trace("window.uiContext.resize()", Std.int(this.width), Std.int(this.height), getStart().HDWidth, getStart().HDHeight);
 		} else {
 			trace("window.uiContext is null");
