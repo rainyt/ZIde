@@ -18,6 +18,8 @@ import feathers.controls.Application;
 class Main extends Application {
 	public static var current:Main;
 
+	public var head = new Head();
+
 	public function new() {
 		super();
 
@@ -96,7 +98,6 @@ class Main extends Application {
 
 		var menu = new Menu();
 		this.addChild(menu);
-		var head = new Head();
 		this.addChild(head);
 		var assets = new AssetsList();
 		this.addChild(assets);

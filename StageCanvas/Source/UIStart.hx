@@ -58,7 +58,7 @@ class UIStart extends Start {
 	}
 
 	public function onMove(e:MouseEvent):Void {
-		trace("onMove",  stage.mouseX,  stage.mouseY);
+		trace("onMove", stage.mouseX, stage.mouseY);
 		if (isClick) {
 			this.x = this._viewX - (this.clickX - stage.mouseX);
 			this.y = this._viewY - (this.clickY - stage.mouseY);
@@ -67,12 +67,15 @@ class UIStart extends Start {
 
 	private var _xmlPath:String = null;
 
-	public function openFile(xmlPath:String, xmlData:String, project:data.ZProjectData):Void {
+	public function openFile(xmlPath:String, xmlData:String, project:data.ZProjectData, paramString:String):Void {
 		if (xmlPath != null && _xmlPath != xmlPath) {
 			this.x = 0;
 			this.y = 0;
 			_xmlPath = xmlPath;
 		}
+		@:privateAccess ZBuilder.defineMaps.clear();
+		ZBuilder.defineValue(paramString);
+		trace("追加define:", paramString);
 		_project = project;
 		trace("_project.rootXmlPath=", _project.rootXmlPath);
 		while (this.numChildren > 0) {
@@ -105,7 +108,7 @@ class UIStart extends Start {
 					} else
 						trace("需要指定精灵表！");
 				} else {
-					_assets.setXml("layout_xml",xml);
+					_assets.setXml("layout_xml", xml);
 					var scene = new ZBuilderScene("layout_xml.xml");
 					this.addChild(scene);
 					// _build = ZBuilder.build(, this);

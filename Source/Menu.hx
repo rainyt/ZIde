@@ -69,7 +69,7 @@ class Menu extends LayoutGroup {
 		try {
 			var data = Editor.current.getEditorData();
 			Xml.parse(data);
-			StageCavans.current.getStart().openFile(null, data, App.currentProject);
+			StageCavans.current.getStart().openFile(null, data, App.currentProject, Main.current.head.buildParams.text);
 		} catch (e:Exception) {
 			Alert.show("错误", "编译错误：" + e.message);
 		}

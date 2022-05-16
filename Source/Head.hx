@@ -1,3 +1,4 @@
+import feathers.controls.TextInput;
 import zygame.macro.ZMacroUtils;
 import data.ZProjectData;
 import zygame.events.ZEvent;
@@ -12,6 +13,8 @@ import feathers.controls.LayoutGroup;
  * 头部信息栏
  */
 class Head extends LayoutGroup {
+	public var buildParams:TextInput;
+
 	public function new() {
 		super();
 		this.height = 36;
@@ -23,6 +26,18 @@ class Head extends LayoutGroup {
 		label.layoutData = new AnchorLayoutData(null, null, null, 10, null, 0);
 		label.textFormat = new TextFormat(Utils.fontName, 12, 0x959595);
 		this.layoutData = new AnchorLayoutData(0, 0, null, 50);
+
+		var clayout = new LayoutGroup();
+		this.addChild(clayout);
+		var desc = new Label("编译参数：");
+		desc.textFormat = new TextFormat(null, null, 0xffffff);
+		clayout.addChild(desc);
+		var input = new TextInput();
+		clayout.addChild(input);
+		buildParams = input;
+		clayout.layout = new HorizontalLayout();
+		cast(clayout.layout, HorizontalLayout).verticalAlign = MIDDLE;
+		clayout.layoutData = new AnchorLayoutData(null, 0, null, null, null, 0);
 
 		Utils.listener.addEventListener("openProject", function(e:ZEvent):Void {
 			if (e.data == null)

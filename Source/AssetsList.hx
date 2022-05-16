@@ -61,7 +61,7 @@ class AssetsList extends LayoutGroup {
 			App.currentEditPath = list.selectedItem.path;
 			var xmlData = File.getContent(list.selectedItem.path);
 			Editor.current.setEditorData(xmlData);
-			StageCavans.current.getStart().openFile( list.selectedItem.path,xmlData, App.currentProject);
+			StageCavans.current.getStart().openFile(list.selectedItem.path, xmlData, App.currentProject, Main.current.head.buildParams.text);
 		});
 
 		f.onFilter = function(data) {
@@ -78,6 +78,7 @@ class AssetsList extends LayoutGroup {
 class AssetsListItem extends ItemRenderer {
 	public function new() {
 		super();
+		this.mouseChildren = false;
 		this.backgroundSkin = new RectangleSkin(SolidColor(0x2a2a2a));
 		this.textFormat = new TextFormat(Utils.fontName, 12, 0xcccccc);
 		this.setSkinForState(ToggleButtonState.UP(true), new RectangleSkin(SolidColor(0x373737)));

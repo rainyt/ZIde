@@ -1,9 +1,9 @@
 -main ApplicationMain 
 -cp /Users/rainy/Documents/haxelib/zygameui/Source
--D zygameui=11.0.7
+-D zygameui=12.0.0
 --macro lime._internal.macros.DefineMacro.run()
--cp /Users/rainy/Documents/haxelib/lime/7,9,2/src
--D lime=7.9.2
+-cp /Users/rainy/Documents/haxelib/lime/src
+-D lime=7.9.0
 -cp /Users/rainy/Documents/haxelib/swf/3,0,2/src
 -D swf=3.0.2
 --macro keep('IntIterator')
@@ -34,7 +34,7 @@
 -cp /Users/rainy/Documents/haxelib/hxargs/3,0,2
 -D hxargs=3.0.2
 --macro openfl.utils._internal.ExtraParamsMacro.include()
--cp /Users/rainy/Documents/haxelib/openfl/src
+-cp /Users/rainy/Documents/haxelib-self/openfl/src
 -D openfl=9.1.0
 -cp /Users/rainy/Documents/haxelib/zygameui/Source
 -cp /Users/rainy/Documents/haxelib/zygameui/openfl9-source
@@ -57,7 +57,7 @@
 -D gpu_particles
 -D MAC_USE_CURRENT_SDK=1
 -D gl_stats
--D tools=7.9.2
+-D tools=7.9.0
 -D ANDROID_SDK=/Users/rainy/Library/Android/sdk
 -D lime-canvas
 -D HXCPP_STACK_TRACE
@@ -101,6 +101,8 @@
 --macro keep("tweenxcore.FloatTools")
 --macro keep("tweenxcore.PointTools")
 --macro keep("tweenxcore.MatrixTools")
+--connect
+6022
 -js Export/html5/bin/ZIde-UI.js
 -cp Export/html5/haxe
 -D html5

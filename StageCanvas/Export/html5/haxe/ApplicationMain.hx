@@ -33,7 +33,7 @@ class ApplicationMain
 
 		ManifestResources.init(config);
 
-		app.meta["build"] = "64";
+		app.meta["build"] = "66";
 		app.meta["company"] = "Company Name";
 		app.meta["file"] = "ZIde-UI";
 		app.meta["name"] = "ZIde";
