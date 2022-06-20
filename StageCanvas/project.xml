@@ -5,6 +5,7 @@
     <define name="spine3.8"/>
     <haxelib name="zygameui" />
     <haxelib name="feathersui" />
+    <haxelib name="hscript"/>
     <source path="Source" />
     <source path="../CommonSource" />
     <window height="0" width="0" />
