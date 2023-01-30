@@ -6,6 +6,7 @@
     <haxelib name="zygameui" />
     <haxelib name="feathersui" />
     <haxelib name="hscript"/>
+    <haxedef name="igonre_extends_error"/>
     <source path="Source" />
     <source path="../CommonSource" />
     <window height="0" width="0" />

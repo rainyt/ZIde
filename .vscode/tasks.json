@@ -549,7 +549,7 @@
             "group": {
                 "kind": "build"
             }
-        },
+        }, 
         {
             "label": "生成EXE版本(需要先运行Electron编译)",
             "command": "cd Export/electron/bin && arch -x86_64 npm run package-win",
