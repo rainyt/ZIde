@@ -134,9 +134,15 @@ class TitleView extends LayoutGroup {
 		layout.addChild(upload);
 		upload.text = "选择";
 		Utils.click(upload, function() {
-			Utils.openFile(function(data) {
-				input.text = data.path;
-			}, type);
+			if (type == "dir") {
+				Utils.openFileSave(function(data) {
+					input.text = data;
+				});
+			} else {
+				Utils.openFile(function(data) {
+					input.text = data.path;
+				}, type);
+			}
 		});
 
 		return input;

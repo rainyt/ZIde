@@ -83,6 +83,7 @@ class PSDView extends TitleView {
 				Std.parseInt(this.getPopUpListView("精灵图最大尺寸").selectedItem.id), this.getPopUpListView("使用批渲染布局").selectedIndex == 0, function(bool) {
 					if (bool) {
 						this.parent.removeChild(this);
+						Alert.show("提示", "导出完成");
 					}
 			}, this.getPopUpListView("九宫格图分离").selectedIndex == 0);
 		});

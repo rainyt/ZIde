@@ -52,6 +52,13 @@ class Menu extends LayoutGroup {
 			Main.current.addChild(new tools.psd.PSDView());
 		});
 
+		var exportBatchPsd = new MenuButton();
+		exportBatchPsd.text = "批量";
+		this.addChild(exportBatchPsd);
+		Utils.click(exportBatchPsd, function() {
+			Main.current.addChild(new tools.psd.PSDBatchView());
+		});
+
 		var debug = new MenuButton();
 		debug.text = "调试";
 		this.addChild(debug);

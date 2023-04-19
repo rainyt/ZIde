@@ -191,14 +191,12 @@ class PSDTools {
 							ChildProcess.exec(atlasSlice9, null, function(err:Dynamic, stdout, stderr) {
 								trace(err, stdout, stderr);
 								if (err == null) {
-									Alert.show("提示", "导出完成");
 									callBack(true);
 								} else {
 									Alert.show("错误", err);
 								}
 							});
 						} else {
-							Alert.show("提示", "导出完成");
 							callBack(true);
 						}
 					} else {
@@ -206,7 +204,6 @@ class PSDTools {
 					}
 				});
 			} else {
-				Alert.show("提示", "导出完成");
 				callBack(true);
 			}
 		}
