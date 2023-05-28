@@ -44,7 +44,6 @@ class UIStart extends Start {
 	private var clickY:Float = 0;
 
 	public function onDown(e:MouseEvent):Void {
-		trace("onDown");
 		isClick = true;
 		this.clickX = stage.mouseX;
 		this.clickY = stage.mouseY;
@@ -53,12 +52,10 @@ class UIStart extends Start {
 	}
 
 	public function onUp(e:MouseEvent):Void {
-		trace("onUp");
 		isClick = false;
 	}
 
 	public function onMove(e:MouseEvent):Void {
-		trace("onMove", stage.mouseX, stage.mouseY);
 		if (isClick) {
 			this.x = this._viewX - (this.clickX - stage.mouseX);
 			this.y = this._viewY - (this.clickY - stage.mouseY);
@@ -231,6 +228,20 @@ class UIStart extends Start {
 	}
 
 	private function findXmlItemAssets(item:Xml, array:Array<String>, findChild:Bool = false) {
+		if (item.exists("style")) {
+			// 动画文件
+			var src = item.get("style");
+			var xmlid = src.split(":")[0];
+			var childXmlContent = _project.xmlDatas.get(_project.xmlFiles.get(xmlid));
+			if (childXmlContent != null) {
+				trace("子集查询：" + xmlid, childXmlContent);
+				var childXml = Xml.parse(childXmlContent);
+				trace("深度查询：", childXml.toString());
+				if (findChild)
+					findXmlAssets(childXml.firstElement(), array);
+				array.push(xmlid);
+			}
+		}
 		if (item.exists("tween")) {
 			// 动画文件
 			var src = item.get("tween");
