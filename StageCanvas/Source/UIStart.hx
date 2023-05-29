@@ -1,3 +1,4 @@
+import zygame.components.style.XmlStyle;
 import zygame.components.ZBuilderScene;
 import openfl.display.DisplayObject;
 import zygame.utils.Lib;
@@ -144,6 +145,8 @@ class UIStart extends Start {
 		}
 		filesConfig = [];
 		if (isload) {
+			// 重置新的样式
+			@:privateAccess ZBuilder.__xmlStyle = new XmlStyle();
 			_assets.unloadAll();
 			for (file in needAssets) {
 				var png:String = this._project.pngFiles.get(file);
