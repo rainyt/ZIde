@@ -1,0 +1,6 @@
+# ZIde 2.0 编译配置
+# 使用2.0开始，将使用hxvue代替基础HTML框架，不再使用旧的feathersui组件布局实现
+--main Main
+--class-path Source
+--library hxvue3
+--js bin/electron/ZIde.js
