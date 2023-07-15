@@ -1,5 +1,7 @@
 package app;
 
+import element.plus.ElMessage;
+import haxe.Exception;
 import sys.io.File;
 import js.html.IFrameElement;
 import data.ZProjectData;
@@ -41,22 +43,32 @@ class App extends VueComponent {
 	 */
 	public function cleanNoChangeTab():Void {
 		var array:Array<TapData> = this.tabs;
-		array = array.filter((a) -> return a.name == tabKey || a.isChange);
+		array = array.filter((a) -> return a.name == tabKey || a.isChange || a.lock);
 		this.tabs = array;
 	}
 
 	public function onTabChange(item):Void {
-		this.tabKey = item.props.name;
-		// 渲染到编辑器中
-		var editer = this.get("editer", IFrameElement);
-		untyped editer.contentWindow.setCodeValue(this.tabKey, getCurrentTapData().code);
-		this.onRender();
+		if (this.tabKey != item.props.name) {
+			this.tabKey = item.props.name;
+			// 渲染到编辑器中
+			var editer = this.get("editer", IFrameElement);
+			untyped editer.contentWindow.setCodeValue(this.tabKey, getCurrentTapData().code);
+			this.onRender();
+		}
 	}
 
 	public function onRemoveTab(item):Void {
 		var array:Array<TapData> = this.tabs;
 		array = array.filter((a) -> a.name != item);
 		this.tabs = array;
+		if (array.length > 0) {
+			// 默认切换到第一个
+			this.tabKey = array[0].name;
+		} else {
+			// 清空代码区域
+			this.tabKey = "";
+		}
+		onCodeUpdate();
 	}
 
 	public function addTap(item:TapData):Void {
@@ -120,14 +132,34 @@ class App extends VueComponent {
 			var editer = this.get("editer", IFrameElement);
 			var uiediter = this.get("uiediter", IFrameElement);
 			var code:String = untyped editer.contentWindow.getCodeValue();
-			untyped uiediter.contentWindow.openFile(currentData.path, code, AppData.currentProject, null);
+			try {
+				untyped uiediter.contentWindow.openFile(currentData.path, code, AppData.currentProject, null);
+			} catch (e:Exception) {
+				ElMessage.error("错误：" + e.message);
+			}
 		}
+	}
+
+	public function onCodeUpdate():Void {
+		var editer = this.get("editer", IFrameElement);
+		var currentData = getCurrentTapData();
+		if (currentData != null) {
+			untyped editer.contentWindow.setCodeValue(currentData.name, currentData.code);
+		} else {
+			untyped editer.contentWindow.setCodeValue("", "");
+		}
+		this.onRender();
 	}
 
 	/**
 	 * 单栏点击
 	 */
 	public function onHandleNodeClick(item):Void {
+		if (this.tabKey == item.label) {
+			var tabData = this.getCurrentTapData();
+			tabData.lock = true;
+			return;
+		}
 		var xmlContent = File.getContent(item.path);
 		// 渲染到编辑器中
 		var editer = this.get("editer", IFrameElement);
@@ -138,7 +170,8 @@ class App extends VueComponent {
 			path: item.path,
 			name: item.label,
 			code: xmlContent,
-			isChange: false
+			isChange: false,
+			lock: false
 		});
 		this.tabKey = item.label;
 		this.cleanNoChangeTab();
@@ -152,5 +185,6 @@ typedef TapData = {
 	name:String,
 	path:String,
 	code:String,
-	isChange:Bool
+	isChange:Bool,
+	lock:Bool
 }
