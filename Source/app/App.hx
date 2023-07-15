@@ -216,6 +216,13 @@ class App extends VueComponent {
 		// 尝试渲染
 		onRender();
 	}
+
+	/**
+	 * PSD导出处理
+	 */
+	public function onPSDExport():Void {
+		trace("这里需要实现PSD导出");
+	}
 }
 
 typedef TapData = {
