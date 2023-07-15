@@ -4,3 +4,5 @@
 --class-path Source
 --library hxvue3
 --js bin/electron/ZIde.js
+# 使用electron目标
+--library electron

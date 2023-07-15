@@ -1,0 +1,12 @@
+body {
+    margin: 0px;
+    color: #303133
+}
+
+.center {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    right: 20px;
+  }

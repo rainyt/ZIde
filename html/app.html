@@ -1,1 +1,23 @@
-<el-button>测试</el-button>
+<el-container>
+    <el-header style="background-color: #061626;">
+        <div class="center">
+            <el-button @click="onOpenProject"><el-icon>
+                    <FolderOpened />
+                </el-icon>打开</el-button>
+            <el-button><el-icon>
+                    <FolderChecked />
+                </el-icon>保存</el-button>
+            <el-button>
+                <el-icon>
+                    <Odometer />
+                </el-icon>调试</el-button>
+            <el-button><el-icon>
+                    <Tools />
+                </el-icon>工具</el-button>
+        </div>
+    </el-header>
+    <el-container>
+        <el-aside width="200px">Aside</el-aside>
+        <el-main>Main</el-main>
+    </el-container>
+</el-container>
