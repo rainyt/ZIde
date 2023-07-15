@@ -18,19 +18,19 @@
                 value: null,
                 language: 'xml',
                 theme: "vs-dark",
-                quickSuggestions:false
+                quickSuggestions: false
             });
             window.editor = editor;
             document.getElementById("container").style.height = document.documentElement.clientHeight + "px";
             editor.layout();
-            monaco.languages.registerCompletionItemProvider("xml",new XmlEditorContent());
-            editor.onDidChangeModelContent(function(){
-                if(window.onCodeChange != null)
-                    window.onCodeChange();
+            monaco.languages.registerCompletionItemProvider("xml", new XmlEditorContent());
+            editor.onDidChangeModelContent(function () {
+                if (window.onCodeChange != null)
+                    window.onCodeChange(this.url, editor.getValue());
             });
         });
         //注册项目缓存
-        window.registerZProjectData = function(data){
+        window.registerZProjectData = function (data) {
             XmlEditorContent.registerZProjectData(data);
         }
         //注册提示工具
@@ -47,7 +47,8 @@
         window.getCodeValue = function () {
             return editor.getValue();
         }
-        window.setCodeValue = function (data){
+        window.setCodeValue = function (url, data) {
+            this.url = url;
             editor.setValue(data);
         }
     </script>

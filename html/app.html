@@ -4,7 +4,7 @@
             <el-button @click="onOpenProject"><el-icon>
                     <FolderOpened />
                 </el-icon>打开</el-button>
-            <el-button><el-icon>
+            <el-button @click="onSave"><el-icon>
                     <FolderChecked />
                 </el-icon>保存</el-button>
             <el-button @click="onRender">
@@ -25,20 +25,21 @@
                     </el-icon>
                 </template>
             </el-input>
-            <el-tree style="height:calc(100vh - 92px);overflow-y: auto;" :data="files" @node-click="onHandleNodeClick" />
+            <el-tree style="height:calc(100vh - 92px);overflow-y: auto;" :data="files"
+                @node-click="onHandleNodeClick" />
         </el-aside>
         <el-main style="border-width: 1px; background-color: #ffffff;--el-main-padding:0px;overflow-y: hidden;">
-            <el-tabs type="card" closable @tab-remove="removeTab" v-model="tabs" style="margin: 0px;">
-                <el-tab-pane label="Config" style="margin: 0px;"/>
+            <el-tabs type="card" closable @tab-click="onTabChange" @tab-remove="onRemoveTab" v-model="tabKey" style="margin: 0px;">
+                <el-tab-pane v-for="item in tabs" :key="item.name" :name="item.name" :label="item.title"
+                    style="margin: 0px;" />
             </el-tabs>
             <!-- 主要编辑器内容 -->
             <el-container>
-                <el-main
-                    style="border-width: 1px; background-color: #ffffff;--el-main-padding:0px;overflow-y: hidden;">
+                <el-main style="border-width: 1px; background-color: #ffffff;--el-main-padding:0px;overflow-y: hidden;">
                     <iframe ref="editer" class="editer" src="md/editor.html" />
                 </el-main>
                 <el-aside width="320px" style="background-color: #ccc;">
-                    <iframe ref="uiediter" class="editer" src="canvas/index.html" />
+                    <iframe ref="uiediter" class="editer" src="canvas/index.html" style="width: 100%;height: 576px;" />
                 </el-aside>
             </el-container>
         </el-main>
