@@ -163,7 +163,9 @@ class ZProjectData {
 		try {
 			var xml = Xml.parse(File.getContent(path));
 			var nodeName = xml.firstElement().nodeName;
-			// return @:privateAccess ZBuilder.classMaps.exists(nodeName);
+			if (nodeName == "TextureAtlas") {
+				return false;
+			}
 			return true;
 		} catch (e:Exception) {}
 		return false;

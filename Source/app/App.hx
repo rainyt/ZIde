@@ -1,5 +1,7 @@
 package app;
 
+import sys.io.File;
+import js.html.IFrameElement;
 import data.ZProjectData;
 import electron.FileSystem;
 import app.AppData;
@@ -52,13 +54,38 @@ class App extends VueComponent {
 			return;
 		}
 		var list:Array<{label:String, path:String}> = [];
-		for (key => value in AppData.currentProject.xmlFiles) {
-			if (key.indexOf(filterFileName) != -1)
+		for (key => value in AppData.currentProject.builderFiles) {
+			if (value.name.indexOf(filterFileName) != -1)
 				list.push({
-					label: key,
-					path: value
+					label: value.name,
+					path: value.path
 				});
 		}
 		this.files = list;
+	}
+
+	/**
+	 * 开始调试内容
+	 */
+	public function onDebug():Void {
+		var editer = this.get("editer", IFrameElement);
+	}
+
+	/**
+	 * 开始渲染UI
+	 */
+	public function onRender():Void {
+		var uiediter = this.get("uiediter", IFrameElement);
+	}
+
+	/**
+	 * 单栏点击
+	 */
+	public function onHandleNodeClick(item):Void {
+		trace(item);
+		var xmlContent = File.getContent(item.path);
+		// 渲染到编辑器中
+		var editer = this.get("editer", IFrameElement);
+		untyped editer.contentWindow.setCodeValue(xmlContent);
 	}
 }

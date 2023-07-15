@@ -7,7 +7,7 @@
             <el-button><el-icon>
                     <FolderChecked />
                 </el-icon>保存</el-button>
-            <el-button>
+            <el-button @click="onDebug">
                 <el-icon>
                     <Odometer />
                 </el-icon>调试</el-button>
@@ -25,22 +25,22 @@
                     </el-icon>
                 </template>
             </el-input>
-            <el-tree style="height:calc(100vh - 92px);overflow-y: auto;" :data="files" @node-click="handleNodeClick" />
+            <el-tree style="height:calc(100vh - 92px);overflow-y: auto;" :data="files" @node-click="onHandleNodeClick" />
         </el-aside>
         <el-main style="border-width: 1px; background-color: #ffffff;--el-main-padding:0px;overflow-y: hidden;">
             <el-tabs type="card" closable @tab-remove="removeTab" v-model="tabs" style="margin: 0px;">
-                <el-tab-pane label="Config" style="margin: 0px;">
-                    <el-container>
-                        <el-main
-                            style="border-width: 1px; background-color: #ffffff;--el-main-padding:0px;overflow-y: hidden;">
-                            <iframe ref="editer" class="editer" src="md/editor.html" />
-                        </el-main>
-                        <el-aside width="320px" style="background-color: #ccc;">
-                            <iframe ref="editer" class="editer" src="canvas/index.html" />
-                        </el-aside>
-                    </el-container>
-                </el-tab-pane>
+                <el-tab-pane label="Config" style="margin: 0px;"/>
             </el-tabs>
+            <!-- 主要编辑器内容 -->
+            <el-container>
+                <el-main
+                    style="border-width: 1px; background-color: #ffffff;--el-main-padding:0px;overflow-y: hidden;">
+                    <iframe ref="editer" class="editer" src="md/editor.html" />
+                </el-main>
+                <el-aside width="320px" style="background-color: #ccc;">
+                    <iframe ref="uiediter" class="editer" src="canvas/index.html" />
+                </el-aside>
+            </el-container>
         </el-main>
     </el-container>
 </el-container>
