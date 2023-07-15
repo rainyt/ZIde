@@ -1,5 +1,6 @@
 package app;
 
+import element.plus.ElMessageBox;
 import element.plus.ElMessage;
 import haxe.Exception;
 import sys.io.File;
@@ -58,6 +59,27 @@ class App extends VueComponent {
 	}
 
 	public function onRemoveTab(item):Void {
+		var tabData = this.getCurrentTapData();
+		if (tabData != null && tabData.isChange) {
+			ElMessageBox.confirm("注意当前文件未保存，避免造成数据丢失", "是否保存当前文件", {
+				cancelButtonText: "放弃",
+				confirmButtonText: "保存并关闭",
+				distinguishCancelAndClose: true,
+			}).then((data) -> {
+				// 先保存，再关闭
+				File.saveContent(tabData.path, tabData.code);
+				removeTap(item);
+			}).catchError((data) -> {
+				if (data != "close") {
+					removeTap(item);
+				}
+			});
+			return;
+		}
+		removeTap(item);
+	}
+
+	public function removeTap(item):Void {
 		var array:Array<TapData> = this.tabs;
 		array = array.filter((a) -> a.name != item);
 		this.tabs = array;
