@@ -1,11 +1,9 @@
 package data;
 
-import zygame.utils.StringUtils;
-import zygame.events.ZEvent;
-#if electron
+import haxe.Exception;
+#if (electron)
 import sys.FileSystem;
 import sys.io.File;
-#end
 
 class ZProjectData {
 	/**
@@ -103,10 +101,10 @@ class ZProjectData {
 			switch (item.nodeName) {
 				case "assets":
 					var assetsPath = rootPath + "/" + item.get("path");
-					if(assetsPaths.indexOf(assetsPath) == -1){
+					if (assetsPaths.indexOf(assetsPath) == -1) {
 						assetsPaths.push(assetsPath);
 						proessFile(assetsPath);
-					}					
+					}
 				case "app":
 					if (item.exists("hdwidth"))
 						HDWidth = Std.parseInt(item.get("hdwidth"));
@@ -133,26 +131,54 @@ class ZProjectData {
 			switch (type) {
 				case "xml":
 					// 判断是否为ZBuilder配置XML
-					if (Utils.isZBuilderXml(path)) {
+					if (isZBuilderXml(path)) {
 						this.builderFiles.push({
 							name: path.substr(path.lastIndexOf("/") + 1),
 							path: path
 						});
 					}
 					// 普通XML文件
-					xmlFiles.set(StringUtils.getName(path), path);
+					xmlFiles.set(getName(path), path);
 					xmlDatas.set(path, File.getContent(path));
-				case "png","jpg":
+				case "png", "jpg":
 					// 图片文件缓存
-					pngFiles.set(StringUtils.getName(path), path);
+					pngFiles.set(getName(path), path);
 				case "json":
-					jsonFiles.set(StringUtils.getName(path), path);
+					jsonFiles.set(getName(path), path);
 				case "atlas":
-					atlasFiles.set(StringUtils.getName(path), path);
+					atlasFiles.set(getName(path), path);
 				case "mp3":
-					mp3Files.set(StringUtils.getName(path), path);
+					mp3Files.set(getName(path), path);
 			}
 		}
 	}
 	#end
+
+	/**
+	 * 判断是否为ZBuilderXml目录
+	 * @param path 
+	 * @return Bool
+	 */
+	public static function isZBuilderXml(path:String):Bool {
+		try {
+			var xml = Xml.parse(File.getContent(path));
+			var nodeName = xml.firstElement().nodeName;
+			// return @:privateAccess ZBuilder.classMaps.exists(nodeName);
+			return true;
+		} catch (e:Exception) {}
+		return false;
+	}
+
+	public function getName(source:String):String {
+		var data = source;
+		if (data == null)
+			return data;
+		data = data.substr(data.lastIndexOf("/") + 1);
+		if (data.indexOf(".") != -1)
+			data = data.substr(0, data.lastIndexOf("."));
+		else if (source.indexOf("http") == 0)
+			return source;
+		return data;
+	}
 }
+#end

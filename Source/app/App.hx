@@ -1,6 +1,8 @@
 package app;
 
+import data.ZProjectData;
 import electron.FileSystem;
+import app.AppData;
 import vue3.VueComponent;
 
 /**
@@ -9,6 +11,13 @@ import vue3.VueComponent;
 @:t("html/app.html")
 @:s("html/css/main.css")
 class App extends VueComponent {
+	override function data():Dynamic {
+		return {
+			filterFileName: "",
+			files: []
+		}
+	}
+
 	public function onOpenProject():Void {
 		FileSystem.openFile({
 			title: "选择project.xml文件",
@@ -20,8 +29,24 @@ class App extends VueComponent {
 			]
 		}, (data) -> {
 			if (!data.canceled) {
-				trace("选择了项目配置：", data.filePaths[0]);
+				AppData.currentProject = new ZProjectData(data.filePaths[0]);
+				this.onFilterChange();
 			}
 		});
+	}
+
+	public function onFilterChange():Void {
+		if (AppData.currentProject == null) {
+			return;
+		}
+		var list:Array<{label:String, path:String}> = [];
+		for (key => value in AppData.currentProject.xmlFiles) {
+			if (key.indexOf(filterFileName) != -1)
+				list.push({
+					label: key,
+					path: value
+				});
+		}
+		this.files = list;
 	}
 }

@@ -13,6 +13,7 @@ class Main {
 		app.component("FolderChecked", ElementPlusIconsVue.FolderChecked);
 		app.component("Odometer", ElementPlusIconsVue.Odometer);
 		app.component("Tools", ElementPlusIconsVue.Tools);
+		app.component("Search", ElementPlusIconsVue.Search);
 		app.mount("#app");
 		// 初始化文件管理器API
 		electron.FileSystem.init();
@@ -25,4 +26,5 @@ class Main {
 	public static var FolderChecked:Dynamic;
 	public static var Odometer:Dynamic;
 	public static var Tools:Dynamic;
+	public static var Search:Dynamic;
 }

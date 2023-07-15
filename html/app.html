@@ -17,7 +17,16 @@
         </div>
     </el-header>
     <el-container>
-        <el-aside width="200px">Aside</el-aside>
+        <el-aside width="300px">
+            <el-input v-model="filterFileName" placeholder="过滤文件..." @change="onFilterChange">
+                <template #prefix>
+                    <el-icon class="el-input__icon">
+                        <search />
+                    </el-icon>
+                </template>
+            </el-input>
+            <el-tree style="height:calc(100vh - 92px);overflow-y: auto;" :data="files" @node-click="handleNodeClick" />
+        </el-aside>
         <el-main>Main</el-main>
     </el-container>
 </el-container>

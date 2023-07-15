@@ -6,3 +6,4 @@
 --js bin/electron/ZIde.js
 # 使用electron目标
 --library electron
+--class-path CommonSource
