@@ -30,7 +30,15 @@
         <el-main style="border-width: 1px; background-color: #ffffff;--el-main-padding:0px;overflow-y: hidden;">
             <el-tabs type="card" closable @tab-remove="removeTab" v-model="tabs" style="margin: 0px;">
                 <el-tab-pane label="Config" style="margin: 0px;">
-                    <iframe ref="editer" class="editer" src="md/editor.html" />
+                    <el-container>
+                        <el-main
+                            style="border-width: 1px; background-color: #ffffff;--el-main-padding:0px;overflow-y: hidden;">
+                            <iframe ref="editer" class="editer" src="md/editor.html" />
+                        </el-main>
+                        <el-aside width="320px" style="background-color: #ccc;">
+                            <iframe ref="editer" class="editer" src="canvas/index.html" />
+                        </el-aside>
+                    </el-container>
                 </el-tab-pane>
             </el-tabs>
         </el-main>
