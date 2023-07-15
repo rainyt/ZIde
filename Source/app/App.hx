@@ -67,8 +67,9 @@ class App extends VueComponent {
 				distinguishCancelAndClose: true,
 			}).then((data) -> {
 				// 先保存，再关闭
-				File.saveContent(tabData.path, tabData.code);
-				removeTap(item);
+				if (onSave()) {
+					removeTap(item);
+				}
 			}).catchError((data) -> {
 				if (data != "close") {
 					removeTap(item);
@@ -141,7 +142,7 @@ class App extends VueComponent {
 	/**
 	 * 将文件保存
 	 */
-	public function onSave():Void {
+	public function onSave():Bool {
 		// TODO
 		var tabData = this.getCurrentTapData();
 		if (tabData != null) {
@@ -151,11 +152,12 @@ class App extends VueComponent {
 					Xml.parse(tabData.code);
 				} catch (e:Exception) {
 					ElMessage.error("保存失败：" + e.message);
-					return;
+					return false;
 				}
 				File.saveContent(tabData.path, tabData.code);
 			}
 		}
+		return true;
 	}
 
 	/**
