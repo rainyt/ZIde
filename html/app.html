@@ -1,5 +1,5 @@
 <el-container>
-    <el-header style="background-color: #061626;">
+    <el-header style="background-color: #eee;">
         <div class="center">
             <el-button @click="onOpenProject"><el-icon>
                     <FolderOpened />
@@ -17,7 +17,7 @@
         </div>
     </el-header>
     <el-container>
-        <el-aside width="300px">
+        <el-aside width="260px" style="background-color: #ccc;">
             <el-input v-model="filterFileName" placeholder="过滤文件..." @change="onFilterChange">
                 <template #prefix>
                     <el-icon class="el-input__icon">
@@ -27,6 +27,8 @@
             </el-input>
             <el-tree style="height:calc(100vh - 92px);overflow-y: auto;" :data="files" @node-click="handleNodeClick" />
         </el-aside>
-        <el-main>Main</el-main>
+        <el-main style="background-color: #1e1e1e;--el-main-padding:0px;">
+            <iframe ref="editer" class="editer" src="md/editor.html" />
+        </el-main>
     </el-container>
 </el-container>

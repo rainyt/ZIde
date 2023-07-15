@@ -1,6 +1,7 @@
 body {
     margin: 0px;
-    color: #303133
+    color: #303133;
+    overflow-y: hidden;
 }
 
 .center {
@@ -9,4 +10,13 @@ body {
     justify-content: center;
     height: 100%;
     right: 20px;
-  }
+}
+
+.editer {
+    border-width: 0px;   
+    margin: 0px;
+    padding: 0px;
+    height:calc(100vh - 60px);
+    width:100%;
+    overflow-y: hidden;
+}
