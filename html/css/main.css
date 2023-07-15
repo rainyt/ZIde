@@ -20,3 +20,7 @@ body {
     width:100%;
     overflow-y: hidden;
 }
+
+.el-tabs__header {
+    margin: 0px;
+}

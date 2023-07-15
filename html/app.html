@@ -18,7 +18,7 @@
     </el-header>
     <el-container>
         <el-aside width="260px" style="background-color: #ccc;">
-            <el-input v-model="filterFileName" placeholder="过滤文件..." @change="onFilterChange">
+            <el-input style="height: 41px;" v-model="filterFileName" placeholder="过滤文件..." @change="onFilterChange">
                 <template #prefix>
                     <el-icon class="el-input__icon">
                         <search />
@@ -27,8 +27,12 @@
             </el-input>
             <el-tree style="height:calc(100vh - 92px);overflow-y: auto;" :data="files" @node-click="handleNodeClick" />
         </el-aside>
-        <el-main style="background-color: #1e1e1e;--el-main-padding:0px;">
-            <iframe ref="editer" class="editer" src="md/editor.html" />
+        <el-main style="border-width: 1px; background-color: #ffffff;--el-main-padding:0px;overflow-y: hidden;">
+            <el-tabs type="card" closable @tab-remove="removeTab" v-model="tabs" style="margin: 0px;">
+                <el-tab-pane label="Config" style="margin: 0px;">
+                    <iframe ref="editer" class="editer" src="md/editor.html" />
+                </el-tab-pane>
+            </el-tabs>
         </el-main>
     </el-container>
 </el-container>

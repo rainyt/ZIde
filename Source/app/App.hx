@@ -14,7 +14,19 @@ class App extends VueComponent {
 	override function data():Dynamic {
 		return {
 			filterFileName: "",
-			files: []
+			files: [],
+			tabs: [
+				{
+					title: 'Tab 1',
+					name: '1',
+					content: 'Tab 1 content',
+				},
+				{
+					title: 'Tab 2',
+					name: '2',
+					content: 'Tab 2 content',
+				},
+			]
 		}
 	}
 
