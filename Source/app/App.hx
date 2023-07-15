@@ -121,6 +121,19 @@ class App extends VueComponent {
 	 */
 	public function onSave():Void {
 		// TODO
+		var tabData = this.getCurrentTapData();
+		if (tabData != null) {
+			if (tabData.isChange) {
+				// 检验一下
+				try {
+					Xml.parse(tabData.code);
+				} catch (e:Exception) {
+					ElMessage.error("保存失败：" + e.message);
+					return;
+				}
+				File.saveContent(tabData.path, tabData.code);
+			}
+		}
 	}
 
 	/**
@@ -133,9 +146,10 @@ class App extends VueComponent {
 			var uiediter = this.get("uiediter", IFrameElement);
 			var code:String = untyped editer.contentWindow.getCodeValue();
 			try {
+				Xml.parse(code);
 				untyped uiediter.contentWindow.openFile(currentData.path, code, AppData.currentProject, null);
 			} catch (e:Exception) {
-				ElMessage.error("错误：" + e.message);
+				ElMessage.error("渲染错误：" + e.message);
 			}
 		}
 	}
