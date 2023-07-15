@@ -65,13 +65,6 @@ class App extends VueComponent {
 	}
 
 	/**
-	 * 开始调试内容
-	 */
-	public function onDebug():Void {
-		var editer = this.get("editer", IFrameElement);
-	}
-
-	/**
 	 * 开始渲染UI
 	 */
 	public function onRender():Void {
@@ -82,10 +75,11 @@ class App extends VueComponent {
 	 * 单栏点击
 	 */
 	public function onHandleNodeClick(item):Void {
-		trace(item);
 		var xmlContent = File.getContent(item.path);
 		// 渲染到编辑器中
 		var editer = this.get("editer", IFrameElement);
 		untyped editer.contentWindow.setCodeValue(xmlContent);
+		// 尝试渲染
+		onRender();
 	}
 }

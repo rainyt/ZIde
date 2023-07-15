@@ -1,9 +1,10 @@
 package data;
 
 import haxe.Exception;
-#if (electron)
+#if (electron || sys)
 import sys.FileSystem;
 import sys.io.File;
+#end
 
 class ZProjectData {
 	/**
@@ -85,7 +86,9 @@ class ZProjectData {
 		}
 		baseXml = xml;
 		if (baseXml == null) {
+			#if electron
 			baseXml = Xml.parse(File.getContent(path));
+			#end
 		}
 		if (baseXml.nodeType == Element) {
 			parserElements(baseXml);
@@ -160,6 +163,7 @@ class ZProjectData {
 	 * @return Bool
 	 */
 	public static function isZBuilderXml(path:String):Bool {
+		#if electron
 		try {
 			var xml = Xml.parse(File.getContent(path));
 			var nodeName = xml.firstElement().nodeName;
@@ -168,6 +172,7 @@ class ZProjectData {
 			}
 			return true;
 		} catch (e:Exception) {}
+		#end
 		return false;
 	}
 
@@ -183,4 +188,3 @@ class ZProjectData {
 		return data;
 	}
 }
-#end

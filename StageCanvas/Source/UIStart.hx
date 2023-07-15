@@ -36,6 +36,8 @@ class UIStart extends Start {
 		stage.addEventListener(MouseEvent.MOUSE_DOWN, onDown);
 		stage.addEventListener(MouseEvent.MOUSE_UP, onUp);
 		stage.addEventListener(MouseEvent.MOUSE_MOVE, onMove);
+
+		untyped window.openFile = openFile;
 	}
 
 	private var isClick = false;
