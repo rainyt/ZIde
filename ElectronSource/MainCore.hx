@@ -7,8 +7,6 @@ import electron.main.Menu;
 
 @:expose
 class MainCore {
-	public static var window:BrowserWindow;
-
 	static function main() {
 		trace("ElectronCore初始化");
 		var template:Array<Dynamic> = [
@@ -20,7 +18,7 @@ class MainCore {
 						accelerator: "Command+U",
 						selector: null,
 						click: function() {
-							untyped window.send("update");
+							untyped BrowserWindow.getFocusedWindow().send("update");
 						}
 					},
 					{
@@ -28,7 +26,7 @@ class MainCore {
 						accelerator: "Command+R",
 						selector: null,
 						click: function() {
-							window.reload();
+							untyped BrowserWindow.getFocusedWindow().reload();
 						}
 					},
 					{
@@ -73,7 +71,7 @@ class MainCore {
 						accelerator: "CmdOrCtrl+S",
 						selector: null,
 						click: () -> {
-							untyped window.send("save");
+							untyped BrowserWindow.getFocusedWindow().send("save");
 						}
 					}
 				]
@@ -86,7 +84,7 @@ class MainCore {
 						accelerator: "CmdOrCtrl+B",
 						selector: null,
 						click: () -> {
-							untyped window.send("build");
+							untyped BrowserWindow.getFocusedWindow().send("build");
 						}
 					},
 					{
@@ -94,7 +92,7 @@ class MainCore {
 						accelerator: "F5",
 						selector: null,
 						click: () -> {
-							untyped window.send("f5");
+							untyped BrowserWindow.getFocusedWindow().send("f5");
 						}
 					}
 				]
@@ -107,7 +105,7 @@ class MainCore {
 						accelerator: "F12",
 						selector: null,
 						click: () -> {
-							untyped window.send("debug");
+							untyped BrowserWindow.getFocusedWindow().send("debug");
 						}
 					},
 					{
@@ -115,29 +113,12 @@ class MainCore {
 						accelerator: "CmdOrCtrl+D",
 						selector: null,
 						click: () -> {
-							untyped window.send("codetips");
+							untyped BrowserWindow.getFocusedWindow().send("codetips");
 						}
 					}
 				]
 			}
 		];
 		Menu.setApplicationMenu(Menu.buildFromTemplate(template));
-
-		IpcMain.on("saveFile", function(event) {
-			Dialog.showSaveDialog(window, {
-				title: "储存文件"
-			}).then(function(promise) {
-				if (untyped !promise.canceled)
-					untyped window.send("selectFile", promise.filePath);
-			});
-		});
-
-		IpcMain.on("debug", function(evnet) {
-			window.webContents.openDevTools();
-		});
-
-		IpcMain.on("reload", function(evnet) {
-			window.webContents.reload();
-		});
 	}
 }

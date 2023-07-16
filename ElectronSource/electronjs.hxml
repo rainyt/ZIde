@@ -1,0 +1,3 @@
+--library electron
+--main MainCore
+-js ../bin/electron/electron-core.js

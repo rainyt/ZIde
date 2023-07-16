@@ -19,6 +19,7 @@ import vue3.VueComponent;
 @:s("html/css/main.css")
 @:mainHtml("html/index.html")
 @:assets("./Assets", "./")
+@:require("./electron-core.js")
 class App extends VueComponent {
 	override function data():Dynamic {
 		return {

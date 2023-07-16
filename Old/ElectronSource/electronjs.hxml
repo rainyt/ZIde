@@ -1,4 +1,0 @@
---library electron
---main MainCore
--js ./electron-core.js
---cmd cp -rp ./electron-core.js ../Export/electron/bin/electron-core.js
