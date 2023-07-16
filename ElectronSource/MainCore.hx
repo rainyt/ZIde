@@ -105,7 +105,8 @@ class MainCore {
 						accelerator: "F12",
 						selector: null,
 						click: () -> {
-							untyped BrowserWindow.getFocusedWindow().send("debug");
+							var window:BrowserWindow = BrowserWindow.getFocusedWindow();
+							window.webContents.openDevTools();
 						}
 					},
 					{

@@ -1,3 +1,4 @@
+import app.utils.ElectronCore;
 import app.AppData;
 import element.plus.ElementPlus;
 import vue3.Vue;
@@ -13,6 +14,7 @@ class Main {
 		fixPath();
 		console.log(process.env.PATH);");
 		AppData.init();
+		ElectronCore.init();
 		var config = new App();
 		var app = Vue.createApp(config);
 		app.use(ElementPlus);

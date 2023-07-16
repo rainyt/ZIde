@@ -1,5 +1,6 @@
 package app;
 
+import app.utils.ElectronCore;
 import app.utils.UpdateCore;
 import element.plus.ElementPlus;
 import element.plus.ElMessageBox;
@@ -245,6 +246,12 @@ class App extends VueComponent {
 					ElMessageBox.alert("更新程序包错误", "错误");
 			}
 		});
+	}
+
+	override function onMounted() {
+		super.onMounted();
+		ElectronCore.onBuild = this.onRender;
+		ElectronCore.onSave = this.onSave;
 	}
 }
 
