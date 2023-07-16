@@ -1,5 +1,6 @@
 package app;
 
+import element.plus.ElMessageBox;
 import haxe.io.Path;
 import app.utils.PSDTools;
 import electron.FileSystem;
@@ -12,6 +13,7 @@ import vue3.VueComponent;
 class PsdExportView extends VueComponent {
 	override function data():Dynamic {
 		return {
+			exporting: false,
 			option: {
 				psd: "",
 				atlas: true,
@@ -28,11 +30,18 @@ class PsdExportView extends VueComponent {
 	 */
 	public function onExport():Void {
 		// 开始导出
+		exporting = true;
 		var tools = new PSDTools();
 		var psdPath = new Path(option.psd);
 		var outDir = psdPath.dir + "/bin/";
 		sys.FileSystem.createDirectory(outDir);
-		tools.exportPsdUIFiles(option.psd, outDir, option.layoutFile, option.atlas, psdPath.file, 2048, option.batchRender, (bool) -> {}, option.s9out);
+		tools.exportPsdUIFiles(option.psd, outDir, option.layoutFile, option.atlas, psdPath.file, 2048, option.batchRender, (bool) -> {
+			exporting = false;
+			if (bool) {
+				this.unmount();
+				ElMessageBox.alert("导出完成", "导出PSD成功");
+			}
+		}, option.s9out);
 	}
 
 	/**
