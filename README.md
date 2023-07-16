@@ -4,6 +4,9 @@ Zygameui的UI可视化编辑器v2.0
 # v2.0说明
 工具从2.0开始，使用`hxvue3`重构了整个编辑器功能；
 
+## 运行效果
+![](./img.png)
+
 ## 编译
 可以进行自行编译，编译前提：
 - 1、补全所需的库、如electron、electron-packager等。
