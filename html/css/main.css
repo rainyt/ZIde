@@ -18,11 +18,21 @@ body {
     right: 20px;
 }
 
+.bottommenu {
+    height: 42px;
+    background-color: #eee;
+}
+
+.treelist {
+    height: calc(100% - 28px);
+    overflow-y: auto;
+}
+
 .editer {
     border-width: 0px;
     margin: 0px;
     padding: 0px;
-    height: calc(100vh - 60px);
+    height: 100%;
     width: 100%;
     overflow-y: hidden;
 }
