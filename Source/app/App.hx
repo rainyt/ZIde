@@ -1,5 +1,6 @@
 package app;
 
+import element.plus.ElementPlus;
 import element.plus.ElMessageBox;
 import element.plus.ElMessage;
 import haxe.Exception;
@@ -155,6 +156,7 @@ class App extends VueComponent {
 					return false;
 				}
 				File.saveContent(tabData.path, tabData.code);
+				ElMessage.success("保存成功");
 			}
 		}
 		return true;
@@ -221,7 +223,9 @@ class App extends VueComponent {
 	 * PSD导出处理
 	 */
 	public function onPSDExport():Void {
-		trace("这里需要实现PSD导出");
+		var app = PsdExportView.createApp();
+		app.use(ElementPlus);
+		app.mount("#dialog");
 	}
 }
 

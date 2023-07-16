@@ -1,0 +1,13 @@
+<el-dialog model-value="true" title="PSD导出功能" width="600px" @close="unmount" center align-center>
+    <span>
+        将PSD文件导出精灵图（XML Atlas）的工具，命令规则：{名字}@{类型}，其中类型有如下几种：@img @btn @box @fnt
+    </span>
+    <template #footer>
+        <span class="dialog-footer">
+            <el-button @click="unmount()">取消</el-button>
+            <el-button type="primary" @click="centerDialogVisible = false">
+                导出
+            </el-button>
+        </span>
+    </template>
+</el-dialog>
