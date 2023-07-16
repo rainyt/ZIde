@@ -2,10 +2,30 @@
     <span>
         将PSD文件导出精灵图（XML Atlas）的工具，命令规则：{名字}@{类型}，其中类型有如下几种：@img @btn @box @fnt
     </span>
+    <el-form :model="option" label-width="120px" style="padding-top: 15px;">
+        <el-form-item label="PSD文件：">
+            <el-col :span="16">
+                <el-input v-model="option.psd" placeholder="请选择PSD文件" style="width: 100%;padding-right: 5px;"
+                    disabled />
+            </el-col>
+            <el-col :span="4">
+                <el-button style="width: 100%;padding-left: 5px;">选择</el-button>
+            </el-col>
+        </el-form-item>
+        <el-form-item label="可选参数：">
+            <div>
+                <el-checkbox v-model="option.atlas" label="导出为图集（XMLAtlas）" size="large" />
+                <el-checkbox v-model="option.laytouFile" label="导出布局文件" size="large" />
+                <el-checkbox v-model="option.batchRender" label="使用批渲染布局" size="large" />
+                <el-checkbox v-model="option.s9out" label="九宫格图分离" size="large" />
+                <el-checkbox v-model="option.miniPng" label="压缩" size="large" />
+            </div>
+        </el-form-item>
+    </el-form>
     <template #footer>
         <span class="dialog-footer">
             <el-button @click="unmount()">取消</el-button>
-            <el-button type="primary" @click="centerDialogVisible = false">
+            <el-button type="primary" @click="onExport">
                 导出
             </el-button>
         </span>
