@@ -5,6 +5,12 @@ import app.App;
 class Main {
 	static function main() {
 		trace("ZIde v2.0 inited");
+		js.Syntax.code("// 此处修复命令行索引
+		const fixPath = require('fix-path');
+		console.log(process.env.PATH);
+		//=> '/usr/bin'
+		fixPath();
+		console.log(process.env.PATH);");
 		var config = new App();
 		var app = Vue.createApp(config);
 		app.use(ElementPlus);

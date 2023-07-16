@@ -16,6 +16,7 @@ import vue3.VueComponent;
  */
 @:t("html/app.html")
 @:s("html/css/main.css")
+@:mainHtml("html/index.html")
 class App extends VueComponent {
 	override function data():Dynamic {
 		return {

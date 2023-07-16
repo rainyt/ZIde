@@ -1,5 +1,8 @@
 package app;
 
+import haxe.io.Path;
+import app.utils.PSDTools;
+import electron.FileSystem;
 import vue3.VueComponent;
 
 /**
@@ -14,7 +17,7 @@ class PsdExportView extends VueComponent {
 				atlas: true,
 				laytouFile: true,
 				batchRender: true,
-				s9out: true,
+				s9out: false,
 				miniPng: true
 			}
 		}
@@ -25,5 +28,29 @@ class PsdExportView extends VueComponent {
 	 */
 	public function onExport():Void {
 		// 开始导出
+		var tools = new PSDTools();
+		var psdPath = new Path(option.psd);
+		var outDir = psdPath.dir + "/bin/";
+		sys.FileSystem.createDirectory(outDir);
+		tools.exportPsdUIFiles(option.psd, outDir, option.layoutFile, option.atlas, psdPath.file, 2048, option.batchRender, (bool) -> {}, option.s9out);
+	}
+
+	/**
+	 * 将PSD文件上传
+	 */
+	public function onPSDUpload():Void {
+		FileSystem.openFile({
+			title: "选择PSD文件",
+			filters: [
+				{
+					name: "Photoshop文件",
+					extensions: [".psd"]
+				}
+			]
+		}, (data) -> {
+			if (!data.canceled) {
+				option.psd = data.filePaths[0];
+			}
+		});
 	}
 }

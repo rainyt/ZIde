@@ -5,11 +5,11 @@
     <el-form :model="option" label-width="120px" style="padding-top: 15px;">
         <el-form-item label="PSD文件：">
             <el-col :span="16">
-                <el-input v-model="option.psd" placeholder="请选择PSD文件" style="width: 100%;padding-right: 5px;"
+                <el-input v-model="option.psd" placeholder="请选择PSD文件" style="width: 100%;padding-right: 10px;"
                     disabled />
             </el-col>
             <el-col :span="4">
-                <el-button style="width: 100%;padding-left: 5px;">选择</el-button>
+                <el-button @click="onPSDUpload" style="width: 100%;">选择</el-button>
             </el-col>
         </el-form-item>
         <el-form-item label="可选参数：">
