@@ -19,8 +19,8 @@
                 <template #dropdown>
                     <el-dropdown-menu>
                         <el-dropdown-item @click="onPSDExport">PSD导出</el-dropdown-item>
-                        <el-dropdown-item>PSD批量导出</el-dropdown-item>
-                        <el-dropdown-item>分析中文资源</el-dropdown-item>
+                        <el-dropdown-item disabled>PSD批量导出</el-dropdown-item>
+                        <el-dropdown-item disabled>分析中文资源</el-dropdown-item>
                     </el-dropdown-menu>
                 </template>
             </el-dropdown>
@@ -42,7 +42,7 @@
         <el-main style="border-width: 1px; background-color: #ffffff;--el-main-padding:0px;overflow-y: hidden;">
             <el-tabs type="card" closable @tab-click="onTabChange" @tab-remove="onRemoveTab" v-model="tabKey"
                 style="margin: 0px;">
-                <el-tab-pane v-for="item in tabs" :key="item.name" :name="item.name" :label="item.title"
+                <el-tab-pane v-for="item in tabs" :key="item.name" :name="item.name" :label="item.title + (item.isChange ? '*' : '')"
                     style="margin: 0px;" />
             </el-tabs>
             <!-- 主要编辑器内容 -->

@@ -158,6 +158,7 @@ class App extends VueComponent {
 				}
 				File.saveContent(tabData.path, tabData.code);
 				ElMessage.success("保存成功");
+				tabData.isChange = false;
 			}
 		}
 		return true;
