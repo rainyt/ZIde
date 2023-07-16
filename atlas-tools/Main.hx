@@ -186,25 +186,25 @@ class Main {
 		path = StringTools.replace(path, "\\", "/");
 		path = path.substr(0, path.lastIndexOf("/"));
 		Sys.command(path + "/pngquant/pngquant" + (Sys.systemName() == "Windows" ? ".exe" : "") + " --force --speed=1 " + out + ".png");
-		if (atlasBitmapScale9 != null) {
-			var pngfs8:BitmapData = BitmapData.fromFile(out + "-fs8.png");
-			pngfs8.draw(atlasBitmapScale9);
-			var png = new PNGEncoderOptions();
-			var bytes = pngfs8.encode(pngfs8.rect, png);
-			File.saveBytes(out + "-s9.png", bytes);
-			FileSystem.deleteFile(out + "-fs8.png");
+		// if (atlasBitmapScale9 != null) {
+		// 	var pngfs8:BitmapData = BitmapData.fromFile(out + "-fs8.png");
+		// 	pngfs8.draw(atlasBitmapScale9);
+		// 	var png = new PNGEncoderOptions();
+		// 	var bytes = pngfs8.encode(pngfs8.rect, png);
+		// 	File.saveBytes(out + "-s9.png", bytes);
+		// 	FileSystem.deleteFile(out + "-fs8.png");
+		// 	FileSystem.deleteFile(out + ".png");
+		// 	FileSystem.rename(out + "-s9.png", out + ".png");
+		// 	// Sys.command(Sys.programPath().substr(0,Sys.programPath().lastIndexOf("/")) + "/pngquant/pngquant --force --speed=1 "+ out + "-s9.png");
+		// 	// FileSystem.rename(out + "-s9-fs8.png",out + ".png");
+		// 	// FileSystem.deleteFile(out + "-s9.png");
+		// 	trace("合并九宫格图完毕");
+		// } else {
+		if (FileSystem.exists(out + "-fs8.png")) {
 			FileSystem.deleteFile(out + ".png");
-			FileSystem.rename(out + "-s9.png", out + ".png");
-			// Sys.command(Sys.programPath().substr(0,Sys.programPath().lastIndexOf("/")) + "/pngquant/pngquant --force --speed=1 "+ out + "-s9.png");
-			// FileSystem.rename(out + "-s9-fs8.png",out + ".png");
-			// FileSystem.deleteFile(out + "-s9.png");
-			trace("合并九宫格图完毕");
-		} else {
-			if (FileSystem.exists(out + "-fs8.png")) {
-				FileSystem.deleteFile(out + ".png");
-				FileSystem.rename(out + "-fs8.png", out + ".png");
-			}
+			FileSystem.rename(out + "-fs8.png", out + ".png");
 		}
+		// }
 	}
 
 	public static function addToPack(atlas:MaxRectsBinPack, width:Int, height:Int):Rectangle {

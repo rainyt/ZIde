@@ -309,7 +309,12 @@ class App extends VueComponent {
 		if (AppData.currentProject != null) {
 			AppData.currentProject = new ZProjectData(AppData.currentProject.rootXmlPath);
 			this.onFilterChange();
-			ElMessage.success("项目配置已刷新");
+			var uiediter = this.get("uiediter", IFrameElement);
+			uiediter.contentWindow.location.reload(true);
+			uiediter.onload = () -> {
+				this.onRender();
+				ElMessage.success("项目配置已刷新");
+			}
 		} else {
 			ElMessage.error("未打开项目");
 		}
