@@ -1,3 +1,4 @@
+import app.AppData;
 import element.plus.ElementPlus;
 import vue3.Vue;
 import app.App;
@@ -11,6 +12,7 @@ class Main {
 		//=> '/usr/bin'
 		fixPath();
 		console.log(process.env.PATH);");
+		AppData.init();
 		var config = new App();
 		var app = Vue.createApp(config);
 		app.use(ElementPlus);

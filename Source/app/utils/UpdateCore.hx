@@ -1,6 +1,5 @@
-package tools.update;
+package app.utils;
 
-#if electron
 import js.node.ChildProcess;
 import sys.io.File;
 import haxe.Http;
@@ -23,15 +22,15 @@ class UpdateCore {
 			}
 		};
 		http.onBytes = function(data) {
-			var savePath = App.applicationPath + "/app.zip";
+			var savePath = AppData.applicationPath + "/app.zip";
 			trace("保存至：" + savePath);
 			File.saveBytes(savePath, data);
 			// 解压
-			var cmd = "cd " + App.applicationPath + "\nunzip -o app.zip\nrm -rf app.zip";
+			var cmd = "cd " + AppData.applicationPath + "\nunzip -o app.zip\nrm -rf app.zip";
 			if (Sys.systemName() == "Windows") {
-				var cdto = App.applicationPath.charAt(0);
+				var cdto = AppData.applicationPath.charAt(0);
 				cmd = cdto.toLowerCase() + ": & ";
-				cmd += "cd " + App.applicationPath + " & zip\\unzip.exe -o app.zip"; // & rm -f app.zip
+				cmd += "cd " + AppData.applicationPath + " & zip\\unzip.exe -o app.zip"; // & rm -f app.zip
 			}
 			trace("cmd=", cmd);
 			var code = Sys.command(cmd);
@@ -41,4 +40,3 @@ class UpdateCore {
 		http.request();
 	}
 }
-#end

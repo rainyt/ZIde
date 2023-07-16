@@ -1,5 +1,6 @@
 package app;
 
+import app.utils.UpdateCore;
 import element.plus.ElementPlus;
 import element.plus.ElMessageBox;
 import element.plus.ElMessage;
@@ -17,9 +18,11 @@ import vue3.VueComponent;
 @:t("html/app.html")
 @:s("html/css/main.css")
 @:mainHtml("html/index.html")
+@:assets("./Assets", "./")
 class App extends VueComponent {
 	override function data():Dynamic {
 		return {
+			updateing: false,
 			filterFileName: "",
 			files: [],
 			tabKey: "",
@@ -228,6 +231,19 @@ class App extends VueComponent {
 		var app = PsdExportView.createApp();
 		app.use(ElementPlus);
 		app.mount("#dialog");
+	}
+
+	public function onUpdate():Void {
+		updateing = true;
+		new UpdateCore((code) -> {
+			updateing = false;
+			switch code {
+				case 0:
+					ElMessageBox.alert("更新完成", "提示");
+				default:
+					ElMessageBox.alert("更新程序包错误", "错误");
+			}
+		});
 	}
 }
 
