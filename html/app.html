@@ -58,5 +58,14 @@
             </el-container>
         </el-main>
     </el-container>
-    <el-footer class="bottommenu"></el-footer>
+    <el-footer class="bottommenu">
+        <div style="position:fixed;right:5px;bottom: 5px;">
+            <el-switch v-model="orientation" size="small" active-text="竖向" inactive-text="横向"
+                style="margin-right: 5px;" />
+            <el-select @change="onPhoneChange" v-model="phoneSelect" placeholder="请选择设备尺寸" size="small">
+                <el-option v-for="item in phones" :key="item.label"
+                    :label="item.label" :value="item.label" />
+            </el-select>
+        </div>
+    </el-footer>
 </el-container>

@@ -24,11 +24,59 @@ import vue3.VueComponent;
 class App extends VueComponent {
 	override function data():Dynamic {
 		return {
+			orientation: true,
 			updateing: false,
 			filterFileName: "",
 			files: [],
 			tabKey: "",
 			tabs: [],
+			phoneSelect: "默认",
+			phones: [
+				{
+					label: "默认",
+					value: {
+						width: 1080,
+						height: 1920
+					}
+				},
+				{
+					label: "IPhoneX",
+					value: {
+						width: 414,
+						height: 896
+					}
+				},
+				{
+					label: "IPad Air",
+					value: {
+						width: 768,
+						height: 1024
+					}
+				}
+			]
+		}
+	}
+
+	public function onPhoneChange(item):Void {
+		var array:Array<PhoneConfig> = phones;
+		var config = array.filter((a) -> {
+			a.label == item;
+		})[0];
+		if (config != null) {
+			// 更新布局
+			var uiediter = this.get("uiediter", IFrameElement);
+			if (orientation) {
+				untyped uiediter.contentWindow.uiStart.HDHeight = Std.int(1920);
+				untyped uiediter.contentWindow.uiStart.HDWidth = Std.int(1080);
+				var scaleMath = 320 / config.value.width;
+				uiediter.style.setProperty("height", config.value.height * scaleMath + "px");
+			} else {
+				untyped uiediter.contentWindow.uiStart.HDHeight = Std.int(1080);
+				untyped uiediter.contentWindow.uiStart.HDWidth = Std.int(1920);
+				var scaleMath = 320 / config.value.height;
+				uiediter.style.setProperty("height", config.value.width * scaleMath + "px");
+			}
+			this.onRender();
 		}
 	}
 
@@ -262,4 +310,11 @@ typedef TapData = {
 	code:String,
 	isChange:Bool,
 	lock:Bool
+}
+
+typedef PhoneConfig = {
+	label:String,
+	value:{
+		width:Int, height:Int
+	}
 }
