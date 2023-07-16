@@ -1,5 +1,7 @@
 package app;
 
+import js.Browser;
+import js.Lib;
 import app.utils.ElectronCore;
 import app.utils.UpdateCore;
 import element.plus.ElementPlus;
@@ -300,6 +302,17 @@ class App extends VueComponent {
 		super.onMounted();
 		ElectronCore.onBuild = this.onRender;
 		ElectronCore.onSave = this.onSave;
+		ElectronCore.onUpdateProject = this.onUpdateProject;
+	}
+
+	public function onUpdateProject():Void {
+		if (AppData.currentProject != null) {
+			AppData.currentProject = new ZProjectData(AppData.currentProject.rootXmlPath);
+			this.onFilterChange();
+			ElMessage.success("项目配置已刷新");
+		} else {
+			ElMessage.error("未打开项目");
+		}
 	}
 }
 
