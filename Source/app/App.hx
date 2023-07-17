@@ -260,7 +260,6 @@ class App extends VueComponent {
 		if (currentData != null) {
 			var editer = this.get("editer", IFrameElement);
 			untyped editer.contentWindow.onCodeChange = this.onCodeChange;
-			untyped editer.contentWindow.setCodeValue(item.label, xmlContent);
 			var uiediter = this.get("uiediter", IFrameElement);
 			var code:String = untyped editer.contentWindow.getCodeValue();
 			try {
@@ -293,6 +292,9 @@ class App extends VueComponent {
 			return;
 		}
 		var xmlContent = File.getContent(item.path);
+		var editer = this.get("editer", IFrameElement);
+		untyped editer.contentWindow.onCodeChange = this.onCodeChange;
+		untyped editer.contentWindow.setCodeValue(item.label, xmlContent);
 		this.addTap({
 			title: item.label,
 			path: item.path,
