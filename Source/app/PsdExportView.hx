@@ -17,7 +17,7 @@ class PsdExportView extends VueComponent {
 			option: {
 				psd: "",
 				atlas: true,
-				laytouFile: true,
+				layoutFile: true,
 				batchRender: true,
 				s9out: false,
 				miniPng: true
