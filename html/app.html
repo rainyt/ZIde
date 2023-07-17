@@ -30,7 +30,7 @@
     </el-header>
     <el-container>
         <el-aside width="260px" style="background-color: #ccc;height:  calc(100vh - 51px - 42px); overflow-y: hidden;">
-            <el-input style="height: 41px;" v-model="filterFileName" placeholder="过滤文件..." @change="onFilterChange">
+            <el-input style="height: 41px;" v-model="filterFileName" placeholder="过滤文件..." @input="onFilterChange">
                 <template #prefix>
                     <el-icon class="el-input__icon">
                         <search />
