@@ -24,6 +24,7 @@ class Main {
 		app.component("Odometer", ElementPlusIconsVue.Odometer);
 		app.component("Tools", ElementPlusIconsVue.Tools);
 		app.component("Search", ElementPlusIconsVue.Search);
+		app.component("DocumentAdd", ElementPlusIconsVue.DocumentAdd);
 		app.mount("#app");
 		// 初始化文件管理器API
 		electron.FileSystem.init();
@@ -37,4 +38,5 @@ class Main {
 	public static var Odometer:Dynamic;
 	public static var Tools:Dynamic;
 	public static var Search:Dynamic;
+	public static var DocumentAdd:Dynamic;
 }

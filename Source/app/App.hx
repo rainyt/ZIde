@@ -1,7 +1,6 @@
 package app;
 
-import js.Browser;
-import js.Lib;
+import haxe.io.Path;
 import app.utils.ElectronCore;
 import app.utils.UpdateCore;
 import element.plus.ElementPlus;
@@ -80,6 +79,38 @@ class App extends VueComponent {
 			}
 			this.onRender();
 		}
+	}
+
+	/**
+	 * 创建新文件
+	 */
+	public function onNewFile():Void {
+		// 新建文件
+		FileSystem.saveFile(null, (data) -> {
+			if (!data.canceled) {
+				if (!sys.FileSystem.exists(data.filePath)) {
+					trace("保存成功：", data.filePath);
+					File.saveContent(data.filePath, '<ZBox width="100%" height="100%"></ZBox>');
+					// 从标签打开对应的文件
+					var path = new Path(data.filePath);
+					this.addTap({
+						title: path.file,
+						path: data.filePath,
+						name: path.file,
+						lock: true,
+						isChange: false,
+						code: File.getContent(data.filePath)
+					});
+					this.onTabChange({
+						props: {
+							name: path.file
+						}
+					});
+				} else {
+					ElMessageBox.alert("文件：" + data.filePath + "已经存在，请删除后操作", "创建失败");
+				}
+			}
+		});
 	}
 
 	/**
@@ -228,6 +259,8 @@ class App extends VueComponent {
 		var currentData = this.getCurrentTapData();
 		if (currentData != null) {
 			var editer = this.get("editer", IFrameElement);
+			untyped editer.contentWindow.onCodeChange = this.onCodeChange;
+			untyped editer.contentWindow.setCodeValue(item.label, xmlContent);
 			var uiediter = this.get("uiediter", IFrameElement);
 			var code:String = untyped editer.contentWindow.getCodeValue();
 			try {
@@ -260,10 +293,6 @@ class App extends VueComponent {
 			return;
 		}
 		var xmlContent = File.getContent(item.path);
-		// 渲染到编辑器中
-		var editer = this.get("editer", IFrameElement);
-		untyped editer.contentWindow.onCodeChange = this.onCodeChange;
-		untyped editer.contentWindow.setCodeValue(item.label, xmlContent);
 		this.addTap({
 			title: item.label,
 			path: item.path,

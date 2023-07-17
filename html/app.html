@@ -4,6 +4,9 @@
             <el-button @click="onOpenProject"><el-icon>
                     <FolderOpened />
                 </el-icon>打开</el-button>
+            <el-button @click="onNewFile"><el-icon>
+                    <DocumentAdd />
+                </el-icon>新建</el-button>
             <el-button @click="onSave"><el-icon>
                     <FolderChecked />
                 </el-icon>保存</el-button>
@@ -63,8 +66,7 @@
             <el-switch v-model="orientation" size="small" active-text="竖向" inactive-text="横向"
                 style="margin-right: 5px;" />
             <el-select @change="onPhoneChange" v-model="phoneSelect" placeholder="请选择设备尺寸" size="small">
-                <el-option v-for="item in phones" :key="item.label"
-                    :label="item.label" :value="item.label" />
+                <el-option v-for="item in phones" :key="item.label" :label="item.label" :value="item.label" />
             </el-select>
         </div>
     </el-footer>
