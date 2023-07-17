@@ -186,8 +186,10 @@ class App extends VueComponent {
 			return;
 		}
 		var list:Array<{label:String, path:String}> = [];
+		var checkName:String = filterFileName ?? "";
+		checkName = checkName.toLowerCase();
 		for (key => value in AppData.currentProject.builderFiles) {
-			if (value.name.indexOf(filterFileName) != -1)
+			if (value.name.toLowerCase().indexOf(checkName) != -1)
 				list.push({
 					label: value.name,
 					path: value.path
