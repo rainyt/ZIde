@@ -8,10 +8,12 @@ Zygameui的UI可视化编辑器v2.0
 ![](./img.png)
 
 ## 编译
-可以进行自行编译，编译前提：
-- 1、补全所需的库、如electron、electron-packager等。
-- 2、使用Electron编译一次。
-- 3、使用生成EXE、或者生成MAC进行生成最终可用包。
+- Mac:
+```shell
+# 将自动编译成electron目标，并运行
+make build
+```
+
 
 ## 支持功能
 - 支持zygameui的所有渲染特性（同步最新版本11.0.7）。
