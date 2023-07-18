@@ -23,12 +23,11 @@
                     <el-dropdown-menu>
                         <el-dropdown-item @click="onPSDExport">PSD导出</el-dropdown-item>
                         <el-dropdown-item disabled>PSD批量导出</el-dropdown-item>
-                        <el-dropdown-item disabled>分析中文资源</el-dropdown-item>
+                        <el-dropdown-item @click="onCheck" disabled>分析中文资源</el-dropdown-item>
                         <el-dropdown-item @click="onUpdate">更新版本</el-dropdown-item>
                     </el-dropdown-menu>
                 </template>
             </el-dropdown>
-
         </div>
     </el-header>
     <el-container>

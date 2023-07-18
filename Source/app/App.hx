@@ -58,6 +58,10 @@ class App extends VueComponent {
 		}
 	}
 
+	public function onCheck():Void {
+		trace("触发");
+	}
+
 	public function onPhoneChange(item):Void {
 		var array:Array<PhoneConfig> = phones;
 		var config = array.filter((a) -> {
@@ -207,6 +211,9 @@ class App extends VueComponent {
 		}, (data) -> {
 			if (!data.canceled) {
 				AppData.currentProject = new ZProjectData(data.filePaths[0]);
+				// 注册缓存
+				var editer = this.get("editer", IFrameElement);
+				untyped editer.contentWindow.registerZProjectData(AppData.currentProject);
 				this.onFilterChange();
 			}
 		});
