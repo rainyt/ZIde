@@ -45,7 +45,7 @@ class XmlEditorContent {
 		if (leftInput.indexOf("</") == 0) {
 			// </开头时，应输入类型
 			return returnSuggestions(filterSuggestions(position, sym, content, tipsPool.classesend.copy()));
-		} else if (leftInput.indexOf("<") == 0) {
+		} else if (leftInput.indexOf("<") == 0 || (sym == "\"" && leftInput == "style=\"")) {
 			// <开头时，应输入类型
 			var copy = tipsPool.classes.copy();
 			if (TipsPool.cacheData != null) {
@@ -59,15 +59,32 @@ class XmlEditorContent {
 			// 可能是访问属性
 			var classFount = content.substr(content.lastIndexOf("<"));
 			classFount = classFount.substr(1, classFount.indexOf(" ") - 1);
+			// trace("检测：", classFount);
+			// if (TipsPool.cacheData != null) {
+			// 	if (TipsPool.cacheData.xmlFiles.exists(classFount)) {
+			// 		var xml:Xml = Xml.parse(File.getContent(TipsPool.cacheData.xmlFiles.get(classFount)));
+			// 		if (xml.nodeType == Document) {
+			// 			classFount = xml.firstElement().nodeName;
+			// 		} else {
+			// 			classFount = xml.firstElement().nodeName;
+			// 		}
+			// 	}
+			// }
+			// trace("检测2：", classFount);
 			if (tipsPool.attartMaps.exists(classFount))
 				return returnSuggestions(filterSuggestions(position, sym, content, tipsPool.attartMaps.get(classFount), "="));
+			else {
+				// 返回默认配置
+				return returnSuggestions(filterSuggestions(position, sym, content, tipsPool.attartMaps.get("Base"), "="));
+			}
 		} else if (sym == "\"" && leftInput == "src=\"") {
 			// src参数 需要筛选出资源选项
 			return returnSuggestions(filterSuggestions(position, sym, content, tipsPool.getCacheFileMaps()));
-		} else if (sym == ":" && leftInput.indexOf("src=\"") != -1) {
+		} else if (sym == ":" && (leftInput.indexOf("src=\"") != -1 || leftInput.indexOf("style=\"") != -1)) {
 			// src参数 精灵图的子内容
 			var xmlid = leftInput.substr(leftInput.indexOf("\"") + 1);
 			xmlid = xmlid.substr(0, xmlid.indexOf(":"));
+			trace("联想资源id", xmlid);
 			return returnSuggestions(filterSuggestions(position, sym, content, tipsPool.getCacheFileMapsByXml(xmlid)));
 		} else if (sym == "\"" && leftInput.indexOf("type=\"") != -1) {
 			// src参数 精灵图的子内容
@@ -105,6 +122,7 @@ class XmlEditorContent {
 				content.substr(0, content.lastIndexOf(sym) + 1) + value.insertText));
 		}
 		// trace("提示：", newarray);
+		// trace("提示长度：", newarray.length);
 		return newarray;
 	}
 

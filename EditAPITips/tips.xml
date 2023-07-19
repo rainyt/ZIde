@@ -15,6 +15,7 @@
         <bottom tips="底部对齐" />
         <centerX tips="横向对齐" />
         <centerY tips="垂直对齐" />
+        <style tips="样式"/>
     </Base>
     <BaseBox class="Base" igone="true">
         <gap tips="间隔" />
@@ -95,6 +96,9 @@
     <tween parent="ZTween" class="add" tips="过渡动画">
         <from tips="初始值" />
     </tween>
+    <template>
+        <name tips="模板名称"/>
+    </template>
     <ZHaxe tips="HScript">
         <id tips="调用名" />
     </ZHaxe>

@@ -70,12 +70,15 @@ class TipsPool {
 	 */
 	public function getCacheFileMapsByXml(xmlid:String):Array<Dynamic> {
 		if (cacheData.xmlFiles.exists(xmlid)) {
-			trace("xmlid=" + xmlid);
 			var path = cacheData.xmlFiles.get(xmlid);
 			var xml = Xml.parse(cacheData.xmlDatas.get(path));
 			var array = [];
 			for (item in xml.firstElement().elements()) {
-				array.push(Suggestions.create(item.get("name"), item.get("name"), "图集名"));
+				if (item.exists("name"))
+					array.push(Suggestions.create(item.get("name"), item.get("name"), "图集名"));
+				else if (item.exists("id")) {
+					array.push(Suggestions.create(item.get("id"), item.get("id"), "ID"));
+				}
 			}
 			return array;
 		}

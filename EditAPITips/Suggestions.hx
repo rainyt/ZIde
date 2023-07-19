@@ -14,7 +14,7 @@ class Suggestions {
 			label: label,
 			insertText: insertText,
 			detail: detail,
-			filterText: filterText,
+			filterText: filterText != null ? filterText.toUpperCase() : filterText,
 			kind: untyped monaco.languages.CompletionItemKind[className],
 			insertTextRules: untyped monaco.languages.CompletionItemInsertTextRule.KeepWhitespace
 		}
