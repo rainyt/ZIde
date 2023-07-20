@@ -29,7 +29,7 @@
                 </template>
             </el-dropdown>
             <div class="rightbox">
-                <el-button @click="onOpenProject" style="width: 30px;"><el-icon>
+                <el-button @click="projectConfigVisible = true" style="width: 30px;"><el-icon>
                         <Operation />
                     </el-icon></el-button>
             </div>
@@ -78,4 +78,10 @@
             </el-select>
         </div>
     </el-footer>
+    <el-drawer v-model="projectConfigVisible" title="项目配置">
+        <div style="display: flex;flex-direction: column;justify-content: flex-start;">
+            <el-text class="left-el-text">项目路径</el-text>
+            <el-text class="left-el-text" type="small">{{ projectPath == "" ? "未打开项目" : projectPath }}</el-text>
+        </div>
+    </el-drawer>
 </el-container>

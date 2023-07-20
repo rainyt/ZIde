@@ -18,6 +18,10 @@ body {
     right: 20px;
 }
 
+.left-el-text {
+    align-self: self-start;
+}
+
 .rightbox {
     display: flex;
     flex-grow: 1;

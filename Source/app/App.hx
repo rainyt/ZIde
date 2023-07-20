@@ -27,6 +27,8 @@ import vue3.VueComponent;
 class App extends VueComponent {
 	override function data():Dynamic {
 		return {
+			projectConfigVisible: false,
+			projectPath: "",
 			assetsSize: 0,
 			assetsList: [],
 			orientation: true,
@@ -219,6 +221,7 @@ class App extends VueComponent {
 		}, (data) -> {
 			if (!data.canceled) {
 				AppData.currentProject = new ZProjectData(data.filePaths[0]);
+				this.projectPath = data.filePaths[0];
 				// 注册缓存
 				var editer = this.get("editer", IFrameElement);
 				untyped editer.contentWindow.registerZProjectData(AppData.currentProject);
