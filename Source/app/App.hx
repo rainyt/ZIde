@@ -1,5 +1,7 @@
 package app;
 
+import vue3.Vue;
+import js.html.Console;
 import haxe.io.Path;
 import app.utils.ElectronCore;
 import app.utils.UpdateCore;
@@ -25,6 +27,8 @@ import vue3.VueComponent;
 class App extends VueComponent {
 	override function data():Dynamic {
 		return {
+			assetsSize: 0,
+			assetsList: [],
 			orientation: true,
 			updateing: false,
 			filterFileName: "",
@@ -126,6 +130,10 @@ class App extends VueComponent {
 			var editer = this.get("editer", IFrameElement);
 			if (!tabData.isChange) {
 				tabData.isChange = tabData.code != untyped editer.contentWindow.getCodeValue();
+				// 有更改的代码，则保持锁定状态，避免丢失
+				if (tabData.isChange) {
+					tabData.lock = true;
+				}
 			}
 			tabData.code = untyped editer.contentWindow.getCodeValue();
 		}
@@ -271,11 +279,40 @@ class App extends VueComponent {
 			var code:String = untyped editer.contentWindow.getCodeValue();
 			try {
 				Xml.parse(code);
+				untyped uiediter.contentWindow.onFileChanged = onFileChanged;
 				untyped uiediter.contentWindow.openFile(currentData.path, code, AppData.currentProject, null);
 			} catch (e:Exception) {
 				ElMessage.error("渲染错误：" + e.message);
 			}
 		}
+	}
+
+	public function onFileChanged(files:Array<{
+		file:String,
+		?fileLabel:String,
+		?size:Float,
+		?sizeLabel:String
+	}>) {
+		var allsize = 0;
+		assetsList = files;
+		for (value in files) {
+			var obj = sys.FileSystem.stat(value.file);
+			var size = obj.size;
+			value.size = size;
+			value.fileLabel = StringTools.replace(value.file, AppData.currentProject.rootPath, "");
+			value.sizeLabel = Math.round(size / 1024 * 100) / 100 + "kb";
+			allsize += size;
+		}
+		this.assetsSize = Math.round(allsize / 1024 * 100) / 100;
+	}
+
+	public function onShowFileList():Void {
+		// 展示列表信息
+		var config = new FilesListView();
+		config.filesData = assetsList;
+		var app = Vue.createApp(config);
+		app.use(ElementPlus);
+		app.mount("#dialog");
 	}
 
 	public function onCodeUpdate():Void {

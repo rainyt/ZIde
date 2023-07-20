@@ -11,16 +11,24 @@ body {
 }
 
 .center {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
     right: 20px;
 }
 
+.rightbox {
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-end;
+}
+
 .bottommenu {
-    height: 42px;
+    height: 32px;
     background-color: #eee;
+    display: flex;
+    align-items: center;
 }
 
 .treelist {
@@ -39,4 +47,8 @@ body {
 
 .el-tabs__header {
     margin: 0px;
+}
+
+.flex-grow {
+    flex-grow: 1;
 }

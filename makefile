@@ -13,3 +13,7 @@ upload:
 # 编译Mac运行包
 build-mac:
 	cd bin/electron; npm run package-mac;
+
+test:
+	haxe build.hxml
+	electron ./bin/electron/ElectronSetup.js

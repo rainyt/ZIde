@@ -21,8 +21,6 @@ class UIStart extends Start {
 
 	public var filesConfig:Array<Dynamic> = [];
 
-	public dynamic function onFileChanged(files:Array<Dynamic>):Void {}
-
 	public function new() {
 		super(1080, 600, false);
 		this.lowFps = true;
@@ -208,15 +206,18 @@ class UIStart extends Start {
 			_assets.start(function(f) {
 				if (f == 1) {
 					cb(true);
-					onFileChanged(filesConfig);
+					if (untyped window.onFileChanged != null)
+						untyped window.onFileChanged(filesConfig);
 				}
 			}, function(data) {
 				cb(false);
-				onFileChanged(filesConfig);
+				if (untyped window.onFileChanged != null)
+					untyped window.onFileChanged(filesConfig);
 			});
 		} else {
 			cb(true);
-			onFileChanged(filesConfig);
+			if (untyped window.onFileChanged != null)
+				untyped window.onFileChanged(filesConfig);
 		}
 	}
 

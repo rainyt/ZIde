@@ -1,0 +1,9 @@
+<el-dialog model-value="true" title="文件资源列表" width="600px" height="400px" @close="unmount" center align-center>
+    <span>
+        该布局的所有引用的文件关系，需要多留意UI的资源大小，在HTML5中，资源越少，意味着加载越快。
+    </span>
+    <el-table :data="tableData" style="width: 100%">
+        <el-table-column prop="fileLabel" label="路径" />
+        <el-table-column prop="sizeLabel" label="大小" width="100" />
+    </el-table>
+</el-dialog>

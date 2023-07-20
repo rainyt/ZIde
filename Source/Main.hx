@@ -25,6 +25,8 @@ class Main {
 		app.component("Tools", ElementPlusIconsVue.Tools);
 		app.component("Search", ElementPlusIconsVue.Search);
 		app.component("DocumentAdd", ElementPlusIconsVue.DocumentAdd);
+		app.component("Files", ElementPlusIconsVue.Files);
+		app.component("Operation", ElementPlusIconsVue.Operation);
 		app.mount("#app");
 		// 初始化文件管理器API
 		electron.FileSystem.init();
@@ -39,4 +41,6 @@ class Main {
 	public static var Tools:Dynamic;
 	public static var Search:Dynamic;
 	public static var DocumentAdd:Dynamic;
+	public static var Files:Dynamic;
+	public static var Operation:Dynamic;
 }

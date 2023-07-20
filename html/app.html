@@ -28,6 +28,11 @@
                     </el-dropdown-menu>
                 </template>
             </el-dropdown>
+            <div class="rightbox">
+                <el-button @click="onOpenProject" style="width: 30px;"><el-icon>
+                        <Operation />
+                    </el-icon></el-button>
+            </div>
         </div>
     </el-header>
     <el-container>
@@ -61,6 +66,10 @@
         </el-main>
     </el-container>
     <el-footer class="bottommenu">
+        <el-button class="mx-1" size="small" @click="onShowFileList">
+            <el-icon>
+                <Files />
+            </el-icon>文件大小:{{ assetsSize }}kb</el-button>
         <div style="position:fixed;right:5px;bottom: 5px;">
             <el-switch v-model="orientation" size="small" active-text="竖向" inactive-text="横向"
                 style="margin-right: 5px;" />
