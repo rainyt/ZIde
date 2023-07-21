@@ -388,6 +388,9 @@ class App extends VueComponent {
 	public function onUpdateProject():Void {
 		if (AppData.currentProject != null) {
 			AppData.currentProject = new ZProjectData(AppData.currentProject.rootXmlPath);
+			// 注册缓存
+			var editer = this.get("editer", IFrameElement);
+			untyped editer.contentWindow.registerZProjectData(AppData.currentProject);
 			this.onFilterChange();
 			var uiediter = this.get("uiediter", IFrameElement);
 			uiediter.contentWindow.location.reload(true);

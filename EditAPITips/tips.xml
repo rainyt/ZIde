@@ -15,7 +15,9 @@
         <bottom tips="底部对齐" />
         <centerX tips="横向对齐" />
         <centerY tips="垂直对齐" />
-        <style tips="样式"/>
+        <style tips="样式" />
+        <mouseEnabled tips="鼠标是否可点击" />
+        <mouseChildren tips="鼠标子项是否可点击" />
     </Base>
     <BaseBox class="Base" igone="true">
         <gap tips="间隔" />
@@ -38,16 +40,16 @@
         <size tips="文本大小" />
         <fontName tips="文本字体" />
         <wordWrap tips="是否自动换行" />
-        <hAlign tips="横向对齐"/>
-        <vAlign tips="纵向对齐"/>
-        <stroke tips="描边颜色"/>
+        <hAlign tips="横向对齐" />
+        <vAlign tips="纵向对齐" />
+        <stroke tips="描边颜色" />
     </ZLabel>
     <ZInputLabel class="ZLabel" tips="输入文本框"></ZInputLabel>
     <ZTween tips="动画">
-        <id tips="设置ID标示"/>
+        <id tips="设置ID标示" />
         <auto tips="自动播放(Bool)" />
-        <sync tips="同步渲染"/>
-        <loop tips="循环次数，-1为无限循环"/>
+        <sync tips="同步渲染" />
+        <loop tips="循环次数，-1为无限循环" />
     </ZTween>
     <ZSpine class="Base" tips="Spine动画">
         <action tips="动画名" />
@@ -62,6 +64,9 @@
         <src tips="设置图像" />
         <text tips="设置按钮文案" />
         <size tips="设置文案大小" />
+        <stroke tips="设置文本描边" />
+        <offest tips="x,y坐标偏移" />
+        <color tips="文案颜色" />
     </ZButton>
     <ZBitmapLabel class="ZLabel" tips="位图文本">
         <src tips="设置图集或者Fnt" />
@@ -97,7 +102,7 @@
         <from tips="初始值" />
     </tween>
     <template>
-        <name tips="模板名称"/>
+        <name tips="模板名称" />
     </template>
     <ZHaxe tips="HScript">
         <id tips="调用名" />
