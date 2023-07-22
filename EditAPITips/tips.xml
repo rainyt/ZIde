@@ -1,5 +1,6 @@
 <tips>
     <Base igone="true">
+        <classed tips="类型绑定"/>
         <id tips="设置ID标示" />
         <width tips="宽度" />
         <height tips="高度" />
@@ -18,6 +19,8 @@
         <style tips="样式" />
         <mouseEnabled tips="鼠标是否可点击" />
         <mouseChildren tips="鼠标子项是否可点击" />
+        <customData tips="自定义数据"/>
+        <parentBind tips="将width/height赋值给父节点"/>
     </Base>
     <BaseBox class="Base" igone="true">
         <gap tips="间隔" />

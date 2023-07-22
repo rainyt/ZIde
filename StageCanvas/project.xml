@@ -12,6 +12,7 @@
     <window height="0" width="0" />
     <haxedef name="disable_res" />
     <haxedef name="gpu_particles"/>
+    <haxedef name="zide"/>
     <postbuild command="cp -rf Export/html5/bin/ZIde-UI.js ../bin/electron/canvas/ZIde-UI.js"/>
     <window allow-high-dpi="true"/>
 </project>
