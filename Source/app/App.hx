@@ -27,6 +27,7 @@ import vue3.VueComponent;
 class App extends VueComponent {
 	override function data():Dynamic {
 		return {
+			drawCall: 0,
 			projectConfigVisible: false,
 			projectPath: "",
 			assetsSize: 0,
@@ -283,11 +284,20 @@ class App extends VueComponent {
 			try {
 				Xml.parse(code);
 				untyped uiediter.contentWindow.onFileChanged = onFileChanged;
+				untyped uiediter.contentWindow.onDrawCallUpdate = onDrawCallUpdate;
 				untyped uiediter.contentWindow.openFile(currentData.path, code, AppData.currentProject, null);
 			} catch (e:Exception) {
 				ElMessage.error("渲染错误：" + e.message);
 			}
 		}
+	}
+
+	/**
+	 * 更新drawCall
+	 * @param drawCall 
+	 */
+	public function onDrawCallUpdate(drawCall:Int):Void {
+		this.drawCall = drawCall;
 	}
 
 	public function onFileChanged(files:Array<{

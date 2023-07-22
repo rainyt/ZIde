@@ -114,6 +114,11 @@ class UIStart extends Start {
 				}
 				// display.scaleX = 0.5;
 				// display.scaleY = 0.5;
+				Lib.setTimeout(() -> {
+					if (untyped window.onDrawCallUpdate != null) {
+						untyped window.onDrawCallUpdate(Start.current.fps.getDrawCall());
+					}
+				}, 100);
 			});
 		} catch (e:Dynamic) {
 			trace("预览失败：", e);
