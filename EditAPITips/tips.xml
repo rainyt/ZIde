@@ -92,6 +92,8 @@
         <src tips="设置图集或者Fnt" />
         <fontName tips="文本字体" />
         <size tips="文本大小" />
+        <hAlign tips="横向对齐" />
+        <vAlign tips="纵向对齐" />
     </BLabel>
     <add parent="ZTween" tips="递增动画">
         <bind tips="绑定ID值" />
