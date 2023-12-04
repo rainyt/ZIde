@@ -27,6 +27,9 @@
     </BaseBox>
     <ZImage class="Base" tips="图像对象">
         <src tips="设置图像，支持网络地址、图集地址" />
+        <scaleWidth tips="图片等比缩放宽度"/>
+        <scaleHeight tips="图片等比缩放高度"/>
+        <fill tips="是否铺满显示"/>
     </ZImage>
     <ZBox class="Base" tips="基本容器"></ZBox>
     <ZStack class="ZBox">
@@ -36,6 +39,8 @@
     <HBox class="BaseBox" tips="基本容器(横向)"></HBox>
     <ZQuad class="Base" tips="色块">
         <color tips="颜色" />
+        <ellipseWidth tips="圆角宽度"/>
+        <ellipseHeight tips="圆角高度"/>
     </ZQuad>
     <ZLabel class="Base" tips="文本">
         <text tips="文本" />
