@@ -51,6 +51,7 @@
         <hAlign tips="横向对齐" />
         <vAlign tips="纵向对齐" />
         <stroke tips="描边颜色" />
+        <mixColor tips="开始颜色,结束颜色"/>
     </ZLabel>
     <ZInputLabel class="ZLabel" tips="输入文本框"></ZInputLabel>
     <ZTween tips="动画">
@@ -75,6 +76,7 @@
         <stroke tips="设置文本描边" />
         <offest tips="x,y坐标偏移" />
         <color tips="文案颜色" />
+        <mixColor tips="开始颜色,结束颜色"/>
     </ZButton>
     <ZBitmapLabel class="ZLabel" tips="位图文本">
         <src tips="设置图集或者Fnt" />
