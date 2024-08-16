@@ -59,6 +59,7 @@
         <auto tips="自动播放(Bool)" />
         <sync tips="同步渲染" />
         <loop tips="循环次数，-1为无限循环" />
+        <currentFrame tips="当前指定帧"/>
     </ZTween>
     <ZSpine class="Base" tips="Spine动画">
         <action tips="动画名" />
@@ -113,6 +114,9 @@
     <tween parent="ZTween" class="add" tips="过渡动画">
         <from tips="初始值" />
     </tween>
+    <scale parent="ZTween" class="add" tips="过渡动画">
+        <from tips="初始值" />
+    </scale>
     <template>
         <name tips="模板名称" />
     </template>
