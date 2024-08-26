@@ -84,6 +84,7 @@
     </ZBitmapLabel>
     <ImageBatchs class="Base" tips="批渲染对象（无触摸）">
         <src tips="设置图集" />
+        <multiTextureEnabled tips="多纹理渲染开关"/>
     </ImageBatchs>
     <TouchImageBatchsContainer class="ImageBatchs" tips="批渲染对象（含触摸）"></TouchImageBatchsContainer>
     <BButton class="Base" tips="批渲染按钮">

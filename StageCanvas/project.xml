@@ -6,6 +6,7 @@
     <haxelib name="zygameui" />
     <haxelib name="feathersui" />
     <haxelib name="hscript"/>
+    <haxedef name="smoothing"/>
     <haxedef name="igonre_extends_error"/>
     <source path="Source" />
     <source path="../CommonSource" />
@@ -15,4 +16,6 @@
     <haxedef name="zide"/>
     <postbuild command="cp -rf Export/html5/bin/ZIde-UI.js ../bin/electron/canvas/ZIde-UI.js"/>
     <window allow-high-dpi="true"/>
+    <haxedef name="openfl_experimental_multitexture"/>
+    <!-- <haxedef name="assets_debug"/> -->
 </project>
