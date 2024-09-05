@@ -32,7 +32,7 @@ class Menu extends LayoutGroup {
 			Utils.openFile(function(data) {
 				Utils.listener.dispatchEvent(new ZEvent("openProject", data));
 				Main.current.changeLandsapce(App.currentProject.isLandsapce());
-			}, ".xml");
+			}, "xml");
 		});
 
 		var build = new MenuButton();
