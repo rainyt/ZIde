@@ -14,6 +14,10 @@ upload:
 build-mac:
 	cd bin/electron; npm run package-mac;
 
+# 编译Window运行包
+build-window:
+	cd bin/electron; npm run package-win;
+
 test:
 	haxe build.hxml
 	electron ./bin/electron/ElectronSetup.js
