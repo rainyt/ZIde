@@ -1,3 +1,4 @@
+import haxe.Exception;
 import openfl.geom.Rectangle;
 import AutoExportCut;
 import AutoExportSlice9.Slice9;
@@ -181,7 +182,7 @@ class Main {
 		// 	File.saveBytes(out + "_s9.png", s9_bytes);
 		// }
 		// 开始压缩计算
-		trace("压缩png", Sys.programPath(), "./pngquant/pngquant --force --speed=1 " + out + ".png");
+		trace("v3压缩png", Sys.programPath(), "./pngquant/pngquant --force --speed=1 " + out + ".png");
 		var path = Sys.programPath();
 		path = StringTools.replace(path, "\\", "/");
 		path = path.substr(0, path.lastIndexOf("/"));
@@ -200,9 +201,13 @@ class Main {
 		// 	// FileSystem.deleteFile(out + "-s9.png");
 		// 	trace("合并九宫格图完毕");
 		// } else {
-		if (FileSystem.exists(out + "-fs8.png")) {
-			FileSystem.deleteFile(out + ".png");
-			FileSystem.rename(out + "-fs8.png", out + ".png");
+		try {
+			if (FileSystem.exists(out + "-fs8.png")) {
+				FileSystem.deleteFile(out + ".png");
+				FileSystem.rename(out + "-fs8.png", out + ".png");
+			}
+		} catch (e:Exception) {
+			trace("压缩错误", e.message);
 		}
 		// }
 	}

@@ -216,7 +216,7 @@ class App extends VueComponent {
 			filters: [
 				{
 					name: "项目配置文件",
-					extensions: [".xml"]
+					extensions: ["xml"]
 				}
 			]
 		}, (data) -> {

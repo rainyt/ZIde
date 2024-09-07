@@ -1,5 +1,6 @@
 package data;
 
+import haxe.io.Path;
 import haxe.Exception;
 #if (electron || sys)
 import sys.FileSystem;
@@ -80,7 +81,7 @@ class ZProjectData {
 		rootXmlPath = path;
 		#if electron
 		if (path.indexOf(".xml") != -1) {
-			rootPath = path.substr(0, path.lastIndexOf("/"));
+			rootPath = Path.directory(path);
 		} else {
 			rootPath = path;
 		}
@@ -101,6 +102,7 @@ class ZProjectData {
 	#if electron
 	private function parserElements(xml:Xml):Void {
 		for (item in xml.elements()) {
+			trace("parser", item);
 			switch (item.nodeName) {
 				case "assets":
 					var assetsPath = rootPath + "/" + item.get("path");
@@ -124,6 +126,7 @@ class ZProjectData {
 
 	#if electron
 	private function proessFile(path:String):Void {
+		trace("proessFile", path);
 		if (FileSystem.isDirectory(path)) {
 			var files = FileSystem.readDirectory(path);
 			for (file in files) {
