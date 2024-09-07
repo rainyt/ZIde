@@ -7,7 +7,7 @@ class PSDView extends TitleView {
 	public function new() {
 		super();
 		this.setTitle("导出PSD格式UI文件");
-		this.createUpload("PSD文件", null, false, "请选择需要导出的PSD文件", ".psd");
+		this.createUpload("PSD文件", null, false, "请选择需要导出的PSD文件", "psd");
 		this.createDrop("导出为图集", [
 			{
 				index: 0,

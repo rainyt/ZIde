@@ -53,7 +53,7 @@ class PsdExportView extends VueComponent {
 			filters: [
 				{
 					name: "Photoshop文件",
-					extensions: [".psd"]
+					extensions: ["psd"]
 				}
 			]
 		}, (data) -> {
