@@ -183,12 +183,18 @@ class PSDTools {
 					+ "\" "
 					+ atlasSize;
 				trace("command = ", command);
+				if (Sys.systemName() == "Mac") {
+					command = "arch -x86_64 " + command;
+				}
 				ChildProcess.exec(command, null, function(err:Dynamic, stdout, stderr) {
 					trace(err, stdout, stderr);
 					if (err == null) {
 						if (outSlice9) {
 							// 单独合并九宫格图
 							var atlasSlice9 = 'neko ${StringTools.replace(Sys.programPath(), "index.html", "atlas/tools.n")} ${psdOutDir}/slice9 ${atlasName}_slice9 ${atlasSize}';
+							if (Sys.systemName() == "Mac") {
+								atlasSlice9 = "arch -x86_64 " + atlasSlice9;
+							}
 							ChildProcess.exec(atlasSlice9, null, function(err:Dynamic, stdout, stderr) {
 								trace(err, stdout, stderr);
 								if (err == null) {
