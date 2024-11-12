@@ -1,3 +1,5 @@
+import zygame.components.renders.opengl.TextFieldContextBitmapData;
+import zygame.components.ZLabel;
 import zygame.components.style.XmlStyle;
 import zygame.components.ZBuilderScene;
 import openfl.display.DisplayObject;
@@ -34,6 +36,9 @@ class UIStart extends Start {
 		stage.addEventListener(MouseEvent.MOUSE_DOWN, onDown);
 		stage.addEventListener(MouseEvent.MOUSE_UP, onUp);
 		stage.addEventListener(MouseEvent.MOUSE_MOVE, onMove);
+
+		// 使用纹理缓存器
+		ZLabel.textFieldContextBitmapData = new TextFieldContextBitmapData();
 
 		untyped window.openFile = openFile;
 	}
