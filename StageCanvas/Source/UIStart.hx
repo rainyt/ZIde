@@ -25,7 +25,7 @@ class UIStart extends Start {
 	public var filesConfig:Array<Dynamic> = [];
 
 	public function new() {
-		super(1080, 600, false);
+		super(1080, 1920, false);
 		this.lowFps = true;
 		untyped window.uiContext = this.stage;
 		untyped window.uiStart = this;
@@ -124,7 +124,7 @@ class UIStart extends Start {
 					if (untyped window.onDrawCallUpdate != null) {
 						untyped window.onDrawCallUpdate(Start.current.fps.getDrawCall());
 					}
-				}, 100);
+				}, 500);
 			});
 		} catch (e:Dynamic) {
 			trace("预览失败：", e);

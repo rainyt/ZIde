@@ -126,7 +126,7 @@ class ZProjectData {
 
 	#if electron
 	private function proessFile(path:String):Void {
-		trace("proessFile", path);
+		// trace("proessFile", path);
 		if (FileSystem.isDirectory(path)) {
 			var files = FileSystem.readDirectory(path);
 			for (file in files) {
