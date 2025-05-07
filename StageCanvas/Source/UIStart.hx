@@ -1,3 +1,4 @@
+import hx.ui.UIManager;
 import zygame.components.renders.opengl.TextFieldContextBitmapData;
 import zygame.components.ZLabel;
 import zygame.components.style.XmlStyle;
@@ -215,6 +216,9 @@ class UIStart extends Start {
 			}
 			_assets.start(function(f) {
 				if (f == 1) {
+					UIManager.clean();
+					_assets.getZMakerAssets().updateAssets(true);
+					UIManager.bindAssets(_assets.getZMakerAssets());
 					cb(true);
 					if (untyped window.onFileChanged != null)
 						untyped window.onFileChanged(filesConfig);

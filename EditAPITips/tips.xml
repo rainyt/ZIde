@@ -135,4 +135,5 @@
         <currentId tips="设置当前显示的ID" />
     </BStack>
     <ZCacheBitmapLabel class="ZLabel"></ZCacheBitmapLabel>
+    <MakerDisplay class="Base"></MakerDisplay>
 </tips>
