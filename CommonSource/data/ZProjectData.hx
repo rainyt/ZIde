@@ -102,7 +102,7 @@ class ZProjectData {
 	#if electron
 	private function parserElements(xml:Xml):Void {
 		for (item in xml.elements()) {
-			trace("parser", item);
+			// trace("parser", item);
 			switch (item.nodeName) {
 				case "assets":
 					var assetsPath = rootPath + "/" + item.get("path");

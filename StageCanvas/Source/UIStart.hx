@@ -172,7 +172,7 @@ class UIStart extends Start {
 					});
 				} else if (png != null && afile != null) {
 					// Spine格式
-					trace("载入Spine", png, afile);
+					// trace("载入Spine", png, afile);
 					filesConfig.push({
 						file: png
 					});
@@ -182,7 +182,7 @@ class UIStart extends Start {
 					_assets.loadSpineTextAlats([png], afile);
 				} else if (png != null && xfile != null) {
 					// 图集格式
-					trace("载入图集", png, xfile);
+					// trace("载入图集", png, xfile);
 					filesConfig.push({
 						file: png
 					});
@@ -192,14 +192,14 @@ class UIStart extends Start {
 					_assets.loadTextures(png, xfile);
 				} else if (png != null) {
 					// 单图格式
-					trace("载入单图", png);
+					// trace("载入单图", png);
 					filesConfig.push({
 						file: png
 					});
 					_assets.loadFile(png);
 				} else if (xfile != null) {
 					// 单XML格式
-					trace("载入单XML", xfile);
+					// trace("载入单XML", xfile);
 					filesConfig.push({
 						file: xfile
 					});
@@ -207,7 +207,7 @@ class UIStart extends Start {
 				}
 				if (jfile != null) {
 					// JSON格式
-					trace("载入JSON", jfile);
+					// trace("载入JSON", jfile);
 					filesConfig.push({
 						file: jfile
 					});
